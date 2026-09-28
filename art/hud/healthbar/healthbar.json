@@ -1,0 +1,55 @@
+{
+ "frame": {
+  "size": [
+   2860,
+   293
+  ],
+  "inner_box_xyxy": [
+   74,
+   79,
+   2785,
+   213
+  ],
+  "slice3": {
+   "left": 135,
+   "right": 135
+  }
+ },
+ "fill_blood": {
+  "size": [
+   2860,
+   245
+  ]
+ },
+ "fill_damage_white": {
+  "size": [
+   2859,
+   246
+  ]
+ },
+ "tip_blood": {
+  "size": [
+   1119,
+   354
+  ]
+ },
+ "impact_splat_white": {
+  "size": [
+   616,
+   383
+  ]
+ },
+ "stacked_layers": {
+  "canvas": [
+   2860,
+   293
+  ],
+  "order_bottom_to_top": [
+   "fill_damage_white_stacked",
+   "fill_blood_stacked",
+   "tip_blood_fitted (x = clip edge)",
+   "frame"
+  ],
+  "clip": "crop fills from x=inner.x0 to inner.x0 + (inner.x1-inner.x0)*hp/hpMax"
+ }
+}

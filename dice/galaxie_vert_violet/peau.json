@@ -1,0 +1,31 @@
+{
+ "peau": "galaxie_vert_violet",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "Vert Violet Galaxy.jpg"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "f7e369f65d3a0ee0691bf67f451c2fc8abc0d47009e423823a3ef3d881114543"
+ }
+}

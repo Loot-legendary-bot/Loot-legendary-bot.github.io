@@ -1,0 +1,31 @@
+{
+ "peau": "rose_opaque",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "0005198_opq pink_a.jpg_550.jpeg"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "a825817dbac593f5df7b790610566030cd54ee4eebb031d3243a3a4dd9daa3b1"
+ }
+}

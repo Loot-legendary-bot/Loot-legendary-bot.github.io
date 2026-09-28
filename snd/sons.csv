@@ -1,0 +1,76 @@
+sound_id,bus,fichier,event,hint_croze,gain_db,boucle,duree_s,lufs_i,crete_dbtp,fichier_source,lieu
+beneath_the_stone,MUSIC,music/beneath_the_stone.ogg,PHASE_TODO,,0,TODO_BOUCLE,141,-16.0,-4.3,Beneath_the_Stone.mp3,DONJON
+bones_in_the_wall,MUSIC,music/bones_in_the_wall.ogg,PHASE_TODO,,0,TODO_BOUCLE,155,-16.0,-4.8,Bones_in_the_Wall.mp3,DONJON
+concrete_falls,MUSIC,music/concrete_falls.ogg,PHASE_TODO,,0,TODO_BOUCLE,58,-16.1,-4.4,Concrete_Falls.mp3,DONJON
+echoes_in_the_static,MUSIC,music/echoes_in_the_static.ogg,PHASE_TODO,,0,TODO_BOUCLE,49,-16.0,-4.7,Echoes_in_the_Static.mp3,DONJON
+menu_home_1,MUSIC,music/menu_home_1.ogg,PHASE_TODO,TITRE Peaceful Dungeon - LA MUSIQUE DU HOME (note 108),-4.1,TODO_BOUCLE,189,-11.9,0.4,,HOME
+midnight_shadows,MUSIC,music/midnight_shadows.ogg,PHASE_TODO,,-3.9,TODO_BOUCLE,198,-12.1,-0.4,,DONJON
+neon_blood,MUSIC,music/neon_blood.ogg,PHASE_TODO,,0,TODO_BOUCLE,145,-16.0,-3.9,Neon_Blood.mp3,DONJON
+neon_dungeon,MUSIC,music/neon_dungeon.ogg,PHASE_TODO,,0,TODO_BOUCLE,143,-16.1,-4.2,Neon_Dungeon.mp3,DONJON
+neon_dungeon_party,MUSIC,music/neon_dungeon_party.ogg,PHASE_TODO,,-3.8,TODO_BOUCLE,168,-12.2,1.0,,DONJON
+quest_for_the_lost_star,MUSIC,music/quest_for_the_lost_star.ogg,PHASE_TODO,,-3.4,TODO_BOUCLE,168,-12.6,-0.1,,DONJON
+shadowed_path,MUSIC,music/shadowed_path.ogg,PHASE_TODO,,-3.3,TODO_BOUCLE,88,-12.7,-1.5,,DONJON
+the_iron_golems_fall,MUSIC,music/the_iron_golems_fall.ogg,PHASE_TODO,,0,TODO_BOUCLE,208,-16.0,-1.1,The_Iron_Golem_s_Fall.mp3,DONJON
+the_whispering_floorboards__a,MUSIC,music/the_whispering_floorboards__a.ogg,PHASE_TODO,,0,TODO_BOUCLE,450,-16.0,-1.6,The_Whispering_Floorboards.mp3,DONJON
+the_whispering_floorboards__b,MUSIC,music/the_whispering_floorboards__b.ogg,PHASE_TODO,,0,TODO_BOUCLE,124,-16.0,-2.7,The_Whispering_Floorboards_2.mp3,DONJON
+warmth_in_the_rain__a,MUSIC,music/warmth_in_the_rain__a.ogg,PHASE_TODO,,0,TODO_BOUCLE,274,-16.0,-2.7,Warmth_in_the_Rain.mp3,DONJON
+warmth_in_the_rain__b,MUSIC,music/warmth_in_the_rain__b.ogg,PHASE_TODO,,0,TODO_BOUCLE,262,-16.0,-2.5,Warmth_in_the_Rain_2.mp3,DONJON
+amb_atmosphere_01,AMBIENT,ambient/amb_atmosphere_01.ogg,PHASE_TODO,,0,TODO_BOUCLE,26,-20.0,-7.8,11325622-atmosphere-sound-effect-239969.mp3,
+amb_demon_drone_01,AMBIENT,ambient/amb_demon_drone_01.ogg,PHASE_TODO,,0,TODO_BOUCLE,42,-20.0,-3.9,alesiadavina-lurking-demon-ambience-dark-cinematic-horror-drone-543201.mp3,
+amb_dungeon_air_01,AMBIENT,ambient/amb_dungeon_air_01.ogg,PHASE_TODO,,0,TODO_BOUCLE,152,-20.1,-1.5,freesound_community-dungeon-air-6983.mp3,
+amb_dungeon_loop_01,AMBIENT,ambient/amb_dungeon_loop_01.ogg,PHASE_TODO,,0,TODO_BOUCLE,29,-20.0,-2.5,freesound_community-a_dungeon_ambience_loop-79423.mp3,
+amb_home_fire_night_01,AMBIENT,ambient/amb_home_fire_night_01.ogg,PHASE_TODO,HOME SCREEN OUTSIDE THE DUNGEON BY NIGHT,0,TODO_BOUCLE,10,-20.0,-0.3,HOME SCREEN OUTSIDE THE DUNGEON BY NIGHTfreesound_community-fire-crackling-36970.mp3,
+amb_monster_breathing_01,AMBIENT,ambient/amb_monster_breathing_01.ogg,PHASE_TODO,,0,TODO_BOUCLE,14,-20.1,-10.0,alesiadavina-deep-monster-breathing-demonic-dungeon-ambience-sfx-541140.mp3,
+amb_timer_tick_01,AMBIENT,ambient/amb_timer_tick_01.ogg,PHASE_TODO,,0,TODO_BOUCLE,10,-20.1,-1.3,11325622-clock-ticking-sound-effect-240503.mp3,
+aoe_impact_01,SFX,sfx/aoe_impact_01.ogg,UPKEEP_COLLAPSE,AOE DAMAGE,0,non,1,-3.9,3.3,AOE DAMAGE bannythecoolio-impactful-damage-425132.mp3,
+aoe_splash_01,SFX,sfx/aoe_splash_01.ogg,TODO_EVENT,AOE DAMAGE 2,0,non,1,-14.8,0.8,AOE DAMAGE 2 freesound_community-splash-death-splash-46048.mp3,
+attack_generic_punch_01,SFX,sfx/attack_generic_punch_01.ogg,HP_LOST,GENERIC ATTACK TYPE 1,0,non,2,-13.9,-0.4,universfield-punch-GENERIC ATTAK TYPE 140236.mp3,
+card_flip_01,SFX,sfx/card_flip_01.ogg,UPKEEP_DRAWN_CARD,,0,non,1,-23.5,-1.1,freesound_community-flipcard-91468.mp3,
+card_play_01,SFX,sfx/card_play_01.ogg,PRIORITY_PLAY,,0,non,0,-22.9,-1.0,freesound_community-card-sounds-35956.mp3,
+card_shuffle_01,SFX,sfx/card_shuffle_01.ogg,CASINO_OPENED,,0,non,5,-27.3,-1.3,freesound_community-card-mixing-48088.mp3,
+card_shuffle_02,SFX,sfx/card_shuffle_02.ogg,TRADE_CARDS_PRESENTED,,0,non,5,-22.4,-1.5,freesound_community-card-shuffle-94662.mp3,
+chest_explore_01,SFX,sfx/chest_explore_01.ogg,EXPLORED,EXPLORE_CHEST,0,non,5,-13.6,-0.9,freesound_community-magic-mallet-EXPLORE_CHEST6262.mp3,
+chest_open_01,SFX,sfx/chest_open_01.ogg,ABILITY_LOOT,,0,non,4,-11.9,-0.0,Treasure_chest_openi_#2-1787179919556.mp3,
+combat_victory_01,SFX,sfx/combat_victory_01.ogg,DUEL_WON,COMBAT_VICTORY,0,non,4,-14.4,-1.0,COMBAT_VICTORYTriumphant_fanfare_w_#3-1787179932496.mp3,
+dice_roll_01,SFX,sfx/dice_roll_01.ogg,DICE_ROLLED,,0,non,1,-15.3,-0.8,freesound_community-dice-95077.mp3,
+dice_roll_02,SFX,sfx/dice_roll_02.ogg,MOB_ATTACK_ROLLED,,0,non,1,-15.3,-0.7,freesound_community-rpg-dice-rolling-95182.mp3,
+dice_roll_03,SFX,sfx/dice_roll_03.ogg,ABILITY_CHECK,,0,non,2,-27.1,-1.6,freesound_community-dice-89594.mp3,
+dice_roll_2d6_01,SFX,sfx/dice_roll_2d6_01.ogg,DICE_ROLLED:die=2d6,,0,non,4,-18.5,-0.7,freesound_community-072276_2d6-rolling-dice-35975.mp3,
+dice_roll_2d6_02,SFX,sfx/dice_roll_2d6_02.ogg,TODO_EVENT,,0,non,3,-18.2,-1.1,freesound_community-075220_2d6-rolling-dice-35981.mp3,
+gag_turd_01,SFX,sfx/gag_turd_01.ogg,ABILITY_DAMAGE_SELF,for turd,0,non,18,-30.5,-1.1,freesound_community-dungeon-fart-for turd74529.mp3,
+item_equip_01,SFX,sfx/item_equip_01.ogg,EQUIPPED,,0,non,1,-18.4,-1.2,freesound_community-item-equip-6904.mp3,
+item_equip_02,SFX,sfx/item_equip_02.ogg,UNEQUIPPED,,0,non,0,-15.0,-0.6,homemade_sfx-equip-sound-272428.mp3,
+magic_fire_impact_01,SFX,sfx/magic_fire_impact_01.ogg,ABILITY_DAMAGE,FIRE BALL AND FIRE ATTACK,0,non,6,-6.4,1.3,dragon-studio-fire-spell-impact-FIRE BALL AND FIRE ATTACK 448565.mp3,
+magic_heal_cast_01,SFX,sfx/magic_heal_cast_01.ogg,ABILITY_HEAL,,0,non,5,-12.6,-0.9,vadim_makes_sound-fantasy-healing-spell-cast-1-547831.mp3,
+magic_heal_chime_01,SFX,sfx/magic_heal_chime_01.ogg,HP_HEALED,,0,non,4,-11.4,-1.3,vadim_makes_sound-fantasy-healing-spell-soft-magic-chime-1-546563.mp3,
+magic_shine_01,SFX,sfx/magic_shine_01.ogg,LOOT_PICKED,,0,non,3,-9.9,-1.0,alexis_gaming_cam-anime-shine-sound-effect-346114.mp3,
+magic_strike_wis_01,SFX,sfx/magic_strike_wis_01.ogg,ABILITY_NEGATE_DAMAGE,GENERIC POSSIBLE FOR WIS DAMAGE,0,non,2,-18.3,-1.0,freesound_community-magic-strike-GENERIC POSSIBLE FOR WIS DAMAGE5856.mp3,
+magic_wis_impact_01,SFX,sfx/magic_wis_impact_01.ogg,HP_IMMUNE,WIS ATTACK GENERIC,0,non,3,-11.5,-1.0,WIS ATTACK GENERIC rescopicsound-elemental-magic-spell-impact-outgoing-228342.mp3,
+melee_axe_hit_01,SFX,sfx/melee_axe_hit_01.ogg,MOB_DAMAGE,MELEE ATTACK,0,non,1,-16.8,-1.0,MELEE ATTACK imagne_impossible-weapon-axe-hit-01-153372.mp3,
+melee_combo_01,SFX,sfx/melee_combo_01.ogg,TODO_EVENT,MELEE,0,non,1,-12.9,-0.9,freesound_gamestudio-rpg-MELEE -attack-combo-24-388941.mp3,
+melee_dagger_hit_01,SFX,sfx/melee_dagger_hit_01.ogg,ABILITY_TAKE_ENEMY_WEAPON_ATTACK,MELEE DAGGER HIT,0,non,1,-13.3,-0.9,daviddumaisaudio-dagger-scrape-and-hit-MELEE DAGGER HIT185443.mp3,
+melee_multi_hit_01,SFX,sfx/melee_multi_hit_01.ogg,ABILITY_MULTIPLY_DAMAGE,MULTI HIT ATTACK,0,non,1,-8.0,-0.7,freesound_gamestudio-rpg-sword-attack-combo-MULTI HIT ATTACK28-388957.mp3,
+melee_sword_combo_01,SFX,sfx/melee_sword_combo_01.ogg,COMBAT_OPENED,MELEE ATTACK,0,non,1,-10.5,-0.6,freesound_gamestudio-rpg-sword-attack-combo-MELEE ATTACK22-388940.mp3,
+melee_sword_combo_02,SFX,sfx/melee_sword_combo_02.ogg,TODO_EVENT,MELEE ATTACK,0,non,1,-15.2,-0.6,freesound_gamestudio-rpg-sword-attack-combo-MELEE ATTACK39-388951.mp3,
+melee_sword_slash_01,SFX,sfx/melee_sword_slash_01.ogg,TODO_EVENT,MELEE ONLY SWORD DAMAGE,0,non,2,-12.7,-0.9,daviddumaisaudio-sword-slash-and-swing-MELEE_ ONLY SWORD DAMAGE185432.mp3,
+mob_death_01,SFX,sfx/mob_death_01.ogg,MOB_DIED,MOB DEATH GENERIC,0,non,4,-15.8,-1.1,MOB DEATH GENERIC RPG_death_sound_effe_#1-1787180144581.mp3,
+mob_death_02,SFX,sfx/mob_death_02.ogg,MOB_KILLED,MOB DEATH GENERIC 2,0,non,2,-18.2,-1.0,MOB DEATH GENERIC 2 universfield-horror-liquid-splash-352472.mp3,
+mob_growl_01,SFX,sfx/mob_growl_01.ogg,MOB_ENCOUNTER_DECLARED,ATTACK MOB BUT SPECIFIC TO GROWL,0,non,4,-11.3,-1.0,ATTACK MOB BUT SPECIFIC TO GROWL freesound_community-super-deep-growl-86749.mp3,
+player_death_01,SFX,sfx/player_death_01.ogg,PLAYER_KILLED,PLAYER DEATH TRIGGER,0,non,1,-11.1,-0.9,PLAYER DEATH TRIGGER universfield-dramatic-death-collapse-352720.mp3,
+ranged_arrow_impact_01,SFX,sfx/ranged_arrow_impact_01.ogg,TRAP_RESOLVED,RANGED DAMAGE DEX,0,non,1,-11.8,-0.7,dennish18-arrow-wood-impact-RANGED DAMAGE DEX146418.mp3,
+ranged_bow_twang_01,SFX,sfx/ranged_bow_twang_01.ogg,TRAP_OPENED,RANGED BOW,0,non,1,-16.2,-0.7,ranged bow djartmusic-arrow-twang_01-306041.mp3,
+result_good_01,SFX,sfx/result_good_01.ogg,QUEST_COMPLETED,,0,non,4,-11.7,-0.9,freesound_community-goodresult-82807.mp3,
+skill_buff_reveal_01,SFX,sfx/skill_buff_reveal_01.ogg,EQUIPPED_ACTED,BUFF LIKE NON DAMAGE SKILL 1,0,non,2,-13.3,-1.1,freesound_gamestudio-hero-skill-attack-reveal-BUFF LIKE NON DAMAGE SKILL 1-384975.mp3,
+tile_move_door_01,SFX,sfx/tile_move_door_01.ogg,PLAYER_MOVED,TILE_MOVE,0,non,5,-15.3,-0.8,audiopapkin-old-creaking-wooden-door-001-raw-recording-TILE_MOVE508596.mp3,
+tile_move_door_02,SFX,sfx/tile_move_door_02.ogg,ABILITY_TELEPORT,TILE_MOVE,0,non,2,-12.6,-0.6,audiopapkin-old-creaking-wooden-door-002-raw-recording-TILE_MOVE508597.mp3,
+tile_move_door_03,SFX,sfx/tile_move_door_03.ogg,MOB_FLED,TILE_MOVE,0,non,2,-17.4,-0.8,audiopapkin-old-creaking-wooden-door-003-raw-recording-TILE_MOVE508598.mp3,
+tile_move_door_04,SFX,sfx/tile_move_door_04.ogg,PLAYER_RESPAWNED,TILE_MOVE,0,non,3,-14.9,-0.8,audiopapkin-old-creaking-wooden-door-004-raw-recording-TILE_MOVE508599.mp3,
+tile_move_door_05,SFX,sfx/tile_move_door_05.ogg,ABILITY_SWAP_TILES,TILE_MOVE,0,non,3,-14.1,-0.8,audiopapkin-old-creaking-wooden-door-005-raw-recording-TILE_MOVE508601.mp3,
+ui_tonal_fountain_01,SFX,sfx/ui_tonal_fountain_01.ogg,EXPLORE_HEAL,,0,non,4,-9.4,-0.8,11325622-tonal-fountain-sound-effect-241390.mp3,
+dark_sun,MUSIC,music/dark_sun.ogg,PHASE_TODO,,0,TODO_BOUCLE,98,-16.0,-4.1,dark sun.mp3,DONJON
+dungeon_crawler_drake,MUSIC,music/dungeon_crawler_drake.ogg,PHASE_TODO,,0,TODO_BOUCLE,177,-16.0,-5.1,Dungeon Crawler drake.mp3,DONJON
+dungeon_crozer,MUSIC,music/dungeon_crozer.ogg,PHASE_TODO,,0,TODO_BOUCLE,213,-16.0,-5.1,Dungeon Crozer.mp3,DONJON
+echoes_in_the_static__b,MUSIC,music/echoes_in_the_static__b.ogg,PHASE_TODO,,0,TODO_BOUCLE,153,-16.0,-3.2,Echoes in the Static.mp3,DONJON
+moonlit_wardens,MUSIC,music/moonlit_wardens.ogg,PHASE_TODO,,0,TODO_BOUCLE,158,-15.9,-2.8,Moonlit Wardens.mp3,DONJON
+quest_for_the_lost_star__b,MUSIC,music/quest_for_the_lost_star__b.ogg,PHASE_TODO,,0,TODO_BOUCLE,168,-16.0,-2.2,Quest for the Lost Star.mp3,DONJON
+the_obsidian_drake,MUSIC,music/the_obsidian_drake.ogg,PHASE_TODO,,0,TODO_BOUCLE,179,-16.0,-4.0,The Obsidian Drake.mp3,DONJON

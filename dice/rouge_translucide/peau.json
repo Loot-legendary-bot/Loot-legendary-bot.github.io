@@ -1,0 +1,45 @@
+{
+ "peau": "rouge_translucide",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "Rouge translucide.webp"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "fond": 0.6,
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "57ab5cedaba2c8ed11c0a2ea571ae4b01f02cac352a77c4732d3ed5ca9251b08",
+  "lumiere": {
+   "cle": "neutre",
+   "cle_taille": 1.0,
+   "cle_energie": 1.0,
+   "vue": "Standard",
+   "expo": -1.5,
+   "fond_rgb": [
+    0.6,
+    0.6,
+    0.6
+   ]
+  },
+  "cle_taille": 1.0
+ }
+}

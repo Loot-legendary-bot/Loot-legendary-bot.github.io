@@ -1,0 +1,41 @@
+{
+ "famille": "marbre",
+ "couleurs": {
+  "corps": [
+   "#00bee8",
+   "#71caea"
+  ],
+  "veines": "#b0d7eb",
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#112e59"
+ },
+ "fini": {
+  "rugosite": 0.34,
+  "metallique": 0.0,
+  "transmission": 0.5,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 4.2,
+  "contraste": 0.1,
+  "densite": 0.7,
+  "densite_paillettes": 0.22,
+  "rugosite_inclusions": 0.45
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.6
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "Icy.jpg, chroma x1.37. corps[0] AU BORD du gamut sRGB : le bleu profond vient de la PROFONDEUR (transmission 0.5, fond 2.0). Croze 17/09 : plus diffus et plus shiny."
+}

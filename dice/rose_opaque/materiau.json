@@ -1,0 +1,38 @@
+{
+ "famille": "uni",
+ "couleurs": {
+  "corps": [
+   "#ff0374",
+   "#e74b76"
+  ],
+  "veines": null,
+  "inclusions": null,
+  "chiffres": "#ffffff"
+ },
+ "fini": {
+  "rugosite": 0.6,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.0,
+  "densite_paillettes": 0.0,
+  "rugosite_inclusions": 0.0
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Nunito-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "notes": "plastique rose opaque et mat, peinture blanche en gravure. corps[0] est un ALBEDO au BORD du gamut sRGB, resolu sous Standard -1.50 ; ce n'est pas la couleur lue sur la photo, qui est corps[1]"
+}

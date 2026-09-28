@@ -1,0 +1,33 @@
+jaune_opaque — licences et provenance
+=====================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+PHOTO       La photographie de reference a servi AUX COULEURS SEULEMENT : les
+            teintes de materiau.json sont des grappes k-means mesurees sur elle
+            (palette.json), et rien de son image n'entre dans la peau — pas de
+            texture, pas de decoupe, pas de tracage. Le jaune du corps et le
+            noir des chiffres sont des albedos, pas des echantillons.
+
+NOM         La peau porte le nom de sa MATIERE — un plastique jaune opaque et
+            satine, chiffres peints en noir dans une gravure. La photographie
+            qui a servi a la mesure est un cliche de produit du commerce : la
+            marque du fabricant n'entre nulle part, ni dans le nom, ni dans les
+            fichiers, ni dans le depot, et la photographie elle-meme n'est pas
+            commitee — references/ est ignore par le .gitignore niche de ce
+            dossier.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

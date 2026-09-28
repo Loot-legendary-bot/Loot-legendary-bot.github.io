@@ -1,0 +1,31 @@
+{
+ "peau": "eclaboussures_sang",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "ad9e141e-5efe-4f87-aad6-7dfce5ad740b.avif"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "249fb0a66aed802050985be592cc727a870e3c4d7d0b841d4b075c1c073cefe1"
+ }
+}

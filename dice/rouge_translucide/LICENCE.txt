@@ -1,0 +1,61 @@
+rouge_translucide — licences et provenance
+==========================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+PHOTO       La photographie de reference a servi AUX COULEURS ET A DES NOMBRES,
+            rien d'autre : aucune texture, aucune decoupe, aucun tracage, aucun
+            pixel de l'image n'entre dans la peau. Ce qu'elle a donne :
+              - la TEINTE de la resine, 27,7 deg, et sa chroma, mesurees sur la
+                resine seule apres avoir retire le fond ET l'encre ;
+              - les trois epaisseurs (L* 43,5 au mince, 27,5 median, 13,3 a
+                l'epais), qui est le sujet propre de cette famille ;
+              - le decile sombre 0,060, qui calibre la dent TRANSLUCIDE
+                (addendum 22) ;
+              - l'ecretage de la photo elle-meme, 0,17 % d'un canal.
+
+FOND BOIS   Cette photographie n'est PAS prise en boite a lumiere : elle est
+            posee sur une planche de bois chaud, et le bois est chromatique.
+            Les deux masques que la forge posait jusqu'ici s'y trompent, et
+            c'est mesure, pas suppose : celui de bande_de_la_reference prenait
+            80,8 % du cadre (donc le bois), celui des chiffres prenait la resine
+            MINCE, qui est pale et peu saturee exactement comme une encre
+            blanche. Les masques ont ete peints et REGARDES avant d'etre crus,
+            et la segmentation retenue separe le fond par sa TEINTE (le bois est
+            a 77 deg, la resine a 28) et l'encre par sa neutralite RELATIVE a la
+            chroma du corps. Les deux valeurs et leur ecart sont au rapport.
+
+PAILLETTES  La photographie NE MESURE PAS les paillettes d'or, et le dire est
+            le seul geste honnete : l'instrument qui les cherche par un exces
+            de lumiere locale rend une population plus claire de 20 L* mais
+            MOINS jaune de 10 (b*) que la resine — ce sont des reflets, pas de
+            l'or, et le resultat est stable sur quatre erosions du masque.
+            Chercher l'excedent de jaune ne rend aucune classe separable :
+            l'or de cette photo est sous le pixel. La COUVERTURE et la COULEUR
+            des paillettes sont donc des choix de FORME, poses dans
+            materiau.json (motif.densite_paillettes, couleurs.inclusions) et
+            juges sur la planche par l'oeil de Croze, jamais presentes comme
+            une mesure. Les paillettes sont des cellules de Voronoi inclinees,
+            jamais un echantillon de l'image.
+
+NOM         La peau porte le nom de sa MATIERE — une resine rouge translucide a
+            paillettes d'or, chiffres peints en blanc dans une gravure. La
+            photographie qui a servi a la mesure est un cliche de produit du
+            commerce : sa marque n'entre nulle part, ni dans le nom, ni dans les
+            fichiers, ni dans le depot, et la photographie elle-meme n'est pas
+            commitee — references/ est ignore par le .gitignore de ce dossier.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

@@ -1,0 +1,32 @@
+{
+ "peau": "jaune_translucide",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "Jaune Translucide.webp"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "fond": 0.6,
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "fb6a36902b4d650c926748bde970fd8a34c453786b94b28b9e47cc3f97953365"
+ }
+}

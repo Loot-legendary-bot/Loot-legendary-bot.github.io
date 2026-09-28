@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Loot Legendary — banc VFX (28 cas)</title>
+    <style>
+      /*
+       * La peau du banc reprend l'encre et le carton de l'écran joueur, sans
+       * en importer une ligne : un banc qui partagerait la feuille de style de
+       * l'écran ferait vivre deux lectures du même jeton.
+       */
+      :root {
+        --ink: #15120F; --ink-2: #1F1B16; --ink-3: #2B251E;
+        --stock: #D9D3C2; --stock-dim: #8E877A;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; padding: 20px 24px 48px;
+        background: var(--ink); color: var(--stock);
+        font-family: 'Courier Prime', ui-monospace, monospace;
+      }
+      h1 { font-size: 18px; letter-spacing: .08em; margin: 0 0 4px; text-transform: uppercase; }
+      #compte { color: var(--stock-dim); font-size: 12px; margin-bottom: 18px; }
+      #banc { display: grid; grid-template-columns: repeat(auto-fill, minmax(216px, 1fr)); gap: 12px; }
+      .cas { background: var(--ink-2); border: 1px solid var(--ink-3); padding: 8px; }
+      .cas.repli { border-color: #4A4034; background: #1A1712; }
+      .titre { font-size: 12px; letter-spacing: .06em; margin-bottom: 6px; }
+      canvas { display: block; width: 100%; height: auto; background: #0E0C0A; }
+      .pied { font-size: 10px; color: var(--stock-dim); margin-top: 6px; line-height: 1.5; }
+      .planche { color: var(--stock); }
+      .mention { color: #C2A25A; }
+      .manque { color: #E0704A; }
+      .absent { color: #E0704A; }
+      .pastille {
+        display: inline-block; width: 8px; height: 8px; margin-right: 3px;
+        vertical-align: middle; border-radius: 50%;
+      }
+    </style>
+    <script type="module" crossorigin src="./assets/vfx-CUzowHWE.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/vfx-DKBuV1Fe.js">
+  </head>
+  <body>
+    <h1>Banc VFX — les 21 lignes et les 7 replis</h1>
+    <div id="compte">chargement…</div>
+    <div id="banc"></div>
+  </body>
+</html>

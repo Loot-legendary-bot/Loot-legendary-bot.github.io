@@ -1,0 +1,110 @@
+{
+ "slash_fire": {
+  "fichier": "slash_fire.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 64,
+  "source": "Sword Slash VFX Spritesheets/Fire Slash v1 - Spin_A_spritesheet.png",
+  "cellule_source": 512
+ },
+ "slash_lightning": {
+  "fichier": "slash_lightning.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 45,
+  "source": "Sword Slash VFX Spritesheets/Lightning Slash v1 - Spin_A_spritesheet.png",
+  "cellule_source": 512
+ },
+ "slash_blanc": {
+  "fichier": "slash_blanc.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 16,
+  "source": "Sword Slash VFX Spritesheets/Blue Slash v1_spritesheet.png",
+  "cellule_source": 512
+ },
+ "ball_fire": {
+  "fichier": "ball_fire.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 64,
+  "source": "Fire VFX Spritesheets/Fireball_v1_spritesheet.png",
+  "cellule_source": 512
+ },
+ "burst_fire": {
+  "fichier": "burst_fire.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 64,
+  "source": "Fire VFX Spritesheets/Fire_Burst_v2_spritesheet.png",
+  "cellule_source": 512
+ },
+ "ball_lightning": {
+  "fichier": "ball_lightning.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 62,
+  "source": "Lightning VFX Spritesheets/Blue Lightning Ball_A_spritesheet.png",
+  "cellule_source": 512
+ },
+ "burst_lightning": {
+  "fichier": "burst_lightning.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 14,
+  "source": "Lightning VFX Spritesheets/Blue Shock Burst v1_spritesheet.png",
+  "cellule_source": 512
+ },
+ "ball_eau": {
+  "fichier": "ball_eau.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 63,
+  "source": "Water VFX Spritesheets/Water_Projectile_v1_A_spritesheet.png",
+  "cellule_source": 512
+ },
+ "burst_eau": {
+  "fichier": "burst_eau.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 61,
+  "source": "Water VFX Spritesheets/Water_Splash_Burst_v1_A_Drops_With Back Splash_spritesheet.png",
+  "cellule_source": 512
+ },
+ "ball_vent": {
+  "fichier": "ball_vent.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 16,
+  "source": "Wind VFX Spritesheets/Projectile_Wind_White_v1_spritesheet.png",
+  "cellule_source": 512
+ },
+ "burst_fumee": {
+  "fichier": "burst_fumee.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 64,
+  "source": "Wind VFX Spritesheets/Angry_Smoke_Burst_White_v1_A_spritesheet.png",
+  "cellule_source": 512
+ },
+ "burst_poussiere": {
+  "fichier": "burst_poussiere.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 15,
+  "source": "Wind VFX Spritesheets/Burst_Dust_White_v1_spritesheet.png",
+  "cellule_source": 512
+ }
+}

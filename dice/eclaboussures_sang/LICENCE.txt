@@ -1,0 +1,23 @@
+eclaboussures_sang — licences et provenance
+===========================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Nunito Black, SIL Open Font License 1.1.
+            Copyright 2014 The Nunito Project Authors
+            (https://github.com/googlefonts/nunito)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Nunito.txt et
+            polices/PROVENANCE-Nunito.txt.
+
+PHOTO       La photographie de reference a servi AUX COULEURS SEULEMENT : les
+            trois teintes de materiau.json sont des grappes k-means mesurees sur
+            elle (palette.json), et rien de son image n'entre dans la peau — pas
+            de texture, pas de decoupe, pas de tracage. Les eclaboussures sont
+            engendrees par un champ de Voronoi, pas copiees.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre.

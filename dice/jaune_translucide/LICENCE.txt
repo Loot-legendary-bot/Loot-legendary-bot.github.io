@@ -1,0 +1,51 @@
+jaune_translucide — licences et provenance
+=========================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+PHOTO       La photographie de reference a servi AUX COULEURS ET A DEUX
+            NOMBRES, rien d'autre : aucune texture, aucune decoupe, aucun
+            tracage, aucun pixel de l'image n'entre dans la peau. Ce qu'elle a
+            donne :
+              - la RAMPE, trois couleurs mesurees par decile de a* sur 32 228
+                pixels de peau pris dans trois des, fond et chiffres retires ;
+              - la PERIODE des bandes, 2,97 par de, mesuree par la decroissance
+                a 1/e de l'autocorrelation du canal a* ;
+              - la SEPARATION des deux teintes, 155 deg, qui est le sujet propre
+                de cette famille.
+            Les bandes sont un bruit fractal lu comme une POSITION SUR UNE
+            RAMPE, jamais un echantillon ; les paillettes sont des cellules de
+            Voronoi. La photographie ne pouvait pas mesurer leur taille — ses
+            eclats font un pixel ou moins — et le rapport le dit a l'endroit ou
+            le nombre est choisi.
+
+POINTES     Les pointes infimes de bleu et de jaune, et la lueur propre de la
+            resine, NE VIENNENT PAS DE LA PHOTOGRAPHIE : elles sont un mot de
+            Croze du 14/09 (« le violet et le vert sont uniformes alors qu'ils
+            devraient avoir des pointes infimes de bleu et de jaune par
+            endroits »). Leurs deux couleurs sont dans materiau.json
+            (couleurs.pointes), leur etendue dans motif.densite, et le rapport
+            imprime de combien la resine s'ecarte de son propre lobe — 1,8 % au
+            dela de 12 degres. Rien n'est peint a la main.
+
+NOM         La peau porte le nom de sa MATIERE — une resine galaxie vert et
+            violet a paillettes, chiffres peints en blanc dans une gravure. La
+            photographie qui a servi a la mesure est un cliche de produit du
+            commerce : sa marque n'entre nulle part, ni dans le nom, ni dans les
+            fichiers, ni dans le depot, et la photographie elle-meme n'est pas
+            commitee — references/ est ignore par le .gitignore de ce dossier.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

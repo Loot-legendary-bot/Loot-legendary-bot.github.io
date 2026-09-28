@@ -1,0 +1,49 @@
+{
+ "famille": "marbre",
+ "couleurs": {
+  "corps": [
+   "#c8cbd0",
+   "#a5a9ae",
+   "#909398",
+   "#74787e",
+   "#5e6267",
+   "#50565e",
+   "#171c4d",
+   "#29376d",
+   "#3d4f88",
+   "#6284c6"
+  ],
+  "veines": "#e6e8e5",
+  "inclusions": "#f3f4ef",
+  "pointes": null,
+  "chiffres": "#ffffff"
+ },
+ "fini": {
+  "rugosite": 0.45,
+  "metallique": 0.6,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.68,
+  "contraste": 0.55,
+  "densite": 0.15,
+  "densite_paillettes": 0.02,
+  "rugosite_inclusions": 0.15
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.35
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "Blue Steel.webp. ECHELLE par LOBE, 6 acier + 4 bleu, jointe par les bouts SOMBRES (photo -12.84 L*), relevee de +7.2 L*. Acier sur p20..p65 : son bout clair est de la LUMIERE (chroma 1.1)."
+}

@@ -1,0 +1,32 @@
+{
+ "peau": "noir_vert_acide",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "noir vert acide.webp"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "fond": null,
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "78e73a8dc39e341aa64c59dfa397ddedd846c917193d4acbc5e4d029be873e5e"
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "peau": "bleu_givre",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "Icy.jpg"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "fond": "2.0",
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "ddfd5f3acc3396ab99b8de81b7f37ce00ec43bcd173b2433d393ae8d2e36b04a",
+  "lumiere": {
+   "cle": "neutre",
+   "cle_taille": 2.0,
+   "cle_energie": 1.0,
+   "vue": "Standard",
+   "expo": -1.5,
+   "fond_rgb": [
+    2.0,
+    2.0,
+    2.0
+   ]
+  },
+  "cle_taille": 2.0
+ }
+}

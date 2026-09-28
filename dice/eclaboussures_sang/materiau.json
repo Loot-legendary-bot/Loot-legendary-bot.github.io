@@ -1,0 +1,38 @@
+{
+ "famille": "eclaboussures",
+ "couleurs": {
+  "corps": [
+   "#f5f4f0",
+   "#dcdad5"
+  ],
+  "veines": null,
+  "inclusions": "#b7002e",
+  "chiffres": "#050505"
+ },
+ "fini": {
+  "rugosite": 0.45,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 1.0,
+  "densite_paillettes": 0.45,
+  "rugosite_inclusions": 0.45
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Nunito-Black.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.8
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "notes": "corps clair neutre, Nunito Black grave en cuvette; sang au maximum du gamut sRGB pour sa teinte — le chroma RENDU plafonne a 46, voir le rapport"
+}

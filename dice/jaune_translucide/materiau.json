@@ -1,0 +1,41 @@
+{
+ "famille": "translucide",
+ "couleurs": {
+  "corps": [
+   "#ffff00",
+   "#ffcf5a"
+  ],
+  "veines": "#fff6c0",
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#ffffff"
+ },
+ "fini": {
+  "rugosite": 0.34,
+  "metallique": 0.0,
+  "transmission": 1.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.0,
+  "densite": 0.525,
+  "densite_paillettes": 0.0,
+  "rugosite_inclusions": 0.0
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "corps[0]=VOLUME (R et V a 1.0 sinon le d20 vire), corps[1]=SURFACE, veines=reflet. Fond 0.6 = defaut de la famille (addendum 22). GRAINE 6."
+}

@@ -1,0 +1,31 @@
+{
+ "peau": "granite_bleu",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "Bleu Granite.jpg"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "graine": 21,
+  "echantillons": 128,
+  "sha256_scene": "398d70de845ae1f44acd53640cc7da159c836f81fc1830a0334b7dfe6d65b89f"
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "famille": "translucide",
+ "couleurs": {
+  "corps": [
+   "#ff1f1a",
+   "#ee0038"
+  ],
+  "veines": "#e993a2",
+  "inclusions": "#7a5a18",
+  "pointes": null,
+  "chiffres": "#ffffff"
+ },
+ "fini": {
+  "rugosite": 0.16,
+  "metallique": 0.0,
+  "transmission": 1.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.0,
+  "densite": 0.58,
+  "densite_paillettes": 0.18,
+  "rugosite_inclusions": 0.08
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "Rouge translucide.webp, fond BOIS. corps[0]=VOLUME (mange vert+bleu), corps[1]=SURFACE, veines=reflet pale commun aux 6 des, inclusions=la lumiere d'une paillette d'or. GRAINE 6."
+}

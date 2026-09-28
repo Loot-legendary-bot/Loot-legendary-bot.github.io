@@ -1,0 +1,37 @@
+{
+ "famille": "pierre",
+ "couleurs": {
+  "corps": [
+   "#0060dc"
+  ],
+  "veines": null,
+  "inclusions": "#008cf4",
+  "chiffres": "#ffffff"
+ },
+ "fini": {
+  "rugosite": 0.6,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 0.43,
+  "contraste": 0.6,
+  "densite_paillettes": 0.455,
+  "rugosite_inclusions": 0.78
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "notes": "corps/motif = ALBEDOS au bord du gamut sRGB pour la cible b* de Croze, pas les couleurs de la photo. rugosite 0.60 : son mot du 14/09, c'est elle qui tient l'ecretage des JETS. GRAINE 21."
+}

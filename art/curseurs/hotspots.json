@@ -1,0 +1,42 @@
+{
+ "bones.png": [
+  1,
+  1
+ ],
+ "bones_hover.png": [
+  2,
+  1
+ ],
+ "legendary.png": [
+  0,
+  1
+ ],
+ "legendary_hover.png": [
+  5,
+  4
+ ],
+ "torch.png": [
+  16,
+  1
+ ],
+ "torch_hover.png": [
+  9,
+  11
+ ],
+ "wizard.png": [
+  2,
+  1
+ ],
+ "wizard_hover.png": [
+  3,
+  2
+ ],
+ "collapse.png": [
+  4,
+  1
+ ],
+ "collapse_hover.png": [
+  11,
+  5
+ ]
+}

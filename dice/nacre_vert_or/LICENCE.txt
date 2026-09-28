@@ -1,0 +1,41 @@
+nacre_vert_or — licences et provenance
+======================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+PHOTO       La photographie de reference a servi AUX COULEURS SEULEMENT, et a
+            deux chiffres de forme : la TAILLE d'une volute et son emiettement.
+            Les teintes de materiau.json sont des mesures CIELAB faites sur
+            elle, remontees a travers la desaturation du rig ; rien de son image
+            n'entre dans la peau — pas de texture, pas de decoupe, pas de
+            tracage. Les volutes sont un champ procedural (trois calques de
+            bruit fBm etires sur un axe tire de la graine), pas un calque de la
+            photo.
+
+NOM         La peau porte le nom de sa MATIERE — une resine opaque nacree, deux
+            couleurs en grandes volutes douces, un vert profond et un or qui lit
+            comme un ocre metallique, finition nacree a reflets etires, chiffres
+            graves et peints en blanc, 6 et 9 soulignes. Le nom de fichier de la
+            photographie de reference dit « Galaxy » et cette peau n'est PAS une
+            galaxie : la nebuleuse sombre a paillettes du depot s'appelle
+            galaxie_vert_violet et vient d'une autre photographie. La
+            photographie qui a servi a la mesure est un cliche de produit du
+            commerce : la marque du fabricant n'entre nulle part, ni dans le
+            nom, ni dans les fichiers, ni dans le depot, et la photographie
+            elle-meme n'est pas commitee — references/ est ignore par le
+            .gitignore niche de ce dossier.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

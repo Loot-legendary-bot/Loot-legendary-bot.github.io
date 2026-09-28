@@ -1,0 +1,12 @@
+HUD Loot Legendary - assets peinture blanche / noir / sang. Tous les PNG sont transparents (detourage par luminance).
+
+icons_actions/   6 glyphes (fight_player, trade, move, portal, loot_corpse, fight_monster) : natif + 48/64/96/128/256 px, centres dans un carre.
+decals/          4 blancs (splatter, claws, handprint, corner_star) + 4 sang (splatter, drips, smear, pool_bootprint).
+controls/        button_solid, button_outline, bar_frame, bar_filled_example, slider_full, checkbox_empty, checkbox_checked, close_circle_x, pip_filled, pip_filled_b, pip_hollow.
+healthbar/       frame.png + fill_blood_stacked.png + fill_damage_white_stacked.png : MEME canevas (2860x293), a empiler a la meme origine.
+                 Rogner les deux fills en largeur selon hp/hpMax (voir healthbar.json > inner_box_xyxy). tip_blood_fitted.png se pose au bord du rognage.
+                 frame_left/mid/right.png : decoupe 3 tranches, seul mid s'etire. _demo_62pct.png montre l'assemblage.
+transitions/     *_alpha.webm = VP9 avec canal alpha (Electron/Chromium, a poser par-dessus le jeu). *_black.mp4 = original sur noir (Final Cut, mode Ecran).
+                 1280x720, 24 i/s, 5 s.
+cardback_master/ cadre maitre 1050x1498 extrait de ton dos "visage" : frame_master_red (couleurs d'origine), _white_tintable (a teinter en code), _gold, _bone.
+                 Le centre est transparent : poser l'illustration DESSOUS, le cadre DESSUS.

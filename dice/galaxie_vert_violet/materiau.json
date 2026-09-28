@@ -1,0 +1,47 @@
+{
+ "famille": "nebuleuse",
+ "couleurs": {
+  "corps": [
+   "#009370",
+   "#009370",
+   "#009370",
+   "#516978",
+   "#6c3e73"
+  ],
+  "veines": null,
+  "inclusions": "#3a3f3e",
+  "pointes": [
+   "#4c68d2",
+   "#876c29"
+  ],
+  "chiffres": "#ffffff"
+ },
+ "fini": {
+  "rugosite": 0.6,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.15
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.5,
+  "densite": 0.02,
+  "densite_paillettes": 0.55,
+  "rugosite_inclusions": 0.15
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "corps = la RAMPE lue dans l'ordre, vert x3 = vert sur la moitie de la rampe. inclusions = la LUMIERE QU'UN ECLAT AJOUTE (SCREEN), pas sa couleur. echelle 1.0 = 2,97 periodes/de, mesure."
+}

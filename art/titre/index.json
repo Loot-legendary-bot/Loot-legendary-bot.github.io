@@ -1,0 +1,533 @@
+{
+ "fonds": [
+  "art/titre/fonds/fond_01.jpg",
+  "art/titre/fonds/fond_02.jpg",
+  "art/titre/fonds/fond_03.jpg",
+  "art/titre/fonds/fond_04.jpg",
+  "art/titre/fonds/fond_05.jpg",
+  "art/titre/fonds/fond_06.jpg",
+  "art/titre/fonds/fond_07.jpg",
+  "art/titre/fonds/fond_08.jpg",
+  "art/titre/fonds/fond_09.jpg",
+  "art/titre/fonds/fond_10.jpg",
+  "art/titre/fonds/fond_11.jpg",
+  "art/titre/fonds/fond_12.jpg",
+  "art/titre/fonds/fond_13.jpg",
+  "art/titre/fonds/fond_14.jpg",
+  "art/titre/fonds/fond_15.jpg",
+  "art/titre/fonds/fond_16.jpg",
+  "art/titre/fonds/fond_17.jpg",
+  "art/titre/fonds/fond_18.jpg",
+  "art/titre/fonds/fond_19.jpg"
+ ],
+ "vignettes": [
+  "art/titre/vignettes/banniere_01.webp",
+  "art/titre/vignettes/banniere_02.webp",
+  "art/titre/vignettes/banniere_03.webp",
+  "art/titre/vignettes/banniere_04.webp",
+  "art/titre/vignettes/banniere_05.webp",
+  "art/titre/vignettes/banniere_06.webp",
+  "art/titre/vignettes/banniere_07.webp",
+  "art/titre/vignettes/banniere_08.webp",
+  "art/titre/vignettes/banniere_09.webp",
+  "art/titre/vignettes/banniere_10.webp",
+  "art/titre/vignettes/banniere_11.webp",
+  "art/titre/vignettes/banniere_12.webp",
+  "art/titre/vignettes/banniere_13.webp",
+  "art/titre/vignettes/banniere_14.webp",
+  "art/titre/vignettes/banniere_15.webp",
+  "art/titre/vignettes/banniere_16.webp",
+  "art/titre/vignettes/banniere_17.webp",
+  "art/titre/vignettes/banniere_18.webp",
+  "art/titre/vignettes/banniere_19.webp"
+ ],
+ "ui": {
+  "bar": "art/titre/ui/bar.jpg",
+  "bloodlogo": "art/titre/ui/bloodlogo.webp",
+  "bloodside": "art/titre/ui/bloodside.webp",
+  "cBL": "art/titre/ui/cBL.webp",
+  "cBR": "art/titre/ui/cBR.webp",
+  "cTL": "art/titre/ui/cTL.webp",
+  "cTR": "art/titre/ui/cTR.webp",
+  "floor": "art/titre/ui/floor.webp",
+  "floorblood": "art/titre/ui/floorblood.webp",
+  "logo": "art/titre/ui/logo.webp",
+  "sep": "art/titre/ui/sep.webp",
+  "sweep": "art/titre/ui/sweep.jpg",
+  "wipe": "art/titre/ui/wipe.webp"
+ },
+ "panneaux": {
+  "carrousel": [
+   "art/titre/fonds/fond_01.jpg",
+   "art/titre/fonds/fond_02.jpg",
+   "art/titre/fonds/fond_03.jpg",
+   "art/titre/fonds/fond_04.jpg",
+   "art/titre/fonds/fond_05.jpg",
+   "art/titre/fonds/fond_06.jpg",
+   "art/titre/fonds/fond_07.jpg",
+   "art/titre/fonds/fond_08.jpg",
+   "art/titre/fonds/fond_09.jpg",
+   "art/titre/fonds/fond_10.jpg",
+   "art/titre/fonds/fond_11.jpg",
+   "art/titre/fonds/fond_12.jpg",
+   "art/titre/fonds/fond_13.jpg",
+   "art/titre/fonds/fond_14.jpg",
+   "art/titre/fonds/fond_15.jpg",
+   "art/titre/fonds/fond_16.jpg",
+   "art/titre/fonds/fond_17.jpg",
+   "art/titre/fonds/fond_18.jpg",
+   "art/titre/fonds/fond_19.jpg"
+  ],
+  "play_bots": "art/titre/fonds/fond_10.jpg",
+  "play_daily": "art/titre/fonds/fond_13.jpg",
+  "play_ranked": "art/titre/fonds/fond_05.jpg",
+  "bounty": "art/titre/fonds/fond_01.jpg",
+  "vault": "art/titre/fonds/fond_14.jpg",
+  "dice_set": "art/titre/fonds/fond_17.jpg",
+  "options": "art/titre/fonds/fond_11.jpg",
+  "character_select": "art/titre/ui/floorblood.webp"
+ },
+ "parLeNom": {},
+ "ecartes": [
+  {
+   "fichier": "cr0ze_A_purple_colossal_chaotic_crab_boss_incrusted_with_rpg_di_2fd7727e-9de5-4c6a-aec4-792a0a04f572.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 9075017,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_A_sealed_royal_invitation_parchment_rpg_solo_item_oil_pai_5bf61a2e-1410-42f8-af15-70a1a31d2974.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 5841487,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_A_sealed_royal_invitation_parchment_rpg_solo_item_oil_pai_b0731df3-3609-4959-9966-c4465537875b.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 7727195,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_Astragor_The_Compass_Warden_colossal_spectral_entity_with_8d6996bf-c3b0-426b-9554-3733c8b88595.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 10787732,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_Crazy_Mask_multicolor_RPG_item_solo_item_dark_background__b323d8d0-9fd0-46c7-a1bd-0edaaafe404e.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 7981142,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_Extreme_macro_oil_painting_in_the_style_of_Jean-Lon_Grme__c5b5a517-1bfe-4254-b507-3dc033db398f.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 7451735,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_Loose_Brick_Drop_dark_dungeon_crawler_vibes_oil_painting__6e412bb8-fc2f-4549-a8fe-f92b93f9cda1.png",
+   "largeur": 2048,
+   "hauteur": 2048,
+   "rapport": 1.0,
+   "octets": 6405679,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.000"
+  },
+  {
+   "fichier": "cr0ze_Lucky_trefle_displayed_alone_oil_painting_by_jean_leon_Gr_410eee89-ddee-4c7d-8fb2-f84f49f13dc7.png",
+   "largeur": 2048,
+   "hauteur": 2048,
+   "rapport": 1.0,
+   "octets": 7708398,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.000"
+  },
+  {
+   "fichier": "cr0ze_Magic_dark_fantasy_consumable_item_a_disgusting_leech_ske_f29d4e6a-80c1-440a-875f-5ca84c15931c.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 5340641,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_Oil_painting_in_the_style_of_Jean-Lon_Grme._onion_dark_ba_2c8f5c39-8a72-4d4e-aa30-faf5c220f8cb.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6829959,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_ROCKS_FALLING_EVERYWHERE_Cosy_secret_and_refined_indoor_6537a31d-3f2a-4538-a2b1-978f6ac755bd_1.png",
+   "largeur": 2544,
+   "hauteur": 1904,
+   "rapport": 1.336,
+   "octets": 7165882,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.336"
+  },
+  {
+   "fichier": "cr0ze_Shadow_hidding_a_hole_dark_dungeon_crawler_vibes_oil_pain_44a95b7a-1e18-45c4-bd07-a3e0981e7433.png",
+   "largeur": 2048,
+   "hauteur": 2048,
+   "rapport": 1.0,
+   "octets": 6353042,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.000"
+  },
+  {
+   "fichier": "cr0ze_Shock_Eel_in_an_open_Jar_electric_spikes_rpg_item_dark_ba_3514bf62-c801-4765-b57e-c638141c92e6.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6371313,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_Still_from_a_1960s_sci_fi_movie._Apple__displayed_alone_o_df655942-0198-4997-a80c-00aa9cd5fd4a.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6413240,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_Tripwire_Gnome_item_from_dungeon_crawler_oil_painting_by__6b23cb11-c5a5-4de2-ad71-63864a186181.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 8917448,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_Troll_milk_written_on_a_milk_bottle__medieval_milk_bottle_770e40cb-9c59-43c5-8693-b1990d875a63.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 2886590,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_Wizard_brain_floating_in_liquid_inside_a_glass_jar_mediev_4c8f9164-118b-4cf0-9ea5-52cfa954e4a3.png",
+   "largeur": 2400,
+   "hauteur": 1920,
+   "rapport": 1.25,
+   "octets": 7967636,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.250"
+  },
+  {
+   "fichier": "cr0ze_Wizard_brain_floating_in_liquid_inside_a_glass_jar_mediev_dcecd50b-2b6f-40d4-9033-71cb6df0bb14.png",
+   "largeur": 2400,
+   "hauteur": 1920,
+   "rapport": 1.25,
+   "octets": 6742592,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.250"
+  },
+  {
+   "fichier": "cr0ze_a_Three_headed_lizard_albinos_humanoid_with_red_eye__rpg__ddc8bc7d-9400-4628-91d7-4dffc44623c1.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 9636838,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_a_skinny_black_woman_rogue_wearing_stealth_in_a_full_cloa_f6715695-84d7-41c9-9aa4-dc99c7eaa38c.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 5672368,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_absurd_luxurious_bathhouse_hidden_inside_a_medieval_dunge_2d448c71-6d3f-4005-b350-86c87514b220.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 9508672,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_chaotic_purple_and_blue_jester-themed_ring_with_mocking_e_c60c1737-ee1e-4e51-898b-bf642fb5534f.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6097586,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_close_up_of_a_tiny_mosquito_flying_in_a_dungeon_crawler_w_affe64c8-f4a6-433d-a88d-77312919f6a5.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 8590245,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_cyclops_one-eyed_monster_dungeon_crawler_vibes_oil_painti_bdebc481-6d97-4826-9f30-0d3e7ecd492c.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 8549445,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_dark_dungeon_crawler_scen_a_close_up_portrait_of_a_stress_1973bdcb-e538-4874-8cee-362752cc210a.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 7749598,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_dark_dungeon_crawler_scene_a_lone_silent_figure_rogue_hid_5741ec67-4924-4540-9538-4990450e623f.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 6228266,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_double_cat_glitch_effect_dark_dungeon_background_oil_pa_3b11258f-fdb8-4ffc-ae1f-799715351d32_2.png",
+   "largeur": 2544,
+   "hauteur": 1904,
+   "rapport": 1.336,
+   "octets": 7963639,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.336"
+  },
+  {
+   "fichier": "cr0ze_dungeon_crawler_scene_3_dead_adventurers_lying_on_the_sto_f86a2707-2fef-4be2-9035-f439d3202d71.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 7826647,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_dungeon_crawler_scene_an_elegant_and_slightly_effeminate__75271b84-8a46-43e5-8e32-e78125409472.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 9596785,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_frozen_book_warm_dungeon_in_the_background_rpg_item_oil_p_2807eddc-e9a6-4d15-b1c3-a2c5a489fc63 (1).png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 8050419,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_guard_with_scare_medieval_haircut_shiny_dark_plate_armo_7006a465-fc4b-4e63-940d-eaf62638ac6c_1.png",
+   "largeur": 1904,
+   "hauteur": 2544,
+   "rapport": 0.748,
+   "octets": 7816450,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 0.748"
+  },
+  {
+   "fichier": "cr0ze_httpss.mj.runGqTAtyuseqA_about_to_resurect_bleeding_loo_295f90a8-7a36-483d-95c7-acbaf63a4de5_1.png",
+   "largeur": 2544,
+   "hauteur": 1904,
+   "rapport": 1.336,
+   "octets": 6484796,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.336"
+  },
+  {
+   "fichier": "cr0ze_leech_rpg_monstyer_dungeon_crawler_background_oil_paintin_163ea148-903e-4d48-a482-8f7eab6b3a44.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 7298698,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_massive_dark_poo_low_detailed_oil_painting_painted_in_t_8b1eb789-b84a-4817-99ec-6536b0f7193a_3.png",
+   "largeur": 1232,
+   "hauteur": 928,
+   "rapport": 1.328,
+   "octets": 1608947,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.328"
+  },
+  {
+   "fichier": "cr0ze_massive_living_alone_root_creature_emerging_from_cracked__1f5ed05c-80dd-4326-a903-5bc1a55ff0ee.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 7405342,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_massive_living_alone_root_creature_emerging_from_cracked__edcc6a89-86a5-4722-958c-13de6d87f16f.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6814652,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_medieval_cheese_dark_background_oil_painting_low_detail_b_10b7c6ff-3b20-486e-9214-0c8b7fb006af.png",
+   "largeur": 2464,
+   "hauteur": 1856,
+   "rapport": 1.328,
+   "octets": 6460875,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.328"
+  },
+  {
+   "fichier": "cr0ze_mystical_eye-shaped_ring_subtle_glow_displayed_alone_on_b_7a69872a-8a7d-459c-9ced-7c443792fbb3.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 4551221,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_packshot_FOOLS_ORACLE_written_on_a_game_box_solo_item_on__d59c32df-4eaf-4a8f-81e7-4c7473699c31 (1).png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6510937,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_packshot_FOOLS_ORACLE_written_on_a_game_box_solo_item_on__d59c32df-4eaf-4a8f-81e7-4c7473699c31.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6510937,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_packshot_of_a_loot_chest_in_a_castle_or_crypt_very_dark_b_da5abc2e-c4bb-4ab5-b57f-b42c5b11b683.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 8025131,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_packshot_of_a_magic_mirror_shard_dark_background_oil_pain_7b8160f0-4d5f-440c-be50-c4f90bff4574.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 8715836,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_packshot_of_a_treasure_pile_in_a_castle_or_crypt_very_dar_a74f9dbc-6501-41ae-ad5a-2ac931380a2c.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 9626254,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_packshot_of_medieval_Iron_purple_magic_armor_with_eyes__525d8153-ba83-4093-b266-e57bea283836_0.png",
+   "largeur": 2544,
+   "hauteur": 1904,
+   "rapport": 1.336,
+   "octets": 8404175,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.336"
+  },
+  {
+   "fichier": "cr0ze_packshot_of_multicolor_rainbow_glowing_magical_medieval_s_4a7744d5-d810-448a-9279-069c36a92bab.png",
+   "largeur": 2400,
+   "hauteur": 1920,
+   "rapport": 1.25,
+   "octets": 6428058,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.250"
+  },
+  {
+   "fichier": "cr0ze_portrait_of_a_giant_Frost_wyvern_in_a_dungeon_centered_mo_bb310672-f366-45f0-9160-61494f8e65db.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6665893,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_purple_arcanic_missiles_coming_from_the_top_trap_in_the_298f14a1-0832-47c6-9f4d-f5893361f5df_0.png",
+   "largeur": 2544,
+   "hauteur": 1904,
+   "rapport": 1.336,
+   "octets": 7012275,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.336"
+  },
+  {
+   "fichier": "cr0ze_red_and_dark_and_scary_magic_book_glowing_in_a_dark_magic_a11993ae-e50f-49f6-b6a5-d4140b118157.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 5203546,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  },
+  {
+   "fichier": "cr0ze_rusty_spikes_emerging_from_dungeon_floor_medieval_trap_da_e99f9e3b-5ebe-485d-bfb7-0d3af28d716f.png",
+   "largeur": 2048,
+   "hauteur": 2048,
+   "rapport": 1.0,
+   "octets": 8068155,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.000"
+  },
+  {
+   "fichier": "cr0ze_secret_indoor_garden_room_in_a_dungeon_with_rocks_falli_714fbba1-cdde-411e-94fb-122df3af75db_0.png",
+   "largeur": 2544,
+   "hauteur": 1904,
+   "rapport": 1.336,
+   "octets": 8622048,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.336"
+  },
+  {
+   "fichier": "cr0ze_small_fantasy_ring_white_gold_incrusted_with_tiny_spiky_8b815343-22a6-4ddb-b8db-4695a0897911_2.png",
+   "largeur": 2544,
+   "hauteur": 1904,
+   "rapport": 1.336,
+   "octets": 7145044,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.336"
+  },
+  {
+   "fichier": "cr0ze_super_pale_chubby_evil_Cristin_Milioti_as_a_vampire_red_e_f7d5dc61-a87d-4953-a266-00f2a9367844.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 6769903,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_tiny_fragile_ring_rusty_white_and_red_metal_incrusted_w_2ef00596-1f51-444a-9242-2363e2b9bd60_3.png",
+   "largeur": 1200,
+   "hauteur": 960,
+   "rapport": 1.25,
+   "octets": 1339667,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.250"
+  },
+  {
+   "fichier": "cr0ze_treasure_pile_with_a_happy_black_cocker_spaniel_dog_dunge_e6d87ccf-9084-40f7-9684-dab918ab3855.png",
+   "largeur": 2400,
+   "hauteur": 1984,
+   "rapport": 1.21,
+   "octets": 7646560,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.210"
+  },
+  {
+   "fichier": "cr0ze_two_adventurers_one_in_plate_armor_the_other_is_a_wizard__f474c39e-6785-4b84-9716-d387db56e17b.png",
+   "largeur": 2688,
+   "hauteur": 1792,
+   "rapport": 1.5,
+   "octets": 10087941,
+   "pourquoi": "ce n'est pas un fond : un fond fait 16/9 (1,778), celui-ci fait 1.500"
+  }
+ ]
+}
