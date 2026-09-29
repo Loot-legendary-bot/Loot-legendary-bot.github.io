@@ -8,6 +8,6 @@ button{margin-top:1rem;background:#7a2a24;border:0;color:#f3ede3;font:inherit;fo
 const H='60d91e576dcdfdb05f2602a5a9b6cd5dac7e34278e2b3f7f3e9ef24ea9ae4586';
 async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
 document.getElementById('f').onsubmit=async e=>{e.preventDefault();const v=document.getElementById('p').value.trim();
- if(await sha(v)===H){sessionStorage.setItem('ll_pass','ok');location.replace(sessionStorage.getItem('ll_apres')||'/titre/ecran_titre.html')}
+ if(await sha(v)===H){sessionStorage.setItem('ll_pass','ok');location.replace('/titre/ecran_titre.html')}
  else{document.getElementById('m').textContent='Non.';document.getElementById('p').value=''}};
 </script></body></html>
