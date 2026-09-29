@@ -5,7 +5,7 @@ input{background:#000;border:1px solid #7a2a24;color:#efe6d6;font:inherit;font-s
 button{margin-top:1rem;background:#7a2a24;border:0;color:#f3ede3;font:inherit;font-size:1rem;padding:.6rem 1.6rem;letter-spacing:.2em;cursor:pointer}p{color:#8f8479;font-size:.85rem;margin:1rem 0 0;min-height:1.2em}</style></head>
 <body><form id="f"><h1>LOOT LEGENDARY</h1><input id="p" type="password" autocomplete="off" autofocus placeholder="mot de passe"><br><button>ENTRER</button><p id="m"></p></form>
 <script>
-const H='55194b4d5553f498591ff8c249efdd19cfa6c3e0ee99df75720ede152acf687f';
+const H='60d91e576dcdfdb05f2602a5a9b6cd5dac7e34278e2b3f7f3e9ef24ea9ae4586';
 async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
 document.getElementById('f').onsubmit=async e=>{e.preventDefault();const v=document.getElementById('p').value.trim();
  if(await sha(v)===H){sessionStorage.setItem('ll_pass','ok');location.replace(sessionStorage.getItem('ll_apres')||'/titre/ecran_titre.html')}
