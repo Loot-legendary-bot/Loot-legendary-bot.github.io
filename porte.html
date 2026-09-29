@@ -1,0 +1,13 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LOOT LEGENDARY</title>
+<style>html,body{height:100%;margin:0;background:#0a0908;color:#efe6d6;font-family:"Courier New",monospace}body{display:flex;align-items:center;justify-content:center}
+form{text-align:center;padding:2rem 3rem;border:1px solid #3a2f2a;background:#120f0e}h1{font-family:Impact,"Arial Narrow",sans-serif;letter-spacing:.12em;font-size:2.2rem;margin:0 0 1.2rem;color:#f3ede3}
+input{background:#000;border:1px solid #7a2a24;color:#efe6d6;font:inherit;font-size:1.1rem;padding:.6rem .9rem;width:16rem;text-align:center;letter-spacing:.15em}
+button{margin-top:1rem;background:#7a2a24;border:0;color:#f3ede3;font:inherit;font-size:1rem;padding:.6rem 1.6rem;letter-spacing:.2em;cursor:pointer}p{color:#8f8479;font-size:.85rem;margin:1rem 0 0;min-height:1.2em}</style></head>
+<body><form id="f"><h1>LOOT LEGENDARY</h1><input id="p" type="password" autocomplete="off" autofocus placeholder="mot de passe"><br><button>ENTRER</button><p id="m"></p></form>
+<script>
+const H='55194b4d5553f498591ff8c249efdd19cfa6c3e0ee99df75720ede152acf687f';
+async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+document.getElementById('f').onsubmit=async e=>{e.preventDefault();const v=document.getElementById('p').value.trim();
+ if(await sha(v)===H){sessionStorage.setItem('ll_pass','ok');location.replace(sessionStorage.getItem('ll_apres')||'/titre/ecran_titre.html')}
+ else{document.getElementById('m').textContent='Non.';document.getElementById('p').value=''}};
+</script></body></html>
