@@ -129,14 +129,19 @@
     }
     fermeVoulue = false;
     var sieges = 4, mode = 'FFA';
+    /* note 275 (3), note moteur 204 (1) - L'IDLE-TIMER, option de salon, ON par defaut : 60 s par
+       action, 3 depassements de suite -> le joueur passe DECO (il passe ses actions jusqu'a son
+       retour). La regle vit au serveur ; l'ecran la choisit, l'envoie et la dit. */
+    var idle = true;
     var b = cadre();
     b.appendChild(el('h2', '', 'Play with friends'));
     b.appendChild(el('p', '', 'Logged in as ' + s.pseudo + '.'));
     b.appendChild(el('h3', '', 'Create a room'));
     var rs = el('div', 'row'); b.appendChild(rs);
     var rm = el('div', 'row'); b.appendChild(rm);
+    var ri = el('div', 'row'); b.appendChild(ri);
     var peint = function () {
-      rs.innerHTML = ''; rm.innerHTML = '';
+      rs.innerHTML = ''; rm.innerHTML = ''; ri.innerHTML = '';
       rs.appendChild(el('p', '', 'Seats'));
       [2, 3, 4, 5].forEach(function (n) {
         bouton(rs, String(n), n === sieges ? 'sel' : '', function () {
@@ -147,6 +152,10 @@
       bouton(rm, 'Free-for-all', mode === 'FFA' ? 'sel' : '', function () { mode = 'FFA'; peint(); });
       var d = bouton(rm, '2 vs 2', mode === '2V2' ? 'sel' : '', function () { mode = '2V2'; sieges = 4; peint(); });
       d.title = 'Four seats: seats 1 + 2 against seats 3 + 4.';
+      ri.appendChild(el('p', '', 'Idle timer'));
+      bouton(ri, 'On', idle ? 'sel' : '', function () { idle = true; peint(); });
+      bouton(ri, 'Off', idle ? '' : 'sel', function () { idle = false; peint(); });
+      ri.appendChild(el('p', '', idle ? '60 s per action ' + '—' + ' 3 timeouts in a row and the player is disconnected (passes until back).' : 'No limit: nobody is ever pushed out.'));
     };
     peint();
     var rc = el('div', 'row'); b.appendChild(rc);
@@ -155,12 +164,13 @@
       fetch(base() + '/rooms', {
         method: 'POST',
         headers: { 'content-type': 'application/json', authorization: 'Bearer ' + s.token },
-        body: JSON.stringify({ seats: sieges })
+        body: JSON.stringify({ seats: sieges, idleTimer: idle })
       }).then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; });
       }, function () { return { ok: false, j: { error: 'RESEAU' } }; }).then(function (r) {
         cree.disabled = false;
         if (!r.ok) { err.textContent = phrase(r.j && r.j.error); return; }
+        idleVoulu = idle;
         entre(r.j.code, mode);
       });
     });
@@ -184,6 +194,8 @@
   }
 
   /* ② le salon : le code, les sièges, PRÊT, et LANCER pour l'hôte */
+  /* note 275 (3) : l'idle-timer choisi a la creation (l'hote seul le connait avant le depart) */
+  var idleVoulu = true;
   function entre(code, mode) {
     var s = session();
     if (!s) { ouvre(); return; }
@@ -222,6 +234,7 @@
     });
     rc.appendChild(el('p', '', 'Give it to your friends: Play with friends → Join.'));
     var hote = moi && moi.host === true;
+    if (hote && mode) { b.appendChild(el('p', '', idleVoulu ? 'Idle timer: on — 60 s per action, 3 timeouts in a row = disconnected.' : 'Idle timer: off.')); }
     if (hote && mode) { b.appendChild(el('p', '', mode === '2V2' ? 'Mode: 2 vs 2 — seats 1 + 2 against seats 3 + 4.' : 'Mode: free-for-all.')); }
     var ol = el('ol'); b.appendChild(ol);
     var tousPrets = false, assis = 0;
@@ -256,7 +269,7 @@
       var go = bouton(row, 'Start', 'oui', function () {
         if (!ws) { return; }
         go.disabled = true;
-        ws.send(JSON.stringify({ t: 'start', setup: { mode: mode === '2V2' ? '2V2' : 'FFA' } }));
+        ws.send(JSON.stringify({ t: 'start', setup: { mode: mode === '2V2' ? '2V2' : 'FFA', idleTimer: idleVoulu } }));
       });
       go.disabled = !tousPrets || assis < 2;
       if (assis < 2) { go.title = 'Wait for a friend to join.'; }
@@ -273,6 +286,8 @@
       seed: setup.seed,
       seats: Array.isArray(setup.players) ? setup.players.length : 4,
       mode: setup.mode === '2V2' ? '2V2' : 'FFA',
+      /* note 275 (3) : l'option choisie par l'hote, relayee a tous par le setup */
+      idleTimer: setup.idleTimer !== false,
       players: setup.players,
       seat: moi ? moi.seat : null,
       hote: !!(moi && moi.host),

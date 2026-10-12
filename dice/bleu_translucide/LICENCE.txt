@@ -1,0 +1,60 @@
+bleu_translucide — licences et provenance
+=========================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+PHOTO       La photographie de reference est celle que Croze a deposee pour
+            cette peau (docs/refs/skin_bleu_translucide/reference_croze.png).
+            Elle a servi AUX COULEURS ET A DES NOMBRES, rien d'autre : aucune
+            texture, aucune decoupe, aucun tracage, aucun pixel de l'image
+            n'entre dans la peau. Ce qu'elle a donne :
+              - la TEINTE de la resine, 296,4 deg en CIELAB et 269,6 deg en
+                Oklab, et sa chroma (69,5), mesurees sur la resine seule apres
+                avoir retire le fond ET l'encre. Les deux espaces sont donnes
+                parce que CIELAB ecrase la region bleu -> violet (un bleu pur et
+                un violet y sont a 5,4 deg) et qu'Oklab les separe (30 deg) ;
+              - les trois epaisseurs (L* 26,2 a l'epais, 37,1 median, 45,5 au
+                mince), qui est le sujet propre de cette famille ;
+              - l'ecretage de la photo elle-meme, 0,001 % d'un canal.
+
+FOND BLEU   La photographie est prise sur un fond BLEU PALE, de la meme teinte
+            que les des. La teinte ne les separe donc pas ; la CHROMA le fait
+            (Otsu a 49,9 : fond 31,2, resine 69,4). Les masques ont ete PEINTS
+            et REGARDES avant d'etre crus : le corps prend les sept des et rien
+            du fond, l'encre prend les glyphes blancs.
+
+GIVRE       La resine de la photographie est GIVREE : la surface diffuse, la
+            lumiere traverse quand meme. Le givre est la rugosite de la
+            surface (fini.rugosite 0,70), jamais une texture prise a l'image.
+            Le chiffre est MESURE, pas choisi a l'oeil : a 0,25, 0,35 et 0,45
+            le d6 au milieu de son jet ecretait 21 a 24 % de son corps sur le
+            canal bleu (la cle sur la face du dessus) ; a 0,70 il en ecrete
+            0,17 %, comme rouge_translucide et jaune_translucide.
+
+VOLUME      Le volume ne mange que le ROUGE ; le vert y est a 1,0 et la teinte
+            se pose sur la surface. Mesure sur la vitrine : un volume qui
+            mangeait aussi un peu de vert faisait virer les des epais vers le
+            violet et les minces vers le cyan, 15,1 deg entre le d4 et le d20 ;
+            vert a 1,0, l'ecart tombe a 2,8 deg (plafond 8).
+
+NOM         La peau porte le nom de sa MATIERE — une resine bleue translucide
+            givree, chiffres peints en blanc dans une gravure. Elle remplace,
+            sous le meme nom et a la demande de Croze du 12/10, le dossier du
+            vieux gabarit (sans manifeste) que l'ecran connaissait deja. La
+            photographie est un cliche de produit du commerce : sa marque
+            n'entre nulle part, ni dans le nom, ni dans les fichiers.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

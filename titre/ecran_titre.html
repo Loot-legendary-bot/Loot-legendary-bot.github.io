@@ -40,6 +40,8 @@
      images ensemble), jamais sur une seule. */
   .bgw .diapo{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity 1.6s ease-in-out}
   .bgw .diapo.on{opacity:1}
+  /* note 275 (8) - plus de carrousel : la pierre de la DA (da_fonds.css), comme les panneaux. */
+  .bgw.pierre-seule{background:#0b0b0b var(--da-pierre,none) 0 0 / 72cqh repeat;filter:brightness(.85)}
   .bgw .diapo img{position:absolute;inset:0;width:100%;height:100%;object-position:center}
   .bgw .diapo img.flou{object-fit:cover;transform:scale(1.08);
     filter:blur(28px) grayscale(.55) brightness(.34)}
@@ -146,6 +148,10 @@
     text-transform:inherit;cursor:pointer}
   .pied-lien:hover,.pied-lien:focus{color:var(--bone);outline:none}
   #who,#rank{cursor:pointer}
+  /* note 275 (6) - le buff du mur pres du pseudo : petit, discret */
+  .hud .who-buff{font-size:1.25cqh;letter-spacing:.06em;color:#d9c9a3;opacity:.85;white-space:nowrap;margin-left:.6cqh}
+  #bboard .bb-sceau .bb-x{position:absolute;transform:translate(-50%,0);margin-top:2.6cqh;font-size:1.15cqh;
+    color:#e9e4d8;background:rgba(0,0,0,.7);padding:0 .4cqh;border-radius:.4cqh;pointer-events:none;white-space:nowrap}
   /* S1419 - note 243 (8)(a) (BOUNTY_WALL 21) : le BOUNTY WALL revient, en evidence A DROITE
      du HOME, avec ses sept spheres (Donjon compris) ; il ne se pose que sur le titre. */
   #bboard{display:flex;flex-direction:column;align-items:center;gap:1.2cqh;padding:1.6cqh 1.6cqw 1.8cqh}
@@ -957,7 +963,7 @@
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 
-<p class="hint">click a menu entry &middot; esc goes back &middot; backgrounds cycle on their own</p>
+<p class="hint">click a menu entry &middot; esc goes back</p>
 
 <div class="frame"><div class="screen" id="screen">
   <div class="bgw" id="bgw"></div>
@@ -1101,6 +1107,7 @@
   <div class="corner">
   <div class="hud">
     <span class="who" id="who"></span>
+    <span class="who-buff" id="whobuff"></span>
     <span class="hbar"></span>
     <span class="rank serif"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none"
       stroke="#a3231d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1389,12 +1396,25 @@ const DICE=[
   /* note 268 (3), MONNAIE 17 : plastique_rouge + plastique_bleu (forge, fusion e5c7713) - la
      VENTE LIBRE du rayon : aucun exploit au mur, debloquees a l'achat. */
   ["Red plastic dice","plastique_rouge",0],
-  ["Blue plastic dice","plastique_bleu",0]];
+  ["Blue plastic dice","plastique_bleu",0],
+  /* note 275 (4) - les deux dernieres plastique_* (fusion d039ae6) et bleu_translucide
+     (forge ceef7ab, fusion 935aeab) : OPEN SALE. `titre_contre_registre.py` les nommait
+     (AU REGISTRE ET PAS AU TITRE) - Croze n'en voyait que 2 sur 4. */
+  ["Green plastic dice","plastique_vert",0],
+  ["White plastic dice","plastique_blanc",0],
+  ["Blue resin dice","bleu_translucide",0],
+  /* note 275 (4) - `bones` refait (note 272 (6)) a sa vitrine : il ENTRE au rayon,
+     possede d'office et equipe par defaut (la partie le prend quand rien n'est equipe :
+     main.ts::PEAU_PAR_DEFAUT). La raison d'hier (« aucune vitrine forgee ») est perimee. */
+  ["Bones dice","bones",1]];
+/* note 275 (4) - les peaux DE DEPART : a toi sans achat, sous leur propre titre. */
+const PEAUX_DE_DEPART=['bones'];
 /* S1427 - note 263 : « les des the Seal me sont donnes - et ils ne sont PAS en vente au Vault ».
    Une peau HORS VENTE n'est au rayon que possedee (pour l'equiper), jamais au tirage. */
 const PEAUX_HORS_VENTE=['sceau'];
 /* note 266 (5) / 268 (3) - la VENTE LIBRE du rayon DICE : pas de verrou, un seul prix (MONNAIE 17 : 320 R). */
-const PEAUX_VENTE_LIBRE={plastique_rouge:200,plastique_bleu:200};   /* SUPER COMMON 200, MONNAIE §20 gravé */
+const PEAUX_VENTE_LIBRE={plastique_rouge:200,plastique_bleu:200,plastique_vert:200,plastique_blanc:200,   /* SUPER COMMON 200, MONNAIE §20 gravé */
+  bleu_translucide:1000};   /* note 275 (4) : Common 1 000 */
 /* note 269 ② - MONNAIE §21 gravé : le prix d'une peau du mur est celui de son PALIER (7.2, la matiere),
    Common 1 000 / Uncommon 2 000 / Rare 5 000, sans le x5 d'hier. Les peaux absentes du tableau 7.2
    sont classees par leur matiere (Q-269-PALIERS) : nacre = Rare (reflet), cristal = Uncommon (translucide). */
@@ -1472,15 +1492,17 @@ const BACKS=[["Lick Floor","lick_floor",1,0],
   /* note 268 (2) - les dos de Croze (ASSETS/cardback, *BACKCARD) : vente libre.
      note 271 (6), MONNAIE 22 : etages 300 (simples) / 500 (standard) / 800 (elabores) -
      repartition = reco de l'ecran a l'inventaire, le classeur et Croze corrigent. */
+  /* note 275 (7), BOUNTY_WALL 24 - cinq d'entre eux deviennent les recompenses des defis du
+     Donjon (prix null : gagnes au mur, plus vendus) ; Q-275-DOS-DEFIS. */
   ["Black Sober","black_sober",0,300],
   ["Light Sober","light_sober",0,300],
-  ["Red Sober","red_sober",0,300],
-  ["Bones","bones_back",0,500],
-  ["Old Paper","old_paper",0,500],
-  ["Simple and Sunny","simple_and_sunny",0,500],
+  ["Red Sober","red_sober",0,null],
+  ["Bones","bones_back",0,null],
+  ["Old Paper","old_paper",0,null],
+  ["Simple and Sunny","simple_and_sunny",0,null],
   ["Gold and Red","gold_and_red",0,800],
   ["Special Edition Iridescent","special_iridescent",0,800],
-  ["Stained Glass","stained_glass",0,800]];
+  ["Stained Glass","stained_glass",0,null]];
 /* note 271 (6) - le pool season_reward : remis en fin de saison, jamais vendu. Les 2 des 9
    *backcards qui y passent sont designes par le classeur (ajouter l'id ici, prix -> null). */
 const DOS_SAISON=new Set(["alt","alt_legendary"]);
@@ -1513,7 +1535,8 @@ function gardeLesDos(){
   let eq=null;
   try{eq=window.LLProfil.lis().equipe.de;}catch(e){eq=null;}
   const k=DICE.findIndex(d=>d[1]===eq&&d[2]);
-  if(k>=0) equipped.dice=k;
+  /* note 275 (4) - rien d'equipe = `bones`, le de par defaut de la partie : il porte « Equipped ». */
+  if(k>=0) equipped.dice=k; else equipped.dice=DICE.findIndex(d=>d[1]==='bones');
 }());
 function gardeLesPossessions(){
   try{window.LLProfil.modifie(p=>{
@@ -1687,6 +1710,9 @@ if(window.LLBountyWall){
   window.LLBountyWall.SORTES.forEach(so=>{
     const o=window.LLBountyWall.OFFRANDES[so];
     BESACE_SILHOUETTE[so]=FIOLE[o.taille](o.teinte);
+    /* note 275 (6) - les offrandes de Croze (ASSETS/offrandes : trois tas par esprit, decoupes en
+       `art/besace/essence_<taille>_<esprit>.webp`, a leur taille relative) ; la fiole reste le repli. */
+    BESACE_FICHIER[so]='essence_'+so;
   });
 }
 /* S1414 : sans packshot connu (les essences), pas d'<img> - elle cachait la fiole jusqu'a son 404 */
@@ -1806,13 +1832,10 @@ const CARROUSEL = Array.isArray(PANNEAU.carrousel) && PANNEAU.carrousel.length >
   ? PANNEAU.carrousel : BGS;
 /* C-T4 bis — une DIAPO par image : la copie floutee derriere, l'image
    entiere devant. La classe `on` va sur la diapo (le fondu de `.bgw .diapo`). */
-CARROUSEL.forEach((s,i)=>{const d=document.createElement('div');d.className='diapo'+(i===0?' on':'');
-  const f=new Image();f.className='flou';f.alt='';f.src=s;
-  const n=new Image();n.className='net';n.alt='';n.src=s;
-  d.appendChild(f);d.appendChild(n);bgw.appendChild(d);});
-let bi=0;
-setInterval(()=>{const im=bgw.children;im[bi].classList.remove('on');
-  bi=(bi+1)%im.length;im[bi].classList.add('on');},5200);
+/* note 275 (8) - LE CARROUSEL EST RETIRE (obsolete, reco du classeur prise) : le HOME vit
+   sur la PIERRE (da_fonds.css, DA-2), plus aucune diapo ni minuterie. `CARROUSEL` reste
+   lu ici pour qu'un veto d'un mot le ressuscite en une ligne. */
+bgw.classList.add('pierre-seule');
 
 /* transition : the entry bleeds, paint covers, the view turns underneath */
 const BLINK_MS=300, COVER_MS=420, PAINT_MS=840;
@@ -2159,6 +2182,10 @@ function peinsLeBlocDuMur(){
       if(BW.dort(profil,t.id)) im.className='ferme';
     }
     box.appendChild(im);
+    /* note 275 (6) - le multiplicateur actif de la branche, en petit sous sa sphere */
+    var mx=BW.multiplicateur(profil,t.id);
+    if(mx>1){ var x=document.createElement('span'); x.className='bb-x'; x.textContent=BW.affiche(mx);
+      x.style.left=im.style.left; x.style.top=im.style.top; box.appendChild(x); }
   });
   var sous=document.querySelector('#bboard .bb-sous');
   if(sous) sous.textContent = BW.aGagne(profil) ? 'the seven spirits — your challenges' : 'win a game to open the spirits';
@@ -2807,11 +2834,13 @@ function fillGrid(key){
     /* note 266 (5) - la VENTE LIBRE d'abord, sous son titre ; puis les peaux du mur. */
     const libre=d=>PEAUX_VENTE_LIBRE[d[1]]!==undefined;
     const titre=t=>{ const h=document.createElement('div'); h.className='rayon-sect'; h.textContent=t; grid.appendChild(h); };
-    const ordre=DICE.map((d,i)=>[d,i]).sort((a,b)=>(libre(b[0])?1:0)-(libre(a[0])?1:0));
+    /* note 275 (4) - trois sections : Starter set (a toi d'office), Open sale, Bounty Wall. */
+    const rang=d=>PEAUX_DE_DEPART.indexOf(d[1])>=0?0:libre(d)?1:2;
+    const ordre=DICE.map((d,i)=>[d,i]).sort((a,b)=>rang(a[0])-rang(b[0]));
     let sect=null;
     ordre.forEach(([[name,dossier,owned],i])=>{
       if(!owned&&PEAUX_HORS_VENTE.indexOf(dossier)>=0) return;
-      const s=libre(DICE[i])?'Open sale':'Bounty Wall';
+      const s=['Starter set','Open sale','Bounty Wall'][rang(DICE[i])];
       if(s!==sect){ sect=s; titre(s); }
       const c=document.createElement('div');
       c.className='cell'+(owned?'':' locked')+(owned&&equipped.dice===i?' eq':''); c.tabIndex=0;
@@ -2983,6 +3012,13 @@ function paintHUD(flash){
   /* note 270 (1) - la player banner de Croze sous le pseudo (calque leger, /titre/bannieres.js) */
   if(window.LLBannieres) window.LLBannieres.pose(document.getElementById('who'));
   document.getElementById('rank').textContent=PROFILE.rank;
+  /* note 275 (6), MONNAIE 25 - le buff actif pres du pseudo : chaque branche qui compte plus que x1. */
+  (function(){ const wb=document.getElementById('whobuff'), BW=window.LLBountyWall; if(!wb||!BW) return;
+    let p=null; try{ p=window.LLProfil.lis(); }catch(e){ p=null; }
+    const actifs=p===null?[]:BW.TRONCS.filter(t=>BW.multiplicateur(p,t.id)>1);
+    wb.textContent=actifs.map(t=>(t.pointe===null?'Dungeon':t.t)+' '+BW.affiche(BW.multiplicateur(p,t.id))).join(' · ');
+    wb.title=actifs.length?'Active on the Bounty Wall: pact and essences':'';
+    wb.style.display=actifs.length?'':'none'; })();
   /* S1416 - HM-5 (d) : le grade n'est plus qu'une icone, son nom au survol, clic = le profil */
   document.getElementById('rank').parentElement.title='Rank: '+PROFILE.rank+' — click for all your stats';
   document.getElementById('gold').textContent=fmt(PROFILE.gold);
@@ -3043,12 +3079,12 @@ function openSheet(kind,i){
     const BW=window.LLBountyWall; const so=BW.SORTES[i]; const o=BW.OFFRANDES[so];
     const n=BW.sac(window.LLProfil.lis())[so];
     owned=false;
-    shot='<div class="dshot besace">'+besaceObjet(so)+'<b class="besace-x">\u00d7'+o.x+'</b></div>';
+    shot='<div class="dshot besace">'+besaceObjet(so)+'<b class="besace-x">\u00d7'+Math.round(o.x)+'</b></div>';
     kick='Bounty Wall \u00b7 Essence'+(n>0?' \u00b7 '+n+' in your bag':'');
     name=o.nom;
     /* S1414 - BW-DA bis (16.1) : une essence ne nourrit QUE son esprit ; elles s'additionnent. */
     const deQui=BW.nomDe(o.esprit);
-    body='<div class="rows">'+row('What it does','Offer it to '+(o.esprit==='neutre'?'Spirit of the Dungeon':'the spirit of '+deQui)+': its path earns \u00d7'+o.x+' for '+o.duree+' games')
+    body='<div class="rows">'+row('What it does','Offer it to '+(o.esprit==='neutre'?'Spirit of the Dungeon':'the spirit of '+deQui)+': its path earns \u00d7'+Math.round(o.x)+' for '+o.duree+' games')
       +row('Only for','The '+(o.esprit==='neutre'?'Dungeon':deQui)+' tree \u2014 the colour says it')
       +row('Adds up','Several essences on the same path add up, and your pact (\u00d73) adds to them')
       +row('Where','Bounty Wall \u2014 open the spirit, the band on top')
@@ -3219,7 +3255,7 @@ function offrandeDuTicket(){
   const pose=BW.surLeTicket(profil);
   if(pose!==null){
     const o=BW.OFFRANDES[pose];
-    return '<div class="rows">'+row('Offering on the ticket',o.nom+' \u2014 this game pays \u00d7'+o.x+' the teeth, won or lost')+'</div>';
+    return '<div class="rows">'+row('Offering on the ticket',o.nom+' \u2014 this game pays \u00d7'+Math.round(o.x)+' the teeth, won or lost')+'</div>';
   }
   const ouverte=BW.ligueOuverte(profil);
   const enPoche=window.LLTickets.enPoche(profil).dpl>0;
@@ -3230,7 +3266,7 @@ function offrandeDuTicket(){
   BW.SORTES.forEach(so=>{
     const o=BW.OFFRANDES[so]; const ok=ouverte&&enPoche&&sac[so]>0;
     h+='<button type="button" data-tkoffr="'+so+'"'+(ok?'':' disabled')+' title="'+(pourquoi||(sac[so]>0?'':'None in your bag.'))+'">'
-      +o.nom+' \u00d7'+o.x+' ('+sac[so]+')</button>';
+      +o.nom+' \u00d7'+Math.round(o.x)+' ('+sac[so]+')</button>';
   });
   return h+'</div>'+(pourquoi?'<p class="dnote">'+pourquoi+'</p>':'');
 }
@@ -4728,7 +4764,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     if (mxN > 1) {
       var brN = BW.brulent(profil, 'neutre');
       var resteN = brN.length === 0 ? null : Math.max.apply(null, brN.map(function (o) { return o.restant; }));
-      sph.insertAdjacentHTML('beforeend', '<span class="braise">×' + mxN + ' · ' +
+      sph.insertAdjacentHTML('beforeend', '<span class="braise">' + BW.affiche(mxN) + ' · ' +
         (resteN === null ? 'pact' : resteN + (resteN > 1 ? ' games' : ' game')) + '</span>');
     }
     sph.addEventListener('click', function () { ouvre('neutre'); });
@@ -4756,7 +4792,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       if (mx > 1) {
         var br0 = BW.brulent(profil, t.id);
         var reste = br0.length === 0 ? null : Math.max.apply(null, br0.map(function (o) { return o.restant; }));
-        b.insertAdjacentHTML('beforeend', '<span class="braise">×' + mx + ' · ' +
+        b.insertAdjacentHTML('beforeend', '<span class="braise">' + BW.affiche(mx) + ' · ' +
           (reste === null ? 'pact' : reste + (reste > 1 ? ' games' : ' game')) + '</span>');
       }
       b.addEventListener('click', function () { ouvre(t.id); });
@@ -4826,7 +4862,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       BW.brulent(profil, t.id).forEach(function (b) {
         var ac = document.createElement('span');
         ac.className = 'actif';
-        ac.textContent = '×' + BW.OFFRANDES[b.sorte].x + ' active · ' + b.restant + (b.restant > 1 ? ' games' : ' game') + ' left';
+        ac.textContent = BW.affiche(BW.OFFRANDES[b.sorte].x) + ' active · ' + b.restant + (b.restant > 1 ? ' games' : ' game') + ' left';
         l2.appendChild(ac);
       });
       /* note 274 ② : le motif du refus, UNE fois (chaque OFFER grise le porte au survol) */
@@ -4843,7 +4879,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         var carte = document.createElement('div');
         carte.className = 'carte-offr' + (n > 0 ? '' : ' vide');
         carte.innerHTML = '<span class="ico">' + besaceObjet(so) + '</span>' +
-          '<span class="quoi">' + o.taille.charAt(0).toUpperCase() + o.taille.slice(1) + ' Essence · ×' + o.x + ' for ' + o.duree + ' games</span>' +
+          '<span class="quoi">' + o.taille.charAt(0).toUpperCase() + o.taille.slice(1) + ' Essence · ' + BW.affiche(o.x) + ' for ' + o.duree + ' games</span>' +
           '<span class="stock">in your stash: ' + n + '</span>';
         var bo = document.createElement('button');
         bo.type = 'button';
@@ -4853,10 +4889,10 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         /* note 274 ② (MONNAIE §24) : une seule essence active par branche - le motif du refus est dit */
         var pourquoi = BW.refus(profil, t.id, so);
         bo.disabled = n === 0 || pourquoi !== null;
-        bo.title = pourquoi !== null ? pourquoi : n > 0 ? o.nom + ': this path earns ×' + o.x + ' for ' + o.duree + ' games.' : 'You have none — essences drop in games.';
+        bo.title = pourquoi !== null ? pourquoi : n > 0 ? o.nom + ': this path earns ' + BW.affiche(o.x) + ' for ' + o.duree + ' games.' : 'You have none — essences drop in games.';
         bo.addEventListener('click', function () {
           if (BW.offre(t.id, so)) {
-            offertDire = { esprit: t.id, texte: 'Offered: ' + o.nom + ' — ×' + o.x + ' for ' + o.duree + ' games' };
+            offertDire = { esprit: t.id, texte: 'Offered: ' + o.nom + ' — ' + BW.affiche(o.x) + ' for ' + o.duree + ' games' };
             peins();
           }
         });
@@ -4865,7 +4901,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       });
       var tot = document.createElement('span');
       tot.className = 'total';
-      tot.innerHTML = 'Total on this path: <b>×' + BW.multiplicateur(profil, t.id) + '</b>';
+      tot.innerHTML = 'Total on this path: <b>' + BW.affiche(BW.multiplicateur(profil, t.id)) + '</b>';
       l2.appendChild(tot);
       coeur.appendChild(l2);
       var confirme = function (texte, prix, faire) {
@@ -4896,8 +4932,12 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
 
     /* la couronne : les paliers AUTOUR du portrait (le Donjon : une page à la fois) */
     var rangs = t.rangs;
-    if (donjon && t.rangs.length === 22) {
-      var PAGES = [['Progress', 0, 3], ['Exploration', 3, 15], ['Pro Tour', 15, 22]];
+    if (donjon && t.rangs.length >= 22) {
+      /* note 275 (7) : une 4e page, CHALLENGES (les cinq defis du Donjon + le Bout). */
+      var PAGES = t.rangs.length === 27
+        ? [['Progress', 0, 3], ['Exploration', 3, 15], ['Pro Tour', 15, 21], ['Challenges', 21, 27]]
+        : [['Progress', 0, 3], ['Exploration', 3, 15], ['Pro Tour', 15, t.rangs.length]];
+      if (pageDonjon >= PAGES.length) pageDonjon = 0;
       var pg = document.createElement('nav');
       pg.className = 'pages';
       PAGES.forEach(function (pa, i) {
@@ -5138,9 +5178,9 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       bo.className = 'bonus';
       if (mxT > 1) {
         var resteT = brT.length === 0 ? null : Math.max.apply(null, brT.map(function (o) { return o.restant; }));
-        bo.innerHTML = '<b>×' + mxT + '</b><i>' + (resteT === null ? 'pact' : resteT + (resteT > 1 ? ' games' : ' game')) + '</i>';
+        bo.innerHTML = '<b>' + BW.affiche(mxT) + '</b><i>' + (resteT === null ? 'pact' : resteT + (resteT > 1 ? ' games' : ' game')) + '</i>';
         bo.title = (signe ? 'Pact ×' + BW.PACTE + (brT.length > 0 ? ' + ' : '') : '')
-          + brT.map(function (o) { return BW.OFFRANDES[o.sorte].nom + ' ×' + BW.OFFRANDES[o.sorte].x + ' (' + o.restant + ')'; }).join(' + ');
+          + brT.map(function (o) { return BW.OFFRANDES[o.sorte].nom + ' ' + BW.affiche(BW.OFFRANDES[o.sorte].x) + ' (' + o.restant + ')'; }).join(' + ');
       } else {
         bo.textContent = '';   /* note 241 ⑥ : plus de « no offering » gris */
       }
@@ -5156,7 +5196,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       /* S1419 · note 243 ⑧ⓑ (BOUNTY_WALL §21) — SEE ALL = TOUT, SANS ONGLET : la colonne du
          Donjon prend deux places, Progress + Exploration à gauche, Pro Tour à droite, en
          cases serrées (le libellé au survol). */
-      if (t.pointe === null && t.rangs.length === 22) {
+      if (t.pointe === null && t.rangs.length >= 22) {   /* note 275 (7) : 27 rangs, les defis a droite */
         tr.classList.add('tronc-donjon');
         var gauche = document.createElement('div');
         gauche.className = 'rgs serre';

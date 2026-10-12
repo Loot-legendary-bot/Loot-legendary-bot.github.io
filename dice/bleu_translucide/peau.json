@@ -1,0 +1,45 @@
+{
+ "peau": "bleu_translucide",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "sha256:b7bf0a00d30c/426x363"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "fond": "1.0",
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "77d89abc9bb9813d8020f6e0288e31f04632f5d1e5a84a3d78fc5e9161c5d3e4",
+  "lumiere": {
+   "cle": "neutre",
+   "cle_taille": 1.0,
+   "cle_energie": 1.0,
+   "vue": "Standard",
+   "expo": -1.5,
+   "fond_rgb": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "cle_taille": 1.0
+ }
+}

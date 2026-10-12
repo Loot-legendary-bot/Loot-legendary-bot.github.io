@@ -135,7 +135,7 @@
       rg('degats_poison', 'Poison damage dealt', [d(350, 'noir_vert_acide', 'Acid dice')]),
       rg('mobs_tues', 'Mobs killed', [d(75, 'vert_clair_marbre', 'Green marble dice')]),
       rg('serrures_cle', 'Locks opened with a key', [p(20, 'the_rogue', 'The Rogue')]),
-      rg('mobs_tues', 'Mobs killed', [p(200, 'the_green', 'The Green')]),
+      rg('degats_infliges', 'Damage dealt', [p(100, 'the_green', 'The Green')]),   /* note 275 (5), BW 24 */
       rg('d20_nat20', 'Natural 20s rolled', [p(150, 'the_poisoner', 'The Poisoner')]),
       rg('degats_poison', 'Poison damage dealt', [u(2500, 'fiole', 'Vial cursor')]),
       rg(DEFIS, 'Card challenges done', [k(5, 'dos_poison', 'Poison card back (Epic)')])] },
@@ -150,7 +150,7 @@
     { id: 'feu', t: 'Fire', f: 'feu', pointe: 2, teinte: '#f0612a', rangs: [
       rg('degats_fire', 'Fire damage dealt', [d(350, 'rouge_translucide', 'Red dice')]),
       rg('d20_nat1', 'Natural 1s rolled', [d(100, 'jaune_translucide', 'Amber dice')]),
-      rg('consommables', 'Consumables used', [p(40, 'the_cook', 'The Cook')]),
+      rg('consommables', 'Consumables used', [p(25, 'the_cook', 'The Cook')]),
       rg('d20_nat20', 'Natural 20s rolled', [u(100, 'torch', 'Torch cursor')]),
       rg('boss_tues', 'Bosses killed', [p(4, 'the_dredger', 'The Dredger')]),
       rg('degats_pris', 'Damage taken (all schools)', [p(2500, 'the_guard', 'The Guard')]),
@@ -160,22 +160,22 @@
       rg('degats_wis', 'WIS-based damage dealt', [d(750, 'galaxie_vert_violet', 'Galaxy dice')]),
       rg('degats_arcane', 'Arcane damage dealt', [p(500, 'the_cleric', 'The Cleric')]),
       rg('golden_equipes', 'Golden items equipped', [p(50, 'the_guru', 'The Guru')]),
-      rg('degats_wis', 'WIS-based damage dealt', [p(3000, 'the_wizard', 'The Wizard')]),
+      rg('degats_wis', 'WIS-based damage dealt', [p(100, 'the_wizard', 'The Wizard')]),
       rg('degats_arcane', 'Arcane damage dealt', [d(1000, 'cristal_mauve', 'Mauve crystal dice')]),
       rg(DEFIS, 'Card challenges done', [k(5, 'dos_arcane', 'Arcane card back (Epic)')])] },
     { id: 'foudre', t: 'Lightning', f: 'foudre', pointe: 4, teinte: '#f2c230', rangs: [
       rg('degats_lightning', 'Lightning damage dealt', [d(350, 'jaune_opaque', 'Bee dice')]),
       rg('golden_equipes', 'Golden items equipped', [d(40, 'nacre_vert_or', 'Green-gold pearl dice')]),
       rg('d20_nat1', 'Natural 1s rolled', [p(250, 'the_robert', 'The Robert')]),
-      rg('invitations', 'Convocations / invitations played', [p(35, 'the_mailman', 'The Mailman')]),
+      rg('invitations', 'Convocations / invitations played', [p(10, 'the_mailman', 'The Mailman')]),
       rg('degats_lightning', 'Lightning damage dealt', [u(1000, 'eclair', 'Bolt cursor')]),
-      rg('degats_lightning', 'Lightning damage dealt', [p(2000, 'the_boltwright', 'The Boltwright')]),
+      rg('degats_lightning', 'Lightning damage dealt', [p(500, 'the_boltwright', 'The Boltwright')]),
       rg(DEFIS, 'Card challenges done', [k(5, 'dos_lightning', 'Lightning card back (Epic)')])] },
     { id: 'givre', t: 'Frost', f: 'givre', pointe: 3, teinte: '#3cb4ea', rangs: [
       rg('degats_frost', 'Frost damage dealt', [d(350, 'bleu_givre', 'Frost blue dice')]),
       rg('coffres', 'Chests opened', [d(50, 'granite_bleu', 'Blue granite dice')]),
       rg('fuites_reussies', 'Successful flees', [p(75, 'the_whiff', 'The Whiff')]),
-      rg('degats_frost', 'Frost damage dealt', [p(750, 'the_necromancer', 'The Necromancer')]),
+      rg('degats_frost', 'Frost damage dealt', [p(10, 'the_necromancer', 'The Necromancer')]),
       rg('kills_joueurs', 'Player kills', [p(60, 'the_golmon', 'The Golmon')]),
       rg('degats_frost', 'Frost damage dealt', [u(1500, 'glace', 'Snowflake cursor')]),
       rg(DEFIS, 'Card challenges done', [k(5, 'dos_frost', 'Frost card back (Epic)')])] },
@@ -196,7 +196,15 @@
       rg('victoires_dpl', 'DPT wins', [d(75, 'nacre_bleu_acier', 'Steel-blue pearl dice')]),
       rg('parties_dpl', 'DPT games played', [t(200, 2000, '2 000 teeth')]),
       rg('rang_dpl', 'DPT rank reached (Diamond)', [t(5, 5000, '5 000 teeth')]),
-      rg(SERVIS, 'The whole branch', [k(21, 'dos_dungeon', 'Dungeon card back (Epic)')])] }
+      /* note 275 (7), BOUNTY_WALL 24 - CHALLENGES : cinq defis neufs, payes en dos (*backcards
+         retires de la vente ; affectation = reco de l'ecran, Q-275-DOS-DEFIS). Poses AVANT le Bout :
+         les index des rangs d'avant (cle des dents prises) ne bougent pas. */
+      rg('fake_coop', 'Fake co-ops pulled off', [k(10, 'red_sober', 'Red Sober card back')]),
+      rg('boss_a_deux', 'Bosses felled by two', [k(5, 'old_paper', 'Old Paper card back')]),
+      rg('trades', 'Trades made', [k(50, 'simple_and_sunny', 'Simple and Sunny card back')]),
+      rg('trades_joueurs', 'Trades with players', [k(25, 'bones_back', 'Bones card back')]),
+      rg('ruines_entrees', 'RUINS tiles entered', [k(100, 'stained_glass', 'Stained Glass card back')]),
+      rg(SERVIS, 'The whole branch', [k(26, 'dos_dungeon', 'Dungeon card back (Epic)')])] }
   ];
   var IDS = TRONCS.map(function (t) { return t.id; });
   /* S1414 · BW-DA bis (note 235 ⑥ⓐ, BOUNTY_WALL §16.1) — LES ESSENCES : 21 objets,
@@ -206,10 +214,18 @@
   var TAILLES = [
     /* note 237 ④ (Croze, 10/10 soir) : les essences NE SE VENDENT PLUS — elles ne
        tombent qu'en partie (prix null partout). */
-    { k: 'small', nom: 'Small', x: 2, duree: 3, prix: null, chance: 0.5 },
-    { k: 'big', nom: 'Big', x: 5, duree: 5, prix: null, chance: 0.1 },
-    { k: 'massive', nom: 'Massive', x: 10, duree: 5, prix: null, chance: 0.01 }
+    /* note 275 (6), MONNAIE 25 (chiffres de Croze) : x1,5 / x2,5 / x5, CINQ parties toujours ;
+       `chance` = la PART de chaque taille dans une offrande tombee (60 / 30 / 10 %). Le vrai
+       decimal est garde pour le calcul ; l'ecran l'arrondit a l'entier (jamais de decimale). */
+    { k: 'small', nom: 'Small', x: 1.5, duree: 5, prix: null, chance: 0.6 },
+    { k: 'big', nom: 'Big', x: 2.5, duree: 5, prix: null, chance: 0.3 },
+    { k: 'massive', nom: 'Massive', x: 5, duree: 5, prix: null, chance: 0.1 }
   ];
+  /* MONNAIE 25 : une offrande tombe dans 25 % des parties, 75 % si on a GAGNE. La modulation
+     par taille de table et par joueurs reels attend la ligne du moteur (note 204 (3)). */
+  var DROP_PERDUE = 0.25, DROP_GAGNEE = 0.75;
+  /* MONNAIE 25 : « jamais de decimale a l'ecran » - x1,5 s'ecrit x2, x4,5 s'ecrit x5. */
+  function affiche(x) { return '\u00d7' + Math.round(x); }
   TRONCS.forEach(function (t) {
     var ecole = t.id === 'neutre' ? 'Dungeon' : t.t;
     TAILLES.forEach(function (z) {
@@ -579,13 +595,14 @@
        l'esprit tiré parmi les ouverts (le Cartographe n'en prend pas). */
     var ouverts = (Array.isArray(arguments[1]) ? arguments[1] : []).filter(function (id) { return IDS.indexOf(id) >= 0; });
     if (ouverts.length === 0) { return []; }
-    var tombe = [];
-    TAILLES.forEach(function (z) {
-      var oui = u() < z.chance;
-      var qui = ouverts[Math.min(ouverts.length - 1, Math.floor(u() * ouverts.length))];
-      if (oui) { tombe.push(z.k + '_' + qui); }
-    });
-    return tombe;
+    /* note 275 (6), MONNAIE 25 : UN tirage - tombe-t-il (25 % / 75 % gagnee) ? puis sa taille
+       (60 / 30 / 10 %) et son esprit parmi les ouverts. */
+    var gagnee = arguments[2] === true;
+    if (u() >= (gagnee ? DROP_GAGNEE : DROP_PERDUE)) { return []; }
+    var v = u(), z = TAILLES[TAILLES.length - 1];
+    for (var i = 0, cumul = 0; i < TAILLES.length; i++) { cumul += TAILLES[i].chance; if (v < cumul) { z = TAILLES[i]; break; } }
+    var qui = ouverts[Math.min(ouverts.length - 1, Math.floor(u() * ouverts.length))];
+    return [z.k + '_' + qui];
   }
 
   /* LA FIN DE PARTIE, dans l'écriture du profil qui compte la partie (UNE fois
@@ -636,7 +653,8 @@
         .map(function (o) { return { esprit: o.esprit, sorte: sorteDe(o.sorte), restant: (o.restant | 0) - 1 }; })
         .filter(function (o) { return o.restant > 0 && o.sorte !== null; });
     }
-    var drops = tirage(graine, IDS.filter(function (id) { return !dort(p, id); }));
+    var drops = tirage(graine, IDS.filter(function (id) { return !dort(p, id); }),
+      !!(gainsBruts && gainsBruts.victoires > 0));
     /* note 237 ④ — la chance multiplie les essences tombées, et perd une partie. */
     var ch = chance(p);
     if (ch !== null) {
@@ -663,6 +681,6 @@
     passeLePacte: passeLePacte, romps: romps, prends1: prends1, dptOuvert: dptOuvert, CODEX: CODEX, ARBRES: ARBRES, DEFIS: DEFIS, ligueOuverte: ligueOuverte, surLeTicket: surLeTicket, offreSurLeTicket: offreSurLeTicket,
     CHANCES: CHANCES, SORTES_CHANCE: SORTES_CHANCE, chance: chance, acheteLaChance: acheteLaChance, stockDesCharmes: stockDesCharmes,
     OFFRANDES: OFFRANDES, SORTES: SORTES, TAILLES: TAILLES, essencesDe: essencesDe, eveilles: eveilles, dort: dort, sac: sac, brulent: brulent,
-    multiplicateur: multiplicateur, gain: gain, offre: offre, achete: achete, tirage: tirage, finDePartie: finDePartie,
+    multiplicateur: multiplicateur, affiche: affiche, gain: gain, offre: offre, achete: achete, tirage: tirage, finDePartie: finDePartie,
     nomDe: nomDe };
 })();
