@@ -1861,7 +1861,8 @@
                       * l'écran le PREND.*
                       */
                      rgba(10, 8, 6, .94);
-                   cursor: pointer; animation: fadein .14s ease; }
+                   /* S1435 · note 281 ② : un clic ne coupe plus la scène — pas de main. */
+                   animation: fadein .14s ease; }
       @keyframes fadein { from { opacity: 0 } to { opacity: 1 } }
       /*
        * ═══ ⛑ S209 · LES DEUX BORNES DU TOUR — « en gros et en rouge » ═══════
@@ -9409,8 +9410,28 @@
        */
       /* S1427 · CS-3 (note 261 ②) — le trait était trop fin : 6 px, or pour moi, la couleur
          du siège pour les autres (la même que son liseré, 243 ⑤). */
-      .cell-mien, .cell-defaut { opacity: 1; border-color: #d9b35a; border-width: 6px;
-                                 box-shadow: 0 0 22px rgb(217 179 90 / .35); }
+      /* S1435 · note 283 ① — « façon borne d'arcade » : plus le cadre entier, SEULS LES QUATRE
+         COINS, épais, or vif, et ils pulsent. Phrase : « Je vois d'un coup d'œil qui est
+         sélectionné, même du canapé. » Les coins sont dessinés DANS la vignette (`overflow: hidden`). */
+      .cell-mien, .cell-defaut { opacity: 1; }
+      .cell-mien::after, .cell-defaut::after { content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+        --c: #ffd23f; --l: 30%; --e: 8px;
+        background:
+          linear-gradient(var(--c), var(--c)) top left / var(--l) var(--e) no-repeat,
+          linear-gradient(var(--c), var(--c)) top left / var(--e) var(--l) no-repeat,
+          linear-gradient(var(--c), var(--c)) top right / var(--l) var(--e) no-repeat,
+          linear-gradient(var(--c), var(--c)) top right / var(--e) var(--l) no-repeat,
+          linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--e) no-repeat,
+          linear-gradient(var(--c), var(--c)) bottom left / var(--e) var(--l) no-repeat,
+          linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--e) no-repeat,
+          linear-gradient(var(--c), var(--c)) bottom right / var(--e) var(--l) no-repeat;
+        filter: drop-shadow(0 0 6px rgb(255 210 63 / .7));
+        animation: coins-arcade 1.1s ease-in-out infinite; }
+      @keyframes coins-arcade {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: .55; transform: scale(.965); }
+      }
+      @media (prefers-reduced-motion: reduce) { .cell-mien::after, .cell-defaut::after { animation: none; } }
       .cell-pris { opacity: 1; border-color: var(--siege, var(--activable)); border-width: 6px; }
       .cell-voile { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
                     transform: skewX(10deg); pointer-events: none; background: rgb(0 0 0 / .45);
@@ -11913,6 +11934,9 @@
       .nouvelle-table .nt-points { color: var(--stock); font-weight: 700; margin-right: 8px; }
       .nouvelle-table .nt-points-nb { font-size: calc(13px * var(--lisible, 1)); }
       .nouvelle-table .nt-points-mot { font-size: calc(9px * var(--lisible, 1)); color: var(--stock-dim); }
+      /* S1435 · note 281 ⑨ — à côté de ma pastille de PV, à sa taille. */
+      .nouvelle-table .bj-pts-pv .nt-points-nb { font-size: calc(24px * var(--lisible, 1)); font-family: var(--display); }
+      .nouvelle-table .bj-pts-pv .nt-points-mot { font-size: calc(11px * var(--lisible, 1)); }
       .nouvelle-table .nt-quetes { margin-right: 6px; }
       /* S1428 - note 265 (8) : le bandeau RUN · DUNGEON TURN, plus sature */
       .nouvelle-table .nt-tour-seul .bt-etat { filter: saturate(1.9); }
@@ -12666,8 +12690,10 @@
       /* ⛑ S1324 · CO-1 — un seul bouton, en haut à droite ; le bandeau des ronds
          s'efface (220 ms) au rendu où le combat le gobe. */
       /* sur la ligne de JOURNAL et SUIVRE L'ACTION, à leur gauche (JOURNAL finit à right 268 + 106) */
+      /* S1435 · note 281 ⑭ — à gauche de DONJON (right 400, ~106 de large) : elle était posée
+         sur lui (right 386), mesuré 1383–1533 contre 1413–1519. */
       .nouvelle-table .ntt-onglets.ntt-bascule {
-        position: absolute; top: 2px; right: 386px; z-index: 48; margin: 0;
+        position: absolute; top: 2px; right: 520px; z-index: 48; margin: 0;
       }
       .nouvelle-table .nt-presences.nt-s-efface {
         overflow: hidden; pointer-events: none;
@@ -12969,6 +12995,16 @@
         background: transparent; border: 1px solid var(--stock-dim);
       }
       .nouvelle-table .nt-donjon-bouton:hover { border-color: var(--stock); }
+      /* S1435 · note 282 ③ — END TURN, posé quand tout est résolu : grand, tampon encré,
+         pulsé doucement. « Quand je le vois, il est impossible à rater. » */
+      button.fin-de-tour-prete { font-size: calc(18px * var(--lisible, 1)) !important; letter-spacing: .16em;
+        padding: 12px 34px !important; color: var(--rouge-vif) !important; font-weight: 800;
+        animation: fin-de-tour-pulse 1.6s ease-in-out infinite; }
+      @keyframes fin-de-tour-pulse {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(238,75,75,0)); }
+        50% { transform: scale(1.04); filter: drop-shadow(0 0 10px rgba(238,75,75,.55)); }
+      }
+      @media (prefers-reduced-motion: reduce) { button.fin-de-tour-prete { animation: none; } }
       .plein .djt { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px 40px;
         padding: 14px 18px; font-family: var(--mono); color: var(--stock); }
       .plein .djt-portail { grid-column: 1 / -1; }
@@ -13331,7 +13367,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-ZqBO7YrH.js"></script>
+    <script type="module" crossorigin src="./assets/index-Cl5RbH6o.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

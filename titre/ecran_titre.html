@@ -935,6 +935,8 @@
 .langue-titre{font-weight:700;letter-spacing:.12em;margin-right:12px;opacity:.85}
 .langue-btn{background:transparent;color:inherit;border:1px solid rgba(255,255,255,.35);padding:10px 22px;font:inherit;letter-spacing:.1em;cursor:pointer}
 .langue-btn.on{border-color:#fff;background:rgba(255,255,255,.08)}
+.son-maitre{display:flex;align-items:center;gap:16px;letter-spacing:.1em}
+.son-maitre input[type=range]{width:22cqw;accent-color:#c8102e;cursor:pointer}
 /* S1414 - BG-1 : la page BOARDGAME - le visuel a gauche, trois lignes et le champ a droite */
 .bg1{position:absolute;left:5.1%;right:5.1%;top:35%;bottom:6%;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:4cqw;align-items:center}
 .bg1-visuel{position:relative;height:100%}
@@ -2046,6 +2048,24 @@ function peinsLaLangue(){
     b.addEventListener('click',function(){ P.modifie(function(p){ if(typeof p.options!=='object'||p.options===null) p.options={}; p.options.vfx=x[0]; }); peinsLaLangue(); });
     box.appendChild(b);
   });
+  /* S1435 - note 281 (12) : « OPTIONS du HOME : le volume du SON (master au minimum) ».
+     Un seul curseur, le MAITRE : il multiplie la musique, l'ambiance et les effets du jeu
+     (`volMaster` dans `ll.options.son`, la cle que le jeu lit deja), sans toucher a leurs
+     reglages propres. */
+  var t3=document.createElement('div'); t3.className='langue-titre'; t3.textContent='SOUND'; t3.style.marginTop='2.4cqh'; box.appendChild(t3);
+  var lu=1;
+  try { var rs=JSON.parse(localStorage.getItem('ll.options.son')||'null'); if(rs&&typeof rs.volMaster==='number'&&isFinite(rs.volMaster)) lu=Math.min(1,Math.max(0,rs.volMaster)); } catch(e) {}
+  var ligneSon=document.createElement('label'); ligneSon.className='son-maitre';
+  var curseurSon=document.createElement('input'); curseurSon.type='range'; curseurSon.min='0'; curseurSon.max='100'; curseurSon.step='5';
+  curseurSon.value=String(Math.round(lu*100)); curseurSon.setAttribute('aria-label','Master volume');
+  var valSon=document.createElement('span'); valSon.className='son-maitre-val'; valSon.textContent='MASTER  '+curseurSon.value+' %';
+  curseurSon.addEventListener('input',function(){
+    var v=Number(curseurSon.value)/100;
+    valSon.textContent='MASTER  '+curseurSon.value+' %';
+    try { var r=JSON.parse(localStorage.getItem('ll.options.son')||'null'); if(!r||typeof r!=='object') r={}; r.volMaster=v; localStorage.setItem('ll.options.son',JSON.stringify(r)); } catch(e) {}
+    if (typeof window.LLVolumeMaitre==='function') window.LLVolumeMaitre(v);
+  });
+  ligneSon.appendChild(valSon); ligneSon.appendChild(curseurSon); box.appendChild(ligneSon);
   peinsLeDev(box);
 }
 /* S1419 - note 241 (8) : LE PANNEAU DEV. Croze : « reboot les offrandes sur mon profil,
@@ -3709,6 +3729,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
 
   var vol = 1;                       /* le mix (cellule `gain_db`) */
   var reglage = 1;                   /* le curseur de Croze (`volMusique`) */
+  var maitre = 1;                    /* S1435 - note 281 (12) : le volume MAITRE (`volMaster`) */
   var allumee = true;                /* son interrupteur (`musique`) */
   var els = [], actif = 0, arme = false, pret = false;
 
@@ -3725,6 +3746,9 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         if (typeof r.musique === 'boolean') allumee = r.musique;
         if (typeof r.volMusique === 'number' && isFinite(r.volMusique)) {
           reglage = Math.min(1, Math.max(0, r.volMusique));
+        }
+        if (typeof r.volMaster === 'number' && isFinite(r.volMaster)) {
+          maitre = Math.min(1, Math.max(0, r.volMaster));
         }
       }
     } catch (e) { /* du texte que n importe quoi peut avoir ecrit : on l ignore */ }
@@ -3743,7 +3767,12 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     }, pas);
   }
 
-  function cible(){ return vol * reglage; }
+  function cible(){ return vol * reglage * maitre; }
+  /* S1435 - note 281 (12) : le curseur SOUND d'Options regle la musique du menu en direct. */
+  window.LLVolumeMaitre = function(v){
+    maitre = Math.min(1, Math.max(0, v));
+    els.forEach(function(x){ if (!x.paused && !x.__rampe) { x.volume = Math.min(1, Math.max(0, cible())); } });
+  };
 
   function lance(i){
     var a = els[i];
