@@ -1,0 +1,49 @@
+{
+ "famille": "marbre",
+ "couleurs": {
+  "corps": [
+   "#cbcbcb",
+   "#a9a9a9",
+   "#939393",
+   "#787878",
+   "#626262",
+   "#555555",
+   "#603114",
+   "#8b4b24",
+   "#b5683b",
+   "#e08854"
+  ],
+  "veines": "#e6e8e5",
+  "inclusions": "#f3f4ef",
+  "pointes": null,
+  "chiffres": "#ffffff"
+ },
+ "fini": {
+  "rugosite": 0.45,
+  "metallique": 0.6,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.68,
+  "contraste": 0.55,
+  "densite": 0.15,
+  "densite_paillettes": 0.02,
+  "rugosite_inclusions": 0.15
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.35
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 11,
+ "notes": "Pas de photo : TRANSPOSITION de nacre_bleu_acier. Argent NEUTRALISE (chroma 0) : l'acier herite tirait au bleu-violet. Orange h 55, occupation de plafond de la bleue. graine 11."
+}

@@ -1,0 +1,43 @@
+nacre_orange_argent — licences et provenance
+======================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+SOURCE      AUCUNE PHOTOGRAPHIE. Cette peau est une TRANSPOSITION de
+            `nacre_bleu_acier`, livree le 19/09 et acceptee par Croze, dont les
+            dix barreaux sont, eux, des mesures CIELAB faites sur une
+            photographie. Mot de Croze, 10/10 : « tu pourrais m'en recreer base
+            sur ca mais en version orange et silver avec des taches legerement
+            differentes en terme d'endroit ».
+            CE QUI EST REPRIS SANS UN BIT DE CHANGEMENT : les six barreaux
+            d'ARGENT, qui sont le seul gris mesure du pool. CE QUI EST
+            TRANSPOSE : les quatre barreaux chromatiques, tournes du bleu
+            (teinte 280-297 deg) vers l'orange (55 deg). La regle de
+            transposition n'est pas une rotation a chroma constante — elle ne
+            tiendrait pas, le plafond de chroma sRGB valant 47.5 a L* 13 en bleu
+            contre 23.8 en orange. Ce qui est conserve est l'OCCUPATION DE CE
+            PLAFOND, 60 a 74 % barreau par barreau, et la bande de clarte se
+            deplace la ou l'orange existe. Aucune couleur de cette peau ne vient
+            donc d'une photographie, et aucun chiffre de couleur de son rapport
+            n'a de cote reference : l'oeil de Croze est le seul juge, avec les
+            dix portes, qui ne demandent pas de photographie.
+
+NOM         La peau porte le nom de sa MATIERE — une resine opaque nacree, deux
+            couleurs en grandes masses, un orange brule profond et un gris
+            argent nacre presque neutre, plus clair la ou la lumiere frappe,
+            chiffres graves et peints en blanc, 6 et 9 soulignes.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

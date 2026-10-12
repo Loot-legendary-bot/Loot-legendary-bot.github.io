@@ -1,0 +1,110 @@
+/*
+ * S1420 · DA-2 (notes 244 et 245, docs/DA_FONDS.md) — LA PIERRE, LE BOIS, LE PARCHEMIN.
+ *
+ * Phrase de Croze : « Le jeu est sur la pierre, mes panneaux sont des planches de bois
+ * cloutées, mes notices du parchemin, et je lis tout aussi bien qu'avant. »
+ *
+ * Les quatre matières viennent de `ASSETS\bounty wall\` (déposées le 11/10, P1 à P4 de
+ * DA_FONDS §3) et vivent dans `/art/da/` :
+ *   pierre.webp     P1, 1024², assombrie ×0,6 (luminance moyenne 24) — le fond
+ *   cadre_bois.webp P2, détouré (teinte min(R,B)−G, pas de liseré), 1296×628 — le 9-slice
+ *   planche.webp    P3, 1024², assombrie ×0,55 — derrière les panneaux
+ *   parchemin.webp  P4, 1024² — sous les notices
+ *
+ * ⚑ LA LOI DE CE FICHIER : AUCUNE GÉOMÉTRIE NE BOUGE. Le cadre est un `border-image`
+ * dont la LARGEUR est donnée en longueur (`border-image-width`) et qui DÉBORDE
+ * (`border-image-outset`) : la boîte, sa bordure de mise en page et ses enfants restent
+ * au pixel près (mesuré : getBoundingClientRect identique avant/après, enfants compris).
+ * Un élément sans bordure reçoit `border-style: solid; border-width: 0` — sa largeur de
+ * bordure reste 0. Le débord se peint hors de la boîte : un `overflow: hidden` de
+ * l'élément ne le rogne pas (il ne rogne que ses enfants).
+ *
+ * ⚑ La lisibilité prime (note 244 ⓓ) : là où un texte court passe sur une texture, la
+ * texture est voilée — jamais le texte éclairci.
+ */
+:root {
+  --da-pierre: url('/art/da/pierre.webp');
+  --da-planche: url('/art/da/planche.webp');
+  --da-parchemin: url('/art/da/parchemin.webp');
+  --da-cadre: url('/art/da/cadre_bois.webp');
+  /* les coins du cadre (ferrures comprises), en pixels de l'image : haut droite bas gauche */
+  --da-coupe: 100 140 108 140;
+}
+
+/* ─── LA PIERRE : le fond de tout le jeu ─────────────────────────────────────── */
+html, body { background: #0b0b0b var(--da-pierre) 0 0 / 768px repeat; }
+
+/* ─── LE JEU (index.html) ─────────────────────────────────────────────────────── */
+
+/* Regarder un autre joueur (note 244 ⓒ, 243 ⑤) : la pierre, teintée à la couleur de sa
+   bannière (le liseré), la bannière en filigrane par-dessus — le noir plein est retiré. */
+html body .nouvelle-table.nt-chez-un-autre {
+  background:
+    linear-gradient(color-mix(in srgb, var(--lisere, rgba(233,228,216,.35)) 22%, transparent),
+                    color-mix(in srgb, var(--lisere, rgba(233,228,216,.35)) 22%, transparent)),
+    #0b0b0b var(--da-pierre) 0 0 / 768px repeat;
+}
+html body .nouvelle-table.nt-chez-un-autre::before { opacity: .55; }
+
+/* Le HUD : la colonne du joueur (bandeau, stats, gestes, INVENTAIRE). */
+html body .nouvelle-table .ntt-toi {
+  /* la planche, voilée à 80 % : le texte atténué (#A1A1A1) garde ~7:1, comme sur l'encre */
+  background: linear-gradient(rgba(16,13,10,.80), rgba(16,13,10,.80)), var(--da-planche) center / 1024px repeat;
+  border-style: solid; border-width: 0;
+  border-image: var(--da-cadre) var(--da-coupe) / 14px 19px 15px 19px / 9px 10px stretch;
+}
+
+/* Le JOURNAL (et toute la surface pleine : Options, ⤢, le Donjon) : planche voilée + cadre. */
+html body .plein-boite {
+  background:
+    linear-gradient(rgba(16,13,10,.80), rgba(16,13,10,.80)),
+    var(--da-planche) center / 1024px repeat;
+  border-image: var(--da-cadre) var(--da-coupe) / 16px 22px 17px 22px / 10px 12px stretch;
+}
+html body .plein-boite .plein-tete { background: rgba(16,13,10,.94); }
+
+/* Les fiches de l'ARÈNE (duel regardé) : le cadre remplace la bordure grise ; le siège qui
+   agit garde son signal, en ombre intérieure (la bordure colorée ne se voit plus). */
+html body .ndr-duelliste {
+  border-image: var(--da-cadre) var(--da-coupe) / 13px 18px 14px 18px / 8px 9px stretch;
+}
+html body .ndr-duelliste.agit { box-shadow: inset 0 0 0 2px var(--siege, var(--stock)); }
+
+/* ─── LE HOME (titre/ecran_titre.html) ────────────────────────────────────────── */
+
+/* Les panneaux SANS fond choisi par Croze (DIVE, Codex, Rules, Boardgame, la partie) :
+   la pierre au lieu du sol commun — posé par `poseLeFondDuPanneau()` (classe `da-pierre`).
+   Le Bounty Wall, le Vault et les Options gardent LEUR fond (note 140). */
+.screen.deep.da-pierre .floorbg {
+  background-image: var(--da-pierre) !important; background-size: 72cqh; background-repeat: repeat;
+  filter: none;
+}
+.screen.deep.da-pierre .scrim {
+  background: radial-gradient(ellipse at 50% 46%, rgba(0,0,0,.15) 20%, rgba(0,0,0,.7) 100%);
+}
+
+/* Les rayons du VAULT. */
+#v-collection #roster, #v-collection #grid {
+  border-style: solid; border-width: 0;
+  border-image: var(--da-cadre) var(--da-coupe) / 1.3cqh 1.75cqh 1.4cqh 1.75cqh / .9cqh 1cqh stretch;
+}
+
+/* Les boîtes du CODEX : le registre et la table — la table devient la vraie planche. */
+#v-codex .cx-col.cx-registre, #v-codex .cx-fen {
+  border-image: var(--da-cadre) var(--da-coupe) / 1.3cqh 1.75cqh 1.4cqh 1.75cqh / .9cqh 1cqh stretch;
+}
+#v-codex .cx-fen {
+  background: linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)), #22170f var(--da-planche) center / 60cqh repeat;
+}
+
+/* Le PARCHEMIN sous le texte long : les PATCH NOTES de la page RULES (les trois autres pages
+   de RULES sont des images de Croze, elles restent telles quelles). Encre sombre, le titre
+   de version garde son sang. `.notes` défile en interne : la marge du papier est un padding
+   dans la boîte qui défile, la boîte elle-même ne bouge pas. */
+#v-rules .regles .notes {
+  background: var(--da-parchemin) center top / 100% auto repeat-y; color: #2a2018;
+  padding: 2cqh 2cqw; box-sizing: border-box;
+  border-style: solid; border-width: 0;
+  border-image: var(--da-cadre) var(--da-coupe) / 1.3cqh 1.75cqh 1.4cqh 1.75cqh / 0 stretch;
+}
+#v-rules .regles .notes h3 { color: #2a2018; }

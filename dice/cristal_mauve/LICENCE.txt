@@ -1,0 +1,35 @@
+cristal_mauve — licences et provenance
+======================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+PHOTO       La photographie de reference a servi AUX COULEURS SEULEMENT : la
+            teinte et la chroma du violet sont mesurees sur les faces claires
+            des des, et rien de son image n'entre dans la peau — pas de
+            texture, pas de decoupe, pas de tracage. Le violet du corps et le
+            blanc des chiffres sont des albedos, pas des echantillons.
+
+NOM         Le mot de Croze est « des crystal mauve ». La photographie montre
+            un violet profond a fini miroir, OPAQUE : aucun chiffre de la face
+            arriere ne se voit a travers le corps. Le nom reste celui que la
+            consigne a propose ; c'est un identifiant, le nom que liront les
+            joueurs est choisi par Croze au Vault. La photographie est un
+            cliche de produit du commerce : aucune marque n'entre ni dans le
+            nom, ni dans les fichiers, ni dans le depot, et la photographie
+            elle-meme n'est pas commitee — references/ est ignore par le
+            .gitignore niche de ce dossier.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

@@ -38,5 +38,37 @@
  "collapse_hover.png": [
   11,
   5
+ ],
+ "fiole.png": [
+  50,
+  5
+ ],
+ "fiole_hover.png": [
+  45,
+  5
+ ],
+ "faille.png": [
+  2,
+  2
+ ],
+ "faille_hover.png": [
+  2,
+  1
+ ],
+ "eclair.png": [
+  1,
+  62
+ ],
+ "eclair_hover.png": [
+  3,
+  62
+ ],
+ "glace.png": [
+  1,
+  1
+ ],
+ "glace_hover.png": [
+  1,
+  1
  ]
 }

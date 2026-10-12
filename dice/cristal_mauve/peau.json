@@ -1,0 +1,45 @@
+{
+ "peau": "cristal_mauve",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [
+   "sha256:aa53e25a3e10/1946x1946"
+  ],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "fond": "0.35",
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "039f5229c41a18d05295ebc858138c9fe21152940d20a98bdd78ad2c9c630e98",
+  "lumiere": {
+   "cle": "neutre",
+   "cle_taille": 1.0,
+   "cle_energie": 1.0,
+   "vue": "Standard",
+   "expo": -1.5,
+   "fond_rgb": [
+    0.35,
+    0.35,
+    0.35
+   ]
+  },
+  "cle_taille": 1.0
+ }
+}

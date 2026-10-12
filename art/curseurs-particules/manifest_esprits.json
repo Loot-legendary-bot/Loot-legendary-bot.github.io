@@ -1,0 +1,526 @@
+{
+  "fiole": {
+    "esprit": "poison",
+    "source": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261010_112945_4e8117d3-5aae-4da2-bdf1-e969dbc3a90b.png",
+    "sprites": {
+      "pointer": {
+        "sizes": {
+          "32": {
+            "file": "fiole/pointer_32.png",
+            "hotspot": [
+              25,
+              2
+            ]
+          },
+          "48": {
+            "file": "fiole/pointer_48.png",
+            "hotspot": [
+              38,
+              4
+            ]
+          },
+          "64": {
+            "file": "fiole/pointer_64.png",
+            "hotspot": [
+              50,
+              5
+            ]
+          }
+        }
+      },
+      "pointer_hover": {
+        "sizes": {
+          "32": {
+            "file": "fiole/pointer_hover_32.png",
+            "hotspot": [
+              22,
+              2
+            ]
+          },
+          "48": {
+            "file": "fiole/pointer_hover_48.png",
+            "hotspot": [
+              33,
+              4
+            ]
+          },
+          "64": {
+            "file": "fiole/pointer_hover_64.png",
+            "hotspot": [
+              45,
+              5
+            ]
+          }
+        }
+      },
+      "p1": {
+        "sizes": {
+          "32": {
+            "file": "fiole/p1_32.png",
+            "hotspot": [
+              10,
+              2
+            ]
+          },
+          "48": {
+            "file": "fiole/p1_48.png",
+            "hotspot": [
+              15,
+              3
+            ]
+          },
+          "64": {
+            "file": "fiole/p1_64.png",
+            "hotspot": [
+              19,
+              5
+            ]
+          }
+        }
+      },
+      "p2": {
+        "sizes": {
+          "32": {
+            "file": "fiole/p2_32.png",
+            "hotspot": [
+              9,
+              4
+            ]
+          },
+          "48": {
+            "file": "fiole/p2_48.png",
+            "hotspot": [
+              13,
+              6
+            ]
+          },
+          "64": {
+            "file": "fiole/p2_64.png",
+            "hotspot": [
+              17,
+              8
+            ]
+          }
+        }
+      },
+      "p3": {
+        "sizes": {
+          "32": {
+            "file": "fiole/p3_32.png",
+            "hotspot": [
+              3,
+              4
+            ]
+          },
+          "48": {
+            "file": "fiole/p3_48.png",
+            "hotspot": [
+              5,
+              7
+            ]
+          },
+          "64": {
+            "file": "fiole/p3_64.png",
+            "hotspot": [
+              6,
+              9
+            ]
+          }
+        }
+      }
+    }
+  },
+  "faille": {
+    "esprit": "chaos",
+    "source": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261010_113541_67aa7a65-3b6b-403b-ac85-4a1cb9134ddd.png",
+    "sprites": {
+      "pointer": {
+        "sizes": {
+          "32": {
+            "file": "faille/pointer_32.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          },
+          "48": {
+            "file": "faille/pointer_48.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          },
+          "64": {
+            "file": "faille/pointer_64.png",
+            "hotspot": [
+              2,
+              2
+            ]
+          }
+        }
+      },
+      "pointer_hover": {
+        "sizes": {
+          "32": {
+            "file": "faille/pointer_hover_32.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          },
+          "48": {
+            "file": "faille/pointer_hover_48.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          },
+          "64": {
+            "file": "faille/pointer_hover_64.png",
+            "hotspot": [
+              2,
+              1
+            ]
+          }
+        }
+      },
+      "p1": {
+        "sizes": {
+          "32": {
+            "file": "faille/p1_32.png",
+            "hotspot": [
+              5,
+              5
+            ]
+          },
+          "48": {
+            "file": "faille/p1_48.png",
+            "hotspot": [
+              7,
+              8
+            ]
+          },
+          "64": {
+            "file": "faille/p1_64.png",
+            "hotspot": [
+              9,
+              10
+            ]
+          }
+        }
+      },
+      "p2": {
+        "sizes": {
+          "32": {
+            "file": "faille/p2_32.png",
+            "hotspot": [
+              9,
+              7
+            ]
+          },
+          "48": {
+            "file": "faille/p2_48.png",
+            "hotspot": [
+              13,
+              10
+            ]
+          },
+          "64": {
+            "file": "faille/p2_64.png",
+            "hotspot": [
+              18,
+              13
+            ]
+          }
+        }
+      },
+      "p3": {
+        "sizes": {
+          "32": {
+            "file": "faille/p3_32.png",
+            "hotspot": [
+              5,
+              2
+            ]
+          },
+          "48": {
+            "file": "faille/p3_48.png",
+            "hotspot": [
+              7,
+              3
+            ]
+          },
+          "64": {
+            "file": "faille/p3_64.png",
+            "hotspot": [
+              9,
+              4
+            ]
+          }
+        }
+      }
+    }
+  },
+  "eclair": {
+    "esprit": "lightning",
+    "source": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261010_113002_35e4cd5e-c168-4e9b-bc81-fb557e46fb18.png",
+    "sprites": {
+      "pointer": {
+        "sizes": {
+          "32": {
+            "file": "eclair/pointer_32.png",
+            "hotspot": [
+              0,
+              31
+            ]
+          },
+          "48": {
+            "file": "eclair/pointer_48.png",
+            "hotspot": [
+              1,
+              47
+            ]
+          },
+          "64": {
+            "file": "eclair/pointer_64.png",
+            "hotspot": [
+              1,
+              63
+            ]
+          }
+        }
+      },
+      "pointer_hover": {
+        "sizes": {
+          "32": {
+            "file": "eclair/pointer_hover_32.png",
+            "hotspot": [
+              1,
+              31
+            ]
+          },
+          "48": {
+            "file": "eclair/pointer_hover_48.png",
+            "hotspot": [
+              2,
+              47
+            ]
+          },
+          "64": {
+            "file": "eclair/pointer_hover_64.png",
+            "hotspot": [
+              3,
+              63
+            ]
+          }
+        }
+      },
+      "p1": {
+        "sizes": {
+          "32": {
+            "file": "eclair/p1_32.png",
+            "hotspot": [
+              4,
+              16
+            ]
+          },
+          "48": {
+            "file": "eclair/p1_48.png",
+            "hotspot": [
+              6,
+              25
+            ]
+          },
+          "64": {
+            "file": "eclair/p1_64.png",
+            "hotspot": [
+              8,
+              33
+            ]
+          }
+        }
+      },
+      "p2": {
+        "sizes": {
+          "32": {
+            "file": "eclair/p2_32.png",
+            "hotspot": [
+              2,
+              13
+            ]
+          },
+          "48": {
+            "file": "eclair/p2_48.png",
+            "hotspot": [
+              3,
+              20
+            ]
+          },
+          "64": {
+            "file": "eclair/p2_64.png",
+            "hotspot": [
+              4,
+              27
+            ]
+          }
+        }
+      },
+      "p3": {
+        "sizes": {
+          "32": {
+            "file": "eclair/p3_32.png",
+            "hotspot": [
+              15,
+              2
+            ]
+          },
+          "48": {
+            "file": "eclair/p3_48.png",
+            "hotspot": [
+              22,
+              3
+            ]
+          },
+          "64": {
+            "file": "eclair/p3_64.png",
+            "hotspot": [
+              29,
+              4
+            ]
+          }
+        }
+      }
+    }
+  },
+  "glace": {
+    "esprit": "frost",
+    "source": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261010_113550_ee5b783b-9329-49c9-a120-6875453697e4.png",
+    "sprites": {
+      "pointer": {
+        "sizes": {
+          "32": {
+            "file": "glace/pointer_32.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          },
+          "48": {
+            "file": "glace/pointer_48.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          },
+          "64": {
+            "file": "glace/pointer_64.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          }
+        }
+      },
+      "pointer_hover": {
+        "sizes": {
+          "32": {
+            "file": "glace/pointer_hover_32.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          },
+          "48": {
+            "file": "glace/pointer_hover_48.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          },
+          "64": {
+            "file": "glace/pointer_hover_64.png",
+            "hotspot": [
+              1,
+              1
+            ]
+          }
+        }
+      },
+      "p1": {
+        "sizes": {
+          "32": {
+            "file": "glace/p1_32.png",
+            "hotspot": [
+              4,
+              4
+            ]
+          },
+          "48": {
+            "file": "glace/p1_48.png",
+            "hotspot": [
+              5,
+              7
+            ]
+          },
+          "64": {
+            "file": "glace/p1_64.png",
+            "hotspot": [
+              7,
+              9
+            ]
+          }
+        }
+      },
+      "p2": {
+        "sizes": {
+          "32": {
+            "file": "glace/p2_32.png",
+            "hotspot": [
+              2,
+              8
+            ]
+          },
+          "48": {
+            "file": "glace/p2_48.png",
+            "hotspot": [
+              3,
+              13
+            ]
+          },
+          "64": {
+            "file": "glace/p2_64.png",
+            "hotspot": [
+              4,
+              17
+            ]
+          }
+        }
+      },
+      "p3": {
+        "sizes": {
+          "32": {
+            "file": "glace/p3_32.png",
+            "hotspot": [
+              5,
+              5
+            ]
+          },
+          "48": {
+            "file": "glace/p3_48.png",
+            "hotspot": [
+              7,
+              8
+            ]
+          },
+          "64": {
+            "file": "glace/p3_64.png",
+            "hotspot": [
+              10,
+              11
+            ]
+          }
+        }
+      }
+    }
+  }
+}

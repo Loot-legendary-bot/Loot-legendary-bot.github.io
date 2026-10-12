@@ -144,6 +144,13 @@
     torch:     { teinte: '#f0a038', forme: 'goutte',  n: 4, portee: 10, montee: 16 },  /* flamme */
     wizard:    { teinte: '#bfe4ff', forme: 'losange', n: 4, portee: 15, montee: 0 },   /* étincelle de cristal */
     legendary: { teinte: '#e8c35a', forme: 'rayon',   n: 6, portee: 18, montee: 0 },   /* éclat d'or */
+    /* note 237 ③ — les curseurs des esprits portent LEURS particules (trois
+       sprites par planche, `art/curseurs-particules/<id>/`) : 8-12 éclats,
+       250 ms, comme Croze l'écrit. */
+    fiole:     { teinte: '#9be04a', images: true, n: 10, portee: 22, montee: 6, duree: 250 },
+    faille:    { teinte: '#d24fd8', images: true, n: 10, portee: 22, montee: 0, duree: 250 },
+    eclair:    { teinte: '#f3e24a', images: true, n: 10, portee: 24, montee: 0, duree: 250 },
+    glace:     { teinte: '#cfe9ff', images: true, n: 10, portee: 22, montee: 0, duree: 250 },
   };
   var FORMES = {
     eclat:   'width:2px;height:7px;border-radius:1px;',
@@ -163,12 +170,22 @@
     couche.style.cssText = 'position:fixed;left:' + e.clientX + 'px;top:' + e.clientY
       + 'px;width:0;height:0;pointer-events:none;z-index:2147483647;';
     var n = reduit ? 1 : f.n;
+    var duree = f.duree || DUREE;
+    var id = actuel();
     for (var i = 0; i < n; i += 1) {
       var a = (i / n) * Math.PI * 2 - Math.PI / 2;
       var deg = a * 180 / Math.PI + 90;
-      var p = document.createElement('span');
-      p.style.cssText = 'position:absolute;left:0;top:0;background:' + f.teinte + ';'
-        + FORMES[f.forme] + 'box-shadow:0 0 4px ' + f.teinte + ';';
+      var p;
+      if (f.images) {
+        p = document.createElement('img');
+        p.src = DOSSIER.replace(/\/$/, '-particules/') + id + '/p' + (1 + i % 3) + '_32.png';
+        p.alt = '';
+        p.style.cssText = 'position:absolute;left:0;top:0;width:' + (10 + (i % 3) * 3) + 'px;height:auto;';
+      } else {
+        p = document.createElement('span');
+        p.style.cssText = 'position:absolute;left:0;top:0;background:' + f.teinte + ';'
+          + FORMES[f.forme] + 'box-shadow:0 0 4px ' + f.teinte + ';';
+      }
       couche.appendChild(p);
       var dx = reduit ? 0 : Math.cos(a) * f.portee;
       var dy = reduit ? 0 : Math.sin(a) * f.portee - f.montee;
@@ -177,12 +194,12 @@
         { transform: 'translate(-50%,-50%) rotate(' + tourne + 'deg) scale(1)', opacity: 1 },
         { transform: 'translate(calc(-50% + ' + dx + 'px),calc(-50% + ' + dy + 'px)) rotate('
           + tourne + 'deg) scale(' + (reduit ? 1.6 : 0.4) + ')', opacity: 0 },
-      ], { duration: DUREE, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
+      ], { duration: duree, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
     }
     document.body.appendChild(couche);
     /* Retirée par l'horloge des tâches, pas par `finished` : un onglet dont le
        compositeur dort ne finit jamais son animation, et la couche resterait. */
-    window.setTimeout(function () { couche.remove(); }, DUREE + 60);
+    window.setTimeout(function () { couche.remove(); }, duree + 60);
   }
   document.addEventListener('pointerdown', effetAuClic, true);
   window.llCurseur.EFFETS = EFFETS;

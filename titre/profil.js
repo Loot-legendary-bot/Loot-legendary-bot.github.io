@@ -44,11 +44,14 @@
       /* S1340 · PR-1 (note 194) — `persos` : les personnages possédés (ids du
          jeu). Au départ, les six que le Vault montrait déjà possédés (Q-PR1,
          veto d'un mot). `des` : les peaux achetées — `bones` l'est d'office. */
-      possede: { persos: PERSOS_DE_DEPART.slice(), des: [], curseurs: [], dos: [], peaux: [] },
+      possede: { persos: PERSOS_DE_DEPART.slice(), des: [], curseurs: [], dos: [], peaux: [], foils: [] },  /* S1426 - FL-1 : les Foils (ids de cartes de loot) */
       equipe: { de: null, curseur: null, dos: null },
       bounty: {},
       today: [],
-      options: {}
+      options: {},
+      /* S1411 - CX-1 (note 229, CODEX 2) : ce que le jeu t'a montre face
+         visible, par famille ; ecrit par le jeu (`noteLesDecouvertes`). */
+      codex: { seen: { tiles: [], traps: [], mobs: [], chests: [], loots: [], quests: [] } }
     };
   }
 
@@ -65,8 +68,24 @@
     for (var s in n.possede) {
       if (!Array.isArray(p.possede[s])) p.possede[s] = n.possede[s];
     }
+    /* S1411 - CX-1 : un profil d'avant le CODEX gagne ses listes vides. */
+    if (typeof p.codex !== 'object' || p.codex === null || typeof p.codex.seen !== 'object' || p.codex.seen === null) {
+      p.codex = n.codex;
+    }
+    for (var f in n.codex.seen) {
+      if (!Array.isArray(p.codex.seen[f])) p.codex.seen[f] = [];
+    }
     if (typeof p.dents !== 'number' || !isFinite(p.dents)) p.dents = n.dents;
     if (typeof p.sang !== 'number' || !isFinite(p.sang)) p.sang = n.sang;
+    /* S1419 - note 241 (8) : Croze a encore des offrandes x13 d'avant les essences —
+       elles retombent a zero UNE fois, au premier lancement qui lit ce profil. */
+    if (typeof p.migrations !== 'object' || p.migrations === null) p.migrations = {};
+    if (p.migrations.offrandes_241 !== true) {
+      p.offrandes = [];
+      if (p.mur && typeof p.mur === 'object') p.mur.offertes = [];
+      p.migrations.offrandes_241 = true;
+      pose(p);   /* ecrit tout de suite, fichier du dossier compris */
+    }
     p.schema_version = SCHEMA;
     return p;
   }
@@ -87,6 +106,18 @@
     catch (e) { /* un navigateur peut refuser le stockage : la page vit quand même */ }
     /* L'écran de jeu lit le pseudo sous cette clé depuis S1202 : elle suit. */
     try { window.localStorage.setItem('ll.profil.pseudo', String(p.pseudo || '')); } catch (e) { /* idem */ }
+    /* S1424 · NET-1 (note 249 ①) — connecté, le profil part au serveur à CHAQUE
+       écriture (le titre comme la page de jeu : la session porte l'adresse).
+       Le serveur ne répond pas : la copie locale reste, la suivante repartira. */
+    try {
+      var cpt = JSON.parse(window.localStorage.getItem('ll.compte.v1') || 'null');
+      if (cpt && cpt.pret === true && typeof cpt.token === 'string' && typeof cpt.base === 'string') {
+        var corps = JSON.stringify({ profile: p });
+        fetch(cpt.base + '/profile', { method: 'PUT', body: corps, keepalive: corps.length < 60000,
+          headers: { 'content-type': 'application/json', authorization: 'Bearer ' + cpt.token } })
+          .catch(function () { /* hors ligne : rien de perdu ici */ });
+      }
+    } catch (e) { /* pas de session lisible */ }
     /* S1379 · PK-1 (note 210 ②) — dans le PAQUET PORTABLE, le profil vit aussi
        dans `profil.json`, à côté du `JOUER.bat` (le serveur du paquet pose
        `LL_PORTABLE` en tête de ce fichier). En développement : rien ne change. */

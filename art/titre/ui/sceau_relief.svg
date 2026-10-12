@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 112 112">
+<g fill="none" stroke-linejoin="round">
+<path d="M50.00 4.00 L89.84 73.00 L10.16 73.00 Z M50.00 96.00 L10.16 27.00 L89.84 27.00 Z" stroke="#000" stroke-opacity=".7" stroke-width="2.6" transform="translate(-.45 -.45)"/>
+<path d="M50.00 4.00 L89.84 73.00 L10.16 73.00 Z M50.00 96.00 L10.16 27.00 L89.84 27.00 Z" stroke="#b7a68b" stroke-opacity=".22" stroke-width="2.2" transform="translate(.55 .55)"/>
+<path d="M50.00 4.00 L89.84 73.00 L10.16 73.00 Z M50.00 96.00 L10.16 27.00 L89.84 27.00 Z" stroke="#15120f" stroke-width="1.7"/>
+<circle cx="50" cy="50" r="50" stroke="#000" stroke-opacity=".55" stroke-width="1.4" transform="translate(-.4 -.4)"/>
+<circle cx="50" cy="50" r="50" stroke="#b7a68b" stroke-opacity=".16" stroke-width="1.2" transform="translate(.5 .5)"/>
+</g>
+<circle cx="50.00" cy="4.00" r="7.6" fill="#000" fill-opacity=".45"/>
+<circle cx="50.60" cy="4.60" r="7.6" fill="none" stroke="#b7a68b" stroke-opacity=".2" stroke-width=".9"/>
+<circle cx="89.84" cy="27.00" r="7.6" fill="#000" fill-opacity=".45"/>
+<circle cx="90.44" cy="27.60" r="7.6" fill="none" stroke="#b7a68b" stroke-opacity=".2" stroke-width=".9"/>
+<circle cx="89.84" cy="73.00" r="7.6" fill="#000" fill-opacity=".45"/>
+<circle cx="90.44" cy="73.60" r="7.6" fill="none" stroke="#b7a68b" stroke-opacity=".2" stroke-width=".9"/>
+<circle cx="50.00" cy="96.00" r="7.6" fill="#000" fill-opacity=".45"/>
+<circle cx="50.60" cy="96.60" r="7.6" fill="none" stroke="#b7a68b" stroke-opacity=".2" stroke-width=".9"/>
+<circle cx="10.16" cy="73.00" r="7.6" fill="#000" fill-opacity=".45"/>
+<circle cx="10.76" cy="73.60" r="7.6" fill="none" stroke="#b7a68b" stroke-opacity=".2" stroke-width=".9"/>
+<circle cx="10.16" cy="27.00" r="7.6" fill="#000" fill-opacity=".45"/>
+<circle cx="10.76" cy="27.60" r="7.6" fill="none" stroke="#b7a68b" stroke-opacity=".2" stroke-width=".9"/>
+<circle cx="50.00" cy="50.00" r="9.5" fill="#000" fill-opacity=".45"/>
+<circle cx="50.60" cy="50.60" r="9.5" fill="none" stroke="#b7a68b" stroke-opacity=".2" stroke-width=".9"/>
+</svg>
