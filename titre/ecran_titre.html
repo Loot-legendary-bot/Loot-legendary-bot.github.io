@@ -576,7 +576,6 @@
   .grid.inv .slot.eq{border-color:#b3171b}
   .grid.inv .slot .plate,.grid.inv .slot .dosmark,.grid.inv .slot .curmark{width:100%;height:100%;background-size:contain;background-repeat:no-repeat;background-position:center}
   .grid.inv .slot .plate img{width:100%;height:100%;object-fit:contain;display:block}
-  .grid.inv .slot .besace-sil{width:100%;height:100%}
   .grid.inv .slot .q{position:absolute;z-index:3;right:.5cqh;bottom:.2cqh;font:900 1.9cqh/1 "Arial Black",Impact,sans-serif;color:#e9e4d8;text-shadow:0 0 .4cqh #000,0 0 .4cqh #000}
   .grid.inv .slot .eqm{position:absolute;z-index:3;left:.5cqh;top:.4cqh;font:900 1.3cqh/1 "Arial Black",Impact,sans-serif;font-style:normal;color:#0b0b0b;background:#b3171b;padding:.2cqh .4cqh}
   .grid.blood{grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(3,1fr)}
@@ -2873,8 +2872,8 @@ function fillGrid(key){
         const o=BW.CHANCES[id];
         const c=document.createElement('div');
         c.className='cell besace'; c.tabIndex=0;
+        /* note 273 (2) : plus de badge de duree sur la vignette - elle est dans la fiche (« Lasts N games »). */
         c.innerHTML=charmeShot(id)+
-          '<b class="besace-x">'+o.parties+' games</b>'+
           '<div class="own">'+fmt(o.prix)+'</div>'+(ch&&ch.id===id?'<div class="tagx">'+ch.restant+' games left</div>':'')+
           '<div class="cap">'+o.nom+'</div>';
         c.addEventListener('click',()=>openSheet('luck',k));
@@ -3012,7 +3011,7 @@ function openSheet(kind,i){
     shot='<div class="dshot besace">'+charmeShot(id)+'</div>';
     kick='Charm · '+(ch&&ch.id===id?ch.restant+' games left':o.parties+' games');
     name=o.nom;
-    body='<div class="rows">'+row('Lasts',o.parties+' games')
+    body='<div class="rows">'+row('Lasts','lasts '+o.parties+' games')
       +row('Teeth',(o.dents===2?'×2':'+'+Math.round((o.dents-1)*100)+' %')+' — waits for the game to publish the teeth of a game')
       +row('Essences','×'+o.essences+' on every essence a game drops')
       +row('One at a time','Your luck runs out before you buy another')+'</div>';
@@ -4625,6 +4624,24 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     '#sceau-bw .coeur .ligne button.romps{border-color:#4a453d;color:#8d8578}' +
     '#sceau-bw .coeur .ligne.fait{border-color:var(--teinte);color:var(--teinte)}' +
     '#sceau-bw .coeur .pacte-ok{position:static;margin:0}' +
+    /* note 273 ① : les deux blocs de la page d'esprit */
+    '#sceau-bw .coeur .bloc-esprit{flex-direction:column;align-items:stretch;gap:.5cqh;width:100%;box-sizing:border-box;text-align:left}' +
+    '#sceau-bw .coeur .bloc-esprit > b{text-align:center}' +
+    '#sceau-bw .coeur .bloc-esprit > span{text-align:center}' +
+    '#sceau-bw .coeur .bloc-esprit > button{align-self:center}' +
+    '#sceau-bw .coeur .bloc-esprit .explique{font-size:1.35cqh;color:#c9c2b4}' +
+    '#sceau-bw .coeur .bloc-esprit .actif,#sceau-bw .coeur .bloc-esprit .fait-la{font:900 1.4cqh/1.2 "Arial Black",Impact,sans-serif;color:var(--teinte)}' +
+    '#sceau-bw .coeur .bloc-esprit .total{font-size:1.5cqh;border-top:.12cqh solid rgba(233,228,216,.18);padding-top:.4cqh}' +
+    '#sceau-bw .coeur .bloc-esprit .total b{color:var(--teinte);font:900 1.7cqh/1 "Arial Black",Impact,sans-serif}' +
+    '#sceau-bw .coeur .carte-offr{display:grid;grid-template-columns:4.2cqh 1fr auto;grid-template-rows:auto auto;column-gap:.6cqw;align-items:center;' +
+    'padding:.35cqh .4cqw;border:.12cqh solid rgba(233,228,216,.14);background:rgba(0,0,0,.35)}' +
+    '#sceau-bw .coeur .carte-offr .ico{grid-row:1/3;width:4.2cqh;height:4.2cqh;position:relative;overflow:hidden}' +
+    '#sceau-bw .coeur .carte-offr .ico .plate{position:absolute;inset:0}' +
+    '#sceau-bw .coeur .carte-offr .quoi{font-size:1.4cqh;line-height:1.15}' +
+    '#sceau-bw .coeur .carte-offr .stock{grid-column:2;font-size:1.2cqh;color:#8d8578}' +
+    '#sceau-bw .coeur .carte-offr button{grid-column:3;grid-row:1/3}' +
+    '#sceau-bw .coeur .carte-offr.vide{opacity:.5}' +
+    '#sceau-bw .coeur .carte-offr button:disabled{cursor:default;border-color:#4a453d;color:#8d8578;background:none}' +
     '#sceau-bw .couronne .rg{position:absolute;transform:translate(-50%,-50%);width:16cqh;display:flex;flex-direction:column;align-items:center;' +
     'gap:.4cqh;padding:.6cqh .4cqw;text-align:center;background:rgba(8,7,6,.78);border:.12cqh solid rgba(233,228,216,.12);box-sizing:border-box;z-index:1}' +
     '#sceau-bw .couronne .rg .fin{width:7cqh;height:7cqh;flex:none}' +
@@ -4753,47 +4770,67 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       var noms = etats.filter(function (x) { return signes.indexOf(x.id) >= 0; }).map(function (x) { return x.t; });
       var prixP = BW.prixDuPacte(profil, t.id);
       var sacs = BW.sac(profil);
-      /* ⑥ ligne 1 — LE PACTE */
+      /* note 273 ① (retour n°4, capture 08 « c'est pas clair, surtout pour les offrandes ») :
+         DEUX blocs separes - YOUR PACT (l'engagement permanent) puis OFFER AN ESSENCE
+         (le stock, le bouton, l'etat actif, le total). */
+      var quiDit = donjon ? 'the Dungeon' : t.t;
       var l1 = document.createElement('div');
-      l1.className = 'ligne pacte';
+      l1.className = 'ligne pacte bloc-esprit';
       if (jure) {
-        l1.innerHTML = '<b>Your pact ×' + BW.PACTE + '</b><span>this path counts ×' + BW.PACTE + '</span>' +
+        l1.innerHTML = '<b>Your pact</b><span>Sworn to ' + quiDit + ' — this path counts ×' + BW.PACTE + '</span>' +
           '<button type="button" class="romps">break · ' + fmt(BW.ROMPRE) + ' teeth</button>';
       } else {
-        l1.innerHTML = '<b>Pact</b><button type="button" class="jurer">swear to ' + (donjon ? 'the Dungeon' : t.t) + ': ×' + BW.PACTE +
-          ' on this spirit · ' + (prixP > 0 ? fmt(prixP) + ' teeth' : 'free') + '</button>';
+        l1.innerHTML = '<b>Your pact</b><span>Swear to ' + quiDit + ': this path counts ×' + BW.PACTE + ', forever · ' +
+          fmt(BW.ROMPRE) + ' teeth to break later</span>' +
+          '<button type="button" class="jurer">swear · ' + (prixP > 0 ? fmt(prixP) + ' teeth' : 'free') + '</button>';
       }
       coeur.appendChild(l1);
-      /* ⑥ ligne 2 — L'OFFRANDE : un bouton par essence POSSÉDÉE ; aucune = pas de ligne */
-      var miennes = BW.essencesDe(t.id).filter(function (so) { return sacs[so] > 0; });
+      var l2 = document.createElement('div');
+      l2.className = 'ligne offre bloc-esprit';
+      l2.innerHTML = '<b>Offer an essence — boost this path</b>' +
+        '<span class="explique">Burn one essence: its multiplier applies to this spirit’s counters.</span>';
       if (offertDire !== null && offertDire.esprit === t.id) {
-        var lf = document.createElement('div');
-        lf.className = 'ligne fait';
+        var lf = document.createElement('span');
+        lf.className = 'fait-la';
         lf.textContent = offertDire.texte;
-        coeur.appendChild(lf);
+        l2.appendChild(lf);
         offertDire = null;
-      } else if (miennes.length > 0) {
-        var l2 = document.createElement('div');
-        l2.className = 'ligne offre';
-        l2.innerHTML = '<b>Offer</b>';
-        miennes.forEach(function (so) {
-          var o = BW.OFFRANDES[so];
-          var bo = document.createElement('button');
-          bo.type = 'button';
-          bo.className = 'essence';
-          bo.dataset.sorte = so;
-          bo.textContent = o.nom + ' ×' + o.x + ' (' + o.duree + ' games) · you own ' + sacs[so];
-          bo.title = 'Offer it: this path earns ×' + o.x + ' for ' + o.duree + ' games, added to what already burns.';
-          bo.addEventListener('click', function () {
-            if (BW.offre(t.id, so)) {
-              offertDire = { esprit: t.id, texte: (donjon ? 'The Dungeon' : t.t) + ' counts ×' + o.x + ' for ' + o.duree + ' games' };
-              peins();
-            }
-          });
-          l2.appendChild(bo);
-        });
-        coeur.appendChild(l2);
       }
+      BW.brulent(profil, t.id).forEach(function (b) {
+        var ac = document.createElement('span');
+        ac.className = 'actif';
+        ac.textContent = '×' + BW.OFFRANDES[b.sorte].x + ' active · ' + b.restant + (b.restant > 1 ? ' games' : ' game') + ' left';
+        l2.appendChild(ac);
+      });
+      BW.essencesDe(t.id).forEach(function (so) {
+        var o = BW.OFFRANDES[so];
+        var n = sacs[so] || 0;
+        var carte = document.createElement('div');
+        carte.className = 'carte-offr' + (n > 0 ? '' : ' vide');
+        carte.innerHTML = '<span class="ico">' + besaceObjet(so) + '</span>' +
+          '<span class="quoi">' + o.taille.charAt(0).toUpperCase() + o.taille.slice(1) + ' Essence · ×' + o.x + ' for ' + o.duree + ' games</span>' +
+          '<span class="stock">in your stash: ' + n + '</span>';
+        var bo = document.createElement('button');
+        bo.type = 'button';
+        bo.className = 'essence';
+        bo.dataset.sorte = so;
+        bo.textContent = 'Offer';
+        bo.disabled = n === 0;
+        bo.title = n > 0 ? o.nom + ': this path earns ×' + o.x + ' for ' + o.duree + ' games.' : 'You have none — essences drop in games.';
+        bo.addEventListener('click', function () {
+          if (BW.offre(t.id, so)) {
+            offertDire = { esprit: t.id, texte: 'Offered: ' + o.nom + ' — ×' + o.x + ' for ' + o.duree + ' games' };
+            peins();
+          }
+        });
+        carte.appendChild(bo);
+        l2.appendChild(carte);
+      });
+      var tot = document.createElement('span');
+      tot.className = 'total';
+      tot.innerHTML = 'Total on this path: <b>×' + BW.multiplicateur(profil, t.id) + '</b>';
+      l2.appendChild(tot);
+      coeur.appendChild(l2);
       var confirme = function (texte, prix, faire) {
         var vieux = coeur.querySelector('.pacte-ok');
         if (vieux) { vieux.remove(); }
