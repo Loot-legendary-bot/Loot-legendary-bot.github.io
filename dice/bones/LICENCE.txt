@@ -1,0 +1,29 @@
+bones — licences et provenance
+==============================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+PHOTO       Aucune. Le corps couleur d'os, son mouchete d'os vieilli et
+            l'encre sepia des chiffres sont des albedos CHOISIS, pas mesures.
+            Le rapport n'imprime donc aucune table de couleur.
+
+NOM         `bones` est le de PAR DEFAUT des joueurs : le premier de
+            ORDRE_OFFRE (peaux_des.py), possede d'office. Cette peau REMPLACE
+            la peau legacy du meme nom (160 px, 36 images), refaite par la
+            forge sur la demande de Croze du 12/10/2026. Elle n'entre pas au
+            Vault.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

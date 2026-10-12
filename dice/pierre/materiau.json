@@ -1,0 +1,46 @@
+{
+ "famille": "pierre",
+ "couleurs": {
+  "corps": [
+   "#8a8781"
+  ],
+  "veines": null,
+  "inclusions": "#c9c4ba",
+  "pointes": null,
+  "chiffres": "#1b1a19"
+ },
+ "fini": {
+  "rugosite": 0.85,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 0.4,
+  "contraste": 0.75,
+  "densite": 0.0,
+  "densite_paillettes": 0.2,
+  "rugosite_inclusions": 0.65
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "DE DU DONJON, refait 12/10 : granite gris mat a grain fin, eclats de mineral nets, un peu abime (eclats aux aretes, rares fissures grises). Couleurs choisies.",
+ "usure": {
+  "eclats": 0.35,
+  "fissures": 0.12,
+  "couleur_eclat": "#a7a093",
+  "couleur_fissure": "#5c5852"
+ }
+}
