@@ -233,14 +233,44 @@
     if (!c || !CHANCES[c.id] || !((c.restant | 0) > 0)) { return null; }
     return { id: c.id, restant: c.restant | 0, nom: CHANCES[c.id].nom, dents: CHANCES[c.id].dents, essences: CHANCES[c.id].essences };
   }
+  /* S1432 · note 274 ④ — LES CHARMS SONT EMPILABLES : en avoir n'empêche jamais d'en
+     racheter. Le stock vit dans `profil.charmes` ({ id: n }) ; UN seul court à la fois
+     (Q-CHANCE-CUMUL inchangée) : acheté sans charm qui court, il part tout de suite,
+     sinon il va au stock, et le suivant du stock part quand le précédent s'éteint
+     (le même charm d'abord, puis l'autre). */
+  function stockDesCharmes(profil) {
+    var c = profil && profil.charmes, n = {};
+    SORTES_CHANCE.forEach(function (id) { n[id] = c && typeof c[id] === 'number' && c[id] > 0 ? c[id] | 0 : 0; });
+    return n;
+  }
+  function relanceDuStock(p, prefere) {
+    var n = stockDesCharmes(p);
+    var ordre = [prefere].concat(SORTES_CHANCE.filter(function (x) { return x !== prefere; }));
+    for (var i = 0; i < ordre.length; i++) {
+      var id = ordre[i];
+      if (CHANCES[id] && n[id] > 0) {
+        n[id] -= 1;
+        p.charmes = n;
+        p.chance = { id: id, restant: CHANCES[id].parties };
+        return;
+      }
+    }
+    p.chance = null;
+  }
   function acheteLaChance(id) {
     var o = CHANCES[id];
     var fait = false;
     if (!o) { return false; }
     window.LLProfil.modifie(function (p) {
-      if (chance(p) !== null || p.dents < o.prix) { return; }
+      if (p.dents < o.prix) { return; }
       p.dents -= o.prix;
-      p.chance = { id: id, restant: o.parties };
+      if (chance(p) === null) {
+        p.chance = { id: id, restant: o.parties };
+      } else {
+        var n = stockDesCharmes(p);
+        n[id] += 1;
+        p.charmes = n;
+      }
       fait = true;
     });
     return fait;
@@ -468,6 +498,12 @@
     if (o.ancienne) { return 'This is a card now, not an offering.'; }
     if (o.esprit !== id) { return 'This essence feeds only the spirit of ' + nomDe(o.esprit) + '.'; }
     if (id === 'exploration') { return 'The Cartographer takes no essence.'; }
+    /* S1432 · note 274 ② (MONNAIE §24 ⓡ) : UNE seule essence active par branche. */
+    var b = brulent(profil, id);
+    if (b.length > 0) {
+      var reste = Math.max.apply(null, b.map(function (x) { return x.restant; }));
+      return 'An essence is already burning on this path (' + reste + (reste > 1 ? ' games' : ' game') + ' left).';
+    }
     return null;
   }
   /* le gain d'une branche : compteur × multiplicateur (plus de ¼, §13.3).
@@ -606,7 +642,8 @@
     if (ch !== null) {
       var n = drops.length;
       for (var r = 1; r < ch.essences; r++) { for (var q = 0; q < n; q++) { drops.push(drops[q]); } }
-      p.chance = ch.restant - 1 > 0 ? { id: ch.id, restant: ch.restant - 1 } : null;
+      if (ch.restant - 1 > 0) { p.chance = { id: ch.id, restant: ch.restant - 1 }; }
+      else { relanceDuStock(p, ch.id); }   /* note 274 ④ : le suivant du stock part */
     }
     if (drops.length > 0) {
       if (!Array.isArray(p.offrandes)) { p.offrandes = []; }
@@ -624,7 +661,7 @@
   window.LLBountyWall = { EPIC_FORGEE: false, refus: refus, verrouVictoire: verrouVictoire, aGagne: aGagne, PRIX_PERSO: PRIX_PERSO, FOIS: FOIS, TRONCS: TRONCS, FILTRES: FILTRES, SERVIS: SERVIS, etat: etat,
     compteur: compteur, compteurBranche: compteurBranche, actifs: actifs, PACTE: PACTE, ROMPRE: ROMPRE, pacte: pacte, prixDuPacte: prixDuPacte,
     passeLePacte: passeLePacte, romps: romps, prends1: prends1, dptOuvert: dptOuvert, CODEX: CODEX, ARBRES: ARBRES, DEFIS: DEFIS, ligueOuverte: ligueOuverte, surLeTicket: surLeTicket, offreSurLeTicket: offreSurLeTicket,
-    CHANCES: CHANCES, SORTES_CHANCE: SORTES_CHANCE, chance: chance, acheteLaChance: acheteLaChance,
+    CHANCES: CHANCES, SORTES_CHANCE: SORTES_CHANCE, chance: chance, acheteLaChance: acheteLaChance, stockDesCharmes: stockDesCharmes,
     OFFRANDES: OFFRANDES, SORTES: SORTES, TAILLES: TAILLES, essencesDe: essencesDe, eveilles: eveilles, dort: dort, sac: sac, brulent: brulent,
     multiplicateur: multiplicateur, gain: gain, offre: offre, achete: achete, tirage: tirage, finDePartie: finDePartie,
     nomDe: nomDe };

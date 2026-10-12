@@ -566,7 +566,9 @@
   .grid.tick .cell{aspect-ratio:auto;height:100%}
   /* S1418 - note 239 (3) : le rayon BLOOD, meme gabarit que LUCK */
   /* S1431 - note 272 (5) : l'INVENTAIRE, des cases de RPG (dix de front, carrees). */
-  .grid.inv{grid-template-columns:repeat(10,1fr);gap:.7cqw}
+  .grid.inv{grid-template-columns:repeat(12,1fr);gap:.7cqw}
+  .grid.inv .inv-ecole{align-self:center;justify-self:end;font:900 1.35cqh/1.1 "Arial Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:.06em;text-align:right}
+  .grid.inv .slot.zero{opacity:.35}
   .grid.inv .slot{position:relative;aspect-ratio:1;box-sizing:border-box;padding:.9cqh;cursor:pointer;
     background:radial-gradient(circle at 50% 40%,#211e19,#0b0a08 75%);border:.18cqh solid #3b382f;
     box-shadow:inset 0 0 1.4cqh rgba(0,0,0,.95),0 .2cqh 0 rgba(255,255,255,.04)}
@@ -1942,7 +1944,7 @@ function peinsLeDev(box){
       les Dailies du jour a zero tentative ; tout le debloque reste. */
    ['WIPE','Teeth back to 300, DPT ranks back to Bronze, essences and luck gone, today\u2019s Dungeon tries cleared. Everything unlocked stays.',function(){
       P.modifie(function(p){
-        p.dents=300; p.offrandes=[]; p.chance=null; p.rang='Bronze III';
+        p.dents=300; p.offrandes=[]; p.chance=null; p.charmes={}; p.rang='Bronze III';
         if(p.options&&typeof p.options==='object') delete p.options.dailyJoue;
         if(p.mur&&typeof p.mur==='object') p.mur.offertes=[];
         if(p.compteurs&&typeof p.compteurs==='object') p.compteurs.rang_dpl=0;
@@ -2585,18 +2587,28 @@ const counts=()=>({chars:CHARS.filter(c=>c.owned).length+'/'+TOTAL_CHARS,
   /* S1418 - le Sang en poche */
   blood:fmt(window.LLProfil.lis().sang||0),
   /* S1431 - note 272 (5) : les consommables en poche */
-  inv:String(inventaire().conso.reduce((n,o)=>n+o.q,0))});
+  inv:String((()=>{const v=inventaire();return v.conso.reduce((n,o)=>n+o.q,0)+v.essences.reduce((n,e)=>n+e.cases.reduce((m,c)=>m+c.q,0),0);})())});
 /* S1431 - note 272 (5) : L'INVENTAIRE, lu sur le profil et les rayons (rien d'ecrit ici).
    conso = [{nom, q, html, ouvre}] ; possede = [{nom, html, eq, ouvre}]. */
 function inventaire(){
   const p=window.LLProfil.lis(), BW=window.LLBountyWall, T=window.LLTickets;
   const conso=[], possede=[];
+  /* note 274 (3) : les ESSENCES a part, TOUTES, par ecole (une ligne) et par taille (Small, Big,
+     Massive) - a zero, la case est grise. */
+  const essences=[];
   if(BW&&BW.sac){
     const sac=BW.sac(p);
-    BW.SORTES.forEach(so=>{ if(sac[so]>0) conso.push({nom:BW.OFFRANDES[so].nom,q:sac[so],html:besaceObjet(so),ouvre:null}); });
+    BW.TRONCS.forEach(t=>{
+      essences.push({ecole:t.id==='neutre'?'Dungeon':t.t,teinte:t.teinte,cases:BW.essencesDe(t.id).map(so=>({nom:BW.OFFRANDES[so].nom,q:sac[so]||0,html:besaceObjet(so)}))});
+    });
   }
   const ch=BW&&BW.chance?BW.chance(p):null;
-  if(ch) conso.push({nom:ch.nom+' — '+ch.restant+' games left',q:ch.restant,html:charmeShot(ch.id),ouvre:()=>openSheet('luck',BW.SORTES_CHANCE.indexOf(ch.id))});
+  if(ch) conso.push({nom:ch.nom+' \u2014 running, '+ch.restant+' games left',q:ch.restant,html:charmeShot(ch.id),ouvre:()=>openSheet('luck',BW.SORTES_CHANCE.indexOf(ch.id))});
+  /* note 274 (4) : les charms en stock (empilables) */
+  if(BW&&BW.stockDesCharmes){
+    const st=BW.stockDesCharmes(p);
+    BW.SORTES_CHANCE.forEach((id,k)=>{ if(st[id]>0) conso.push({nom:BW.CHANCES[id].nom+' \u2014 '+st[id]+' in your stash',q:st[id],html:charmeShot(id),ouvre:()=>openSheet('luck',k)}); });
+  }
   if(T){
     const t=T.enPoche(p);
     if(t.daily>0) conso.push({nom:'Today’s Dungeon invitation',q:t.daily,html:'<div class="plate"><img alt="" src="/art/tickets/daily_sceau.webp"></div>',ouvre:()=>openSheet('tdaily',-1)});
@@ -2606,7 +2618,7 @@ function inventaire(){
   BACKS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' (card back)',html:'<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>',eq:equipped.backs===i,ouvre:()=>openSheet('backs',i)}); });
   CURSORS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' cursor',html:'<div class="curmark" style="background-image:url('+IMG_CURSEUR(id)+')"></div>',eq:equipped.curs===i,ouvre:()=>openSheet('curs',i)}); });
   CHARS.forEach(c=>{ if(c.owned) possede.push({nom:c.name,html:'<div class="plate"><img alt="" src="/art/personnages/all_ico_webp_CORRECTED_ALL/200px/'+idDuPerso(c.name)+'_200px.webp"></div>',eq:false,ouvre:null}); });
-  return {conso,possede};
+  return {essences,conso,possede};
 }
 /* (6) note 145 (3), verbatim Croze : *« cursor ca va pas, c'est juste des
    traits qu'on vend »*. Le rayon des CURSEURS sort du Vault tant qu'il n'y a
@@ -2875,6 +2887,7 @@ function fillGrid(key){
         /* note 273 (2) : plus de badge de duree sur la vignette - elle est dans la fiche (« Lasts N games »). */
         c.innerHTML=charmeShot(id)+
           '<div class="own">'+fmt(o.prix)+'</div>'+(ch&&ch.id===id?'<div class="tagx">'+ch.restant+' games left</div>':'')+
+          (BW.stockDesCharmes&&BW.stockDesCharmes(window.LLProfil.lis())[id]>0?'<b class="besace-x">\u00d7'+BW.stockDesCharmes(window.LLProfil.lis())[id]+' in your stash</b>':'')+
           '<div class="cap">'+o.nom+'</div>';
         c.addEventListener('click',()=>openSheet('luck',k));
         c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -2894,10 +2907,21 @@ function fillGrid(key){
         if(o.ouvre){ c.addEventListener('click',o.ouvre); c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();o.ouvre();}}); }
         grid.appendChild(c);
       });
-      const reste=(10-objets.length%10)%10+(objets.length===0?10:0);
+      const reste=(12-objets.length%12)%12+(objets.length===0?12:0);
       for(let k=0;k<reste;k++){ const c=document.createElement('div'); c.className='slot vide'; if(objets.length===0&&k===0) c.title=vide; grid.appendChild(c); }
     };
-    section('Consumables',inv.conso,'Nothing in your bag — essences drop in games, charms and invitations are in CHARMS.');
+    /* note 274 (3) : LES ESSENCES d'abord - une ligne par ecole, ses trois tailles */
+    const h=document.createElement('div'); h.className='rayon-sect'; h.textContent='Essences'; grid.appendChild(h);
+    inv.essences.forEach(e=>{
+      const l=document.createElement('div'); l.className='inv-ecole'; l.textContent=e.ecole; l.style.color=e.teinte; grid.appendChild(l);
+      e.cases.forEach(o=>{
+        const c=document.createElement('div');
+        c.className='slot'+(o.q>0?'':' zero'); c.title=o.nom+' \u00d7'+o.q;
+        c.innerHTML=o.html+'<b class="q">'+o.q+'</b>';
+        grid.appendChild(c);
+      });
+    });
+    section('Consumables',inv.conso,'Nothing else in your bag \u2014 charms and invitations are in CHARMS.');
     section('Owned',inv.possede,'Nothing owned yet.');
   } else if(key==='blood'){
     /* S1418 - note 239 (3) : le rayon BLOOD, vitrine sans achat. */
@@ -3137,9 +3161,12 @@ function openSheet(kind,i){
         'Reach it, then unlock it here or on the wall.';
       warn=false;
     }
+    /* note 274 (4) : les charms sont EMPILABLES - l'achat n'est jamais bloque ; un seul court a la fois. */
     if(kind==='luck' && window.LLBountyWall.chance(window.LLProfil.lis())!==null){
-      cta='<button class="cta" id="dbtn" disabled>A charm is running</button>';
-      note='One charm at a time: this one ends after '+window.LLBountyWall.chance(window.LLProfil.lis()).restant+' more games.'; warn=false;
+      const enCours=window.LLBountyWall.chance(window.LLProfil.lis());
+      const st=window.LLBountyWall.stockDesCharmes(window.LLProfil.lis())[window.LLBountyWall.SORTES_CHANCE[i]];
+      note=enCours.nom+' is running ('+enCours.restant+' games left): this one goes to your stash and starts when it ends.'
+        +(st>0?' \u00d7'+st+' in your stash.':''); warn=false;
     }
     if(kind==='offr' && prix===null){
       cta='<button class="cta" id="dbtn" disabled>Found in play only</button>';
@@ -4802,6 +4829,14 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         ac.textContent = '×' + BW.OFFRANDES[b.sorte].x + ' active · ' + b.restant + (b.restant > 1 ? ' games' : ' game') + ' left';
         l2.appendChild(ac);
       });
+      /* note 274 ② : le motif du refus, UNE fois (chaque OFFER grise le porte au survol) */
+      var motif = BW.essencesDe(t.id).map(function (so) { return BW.refus(profil, t.id, so); }).filter(function (x) { return x !== null; })[0];
+      if (motif !== undefined) {
+        var lm = document.createElement('span');
+        lm.className = 'explique';
+        lm.textContent = motif;
+        l2.appendChild(lm);
+      }
       BW.essencesDe(t.id).forEach(function (so) {
         var o = BW.OFFRANDES[so];
         var n = sacs[so] || 0;
@@ -4815,8 +4850,10 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         bo.className = 'essence';
         bo.dataset.sorte = so;
         bo.textContent = 'Offer';
-        bo.disabled = n === 0;
-        bo.title = n > 0 ? o.nom + ': this path earns ×' + o.x + ' for ' + o.duree + ' games.' : 'You have none — essences drop in games.';
+        /* note 274 ② (MONNAIE §24) : une seule essence active par branche - le motif du refus est dit */
+        var pourquoi = BW.refus(profil, t.id, so);
+        bo.disabled = n === 0 || pourquoi !== null;
+        bo.title = pourquoi !== null ? pourquoi : n > 0 ? o.nom + ': this path earns ×' + o.x + ' for ' + o.duree + ' games.' : 'You have none — essences drop in games.';
         bo.addEventListener('click', function () {
           if (BW.offre(t.id, so)) {
             offertDire = { esprit: t.id, texte: 'Offered: ' + o.nom + ' — ×' + o.x + ' for ' + o.duree + ' games' };
