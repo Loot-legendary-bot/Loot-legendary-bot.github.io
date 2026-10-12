@@ -565,6 +565,20 @@
   .grid.tick{grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(3,1fr)}
   .grid.tick .cell{aspect-ratio:auto;height:100%}
   /* S1418 - note 239 (3) : le rayon BLOOD, meme gabarit que LUCK */
+  /* S1431 - note 272 (5) : l'INVENTAIRE, des cases de RPG (dix de front, carrees). */
+  .grid.inv{grid-template-columns:repeat(10,1fr);gap:.7cqw}
+  .grid.inv .slot{position:relative;aspect-ratio:1;box-sizing:border-box;padding:.9cqh;cursor:pointer;
+    background:radial-gradient(circle at 50% 40%,#211e19,#0b0a08 75%);border:.18cqh solid #3b382f;
+    box-shadow:inset 0 0 1.4cqh rgba(0,0,0,.95),0 .2cqh 0 rgba(255,255,255,.04)}
+  .grid.inv .slot:hover,.grid.inv .slot:focus{border-color:#c9c2b4;outline:none}
+  .grid.inv .slot.vide{cursor:default;opacity:.55}
+  .grid.inv .slot.vide:hover{border-color:#3b382f}
+  .grid.inv .slot.eq{border-color:#b3171b}
+  .grid.inv .slot .plate,.grid.inv .slot .dosmark,.grid.inv .slot .curmark{width:100%;height:100%;background-size:contain;background-repeat:no-repeat;background-position:center}
+  .grid.inv .slot .plate img{width:100%;height:100%;object-fit:contain;display:block}
+  .grid.inv .slot .besace-sil{width:100%;height:100%}
+  .grid.inv .slot .q{position:absolute;z-index:3;right:.5cqh;bottom:.2cqh;font:900 1.9cqh/1 "Arial Black",Impact,sans-serif;color:#e9e4d8;text-shadow:0 0 .4cqh #000,0 0 .4cqh #000}
+  .grid.inv .slot .eqm{position:absolute;z-index:3;left:.5cqh;top:.4cqh;font:900 1.3cqh/1 "Arial Black",Impact,sans-serif;font-style:normal;color:#0b0b0b;background:#b3171b;padding:.2cqh .4cqh}
   .grid.blood{grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(3,1fr)}
   .grid.blood .cell{aspect-ratio:auto;height:100%}
   .contrat-plate{display:grid;place-items:center;width:100%;height:100%;
@@ -2257,8 +2271,9 @@ const MENU=[
   /* S1416 - HM-5 (e) : "Vault = acheter et equiper, Codex = consulter" - le mot sur chaque onglet. */
   ["Vault","buy & equip \u00b7 characters \u00b7 dice sets \u00b7 cursors","collection",0],
   /* S1411 - CX-1 (note 229, CODEX 1) : "au HOME, a cote de DIVE, du VAULT et du MUR". */
-  /* S1429 - RK-1 (note 269 (1)) : RANKING au HOME - les joueurs classes, leurs points, un clic = ses stats. */
-  ["Ranking","players \u00b7 points \u00b7 grades \u00b7 find a player","ranking",0],
+  /* S1429 - RK-1 (note 269 (1)) : RANKING au HOME.
+     S1431 - note 272 (2) : "c'est vraiment une sous-categorie" - il quitte le menu
+     pour la ligne discrete du bas (`pied-home`), avant Rules et Boardgame. */
   ["Codex","browse \u00b7 tiles \u00b7 mobs \u00b7 loot cards \u00b7 quests \u00b7 characters","codex",0],
   /* S1414 - HM-4 (note 235 (8)) : le carnet devient RULES - la cheat sheet, les 20 classes,
      le Timer et le patch note, iso v0.999 (les images de `art/regles/`). */
@@ -2291,7 +2306,7 @@ document.getElementById('fr').textContent='Dive';
 /* S1416 - HM-5 (c) : RULES et BOARDGAME, une ligne discrete sous le menu. */
 (function(){
   const pied=document.createElement('div'); pied.className='pied-home';
-  [['Rules','rules'],['Boardgame','board']].forEach(([mot,cible],k)=>{
+  [['Ranking','ranking'],['Rules','rules'],['Boardgame','board']].forEach(([mot,cible],k)=>{
     if(k>0) pied.appendChild(document.createTextNode(' \u00b7 '));
     const a=document.createElement('button'); a.type='button'; a.className='pied-lien'; a.textContent=mot;
     a.addEventListener('click',()=>go(cible,null,a)); pied.appendChild(a);
@@ -2569,7 +2584,31 @@ const counts=()=>({chars:CHARS.filter(c=>c.owned).length+'/'+TOTAL_CHARS,
   /* S1357 \u00b7 note 201 (5) - les tickets en poche */
   tick:(()=>{const p=window.LLProfil.lis();const t=window.LLTickets?window.LLTickets.enPoche(p):{dpl:0,daily:0};const ch=window.LLBountyWall&&window.LLBountyWall.chance?window.LLBountyWall.chance(p):null;return String(t.dpl+t.daily+(ch?1:0));})(),
   /* S1418 - le Sang en poche */
-  blood:fmt(window.LLProfil.lis().sang||0)});
+  blood:fmt(window.LLProfil.lis().sang||0),
+  /* S1431 - note 272 (5) : les consommables en poche */
+  inv:String(inventaire().conso.reduce((n,o)=>n+o.q,0))});
+/* S1431 - note 272 (5) : L'INVENTAIRE, lu sur le profil et les rayons (rien d'ecrit ici).
+   conso = [{nom, q, html, ouvre}] ; possede = [{nom, html, eq, ouvre}]. */
+function inventaire(){
+  const p=window.LLProfil.lis(), BW=window.LLBountyWall, T=window.LLTickets;
+  const conso=[], possede=[];
+  if(BW&&BW.sac){
+    const sac=BW.sac(p);
+    BW.SORTES.forEach(so=>{ if(sac[so]>0) conso.push({nom:BW.OFFRANDES[so].nom,q:sac[so],html:besaceObjet(so),ouvre:null}); });
+  }
+  const ch=BW&&BW.chance?BW.chance(p):null;
+  if(ch) conso.push({nom:ch.nom+' — '+ch.restant+' games left',q:ch.restant,html:charmeShot(ch.id),ouvre:()=>openSheet('luck',BW.SORTES_CHANCE.indexOf(ch.id))});
+  if(T){
+    const t=T.enPoche(p);
+    if(t.daily>0) conso.push({nom:'Today’s Dungeon invitation',q:t.daily,html:'<div class="plate"><img alt="" src="/art/tickets/daily_sceau.webp"></div>',ouvre:()=>openSheet('tdaily',-1)});
+    if(t.dpl>0) conso.push({nom:'Dungeon Pro Tour ticket',q:t.dpl,html:'<div class="plate"><img alt="" src="/art/tickets/dpl_sceau.webp"></div>',ouvre:()=>openSheet('tdpl',-1)});
+  }
+  DICE.forEach(([nom,dossier,owned],i)=>{ if(owned) possede.push({nom:nom,html:'<div class="plate"><img class="peau" alt="" src="'+IMG_PEAU(dossier)[0]+'"></div>',eq:equipped.dice===i,ouvre:()=>openSheet('dice',i)}); });
+  BACKS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' (card back)',html:'<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>',eq:equipped.backs===i,ouvre:()=>openSheet('backs',i)}); });
+  CURSORS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' cursor',html:'<div class="curmark" style="background-image:url('+IMG_CURSEUR(id)+')"></div>',eq:equipped.curs===i,ouvre:()=>openSheet('curs',i)}); });
+  CHARS.forEach(c=>{ if(c.owned) possede.push({nom:c.name,html:'<div class="plate"><img alt="" src="/art/personnages/all_ico_webp_CORRECTED_ALL/200px/'+idDuPerso(c.name)+'_200px.webp"></div>',eq:false,ouvre:null}); });
+  return {conso,possede};
+}
 /* (6) note 145 (3), verbatim Croze : *« cursor ca va pas, c'est juste des
    traits qu'on vend »*. Le rayon des CURSEURS sort du Vault tant qu'il n'y a
    pas d'art : ce qu'il vendait etait un filtre de couleur pose sur le meme
@@ -2587,7 +2626,8 @@ const counts=()=>({chars:CHARS.filter(c=>c.owned).length+'/'+TOTAL_CHARS,
 /* note 237 (4) : le rayon ESSENCES devient LUCK (les essences ne se vendent plus). */
 /* note 271 (3), MONNAIE 22 - l'onglet BLOOD est MASQUE (« on oublie pour l'instant ») :
    le rayon reste ecrit plus bas, il revient en remettant ['Blood','blood'] dans TABS. */
-const TABS=[['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Charms','tick']];
+/* S1431 - note 272 (5) : l'onglet INVENTORY, a part, en cases de RPG : ce que j'ai (consommables, possedes). */
+const TABS=[['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Charms','tick'],['Inventory','inv']];
 /* S1418 - note 239 (3), MONNAIE.md 10 - LE RAYON BLOOD : les quatre rayons du Sang et
    leurs prix. Le Sang se COMPTE, rien ne se vend tant que Steam n'est pas la : la
    vitrine se lit, aucun bouton n'achete. [nom, icone, prix, ce que c'est]. */
@@ -2602,7 +2642,7 @@ TABS.forEach(([label,key],i)=>{
   const b=document.createElement('button');
   b.className='tab'+(i===0?' on':''); b.dataset.key=key;
   /* S1408 - IC-1 : chaque rayon porte son icone */
-  const ICO_RAYON={chars:'perso',dice:'des',curs:'curseur',backs:'dos',tick:'pot',blood:'fiole'};
+  const ICO_RAYON={chars:'perso',dice:'des',curs:'curseur',backs:'dos',tick:'pot',blood:'fiole',inv:'coffre'};
   b.innerHTML='<svg class="besace-sil tab-ic" viewBox="0 0 48 48" aria-hidden="true">'+ICONES[ICO_RAYON[key]]+'</svg>'+
     label+'<i></i><span class="rule"></span>';
   b.querySelector('.rule').style.backgroundImage='url('+A.bar+')';
@@ -2842,6 +2882,24 @@ function fillGrid(key){
         grid.appendChild(c);
       });
     }
+  } else if(key==='inv'){
+    /* S1431 - note 272 (5) : des CASES (grille de RPG), une icone, une quantite ; l'equipe
+       marque. Une rangee de cases vides prolonge chaque section : un sac, pas une liste. */
+    const inv=inventaire();
+    const section=(titre,objets,vide)=>{
+      const h=document.createElement('div'); h.className='rayon-sect'; h.textContent=titre; grid.appendChild(h);
+      objets.forEach(o=>{
+        const c=document.createElement('div');
+        c.className='slot'+(o.eq?' eq':''); c.title=o.nom; c.tabIndex=0;
+        c.innerHTML=o.html+(o.q!==undefined?'<b class="q">'+o.q+'</b>':'')+(o.eq?'<i class="eqm">E</i>':'');
+        if(o.ouvre){ c.addEventListener('click',o.ouvre); c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();o.ouvre();}}); }
+        grid.appendChild(c);
+      });
+      const reste=(10-objets.length%10)%10+(objets.length===0?10:0);
+      for(let k=0;k<reste;k++){ const c=document.createElement('div'); c.className='slot vide'; if(objets.length===0&&k===0) c.title=vide; grid.appendChild(c); }
+    };
+    section('Consumables',inv.conso,'Nothing in your bag — essences drop in games, charms and invitations are in CHARMS.');
+    section('Owned',inv.possede,'Nothing owned yet.');
   } else if(key==='blood'){
     /* S1418 - note 239 (3) : le rayon BLOOD, vitrine sans achat. */
     BLOOD.forEach(([nom,ico,prix],k)=>{
@@ -4795,6 +4853,42 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     });
     br.appendChild(cour);
     sceau.appendChild(br);
+    degageLaCouronne(cour);
+  }
+
+  /* S1431 - note 272 (3) : « le mur COUPE les images » (07_mur_image_coupee.png) -
+     le coeur (portrait, pacte, offrandes) est centre ; plus il porte de lignes, plus
+     il monte sur les paliers. On mesure (offset*, insensibles aux animations) et on
+     le fait d'abord DESCENDRE dans la place libre (jusqu'au bas de l'ecran), puis on
+     le reduit, jusqu'a ne plus toucher aucune carte ; si ca ne suffit pas, les cartes
+     passent DEVANT : une image de palier n'est jamais coupee. */
+  function degageLaCouronne(cour) {
+    var W = cour.clientWidth, H = cour.clientHeight;
+    var coeur = cour.querySelector('.coeur');
+    if (!coeur || W === 0 || H === 0) { return; }
+    var cw = coeur.offsetWidth, ch = coeur.offsetHeight, marge = 4;
+    var bas = Math.max(0, window.innerHeight - cour.getBoundingClientRect().bottom - 8);
+    var cartes = [].slice.call(cour.querySelectorAll('.rg')).map(function (r) {
+      var x = parseFloat(r.style.left) / 100 * W, y = parseFloat(r.style.top) / 100 * H;
+      return { el: r, g: x - r.offsetWidth / 2, d: x + r.offsetWidth / 2, h: y - r.offsetHeight / 2, b: y + r.offsetHeight / 2 };
+    });
+    function touche(c, s, dy) {
+      var g = W / 2 - cw * s / 2 - marge, d = W / 2 + cw * s / 2 + marge;
+      var h = H / 2 + dy - ch * s / 2 - marge, b = H / 2 + dy + ch * s / 2 + marge;
+      return c.g < d && c.d > g && c.h < b && c.b > h;
+    }
+    function libre(s, dy) { return !cartes.some(function (c) { return touche(c, s, dy); }); }
+    var s = 1, dy = 0, trouve = libre(1, 0);
+    for (; !trouve && s > 0.6; s -= 0.05) {
+      var lim = H / 2 + bas - ch * s / 2;
+      for (dy = 0; dy <= lim && !(trouve = libre(s, dy)); dy += 2) { /* on descend */ }
+      if (trouve) { break; }
+    }
+    if (!trouve) { dy = 0; }
+    if (s < 1 || dy > 0) {
+      coeur.style.transform = 'translate(-50%,-50%) translateY(' + dy + 'px) scale(' + s.toFixed(2) + ')';
+    }
+    cartes.forEach(function (c) { if (touche(c, s, dy)) { c.el.style.zIndex = '3'; } });
   }
 
   /* Les peaux données d'office (le registre `offerte` : bones et pierre
