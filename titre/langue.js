@@ -178,6 +178,10 @@
   };
   /* Libellés qui portent un nombre : motif -> gabarit ($1…). */
   var FR_EN_MOTIFS = [
+    /* S1427 - vu en partie (l'Arene) : la consultation d'une tuile, `view.ts` du moteur
+       (`${choice.reason} — choisissez une option`). */
+    [/^(.+) — entrée — choisissez une option$/, '$1 — on entering — choose an option'],
+    [/^(.+) — choisissez une option$/, '$1 — choose an option'],
     [/^RUN (\d+) · TOUR DE DONJON (\d+)$/, 'RUN $1 · DUNGEON TURN $2'],
     [/^(\d+) POINTS?$/, '$1 POINTS'],
     [/^(\d+) emplacement\(s\) sur cette fiche$/, '$1 slot(s) on this sheet'],

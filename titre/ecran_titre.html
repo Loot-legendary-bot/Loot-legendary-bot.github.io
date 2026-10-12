@@ -180,10 +180,13 @@
   .wipes.on{opacity:1;animation:paint .42s steps(9,jump-none) 2 alternate}
   @keyframes paint{from{background-position-x:0%}to{background-position-x:100%}}
 
-  .back{position:absolute;left:3.6cqw;top:11cqh;display:inline-flex;align-items:center;
-    gap:.55cqw;font:400 1.45cqh/1 ui-monospace,monospace;letter-spacing:.24em;
-    text-transform:uppercase;color:#6b6459;cursor:pointer;background:none;border:0;padding:0}
-  .back:hover,.back:focus-visible{color:var(--bone);outline:none}
+  /* S1427 - note 256 (2) : « je ne peux pas quitter » - le retour faisait 75 x 17 px, gris sur
+     noir. Meme place, une PLAQUE lisible : BACK TO MENU partout. */
+  .back{position:absolute;left:3.6cqw;top:10.4cqh;display:inline-flex;align-items:center;z-index:30;
+    gap:.7cqw;font:700 1.85cqh/1 ui-monospace,monospace;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--bone);cursor:pointer;background:rgba(10,8,7,.72);
+    border:.18cqh solid rgba(233,228,216,.38);padding:1cqh 1.2cqw}
+  .back:hover,.back:focus-visible{color:#fff;border-color:var(--blood);outline:none}
   .back span:first-child{color:var(--blood);font-size:1.7cqh}
   .eyebrow{position:absolute;left:3.6cqw;top:18.6cqh;font:400 1.95cqh/1 ui-monospace,monospace;
     letter-spacing:.4em;text-transform:uppercase;color:#6b6459}
@@ -950,7 +953,7 @@
   </section>
 
   <section class="view" id="v-pve">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <div class="eyebrow">Choose your run</div>
     <h2 class="htitle">Play</h2>
     <div class="hsep sepimg"></div>
@@ -958,7 +961,7 @@
   </section>
 
   <section class="view" id="v-league">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <div class="eyebrow">Contracts</div>
     <!-- (4) note 138 : *« le nom est tranche par Croze »* — BOUNTY WALL.
          Le bouton du HOME et le titre de la page qu'il ouvre doivent dire
@@ -972,7 +975,7 @@
   </section>
 
   <section class="view" id="v-match">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <div class="eyebrow" id="mkick">PvE</div>
     <h2 class="htitle" id="mtitle">Bot match</h2>
     <div class="hsep sepimg"></div>
@@ -986,7 +989,7 @@
   </section>
 
   <section class="view" id="v-collection">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <!-- (5) note 138, verbatim : *« VAULT doit etre mis en bold »*. Le poids
          etait DEJA 900 - mesure a l'ecran, comme ses voisins. Ce qui le faisait
          lire plus maigre est `lower` : elle otait `text-transform:uppercase`,
@@ -1002,21 +1005,21 @@
 
   <!-- S1411 - CX-1 (note 229) : LE CODEX, peint par codex.js -->
   <section class="view" id="v-codex">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <h2 class="htitle">Codex</h2>
     <div class="hsep sepimg"></div>
     <div class="cx" id="codex"></div>
   </section>
 
   <section class="view" id="v-rules">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <h2 class="htitle">Rules</h2>
     <div class="hsep sepimg"></div>
     <div class="regles" id="regles"></div>
   </section>
 
   <section class="view" id="v-board">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <h2 class="htitle">Boardgame</h2>
     <div class="hsep sepimg"></div>
     <div class="bg1" id="bg1">
@@ -1040,14 +1043,14 @@
   </section>
 
   <section class="view" id="v-profil">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <h2 class="htitle">Profile</h2>
     <div class="hsep sepimg"></div>
     <div class="profil" id="profil"></div>
   </section>
 
   <section class="view" id="v-stub">
-    <button class="back" data-back><span>&#9664;</span><span>Back</span></button>
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <div class="eyebrow">Placeholder</div>
     <h2 class="htitle" id="stubtitle">Options</h2>
     <div class="hsep sepimg"></div>
@@ -1344,7 +1347,10 @@ const DICE=[
   /* S1418 - note 240 (1) : les deux forges du 10/10 (forge 72cdf50), recompenses du mur
      (BOUNTY_WALL 19) : Arcane 6 et Donjon 6. */
   ["Mauve crystal dice","cristal_mauve",0],
-  ["Orange pearl dice","nacre_orange_argent",0]];
+  ["Orange pearl dice","nacre_orange_argent",0],
+  /* S1427 - note 259 : la peau `sceau` (forge 747b7ee, fusionnee 09111b6) - Dungeon 18
+     du mur, « The Seal dice ». Sans cette ligne le mur disait « Arriving ». */
+  ["The Seal dice","sceau",0]];
 /* MONNAIE.md 3 : une peau de des se paie 640 dents choisie, 480 en ticket
    random. Chiffres de PROPOSITION du classeur - Croze les corrige d'un mot,
    et c'est pour ca qu'ils sont ici, nommes, plutot que fondus dans
@@ -1852,9 +1858,12 @@ function peinsLeDev(box){
   var fin=function(msg){ if(typeof paintHUD==='function') paintHUD(true); var m=document.getElementById('dev-msg'); if(m) m.textContent=msg; };
   [['RESET OFFERINGS','Every essence you own and every offering burning goes back to zero.',function(){
       P.modifie(function(p){ p.offrandes=[]; if(p.mur&&typeof p.mur==='object') p.mur.offertes=[]; }); return 'Offerings reset.'; }],
-   ['WIPE','Teeth back to 2,048, DPT ranks back to Bronze, essences and luck gone. Everything unlocked stays.',function(){
+   /* S1427 - note 257 (3), MONNAIE 14 : dents a 300, grades a Bronze, essences et chance a zero,
+      les Dailies du jour a zero tentative ; tout le debloque reste. */
+   ['WIPE','Teeth back to 300, DPT ranks back to Bronze, essences and luck gone, today\u2019s Daily tries cleared. Everything unlocked stays.',function(){
       P.modifie(function(p){
-        p.dents=2048; p.offrandes=[]; p.chance=null; p.rang='Bronze III';
+        p.dents=300; p.offrandes=[]; p.chance=null; p.rang='Bronze III';
+        if(p.options&&typeof p.options==='object') delete p.options.dailyJoue;
         if(p.mur&&typeof p.mur==='object') p.mur.offertes=[];
         if(p.compteurs&&typeof p.compteurs==='object') p.compteurs.rang_dpl=0;
         if(p.branches&&typeof p.branches==='object') Object.keys(p.branches).forEach(function(k){ if(p.branches[k]&&typeof p.branches[k]==='object') p.branches[k].rang_dpl=0; });
@@ -2074,7 +2083,23 @@ const REGLES=[
   ['cheat','Cheat sheet','rules · legend · patch note','/art/regles/cheat_sheet.webp'],
   ['classes','The 20 classes','class · strong for · quick read','/art/regles/recap_classes.webp'],
   ['timer','Dungeon timer','the spiral · scoring','/art/regles/dungeon_timer.webp'],
-  ['patch','Patch notes','what changed, version by version',null]];
+  ['patch','Patch notes','what changed, version by version',null],
+  /* S1427 - note 257 (4) : le mode d'emploi du jeu en ligne, une page, pour les amis (OU_ON_EN_EST 12/10 (3)). */
+  ['online','How to play online','friends · a room · a code',null]];
+const COMMENT_EN_LIGNE=[
+  ['The host (on the PC with JOUER.bat, or on the site)',[
+    'Open the game. At the door, click <b>Create account</b>: a name, a password \u2014 and keep your recovery key somewhere safe (it is the only way back into your account).',
+    'Click <b>DIVE</b> \u2192 <b>Vs bots</b> \u2192 <b>Play with friends</b> \u2192 choose the seats and the mode \u2192 <b>Create</b>. A six-letter code appears.',
+    'Send that code to your friends.',
+    'When their names are in the room and they are <b>Ready</b>, click <b>Start</b>. You all play the same dungeon.']],
+  ['A friend (in a browser, nothing to install)',[
+    'Open <b>loot-legendary-bot.github.io</b> in Chrome or Edge and type the door password (the host gives it to you).',
+    'Click <b>Create account</b>: a name, a password, keep your recovery key.',
+    'Click <b>DIVE</b> \u2192 <b>Vs bots</b> \u2192 <b>Play with friends</b> \u2192 <b>Join with a code</b> \u2192 type the code \u2192 <b>Join</b> \u2192 <b>Ready</b>.',
+    'Wait for the host to start. If your connection drops, open the page again: you are back where you were.']],
+  ['If it says \u201cNo answer from \u2026\u201d',[
+    'The message names the server. \u201cthis PC (localhost)\u201d: OPTIONS \u2192 Ctrl+Shift+D \u2192 <b>SERVER: FLY</b>. \u201clootlegendary-api.fly.dev\u201d: check your connection, or play offline.']]];
+window.LLRegles={ ouvre:function(k){ reglesOuverte=k||'cheat'; go('rules'); } };
 const PATCH_NOTES=[
   ['v0.999 — the 20 character sheets (09/10/2026)',[
     'RULES — Start: reroll your starting Tile if it has an effect or another player is on it. · Combat: removed "out-of-combat Consumable dmg lets you use your Reaction". · Run 2: dead players may reroll their Quest(s) only (no Character reroll). · Final Duel: Quests are removed. · Legend: + School value, + Splash/AoE definition. Good to know: + TP, + every Mob has STR/DEX/WIS/AGI. · Timer: + Portal Spawn / Damages labels. Character template made generic.',
@@ -2123,6 +2148,10 @@ function peinsLesRegles(){
     const n=document.createElement('div');
     n.className='notes';
     let h='<h3>Patch notes</h3>';
+    if(r[0]==='online'){
+      h='<h3>How to play online</h3>'+COMMENT_EN_LIGNE.map(([tete,ls])=>'<h4>'+tete+'</h4><ol>'+ls.map(l=>'<li>'+l+'</li>').join('')+'</ol>').join('');
+      n.innerHTML=h; page.appendChild(n); box.appendChild(page); return;
+    }
     PATCH_NOTES.forEach(([v,ls])=>{
       h+='<h4>'+v+'</h4>'+ls.map(l=>{
         const m=/^([A-Z][A-Z ()]+) — (.*)$/.exec(l); const tete=m?m[1]:''; const corps=m?m[2]:l;
@@ -2211,7 +2240,7 @@ fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json(
    ivoire depuis la 138 ①. */
 const DOORS=[
   ["Warm-up","Vs bots","Free-for-all or 2v2 against bots, alone or with a friend. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
-  ["One a day","Today\u2019s Dungeon","One seed for everyone, one run a day \u2014 the whole table walks the same floor.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
+  ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
   ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked','Bronze III']];
 const doors=document.getElementById('doors');
 DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
@@ -2408,7 +2437,7 @@ function paintMatch(ctx){
        : '');
   if(ctx==='daily' && window.LLTickets){
     const T=window.LLTickets, sc=T.duJour(), p=window.LLProfil.lis();
-    const poche=T.enPoche(p).daily, joue=p.options && p.options.dailyJoue===sc.seed;
+    const poche=T.enPoche(p).daily;
     /* S1414 - DD-2 bis : le DEFI se lit ICI, a l'entree (l'invitation est neutre). */
     document.getElementById('mline').innerHTML=
       '<b>Today\u2019s challenge: '+sc.nom+'</b><br>'
@@ -2417,9 +2446,9 @@ function paintMatch(ctx){
       +'Condition: '+sc.conditions+(sc.enAttente?' (not in the game yet \u2014 today plays without it)':'')+'<br>'
       +'Objective: '+sc.objectif+'<br>'
       +'Reward: \u00d72 the teeth \u00b7 +'+sc.prime+' if the objective is met<br>'
-      +'One run \u00b7 seed '+sc.seed+' \u00b7 '+(poche>0?'you have '+poche+' invitation'+(poche>1?'s':''):'no invitation in your pocket');
-    document.getElementById('golaunch').textContent = joue ? 'Come back tomorrow'
-      : poche>0 ? 'Enter' : 'No invitation';
+      +'Every try burns one invitation \u00b7 your best try counts \u00b7 seed '+sc.seed+' \u00b7 '+(poche>0?'you have '+poche+' invitation'+(poche>1?'s':''):'no invitation in your pocket');
+    /* S1427 - note 257 (1), DAILY_DUNGEON 10 : le Daily se rejoue sans limite, une invitation par tentative. */
+    document.getElementById('golaunch').textContent = poche>0 ? 'Burn one invitation' : 'No invitation';
   }
   const msieges=document.getElementById('msieges');
   msieges.innerHTML='';
@@ -2526,6 +2555,21 @@ hero.addEventListener('click',e=>{
   if(!e.target.closest('.shot')||!window.LLDeuxFiches||!ALPHA[heroIdx])return;
   window.LLDeuxFiches.ouvre(ALPHA.map(c=>idDuPerso(c.name)),heroIdx);
 });
+/* S1427 - VL-2 (note 254 (2), BOUNTY_WALL 10 verdict 1) : un personnage du mur ne s'achete
+   au Vault qu'une fois son palier ATTEINT (l'achat vient apres l'exploit). Rend null si le
+   perso n'est pas au mur, ou si son noeud est pret / a toi ; sinon la condition en clair. */
+function verrouDuMur(persoId){
+  const BW=window.LLBountyWall, P=window.LLProfil;
+  if(!BW||!P||typeof BW.etat!=='function') return null;
+  let ofs=[]; try{ ofs=OFFERTES; }catch(e){}
+  const troncs=BW.etat(P.lis(),ofs);
+  for(const tr of troncs) for(const g of tr.rangs) for(const x of g.noeuds){
+    if(x.p!==persoId) continue;
+    if(x.s!=='lock') return null;
+    return g.l+' \u2014 '+fmt(Math.min(g.n,x.a))+' / '+fmt(x.a)+' ('+tr.t+')';
+  }
+  return null;
+}
 function showHero(i){
   heroIdx=i;
   /* la tuile du ticket vit dans le meme roster : on selectionne par le
@@ -2533,7 +2577,8 @@ function showHero(i){
      ment des qu'une tuile s'ajoute devant. */
   [...roster.children].forEach(t=>t.classList.toggle('sel',t.dataset.i===String(i)));
   const c=ALPHA[i], owned=c.owned;
-  const can=PROFILE.gold>=UNLOCK_PRICE;
+  const verrou=owned?null:verrouDuMur(idDuPerso(c.name));
+  const can=PROFILE.gold>=UNLOCK_PRICE && verrou===null;
   hero.innerHTML=
     '<div class="shot'+(owned?'':' off')+'">'+banner(c.n)+
       (owned?'':'<div class="hatch"></div>')+'</div>'+
@@ -2543,13 +2588,18 @@ function showHero(i){
     '<p>'+c.read+'</p>'+
     '<div class="foot2">'+(owned
       ? '<div class="own2">In your vault</div>'
+      : verrou!==null
+      ? '<button class="cta" id="hbtn" disabled>Locked \u2014 '+verrou+'</button>'+
+        '<p class="dnote"><a href="#" id="hmur">Open it on the Bounty Wall \u2192</a></p>'
       : '<button class="cta" id="hbtn"'+(can?'':' disabled')+'>Unlock \u00b7 '+
         fmt(PRIX_PERSO.choisi)+' teeth</button>'+
         (can?'':'<p class="dnote warn">Not enough teeth. You are '+
           fmt(PRIX_PERSO.choisi-PROFILE.gold)+' short.</p>'))+'</div>';
+  const lien=document.getElementById('hmur');
+  if(lien) lien.addEventListener('click',e=>{ e.preventDefault(); const m=document.getElementById('bboard'); if(m) m.click(); });
   const b=document.getElementById('hbtn');
   if(b&&!b.disabled) b.addEventListener('click',()=>{
-    if(PROFILE.gold<UNLOCK_PRICE)return;
+    if(PROFILE.gold<UNLOCK_PRICE||verrouDuMur(idDuPerso(ALPHA[i].name))!==null)return;
     PROFILE.gold-=UNLOCK_PRICE; ALPHA[i].owned=true; gardeLesPossessions();
     paintHUD(true); pinned=i; buildRoster(); refreshTabs(); showHero(i);
   });
@@ -3202,11 +3252,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       var T = window.LLTickets, P = window.LLProfil;
       if (!T || !P) { refuse("The Daily can't be read \u2014 nothing was launched."); return; }
       var sc = T.duJour(), p = P.lis(), poche = T.enPoche(p).daily;
-      if (p.options && p.options.dailyJoue === sc.seed) {
-        bouton.textContent = 'Come back tomorrow';
-        refuse('One Daily a day: today\u2019s run is played. Come back tomorrow.');
-        return;
-      }
+      /* S1427 - note 257 (1) : plus de « Come back tomorrow » — chaque tentative brule une invitation. */
       /* S1414 - DD-2 bis (note 235 (5), DAILY_DUNGEON 0 (2)) : il faut une
          INVITATION pour entrer ; Start ne paie plus en dents. Sans invitation,
          l'entree est REFUSEE, en clair, sur la ligne du defi. */

@@ -1,0 +1,49 @@
+{
+ "famille": "pierre",
+ "couleurs": {
+  "corps": [
+   "#151516"
+  ],
+  "veines": null,
+  "inclusions": "#2c2c2d",
+  "pointes": null,
+  "chiffres": "#e6dfcf"
+ },
+ "fini": {
+  "rugosite": 0.78,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 0.6,
+  "contraste": 0.35,
+  "densite": 0.0,
+  "densite_paillettes": 0.3,
+  "rugosite_inclusions": 0.7
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "sceau": {
+  "couleur": "#8a1a14",
+  "rayon": 0.76,
+  "trait": 0.05,
+  "marge": 1.2,
+  "profondeur": 0.03,
+  "rugosite": 0.55,
+  "metallique": 0.0
+ },
+ "graine": 6,
+ "notes": "the Seal (Dungeon 18) : pierre noire mate, chiffres blanc casse, le sceau du donjon grave autour du chiffre, sang de boeuf dans le creux. Aucune photo : couleurs choisies, pas mesurees."
+}

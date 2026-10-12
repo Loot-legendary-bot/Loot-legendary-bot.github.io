@@ -179,6 +179,8 @@
     var err = el('p', 'err', ''); b.appendChild(err);
     var rf = el('div', 'row'); b.appendChild(rf);
     bouton(rf, 'Back', '', ferme);
+    /* S1427 - note 257 (4) : le mode d'emploi, une page de RULES */
+    if (window.LLRegles) { bouton(rf, 'How to play online', '', function () { ferme(); window.LLRegles.ouvre('online'); }); }
   }
 
   /* ② le salon : le code, les sièges, PRÊT, et LANCER pour l'hôte */

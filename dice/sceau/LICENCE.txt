@@ -1,0 +1,35 @@
+sceau — licences et provenance
+==============================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+SCEAU       Le sceau grave sur chaque face est la figure du jeu lui-meme : un
+            cercle et les deux triangles d'un hexagramme, pointe en haut, tels
+            que l'ecran les trace pour le Bounty Wall
+            (packages/debug-ui/public/art/titre/ui/sceau_relief.svg). C'est une
+            figure geometrique, construite par forge_blender.py
+            (_maillage_du_sceau) : aucune image n'est copiee ni tracee.
+
+PHOTO       Aucune. Cette peau n'a pas de photographie de reference : la pierre
+            noire, le blanc casse des chiffres et le sang de boeuf du sceau sont
+            des albedos CHOISIS sur la consigne du CLASSEUR (11/10/2026), pas
+            mesures. Le rapport n'imprime donc aucune table de couleur.
+
+NOM         « the Seal dice », la recompense Dungeon 18 du Bounty Wall. Le nom
+            de la peau dit la chose, `sceau` ; le nom que liront les joueurs est
+            celui du mur.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

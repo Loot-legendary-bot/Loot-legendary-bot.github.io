@@ -17,7 +17,7 @@
  * il ne connaît ni la clé ni le schéma.
  *
  * Les valeurs de départ ne sont pas inventées : la bourse de départ est
- * `docs/MONNAIE.md §2` (2 048 dents) ; le Sang s'ACHÈTE (§4, reco A) : 0 ;
+ * `docs/MONNAIE.md §14` (300 dents — Croze, 12/10 ; S1427) ; le Sang s'ACHÈTE (§4, reco A) : 0 ;
  * le pseudo et le rang sont ceux que le titre affichait en dur (aucune règle de
  * rang n'existe encore — une ligne de file, pas une invention).
  */
@@ -37,7 +37,7 @@
     return {
       schema_version: SCHEMA,
       pseudo: 'Croze',
-      dents: 2048,
+      dents: 300,
       sang: 0,
       rang: 'Bronze III',
       personnages: {},
