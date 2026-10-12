@@ -160,6 +160,14 @@
   #bboard .bb-sceau img{position:absolute;width:5.6cqh;height:5.6cqh;border-radius:50%;object-fit:cover;
     transform:translate(-50%,-50%);box-shadow:0 0 0 .15cqh rgba(0,0,0,.8)}
   #bboard .bb-sceau img.ferme{filter:grayscale(1) brightness(.45)}
+  /* note 276 - ferme jusqu'a la premiere victoire */
+  #bboard.ferme-victoire{cursor:not-allowed}
+  #bboard.ferme-victoire .bb-sceau img,#bboard.ferme-victoire .bb-titre{filter:grayscale(1) brightness(.42)}
+  #bboard.ferme-victoire .bb-cadenas{position:absolute;left:50%;top:50%;width:7cqh;height:7cqh;transform:translate(-50%,-50%);z-index:2}
+  #bboard.ferme-victoire .bb-cadenas .lockmark{position:absolute;inset:0}
+  #bboard.ferme-victoire .bb-sous{color:#e9e4d8;opacity:1}
+  #bboard .bb-sous.secoue{animation:bb-secoue .45s ease}
+  @keyframes bb-secoue{0%,100%{transform:translateX(0)}20%{transform:translateX(-.6cqh)}40%{transform:translateX(.6cqh)}60%{transform:translateX(-.4cqh)}80%{transform:translateX(.4cqh)}}
   #bboard .bb-sceau img.donjon{width:6.4cqh;height:6.4cqh;filter:grayscale(1)}
   #bboard .bb-sous{font:400 1.25cqh/1.2 "Courier Prime",ui-monospace,monospace;letter-spacing:.04em;text-transform:none;color:#b9b0a0}
   /* (d) le grade : l'icone seule, collee au pseudo */
@@ -575,6 +583,25 @@
   .grid.inv{grid-template-columns:repeat(12,1fr);gap:.7cqw}
   .grid.inv .inv-ecole{align-self:center;justify-self:end;font:900 1.35cqh/1.1 "Arial Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:.06em;text-align:right}
   .grid.inv .slot.zero{opacity:.35}
+  /* note 277 - le BETA VERSION GIFT PACK : l'icone qui appelle, puis la revelation */
+  .grid.inv .slot .pack-icone svg{color:#d9b25a}
+  .pack-voile{position:absolute;inset:0;z-index:80;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center}
+  .pack-boite{width:78%;text-align:center;color:#e9e4d8}
+  .pack-boite h2{font:900 4.2cqh/1 "Arial Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#d9b25a;margin:0 0 1cqh}
+  .pack-dit{font-size:1.7cqh;opacity:.8;margin:0 0 3cqh}
+  .pack-lots{display:grid;grid-template-columns:repeat(6,1fr);gap:1.4cqw;margin-bottom:3cqh;cursor:pointer}
+  .pack-lot{position:relative;aspect-ratio:3/4.4;perspective:60cqh}
+  .pack-lot .pack-dos,.pack-lot .pack-face{position:absolute;inset:0;backface-visibility:hidden;border:2px solid #4a4237;border-radius:.8cqh;transition:transform .55s ease}
+  .pack-lot .pack-dos{background:#14110d url(/art/dos/lick_floor.webp) center/cover}
+  .pack-lot .pack-face{transform:rotateY(180deg);background:#16130f;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1.2cqh .6cqw;box-sizing:border-box}
+  .pack-lot.revele .pack-dos{transform:rotateY(-180deg)}
+  .pack-lot.revele .pack-face{transform:rotateY(0);border-color:#d9b25a;box-shadow:0 0 2.4cqh rgba(217,178,90,.35)}
+  .pack-face i{font:700 1.3cqh/1 sans-serif;text-transform:uppercase;letter-spacing:.1em;color:#d9b25a;font-style:normal}
+  .pack-face .pack-img{width:100%;flex:1;margin:1cqh 0;background:center/contain no-repeat}
+  .pack-face b{font:900 1.7cqh/1.15 "Arial Black",Impact,sans-serif;text-transform:uppercase}
+  .pack-face span{font-size:1.25cqh;opacity:.75;margin-top:.6cqh}
+  .pack-ok{font:900 2cqh/1 "Arial Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:.08em;padding:1.4cqh 3cqw;background:#a3231d;color:#efe6d2;border:0;cursor:pointer}
+  .pack-ok:disabled{opacity:.35;cursor:default}
   .grid.inv .slot{position:relative;aspect-ratio:1;box-sizing:border-box;padding:.9cqh;cursor:pointer;
     background:radial-gradient(circle at 50% 40%,#211e19,#0b0a08 75%);border:.18cqh solid #3b382f;
     box-shadow:inset 0 0 1.4cqh rgba(0,0,0,.95),0 .2cqh 0 rgba(255,255,255,.04)}
@@ -963,7 +990,7 @@
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 
-<p class="hint">click a menu entry &middot; esc goes back</p>
+<p class="hint">click a menu entry &middot; esc goes back &middot; backgrounds cycle on their own</p>
 
 <div class="frame"><div class="screen" id="screen">
   <div class="bgw" id="bgw"></div>
@@ -1613,6 +1640,74 @@ function toutDeverrouiller(){
   })));
   return achetes;
 }
+/* note 277, MONNAIE 26 - LE BETA VERSION GIFT PACK remplace « Unlock everything » de la besace.
+   Un par compte de la beta (le profil le garde : `betaPack.ouvert`), jamais achete, jamais rejoue.
+   A l'ouverture : 3 personnages + 1 peau de des + 1 dos + 1 curseur, tires au hasard, distincts,
+   hors deja possedes et hors EXCLUSIFS (les dos de saison, The Seal). Chaque lot sort OWNED (paye :
+   la possession) ET UNLOCKED (l'exploit du mur marque fait : `mur.exploitsFaits`, la cle du noeud) -
+   il est equipable aussitot et son noeud du mur se montre recolte. */
+function packBetaOuvert(){ try{ const b=window.LLProfil.lis().betaPack; return !!(b&&b.ouvert); }catch(e){ return true; } }
+function tireLePackBeta(){
+  const pioche=(liste,n)=>{ const l=liste.slice(), r=[]; while(r.length<n&&l.length>0){ r.push(l.splice(Math.floor(Math.random()*l.length),1)[0]); } return r; };
+  const persos=pioche(CHARS.filter(c=>!c.owned),3).map(c=>({k:'perso',id:idDuPerso(c.name),nom:c.name,
+    img:'/art/personnages/all_ico_webp_CORRECTED_ALL/200px/'+idDuPerso(c.name)+'_200px.webp'}));
+  const des=pioche(DICE.filter(d=>!d[2]&&PEAUX_HORS_VENTE.indexOf(d[1])<0),1).map(d=>({k:'de',id:d[1],nom:d[0],img:IMG_PEAU(d[1])[0]}));
+  const dos=pioche(BACKS.filter(b=>!b[2]&&b[1]!=='lick_floor'&&!DOS_SAISON.has(b[1])),1).map(b=>({k:'dos',id:b[1],nom:b[0]+' card back',img:'/art/dos/'+b[1]+'.webp'}));
+  const curs=pioche(CURSORS.filter(c=>!c[2]),1).map(c=>({k:'curseur',id:c[1],nom:c[0]+' cursor',img:IMG_CURSEUR(c[1])}));
+  return persos.concat(des,dos,curs);
+}
+function ouvreLePackBeta(){
+  if(packBetaOuvert()) return null;
+  const lots=tireLePackBeta();
+  /* OWNED : les memes ecritures qu'un achat au Vault */
+  lots.forEach(l=>{
+    if(l.k==='perso'){ const c=CHARS.find(x=>idDuPerso(x.name)===l.id); if(c) c.owned=true; }
+    else if(l.k==='de'){ const d=DICE.find(x=>x[1]===l.id); if(d) d[2]=1; }
+    else if(l.k==='dos'){ const b=BACKS.find(x=>x[1]===l.id); if(b) b[2]=1; }
+    else { const c=CURSORS.find(x=>x[1]===l.id); if(c) c[2]=1; }
+  });
+  gardeLesPossessions(); gardeLesDos(); gardeLesCurseurs();
+  /* UNLOCKED : l'exploit de chaque noeud du mur qui donne ce lot, marque fait */
+  const BW=window.LLBountyWall, cles=[];
+  if(BW) BW.TRONCS.forEach(t=>t.rangs.forEach((g,gi)=>g.noeuds.forEach(x=>{
+    if(lots.some(l=>(l.k==='perso'&&x.p===l.id)||(l.k==='de'&&x.d===l.id)||(l.k==='dos'&&x.k===l.id)||(l.k==='curseur'&&x.u===l.id))) cles.push(t.id+':'+gi);
+  })));
+  window.LLProfil.modifie(p=>{
+    if(typeof p.mur!=='object'||p.mur===null) p.mur={};
+    if(!Array.isArray(p.mur.exploitsFaits)) p.mur.exploitsFaits=[];
+    cles.forEach(c=>{ if(p.mur.exploitsFaits.indexOf(c)<0) p.mur.exploitsFaits.push(c); });
+    p.betaPack={ouvert:true,lots:lots.map(l=>({k:l.k,id:l.id}))};
+  });
+  return lots;
+}
+const NOM_DU_LOT={perso:'Character',de:'Dice set',dos:'Card back',curseur:'Cursor'};
+/* L'ecran de revelation : les six lots, un par un, nommes, avec leur visuel. */
+function reveleLePackBeta(lots){
+  const v=document.createElement('div'); v.className='pack-voile';
+  v.innerHTML='<div class="pack-boite"><h2>Beta Version Gift Pack</h2><p class="pack-dit">Six gifts — each one is yours, unlocked and ready to equip.</p>'+
+    '<div class="pack-lots"></div><button type="button" class="pack-ok" disabled>Take them</button></div>';
+  const zone=v.querySelector('.pack-lots'), ok=v.querySelector('.pack-ok');
+  lots.forEach(l=>{
+    const c=document.createElement('div'); c.className='pack-lot pack-'+l.k;
+    c.innerHTML='<div class="pack-dos"></div><div class="pack-face"><i>'+NOM_DU_LOT[l.k]+'</i>'+
+      '<div class="pack-img" style="background-image:url('+l.img+')"></div><b>'+l.nom+'</b><span>Unlocked · yours</span></div>';
+    zone.appendChild(c);
+  });
+  if(lots.length===0) zone.innerHTML='<p class="pack-dit">You already own everything the pack could give.</p>';
+  document.getElementById('screen').appendChild(v);
+  let i=0;
+  const suivant=()=>{
+    const c=zone.children[i];
+    if(!c||!c.classList.contains('pack-lot')){ ok.disabled=false; return; }
+    c.classList.add('revele'); i++; setTimeout(suivant,700);
+  };
+  setTimeout(suivant,500);
+  /* un clic sur la boite : tout de suite le lot suivant */
+  v.querySelector('.pack-lots').addEventListener('click',()=>{ const c=zone.children[i]; if(c&&c.classList.contains('pack-lot')){ c.classList.add('revele'); i++; } if(i>=lots.length) ok.disabled=false; });
+  ok.addEventListener('click',()=>{ v.remove(); paintHUD(); fillGrid(tab); refreshTabs(); });
+}
+const ICONE_PACK='<path d="M8 20h32v22H8z"/><path d="M5 13h38v8H5z"/><path class="trou" d="M22 13h4v29h-4z"/>'+
+  '<path class="trait" d="M24 13c-3-6-11-8-11-3s8 3 11 3c3 0 11 2 11-3s-8-3-11 3"/>';
 /* L'image d'un curseur : son PNG, et son etat de survol au survol. Le point
    chaud ne sert pas a l'AFFICHAGE (il sert au pointeur reel) : il vit au
    registre, et le rayon ne le recopie pas. */
@@ -1832,10 +1927,17 @@ const CARROUSEL = Array.isArray(PANNEAU.carrousel) && PANNEAU.carrousel.length >
   ? PANNEAU.carrousel : BGS;
 /* C-T4 bis — une DIAPO par image : la copie floutee derriere, l'image
    entiere devant. La classe `on` va sur la diapo (le fondu de `.bgw .diapo`). */
-/* note 275 (8) - LE CARROUSEL EST RETIRE (obsolete, reco du classeur prise) : le HOME vit
-   sur la PIERRE (da_fonds.css, DA-2), plus aucune diapo ni minuterie. `CARROUSEL` reste
-   lu ici pour qu'un veto d'un mot le ressuscite en une ligne. */
-bgw.classList.add('pierre-seule');
+/* note 278 (S1434) - LE CARROUSEL REVIENT (le retrait 275 (8) etait une mauvaise lecture :
+   « obsolete » visait les IMAGES). Il lit `art/titre/carrousel/` (la serie recente 16:9,
+   sans la pie) par `index.json` ; la pierre reste son repli s'il n'a rien a montrer. */
+CARROUSEL.forEach((s,i)=>{const d=document.createElement('div');d.className='diapo'+(i===0?' on':'');
+  const f=new Image();f.className='flou';f.alt='';f.src=s;
+  const n=new Image();n.className='net';n.alt='';n.src=s;
+  d.appendChild(f);d.appendChild(n);bgw.appendChild(d);});
+if (bgw.children.length === 0) bgw.classList.add('pierre-seule');
+let bi=0;
+if (bgw.children.length > 1) setInterval(()=>{const im=bgw.children;im[bi].classList.remove('on');
+  bi=(bi+1)%im.length;im[bi].classList.add('on');},5200);
 
 /* transition : the entry bleeds, paint covers, the view turns underneath */
 const BLINK_MS=300, COVER_MS=420, PAINT_MS=840;
@@ -2163,7 +2265,12 @@ document.getElementById('quitno').addEventListener('click',()=>{
   document.getElementById('quit').classList.remove('on');});
 document.getElementById('quityes').addEventListener('click',()=>go('exit'));
 document.getElementById('exit').addEventListener('click',()=>go('title',null,null,true));
-document.getElementById('bboard').addEventListener('click',()=>go('league'));
+/* note 276 - ferme jusqu'a la premiere victoire : le clic secoue la phrase, il n'ouvre rien. */
+function murFermeAuHome(){ try{ return !window.LLBountyWall.aGagne(window.LLProfil.lis()); }catch(e){ return false; } }
+document.getElementById('bboard').addEventListener('click',()=>{
+  if(murFermeAuHome()){ const s=document.querySelector('#bboard .bb-sous'); if(s){ s.classList.remove('secoue'); void s.offsetWidth; s.classList.add('secoue'); } return; }
+  go('league');
+});
 /* S1419 - note 243 (8)(a) : les sept spheres du bloc - six aux pointes, le Donjon au centre ;
    un esprit ferme (le verrou « Win a game », ou endormi) est grise. */
 function peinsLeBlocDuMur(){
@@ -2188,7 +2295,12 @@ function peinsLeBlocDuMur(){
       x.style.left=im.style.left; x.style.top=im.style.top; box.appendChild(x); }
   });
   var sous=document.querySelector('#bboard .bb-sous');
-  if(sous) sous.textContent = BW.aGagne(profil) ? 'the seven spirits — your challenges' : 'win a game to open the spirits';
+  /* note 276, BOUNTY_WALL 25 - LE MUR EST FERME JUSQU'A LA PREMIERE VICTOIRE A VIE : visible, grise,
+     un cadenas, et la phrase de Croze. Le clic ne l'ouvre pas (murFermeAuHome). */
+  var ferme=!BW.aGagne(profil), bb=document.getElementById('bboard');
+  if(bb){ bb.classList.toggle('ferme-victoire',ferme); bb.title=ferme?'Win your first game to open the Bounty Wall.':'';
+    var cad=bb.querySelector('.bb-cadenas'); if(ferme&&!cad){ cad=document.createElement('span'); cad.className='bb-cadenas'; cad.innerHTML=cadenas(); bb.querySelector('.bb-sceau').appendChild(cad); } }
+  if(sous) sous.textContent = ferme ? 'Win your first game to open the Bounty Wall.' : 'the seven spirits — your challenges';
 }
 setTimeout(peinsLeBlocDuMur, 0);
 
@@ -2629,6 +2741,8 @@ function inventaire(){
       essences.push({ecole:t.id==='neutre'?'Dungeon':t.t,teinte:t.teinte,cases:BW.essencesDe(t.id).map(so=>({nom:BW.OFFRANDES[so].nom,q:sac[so]||0,html:besaceObjet(so)}))});
     });
   }
+  /* note 277 - le BETA VERSION GIFT PACK, tant qu'il n'est pas ouvert */
+  if(!packBetaOuvert()) conso.push({nom:'Beta Version Gift Pack — click to OPEN',q:1,html:'<div class="plate besace-shot pack-icone"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONE_PACK+'</svg></div>',ouvre:()=>{ const lots=ouvreLePackBeta(); if(lots!==null) reveleLePackBeta(lots); }});
   const ch=BW&&BW.chance?BW.chance(p):null;
   if(ch) conso.push({nom:ch.nom+' \u2014 running, '+ch.restant+' games left',q:ch.restant,html:charmeShot(ch.id),ouvre:()=>openSheet('luck',BW.SORTES_CHANCE.indexOf(ch.id))});
   /* note 274 (4) : les charms en stock (empilables) */
@@ -2889,22 +3003,8 @@ function fillGrid(key){
     /* S1370 · note 206 (3) - LES OFFRANDES au Vault ; S1373 · note 208 (§13.2) : ce sont
        des consommables nommes - LA POMME et TROLL MILK s'achetent, le SANG DE TROLL
        ne tombe qu'en partie. La plaque est leur CARTE du jeu. */
-    /* S1393 - note 215 (1) : TOUT DEVERROUILLER, gratuit, en dev seulement. */
-    if(window.__llDev===true){
-      const c=document.createElement('div');
-      c.className='cell besace tout-deverrouiller'; c.tabIndex=0;
-      c.innerHTML='<div class="plate besace-shot"><svg class="besace-sil" viewBox="0 0 48 48">'+
-        '<path d="M14 22 V15 a10 10 0 0 1 20 0 V22" class="trait"/><path d="M10 22 H38 V42 H10 Z"/>'+
-        '<path class="trou" d="M22 30 a2 2 0 1 1 4 0 L25 35 H23 Z"/></svg></div>'+
-        '<div class="own">free</div><div class="tagx">dev only</div>'+
-        '<div class="cap">Unlock everything</div>';
-      c.addEventListener('click',()=>{
-        if(!window.confirm('UNLOCK EVERYTHING - every Bounty Wall branch is completed and each reward is bought on the wall (characters, dice, cursors, card backs), plus 999 999 teeth and ten of each essence. This profile becomes a TEST PROFILE.')) return;
-        toutDeverrouiller(); location.reload();
-      });
-      c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
-      grid.appendChild(c);
-    }
+    /* note 277, MONNAIE 26 - « Unlock everything » est RETIRE d'ici : a sa place, le BETA VERSION
+       GIFT PACK (INVENTORY). Il reste au panneau DEV (Ctrl+Shift+D, UNLOCK ALL) pour les tests. */
     /* note 237 (4) - LA CHANCE remplace la vente des essences (elles ne tombent qu'en
        partie, BOUNTY_WALL 16). Deux objets, graves (note 239). */
     if(BW&&BW.CHANCES){

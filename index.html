@@ -22,6 +22,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&family=MedievalSharp&family=Uncial+Antiqua&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
     <style>
+      /* S1434 · note 280 ⑥ — « LE texte overall est petit » : toute taille de corps <= 15 px
+         passe par ce SEUL reglage (+15 %, la reco du classeur). Les titres > 15 px ne bougent pas.
+         Un mot de Croze le regle ici : 1 = l ancien ecran. */
+      :root { --lisible: 1.15; }
+
       /*
        * ═══ LA PEAU EST CELLE DU BANC v3, ET C'EST LE SEUL RENDU ═══════════
        *
@@ -353,10 +358,10 @@
       .who { display: flex; align-items: baseline; gap: 10px; }
       .who .name { font-family: var(--display); font-weight: 800; font-size: 30px;
                    letter-spacing: .02em; text-transform: uppercase; line-height: 1; }
-      .who .tag { font-size: 11px; color: var(--stock-dim); letter-spacing: .14em; text-transform: uppercase; }
+      .who .tag { font-size: calc(11px * var(--lisible, 1)); color: var(--stock-dim); letter-spacing: .14em; text-transform: uppercase; }
       .vitals { display: flex; gap: 20px; align-items: center; margin-left: auto; flex-wrap: wrap; }
       .vital { display: flex; flex-direction: column; gap: 3px; min-width: 118px; }
-      .vital .lbl { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--stock-dim); }
+      .vital .lbl { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em; text-transform: uppercase; color: var(--stock-dim); }
       .vital .val { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1; }
       .bar { height: 5px; background: var(--ink-3); border: 1px solid var(--rule); overflow: hidden; }
       .bar > i { display: block; height: 100%; background: var(--stock-2); }
@@ -463,7 +468,7 @@
                       padding: 4px 0 6px; border-bottom: 1px solid var(--rule); }
       .siege-combat .vital { min-width: 0; }
       .states { display: flex; gap: 6px; flex-wrap: wrap; }
-      .state { font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      .state { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .1em; text-transform: uppercase;
                border: 1px solid var(--rule); padding: 2px 7px; color: var(--stock-dim); }
       /*
        * ⛑⛑ S300 — **L'EMBER SORT D'ICI, ET C'EST §2 QUI LE DIT, PAS LE
@@ -499,9 +504,9 @@
       .bt-palier { flex-basis: 100%; }
       /* ③ CE QUE JE PEUX FAIRE — deux rangs, deux matières. */
       .cap-head { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 18px 5px; }
-      .cap-head h2 { margin: 0; font-family: var(--display); font-weight: 700; font-size: 14px;
+      .cap-head h2 { margin: 0; font-family: var(--display); font-weight: 700; font-size: calc(14px * var(--lisible, 1));
                      letter-spacing: .2em; text-transform: uppercase; color: var(--stock-dim); border: none; }
-      .cap-head .cap { font-size: 11px; color: var(--slate); }
+      .cap-head .cap { font-size: calc(11px * var(--lisible, 1)); color: var(--slate); }
 
       /*
        * ─── ③ LE RANG : GRAVÉ DANS LE CHÂSSIS ──────────────────────────────
@@ -529,16 +534,16 @@
               font-family: var(--mono); text-transform: none; letter-spacing: normal;
               transition: border-color .12s, background .12s; }
       .abil:hover:not(:disabled) { background: var(--ink-3); }
-      .abil .src { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--slate); }
+      .abil .src { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em; text-transform: uppercase; color: var(--slate); }
       .abil .nm { font-family: var(--display); font-weight: 700; font-size: 16px; line-height: 1;
                   text-transform: uppercase; }
-      .abil .tx { font-size: 10px; line-height: 1.3; color: var(--stock-dim); flex: 1; }
+      .abil .tx { font-size: calc(10px * var(--lisible, 1)); line-height: 1.3; color: var(--stock-dim); flex: 1; }
       /*
        * ⛑ S300 — **MÊME RÉSERVE, MÊME SORTIE.** « 0/1 par tour de donjon » est
        * un compteur d'usage : il ne brûle pas davantage. Il prend `--stock-2`,
        * qui le distingue du libellé atténué sans emprunter un signal.
        */
-      .abil .cost { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--stock-2); }
+      .abil .cost { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .08em; text-transform: uppercase; color: var(--stock-2); }
       .abil[data-src="GEAR"] { border-left: 3px solid var(--gold); }
       .abil[data-src="GEAR"] .src { color: var(--gold); }
       /*
@@ -708,13 +713,13 @@
                                        box-shadow: inset 0 0 0 2px var(--ember); }
       .abil.no { opacity: .42; cursor: not-allowed; }
       .abil.no:hover { background: var(--ink-2); }
-      .woke { font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
+      .woke { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
       /* Ce qui part tout seul : pointillés, pas de curseur, pas de clic. */
       .auto-item { position: relative; flex: 0 0 138px; min-height: 88px; background: transparent;
                    border: 1px dashed var(--rule); padding: 7px 8px; display: flex;
-                   flex-direction: column; gap: 3px; color: var(--slate); font-size: 10px; line-height: 1.3; }
-      .auto-item .src { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
-      .auto-item .nm { font-family: var(--display); font-weight: 700; font-size: 15px; line-height: 1;
+                   flex-direction: column; gap: 3px; color: var(--slate); font-size: calc(10px * var(--lisible, 1)); line-height: 1.3; }
+      .auto-item .src { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em; text-transform: uppercase; }
+      .auto-item .nm { font-family: var(--display); font-weight: 700; font-size: calc(15px * var(--lisible, 1)); line-height: 1;
                        text-transform: uppercase; color: var(--stock-dim); }
       .auto-item[data-src="GEAR"] { border-left: 3px dashed var(--gold); }
 
@@ -1004,13 +1009,13 @@
                       background: var(--ink-2);
                       border: 1px solid var(--stamp); border-radius: 4px;
                       box-shadow: 0 8px 22px rgba(0, 0, 0, .6); }
-      .ee-lbl    { font-size: 10px; letter-spacing: .16em; color: var(--stamp); }
+      .ee-lbl    { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em; color: var(--stamp); }
       .ee-l      { display: flex; align-items: baseline; gap: 8px; }
-      .ee-nom    { font-family: var(--display); font-weight: 800; font-size: 14px;
+      .ee-nom    { font-family: var(--display); font-weight: 800; font-size: calc(14px * var(--lisible, 1));
                    color: var(--stock); }
-      .ee-raison { font-size: 11px; color: var(--stock-dim); }
+      .ee-raison { font-size: calc(11px * var(--lisible, 1)); color: var(--stock-dim); }
       .ee-fermer { margin-left: auto; background: transparent; border: 0;
-                   color: var(--stock-dim); cursor: pointer; font-size: 13px; }
+                   color: var(--stock-dim); cursor: pointer; font-size: calc(13px * var(--lisible, 1)); }
       .ee-fermer:hover { color: var(--stock); }
       .mb-milieu, .hand { pointer-events: none; }
       .handslot { pointer-events: auto; }
@@ -1179,7 +1184,7 @@
       .main-basse > .hd-onglet {
         position: absolute; z-index: 60; pointer-events: auto;
         left: var(--hd-onglet-x, 40%); bottom: var(--hd-onglet-y, 160px);
-        font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em;
         text-transform: uppercase; white-space: nowrap; cursor: pointer;
         color: var(--stock); background: var(--ink-2);
         border: 1px solid var(--rule); padding: 3px 10px;
@@ -1293,7 +1298,7 @@
       .poll-source-tuile { flex: 0 0 auto; width: 120px; height: auto; display: block;
                            cursor: zoom-in; border: 1px solid #2a2a2e; }
       .poll-source-tuile-plein { display: block; max-width: 100%; max-height: 82vh; margin: 0 auto; }
-      .poll-entree-tuile { font-family: var(--display); font-weight: 700; font-size: 15px;
+      .poll-entree-tuile { font-family: var(--display); font-weight: 700; font-size: calc(15px * var(--lisible, 1));
                            letter-spacing: .06em; color: var(--stock); margin: 0 0 8px; }
       /*
        * ─── ⛑⛑ S1283 · P3-T3 bis — LA PILE DE RÉACTIONS, LUE DE HAUT EN BAS ──
@@ -1324,14 +1329,14 @@
       .pile-reactions::before { content: ''; position: absolute; left: 9px;
                                 top: 26px; bottom: 10px; width: 1px;
                                 background: var(--gold); opacity: .45; }
-      .pr-tete { font-family: var(--display); font-weight: 800; font-size: 11px;
+      .pr-tete { font-family: var(--display); font-weight: 800; font-size: calc(11px * var(--lisible, 1));
                  letter-spacing: .12em; color: var(--stock); opacity: .8;
                  margin: 0 0 6px 26px; }
       .pr-ligne { position: relative; display: flex; align-items: center; gap: 10px;
                   padding: 4px 0; }
       .pr-rang { flex: 0 0 auto; width: 19px; height: 19px; border-radius: 50%;
                  display: flex; align-items: center; justify-content: center;
-                 font-family: var(--display); font-weight: 800; font-size: 11px;
+                 font-family: var(--display); font-weight: 800; font-size: calc(11px * var(--lisible, 1));
                  color: var(--stock); background: rgba(14,12,9,.96);
                  border: 1px solid var(--gold); }
       .pr-carte { flex: 0 0 auto; position: relative; width: 64px; }
@@ -1339,7 +1344,7 @@
       .pr-loupe { position: absolute; right: 2px; bottom: 2px; z-index: 3;
                   width: 20px; height: 20px; padding: 0; cursor: pointer;
                   display: flex; align-items: center; justify-content: center;
-                  font-size: 12px; line-height: 1; color: var(--stock);
+                  font-size: calc(12px * var(--lisible, 1)); line-height: 1; color: var(--stock);
                   background: rgba(14,12,9,.94); border: 1px solid var(--gold); }
       /*
        * ⛑ S1283 — LE ⤢ D'UNE CARTE JOUABLE. Le parent est le `<button>` qui
@@ -1367,9 +1372,9 @@
       .opt-carte > .opt-loupe { position: absolute; top: 2px; right: 2px;
                                 bottom: auto; z-index: 4; }
       .pr-quoi { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-      .pr-qui { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .pr-qui { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                 letter-spacing: .1em; }
-      .pr-nom { font-size: 13px; color: var(--stock); }
+      .pr-nom { font-size: calc(13px * var(--lisible, 1)); color: var(--stock); }
       /* La SEULE porte du zoom dans cette pile — posée par le ⤢, jamais par le survol. */
       .cz-ouvert > .cz-zoom { opacity: 1; pointer-events: auto;
                               transform: translate(-50%, -50%) scale(1); }
@@ -1381,7 +1386,7 @@
                    display: flex; flex-direction: column; gap: 3px; position: relative;
                    background: none; border: none; padding: 0; cursor: pointer; }
       .opt-carte .cz-vignette { width: 100%; height: auto; display: block; }
-      .opt-verbe { font-family: var(--display); font-weight: 800; font-size: 11px;
+      .opt-verbe { font-family: var(--display); font-weight: 800; font-size: calc(11px * var(--lisible, 1));
                    letter-spacing: .1em; text-transform: uppercase;
                    color: var(--activable); }
       .card.no .cz-vignette { filter: saturate(.28) brightness(.6); }
@@ -1403,7 +1408,7 @@
                   display: flex; flex-wrap: wrap; gap: 4px; justify-content: center;
                   padding: 6px; pointer-events: auto;
                   background: rgba(14,12,9,.94); border: 1px solid var(--gold); }
-      .cz-piles button { flex: 0 0 auto; font-size: 10px; padding: 4px 6px; }
+      .cz-piles button { flex: 0 0 auto; font-size: calc(10px * var(--lisible, 1)); padding: 4px 6px; }
 
       /*
        * ─── LE BANDEAU — CE QUE LE CARTON NE PORTE PAS, POSÉ SUR LE CARTON ──
@@ -1438,7 +1443,7 @@
                transform: translate(-50%, -50%) rotate(-11deg) scale(.94);
                border: 2px solid var(--stamp); outline: 1px solid var(--stamp); outline-offset: 2px;
                color: var(--stamp); background: rgba(217,211,194,.86);
-               font-family: var(--display); font-weight: 800; font-size: 14px; line-height: 1.05;
+               font-family: var(--display); font-weight: 800; font-size: calc(14px * var(--lisible, 1)); line-height: 1.05;
                letter-spacing: .06em; text-transform: uppercase; text-align: center;
                padding: 6px 8px; width: 88%; pointer-events: none; opacity: 0; transition: opacity .1s; }
       /*
@@ -1460,7 +1465,7 @@
        * palette ne passe sur les deux. Déposé en question — changer un FOND
        * n'est pas dans le GO de la note ⑰ ②.
        */
-      .stamp small { display: block; font-family: var(--mono); font-weight: 400; font-size: 9px;
+      .stamp small { display: block; font-family: var(--mono); font-weight: 400; font-size: calc(9px * var(--lisible, 1));
                      letter-spacing: .03em; margin-top: 3px; text-transform: none; }
       /*
        * ⛑⛑ **S555 — LE MÊME TAMPON, DEUX FONDS, DEUX VERDICTS.**
@@ -1482,7 +1487,7 @@
        * jusqu'au S555 : *un nœud qu'un geste révèle n'est pas un nœud
        * absent, c'est un nœud qu'on n'a pas demandé.*
        */
-      .abil .stamp { background: rgba(31,27,22,.94); font-size: 12px; width: 92%;
+      .abil .stamp { background: rgba(31,27,22,.94); font-size: calc(12px * var(--lisible, 1)); width: 92%;
                      color: var(--alert);
                      border-color: var(--alert); outline-color: var(--alert); }
       .card.no:hover .stamp, .card.no:focus-visible .stamp,
@@ -1514,7 +1519,7 @@
        * *Une couleur écrite en dur est une décision que personne ne peut
        * relire.*
        */
-      .motif-lu { font-size: 9px; line-height: 1.35; letter-spacing: .02em;
+      .motif-lu { font-size: calc(9px * var(--lisible, 1)); line-height: 1.35; letter-spacing: .02em;
                   color: var(--alert); text-transform: none; font-weight: 400;
                   padding-top: 3px; text-align: left; }
       .motif-lu.neutre { color: var(--slate); font-style: italic; }
@@ -1539,10 +1544,10 @@
       .inerte-equip { display: flex; flex-direction: column; gap: 1px;
                       width: 100%; padding: 3px 0 0 5px; margin-top: 3px;
                       border-left: 2px solid var(--alert); text-align: left; }
-      .inerte-equip .inerte-tx { font-size: 9px; line-height: 1.35;
+      .inerte-equip .inerte-tx { font-size: calc(9px * var(--lisible, 1)); line-height: 1.35;
                                  letter-spacing: .02em; color: var(--alert);
                                  text-transform: none; font-weight: 400; }
-      .inerte-equip .inerte-porte { font-size: 9px; line-height: 1.35;
+      .inerte-equip .inerte-porte { font-size: calc(9px * var(--lisible, 1)); line-height: 1.35;
                                     color: var(--stock-2); text-transform: none; }
       .cz-bandeau .inerte-equip { padding-top: 0; }
 
@@ -1630,7 +1635,7 @@
 
       .porte-admin {
         position: fixed; right: 0; bottom: 0; z-index: var(--z-portes);
-        font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+        font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em;
         text-transform: uppercase; text-decoration: none;
         color: var(--stock-dim); background: var(--ink-2);
         border: 1px solid var(--rule); border-right: none; border-bottom: none;
@@ -1707,7 +1712,7 @@
        */
       .porte-options {
         position: fixed; right: 16.4em; bottom: 0; z-index: var(--z-portes);
-        font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+        font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em;
         text-transform: uppercase;
         /* S1260 · H-T2 (Q-PLAQUE-ICONES) — un outil, pas une action : plus de
            bord gris, le texte seul. */
@@ -1715,12 +1720,23 @@
         padding: 3px 9px; opacity: .35; cursor: pointer;
         transition: opacity .12s, color .12s;
       }
+      /* S1434 · note 280 ③ — « le bouton OPTIONS en bas à droite : trop petit ». Il passe
+         de 9 px à peine lisibles (opacité .35) à un vrai bouton : 15 px, plaque sombre,
+         bord, lisible au canapé. Mesuré à 1920×1080 : la bande libre du bas est entre la
+         table (y 1040) et le cadre ; le tampon de version occupe x ≥ 1624. Le bouton se
+         pose donc à sa gauche (bord droit à 304 px), haut de 34 px, sans rien couvrir. */
+      .porte-options {
+        right: 304px; bottom: 3px; font-size: calc(15px * var(--lisible, 1)); letter-spacing: .12em;
+        padding: 6px 16px; line-height: 20px; opacity: .9; color: var(--stock);
+        background: rgba(10, 10, 10, .78); border: 1px solid rgba(233, 228, 216, .45);
+        border-radius: 3px;
+      }
       .porte-options:hover,
       .porte-options:focus-visible { opacity: 1; color: var(--stock); }
 
       .porte-rapport {
         position: fixed; right: 6.2em; bottom: 0; z-index: var(--z-portes);
-        font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+        font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em;
         text-transform: uppercase;
         /* S1260 · H-T2 (Q-PLAQUE-ICONES) — un outil, pas une action : plus de
            bord gris, le texte seul. */
@@ -1754,19 +1770,19 @@
         background: var(--ink-2); border: 1px solid var(--rule); padding: 14px 16px;
       }
       .vr-titre {
-        font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em;
         text-transform: uppercase; color: var(--stock-2);
       }
       .vr-zone {
         flex: 1 1 auto; min-height: 46vh;
-        font-family: var(--mono); font-size: 12px; line-height: 1.45;
+        font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); line-height: 1.45;
         color: var(--stock); background: var(--ink);
         border: 1px solid var(--rule); padding: 10px;
         white-space: pre; overflow: auto; resize: none;
       }
       .vr-barre { display: flex; align-items: center; gap: 10px; }
       .vr-dit {
-        font-family: var(--mono); font-size: 11px; color: var(--stock-dim);
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); color: var(--stock-dim);
       }
       /*
        * §4.2 — le portail est une SORTIE. C'est le seul fait d'une tuile qui
@@ -2120,7 +2136,7 @@
        * du couple mesuré, pas relevé sur ce nœud-là, **et je le dis** plutôt
        * que de laisser croire à deux mesures.
        */
-      .borne-cause { font-family: var(--display); font-size: 15px;
+      .borne-cause { font-family: var(--display); font-size: calc(15px * var(--lisible, 1));
                      letter-spacing: .14em; text-transform: uppercase;
                      color: var(--rouge-vif); margin-top: 12px; opacity: .92; }
       /*
@@ -2152,7 +2168,7 @@
       .pile-carte.pile-jouee .pile-nom,
       .pile-carte.pile-jouee .butin-nom { text-decoration: line-through;
                                           opacity: .72; }
-      .pile-role { font-family: var(--display); font-size: 14px;
+      .pile-role { font-family: var(--display); font-size: calc(14px * var(--lisible, 1));
                    letter-spacing: .22em; text-transform: uppercase;
                    color: var(--rouge-vif); margin-top: 10px; }
       .pile-signe { font-family: var(--display); font-size: 52px;
@@ -2214,7 +2230,7 @@
                     font-size: clamp(28px, 3.4vh, 52px); line-height: 1.05;
                     letter-spacing: .04em; color: var(--stock); margin-top: 14px;
                     text-shadow: 0 3px 0 var(--ink), 0 14px 30px rgba(0,0,0,.7); }
-      .tirage-deck { font-family: var(--display); font-size: 15px;
+      .tirage-deck { font-family: var(--display); font-size: calc(15px * var(--lisible, 1));
                      letter-spacing: .18em; text-transform: uppercase;
                      color: var(--stamp); margin-top: 10px; opacity: .92; }
       @media (prefers-reduced-motion: reduce) {
@@ -2248,7 +2264,7 @@
        * refus ni un Collapse.
        */
       .cf-aide { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px;
-                 margin-left: auto; font-size: 12px; letter-spacing: .04em; }
+                 margin-left: auto; font-size: calc(12px * var(--lisible, 1)); letter-spacing: .04em; }
       .cf-aide > span::before { content: '· '; color: var(--stock-dim); }
       .cf-aide .ok { color: var(--activable); }
       .cf-aide .no { color: var(--stock-dim); text-decoration: line-through; }
@@ -2258,7 +2274,7 @@
                  transition: opacity .18s ease, transform .22s var(--pop); }
       .dicelayer.coup-mob.t1 .cm-bloc, .dicelayer.coup-mob.fini .cm-bloc {
         opacity: 1; transform: none; }
-      .cm-mob { font-size: 13px; letter-spacing: .22em; text-transform: uppercase;
+      .cm-mob { font-size: calc(13px * var(--lisible, 1)); letter-spacing: .22em; text-transform: uppercase;
                 color: var(--stock-dim); margin-bottom: 6px; }
       .cm-nom { font-family: var(--display); font-weight: 800;
                 font-size: clamp(34px, 4.2vh, 60px); line-height: 1.05;
@@ -2269,7 +2285,7 @@
       .cm-n { font-family: var(--display); font-weight: 800;
               font-size: clamp(56px, 7vh, 104px); line-height: 1; color: var(--stamp);
               text-shadow: 0 3px 0 var(--ink), 0 14px 30px rgba(0,0,0,.7); }
-      .cm-lbl { font-size: 15px; letter-spacing: .24em; color: var(--stock-dim); }
+      .cm-lbl { font-size: calc(15px * var(--lisible, 1)); letter-spacing: .24em; color: var(--stock-dim); }
       .cm-cible { margin-top: 10px; font-size: 16px; letter-spacing: .1em;
                   color: var(--stock); }
       @media (prefers-reduced-motion: reduce) {
@@ -2277,7 +2293,7 @@
       }
       /* Il REND l'écran : la couche sort, elle ne s'installe pas. */
       .dicelayer.sort { opacity: 0; transition: opacity .2s ease; pointer-events: none; }
-      .dicelayer .rollcap { font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+      .dicelayer .rollcap { font-size: calc(12px * var(--lisible, 1)); letter-spacing: .22em; text-transform: uppercase;
                             color: var(--stock-dim); text-align: center; margin-bottom: 18px; }
       .dgroup { display: flex; gap: 10px; justify-content: center;
                align-items: center; }
@@ -2286,7 +2302,7 @@
        * Petit et en `--slate` : les DÉS sont le fait, ce mot n'est qu'une
        * charnière — *deux choses de même poids se lisent comme deux faits.*
        */
-      .dgroup-vs { font-family: var(--display); font-weight: 800; font-size: 11px;
+      .dgroup-vs { font-family: var(--display); font-weight: 800; font-size: calc(11px * var(--lisible, 1));
                    letter-spacing: .12em; color: var(--slate); text-transform: uppercase; }
       /*
        * Un vrai dé de la boîte : carton et encre. Pas une gemme.
@@ -2362,7 +2378,7 @@
       .de-offert { display: grid; justify-items: center; align-content: center;
                    gap: 8px; padding: 12px 16px; }
       .de-offert .die { width: 84px; height: 84px; font-size: 48px; }
-      .de-offert-dit { font-size: 13px; line-height: 1.3; }
+      .de-offert-dit { font-size: calc(13px * var(--lisible, 1)); line-height: 1.3; }
       /*
        * ═══ SIX TAILLES, SIX FORMES ═══════════════════════════════════════
        *
@@ -2430,7 +2446,7 @@
        */
       .suivi-annonce { display: inline-flex; align-items: baseline; gap: 6px;
                        padding: 2px 7px; border: 1px solid var(--slate);
-                       font-family: var(--mono); font-size: 10px; }
+                       font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); }
       .suivi-n { font-weight: 700; font-variant-numeric: tabular-nums;
                  color: var(--slate); letter-spacing: .04em; }
       .suivi-trajet { color: var(--stock-dim); }
@@ -2448,7 +2464,7 @@
       .camp { display: inline-flex; align-items: center; gap: 6px;
               border: 1px solid transparent; padding: 1px 5px; }
       .camp-win { border-color: var(--win); }
-      .win-tag { font-size: 9px; font-weight: 700; letter-spacing: .18em;
+      .win-tag { font-size: calc(9px * var(--lisible, 1)); font-weight: 700; letter-spacing: .18em;
                  color: var(--win); }
 
       /*
@@ -2645,10 +2661,10 @@
        */
       .rollcible { display: flex; align-items: baseline; justify-content: center;
                    gap: 8px; margin-top: 6px; flex-wrap: wrap; }
-      .rollcible-lbl  { font-size: 10px; letter-spacing: .18em; opacity: .55; }
+      .rollcible-lbl  { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .18em; opacity: .55; }
       .rollcible-qui  { font-family: var(--display); font-weight: 800;
                         font-size: 20px; color: var(--stock); }
-      .rollcible-arme { font-size: 12px; opacity: .65; }
+      .rollcible-arme { font-size: calc(12px * var(--lisible, 1)); opacity: .65; }
       .rollcible-arme::before { content: '· '; }
       /*
        * ⚠⚠ **LA COLONNE ÉTROITE NE PEUT PAS ÊTRE « EN GROS », ET C'EST MESURÉ,
@@ -2854,7 +2870,7 @@
                       line-height: 1; color: var(--ember); transform: scale(1.8); }
       .dicelayer.t3 .total, .dicelayer.fini .total {
         opacity: 1; transform: none; transition: opacity .2s ease, transform .28s var(--pop); }
-      .totlbl { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--slate); }
+      .totlbl { font-size: calc(12px * var(--lisible, 1)); letter-spacing: .2em; text-transform: uppercase; color: var(--slate); }
       .verdict-att { text-align: center; margin-top: 10px; opacity: 0; }
       .dicelayer.t3 .verdict-att, .dicelayer.fini .verdict-att { opacity: 1; transition: opacity .2s ease; }
       .dicelayer .rollverdict { display: block; text-align: center; margin-top: 14px;
@@ -2939,7 +2955,7 @@
         display: flex; flex-wrap: wrap; justify-content: center;
         gap: 6px 10px; margin-top: 14px; }
       .dicelayer .ce-barreau {
-        font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+        font-size: calc(12px * var(--lisible, 1)); letter-spacing: .18em; text-transform: uppercase;
         border: 1px solid var(--rule); border-radius: 4px; padding: 3px 9px; }
       .dicelayer .ce-acquis { color: var(--stock); background: var(--ink-2); }
       .dicelayer .ce-manque { color: var(--slate); text-decoration: line-through; }
@@ -2949,7 +2965,7 @@
         opacity: 1; transform: none;
         transition: opacity .2s ease, transform .28s var(--pop); }
       .dicelayer.compacte .casino-echelle { margin-top: 0; gap: 4px 6px; }
-      .dicelayer.compacte .ce-barreau { font-size: 10px; padding: 2px 6px; }
+      .dicelayer.compacte .ce-barreau { font-size: calc(10px * var(--lisible, 1)); padding: 2px 6px; }
       /*
        * ⛑ **S233 — LE PLAFOND DE LA FILE DE SCÈNES PARLE.** Il coupe exprès
        * (`MAX_JETS_EN_FILE`), il le disait à personne. Même corps que `.skip`,
@@ -2992,10 +3008,10 @@
                                              text-shadow: 0 1px 0 var(--ink); }
       .dicelayer.compacte .borne-titre { font-size: 26px;
                                          text-shadow: 0 1px 0 var(--ink); }
-      .dicelayer.compacte .borne-siege { font-size: 12px; margin-top: 0; }
-      .dicelayer.compacte .borne-cause { font-size: 10px; margin-top: 4px; }
-      .dicelayer.compacte .seuil-annonce { font-size: 14px; }
-      .dicelayer.compacte .rollverdict { font-size: 14px; margin-top: 0; }
+      .dicelayer.compacte .borne-siege { font-size: calc(12px * var(--lisible, 1)); margin-top: 0; }
+      .dicelayer.compacte .borne-cause { font-size: calc(10px * var(--lisible, 1)); margin-top: 4px; }
+      .dicelayer.compacte .seuil-annonce { font-size: calc(14px * var(--lisible, 1)); }
+      .dicelayer.compacte .rollverdict { font-size: calc(14px * var(--lisible, 1)); margin-top: 0; }
       .dicelayer.compacte .scene-detail,
       .dicelayer.compacte .scene-pli { display: none; }
       /*
@@ -3009,7 +3025,7 @@
       .dicelayer.compacte .scene-cadres { gap: 10px; flex-wrap: nowrap; }
       .dicelayer.compacte .scene-cadre { flex-direction: row; gap: 8px;
                                          padding: 2px 8px; border-width: 1px; }
-      .dicelayer.compacte .scene-nom { font-size: 12px; }
+      .dicelayer.compacte .scene-nom { font-size: calc(12px * var(--lisible, 1)); }
       .dicelayer.compacte .scene-compte { display: none; }
       .dicelayer.compacte .scene-chiffres .total { font-size: 20px; }
       /*
@@ -3025,7 +3041,7 @@
                   /* S1261 · H-T2 (Q-PLAQUE-ICONES) — un outil : le texte seul. */
                   border: 0;
                   padding: 5px 14px; cursor: pointer;
-                  font-family: var(--display); font-size: 12px;
+                  font-family: var(--display); font-size: calc(12px * var(--lisible, 1));
                   letter-spacing: .34em; text-transform: uppercase;
                   color: var(--stock-dim); }
       .hide-btn:hover { color: var(--stock); border-color: var(--stock-dim); }
@@ -3044,10 +3060,10 @@
        * coûté un `1,70`. `--stamp` y rend **2,62**, `--alert` **5,55**.
        */
       .file-tue { position: fixed; left: 18px; bottom: 16px; z-index: 901;
-                  max-width: calc(var(--uvw) * 46); font-size: 10px; letter-spacing: .18em;
+                  max-width: calc(var(--uvw) * 46); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .18em;
                   text-transform: uppercase; color: var(--alert);
                   pointer-events: none; }
-      .dicelayer .skip { position: fixed; right: 18px; bottom: 16px; font-size: 10px;
+      .dicelayer .skip { position: fixed; right: 18px; bottom: 16px; font-size: calc(10px * var(--lisible, 1));
                          letter-spacing: .2em; text-transform: uppercase; color: var(--slate); }
       /*
        * ═══ ⚑ S92 · LA PLANCHE 4 — L'ÉCRAN RÉSULTAT D'UNE RÉSOLUTION ═════════
@@ -3069,19 +3085,19 @@
        */
       .recap { display: flex; flex-direction: column; align-items: center; gap: 14px;
                max-width: min(1180px, 92vw); }
-      .recap-quoi { font-family: var(--display); font-size: 13px; letter-spacing: .2em;
+      .recap-quoi { font-family: var(--display); font-size: calc(13px * var(--lisible, 1)); letter-spacing: .2em;
                     text-transform: uppercase; color: var(--stock-dim); text-align: center; }
       .recap-siege { display: flex; align-items: baseline; gap: 10px; }
       .recap-nom { font-family: var(--display); font-weight: 800; font-size: 26px;
                    letter-spacing: .04em; }
-      .recap-perso { font-size: 12px; letter-spacing: .16em; color: var(--slate); }
-      .recap-verbe { font-size: 12px; letter-spacing: .26em; color: var(--stock-dim); }
+      .recap-perso { font-size: calc(12px * var(--lisible, 1)); letter-spacing: .16em; color: var(--slate); }
+      .recap-verbe { font-size: calc(12px * var(--lisible, 1)); letter-spacing: .26em; color: var(--stock-dim); }
       .recap-cartes { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
                       max-height: 62vh; overflow-y: auto; padding: 2px; }
-      .recap-note { font-size: 11px; letter-spacing: .08em; color: var(--slate);
+      .recap-note { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .08em; color: var(--slate);
                     text-align: center; }
       .recap-inerte { font-style: italic; }
-      .recap-muet { font-size: 12px; color: var(--slate); font-style: italic; }
+      .recap-muet { font-size: calc(12px * var(--lisible, 1)); color: var(--slate); font-style: italic; }
       /* Les trois temps : le titre, puis les cartes, puis les notes. */
       .recap-couche .recap-quoi, .recap-couche .recap-siege,
       .recap-couche .recap-cartes, .recap-couche .recap-note,
@@ -3106,7 +3122,7 @@
        */
       .dicelayer.serie .scene { display: flex; flex-direction: column;
                                 align-items: center; gap: 10px; max-width: calc(var(--uvw) * 92); }
-      .scene-compte { font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+      .scene-compte { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .18em; text-transform: uppercase;
                       color: var(--slate); }
       /*
        * ⛑ S683 — LA SCÈNE DE LA RELANCE (note 82 ③). Deux dés et une flèche :
@@ -3124,7 +3140,7 @@
       .relance-avant { opacity: .48; }
       .relance-fleche { font-family: var(--display); font-size: 26px;
                         opacity: .7; }
-      .relance-mot { font-family: var(--display); font-size: 10px;
+      .relance-mot { font-family: var(--display); font-size: calc(10px * var(--lisible, 1));
                      letter-spacing: .14em; text-transform: uppercase;
                      color: var(--stock-dim); }
       .scene-cadres { display: flex; flex-wrap: wrap; justify-content: center;
@@ -3188,7 +3204,7 @@
                         box-shadow: none; opacity: .5; }
       .die-place-vide::after { content: '?'; color: var(--stock-dim); }
       /* Sa carte d'Upkeep, sous son nom — la mienne seule est publiée. */
-      .collapse-carte { font-family: var(--display); font-size: 13px;
+      .collapse-carte { font-family: var(--display); font-size: calc(13px * var(--lisible, 1));
                         letter-spacing: .06em; color: var(--stock-dim);
                         text-transform: none; margin-bottom: 4px; }
       /*
@@ -3244,7 +3260,7 @@
       .fen-offre { display: flex; flex-wrap: wrap; align-items: flex-end;
                    gap: 6px; margin: 6px 0; }
       .fen-offre-cap { flex: 0 0 100%; font-family: var(--display);
-                       font-size: 10px; font-weight: 800; letter-spacing: .14em;
+                       font-size: calc(10px * var(--lisible, 1)); font-weight: 800; letter-spacing: .14em;
                        text-transform: uppercase; color: var(--stock-dim); }
       .fen-offre .cz { width: 74px; }
       .fen-offre .cz .cz-vignette { width: 74px; height: auto; display: block; }
@@ -3258,7 +3274,7 @@
       .troc-tete { margin: 6px 0 8px; padding: 6px 8px;
                    border-left: 3px solid var(--accent, #7FB069);
                    background: rgba(127, 176, 105, .06); }
-      .troc-phrase { font-size: 14px; line-height: 1.35; }
+      .troc-phrase { font-size: calc(14px * var(--lisible, 1)); line-height: 1.35; }
       .troc-phrase .p-name { font-weight: 800; }
       .troc-tete .fen-offre { margin: 6px 0 0; }
       /* S1405 - note 221 (10) : les cartes de debut de tour x2 (84 -> 168 px), l'echelle
@@ -3269,12 +3285,12 @@
                     display: block; }
       /* La rareté est PUBLIQUE (`UPKEEP_DRAW.rarity`) : elle se lit sous
          les quatre cadres, couverts comme découvert. */
-      .pioche-rarete { font-family: var(--display); font-size: 13px;
+      .pioche-rarete { font-family: var(--display); font-size: calc(13px * var(--lisible, 1));
                        font-weight: 800; letter-spacing: .14em;
                        text-transform: uppercase; color: var(--stock-dim); }
       /* Pourquoi ce dos est là — sans elle, « secrète » et « art manquant »
          se ressemblent. Discrète : c'est une note, pas un verdict. */
-      .pioche-couverte { font-size: 10px; letter-spacing: .04em; }
+      .pioche-couverte { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .04em; }
       /*
        * ═══ ⛑⛑ S790 · NOTE 94 ① — C'EST SA CARTE, PAS SA FICHE ═══════════
        *
@@ -3319,7 +3335,7 @@
       .scene-portrait { width: 62px; height: 62px; border-radius: 50%;
                         object-fit: cover; object-position: 50% 30%;
                         border: 1px solid var(--line); display: block; }
-      .scene-nom { font-family: var(--display); font-size: 15px; }
+      .scene-nom { font-family: var(--display); font-size: calc(15px * var(--lisible, 1)); }
       /*
        * ═══ ⚑⚑ S620 · LA SCÈNE DE TABLE EST PLUS GROSSE (note 77 ②) ══════════
        *
@@ -3351,9 +3367,9 @@
       .dicelayer.table .scene-cadre { gap: 10px; padding: 16px 22px; border-radius: 8px; }
       .dicelayer.table .scene-portrait { width: 96px; height: 96px; }
       .dicelayer.table .scene-nom { font-size: 22px; }
-      .dicelayer.table .scene-compte { font-size: 13px; }
-      .dicelayer.table .scene-duel { font-size: 14px; }
-      .dicelayer.table .rollcap { font-size: 15px; }
+      .dicelayer.table .scene-compte { font-size: calc(13px * var(--lisible, 1)); }
+      .dicelayer.table .scene-duel { font-size: calc(14px * var(--lisible, 1)); }
+      .dicelayer.table .rollcap { font-size: calc(15px * var(--lisible, 1)); }
       /*
        * ═══ ⚑⚑ S1228 · C-T3 — LA SCÈNE DE RÉVÉLATION (note 158 ③) ═════════
        *
@@ -3443,7 +3459,7 @@
       .dicelayer.revelation.verdict .rollverdict { opacity: 1; }
       .scene-chiffres { display: flex; align-items: center; gap: 6px; }
       .scene-duel { display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
-                    font-size: 12px; }
+                    font-size: calc(12px * var(--lisible, 1)); }
       /* ⛑ S1330 · DE-1 — les N dés du lanceur, et une ligne par épreuve : mon dé
          (face, mod, total) VS le sien, puis le verdict. */
       .scene-des { display: flex; gap: 10px; justify-content: center; }
@@ -3458,7 +3474,7 @@
       .dicelayer.serie.t2 .scene-detail, .dicelayer.serie.fini .scene-detail,
       .dicelayer.serie.t2 .scene-pli, .dicelayer.serie.fini .scene-pli {
         opacity: 1; transition: opacity .22s ease; }
-      .scene-pli { font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      .scene-pli { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .18em; text-transform: uppercase;
                    background: none; border: 1px solid var(--line); border-radius: 4px;
                    color: var(--slate); padding: 3px 8px; cursor: pointer; }
       @media (prefers-reduced-motion: reduce) {
@@ -3665,7 +3681,7 @@
       /* S1261 · H-T2 (Q-PLAQUE-ICONES) — un outil : le texte seul, rouge au survol. */
       .choix-replier { float: right; margin-left: 10px; background: transparent;
                        border: 0; color: var(--stock);
-                       font-family: var(--display); font-weight: 800; font-size: 10px;
+                       font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                        letter-spacing: .12em; padding: 3px 8px; cursor: pointer; }
       .choix-replier:hover, .choix-replier:focus-visible { color: var(--rouge-vif); background: transparent; }
       /* La zone ③ a rejoint le centre : elle empile comme une colonne le faisait,
@@ -4132,9 +4148,9 @@
        */
       .bande-timer .onglets { display: flex; gap: 8px; margin-left: auto;
                               position: relative; z-index: 905; }
-      .bt-tour { font-family: var(--display); font-weight: 800; font-size: 13px;
+      .bt-tour { font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1));
                  letter-spacing: .18em; text-transform: uppercase; color: var(--stock); }
-      .bt-collapse { font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+      .bt-collapse { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .14em; text-transform: uppercase;
                      color: var(--ember); }
       /*
        * ⛑⛑ S1232 · V-T1 — le run, le tour et le Collapse sur deux lignes, APRÈS
@@ -4151,7 +4167,7 @@
       .bt-siege.actif .bt-ico { border-color: var(--stock); }
       .bt-ico { width: 24px; height: 24px; object-fit: cover; border: 1px solid var(--rule);
                 background: var(--ink); }
-      .bt-nom { font-size: 11px; letter-spacing: .06em; }
+      .bt-nom { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .06em; }
 
       /*
        * ═══ L'ENCADRÉ PERSO — en tête du CENTRE ═══════════════════════════
@@ -4247,7 +4263,7 @@
       }
       .vf4-nom {
         position: fixed; z-index: 93; pointer-events: none; transform: translate(-50%, 0);
-        font-family: var(--mono); font-size: 14px; letter-spacing: .12em; text-transform: uppercase;
+        font-family: var(--mono); font-size: calc(14px * var(--lisible, 1)); letter-spacing: .12em; text-transform: uppercase;
         color: var(--stock); background: rgb(0 0 0 / .75); padding: 3px 10px;
         border: 1px solid var(--rouge-vif); white-space: nowrap;
         animation: vf4-nom 1400ms ease-out forwards;
@@ -4365,7 +4381,7 @@
        */
       .ep-signature { margin: 6px 10px 4px 0; }
       .eps-tete { display: flex; align-items: baseline; gap: 8px; }
-      .eps-titre { font-size: 10px; letter-spacing: .14em; color: var(--stock-dim); }
+      .eps-titre { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .14em; color: var(--stock-dim); }
       /* ⛑ S1267 · H-T2 étape 12 (note 170 ① ⓑ) — la réaction et la Signature
          restent des CARTES, pas des boutons : le bord gris de 1 px qui les
          cernait au repos part (transparent). Le vert JOUABLE (.ok) reste. */
@@ -4382,8 +4398,8 @@
          au repos n'a pas de bord. L'ember de `.lit.no` (refus lisible) reste. */
       .eps-btn.no:not(.lit) { border-color: transparent; }
       .eps-btn.epuisee { opacity: .42; border-color: transparent; cursor: default; }
-      .eps-nom { font-size: 13px; font-weight: 600; letter-spacing: .01em; }
-      .eps-cout { font-size: 9px; letter-spacing: .06em; color: var(--stock-dim); }
+      .eps-nom { font-size: calc(13px * var(--lisible, 1)); font-weight: 600; letter-spacing: .01em; }
+      .eps-cout { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .06em; color: var(--stock-dim); }
       /*
        * ⛑ **S833 · `Q-DOUBLON-REACTION` — LE COÛT SUR LE BOUTON DE LA FENÊTRE.**
        * Il vient de la colonne gauche, qui se tait maintenant ; il prend donc
@@ -4392,7 +4408,7 @@
        * `margin-left` n'est pas un goût : sans lui le rendu collait le prix au
        * nom (« Shadow Dodgerien à payer », mesuré au navigateur).
        */
-      .reac-cout { font-size: 9px; letter-spacing: .06em; color: var(--stock-dim);
+      .reac-cout { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .06em; color: var(--stock-dim);
                    margin-left: 10px; }
       /*
        * ⚑ S314 — `M-S295` servie : ce n'est plus un MANQUE nommé, c'est le
@@ -4400,9 +4416,9 @@
        * vert jouable : ce n'est ni un danger ni une offre, c'est le tarif de
        * l'autre branche, et il se lit dans la même famille que le premier.
        */
-      .eps-cout-options { font-size: 9px; color: var(--stock-dim);
+      .eps-cout-options { font-size: calc(9px * var(--lisible, 1)); color: var(--stock-dim);
                           opacity: .85; text-transform: none; }
-      .eps-etat { font-size: 10px; letter-spacing: .06em; color: var(--stock-dim); }
+      .eps-etat { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .06em; color: var(--stock-dim); }
       .eps-etat.on { color: var(--activable); }
       /*
        * ═══ ⚑ S58 · LE PORTRAIT DE MON PERSONNAGE ════════════════════════════
@@ -4444,23 +4460,23 @@
       .opt-vol { display: inline-flex; align-items: center; gap: 8px; }
       .opt-vol input[type="range"] { width: 132px; accent-color: var(--stock-2);
                                      cursor: pointer; }
-      .opt-vol-n { font-variant-numeric: tabular-nums; font-size: 11px;
+      .opt-vol-n { font-variant-numeric: tabular-nums; font-size: calc(11px * var(--lisible, 1));
                    color: var(--stock-dim); min-width: 38px; text-align: right; }
       /* S1163 — POURQUOI la partie s'est arretee, au-dessus des vainqueurs :
          sur une EGALITE, la ligne du dessous dit « AUCUN VAINQUEUR » et se lit
          comme une panne quand rien ne la precede. Pas d'unite de FENETRE ici
          (verrou 1080, S1090) : la taille suit le corps. */
-      .fin-cause { font-family: var(--display); font-size: 14px;
+      .fin-cause { font-family: var(--display); font-size: calc(14px * var(--lisible, 1));
                    letter-spacing: .04em; color: var(--stock-2);
                    margin: 2px 0 6px; }
       .fin-scores { display: flex; flex-direction: column; gap: 6px; margin: 8px 0; }
       .fs-ligne { border-left: 2px solid var(--rule); padding: 4px 0 4px 10px; }
       .fs-tete { display: flex; align-items: baseline; gap: 10px; }
-      .fs-perso { font-family: var(--display); font-size: 15px; letter-spacing: .03em; }
+      .fs-perso { font-family: var(--display); font-size: calc(15px * var(--lisible, 1)); letter-spacing: .03em; }
       .fs-total { margin-left: auto; font-family: var(--display); font-weight: 800;
                   font-size: 22px; color: var(--stock); }
       .fs-detail { margin-top: 3px; display: flex; flex-direction: column; gap: 1px; }
-      .fs-src { display: flex; gap: 8px; font-size: 11px; color: var(--stock-dim); }
+      .fs-src { display: flex; gap: 8px; font-size: calc(11px * var(--lisible, 1)); color: var(--stock-dim); }
       .fs-src-nom { flex: 1; }
       .fs-src-pts { font-variant-numeric: tabular-nums; color: var(--stock-2); }
       .col-banniere { width: 100%; aspect-ratio: 16 / 5; object-fit: cover;
@@ -4469,7 +4485,7 @@
       .ep-tete { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
       .ep-nom { font-family: var(--display); font-weight: 800; font-size: 21px;
                 text-transform: uppercase; letter-spacing: .04em; }
-      .ep-ou { font-size: 11px; color: var(--stock-dim); letter-spacing: .04em; }
+      .ep-ou { font-size: calc(11px * var(--lisible, 1)); color: var(--stock-dim); letter-spacing: .04em; }
       .ep-etats { display: flex; gap: 6px; flex-wrap: wrap; padding-top: 4px; }
       /*
        * ═══ ⚑ S306 · LE BANDEAU DÉPLOIE LA FICHE — note ㉖ ① ═══════════════
@@ -4491,7 +4507,7 @@
        */
       .encadre-perso { position: relative; }
       .ep-boules { display: flex; align-items: center; gap: 8px; padding-top: 6px; }
-      .ep-boules-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+      .ep-boules-lbl { font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em;
                        color: var(--stock-dim); }
       /*
        * ⚑⚑ **S441 — ELLE S'OUVRAIT HORS DE LA BANDE VISIBLE, ET C'EST LE MOT
@@ -4685,7 +4701,7 @@
        * l'orange braise ni le rouge — ce n'est ni une menace ni un refus, c'est
        * une note de lecture. Le gris ardoise, et le détail au survol.
        */
-      .stat-planche { font-size: 8px; letter-spacing: .1em; text-transform: uppercase;
+      .stat-planche { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .1em; text-transform: uppercase;
                       color: var(--slate); cursor: help; }
 
       /* Mes vitales : en tête du centre, ce sont MES grandeurs. */
@@ -4694,18 +4710,18 @@
       /* c) LA DEMANDE — une demande n'est pas une nouvelle. */
       .demande { border: 2px solid var(--ember); background: var(--ink-2);
                  margin: 10px 0 0; padding: 8px 10px; }
-      .demande-titre { font-family: var(--display); font-weight: 800; font-size: 15px;
+      .demande-titre { font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1));
                        letter-spacing: .2em; text-transform: uppercase; color: var(--ember); }
       .demande-titre.attente { color: var(--stock-dim); }
       .demande:has(.vide) { border-color: var(--rule); }
-      .demande-titre.vide { color: var(--slate); font-family: var(--mono); font-size: 11px;
+      .demande-titre.vide { color: var(--slate); font-family: var(--mono); font-size: calc(11px * var(--lisible, 1));
                             font-weight: 400; letter-spacing: .08em; text-transform: none; }
       .demande .prompt { border: none; background: none; padding: 4px 0 0; margin: 0; }
       /* a) L'ONGLET DE FICHE — vertical dans la maquette, en tête ici. */
       .fiche-onglet { display: flex; align-items: baseline; gap: 10px;
                       border-left: 3px solid var(--gold); background: var(--ink-2);
                       padding: 6px 10px; }
-      .onglet-titre { font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+      .onglet-titre { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .22em; text-transform: uppercase;
                       color: var(--stock-dim); }
       .onglet-nom { font-family: var(--display); font-weight: 800; font-size: 19px;
                     text-transform: uppercase; margin-left: auto; }
@@ -4719,9 +4735,9 @@
       .zoom-tete { display: flex; align-items: center; justify-content: space-between;
                    gap: 8px; padding: 3px 6px 3px 8px; background: var(--ink-2);
                    border-bottom: 1px solid var(--rule); }
-      .zoom-titre { font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+      .zoom-titre { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .2em; text-transform: uppercase;
                     color: var(--stock-dim); }
-      .zoom-tete button { font-size: 12px; line-height: 1; padding: 2px 6px; }
+      .zoom-tete button { font-size: calc(12px * var(--lisible, 1)); line-height: 1; padding: 2px 6px; }
       /*
        * L'EMPLACEMENT DE LA FICHE IMPRIMÉE — vide, et NOMMÉ.
        *
@@ -4787,9 +4803,9 @@
        * grammaire se justifie par ses emplois, et il faut donc que les emplois
        * soient justes.*
        */
-      .pv-coeur { color: var(--rouge-vif); font-size: 15px; }
+      .pv-coeur { color: var(--rouge-vif); font-size: calc(15px * var(--lisible, 1)); }
       .pv-n { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; }
-      .pv-max { font-size: 11px; color: var(--stock-dim); }
+      .pv-max { font-size: calc(11px * var(--lisible, 1)); color: var(--stock-dim); }
       /*
        * a) LES QUATRE STATS — LE CHIFFRE ET LE SIGLE, RIEN D'AUTRE.
        *
@@ -4806,7 +4822,7 @@
       .stat-carte { display: flex; flex-direction: column; align-items: center; gap: 1px; }
       .stat-n { font-family: var(--display); font-weight: 800; font-size: 26px;
                 line-height: 1; color: var(--stock); }
-      .stat-nom { font-size: 9px; letter-spacing: .18em; color: var(--stock-dim); }
+      .stat-nom { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .18em; color: var(--stock-dim); }
       /*
        * ═══ ⛑ S1182 · NOTE 143 ③ — LE CHIFFRE QUI MONTE SE VOIT MONTER ══════
        *
@@ -4851,7 +4867,7 @@
        * en or parce que c'est la matière du gear (§2), et discret parce que le
        * chiffre au-dessus reste ce qu'on lit d'abord.
        */
-      .stat-ecart { font-size: 9px; color: var(--gold); letter-spacing: .04em; }
+      .stat-ecart { font-size: calc(9px * var(--lisible, 1)); color: var(--gold); letter-spacing: .04em; }
       /*
        * ⛑⛑ S405 — **LE TEMPORAIRE EST POINTILLÉ, ET LA GRAMMAIRE EXISTAIT
        * DÉJÀ.** La grille d'équipement dit, depuis longtemps : *« pointillé =
@@ -4877,8 +4893,8 @@
       .etoile svg { width: 96px; height: 96px; }
       .etoile .br { stroke-width: 4; stroke-linecap: round; }
       .etoile .br.off { opacity: .18; }
-      .etoile text { font-family: var(--mono); font-size: 11px; font-weight: 700; }
-      .etoile-lbl { font-size: 8px; letter-spacing: .18em; color: var(--stock-dim); }
+      .etoile text { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); font-weight: 700; }
+      .etoile-lbl { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .18em; color: var(--stock-dim); }
       /*
        * ⛑ S402 — **L'ÉCART DES ÉCOLES, ET IL N'EST PAS EN OR.** Les quatre
        * axes disent le leur en `--gold` parce que c'est la matière du gear.
@@ -4890,7 +4906,7 @@
        */
       .etoile-ecarts { display: flex; flex-wrap: wrap; gap: 2px 8px;
                        justify-content: center; margin-top: 2px; max-width: 130px; }
-      .ec-ecart { font-size: 9px; letter-spacing: .04em;
+      .ec-ecart { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .04em;
                   color: var(--ec-teinte, var(--stock-2)); }
 
       /*
@@ -4936,9 +4952,9 @@
        * 4,5** à ce corps. `--slate`, la seconde ligne du GO de Croze, rend
        * `4,55` — il passe, et il reste une légende.
        */
-      .creneau-nom { font-size: 8px; letter-spacing: .18em; color: var(--slate); }
+      .creneau-nom { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .18em; color: var(--slate); }
       .creneau-vide { color: var(--rule); }
-      .creneau-carte { font-size: 11px; color: var(--stock); line-height: 1.2; }
+      .creneau-carte { font-size: calc(11px * var(--lisible, 1)); color: var(--stock); line-height: 1.2; }
       /*
        * ═══ NOM · STATS · EFFET — l'équipement est la SOURCE UNIQUE ════════
        *
@@ -4977,9 +4993,9 @@
       }
       .creneau-carte .cr-nom   { display: block; font-weight: 700; }
       .creneau-carte .cr-stats { display: block; font-family: var(--mono);
-                                 font-size: 9px; letter-spacing: .04em;
+                                 font-size: calc(9px * var(--lisible, 1)); letter-spacing: .04em;
                                  color: var(--stock-2); }
-      .creneau-carte .cr-effet { display: block; font-size: 9px; line-height: 1.35;
+      .creneau-carte .cr-effet { display: block; font-size: calc(9px * var(--lisible, 1)); line-height: 1.35;
                                  color: var(--stock-dim); }
       /*
        * ═══ ⛑⛑ S1072 · NOTE 130 ② — LA PRISE POUR DÉSÉQUIPER, ET ELLE NE
@@ -5037,7 +5053,7 @@
         background: rgba(127, 176, 105, .10);
       }
       .cr-retirer { position: absolute; right: 3px; bottom: 3px; z-index: 2;
-                    font-family: var(--display); font-weight: 800; font-size: 9px;
+                    font-family: var(--display); font-weight: 800; font-size: calc(9px * var(--lisible, 1));
                     letter-spacing: .1em; padding: 2px 6px; line-height: 1;
                     color: var(--ink); background: var(--stock-2);
                     border: 0; border-radius: 2px; cursor: pointer; }
@@ -5050,7 +5066,7 @@
        * disparaît se lit comme une panne, une case barrée qui dit pourquoi se
        * lit comme une règle. Le rouge tampon est ici à sa place — c'est un refus.
        */
-      .creneau-carte.vide { color: var(--stock-dim); font-size: 9px;
+      .creneau-carte.vide { color: var(--stock-dim); font-size: calc(9px * var(--lisible, 1));
                             letter-spacing: .14em; }
       /*
        * ⛑ **S548 — LE `⊘` DU REFUS ÉTAIT À `1,88`** (6 états sur 14, fonds
@@ -5084,7 +5100,7 @@
        * c'est lui qui dit le refus, la couleur ne fait que l'appuyer.
        */
       .creneau.refuse .creneau-nom { color: var(--alert); text-decoration: line-through; }
-      .creneau-motif { font-size: 9px; color: var(--stock-dim); line-height: 1.25; }
+      .creneau-motif { font-size: calc(9px * var(--lisible, 1)); color: var(--stock-dim); line-height: 1.25; }
       /*
        * `WEAPON` n'est JAMAIS vide (règle de Croze) — mais l'arme de fiche
        * n'est pas publiée (fait 45). La case est donc NOMMÉE ET MANQUANTE, et
@@ -5096,7 +5112,7 @@
        * une carte ferait croire qu'on peut la defausser — elle ne peut etre ni
        * perdue, ni volee, ni defaussee.
        */
-      .creneau-carte.socle { color: var(--stock-dim); font-size: 10px;
+      .creneau-carte.socle { color: var(--stock-dim); font-size: calc(10px * var(--lisible, 1));
                              font-style: italic; }
 
       /*
@@ -5237,7 +5253,7 @@
         transform: translateY(-4px); border-color: var(--activable); }
       .tuile-tiree .cz-vignette { width: auto; height: min(26vh, 540px);
                                   aspect-ratio: 1024 / 1536; border-radius: 2px; }
-      .tuile-tiree-nom { font-family: var(--display); font-weight: 700; font-size: 14px;
+      .tuile-tiree-nom { font-family: var(--display); font-weight: 700; font-size: calc(14px * var(--lisible, 1));
                          letter-spacing: .06em; text-transform: uppercase;
                          color: var(--stock); max-width: 22ch; text-align: center; }
       /*
@@ -5269,7 +5285,7 @@
       .tuile-occ.mort { filter: grayscale(1); opacity: .72; }
       .tuile-occ-ico { width: 100%; height: 100%; object-fit: cover; }
       .tuile-occ-nu { font-family: var(--display); font-weight: 700;
-                      font-size: 15px; color: var(--stock); }
+                      font-size: calc(15px * var(--lisible, 1)); color: var(--stock); }
       /*
        * ⛑ S129 — **LE CADRE GRIS EST SUPPRIMÉ.** Retour de test Croze, verbatim :
        * *« cadre gris supprimé »*. C'était `border: 1px solid var(--rule)`.
@@ -5284,7 +5300,7 @@
        */
       .cz-vignette { display: block; width: 38px; height: auto;
                      border-radius: 2px; }
-      .cz-absente { display: block; font-size: 8px; line-height: 1.2; }
+      .cz-absente { display: block; font-size: calc(8px * var(--lisible, 1)); line-height: 1.2; }
       /*
        * Le panneau est FIXE et centré : la grille d'équipement vit en colonne
        * gauche, un panneau ancré à la case sortirait de l'écran sur la moitié
@@ -5447,7 +5463,7 @@
       /* ⛑ S130 — le bandeau du banc. L'ember est RÉSERVÉ au Collapse : on prend
          le rouge d'erreur, qui dit « ceci n'est pas la partie » sans lui voler
          sa couleur. */
-      .banc-faux { font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+      .banc-faux { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .12em; text-transform: uppercase;
                    color: var(--err, #C0524A); border: 1px dashed var(--err, #C0524A);
                    padding: 4px 10px; margin-bottom: 8px; text-align: center; }
       /*
@@ -5456,7 +5472,7 @@
        * *rien d'enfermé en 1920*, et un état qui déborde ne se lit pas.
        */
       .tuile-etat { display: flex; flex-wrap: wrap; gap: 4px 8px;
-                    align-items: baseline; margin-top: 3px; font-size: 10px; }
+                    align-items: baseline; margin-top: 3px; font-size: calc(10px * var(--lisible, 1)); }
       /*
        * ⛑ S126 — LA FICHE IMPRIMÉE : même zoom, ratio PROPRE.
        *
@@ -5569,7 +5585,7 @@
        */
       .moment-piege.compacte .qtc .cz-vignette { width: clamp(72px, 8vh, 120px); }
       .moment-piege.compacte .mc-atktx,
-      .moment-piege.compacte .butin-des { font-size: 11px; }
+      .moment-piege.compacte .butin-des { font-size: calc(11px * var(--lisible, 1)); }
       .moment-piege .hide-btn { margin-top: 6px; }
       /* Le coffre vit dans le panneau de BUTIN, pas dans la scène de dés. */
       .butin .qtc, .moment-coffre .qtc { float: left; margin: 0 10px 4px 0; }
@@ -5595,7 +5611,7 @@
                     box-shadow: 0 6px 30px rgb(0 0 0 / .8); color: var(--stock); }
       #vol-a-vide .vav-titre { font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: .12em; }
       #vol-a-vide .vav-phrase { font-size: 18px; margin-top: 8px; }
-      #vol-a-vide .vav-main { font-size: 15px; margin-top: 8px; opacity: .85; }
+      #vol-a-vide .vav-main { font-size: calc(15px * var(--lisible, 1)); margin-top: 8px; opacity: .85; }
       #vol-a-vide .vav-x { position: absolute; top: 6px; right: 8px; background: none; border: 0;
                     color: var(--stock); font-size: 20px; cursor: pointer; }
       /* ⛑ S1395 · S-T5 (note 215 ④) — la volee expliquee : qui lance, la table des issues AVANT le de, l'issue en clair. */
@@ -5670,20 +5686,20 @@
                    border: 1px solid var(--rule); border-radius: 3px; }
       .cz-cote { display: flex; flex-direction: column; gap: 6px;
                  max-width: 300px; padding-top: 4px; }
-      .cz-nom    { font-weight: 700; font-size: 15px; color: var(--stock); }
-      .cz-rarete { font-size: 9px; letter-spacing: .18em; color: var(--stock-dim); }
-      .cz-stats  { font-family: var(--mono); font-size: 12px; color: var(--stock-2); }
-      .cz-texte  { font-size: 11px; line-height: 1.4; color: var(--stock-dim); }
+      .cz-nom    { font-weight: 700; font-size: calc(15px * var(--lisible, 1)); color: var(--stock); }
+      .cz-rarete { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .18em; color: var(--stock-dim); }
+      .cz-stats  { font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); color: var(--stock-2); }
+      .cz-texte  { font-size: calc(11px * var(--lisible, 1)); line-height: 1.4; color: var(--stock-dim); }
       /*
        * LA MARQUE DE DÉRIVE. Rouge tampon — c'est la teinte du REFUS et de ce
        * qui ne fait pas foi, et une carte qui imprime un chiffre faux est
        * exactement ça. Elle ne s'allume que sur les neuf mesurées.
        */
       /* ⛑ S244 — 10 px, même raison que `.perte-montant`. */
-      .cz-derive { font-size: 10px; line-height: 1.35; color: var(--alert);
+      .cz-derive { font-size: calc(10px * var(--lisible, 1)); line-height: 1.35; color: var(--alert);
                    border-top: 1px solid var(--stamp); padding-top: 6px; }
 
-      .prix { display: block; font-size: 10px; letter-spacing: .06em; margin-top: 4px;
+      .prix { display: block; font-size: calc(10px * var(--lisible, 1)); letter-spacing: .06em; margin-top: 4px;
               text-transform: uppercase; }
       .prix-payable   { color: var(--stock-dim); }
       /*
@@ -5746,7 +5762,7 @@
       body:has(.pli:hover) .pli.verrouille:not(:hover) > .pli-corps { grid-template-rows: 0fr; }
       /* Un bloc qui a une surface pleine le DIT : le curseur change, la tête s'allume. */
       .pli.a-plein > .pli-tete::after { content: "⤢"; color: var(--slate); margin-left: auto;
-                                        font-size: 13px; }
+                                        font-size: calc(13px * var(--lisible, 1)); }
       .pli.a-plein:hover > .pli-tete::after { color: var(--stock); }
 
       /*
@@ -5779,15 +5795,15 @@
        * — l'état est la seule chose dont la longueur varie.
        */
       .opt { padding: 16px 20px 22px; display: flex; flex-direction: column; gap: 6px; }
-      .opt-titre { font-family: var(--display); font-weight: 800; font-size: 15px;
+      .opt-titre { font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1));
                    letter-spacing: .10em; text-transform: uppercase; color: var(--stock-2);
                    margin-top: 14px; padding-bottom: 4px; border-bottom: 1px solid var(--rule); }
       .opt-titre:first-child { margin-top: 0; }
       .opt-ligne { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
-      .opt-nom { font-family: var(--display); font-weight: 700; font-size: 14px;
+      .opt-nom { font-family: var(--display); font-weight: 700; font-size: calc(14px * var(--lisible, 1));
                  letter-spacing: .06em; min-width: 120px; }
-      .opt-etat { color: var(--stock-2); font-size: 13px; }
-      .opt-note { color: var(--stock-2); font-size: 12px; opacity: .8; max-width: 70ch; }
+      .opt-etat { color: var(--stock-2); font-size: calc(13px * var(--lisible, 1)); }
+      .opt-note { color: var(--stock-2); font-size: calc(12px * var(--lisible, 1)); opacity: .8; max-width: 70ch; }
       /* S1249 · H-T2 étape 2 — Options : plus aucun bouton gris à bord fin.
          Case = la case PEINTE du kit (vide / cochée), le mot à côté ; les
          autres boutons du panneau = la plaque CONTOUR en trois tranches
@@ -5808,10 +5824,10 @@
       .opt-vol input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
         width: 24px; height: 26px; border: 0; cursor: pointer;
         background: url(/art/hud/controls/slider_bouton.png) center / contain no-repeat; }
-      .pli-titre { font-family: var(--display); font-weight: 700; font-size: 15px;
+      .pli-titre { font-family: var(--display); font-weight: 700; font-size: calc(15px * var(--lisible, 1));
                    letter-spacing: .06em; text-transform: uppercase; }
       .pli-faits { display: flex; gap: 12px; flex-wrap: wrap; margin-left: auto; }
-      .pli-faits .fait { font-size: 12px; color: var(--stock-2); }
+      .pli-faits .fait { font-size: calc(12px * var(--lisible, 1)); color: var(--stock-2); }
       .pli-faits .quete { color: var(--gold); }
 
       /*
@@ -5827,7 +5843,7 @@
       .tuile-nom { font-family: var(--display); font-weight: 800; font-size: 30px;
                    line-height: 1; letter-spacing: .02em; text-transform: uppercase; }
       .tuile-bloc { margin: 10px 0 0; }
-      .tuile-lbl { font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      .tuile-lbl { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .2em; text-transform: uppercase;
                    color: var(--stock-dim); display: block; margin-bottom: 3px; }
       /* La table d'exploration : six faces de dé, lisibles d'un coup d'œil. */
       .faces { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px; }
@@ -5835,16 +5851,16 @@
               border: 1px solid var(--rule); padding: 3px 7px; background: var(--ink); }
       .face-n { font-family: var(--display); font-weight: 800; font-size: 17px;
                 color: var(--stock); min-width: 14px; }
-      .face-txt { font-size: 11px; color: var(--stock-2); }
+      .face-txt { font-size: calc(11px * var(--lisible, 1)); color: var(--stock-2); }
 
       body { font: 14px/1.5 var(--mono); margin: 0; background: var(--ink); color: var(--stock); }
-      h2 { font-size: 13px; margin: 10px 0 4px; border-bottom: 1px solid var(--edge); }
-      h3 { font-size: 12px; margin: 6px 0 2px; }
+      h2 { font-size: calc(13px * var(--lisible, 1)); margin: 10px 0 4px; border-bottom: 1px solid var(--edge); }
+      h3 { font-size: calc(12px * var(--lisible, 1)); margin: 6px 0 2px; }
       table { border-collapse: collapse; margin-bottom: 6px; }
       td, th { border: 1px solid var(--line); padding: 1px 5px; text-align: left; vertical-align: top; }
       th { color: var(--dim); font-weight: normal; }
       button {
-        font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+        font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .12em; text-transform: uppercase;
         margin: 1px; background: transparent; color: var(--stock);
         border: 1px solid var(--stock-dim); padding: 7px 14px; cursor: pointer;
       }
@@ -5864,7 +5880,7 @@
         border: 0; border-style: solid; background: none; color: var(--ink);
         border-image: url(/art/hud/controls/button_solid.png) 0 100 0 120 fill / 0 12.2px 0 14.7px stretch;
         height: 44px; min-width: 142px; padding: 0 22px;
-        font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .12em;
+        font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1)); letter-spacing: .12em;
       }
       button.plaque.plaque-contour {
         color: var(--stock); min-width: 122px;
@@ -5880,7 +5896,7 @@
          à leur rapport exact (solid 120|100 / 360 → 12 | 10 px ; outline
          100|90 / 391 → 9,2 | 8,3 px) : la bande tient sur une ligne, 53 px. */
       .onglets button.bt-bascule.plaque {
-        min-width: 0; height: 36px; padding: 0 16px; font-size: 12px; letter-spacing: .1em;
+        min-width: 0; height: 36px; padding: 0 16px; font-size: calc(12px * var(--lisible, 1)); letter-spacing: .1em;
         border-image-width: 0 10px 0 12px;
       }
       .onglets button.bt-bascule.plaque.plaque-contour { border-image-width: 0 8.3px 0 9.2px; }
@@ -5889,7 +5905,7 @@
       button.bouton-outil { border: 0; background: transparent; color: var(--stock); }
       button.bouton-outil:hover:not(:disabled) { background: transparent; color: var(--rouge-vif); }
       /* La couche debug garde des boutons SERRÉS : ils sont cent, pas cinq. */
-      #debug button { font-size: 11px; letter-spacing: .04em; text-transform: none; padding: 1px 6px; }
+      #debug button { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .04em; text-transform: none; padding: 1px 6px; }
 
       /*
        * ═══ LE REGISTRE DE LA MARGE — décision de Croze, close ═══════════════
@@ -5956,7 +5972,7 @@
         padding: 10px 18px 40px;
       }
       /* Une marge n'a pas de titres de jeu : tout y a la même taille. */
-      #debug h2, #debug h3 { font-family: var(--mono); font-size: 11px; font-weight: 700;
+      #debug h2, #debug h3 { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); font-weight: 700;
                              letter-spacing: .18em; text-transform: uppercase;
                              color: var(--stock-dim); border-bottom: 1px solid var(--rule); }
       /* Le papier est plus mat : rien ne saille dans la marge. */
@@ -6036,11 +6052,11 @@
       .annuler-declaration {
         display: block; margin: 10px 0 0; padding: 4px 10px;
         background: transparent; color: var(--dim);
-        border: 1px solid var(--rule); font-size: 13px;
+        border: 1px solid var(--rule); font-size: calc(13px * var(--lisible, 1));
       }
       .annuler-declaration:hover { color: var(--stock); border-color: var(--stock); }
       /* Le dernier jet : c'est ce qu'on vient lire quand un résultat surprend. */
-      .roll { font-size: 14px; color: var(--stock); padding: 2px 0; }
+      .roll { font-size: calc(14px * var(--lisible, 1)); color: var(--stock); padding: 2px 0; }
 
       /*
        * ─── LE MOMENT PREND LE CADRE, IL NE DÉPLACE RIEN ──────────────────
@@ -6055,7 +6071,7 @@
       .prompt h3 { font-family: var(--display); font-weight: 800; font-size: 26px;
                    letter-spacing: .02em; text-transform: uppercase; line-height: 1.05;
                    margin: 0 0 4px; color: var(--stock); }
-      .prompt .rien { font-size: 11px; color: var(--slate); font-style: italic; }
+      .prompt .rien { font-size: calc(11px * var(--lisible, 1)); color: var(--slate); font-style: italic; }
 
       /*
        * ═══ ⚑ S171 — LA FENÊTRE DE PRIORITÉ : LA PHRASE, PUIS LE REBOURS ═════
@@ -6068,8 +6084,8 @@
       .fen-titre { font-family: var(--display); font-weight: 800; font-size: 24px;
                    letter-spacing: .02em; text-transform: uppercase; line-height: 1.05;
                    margin: 0 0 4px; color: var(--stock); }
-      .fen-sous { font-size: 13px; color: var(--dim); margin: 0 0 8px; }
-      .fen-jeton { font-size: 10px; color: var(--slate); letter-spacing: .04em; }
+      .fen-sous { font-size: calc(13px * var(--lisible, 1)); color: var(--dim); margin: 0 0 8px; }
+      .fen-jeton { font-size: calc(10px * var(--lisible, 1)); color: var(--slate); letter-spacing: .04em; }
       /* S1352 · note 201 ① — « TU REÇOIS 8 DMG DU COLLAPSE » puis « VEUX-TU RÉAGIR ? ». */
       .fen-recois { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
       .fen-recois-titre { margin: 0; font-size: 26px; }
@@ -6083,17 +6099,17 @@
                    flex: 0 0 auto; width: 120px; min-height: 160px; padding: 10px 8px;
                    border: 2px solid var(--stock); border-radius: 6px; background: var(--ink);
                    color: var(--stock); text-align: left; cursor: pointer; }
-      .sig-carte-tag { font-size: 9px; letter-spacing: .12em; color: var(--dim); }
+      .sig-carte-tag { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .12em; color: var(--dim); }
       .sig-carte-nom { font-family: var(--display); font-weight: 800; font-size: 17px;
                        text-transform: uppercase; line-height: 1.05; }
-      .sig-carte-cout { font-size: 12px; font-weight: 700; color: var(--stock); }
+      .sig-carte-cout { font-size: calc(12px * var(--lisible, 1)); font-weight: 700; color: var(--stock); }
 
       /*
        * ⛑ S179 — le tampon de build. Minuscule, en bas à droite, non
        * sélectionnable au clic : il répond à une question, il n'en pose aucune.
        */
       .tampon-build { position: fixed; right: 6px; bottom: 4px; z-index: 5;
-                      font-family: var(--mono); font-size: 9px; color: var(--slate);
+                      font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); color: var(--slate);
                       opacity: .55; pointer-events: auto; letter-spacing: .02em; }
 
       /*
@@ -6117,16 +6133,16 @@
        */
       .fen-alarme { border-left: 3px solid var(--alert); padding: 2px 0 2px 8px;
                     margin: 0 0 6px; }
-      .fen-alarme-l { font-family: var(--display); font-weight: 800; font-size: 15px;
+      .fen-alarme-l { font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1));
                       letter-spacing: .04em; text-transform: uppercase;
                       color: var(--alert); line-height: 1.15; }
 
       /* La charge du déclencheur — le « pour quoi ». Sous la phrase, en petit. */
       .fen-detail { display: flex; gap: 10px; flex-wrap: wrap; align-items: baseline;
                     margin: 0 0 8px; }
-      .fen-detail-qui { font-size: 12px; color: var(--stock-2); }
-      .fen-detail-v { font-family: var(--mono); font-size: 11px; color: var(--dim); }
-      .fen-detail-trou { font-size: 10px; color: var(--slate); font-style: italic; }
+      .fen-detail-qui { font-size: calc(12px * var(--lisible, 1)); color: var(--stock-2); }
+      .fen-detail-v { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); color: var(--dim); }
+      .fen-detail-trou { font-size: calc(10px * var(--lisible, 1)); color: var(--slate); font-style: italic; }
       /*
        * ═══ ⛑⛑ S1113 · R3 — LA CARTE DU MOB DANS LA FENÊTRE DE RÉACTION ══════
        *
@@ -6155,10 +6171,10 @@
       .fen-mob-nom { font-family: var(--display); font-weight: 800; font-size: 16px;
                      letter-spacing: .02em; text-transform: uppercase;
                      line-height: 1.1; color: var(--stock); }
-      .fen-mob-pv { font-size: 13px; color: var(--stock-2); }
-      .fen-mob-att { font-size: 13px; color: var(--dim); }
-      .fen-mob-tx { font-size: 12px; color: var(--dim); font-style: italic; }
-      .fen-mob-passif { font-size: 12px; color: var(--slate); }
+      .fen-mob-pv { font-size: calc(13px * var(--lisible, 1)); color: var(--stock-2); }
+      .fen-mob-att { font-size: calc(13px * var(--lisible, 1)); color: var(--dim); }
+      .fen-mob-tx { font-size: calc(12px * var(--lisible, 1)); color: var(--dim); font-style: italic; }
+      .fen-mob-passif { font-size: calc(12px * var(--lisible, 1)); color: var(--slate); }
 
 
       /*
@@ -6173,13 +6189,13 @@
        * exactement le défaut du S166.
        */
       .reb { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; flex-wrap: wrap; }
-      .reb-tx { font-size: 12px; color: var(--dim); letter-spacing: .03em; }
+      .reb-tx { font-size: calc(12px * var(--lisible, 1)); color: var(--dim); letter-spacing: .03em; }
       .reb-sec { font-family: var(--display); font-weight: 800; font-size: 20px;
                  color: var(--activable); min-width: 44px; }
       .reb-piste { flex: 1 1 160px; height: 6px; background: var(--rule); overflow: hidden; }
       .reb-jauge { height: 100%; background: var(--activable);
                    transform-origin: left center; transform: scaleX(1); }
-      .reb-off { font-size: 11px; color: var(--slate); font-style: italic; }
+      .reb-off { font-size: calc(11px * var(--lisible, 1)); color: var(--slate); font-style: italic; }
       /* E-T3 — la PAUSE : le bouton à côté du délai, la réserve qui descend,
          et le bandeau « X réfléchit » que toute la table voit. */
       .reb .pause-bouton { flex: 0 0 auto; font-weight: 800; letter-spacing: .06em; }
@@ -6195,7 +6211,7 @@
        * Discret : il ne dispute pas la vedette à la carte, mais il est là —
        * *jamais d'écrasement muet* (doctrine de file S125).
        */
-      .tv-scene-saut { font-size: 10px; color: var(--slate); letter-spacing: .04em;
+      .tv-scene-saut { font-size: calc(10px * var(--lisible, 1)); color: var(--slate); letter-spacing: .04em;
                        font-style: italic; }
       /*
        * ⛑ S193 — **LES GESTES AVALÉS SE NOMMENT.** Le compte disait qu'il y
@@ -6228,7 +6244,7 @@
        * prend aucune teinte réservée — ce n'est pas un fait de jeu, c'est
        * l'atelier : `--slate`, la même encre que les autres textes de service.
        */
-      .fil .note-repare { margin: 3px 0 0; font-size: 12px; color: var(--slate); }
+      .fil .note-repare { margin: 3px 0 0; font-size: calc(12px * var(--lisible, 1)); color: var(--slate); }
       .fil .note-repare > summary { cursor: pointer; opacity: .75; }
       .fil .note-repare > div { margin-top: 4px; padding-left: 10px;
                                 border-left: 1px solid var(--rule); line-height: 1.45;
@@ -6254,11 +6270,11 @@
       .jet { display: inline-flex; gap: 0; align-items: stretch; vertical-align: middle;
              margin: 0 2px; }
       .jet > span {
-        border: 1px solid var(--edge); padding: 0 5px; font-size: 13px;
+        border: 1px solid var(--edge); padding: 0 5px; font-size: calc(13px * var(--lisible, 1));
         display: inline-flex; align-items: center;
       }
       .jet > span + span { border-left: none; }
-      .jet .quoi   { color: var(--dim); font-size: 11px; background: var(--bg); }
+      .jet .quoi   { color: var(--dim); font-size: calc(11px * var(--lisible, 1)); background: var(--bg); }
       /*
        * La face NUE : celle sur laquelle les cartes agissent.
        *
@@ -6276,7 +6292,7 @@
       .jet .total  { color: var(--stock); font-weight: bold; background: var(--raised);
                      border-width: 2px; }
       .jet .seuil  { color: var(--dim); background: var(--bg); }
-      .jet .rang   { color: var(--dim); font-size: 11px; background: var(--bg); }
+      .jet .rang   { color: var(--dim); font-size: calc(11px * var(--lisible, 1)); background: var(--bg); }
       .jet .vs     { color: var(--dim); border: none; padding: 0 6px; font-weight: bold; }
       /*
        * LA SÉRIE OPPOSÉE — un adversaire par ligne, les DEUX dés côte à côte.
@@ -6286,7 +6302,7 @@
        */
       .jet-duel { display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
                   padding: 2px 0 2px 12px; }
-      .jet-duel > .rang { color: var(--dim); font-size: 11px; min-width: 62px; }
+      .jet-duel > .rang { color: var(--dim); font-size: calc(11px * var(--lisible, 1)); min-width: 62px; }
       .jet-duel > .vs   { color: var(--dim); padding: 0 6px; font-weight: bold; }
       .jet-duel > .refus { color: var(--alert); font-weight: bold; }
 
@@ -6302,7 +6318,7 @@
        */
       .cf-file { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
                  padding: 3px 10px; border-bottom: 1px solid var(--rule);
-                 font-size: 11px; }
+                 font-size: calc(11px * var(--lisible, 1)); }
       .cf-file.on { background: var(--ink-3); }
       .moment-piege, .moment-coffre { padding: 8px 10px; }
       .moment-degats { display: flex; flex-direction: column; gap: 3px;
@@ -6311,7 +6327,7 @@
       /* Une perte de PV : le montant tamponné, la source et l'auteur à côté. */
       .perte { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
                padding: 2px 0; }
-      .perte > .rang { color: var(--dim); font-size: 11px; }
+      .perte > .rang { color: var(--dim); font-size: calc(11px * var(--lisible, 1)); }
       /* ⛑ S244 — 11 px : le petit corps prend `--alert` (2,40 → mesuré après). */
       .perte-montant { color: var(--alert); font-weight: 800; }
       /*
@@ -6322,16 +6338,16 @@
        */
       .perte-calcul { display: flex; flex-direction: column; gap: 1px;
                       padding: 2px 0 4px 14px; }
-      .calc-jet    { font-size: 10px; color: var(--stock-2); }
-      .calc-chaine { font-size: 10px; color: var(--stock-dim); letter-spacing: .04em; }
-      .calc-zero   { font-size: 10px; font-weight: 800; color: var(--stock);
+      .calc-jet    { font-size: calc(10px * var(--lisible, 1)); color: var(--stock-2); }
+      .calc-chaine { font-size: calc(10px * var(--lisible, 1)); color: var(--stock-dim); letter-spacing: .04em; }
+      .calc-zero   { font-size: calc(10px * var(--lisible, 1)); font-weight: 800; color: var(--stock);
                      letter-spacing: .1em; }
 
       /*
        * LE LOG DE COMBAT — tout le combat, séparé par ROUND. L'en-tête n'est
        * pas compté par l'écran : il est lu sur `COMBAT_TURN_BEGAN`.
        */
-      .cf-round { font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+      .cf-round { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .2em; text-transform: uppercase;
                   color: var(--stock-dim); border-top: 1px solid var(--rule);
                   margin-top: 6px; padding-top: 4px; }
       .cf-round.on { color: var(--stock); font-weight: 800; }
@@ -6368,9 +6384,9 @@
       .quetes { padding-bottom: 10px; }
       .quete { padding: 5px 18px; border-top: 1px solid var(--rule);
                display: flex; flex-wrap: wrap; align-items: baseline; gap: 7px; }
-      .quete-nom { font-family: var(--display); font-weight: 800; font-size: 13px;
+      .quete-nom { font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1));
                    text-transform: uppercase; letter-spacing: .06em; }
-      .quete-texte { flex: 1 0 100%; font-size: 11px; line-height: 1.45;
+      .quete-texte { flex: 1 0 100%; font-size: calc(11px * var(--lisible, 1)); line-height: 1.45;
                      color: var(--stock-2); }
       .quete.faite { border-left: 2px solid var(--stock); }
       .quete.faite .quete-nom { color: var(--stock); }
@@ -6401,14 +6417,14 @@
        * qu'il fallait DÉCOUVRIR. *Muette ne veut pas dire absente, ça veut dire
        * non lue.* Le survol ne fait plus qu'ÉCLAIRCIR — il est un complément.
        */
-      .porte-refus .refus { display: inline; color: #8C5A54; font-size: 10px; }
+      .porte-refus .refus { display: inline; color: #8C5A54; font-size: calc(10px * var(--lisible, 1)); }
       .porte-refus:hover .refus, .porte-refus:focus-within .refus { color: var(--alert); }
       .porte-refus:hover > .grise, .porte-refus:focus-within > .grise { opacity: 1; }
       .refus { color: var(--alert); }
       .grise { opacity: .45; }
       .tampon {
         color: var(--alert); border: 1px solid var(--alert); border-radius: 2px;
-        padding: 0 4px; margin-left: 6px; font-size: 11px;
+        padding: 0 4px; margin-left: 6px; font-size: calc(11px * var(--lisible, 1));
       }
 
       /*
@@ -6549,7 +6565,7 @@
        */
       .rang-nombres { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0; }
       .rang-nombres button { min-width: 34px; font-family: var(--display);
-                             font-weight: 800; font-size: 15px; }
+                             font-weight: 800; font-size: calc(15px * var(--lisible, 1)); }
       /* Ce que la partie attend : lisible sans le chercher. */
       .etat { display: flex; gap: 14px; flex-wrap: wrap; align-items: baseline; }
       .etat b { font-weight: bold; }
@@ -6608,13 +6624,13 @@
                  border-bottom: 1px solid var(--rule); padding-bottom: 6px; margin-bottom: 8px; }
       .bc-titre { font-family: var(--display); font-weight: 800; font-size: 16px;
                   letter-spacing: .18em; text-transform: uppercase; color: var(--stock); }
-      .bc-kind, .bc-round { font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+      .bc-kind, .bc-round { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em; text-transform: uppercase;
                             color: var(--stock-dim); border: 1px solid var(--rule);
                             padding: 1px 6px; }
-      .bc-vous { margin-left: auto; font-size: 10px; letter-spacing: .12em;
+      .bc-vous { margin-left: auto; font-size: calc(10px * var(--lisible, 1)); letter-spacing: .12em;
                  text-transform: uppercase; color: var(--slate); }
       .bc-vous.on { color: var(--stock); font-weight: 800; }
-      .bc-sous { display: block; font-size: 9px; letter-spacing: .2em;
+      .bc-sous { display: block; font-size: calc(9px * var(--lisible, 1)); letter-spacing: .2em;
                  text-transform: uppercase; color: var(--stock-dim); padding-bottom: 3px; }
       /* La rangée d'initiative : la colonne vertébrale, elle existe SANS mob. */
       .combat-order { padding: 4px 0 8px; line-height: 1.9; }
@@ -6724,7 +6740,7 @@
         .mobcard[data-frappe] { animation: none; border-color: var(--stock); }
       }
       .mc-kd { display: flex; align-items: center; gap: 8px; padding: 3px 8px;
-               background: var(--ink-3); font-size: 9px; letter-spacing: .2em;
+               background: var(--ink-3); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .2em;
                text-transform: uppercase; color: var(--stock-dim); }
       .mc-actif { margin-left: auto; color: var(--stock); font-weight: 800; }
       .mc-etat { color: var(--stock-2); border: 1px solid var(--rule); padding: 0 4px; }
@@ -7364,12 +7380,12 @@
       .mc-row:last-child { border-bottom: none; }
       /* L'intervalle du d6 : c'est LUI qui désigne la ligne, il se lit en premier. */
       .mc-d { flex: 0 0 34px; text-align: center; font-family: var(--display);
-              font-weight: 800; font-size: 13px; color: var(--stock);
+              font-weight: 800; font-size: calc(13px * var(--lisible, 1)); color: var(--stock);
               border: 1px solid var(--rule); }
       .mc-t { display: flex; flex-direction: column; gap: 1px; }
-      .mc-atknom { font-weight: 800; font-size: 12px; }
-      .mc-atkfx { font-size: 10px; color: var(--stock-dim); letter-spacing: .04em; }
-      .mc-atktx { font-size: 10px; color: var(--slate); }
+      .mc-atknom { font-weight: 800; font-size: calc(12px * var(--lisible, 1)); }
+      .mc-atkfx { font-size: calc(10px * var(--lisible, 1)); color: var(--stock-dim); letter-spacing: .04em; }
+      .mc-atktx { font-size: calc(10px * var(--lisible, 1)); color: var(--slate); }
       .mob-absent { border: 1px dashed var(--rule); padding: 8px 10px; margin-bottom: 8px; }
 
       .bc-deroule { padding: 6px 0 4px; }
@@ -7385,7 +7401,7 @@
       .bc-fuite.barree .bc-sous { text-decoration: line-through; color: var(--slate); }
       .bc-fuite.barree .rien { color: var(--stock-dim); }
       .bc-cause { display: flex; flex-direction: column; gap: 3px; }
-      .bc-causenom { font-family: var(--display); font-weight: 800; font-size: 15px;
+      .bc-causenom { font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1));
                      letter-spacing: .1em; }
       .bloc-combat.clos { border-style: dashed; }
 
@@ -7402,15 +7418,15 @@
       .passif { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
                 border: 1px dashed var(--rule); background: rgba(90,100,112,.07);
                 padding: 4px 7px; margin: 2px 8px 6px; color: var(--stock-dim); }
-      .passif-tag { font-size: 8px; letter-spacing: .22em; text-transform: uppercase;
+      .passif-tag { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .22em; text-transform: uppercase;
                     color: var(--slate); border: 1px solid var(--slate); padding: 0 4px; }
-      .passif-auto { font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+      .passif-auto { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .12em; text-transform: uppercase;
                      color: var(--slate); font-style: italic; }
       /* Le texte IMPRIMÉ, en entier : c'est « ce qu'il fait ». Jamais tronqué. */
-      .passif-tx { flex-basis: 100%; font-size: 11px; line-height: 1.45;
+      .passif-tx { flex-basis: 100%; font-size: calc(11px * var(--lisible, 1)); line-height: 1.45;
                    color: var(--stock-2); }
       /* La couche debug seulement — additive, et elle ne teint pas la peau. */
-      .passif-debug { flex-basis: 100%; font-size: 9px; letter-spacing: .06em;
+      .passif-debug { flex-basis: 100%; font-size: calc(9px * var(--lisible, 1)); letter-spacing: .06em;
                       color: var(--slate); font-style: italic; }
       .auto-item.passif { border-style: dashed; }
 
@@ -7422,7 +7438,7 @@
        * rebours. Un marqueur, et il dit ce qu'il sait.
        */
       .rep { display: inline-flex; gap: 4px; }
-      .rep-m { font-size: 8px; letter-spacing: .14em; text-transform: uppercase;
+      .rep-m { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .14em; text-transform: uppercase;
                border: 1px solid var(--rule); padding: 0 4px; }
       .rep-m.attendu { color: var(--stock); border-color: var(--stock); font-weight: 800; }
       /* Le manque se DIT : une place vide qui s'explique, jamais une place absente. */
@@ -7591,7 +7607,7 @@
        * CE QUE LA CARTE FAIT DE LA FACE — posé À CÔTÉ du verdict du moteur,
        * jamais à sa place. Aucune teinte réservée : c'est du texte de carton.
        */
-      .branche-prise { margin-left: 8px; font-size: 10px; color: var(--stock);
+      .branche-prise { margin-left: 8px; font-size: calc(10px * var(--lisible, 1)); color: var(--stock);
                        border-left: 2px solid var(--stock-dim); padding-left: 6px; }
       /*
        * ⛑ S188 — **CE QUE LA CARTE DEMANDAIT ET N'A PAS EU.** Même matière que
@@ -7600,7 +7616,7 @@
        * et `--stamp` est réservé aux refus. **Aucune teinte neuve** : les quatre
        * sont prises (`ECRANS §2`).
        */
-      .branche-ratee { margin-left: 8px; font-size: 10px; color: var(--stock-dim);
+      .branche-ratee { margin-left: 8px; font-size: calc(10px * var(--lisible, 1)); color: var(--stock-dim);
                        border-left: 2px solid var(--rule); padding-left: 6px; }
 
       /*
@@ -7623,7 +7639,7 @@
        */
       .vs-ligne { display: flex; align-items: center; justify-content: center;
                   gap: 10px; flex-wrap: wrap; margin: 6px 0; }
-      .vs-nom { font-size: 11px; letter-spacing: .1em; color: var(--stock-dim);
+      .vs-nom { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .1em; color: var(--stock-dim);
                 text-transform: uppercase; }
 
       /*
@@ -7652,7 +7668,7 @@
       .ruban-entree .temps { display: flex; align-items: baseline; gap: 8px; }
       .temps-n { flex: 0 0 auto; min-width: 18px; text-align: center;
                  border: 1px solid var(--rule); padding: 0 4px;
-                 font-size: 11px; opacity: .8; }
+                 font-size: calc(11px * var(--lisible, 1)); opacity: .8; }
       .temps-txt { flex: 1 1 auto; min-width: 0; }
       /* Un temps dont le fait n'est pas tombé se dit, en gris : il ne s'invente
          pas, et il ne disparaît pas non plus — la place reste comptée. */
@@ -7680,7 +7696,7 @@
       .fin-temps { display: flex; align-items: baseline; gap: 10px;
                    border-left: 2px solid var(--rule); padding: 2px 0 2px 10px;
                    animation: fin-parait 260ms ease-out both; }
-      .fin-titre { flex: 0 0 auto; min-width: 190px; font-size: 11px;
+      .fin-titre { flex: 0 0 auto; min-width: 190px; font-size: calc(11px * var(--lisible, 1));
                    letter-spacing: .06em; opacity: .75; }
       .fin-txt   { flex: 1 1 auto; min-width: 0; }
       .fin-temps.grand { border-left-color: var(--stamp); padding: 6px 0 6px 10px; }
@@ -7699,7 +7715,7 @@
        * le rangeait dans *« JAMAIS RENDUE »* — c'est-à-dire *« état rare, va
        * chercher ailleurs »*. Il était là, sept fois, sur l'écran même.
        */
-      .fin-temps.grand .fin-titre { font-size: 13px; opacity: 1; color: var(--alert); }
+      .fin-temps.grand .fin-titre { font-size: calc(13px * var(--lisible, 1)); opacity: 1; color: var(--alert); }
       .fin-temps.grand .fin-txt { font-size: 20px; }
       @keyframes fin-parait {
         from { opacity: 0; transform: translateY(6px); }
@@ -7954,7 +7970,7 @@
        * contenu, **trois fois**. Il tient sur une ligne ici. *Ce qu'on
        * compacte est ce qui se répète ; le fait, lui, garde sa taille.*
        */
-      .col-droite .siege-lbl { font-size: 8px; letter-spacing: .1em; }
+      .col-droite .siege-lbl { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .1em; }
       /*
        * ⚑ **ET LA COMPACTION SEULE NE SUFFISAIT PAS — mesuré, pas supposé.**
        * Couchée, la colonne tombe de 2 533 px à 983 dans une fenêtre de 1 080 :
@@ -8031,12 +8047,12 @@
        */
       .tv-bascule { width: 100%; border: 0; border-bottom: 1px solid var(--rule);
                     background: var(--ink-3); color: var(--slate);
-                    font-family: var(--display); font-weight: 700; font-size: 8px;
+                    font-family: var(--display); font-weight: 700; font-size: calc(8px * var(--lisible, 1));
                     letter-spacing: .14em; padding: 2px 5px; text-align: left;
                     cursor: pointer; }
       .tv-bascule:hover { color: var(--stock); }
       .tv-replie { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
-                   padding: 4px 5px; font-size: 9px; }
+                   padding: 4px 5px; font-size: calc(9px * var(--lisible, 1)); }
       .tvr-pv   { font-variant-numeric: tabular-nums; font-weight: 700;
                   color: var(--stock); }
       .tvr-main { font-variant-numeric: tabular-nums; letter-spacing: .08em;
@@ -8049,24 +8065,24 @@
       .tvr-lieu { color: var(--slate); font-style: italic;
                   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
                   max-width: 100%; }
-      .tv-nom { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .tv-nom { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                 letter-spacing: .08em; }
       /* ⛑ S291 — même raison qu'à `.creneau-nom` : 8 px, `4,25` → `4,55`. */
-      .tv-perso { font-size: 8px; color: var(--slate); letter-spacing: .06em; }
-      .tv-joue { font-size: 8px; font-weight: 800; letter-spacing: .12em;
+      .tv-perso { font-size: calc(8px * var(--lisible, 1)); color: var(--slate); letter-spacing: .06em; }
+      .tv-joue { font-size: calc(8px * var(--lisible, 1)); font-weight: 800; letter-spacing: .12em;
                  color: var(--stock); border: 1px solid var(--stock-dim);
                  padding: 0 3px; margin-left: auto; }
-      .tv.actif .tv-nom { font-size: 11px; }
+      .tv.actif .tv-nom { font-size: calc(11px * var(--lisible, 1)); }
       /* L'image manquante se NOMME — jamais un blanc (§14.5). */
-      .tv-manque { font-size: 8px; color: var(--stock-dim); font-style: italic; }
+      .tv-manque { font-size: calc(8px * var(--lisible, 1)); color: var(--stock-dim); font-style: italic; }
       .tv-art { display: block; width: 100%; aspect-ratio: 2 / 3;
                 object-fit: contain; object-position: center top; background: var(--ink); }
       .tv-vide { padding: 14px 8px; text-align: center; min-height: 90px;
                  display: flex; align-items: center; justify-content: center; }
       .tv-pied { display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
                  padding: 3px 5px; border-top: 1px solid var(--rule); }
-      .tv-tuile-nom { font-size: 9px; color: var(--stock-2); }
-      .tv-occ { font-size: 8px; color: var(--stock-dim); border: 1px solid var(--rule);
+      .tv-tuile-nom { font-size: calc(9px * var(--lisible, 1)); color: var(--stock-2); }
+      .tv-occ { font-size: calc(8px * var(--lisible, 1)); color: var(--stock-dim); border: 1px solid var(--rule);
                 padding: 0 3px; }
 
       /*
@@ -8088,14 +8104,14 @@
       .tv-jet { border-top: 1px solid var(--rule); padding: 4px 5px 5px;
                 display: flex; flex-direction: column; gap: 2px; min-height: 62px; }
       .tv-jet-tete { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-      .tv-jet-quoi { font-family: var(--display); font-weight: 700; font-size: 11px;
+      .tv-jet-quoi { font-family: var(--display); font-weight: 700; font-size: calc(11px * var(--lisible, 1));
                      letter-spacing: .06em; color: var(--stock-2); }
       .tv-jet-ligne { display: flex; align-items: baseline; gap: 5px; }
-      .tv-jet-lbl { flex: 0 0 54px; font-size: 8px; letter-spacing: .16em;
+      .tv-jet-lbl { flex: 0 0 54px; font-size: calc(8px * var(--lisible, 1)); letter-spacing: .16em;
                     color: var(--stock-dim); }
-      .tv-jet-val { font-size: 10px; color: var(--stock-2); min-width: 0;
+      .tv-jet-val { font-size: calc(10px * var(--lisible, 1)); color: var(--stock-2); min-width: 0;
                     overflow-wrap: anywhere; }
-      .tv-jet .rien { font-size: 9px; }
+      .tv-jet .rien { font-size: calc(9px * var(--lisible, 1)); }
       /*
        * ⛑ S297 — **LA DATE DU DÉ, note ㉕.** Le bandeau ne montre que le
        * DERNIER jet du siège ; sans date, un dé du tour 9 se lit comme celui
@@ -8159,7 +8175,7 @@
        * la DÉMENT. Les cases maigrissent, la disposition ne bouge pas.
        */
       .creneau-note { padding: 5px 0 2px; display: flex; flex-direction: column; gap: 3px; }
-      .creneau-note .rien { font-size: 10px; color: var(--slate); font-style: italic; }
+      .creneau-note .rien { font-size: calc(10px * var(--lisible, 1)); color: var(--slate); font-style: italic; }
 
       /*
        * ═══ LA FICHE IMPRIMÉE — DU CARTON, ET DES ONGLETS ═════════════════
@@ -8182,7 +8198,7 @@
        *
        * On replie ce qui informe, jamais ce qui interdit.
        */
-      .fi-fam { font-size: 8px; letter-spacing: .22em; text-transform: uppercase;
+      .fi-fam { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .22em; text-transform: uppercase;
                 color: var(--slate); border-bottom: 1px solid var(--rule);
                 padding: 6px 0 2px; margin-top: 4px; }
       .fi-ligne { border-left: 2px solid var(--gold); padding: 3px 0 4px 7px; }
@@ -8196,13 +8212,13 @@
                      background: var(--ink); display: flex; flex-direction: column; gap: 6px; }
       .fi-sig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
                 border-left: 2px solid var(--gold); padding: 3px 0 4px 7px; }
-      .fi-nom { font-family: var(--display); font-weight: 800; font-size: 13px;
+      .fi-nom { font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1));
                 text-transform: uppercase; letter-spacing: .04em; }
-      .fi-tag { font-size: 8px; letter-spacing: .14em; text-transform: uppercase;
+      .fi-tag { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .14em; text-transform: uppercase;
                 color: var(--stock-dim); border: 1px solid var(--rule); padding: 0 4px; }
       /* Le verbatim imprimé, EN ENTIER — jamais tronqué : c'est ce qu'on lit. */
-      .fi-tx { flex-basis: 100%; font-size: 11px; line-height: 1.45; color: var(--stock-2); }
-      .fi-etat { font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+      .fi-tx { flex-basis: 100%; font-size: calc(11px * var(--lisible, 1)); line-height: 1.45; color: var(--stock-2); }
+      .fi-etat { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em; text-transform: uppercase;
                  color: var(--stock-dim); }
       /* Le barré de l'inerte, distinct du gris du passif : DEUX états. */
       .fi-sig.barree { border-left-color: var(--rule); }
@@ -8470,7 +8486,7 @@
                                 animation-delay: calc(var(--i) * .16s); }
       @keyframes ini-entre { to { opacity: 1; transform: none; } }
       .combat-order .arw { opacity: 0; animation: ini-marque .3s ease forwards .9s; }
-      .combat-order .ini-rang { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .combat-order .ini-rang { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                                 color: var(--ink); background: var(--stock-dim);
                                 padding: 0 4px; opacity: 0;
                                 animation: ini-marque .3s ease forwards .9s; }
@@ -8479,8 +8495,8 @@
                                  text-underline-offset: 3px; }
       /* ÊTRE CIBLÉ SE VOIT AVANT LA RÉSOLUTION — c'est un fait, pas une alerte. */
       .combat-order .ini-vise { outline: 1px solid var(--stock); outline-offset: 3px; }
-      .ini-badge { font-size: 8px; letter-spacing: .16em; color: var(--stock); }
-      .ini-ecart { font-size: 10px; color: var(--stock-dim); padding-top: 5px; }
+      .ini-badge { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .16em; color: var(--stock); }
+      .ini-ecart { font-size: calc(10px * var(--lisible, 1)); color: var(--stock-dim); padding-top: 5px; }
       /*
        * ⚑ **QUI OUVRE, ET POURQUOI — fait 64.** Une ligne, trois morceaux : le
        * mot `OUVRE`, le nom, la cause récitée. Elle monte AVANT la rangée parce
@@ -8496,16 +8512,16 @@
        */
       .siege-des { border-left: 2px solid var(--rule); margin: 0 0 8px 6px;
                    padding: 4px 0 4px 7px; display: flex; flex-direction: column; gap: 3px; }
-      .siege-lbl { font-size: 9px; letter-spacing: .18em; color: var(--stock-dim); }
+      .siege-lbl { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .18em; color: var(--stock-dim); }
       .siege-rang { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
       /* Le dé mini reprend la forme du grand — `data-faces` la gouverne déjà. */
-      .die.mini { min-width: 17px; height: 17px; font-size: 10px; line-height: 17px;
+      .die.mini { min-width: 17px; height: 17px; font-size: calc(10px * var(--lisible, 1)); line-height: 17px;
                   padding: 0 2px; }
-      .siege-fil { max-height: 78px; overflow-y: auto; font-size: 10px; }
+      .siege-fil { max-height: 78px; overflow-y: auto; font-size: calc(10px * var(--lisible, 1)); }
       .ini-ouvre { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
                    padding: 3px 0 6px; }
       .ini-ouvre-nom { font-family: var(--display); font-weight: 800; color: var(--stock); }
-      .ini-ouvre-pq { font-size: 10px; color: var(--stock-dim); }
+      .ini-ouvre-pq { font-size: calc(10px * var(--lisible, 1)); color: var(--stock-dim); }
       @media (prefers-reduced-motion: reduce) {
         .combat-order .ini-slot, .combat-order .arw, .combat-order .ini-rang,
         .cf-phrase { animation: none !important; opacity: 1 !important; transform: none !important; }
@@ -8519,7 +8535,7 @@
       .cf-deroule { padding-top: 4px; }
       .cf-phrases { display: flex; flex-direction: column; gap: 3px;
                     max-height: 300px; overflow-y: auto; padding: 4px 0; }
-      .cf-phrase { font-size: 12px; line-height: 1.45; padding: 3px 6px;
+      .cf-phrase { font-size: calc(12px * var(--lisible, 1)); line-height: 1.45; padding: 3px 6px;
                    border-left: 2px solid var(--rule); background: var(--ink);
                    opacity: 0; animation: ini-entre .3s ease forwards;
                    animation-delay: calc(var(--i) * .1s); }
@@ -8535,7 +8551,7 @@
       .cf-phrases > .perte-calcul { margin-top: -3px; padding: 3px 6px 5px 20px;
                    border-left: 2px solid var(--stamp); background: var(--ink); }
       /* Un trou qui dit son manque se lit ; un zéro inventé se croit. */
-      .cf-trou { font-size: 9px; line-height: 1.4; color: var(--slate); font-style: italic;
+      .cf-trou { font-size: calc(9px * var(--lisible, 1)); line-height: 1.4; color: var(--slate); font-style: italic;
                  border: 1px dashed var(--rule); padding: 4px 6px; margin-top: 6px; }
 
       /*
@@ -8553,10 +8569,10 @@
                      letter-spacing: .16em; text-transform: uppercase; line-height: 1.1; }
       .les-choix.a-toi .choix-titre { color: var(--ember); }
       .les-choix.attente .choix-titre { color: var(--stock-dim); font-size: 17px; }
-      .les-choix.vide .choix-titre { color: var(--slate); font-size: 14px;
+      .les-choix.vide .choix-titre { color: var(--slate); font-size: calc(14px * var(--lisible, 1));
                                      font-family: var(--mono); font-weight: 400;
                                      letter-spacing: .08em; }
-      .choix-corps { padding-top: 5px; font-size: 12px; }
+      .choix-corps { padding-top: 5px; font-size: calc(12px * var(--lisible, 1)); }
       /*
        * ═══ ⚑ S304 · LE SECOND VISAGE DE L'ENCADRÉ — note ㉗ ① ═════════════
        *
@@ -8579,9 +8595,9 @@
       .les-choix.a-jouer .choix-titre { color: var(--stock); font-size: 19px; }
       .choix-corps.atj { display: grid; gap: 3px; padding-top: 8px; }
       .atj-l { display: flex; gap: 10px; align-items: baseline; }
-      .atj-k { font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+      .atj-k { font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em;
                color: var(--stock-dim); min-width: 82px; }
-      .atj-v { font-family: var(--mono); font-size: 13px; color: var(--stock); }
+      .atj-v { font-family: var(--mono); font-size: calc(13px * var(--lisible, 1)); color: var(--stock); }
       /*
        * `épuisé` n'est pas un REFUS : c'est un état. Il ne prend donc ni le
        * rouge du tampon ni l'ember — l'encre atténuée suffit à dire « il n'y en
@@ -8622,7 +8638,7 @@
        * taille du fil central ne tient pas dans la colonne ; un fil qui change
        * de mots ne se lit plus comme lui.*
        */
-      .fil.fil-siege { font-size: 10px; line-height: 1.35; max-height: 168px;
+      .fil.fil-siege { font-size: calc(10px * var(--lisible, 1)); line-height: 1.35; max-height: 168px;
                        overflow-y: auto; overscroll-behavior: contain;
                        border-left: 1px solid var(--rule); padding-left: 6px; }
       /*
@@ -8637,7 +8653,7 @@
       .col-droite.col-journal { position: sticky; top: 8px; align-self: start;
                                 height: calc(var(--uvh) * 100 - 140px - var(--reserve-de-la-main)); }
       .col-droite.col-journal > .fil.fil-siege { max-height: none; flex: 1 1 auto; min-height: 0;
-                                                 font-size: 11px; }
+                                                 font-size: calc(11px * var(--lisible, 1)); }
       /*
        * ⛑ S1240 · E-T7 ③ (note 165) — UN COUP, UNE LIGNE, LE GROS CHIFFRE EST
        * L'ENCAISSÉ. Croze : *« B : encaissé »*. Le liseré prend la couleur du
@@ -8691,7 +8707,7 @@
 
       .siege-mort { border: 1px dashed var(--rule); background: var(--ink-2);
                     padding: 10px 12px; display: grid; gap: 4px; }
-      .siege-mort-nom { font-family: var(--display); font-size: 13px;
+      .siege-mort-nom { font-family: var(--display); font-size: calc(13px * var(--lisible, 1));
                         letter-spacing: .08em; color: var(--stock-dim); }
       /*
        * ⛑ S541 — second site de `Q-ROUGE-ENCRE`, trouvé en ÉLARGISSANT le
@@ -8703,7 +8719,7 @@
       .siege-mort-dead { font-family: var(--display); font-weight: 800;
                          font-size: 30px; line-height: 1; letter-spacing: .18em;
                          color: var(--rouge-vif); opacity: .82; }
-      .siege-mort-ou { font-family: var(--mono); font-size: 11px;
+      .siege-mort-ou { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1));
                        color: var(--stock-2); }
       /*
        * ⛑ S1285 · D-T3 — CE QU'IL PORTAIT, SOUS LA STÈLE. Grisé, jamais
@@ -8714,15 +8730,15 @@
       .siege-mort-butin { display: grid; gap: 2px; margin-top: 6px;
                           padding-top: 6px; border-top: 1px solid var(--rule);
                           opacity: .78; }
-      .siege-mort-butin-titre { font-family: var(--display); font-size: 10px;
+      .siege-mort-butin-titre { font-family: var(--display); font-size: calc(10px * var(--lisible, 1));
                                 letter-spacing: .12em; color: var(--stock-dim); }
-      .siege-mort-butin-rien { font-family: var(--mono); font-size: 11px;
+      .siege-mort-butin-rien { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1));
                                color: var(--stock-2); }
       .siege-mort-butin-ligne { display: flex; gap: 6px; align-items: baseline;
-                                font-family: var(--mono); font-size: 11px; }
+                                font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); }
       .smb-creneau { color: var(--stock-dim); min-width: 52px; }
       .smb-nom { color: var(--stock); flex: 1 1 auto; }
-      .smb-rarete { color: var(--stock-2); font-size: 10px;
+      .smb-rarete { color: var(--stock-2); font-size: calc(10px * var(--lisible, 1));
                     letter-spacing: .06em; }
 
       .atj-fin { display: flex; gap: 12px; align-items: baseline;
@@ -8774,7 +8790,7 @@
       .filet { flex: 1 1 100%; display: flex; align-items: center; gap: 8px;
                flex-wrap: wrap; }
       .filet:empty { display: none; }
-      .filet-tx { font-size: 11px; color: var(--dim); letter-spacing: .03em; }
+      .filet-tx { font-size: calc(11px * var(--lisible, 1)); color: var(--dim); letter-spacing: .03em; }
       /*
        * ⛑⛑ **S556 — LE REBOURS ÉTAIT ILLISIBLE, ET C'EST UN COMPTE À REBOURS.**
        *
@@ -8799,8 +8815,8 @@
        * nœud porteur : `1,88` → `4,99`. *Ce qu'on déduit se dit comme une
        * déduction.*
        */
-      .filet-refus { font-size: 11px; line-height: 1.4; color: var(--alert); }
-      .atj-rappel { font-size: 11px; line-height: 1.4; color: var(--activable);
+      .filet-refus { font-size: calc(11px * var(--lisible, 1)); line-height: 1.4; color: var(--alert); }
+      .atj-rappel { font-size: calc(11px * var(--lisible, 1)); line-height: 1.4; color: var(--activable);
                     flex: 1 1 100%; }
       .les-choix .prompt { border: none; background: none; padding: 6px 0 0; margin: 0; }
 
@@ -8821,14 +8837,14 @@
        */
       .butin { display: flex; flex-direction: column; gap: 8px; }
       .les-choix.butin-ouvert { border-color: var(--stock); }
-      .butin-source { font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      .butin-source { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .1em; text-transform: uppercase;
                       color: var(--stock-dim); }
       .butin-des { display: flex; gap: 6px; flex-wrap: wrap; }
       .butin-de { display: flex; align-items: baseline; gap: 5px; padding: 3px 7px;
                   border: 1px solid var(--rule); background: var(--ink); }
       .butin-face { font-family: var(--display); font-weight: 800; font-size: 17px; }
-      .butin-coffre { font-size: 9px; letter-spacing: .1em; color: var(--slate); }
-      .butin-issue { font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      .butin-coffre { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .1em; color: var(--slate); }
+      .butin-issue { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .1em; text-transform: uppercase;
                      color: var(--stock-2); }
       /* `RIEN` S'AFFICHE — `coffin` sort NOTHING sur 5/20, une fois sur quatre.
          Un écran vide se lit comme une panne ; le dé perdu se dit. */
@@ -8857,7 +8873,7 @@
                                to   { transform: translateY(-3px); } }
       .butin-des.pose .butin-face { animation: butin-tampon .2s ease both; }
       .butin-des.pose .butin-de:not(.rien) .butin-issue {
-        color: var(--stamp); font-weight: 800; font-size: 15px;
+        color: var(--stamp); font-weight: 800; font-size: calc(15px * var(--lisible, 1));
         animation: butin-tampon .28s var(--pop) both; }
       @keyframes butin-tampon { from { opacity: 0; transform: scale(1.35); }
                                 to   { opacity: 1; transform: none; } }
@@ -8867,7 +8883,7 @@
        * n'est plus un nombre, c'est SA RARETÉ, en grand, dans la teinte du kit.
        */
       .butin .butin-coffre { display: none; }
-      .butin-des.pose .butin-de[data-rar] .butin-face { font-size: 11px; opacity: .55; }
+      .butin-des.pose .butin-de[data-rar] .butin-face { font-size: calc(11px * var(--lisible, 1)); opacity: .55; }
       .butin-des.pose .butin-de[data-rar] .butin-issue {
         font-family: var(--display); font-size: 20px; letter-spacing: .06em; }
       .butin-de[data-rar="common"]    { border-color: var(--rar-common); }
@@ -8890,7 +8906,7 @@
       .butin-dos[data-rar="epic"]      { border-color: var(--rar-epic); }
       .butin-dos[data-rar="legendary"] { border-color: var(--rar-legendary); }
       .butin-dos-rar { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center;
-                       font-family: var(--display); font-weight: 800; font-size: 14px; color: #efe6d2;
+                       font-family: var(--display); font-weight: 800; font-size: calc(14px * var(--lisible, 1)); color: #efe6d2;
                        text-shadow: 0 1px 3px #000; }
       @media (prefers-reduced-motion: reduce) {
         .butin-des.roule .butin-de { animation: none; }
@@ -8927,12 +8943,12 @@
                    min-height: 64px; margin: 5px; text-align: center; }
       .butin-art:not(:has(.butin-img)) { padding: 8px; border: 1px dashed var(--rule); }
       .butin-img { display: block; width: 100%; height: auto; }
-      .butin-nom { font-family: var(--display); font-weight: 800; font-size: 15px;
+      .butin-nom { font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1));
                    text-transform: uppercase; padding: 2px 8px; }
       .butin-faits { display: flex; gap: 4px; flex-wrap: wrap; padding: 2px 8px 4px; }
-      .butin-rarete { font-size: 9px; letter-spacing: .16em; text-transform: uppercase;
+      .butin-rarete { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em; text-transform: uppercase;
                       font-weight: 800; color: var(--stock-2); }
-      .butin-tx { font-size: 11px; line-height: 1.45; color: var(--stock-2); padding: 0 8px; }
+      .butin-tx { font-size: calc(11px * var(--lisible, 1)); line-height: 1.45; color: var(--stock-2); padding: 0 8px; }
 
       /*
        * ═══ ⚑⚑ S444 · L'ACCORDÉON DES MAINS TIERCES — note ㊸ ⑤ ═════════════
@@ -8985,7 +9001,7 @@
 
       .main-tierce { padding: 4px 0 2px; display: flex; align-items: center;
                      flex-wrap: wrap; gap: 2px; }
-      .mt-titre { font-family: var(--mono); font-size: 9px; letter-spacing: .14em;
+      .mt-titre { font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .14em;
                   color: var(--stock-dim); flex: 0 0 auto; padding-right: 6px; }
       .mt-rangee { display: flex; align-items: flex-end; padding-left: 3px; }
       .mt-dos {
@@ -9001,17 +9017,17 @@
        * au liseré de leur rareté (la même échelle que les dos d'à côté).
        */
       .mains-des-vivants { display: grid; gap: 3px; padding: 2px 10px 4px; }
-      .mdv-titre { font-family: var(--display); font-size: 13px; letter-spacing: .12em;
+      .mdv-titre { font-family: var(--display); font-size: calc(13px * var(--lisible, 1)); letter-spacing: .12em;
                    color: var(--rouge-vif); }
       .mdv-rangee { display: flex; align-items: baseline; gap: 10px;
                     border-left: 3px solid var(--siege, var(--rule)); padding-left: 8px; }
-      .mdv-qui { font-family: var(--display); font-size: 12px; letter-spacing: .08em;
+      .mdv-qui { font-family: var(--display); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .08em;
                  color: var(--stock); flex: 0 0 150px; }
       .mdv-cartes { display: flex; flex-wrap: wrap; gap: 4px; }
       /* ⛑ S1323 · MO-1 — le mort ne voit que des dos. */
       .mdv-dos { width: 22px; height: 32px; border: 1px solid var(--rule); background: var(--ink-2);
         box-shadow: inset 0 0 0 2px var(--ink), inset 0 0 0 3px var(--siege, var(--rule)); }
-      .mdv-carte { font-size: 12px; color: var(--stock); padding: 2px 6px;
+      .mdv-carte { font-size: calc(12px * var(--lisible, 1)); color: var(--stock); padding: 2px 6px;
                    border: 2px solid var(--rule); border-radius: 3px; background: var(--ink-3); }
       .mdv-carte[data-rar="COMMON"]    { border-color: var(--rar-common); }
       .mdv-carte[data-rar="UNCOMMON"]  { border-color: var(--rar-uncommon); }
@@ -9046,7 +9062,7 @@
                margin-left: auto; }
       .ruban-siege { display: flex; align-items: center; gap: 4px; opacity: .8;
                      padding: 2px 5px; border: 1px solid transparent; }
-      .ruban-marque { font-size: 11px; width: 10px; color: var(--stock-dim); }
+      .ruban-marque { font-size: calc(11px * var(--lisible, 1)); width: 10px; color: var(--stock-dim); }
       /* Il a joué : atténué. Ce n'est pas « il ne peut plus rien », c'est
          « son tour est passé » — et la nuance vaut une teinte en moins. */
       .ruban-siege.joue { opacity: .45; }
@@ -9063,12 +9079,12 @@
          vrais, il garde le liseré ET la rature. */
       .ruban-siege.mort.actif { opacity: .7; }
       /* `SUIVANT` est ÉCRIT : une position se lit, elle ne se déduit pas. */
-      .ruban-suivant { font-size: 8px; letter-spacing: .16em; text-transform: uppercase;
+      .ruban-suivant { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .16em; text-transform: uppercase;
                        color: var(--stock-dim); border: 1px solid var(--rule); padding: 0 3px; }
       /* Le mur, et DERRIÈRE LUI l'autre côté — c'est lui qui rend la frontière
          lisible : sans l'autre côté, le mur n'est qu'un trait. */
       .ruban-mur { color: var(--rule); font-size: 16px; }
-      .ruban-borne { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .ruban-borne { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                      letter-spacing: .18em; text-transform: uppercase; color: var(--slate);
                      border: 1px dashed var(--rule); padding: 1px 6px; }
       .ruban-borne.apres { color: var(--stock-dim); opacity: .7; }
@@ -9096,7 +9112,7 @@
        * A · CE QUE LE CLIGNOTEMENT VEUT DIRE, ÉCRIT. La place est toujours là ;
        * elle porte les actions restantes quand il en reste.
        */
-      .ruban-fin { font-size: 8px; letter-spacing: .16em; text-transform: uppercase;
+      .ruban-fin { font-size: calc(8px * var(--lisible, 1)); letter-spacing: .16em; text-transform: uppercase;
                    color: var(--stock-dim); border: 1px solid var(--rule);
                    padding: 1px 5px; }
       .ruban-fin.épuisé { color: var(--stock); border-color: var(--stock-dim); font-weight: 700; }
@@ -9180,9 +9196,9 @@
        */
       .log-base { display: flex; flex-direction: column; gap: 3px; margin: 2px 0 4px; }
       .log-ligne { display: flex; gap: 6px; align-items: baseline; }
-      .log-tour { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .log-tour { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                   letter-spacing: .08em; color: var(--slate); flex: 0 0 auto; }
-      .log-txt { font-size: 12px; line-height: 1.35; }
+      .log-txt { font-size: calc(12px * var(--lisible, 1)); line-height: 1.35; }
       /*
        * ⛑ S288 — LA CIBLE EST L'OBJET (notes ㉒ ② / ㉓ ③). Le cadre reprend
        * l'encre `--activable` des zones de tuile : **c'est le même geste** —
@@ -9203,7 +9219,7 @@
                    width: 108px; padding: 5px; cursor: pointer; background: var(--ink-2);
                    border: 1px solid color-mix(in srgb, var(--activable) 60%, transparent);
                    color: var(--activable); font-family: var(--display); font-weight: 800;
-                   font-size: 11px; letter-spacing: .04em; text-align: center; }
+                   font-size: calc(11px * var(--lisible, 1)); letter-spacing: .04em; text-align: center; }
       .obj-cible:hover:not(:disabled),
       .obj-cible:focus-visible:not(:disabled) { border-color: var(--activable);
                                                 background: var(--ink-3); }
@@ -9240,7 +9256,7 @@
       .obj-cible.levee .obj-art { border-color: var(--activable); }
       .obj-cible.levee .obj-motif { color: var(--activable); font-weight: 800; }
       .obj-motif { display: block; font-family: var(--body); font-weight: 400;
-                   font-size: 10px; letter-spacing: 0; color: var(--slate); line-height: 1.25; }
+                   font-size: calc(10px * var(--lisible, 1)); letter-spacing: 0; color: var(--slate); line-height: 1.25; }
       /*
        * ⛑ S495 — **LA RANGÉE DU CHOIX DE CARTES, EN ×2** (note ㊿ ④). Croze :
        * *« "GARDE CE QUE TU VEUX" : cartes trop petites, illisibles —
@@ -9448,7 +9464,7 @@
        */
       .cell-nom { position: absolute; left: 0; right: 0; bottom: 0;
                   transform: skewX(10deg); text-transform: uppercase;
-                  font-family: var(--display); font-weight: 800; font-size: 13px;
+                  font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1));
                   letter-spacing: .02em; text-align: center; padding: 3px 1px;
                   background: color-mix(in srgb, var(--ink) 82%, transparent);
                   color: var(--activable); pointer-events: none; }
@@ -9460,7 +9476,7 @@
        */
       .cell-pastille { position: absolute; top: 3px; left: 3px;
                        transform: skewX(10deg);
-                       font-family: var(--display); font-weight: 800; font-size: 13px;
+                       font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1));
                        padding: 2px 6px; color: var(--ink); pointer-events: none; }
       /*
        * ═══ ⚑⚑ S588 · LA RÉVÉLATION ÉCHELONNÉE — note 68, réf v14 ════════════
@@ -9537,9 +9553,9 @@
                     background: var(--ink-2); border: 1px solid var(--rule);
                     padding: 7px 8px; }
       .lg-tete { display: flex; align-items: baseline; gap: 8px; }
-      .lg-tete h2 { font-family: var(--display); font-weight: 800; font-size: 13px;
+      .lg-tete h2 { font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1));
                     letter-spacing: .18em; margin: 0; }
-      .lg-sous { font-size: 10px; color: var(--slate); letter-spacing: .04em; }
+      .lg-sous { font-size: calc(10px * var(--lisible, 1)); color: var(--slate); letter-spacing: .04em; }
       /*
        * La hauteur est bornée et le débordement défile : le fil porte 40
        * lignes, et une colonne qui pousse la page rendrait l'ascenseur que la
@@ -9575,9 +9591,9 @@
       .col-tuile { display: flex; align-items: baseline; gap: 6px;
                   margin-top: 5px; padding-top: 5px;
                   border-top: 1px solid var(--rule); }
-      .col-tuile-cap { font-family: var(--display); font-weight: 800; font-size: 9px;
+      .col-tuile-cap { font-family: var(--display); font-weight: 800; font-size: calc(9px * var(--lisible, 1));
                       letter-spacing: .16em; color: var(--slate); flex: 0 0 auto; }
-      .col-tuile-nom { font-size: 11px; color: var(--stock-2);
+      .col-tuile-nom { font-size: calc(11px * var(--lisible, 1)); color: var(--stock-2);
                       overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       /*
        * ═══ ⚑⚑ S614 · LES JETONS DE RARETÉ — une écriture, deux lecteurs ════
@@ -9666,7 +9682,7 @@
                  display: flex; align-items: baseline; gap: 12px; }
       .vd-tete h2 { font-family: var(--display); font-weight: 800; font-size: 26px;
                     letter-spacing: .16em; margin: 0; }
-      .vd-run { font-size: 11px; color: var(--slate); letter-spacing: .14em; }
+      .vd-run { font-size: calc(11px * var(--lisible, 1)); color: var(--slate); letter-spacing: .14em; }
       /*
        * ⚠ **L'ASPECT EST CARRÉ, ET C'EST CE QUI REND LES % DE LA SPIRALE
        * JUSTES.** Un rayon en `%` sur une boîte rectangulaire s'écrase sur un
@@ -9709,24 +9725,24 @@
       .vd-carton { grid-area: carton; }
       .vd-etat { grid-area: etat; display: flex; flex-direction: column; gap: 4px;
                  max-height: calc(var(--uvh) * 34); overflow-y: auto; }
-      .vd-etat h3 { font-family: var(--display); font-weight: 800; font-size: 12px;
+      .vd-etat h3 { font-family: var(--display); font-weight: 800; font-size: calc(12px * var(--lisible, 1));
                     letter-spacing: .18em; margin: 0 0 4px; }
       .vd-ligne { display: flex; justify-content: space-between; gap: 10px;
                   padding: 3px 0; border-bottom: 1px solid var(--rule); }
       .vd-ligne:last-child { border-bottom: 0; }
-      .vd-cap { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .vd-cap { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                 letter-spacing: .16em; color: var(--slate); }
-      .vd-val { font-family: var(--display); font-weight: 800; font-size: 13px; }
+      .vd-val { font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1)); }
       .vd-tuile { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
-                  font-size: 11px; padding: 3px 0;
+                  font-size: calc(11px * var(--lisible, 1)); padding: 3px 0;
                   border-bottom: 1px solid var(--rule); }
       .vd-tuile:last-child { border-bottom: 0; }
-      .vd-tuile-nom { font-family: var(--display); font-weight: 800; font-size: 12px;
+      .vd-tuile-nom { font-family: var(--display); font-weight: 800; font-size: calc(12px * var(--lisible, 1));
                       letter-spacing: .04em; }
       .vd-tuile-portail { color: var(--portail); font-weight: 700; letter-spacing: .08em; }
-      .vd-tuile-cap { font-size: 9px; letter-spacing: .14em; color: var(--slate); }
+      .vd-tuile-cap { font-size: calc(9px * var(--lisible, 1)); letter-spacing: .14em; color: var(--slate); }
       .bt-bascule { margin-left: auto; font-family: var(--display); font-weight: 800;
-                    font-size: 10px; letter-spacing: .16em; }
+                    font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em; }
       .bt-bascule-on { border-color: var(--activable); color: var(--activable); }
       .fin-run { display: flex; flex-direction: column; gap: 10px; }
       /*
@@ -9815,7 +9831,7 @@
       .fr-titre h2 { font-family: var(--display); font-weight: 800;
                      font-size: clamp(27px, calc(var(--uvh) * 3.2), 48px); line-height: 1.05;
                      letter-spacing: .12em; margin: 0; }
-      .fr-sous-titre { font-size: 11px; color: var(--slate); letter-spacing: .04em; }
+      .fr-sous-titre { font-size: calc(11px * var(--lisible, 1)); color: var(--slate); letter-spacing: .04em; }
       /*
        * ⚠ **UNE COLONNE PAR JOUEUR, ET C'EST MESURÉ.** Empilées en lignes, les
        * quatre faisaient **2 350 px dans une fenêtre de 1 080** : il fallait
@@ -9840,7 +9856,7 @@
                      object-position: center 30%;
                      border: 1px solid var(--rule); }
       .fr-nom { display: flex; flex-direction: column; gap: 2px; }
-      .fr-perso { font-family: var(--display); font-weight: 800; font-size: 12px;
+      .fr-perso { font-family: var(--display); font-weight: 800; font-size: calc(12px * var(--lisible, 1));
                   letter-spacing: .04em; }
       .fr-score { font-family: var(--display); font-weight: 800; font-size: 30px;
                   line-height: 1; color: var(--activable); }
@@ -9850,17 +9866,17 @@
        * premier (c'est lui qui désigne le vainqueur, §10), et le run est la
        * précision. *Deux nombres de même poids se lisent comme deux totaux.*
        */
-      .fs-run { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .fs-run { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                 letter-spacing: .08em; color: var(--slate); }
-      .fr-deux-runs { font-size: 10px; line-height: 1.5; color: var(--slate);
+      .fr-deux-runs { font-size: calc(10px * var(--lisible, 1)); line-height: 1.5; color: var(--slate);
                       margin-top: 8px; max-width: 62ch; }
-      .fr-sous { font-family: var(--display); font-weight: 800; font-size: 9px;
+      .fr-sous { font-family: var(--display); font-weight: 800; font-size: calc(9px * var(--lisible, 1));
                  letter-spacing: .1em; color: var(--slate); margin-bottom: 3px; }
       .fr-sources { display: flex; flex-direction: column; gap: 2px; }
       .fr-source { display: flex; justify-content: space-between; gap: 8px;
-                   font-size: 11px; }
+                   font-size: calc(11px * var(--lisible, 1)); }
       .fr-pts { color: var(--activable); font-weight: 700; }
-      .fr-vide { font-size: 11px; color: var(--slate); }
+      .fr-vide { font-size: calc(11px * var(--lisible, 1)); color: var(--slate); }
       /*
        * ⛑⛑ S1220 · P4-T2 — CE QUE LE RUN A FAIT. Même grammaire que
        * `.fr-sources` juste au-dessus : deux colonnes, libellé à gauche,
@@ -9872,7 +9888,7 @@
                   margin-top: 6px; padding-top: 5px;
                   border-top: 1px solid var(--rule); }
       .fr-stat { display: flex; justify-content: space-between; gap: 8px;
-                 font-size: 11px; color: var(--slate); }
+                 font-size: calc(11px * var(--lisible, 1)); color: var(--slate); }
       .fr-stat-val { color: var(--stock); font-weight: 700; }
       /*
        * ⛑ S1274 — **HUIT LIGNES DANS LA HAUTEUR DE QUATRE.** L'écran de fin
@@ -9956,7 +9972,7 @@
        * portrait le plus grand au-dessus de la marche la plus haute.
        */
       .fr-place-1 .fr-pod-qui img { width: 84%; border-color: var(--stock); }
-      .fr-pod-nom { font-family: var(--display); font-weight: 800; font-size: 12px;
+      .fr-pod-nom { font-family: var(--display); font-weight: 800; font-size: calc(12px * var(--lisible, 1));
                     letter-spacing: .08em; text-align: center; }
       /*
        * La FOSSE recadre la marche pour qu'elle MONTE du sol au lieu d'y
@@ -9987,12 +10003,12 @@
       .fr-marche-2 { animation-duration: .68s; }
       .fr-marche-3 { animation-duration: .5s; }
       .fr-place-1 .fr-marche { border-color: var(--stock); }
-      .fr-pod-rang { font-family: var(--display); font-weight: 800; font-size: 11px;
+      .fr-pod-rang { font-family: var(--display); font-weight: 800; font-size: calc(11px * var(--lisible, 1));
                      letter-spacing: .24em; color: var(--stock-dim); }
       .fr-pod-pts { font-family: var(--display); font-weight: 800; font-size: 38px;
                     line-height: 1; color: var(--activable); }
       .fr-place-1 .fr-pod-pts { color: var(--stock); font-size: 46px; }
-      .fr-pod-lbl { font-family: var(--display); font-weight: 800; font-size: 9px;
+      .fr-pod-lbl { font-family: var(--display); font-weight: 800; font-size: calc(9px * var(--lisible, 1));
                     letter-spacing: .28em; color: var(--stock-dim); }
       .fr-sol-trait { height: 1px; background: var(--rule); margin: 0 4%; }
       /*
@@ -10001,7 +10017,7 @@
        */
       .fr-pod-personne { text-align: center; padding: 14px 0 10px;
                          font-family: var(--display); font-weight: 800;
-                         font-size: 15px; letter-spacing: .2em;
+                         font-size: calc(15px * var(--lisible, 1)); letter-spacing: .2em;
                          color: var(--stock-dim);
                          border-bottom: 1px solid var(--rule);
                          margin: 0 4%; }
@@ -10026,11 +10042,11 @@
        */
       .fr-mort-badge { display: inline-block; border: 1px solid var(--alert);
                        color: var(--alert); font-family: var(--display);
-                       font-weight: 800; font-size: 10px; letter-spacing: .14em;
+                       font-weight: 800; font-size: calc(10px * var(--lisible, 1)); letter-spacing: .14em;
                        padding: 3px 7px; }
-      .fr-vif-badge { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .fr-vif-badge { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                       letter-spacing: .14em; color: var(--stock-dim); }
-      .fr-mort-mi { margin-top: 5px; font-size: 10px; font-style: italic;
+      .fr-mort-mi { margin-top: 5px; font-size: calc(10px * var(--lisible, 1)); font-style: italic;
                     color: var(--stock-dim); }
       @keyframes fr-marche-monte { from { transform: translateY(100%); } }
       @keyframes fr-pod-parait  { from { opacity: 0; transform: translateY(-14px); } }
@@ -10076,9 +10092,9 @@
                                         font-size: clamp(54px, calc(var(--uvh) * 6.4), 96px);
                                         color: var(--ink); }
       .obj-rangee.grandes { gap: 12px; }
-      .obj-rangee.grandes .obj-cible { width: 216px; padding: 8px; font-size: 15px; }
+      .obj-rangee.grandes .obj-cible { width: 216px; padding: 8px; font-size: calc(15px * var(--lisible, 1)); }
       .obj-rangee.grandes .obj-nom { line-height: 1.25; }
-      .obj-rangee.grandes .obj-motif { font-size: 12px; }
+      .obj-rangee.grandes .obj-motif { font-size: calc(12px * var(--lisible, 1)); }
       .obj-rangee.grandes .obj-cible.levee { transform: translateY(-12px); }
       .tz-calque { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
             /*
@@ -10100,14 +10116,14 @@
         display: flex; flex-direction: column; gap: 3px; z-index: 4;
         padding: 4px; background: var(--ink-2);
         border: 1px solid var(--rule); pointer-events: auto; }
-      .tz-troc-liste button { font-size: 11px; padding: 3px 6px; }
+      .tz-troc-liste button { font-size: calc(11px * var(--lisible, 1)); padding: 3px 6px; }
       /* S761 — la liste des cadavres, sous le coin rang 3 : 58,675 %.
          `main.ts` porte la table des abscisses, ici comme pour le troc. */
       .tz-depouille-liste { position: absolute; left: 58.675%; top: 60%;
         display: flex; flex-direction: column; gap: 3px; z-index: 4;
         padding: 4px; background: var(--ink-2);
         border: 1px solid var(--rule); pointer-events: auto; }
-      .tz-depouille-liste button { font-size: 11px; padding: 3px 6px; }
+      .tz-depouille-liste button { font-size: calc(11px * var(--lisible, 1)); padding: 3px 6px; }
       .tz-refus { margin: 6px 0 0; padding: 6px 8px; border: 1px solid var(--rule);
                   background: var(--ink-2); display: flex; flex-direction: column; gap: 3px; }
       /*
@@ -10175,7 +10191,7 @@
              */
             margin: 0;
             border-radius: 10px; padding: 0; color: var(--activable);
-            font-family: var(--display); font-weight: 800; font-size: 13px;
+            font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1));
             letter-spacing: .1em; display: flex; align-items: flex-start;
             justify-content: flex-end; gap: 4px;
             text-shadow: 0 1px 2px rgba(0, 0, 0, .85);
@@ -10434,7 +10450,7 @@
       .boule { width: 1.05em; height: 1.05em; border-radius: 50%;
                border: 1px solid var(--rule); box-sizing: border-box;
                display: inline-flex; align-items: center; justify-content: center;
-               font-size: 9px; line-height: 1; font-weight: 800; }
+               font-size: calc(9px * var(--lisible, 1)); line-height: 1; font-weight: 800; }
       /* Mon tour, et l'action est encore là : c'est jouable, et le vert le dit. */
       .boule.pleine { background: var(--activable); border-color: var(--activable);
                       color: var(--ink); }
@@ -10501,7 +10517,7 @@
        * atténué ; c'est le `+3` qui prend l'œil, et lui seul, le temps d'être
        * vu. **Pas d'historique, pas de bandeau d'annonce.**
        */
-      .ruban-score { font-family: var(--display); font-size: 10px; font-weight: 700;
+      .ruban-score { font-family: var(--display); font-size: calc(10px * var(--lisible, 1)); font-weight: 700;
                      color: var(--stock-dim); opacity: .75; min-width: 10px;
                      text-align: right; }
       .ruban-siege.actif .ruban-score { color: var(--stock); opacity: 1; }
@@ -10511,7 +10527,7 @@
         76%  { opacity: 1; transform: translateY(0); }
         100% { opacity: 0; transform: translateY(-3px); }
       }
-      .ruban-delta { font-family: var(--display); font-size: 11px; font-weight: 800;
+      .ruban-delta { font-family: var(--display); font-size: calc(11px * var(--lisible, 1)); font-weight: 800;
                      color: var(--stock); animation: delta-monte 2.6s ease-out 1 forwards; }
 
       /*
@@ -10581,7 +10597,7 @@
                      transform: translateX(-50%); display: flex;
                      flex-direction: column; align-items: center; gap: 1px;
                      pointer-events: none; white-space: nowrap; z-index: 5;
-                     font-family: var(--display); font-weight: 800; font-size: 15px;
+                     font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1));
                      letter-spacing: .04em;
                      animation: varie-monte 2.6s ease-out 1 forwards; }
       /*
@@ -10621,7 +10637,7 @@
        * ligne-ci porte le même fait que le montant, elle n'a pas de couleur à
        * elle.
        */
-      .varie-cause { font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+      .varie-cause { font-size: calc(11px * var(--lisible, 1)); font-weight: 700; letter-spacing: .02em; }
       /*
        * ⛑ S219 — **LE MOUVEMENT SUIT LA BULLE, IL NE SE RÉINVENTE PAS.** Les
        * quatre temps, leurs pourcentages et leurs opacités sont ceux du S57,
@@ -10723,18 +10739,18 @@
         /* Hors de la plage arbitrée, tout est empilé — voir `.col-droite`. */
 :where(html[data-verrou="non"]) .cf-dues { position: static; }
       }
-      .cf-dues .due { font-size: 10px; letter-spacing: .06em; color: var(--stock-dim);
+      .cf-dues .due { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .06em; color: var(--stock-dim);
                       border: 1px solid var(--rule); padding: 1px 6px; }
       .cf-dues .due.on { color: var(--ember); border-color: var(--ember); font-weight: 800; }
       .cf-dues .due-btn { font-weight: 800; }
 
       .cf-cibles { border: 1px solid var(--rule); padding: 6px 8px; background: var(--ink); }
       .cible-seule { display: flex; flex-direction: column; gap: 2px; padding-top: 3px; }
-      .cible-nom { font-family: var(--display); font-weight: 800; font-size: 15px; }
+      .cible-nom { font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1)); }
       .cf-cibles .cible-on { font-weight: 800; border-color: var(--stock); }
       .cf-issue { padding: 12px; display: flex; flex-direction: column; gap: 4px; }
       .combat-fenetre.issue { border-color: var(--stock-dim); }
-      .portee { font-size: 10px; color: var(--slate); letter-spacing: .04em; }
+      .portee { font-size: calc(10px * var(--lisible, 1)); color: var(--slate); letter-spacing: .04em; }
 
       /*
        * ═══ §5.1.2bis · L'ÉCRAN D'OUVERTURE — LA PORTE READY ══════════════
@@ -10983,7 +10999,7 @@
        */
       .ouv-admin { flex: none; margin-left: 10px; background: transparent;
                    border: 1px solid var(--rule); color: var(--slate);
-                   font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+                   font-size: calc(10px * var(--lisible, 1)); letter-spacing: .1em; text-transform: uppercase;
                    padding: 3px 9px; cursor: pointer; }
       .ouv-admin:hover { border-color: var(--stock); color: var(--stock); }
       .ouv-admin[aria-pressed="true"] { border-color: var(--stock);
@@ -11035,7 +11051,7 @@
       .vd-score-total { font-family: var(--display); font-weight: 800; font-size: 20px;
                         line-height: 1; min-width: 34px; text-align: right; }
       .vd-score-detail { display: flex; gap: 10px; flex-wrap: wrap; margin-left: auto; }
-      .vd-score-part { font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      .vd-score-part { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .1em; text-transform: uppercase;
                        color: var(--stock-dim); }
       .vd-journal { display: flex; flex-direction: column; gap: 8px;
                     border-left: 1px solid var(--rule); padding-left: 18px;
@@ -11050,11 +11066,11 @@
                     max-height: 560px; }
       .vdj-tete h3 { margin: 0; font-family: var(--display); font-weight: 800;
                      font-size: 22px; letter-spacing: .12em; color: var(--stock); }
-      .vdj-sous { font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+      .vdj-sous { font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .1em;
                   color: var(--stock-dim); }
       .vdj-barre { display: flex; gap: 10px; align-items: center; }
       .vdj-sel, .vdj-cherche {
-        font-family: var(--mono); font-size: 11px; padding: 4px 6px;
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); padding: 4px 6px;
         background: var(--ink-2); color: var(--stock-2);
         border: 1px solid var(--rule);
       }
@@ -11067,7 +11083,7 @@
        * n'est ni l'un ni l'autre. Il prend `--stock`, l'encre du texte fort.
        */
       .vdj-filtre { border: 1px solid var(--rule); background: var(--ink);
-                    color: var(--dim); font-size: 12px; letter-spacing: .04em;
+                    color: var(--dim); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .04em;
                     padding: 3px 10px; cursor: pointer; flex: 0 0 auto; }
       .vdj-filtre.on { color: var(--stock); border-color: var(--stock-dim);
                        background: var(--raised); }
@@ -11079,7 +11095,7 @@
                    display: flex; flex-direction: column; }
       .vdj-tour {
         position: sticky; top: 0; z-index: 1;
-        font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em;
         text-transform: uppercase; color: var(--stock-dim);
         background: var(--ink); padding: 6px 0 3px;
         border-bottom: 1px solid var(--rule); margin-top: 8px;
@@ -11087,7 +11103,7 @@
       /* Le tour COURANT se distingue, sinon deux en-têtes se ressemblent. */
       .vdj-tour-ici { color: var(--stock); border-bottom-color: var(--stock-dim); }
       .vdj-ico { display: inline-block; width: 1.4em; opacity: .75; }
-      .vdj-compte { font-family: var(--mono); font-size: 10px;
+      .vdj-compte { font-family: var(--mono); font-size: calc(10px * var(--lisible, 1));
                     color: var(--stock-dim); padding-top: 4px;
                     border-top: 1px solid var(--rule); }
       .porte-voile {
@@ -11105,16 +11121,16 @@
         letter-spacing: .02em; margin: 0; color: var(--stock); text-align: center;
       }
       .porte-siege {
-        font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .14em;
         text-transform: uppercase; color: var(--stock-dim);
       }
       .porte-demande {
-        font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .1em;
         color: var(--stock-2);
       }
       .porte-boutons { display: flex; gap: 12px; margin-top: 4px; }
       .porte-motif {
-        font-family: var(--mono); font-size: 10px; color: var(--stock-dim);
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); color: var(--stock-dim);
         text-align: center;
       }
       /*
@@ -11141,7 +11157,7 @@
       .porte-de-prise { border-color: var(--stock); background: rgba(239, 236, 227, .09); }
       .porte-de-img { width: 96px; height: 96px; object-fit: contain; }
       .porte-de-nom {
-        font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .12em;
         text-transform: uppercase;
       }
       /*
@@ -11541,7 +11557,7 @@
       .sel-peaux { position: absolute; left: 0; right: 0; top: 124%;
                    display: flex; align-items: center; justify-content: center;
                    gap: 10px; }
-      .sel-peaux b { font-family: var(--display); font-weight: 800; font-size: 10px;
+      .sel-peaux b { font-family: var(--display); font-weight: 800; font-size: calc(10px * var(--lisible, 1));
                      letter-spacing: .2em; text-transform: uppercase;
                      color: var(--stock-dim); }
       /*
@@ -11578,7 +11594,7 @@
        */
       .sel-peaux-rang { display: flex; gap: 6px; min-width: 0; overflow-x: auto; }
       .sel-peau { background: transparent; border: 1px solid var(--rule);
-                  color: var(--stock-dim); font-size: 10px; letter-spacing: .08em;
+                  color: var(--stock-dim); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .08em;
                   padding: 2px 8px; cursor: pointer; }
       .sel-peau:hover { border-color: var(--stock); color: var(--stock); }
       .sel-peau[aria-pressed="true"] { border-color: var(--stock); color: var(--stock);
@@ -11597,7 +11613,7 @@
       .cell.dead:hover { transform: skewX(-10deg); border-color: var(--rule); }
       .ouv h2 { font-family: var(--display); font-weight: 800; font-size: 34px;
                 letter-spacing: .14em; color: var(--stock); margin: 0 0 6px; }
-      .ouv-sous { color: var(--stock-dim); font-size: 12px; line-height: 1.5;
+      .ouv-sous { color: var(--stock-dim); font-size: calc(12px * var(--lisible, 1)); line-height: 1.5;
                   max-width: 78ch; margin: 0 auto calc(4 * var(--uvh)); }
 
       /*
@@ -11622,14 +11638,14 @@
 
       .ouv-pied { margin-top: calc(4 * var(--uvh)); display: flex; gap: 10px;
                   align-items: center; justify-content: center; flex-wrap: wrap; }
-      .ouv-reste { color: var(--stock-dim); font-size: 12px; }
+      .ouv-reste { color: var(--stock-dim); font-size: calc(12px * var(--lisible, 1)); }
 
       /*
        * §5.1.2bis — **L'ÉCOLE CHOISIE, SOUS L'ÉTOILE.** Elle prend la TEINTE de
        * son école (`--ec-choisie`, posée par le rendu) : c'est la même teinte que
        * sa branche, donc l'œil relie les deux sans légende.
        */
-      .etoile-choix { display: block; margin-top: 3px; font-size: 10px;
+      .etoile-choix { display: block; margin-top: 3px; font-size: calc(10px * var(--lisible, 1));
                       letter-spacing: .1em; font-weight: 800;
                       color: var(--ec-choisie, var(--stock-2)); }
       /*
@@ -11662,12 +11678,12 @@
       }
       .nouvelle-table .nt-mot {
         margin: 0; max-width: 62ch;
-        font-family: var(--mono); font-size: 12px; line-height: 1.7;
+        font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); line-height: 1.7;
         color: var(--stock-dim);
       }
       .nouvelle-table .nt-retour {
         align-self: flex-start;
-        font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em;
         text-transform: uppercase; text-decoration: none;
         color: var(--stock-dim); background: var(--ink-2);
         border: 1px solid var(--rule); padding: 6px 12px;
@@ -11738,12 +11754,16 @@
       @keyframes nt-chrono-respire { from { opacity: .35; } to { opacity: 1; } }
       .nouvelle-table .nt-rond:has(.nt-chrono)::after { display: none; }
       .nouvelle-table .nt-presence.nt-parti { opacity: .45; }
+      /* S1434 · note 280 ① — la vignette d'un MORT passe en noir et blanc : c'est elle qui
+         dit la mort (aucun indicateur d'activité ne s'y pose, main.ts::présence). */
+      .nouvelle-table .nt-presence.nt-parti .nt-portrait,
+      .nouvelle-table .bj-autre.nt-parti .bj-art { filter: grayscale(1) brightness(.8); }
       /* ⛑ S1291 · LA-5 — la miniature se clique (son plateau) ; la regardée
          porte un second anneau, plein, à la couleur du siège. */
       .nouvelle-table .nt-presence.nt-cliquable { cursor: pointer; }
       /* ⛑ S1291 · LA-4 — deux lignes sous la miniature, coupées en fin de ligne. */
       .nouvelle-table .nt-resume {
-        width: 100%; font-family: var(--mono); font-size: 10px; line-height: 13px;
+        width: 100%; font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); line-height: 13px;
         color: var(--stock-dim);
       }
       .nouvelle-table .nt-resume-l1 { display: flex; justify-content: center; gap: 6px; white-space: nowrap; }
@@ -11793,7 +11813,7 @@
       .nt-duel-regarde .ndr-duelliste.ar2-ko { transform: rotate(-7deg) translateY(10px); filter: grayscale(.85) brightness(.55); }
       /* S1419 · note 243 ⑦ : l'inventaire déployé — la carte dans sa case, le cadre à sa rareté */
       .bj-inv .bj-inv-tete { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-      .bj-inv .inv-bascule { font-size: 10px; letter-spacing: .12em; padding: 2px 8px; }
+      .bj-inv .inv-bascule { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .12em; padding: 2px 8px; }
       .bj-inv .creneau[data-rar] { outline: 2px solid var(--rar-common); outline-offset: -2px; }
       .bj-inv .creneau[data-rar="uncommon"] { outline-color: var(--rar-uncommon); }
       .bj-inv .creneau[data-rar="rare"] { outline-color: var(--rar-rare); }
@@ -11806,11 +11826,11 @@
       .nouvelle-table .ntt-pov-tete.ntt-pov-discret {
         width: auto; border: none; padding: 0; gap: 10px; justify-content: center; opacity: .85;
       }
-      .nouvelle-table .ntt-pov-discret .ntt-pov-retour { font-size: 12px; padding: 2px 10px; }
+      .nouvelle-table .ntt-pov-discret .ntt-pov-retour { font-size: calc(12px * var(--lisible, 1)); padding: 2px 10px; }
       /* ⛑ S1321 · SA-1 — ⟵ ⟶ dans la tête du POV. */
       .nouvelle-table .ntt-pov-fleches { display: inline-flex; gap: 6px; }
       .nouvelle-table .ntt-pov-fleche {
-        font-family: var(--mono); font-size: 14px; padding: 2px 10px; cursor: pointer;
+        font-family: var(--mono); font-size: calc(14px * var(--lisible, 1)); padding: 2px 10px; cursor: pointer;
         color: var(--stock); background: transparent; border: 1px solid var(--stock-dim);
       }
       .nouvelle-table .ntt-pov-fleche:hover { border-color: var(--stock); }
@@ -11822,16 +11842,16 @@
         border: 1px solid var(--rule); background: rgb(0 0 0 / .35); padding: 8px 10px;
         display: flex; flex-direction: column; gap: 6px;
       }
-      .nouvelle-table .cj2-zone > .nt-titre { margin: 0; font-size: 12px; letter-spacing: .14em; }
+      .nouvelle-table .cj2-zone > .nt-titre { margin: 0; font-size: calc(12px * var(--lisible, 1)); letter-spacing: .14em; }
       .nouvelle-table .cj2-liste { display: flex; flex-direction: column; gap: 5px; }
       .nouvelle-table .cj2-ligne {
-        display: flex; gap: 8px; align-items: flex-start; font-size: 12px; line-height: 1.35;
+        display: flex; gap: 8px; align-items: flex-start; font-size: calc(12px * var(--lisible, 1)); line-height: 1.35;
         border-left: 2px solid var(--siege, var(--rule)); padding-left: 6px;
       }
       .nouvelle-table .cj2-art { width: 34px; height: auto; flex: none; border: 1px solid var(--rule); }
-      .nouvelle-table .cj2-glyphe { flex: none; width: 34px; text-align: center; font-size: 15px; }
+      .nouvelle-table .cj2-glyphe { flex: none; width: 34px; text-align: center; font-size: calc(15px * var(--lisible, 1)); }
       .nouvelle-table .cj2-texte { flex: 1 1 auto; min-width: 0; margin: 0; }
-      .nouvelle-table .ntt-pov-titre { font-family: var(--mono); font-size: 14px; letter-spacing: .12em; }
+      .nouvelle-table .ntt-pov-titre { font-family: var(--mono); font-size: calc(14px * var(--lisible, 1)); letter-spacing: .12em; }
       /* ⛑ S1336 · PO-1 — le POV d'un autre dans MA grille : la bande « TU REGARDES »
          à la place de ma question, sa main en dos à la place de la mienne. */
       .nouvelle-table .ntt-pov-iso .ntt-pov-bande {
@@ -11854,7 +11874,7 @@
       .nouvelle-table .ntt-pov-tuile { display: flex; flex-direction: column; align-items: center; gap: 6px; }
       /* 240 : sa main (les dos) doit finir AU-DESSUS de l’apex de la mienne (y ≈ 733). */
       .nouvelle-table .ntt-table.ntt-pov .ntt-axe .ntt-pov-tuile .tuile-art { height: 240px; width: auto; }
-      .nouvelle-table .ntt-pov-ou { font-family: var(--mono); font-size: 12px; color: var(--stock-dim); }
+      .nouvelle-table .ntt-pov-ou { font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); color: var(--stock-dim); }
       .nouvelle-table .ntt-pov-main { display: flex; flex-direction: column; align-items: center; gap: 8px; }
       .nouvelle-table .ntt-pov-dos { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
       .nouvelle-table .ntt-pov-carte {
@@ -11876,14 +11896,14 @@
       .nouvelle-table .nt-dos[data-rar="EPIC"]      { background: var(--rar-epic); border-color: var(--rar-epic); }
       .nouvelle-table .nt-dos[data-rar="LEGENDARY"] { background: var(--rar-legendary); border-color: var(--rar-legendary); }
       .nouvelle-table .nt-gear {
-        font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--stock);
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .06em; color: var(--stock);
       }
       .nouvelle-table .nt-gear-glyphe { color: var(--stock-dim); }
       /* ⚑ S1379 · B-T8 (note 209 ③) — la vignette « quêtes faites », sous le timer. */
       .nouvelle-table .nt-vignette-quetes {
         display: inline-flex; align-items: baseline; gap: 6px; align-self: flex-end;
         margin-top: 4px; padding: 2px 9px; cursor: help;
-        font-family: var(--mono); font-size: 11px; letter-spacing: .12em; color: var(--stock);
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .12em; color: var(--stock);
         border: 1px solid var(--stock-dim);
       }
       .nouvelle-table .nt-vq-glyphe { color: var(--stock-dim); }
@@ -11891,25 +11911,25 @@
       .glyphe-dessine { display: inline-flex; vertical-align: -2px; }
       .glyphe-dessine svg { width: 1.05em; height: 1.05em; }
       .nouvelle-table .nt-points { color: var(--stock); font-weight: 700; margin-right: 8px; }
-      .nouvelle-table .nt-points-nb { font-size: 13px; }
-      .nouvelle-table .nt-points-mot { font-size: 9px; color: var(--stock-dim); }
+      .nouvelle-table .nt-points-nb { font-size: calc(13px * var(--lisible, 1)); }
+      .nouvelle-table .nt-points-mot { font-size: calc(9px * var(--lisible, 1)); color: var(--stock-dim); }
       .nouvelle-table .nt-quetes { margin-right: 6px; }
       /* S1428 - note 265 (8) : le bandeau RUN · DUNGEON TURN, plus sature */
       .nouvelle-table .nt-tour-seul .bt-etat { filter: saturate(1.9); }
-      .nouvelle-table .nt-vq-nb { font-size: 14px; }
-      .nouvelle-table .nt-vq-mot { font-size: 10px; color: var(--stock-dim); }
+      .nouvelle-table .nt-vq-nb { font-size: calc(14px * var(--lisible, 1)); }
+      .nouvelle-table .nt-vq-mot { font-size: calc(10px * var(--lisible, 1)); color: var(--stock-dim); }
       .nouvelle-table .nt-nb {
-        margin-left: 5px; font-family: var(--mono); font-size: 10px;
+        margin-left: 5px; font-family: var(--mono); font-size: calc(10px * var(--lisible, 1));
         color: var(--stock-dim);
       }
       .nouvelle-table .nt-qui {
-        font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .08em;
         line-height: 1.5;
       }
       .nouvelle-table .nt-toi { color: var(--stock); font-weight: 700; }
       .nouvelle-table .nt-perso { color: var(--stock-dim); }
       .nouvelle-table .nt-ou {
-        font-family: var(--mono); font-size: 10px; color: var(--stock-dim);
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); color: var(--stock-dim);
         opacity: .8;
       }
       /* ⛑ S1334 · BH-1 (note 194) — la rangée légère : rond 72, une ligne
@@ -11925,7 +11945,7 @@
       .nouvelle-table .nt-qui { line-height: 13px; }
       .nouvelle-table .nt-rond-combat {
         position: absolute; right: -4px; bottom: -2px; z-index: 2;
-        font-size: 15px; line-height: 20px; width: 22px; height: 22px; text-align: center;
+        font-size: calc(15px * var(--lisible, 1)); line-height: 20px; width: 22px; height: 22px; text-align: center;
         border-radius: 50%; background: var(--ink); color: var(--rouge-vif);
         border: 1px solid var(--rouge-vif);
       }
@@ -11969,8 +11989,8 @@
          le numéro, la ligne du Collapse teintée de sa couleur. */
       .nouvelle-table > .nt-memoire.nt-tour-seul { width: auto; max-width: 420px; }
       .nouvelle-table .nt-tour-seul .bt-etat { margin-left: 0; align-items: flex-end; text-align: right; }
-      .nouvelle-table .nt-tour-seul .bt-tour { font-size: 15px; }
-      .nouvelle-table .nt-tour-seul .bt-collapse { font-size: 11px; }
+      .nouvelle-table .nt-tour-seul .bt-tour { font-size: calc(15px * var(--lisible, 1)); }
+      .nouvelle-table .nt-tour-seul .bt-collapse { font-size: calc(11px * var(--lisible, 1)); }
       .bt-gemme {
         display: inline-block; width: 9px; height: 9px; margin-right: 9px;
         transform: rotate(45deg) translateY(-1px); vertical-align: middle;
@@ -11992,12 +12012,12 @@
         display: flex; align-items: baseline; gap: 12px; margin: 8px 0;
         font-family: var(--mono); letter-spacing: .08em;
       }
-      .fin-profil-cap { font-size: 10px; letter-spacing: .18em; color: var(--stock-dim); }
+      .fin-profil-cap { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .18em; color: var(--stock-dim); }
       /* S1370 · note 206 — la ligne du Bounty Wall : l'offrande tombée, les esprits qui brûlaient. */
       .fin-mur { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; margin: 6px 0;
         font-family: var(--mono); letter-spacing: .08em; }
-      .fin-mur-drop { font-size: 13px; font-weight: 700; color: #ffb070; text-shadow: 0 0 6px rgba(255,100,30,.6); }
-      .fin-mur-x { font-size: 12px; color: var(--stock); }
+      .fin-mur-drop { font-size: calc(13px * var(--lisible, 1)); font-weight: 700; color: #ffb070; text-shadow: 0 0 6px rgba(255,100,30,.6); }
+      .fin-mur-x { font-size: calc(12px * var(--lisible, 1)); color: var(--stock); }
       /* ⛑ S1338 · FP-1 (note 194) — l'écran de fin : fond de pierre sombre, le
          vainqueur en grand dans un cadre d'or, les autres en ronds dessous. */
       .nouvelle-table .fp1 {
@@ -12008,8 +12028,8 @@
           radial-gradient(ellipse at center, #17130f 0%, #0a0908 75%);
         color: var(--stock);
       }
-      .fp1-sur-titre { font-family: var(--mono); font-size: 13px; letter-spacing: .4em; color: var(--stock-dim); }
-      .fp1-cause { font-family: var(--mono); font-size: 12px; color: var(--stock-dim); margin-top: -10px; }
+      .fp1-sur-titre { font-family: var(--mono); font-size: calc(13px * var(--lisible, 1)); letter-spacing: .4em; color: var(--stock-dim); }
+      .fp1-cause { font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); color: var(--stock-dim); margin-top: -10px; }
       .fp1-heros { display: flex; align-items: center; gap: 40px; }
       .fp1-cadre {
         height: 470px; aspect-ratio: 2 / 3; padding: 6px; border-radius: 6px;
@@ -12033,10 +12053,10 @@
       }
       .fp1-marche.m1 { height: 34px; }
       .fp1-marche.m2 { height: 46px; }
-      .fp1-marche-mot { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: var(--stock-dim); }
+      .fp1-marche-mot { font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .14em; color: var(--stock-dim); }
       .fp1-marche-n { font-family: var(--display); font-weight: 800; font-size: 18px; line-height: 1; }
       .fp1-cranes { font-size: 20px; letter-spacing: 4px; color: var(--stock); }
-      .fp1-cranes.zero { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; color: var(--stock-dim); }
+      .fp1-cranes.zero { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .12em; color: var(--stock-dim); }
       .fp1-butin { display: flex; height: 96px; align-items: flex-end; padding-left: 20px; }
       .fp1-carte {
         width: 62px; height: auto; margin-left: -20px; border-radius: 4px;
@@ -12048,7 +12068,7 @@
          pivot à 110 %, ×3,2 → son bas remonte de 19 px ; −70 px le pose à ~3 px
          au-dessus du haut de la carte (−150 l'envoyait ~83 px plus haut). */
       .fp1-carte:hover { transform: rotate(0) translateY(-70px) scale(3.2); z-index: 5; }
-      .fp1-profil { font-family: var(--mono); font-size: 14px; letter-spacing: .1em; color: var(--stock); }
+      .fp1-profil { font-family: var(--mono); font-size: calc(14px * var(--lisible, 1)); letter-spacing: .1em; color: var(--stock); }
       .fp1-autres { display: flex; gap: 46px; align-items: flex-start; justify-content: center; }
       .fp1-autre { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 190px; }
       .fp1-rang { font-family: var(--display); font-weight: 800; font-size: 16px; color: var(--stock-dim); }
@@ -12056,7 +12076,7 @@
         width: 84px; height: 84px; border-radius: 50%; object-fit: cover;
         box-shadow: 0 0 0 3px var(--siege, var(--rule)), 0 8px 20px rgb(0 0 0 / .7);
       }
-      .fp1-nom { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; }
+      .fp1-nom { font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .08em; }
       .fp1-boutons { display: flex; gap: 16px; margin-top: auto; }
       /* S1427 · DD-2 ter (note 256 ①) — la fin d'un Daily : l'objectif est THE MAIN INFO. */
       .fp1-daily { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 30px; text-align: center; }
@@ -12070,18 +12090,18 @@
       .fp1-daily-verdict.muet { color: var(--stock-dim); }
       .fp1-daily-objectif { font-family: var(--mono); font-size: 24px; letter-spacing: .06em; color: var(--stock); max-width: 1300px; }
       .fp1-daily-gains { justify-content: center; gap: 28px; margin: 18px 0 6px; }
-      .fp1-daily-gains .fin-profil-cap { font-size: 14px; }
+      .fp1-daily-gains .fin-profil-cap { font-size: calc(14px * var(--lisible, 1)); }
       .fp1-daily-gains .fin-mur-drop { font-size: 30px; }
       .fp1-daily-gains .fin-mur-x { font-size: 20px; }
       .fp1-daily-sieges { transform: scale(.72); transform-origin: 50% 0; }
-      .fin-profil-perso { font-size: 13px; color: var(--stock); }
-      .fin-profil-plus { font-size: 12px; font-weight: 700; color: var(--gold); }
+      .fin-profil-perso { font-size: calc(13px * var(--lisible, 1)); color: var(--stock); }
+      .fin-profil-plus { font-size: calc(12px * var(--lisible, 1)); font-weight: 700; color: var(--gold); }
       .nouvelle-table .nt-dt {
         display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px;
         font-family: var(--mono); letter-spacing: .1em;
       }
-      .nouvelle-table .nt-dt-tour { font-size: 14px; font-weight: 700; color: var(--stock); }
-      .nouvelle-table .nt-dt-collapse { font-size: 11px; color: var(--stock-dim); }
+      .nouvelle-table .nt-dt-tour { font-size: calc(14px * var(--lisible, 1)); font-weight: 700; color: var(--stock); }
+      .nouvelle-table .nt-dt-collapse { font-size: calc(11px * var(--lisible, 1)); color: var(--stock-dim); }
       .nouvelle-table .nt-dt-collapse.en-cours { color: var(--rouge-vif); }
       .nouvelle-table > .nt-memoire .nt-rang {
         max-height: 90px; overflow: hidden; align-content: flex-end;
@@ -12089,7 +12109,7 @@
       .nouvelle-table > .nt-memoire .nt-legende { margin-top: 6px; }
       .nouvelle-table .nt-titre {
         margin: 0 0 10px; font-family: var(--display); font-weight: 700;
-        font-size: 13px; letter-spacing: .18em; color: var(--stock-dim);
+        font-size: calc(13px * var(--lisible, 1)); letter-spacing: .18em; color: var(--stock-dim);
       }
       .nouvelle-table .nt-rang {
         display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
@@ -12112,14 +12132,14 @@
         box-shadow: 0 0 0 2px var(--ink), 0 0 0 3px var(--siege, var(--stock-dim));
       }
       .nouvelle-table .nt-legende {
-        margin: 10px 0 0; font-family: var(--mono); font-size: 10px;
+        margin: 10px 0 0; font-family: var(--mono); font-size: calc(10px * var(--lisible, 1));
         color: var(--stock-dim);
         /* ⛑ S1268 · P3-T4 — la place de LECTURE : une ligne, hauteur fixe,
            survolée ou non. Rien sous elle ne bouge quand la ligne s'ouvre. */
         height: 18px; line-height: 18px; overflow: hidden;
         white-space: nowrap; text-overflow: ellipsis;
       }
-      .nouvelle-table .nt-legende.nt-lecture { color: var(--stock); font-size: 12px; }
+      .nouvelle-table .nt-legende.nt-lecture { color: var(--stock); font-size: calc(12px * var(--lisible, 1)); }
       .nouvelle-table .nt-legende.nt-lecture > * {
         display: inline; margin: 0; padding: 0; border: 0; background: none;
       }
@@ -12207,12 +12227,28 @@
         animation: ndr-clignote .55s ease-in-out infinite alternate;
       }
       @keyframes ndr-clignote { from { opacity: 1; } to { opacity: .2; } }
+      /* S1433 · note 275 ① — la séquence du combat en quatre temps.
+         ① le skill déclaré s'allume sur MA fiche (et celle du siège suivi) */
+      .fcz.en-cours {
+        border: 3px solid var(--siege, #c8102e); border-radius: 3px;
+        background: rgba(200, 16, 46, .14); box-shadow: 0 0 14px var(--siege, #c8102e);
+        animation: ndr-clignote .55s ease-in-out infinite alternate;
+      }
+      /* ① bis — en combat, le voile du jet attend la ligne : rien ne couvre la fiche avant `voile-pose` */
+      .dicelayer.annonce-jet.apres-ligne { transition: background-color .3s ease; }
+      .dicelayer.annonce-jet.apres-ligne:not(.voile-pose) { background-color: transparent !important; }
+      .dicelayer.annonce-jet.apres-ligne > * { transition: opacity .3s ease; }
+      .dicelayer.annonce-jet.apres-ligne:not(.voile-pose) > * { opacity: 0 !important; }
+      /* ④ la barre de PV DESCEND, après les dégâts, depuis ce qu'on avait montré */
+      .pv-pastille.pv-descend::before { transition: width var(--descente, 900ms) linear; }
+      .pv-pastille.pv-coup { animation: pv-coup 900ms ease-out; }
+      @keyframes pv-coup { 0% { box-shadow: 0 0 0 rgba(200,16,46,0); } 20% { box-shadow: 0 0 18px rgba(200,16,46,.9); } 100% { box-shadow: 0 0 0 rgba(200,16,46,0); } }
       .ndr-nom { display: flex; align-items: center; gap: 10px; }
       .ndr-perso {
         font-family: var(--display); font-weight: 800; font-size: 20px;
         text-transform: uppercase; color: var(--siege, var(--stock));
       }
-      .ndr-actif { font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--stock); }
+      .ndr-actif { font-size: calc(12px * var(--lisible, 1)); font-weight: 700; letter-spacing: .08em; color: var(--stock); }
       .ndr-duelliste .fiche-imprimee { width: 100%; }
       .ndr-duelliste .fiche-imprimee .cz-vignette {
         display: block; width: auto; height: min(600px, calc(100vh - 460px)); max-width: 100%;
@@ -12257,7 +12293,7 @@
       }
       .ndr-carte img { display: block; width: 100%; height: auto; }
       .ndr-carte-nom {
-        padding: 3px 5px; font-family: var(--display); font-size: 13px; color: var(--stock);
+        padding: 3px 5px; font-family: var(--display); font-size: calc(13px * var(--lisible, 1)); color: var(--stock);
         white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       }
       .ndr-carte.ndr-arrive-g { animation: ndr-de-gauche 1.6s ease-out both; }
@@ -12266,7 +12302,7 @@
       @keyframes ndr-de-droite { from { translate: 340px 120px; scale: .4; opacity: .2; } 45% { translate: 0 0; scale: 1.15; opacity: 1; } to { translate: 0 0; scale: 1; } }
       .ndr-pile-plus {
         position: absolute; right: -10px; bottom: -10px; padding: 2px 7px; border-radius: 9px;
-        background: var(--stock); color: #0b0b0b; font-family: var(--mono); font-size: 12px;
+        background: var(--stock); color: #0b0b0b; font-family: var(--mono); font-size: calc(12px * var(--lisible, 1));
       }
       .ndr-main { display: flex; align-items: center; gap: 10px; }
       .ndr-dos { position: relative; height: 56px; width: calc(40px + 9 * 16px); }
@@ -12274,7 +12310,7 @@
         position: absolute; left: calc(var(--i, 0) * 16px); top: 0; width: 40px; height: 56px;
         object-fit: cover; border-radius: 3px; box-shadow: 0 2px 6px rgb(0 0 0 / .6);
       }
-      .ndr-compte { font-family: var(--mono); font-size: 14px; color: var(--stock); white-space: nowrap; }
+      .ndr-compte { font-family: var(--mono); font-size: calc(14px * var(--lisible, 1)); color: var(--stock); white-space: nowrap; }
       .arene-spec .nt-duel-regarde { height: calc(100vh - 220px); }
       .plein-boite:has(.nt-duel-regarde) { max-width: 1760px; width: 1760px; }
       /*
@@ -12329,7 +12365,7 @@
         font-family: var(--display); font-weight: 700; font-size: 30px;
         color: var(--stock); letter-spacing: 0;
       }
-      .nouvelle-table .ntt-pts-mot { font-size: 11px; }
+      .nouvelle-table .ntt-pts-mot { font-size: calc(11px * var(--lisible, 1)); }
       /* ⛑ S1293 · TC-2 — la fenêtre du piège / du coffre, par-dessus l'axe. */
       .nouvelle-table .ntt-axe.avec-moment { position: relative; }
       /* ⛑ S1306 · L-3 — LE TROC FACE À FACE (`05_troc.png`). Mesuré avant : le
@@ -12361,7 +12397,7 @@
       .nouvelle-table .ntt-troc .decision > .obj-rangee::before {
         content: "CE QUE TU DONNES \2014  clique une carte";
         display: block; width: 100%; margin-bottom: 4px;
-        font-family: var(--mono); font-size: 10px; letter-spacing: .16em; color: var(--stock-dim);
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .16em; color: var(--stock-dim);
       }
       .nouvelle-table .ntt-troc .fen-offre .cz-vignette { height: 210px; width: auto; }
       .nouvelle-table .ntt-axe > .combat-fenetre.ntt-moment {
@@ -12423,7 +12459,7 @@
         100% { opacity: 1; scale: 1; translate: 0 0; }
       }
       .nouvelle-table .cj-titre {
-        position: absolute; left: 6px; top: 0; font-family: var(--mono); font-size: 9px;
+        position: absolute; left: 6px; top: 0; font-family: var(--mono); font-size: calc(9px * var(--lisible, 1));
         letter-spacing: .14em; color: var(--stock-dim);
       }
       /* ⛑ S1363 · note 204 ④ — sous le rond : la dernière seule, 30 s (le délai,
@@ -12434,13 +12470,13 @@
       .nouvelle-table .cj-carte:not(.cj-neuve) .cj-nom { display: none; }
       .nouvelle-table .cj-coin {
         position: absolute; right: 2px; top: 2px; width: 18px; height: 18px; z-index: 1;
-        display: grid; place-items: center; font-size: 12px; line-height: 1;
+        display: grid; place-items: center; font-size: calc(12px * var(--lisible, 1)); line-height: 1;
         background: rgb(0 0 0 / .7); color: var(--stock); cursor: zoom-in;
       }
       .nouvelle-table .cj-carte:has(.cj-coin:hover) { z-index: 4; }
       .nouvelle-table .cj-art { display: block; width: 100%; height: auto; }
       .nouvelle-table .cj-nom {
-        font-family: var(--mono); font-size: 9px; letter-spacing: .06em; color: var(--stock);
+        font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .06em; color: var(--stock);
         padding: 2px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       }
       @keyframes cj-vie {
@@ -12470,7 +12506,7 @@
       @keyframes fantome-onde { to { scale: 5; opacity: 0; } }
       .nouvelle-table .cj-grand img { display: block; width: 100%; height: auto; }
       .nouvelle-table .cj-grand-nom {
-        font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--stock);
+        font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .08em; color: var(--stock);
         padding-top: 4px;
       }
       .nouvelle-table .ntt-axe {
@@ -12581,7 +12617,7 @@
          rapetisse (216 → 150) et la carte s'ouvre en grand au survol
          (`.obj-zoom`, par `#zoom-coin`) ; le zoom laisse passer la souris, sinon
          il couvrirait la carte qu'on veut cliquer. */
-      .nouvelle-table .ntt-sous-tuile .obj-rangee.grandes .obj-cible { width: 150px; padding: 6px; font-size: 13px; }
+      .nouvelle-table .ntt-sous-tuile .obj-rangee.grandes .obj-cible { width: 150px; padding: 6px; font-size: calc(13px * var(--lisible, 1)); }
       .obj-cible > .obj-zoom { display: none; }
       #zoom-coin > .obj-zoom.zc-ouvert { display: flex; pointer-events: none; }
       .nouvelle-table .ntt-sous-tuile .choix-corps.atj {
@@ -12603,7 +12639,7 @@
        */
       .nouvelle-table .ntt-onglets { display: flex; gap: 10px; margin: -8px 0 -6px; }
       .nouvelle-table .ntt-onglet {
-        font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
+        font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .14em;
         padding: 7px 16px; cursor: pointer;
         color: var(--stock); background: transparent;
         border: 1px solid var(--stock-dim);
@@ -12620,7 +12656,7 @@
         border: 0; border-style: solid; background: none; color: var(--ink);
         border-image: url(/art/hud/controls/button_solid.png) 0 100 0 120 fill / 0 12.2px 0 14.7px stretch;
         height: 44px; min-width: 142px; padding: 0 22px;
-        font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .12em;
+        font-family: var(--display); font-weight: 800; font-size: calc(15px * var(--lisible, 1)); letter-spacing: .12em;
       }
       .nouvelle-table .ntt-onglets button.ntt-onglet.plaque.plaque-contour {
         color: var(--stock); min-width: 122px;
@@ -12727,7 +12763,7 @@
       .nouvelle-table .ntt-toi > .ntt-ma-fiche { flex: 0 0 auto; }
       .nouvelle-table .ntt-toi.avec-fiche .ep-signature { display: none; }
       .nouvelle-table .ntt-signal {
-        font-family: var(--mono); font-size: 13px; letter-spacing: .18em;
+        font-family: var(--mono); font-size: calc(13px * var(--lisible, 1)); letter-spacing: .18em;
         color: var(--stock); text-align: center;
       }
       .nouvelle-table .ntt-signal.vise { color: var(--rouge-vif); }
@@ -12755,7 +12791,7 @@
         flex: 1 1 0; min-height: 0; width: 100%;
         object-fit: contain; object-position: top center;
       }
-      .nouvelle-table .ntt-cb2-texte { flex: 1 1 0; min-height: 0; overflow: hidden; font-size: 13px; }
+      .nouvelle-table .ntt-cb2-texte { flex: 1 1 0; min-height: 0; overflow: hidden; font-size: calc(13px * var(--lisible, 1)); }
       /* ⛑ S1325 · CO-2 — contre un joueur : la cible à droite, plus large que le mob ;
          le bloc joueur (BJ-1) agrandi, un seul cœur (celui de la tête). */
       .nouvelle-table .ntt-table.ntt-cb2.ntt-cb2-pvp { grid-template-columns: 400px minmax(0, 1fr) 520px; }
@@ -12763,11 +12799,11 @@
         max-width: none; height: auto; cursor: default; gap: 10px; padding: 8px;
       }
       .nouvelle-table .ntt-cb2-joueur > .bj-bandeau { flex: 1 1 0; min-height: 200px; height: auto; }
-      .nouvelle-table .ntt-cb2-joueur .bj-nom { font-size: 13px; }
+      .nouvelle-table .ntt-cb2-joueur .bj-nom { font-size: calc(13px * var(--lisible, 1)); }
       .nouvelle-table .ntt-cb2-joueur .bj-stats .pv-pastille { display: none; }
       .nouvelle-table .ntt-cb2-joueur .stat-n { font-size: 22px; }
-      .nouvelle-table .ntt-cb2-joueur .stat-nom { font-size: 10px; }
-      .nouvelle-table .ntt-cb2-joueur .bj-lbl { font-size: 11px; }
+      .nouvelle-table .ntt-cb2-joueur .stat-nom { font-size: calc(10px * var(--lisible, 1)); }
+      .nouvelle-table .ntt-cb2-joueur .bj-lbl { font-size: calc(11px * var(--lisible, 1)); }
       .nouvelle-table .ntt-cb2-joueur .nt-dos { width: 14px; height: 20px; }
       .nouvelle-table .ntt-cb2-joueur.agit { box-shadow: 0 0 0 2px var(--siege, var(--stock)); }
       /* ⚑ S1379 · P3-T3 quinquies (note 209 ④) — l'adversaire comme moi : sa fiche, son inventaire. */
@@ -12784,7 +12820,7 @@
       }
       .nouvelle-table .ntt-cb2-comme-moi > .fc-lecture > .fc-art { width: 100%; height: 100%; }
       .nouvelle-table .ntt-cb2-comme-moi .bj-inv.inv-deploye .creneau { height: auto; justify-content: flex-start; }
-      .nouvelle-table .ntt-cb2-etats { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--siege, var(--stock)); }
+      .nouvelle-table .ntt-cb2-etats { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .14em; color: var(--siege, var(--stock)); }
       .nouvelle-table .ntt-onglet-cible .noc-pastille { transform: scale(.72); transform-origin: left center; margin: -4px 0 -4px 0; }
       /* ⛑ S1328 · PV-1 — contre plusieurs joueurs : un onglet par cible, la tuile de l'ouvert. */
       .nouvelle-table .ntt-cibles { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
@@ -12806,7 +12842,7 @@
         border: 2px solid var(--siege, var(--stock));
       }
       .nouvelle-table .ntt-onglet-cible .noc-nom {
-        flex: 1 1 auto; min-width: 0; font-family: var(--display); font-size: 14px;
+        flex: 1 1 auto; min-width: 0; font-family: var(--display); font-size: calc(14px * var(--lisible, 1));
         letter-spacing: .05em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left;
       }
       .nouvelle-table .ntt-onglet-cible .pv-pastille { flex: 0 0 auto; }
@@ -12844,11 +12880,11 @@
       }
       .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible.noc-mob .noc-ico { object-position: top center; }
       .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-nom {
-        grid-column: 2; font-size: 13px; line-height: 1.1; white-space: normal;
+        grid-column: 2; font-size: calc(13px * var(--lisible, 1)); line-height: 1.1; white-space: normal;
         display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
       }
       .nouvelle-table .ntt-onglet-cible .noc-pv {
-        grid-column: 2; font-family: var(--mono); font-size: 12px; color: var(--stock); text-align: left;
+        grid-column: 2; font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); color: var(--stock); text-align: left;
       }
       .nouvelle-table .ntt-onglet-cible .noc-barre {
         grid-column: 2; display: block; height: 4px; background: rgba(255,255,255,.15); overflow: hidden;
@@ -12869,12 +12905,12 @@
         margin-bottom: 6px; padding: 6px 8px; background: rgba(0,0,0,.55); border: 1px solid var(--stock);
       }
       .nouvelle-table .noc-choix-mot {
-        font-family: var(--mono); font-size: 13px; letter-spacing: .14em; color: var(--stock);
+        font-family: var(--mono); font-size: calc(13px * var(--lisible, 1)); letter-spacing: .14em; color: var(--stock);
         white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       }
       .nouvelle-table .noc-choix .noc-annuler {
         flex: none; padding: 4px 10px; background: transparent; color: var(--stock);
-        border: 1px solid var(--stock); font-family: var(--mono); font-size: 12px; letter-spacing: .12em; cursor: pointer;
+        border: 1px solid var(--stock); font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .12em; cursor: pointer;
       }
       .nouvelle-table .noc-choix .noc-annuler:hover { background: var(--stock); color: #0b0b0b; }
       .nouvelle-table .ntt-onglet-cible.eligible { box-shadow: 0 0 0 2px var(--stock); cursor: crosshair; }
@@ -12892,13 +12928,13 @@
       .nouvelle-table .ntt-onglets-cible .noc-defile:disabled { opacity: .25; cursor: default; }
       .nouvelle-table .ntt-onglets-cible .noc-plus {
         flex: 0 0 auto; align-self: center; padding: 2px 6px; border-radius: 9px;
-        background: var(--stock); color: #0b0b0b; font-family: var(--mono); font-size: 12px;
+        background: var(--stock); color: #0b0b0b; font-family: var(--mono); font-size: calc(12px * var(--lisible, 1));
       }
       .nouvelle-table .ntt-cb2-joueur.interdit > .bj-bandeau { filter: grayscale(1); opacity: .55; }
       .nouvelle-table .noc-verrou {
-        font-family: var(--mono); font-size: 12px; letter-spacing: .2em; color: var(--stock);
+        font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .2em; color: var(--stock);
       }
-      .nouvelle-table .noc-raison { font-family: var(--mono); font-size: 12px; color: var(--rouge-vif); }
+      .nouvelle-table .noc-raison { font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); color: var(--rouge-vif); }
       .nouvelle-table .ntt-cb2-inv { flex: 0 0 auto; }
       /* ⛑ S1331 · FG-1 — rien à faire : la fiche à 45 %, désaturée ; à faire :
          liseré clair au repos sur ce qui se clique, le reste assombri (≈ 60 %). */
@@ -12912,7 +12948,7 @@
       /* ⛑ S1291 · LA-6 — SUIVRE L'ACTION, à gauche du lien de table, même ligne. */
       .nouvelle-table .nt-suivre {
         position: absolute; top: 10px; right: 48px; z-index: 48;
-        font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .12em;
         padding: 5px 12px; cursor: pointer; color: var(--stock-dim);
         background: transparent; border: 1px solid var(--rule);
       }
@@ -12920,7 +12956,7 @@
       /* ⛑ S1298 · JL-1 — le journal complet, à gauche de SUIVRE L'ACTION. */
       .nouvelle-table .nt-journal-bouton {
         position: absolute; top: 10px; right: 268px; z-index: 48;
-        font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .12em;
         padding: 5px 12px; cursor: pointer; color: var(--stock);
         background: transparent; border: 1px solid var(--stock-dim);
       }
@@ -12928,7 +12964,7 @@
       /* ⚑ S1379 · T-T5 (note 211) — DONJON, à gauche de JOURNAL, le même gris. */
       .nouvelle-table .nt-donjon-bouton {
         position: absolute; top: 10px; right: 400px; z-index: 48;
-        font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .12em;
         padding: 5px 12px; cursor: pointer; color: var(--stock);
         background: transparent; border: 1px solid var(--stock-dim);
       }
@@ -12936,11 +12972,11 @@
       .plein .djt { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px 40px;
         padding: 14px 18px; font-family: var(--mono); color: var(--stock); }
       .plein .djt-portail { grid-column: 1 / -1; }
-      .plein .djt-ici { font-size: 12px; letter-spacing: .2em; color: var(--stock-dim); }
+      .plein .djt-ici { font-size: calc(12px * var(--lisible, 1)); letter-spacing: .2em; color: var(--stock-dim); }
       .plein .djt-gros { font-size: 30px; letter-spacing: .04em; color: #f2ede4; margin: 4px 0; }
-      .plein .djt-note { font-size: 12px; color: var(--stock-dim); }
-      .plein .djt-table { border-collapse: collapse; font-size: 13px; align-self: start; }
-      .plein .djt-table th { text-align: left; font-weight: 400; font-size: 10px; letter-spacing: .2em;
+      .plein .djt-note { font-size: calc(12px * var(--lisible, 1)); color: var(--stock-dim); }
+      .plein .djt-table { border-collapse: collapse; font-size: calc(13px * var(--lisible, 1)); align-self: start; }
+      .plein .djt-table th { text-align: left; font-weight: 400; font-size: calc(10px * var(--lisible, 1)); letter-spacing: .2em;
         color: var(--stock-dim); padding: 4px 14px 6px 0; border-bottom: 1px solid var(--rule); }
       .plein .djt-table td { padding: 5px 14px 5px 0; border-bottom: 1px solid var(--rule); white-space: nowrap; }
       .plein .djt-table td[data-rar="COMMON"] { color: var(--rar-common); }
@@ -12950,10 +12986,10 @@
       .plein .djt-table td[data-rar="LEGENDARY"] { color: var(--rar-legendary); }
       .plein .djt-table tr.djt-courant td { background: rgba(110, 18, 18, .55); color: #f2ede4; }
       .plein .djt-table tr.djt-prochain td { border-bottom-color: var(--stock); }
-      .plein .djt-marque { color: var(--stock-dim); font-size: 11px; }
+      .plein .djt-marque { color: var(--stock-dim); font-size: calc(11px * var(--lisible, 1)); }
       .plein .djt-score { align-self: start; }
-      .plein .djt-titre { font-size: 10px; letter-spacing: .2em; color: var(--stock-dim); margin-bottom: 8px; }
-      .plein .djt-ligne { font-size: 13px; line-height: 1.5; padding: 3px 0; border-bottom: 1px solid var(--rule); }
+      .plein .djt-titre { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .2em; color: var(--stock-dim); margin-bottom: 8px; }
+      .plein .djt-ligne { font-size: calc(13px * var(--lisible, 1)); line-height: 1.5; padding: 3px 0; border-bottom: 1px solid var(--rule); }
       .plein .journal-en-grand {
         max-height: none; border-left: 0; padding: 12px 16px;
       }
@@ -12984,7 +13020,7 @@
         visibility: visible; opacity: 1; pointer-events: auto; transition: none;
       }
       .nouvelle-table .bd-epingle-bouton {
-        font-family: var(--mono); font-size: 12px; line-height: 1; padding: 1px 10px;
+        font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); line-height: 1; padding: 1px 10px;
         cursor: pointer; color: var(--stock-dim); background: transparent;
         border: 1px solid var(--rule);
       }
@@ -12995,7 +13031,7 @@
       .nouvelle-table .bd-epingle-bouton { position: relative; z-index: 76; }
       .nouvelle-table .nt-presence > .bd-deplie > .bd-ferme {
         position: absolute; top: 4px; right: 4px; z-index: 1;
-        font-family: var(--mono); font-size: 14px; line-height: 1; padding: 3px 7px;
+        font-family: var(--mono); font-size: calc(14px * var(--lisible, 1)); line-height: 1; padding: 3px 7px;
         cursor: pointer; color: var(--stock); background: var(--ink);
         border: 1px solid var(--stock-dim);
       }
@@ -13029,20 +13065,20 @@
       }
       .nouvelle-table .bj-nom {
         position: absolute; left: 8px; right: 52px; bottom: 4px; z-index: 1;
-        font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .08em;
         white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       }
-      .nouvelle-table .bj-moi .bj-nom { font-size: 12px; bottom: 6px; }
+      .nouvelle-table .bj-moi .bj-nom { font-size: calc(12px * var(--lisible, 1)); bottom: 6px; }
       .nouvelle-table .bj-toi { color: var(--stock); font-weight: 700; }
       .nouvelle-table .bj-perso { color: var(--stock); }
       .nouvelle-table .bj-sig {
         position: absolute; right: 6px; bottom: 4px; z-index: 1;
-        font-family: var(--mono); font-size: 10px; color: var(--stock);
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); color: var(--stock);
       }
       .nouvelle-table .bj-sig.use { color: var(--stock-dim); text-decoration: line-through; }
       .nouvelle-table .bj-coin {
         position: absolute; right: 6px; top: 4px; z-index: 1;
-        font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--stock);
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .1em; color: var(--stock);
         background: rgb(0 0 0 / .6); padding: 1px 5px;
       }
       .nouvelle-table .bj-bandeau:hover, .nouvelle-table .bj-bandeau:focus-within {
@@ -13072,7 +13108,7 @@
         box-shadow: 0 0 0 4000px rgb(0 0 0 / .72), 0 24px 60px rgb(0 0 0 / .8); }
       .nouvelle-table .bj-fiche .fc-boite { max-width: none; }
       .nouvelle-table .bj-fiche-titre {
-        font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .18em;
         color: var(--stock-dim); margin-bottom: 6px;
       }
       .nouvelle-table .bj-fiche .fiche-imprimee, .nouvelle-table .bj-fiche .fiche-cliquable { width: 100%; }
@@ -13088,17 +13124,17 @@
       /* Chez les autres : le chiffre et son nom sur une ligne, sans l'écart à la base. */
       .nouvelle-table .bj-autre .stat-carte { flex-direction: row; align-items: baseline; gap: 3px; }
       .nouvelle-table .bj-autre .stat-carte > :not(.stat-n):not(.stat-nom) { display: none; }
-      .nouvelle-table .bj-autre .stat-n { font-size: 15px; }
-      .nouvelle-table .bj-autre .stat-nom { font-size: 8px; }
-      .nouvelle-table .bj-autre .pv-pastille { transform: none; font-size: 12px; padding: 1px 6px; }
+      .nouvelle-table .bj-autre .stat-n { font-size: calc(15px * var(--lisible, 1)); }
+      .nouvelle-table .bj-autre .stat-nom { font-size: calc(8px * var(--lisible, 1)); }
+      .nouvelle-table .bj-autre .pv-pastille { transform: none; font-size: calc(12px * var(--lisible, 1)); padding: 1px 6px; }
       .nouvelle-table .bj-autre .nt-r-pv, .nouvelle-table .bj-autre .nt-r-sig { display: none; }
       .nouvelle-table .bj-autre .bj-ligne { padding: 0 6px; }
       .nouvelle-table .bj-autre .bj-stats > .bj-ligne { display: none; }
       .nouvelle-table .bj-ligne {
         display: flex; gap: 10px; align-items: baseline;
-        font-family: var(--mono); font-size: 10px; letter-spacing: .12em; color: var(--stock-dim);
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .12em; color: var(--stock-dim);
       }
-      .nouvelle-table .bj-moi .bj-ligne { font-size: 12px; }
+      .nouvelle-table .bj-moi .bj-ligne { font-size: calc(12px * var(--lisible, 1)); }
       .nouvelle-table .bj-points { color: var(--stock); }
       .nouvelle-table .bj-autre .nt-resume { padding: 0 6px; text-align: left; }
       .nouvelle-table .bj-autre .nt-resume-l1 { justify-content: flex-start; }
@@ -13111,7 +13147,7 @@
       .nouvelle-table .bj-moi > .bj-inv.inv-deploye { flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-width: none; }
       .nouvelle-table .bj-moi > .bj-inv.inv-deploye::-webkit-scrollbar { display: none; }
       .nouvelle-table .bj-lbl {
-        font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: var(--stock-dim);
+        font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); letter-spacing: .16em; color: var(--stock-dim);
       }
       .nouvelle-table .bj-inv .corps-libre { gap: 3px; padding: 3px 0; }
       .nouvelle-table .bj-inv .creneau { min-height: 0; padding: 2px 4px; }
@@ -13119,13 +13155,13 @@
       .nouvelle-table .bj-inv .creneau-note, .nouvelle-table .bj-inv .noteDesCreneaux,
       .nouvelle-table .bj-inv .cz, .nouvelle-table .bj-inv .cr-retirer { display: none; }
       .nouvelle-table .bj-inv .creneau-carte {
-        font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+        font-size: calc(10px * var(--lisible, 1)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
       }
       /* La position porte le sens (la grille 3×3 de Croze) : chez les autres, la case
          ne dit que ce qu'elle porte ; son emplacement est dans son `title`. */
       .nouvelle-table .bj-autre .bj-inv .creneau-nom { display: none; }
       .nouvelle-table .bj-autre .bj-inv .creneau { height: 17px; justify-content: center; }
-      .nouvelle-table .bj-autre .bj-inv .creneau-carte { font-size: 9px; }
+      .nouvelle-table .bj-autre .bj-inv .creneau-carte { font-size: calc(9px * var(--lisible, 1)); }
       .nouvelle-table .bj-autre .bj-inv .corps-libre { gap: 2px; padding: 2px 0; }
       .nouvelle-table .bj-main { display: flex; align-items: center; gap: 2px; margin-top: 2px; }
       .nouvelle-table .bj-main .bj-lbl { margin-right: 4px; }
@@ -13133,7 +13169,7 @@
       /* ⛑ S1291 · LA-7 — le retour à la Lanterne, sur l'ancienne table, en haut à droite. */
       .bouton-lanterne {
         position: fixed; top: 10px; right: 48px; z-index: 60;
-        font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
+        font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .14em;
         padding: 7px 16px; cursor: pointer;
         color: var(--ink); background: var(--stock); border: 1px solid var(--stock);
       }
@@ -13160,7 +13196,7 @@
         letter-spacing: .08em; color: var(--rouge-vif);
       }
       .nouvelle-table .nmb-sous {
-        font-family: var(--mono); font-size: 11px; line-height: 14px;
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); line-height: 14px;
         letter-spacing: .12em; color: var(--stock-dim);
       }
       /*
@@ -13192,11 +13228,11 @@
       .nouvelle-table .nt-combat-tete,
       .plein .nt-combat-tete {   /* ⛑ S1392 · O-T3 — l'arène : « COMBATPvPROUND 2 » collés */
         display: flex; align-items: baseline; gap: 14px;
-        font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+        font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .16em;
         color: var(--stock-dim);
       }
       .nouvelle-table .ntc-mot, .plein .ntc-mot { font-family: var(--display); font-weight: 700;
-                                 font-size: 13px; color: var(--stock); }
+                                 font-size: calc(13px * var(--lisible, 1)); color: var(--stock); }
       .nouvelle-table .nt-attaque {
         display: flex; align-items: center; gap: 28px;
         border: 1px solid var(--rule); background: var(--ink-2);
@@ -13205,13 +13241,13 @@
       .nouvelle-table .nta-qui { display: flex; flex-direction: column; min-width: 240px; }
       .nouvelle-table .nta-nom { font-family: var(--display); font-weight: 700;
                                  font-size: 17px; color: var(--stock); }
-      .nouvelle-table .nta-sous { font-family: var(--mono); font-size: 10px;
+      .nouvelle-table .nta-sous { font-family: var(--mono); font-size: calc(10px * var(--lisible, 1));
                                   color: var(--stock-dim); }
       .nouvelle-table .nta-champ { display: flex; flex-direction: column; }
-      .nouvelle-table .nta-lbl { font-family: var(--mono); font-size: 9px;
+      .nouvelle-table .nta-lbl { font-family: var(--mono); font-size: calc(9px * var(--lisible, 1));
                                  letter-spacing: .16em; color: var(--stock-dim); }
       .nouvelle-table .nta-val { font-family: var(--display); font-weight: 700;
-                                 font-size: 15px; color: var(--stock); }
+                                 font-size: calc(15px * var(--lisible, 1)); color: var(--stock); }
       .nouvelle-table .nta-champ:last-child .nta-val { color: var(--stamp); }
       /* L'ART DE LA CARTE : borné, jamais déformé — `object-fit` garde le
          cadrage que Croze a peint, on ne fait que réduire la fenêtre dessus. */
@@ -13295,7 +13331,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-4yfPDEe7.js"></script>
+    <script type="module" crossorigin src="./assets/index-ZqBO7YrH.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
@@ -13307,6 +13343,6 @@
     -->
     <div id="composition">
       <div id="app"></div>
-    </div>
+    </div>
   </body>
 </html>
