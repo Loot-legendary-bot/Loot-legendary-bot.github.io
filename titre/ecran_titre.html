@@ -1351,6 +1351,9 @@ const DICE=[
   /* S1427 - note 259 : la peau `sceau` (forge 747b7ee, fusionnee 09111b6) - Dungeon 18
      du mur, « The Seal dice ». Sans cette ligne le mur disait « Arriving ». */
   ["The Seal dice","sceau",0]];
+/* S1427 - note 263 : « les des the Seal me sont donnes - et ils ne sont PAS en vente au Vault ».
+   Une peau HORS VENTE n'est au rayon que possedee (pour l'equiper), jamais au tirage. */
+const PEAUX_HORS_VENTE=['sceau'];
 /* MONNAIE.md 3 : une peau de des se paie 640 dents choisie, 480 en ticket
    random. Chiffres de PROPOSITION du classeur - Croze les corrige d'un mot,
    et c'est pour ca qu'ils sont ici, nommes, plutot que fondus dans
@@ -2674,6 +2677,7 @@ function fillGrid(key){
        elle ouvre le rayon plutot que de se perdre au milieu des vitrines. */
     /* S1405 - note 221 (4) : « Random dice set » supprime (Croze : il n'existe plus). */
     DICE.forEach(([name,dossier,owned],i)=>{
+      if(!owned&&PEAUX_HORS_VENTE.indexOf(dossier)>=0) return;
       const c=document.createElement('div');
       c.className='cell'+(owned?'':' locked')+(owned&&equipped.dice===i?' eq':''); c.tabIndex=0;
       const src=IMG_PEAU(dossier);
@@ -3053,7 +3057,7 @@ function offrandeDuTicket(){
 /** Combien de peaux le ticket peut encore rendre. Il se COMPTE, jamais ne se
     recopie : un nombre ecrit a cote d'une liste qui bouge ment au premier
     achat. */
-function resteADebloquer(){ return DICE.filter(d=>!d[2]).length; }
+function resteADebloquer(){ return DICE.filter(d=>!d[2]&&PEAUX_HORS_VENTE.indexOf(d[1])<0).length; }
 /* S1347 \u00b7 note 200 (c) - l'exploit d'une peau, LU sur la table du mur
    (bounty_wall.js), jamais recopie ici. `null` : la peau n'a pas d'exploit. */
 function exploitDeLaPeau(id){
@@ -3072,7 +3076,7 @@ function prixDeLaPeau(i){
 }
 /* Le ticket ne tire que parmi les peaux OUVERTES (exploit fait) et pas encore a toi. */
 function peauxTirables(){
-  return DICE.map((d,k)=>[d,k]).filter(([d])=>{ const ex=exploitDeLaPeau(d[1]); return !d[2] && (ex===null||ex.ouverte); });
+  return DICE.map((d,k)=>[d,k]).filter(([d])=>{ const ex=exploitDeLaPeau(d[1]); return !d[2] && PEAUX_HORS_VENTE.indexOf(d[1])<0 && (ex===null||ex.ouverte); });
 }
 function act(kind,i){
   /* S1370 · note 206 (3) - acheter une offrande : elle va dans le sac du profil. */
@@ -4739,7 +4743,8 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   }
   window.LLMurAchete = achete;   /* S1393 - TOUT DEVERROUILLER passe par ce bouton */
   /* note 206 (2) : un personnage 3 200, une peau cinq fois son prix de Vault */
-  function prixDe(x) { return x.p ? BW.PRIX_PERSO : PRIX_DES.choisi * BW.FOIS; }
+  /* S1427 - note 263 : une peau HORS VENTE (le sceau, Dungeon 18) est DONNEE par son palier. */
+  function prixDe(x) { return x.p ? BW.PRIX_PERSO : (x.d && PEAUX_HORS_VENTE.indexOf(x.d) >= 0) ? 0 : PRIX_DES.choisi * BW.FOIS; }
 
   /* Un médaillon : le portrait 200 px, ou la vitrine de la peau (bones et
      pierre n'ont pas de vitrine : leur face 20). */
@@ -4810,6 +4815,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       b.title = x.nom;
       if (PROFILE.gold < prixDe(x)) { b.disabled = true; b.title = 'Not enough teeth: ' + fmt(prixDe(x) - PROFILE.gold) + ' short.'; }
       /* S1415 · BW-5 : des dents, l'accès DPT et le dos d'un esprit se PRENNENT (gratuits) */
+      if (x.d && prixDe(x) === 0) { b.disabled = false; b.textContent = 'Take · ' + x.nom; b.title = x.nom + ' — given by the wall, never sold'; }
       if (x.t || x.x || x.k) {
         b.disabled = false;
         b.textContent = x.cx !== null && x.cx !== undefined ? 'Take' : 'Take · ' + x.nom;
