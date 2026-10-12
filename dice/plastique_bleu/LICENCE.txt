@@ -1,0 +1,30 @@
+plastique_bleu — licences et provenance
+=======================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+PHOTO       Aucune. Cette peau n'a pas de photographie de reference : le bleu
+            du corps et le blanc des chiffres sont des albedos CHOISIS, pas
+            mesures. Le rapport n'imprime donc aucune table de couleur.
+
+NOM         La peau porte le nom de sa MATIERE — un plastique bleu opaque et
+            mat, chiffres peints en blanc dans une gravure. C'est une
+            declinaison du gabarit plastique_* (premiere : plastique_rouge) :
+            le de d'entree, vendu au Vault hors du mur (MONNAIE §15), au palier
+            Common (MONNAIE §7.2). Le nom
+            que liront les joueurs est choisi par Croze au Vault.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

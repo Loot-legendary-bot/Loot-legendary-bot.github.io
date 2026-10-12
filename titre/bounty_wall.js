@@ -34,7 +34,7 @@
      un personnage 640 (#45 B), une peau de dé cinq fois son prix de Vault (Croze
      le garde : `FOIS`), un curseur ou un dos au prix du Vault. */
   var FOIS = 5;
-  var PRIX_PERSO = 640;          /* #45 B · §13 (le ×5 de la note 206 est retiré) */
+  var PRIX_PERSO = 3500;         /* note 269 ② : grille GRAVÉE (MONNAIE §20) — était 640 (#45 B) */
   var SERVIS = '@servis';
 
   /* S1373 · note 208 (§13.2) — LES OFFRANDES SONT DES CONSOMMABLES NOMMÉS.
@@ -224,8 +224,8 @@
      pas publiées, Q-IN) ; `essences` multiplie le drop de fin de partie. Une seule
      chance à la fois (ⓡ, Q-CHANCE-CUMUL) : on n'en rachète pas tant qu'elle court. */
   var CHANCES = {
-    rabbit_foot: { nom: "Rabbit's Foot", parties: 5, dents: 1.5, essences: 2, prix: 300 },
-    four_leaf_clover: { nom: 'Four-Leaf Clover', parties: 10, dents: 2, essences: 3, prix: 1000 }
+    rabbit_foot: { nom: 'Floor Wax', parties: 5, dents: 1.5, essences: 2, prix: 100 },        /* MONNAIE §20 gravé */
+    four_leaf_clover: { nom: 'Dungeon Bleach', parties: 10, dents: 2, essences: 3, prix: 300 }  /* MONNAIE §20 gravé */
   };
   var SORTES_CHANCE = ['rabbit_foot', 'four_leaf_clover'];
   function chance(profil) {

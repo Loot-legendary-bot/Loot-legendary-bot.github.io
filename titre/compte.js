@@ -466,5 +466,5 @@
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', auLancement); }
   else { auLancement(); }
 
-  window.LLCompte = { session: session, serveur: serveur, accueil: accueil, blocDuProfil: blocDuProfil, phrase: phrase, sansReponse: sansReponse, DEFAUT: SERVEUR_DEFAUT };
+  window.LLCompte = { appel: appel, session: session, serveur: serveur, accueil: accueil, blocDuProfil: blocDuProfil, phrase: phrase, sansReponse: sansReponse, DEFAUT: SERVEUR_DEFAUT };
 })();

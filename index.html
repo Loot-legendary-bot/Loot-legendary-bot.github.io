@@ -11723,6 +11723,20 @@
         content: ""; position: absolute; inset: -5px;
         border-radius: 50%; border: 1px solid var(--siege, var(--stock-dim));
       }
+      /* note 271 (5) — L'ANNEAU-TIMER : autour du rond, à la couleur du siège, il se
+         vide sur l'horloge que l'écran tient (main.ts::anneauDuChrono) ; sans
+         horloge (un autre siège), plein et il respire. Il remplace le liseré statique. */
+      .nouvelle-table .nt-chrono {
+        position: absolute; inset: -10px; width: calc(100% + 20px); height: calc(100% + 20px);
+        transform: rotate(-90deg); pointer-events: none; overflow: visible;
+      }
+      .nouvelle-table .nt-chrono circle {
+        fill: none; stroke: var(--siege, var(--stock)); stroke-width: 4; stroke-linecap: round;
+        transition: stroke-dashoffset .2s linear;
+      }
+      .nouvelle-table .nt-chrono.sans-horloge circle { animation: nt-chrono-respire 1.4s ease-in-out infinite alternate; }
+      @keyframes nt-chrono-respire { from { opacity: .35; } to { opacity: 1; } }
+      .nouvelle-table .nt-rond:has(.nt-chrono)::after { display: none; }
       .nouvelle-table .nt-presence.nt-parti { opacity: .45; }
       /* ⛑ S1291 · LA-5 — la miniature se clique (son plateau) ; la regardée
          porte un second anneau, plein, à la couleur du siège. */
@@ -11873,6 +11887,15 @@
         border: 1px solid var(--stock-dim);
       }
       .nouvelle-table .nt-vq-glyphe { color: var(--stock-dim); }
+      /* S1428 - note 265 (7) : glyphes dessines, et les points de chaque joueur */
+      .glyphe-dessine { display: inline-flex; vertical-align: -2px; }
+      .glyphe-dessine svg { width: 1.05em; height: 1.05em; }
+      .nouvelle-table .nt-points { color: var(--stock); font-weight: 700; margin-right: 8px; }
+      .nouvelle-table .nt-points-nb { font-size: 13px; }
+      .nouvelle-table .nt-points-mot { font-size: 9px; color: var(--stock-dim); }
+      .nouvelle-table .nt-quetes { margin-right: 6px; }
+      /* S1428 - note 265 (8) : le bandeau RUN · DUNGEON TURN, plus sature */
+      .nouvelle-table .nt-tour-seul .bt-etat { filter: saturate(1.9); }
       .nouvelle-table .nt-vq-nb { font-size: 14px; }
       .nouvelle-table .nt-vq-mot { font-size: 10px; color: var(--stock-dim); }
       .nouvelle-table .nt-nb {
@@ -13083,6 +13106,10 @@
       /* L'inventaire : la grille 3×3 de Croze, les noms, sans les effets. */
       .nouvelle-table .bj-inv { flex: 0 0 auto; padding: 0 6px 4px; }
       .nouvelle-table .bj-moi > .bj-inv { padding: 0; }
+      /* S1428 - note 265 (6) : « ça DÉBORDE du cadre » — l'inventaire déployé prend le reste
+         de la colonne et défile DEDANS (SC-1 : molette, aucune barre), jamais sous le cadre. */
+      .nouvelle-table .bj-moi > .bj-inv.inv-deploye { flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-width: none; }
+      .nouvelle-table .bj-moi > .bj-inv.inv-deploye::-webkit-scrollbar { display: none; }
       .nouvelle-table .bj-lbl {
         font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: var(--stock-dim);
       }
@@ -13268,7 +13295,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DlOvblHD.js"></script>
+    <script type="module" crossorigin src="./assets/index-rG8NaFPe.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

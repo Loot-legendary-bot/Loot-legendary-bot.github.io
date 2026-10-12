@@ -86,6 +86,14 @@
       p.migrations.offrandes_241 = true;
       pose(p);   /* ecrit tout de suite, fichier du dossier compris */
     }
+    /* S1428 - note 265 (1) : le depart etait 2048 dents jusqu'au 12/10 (MONNAIE 14 : 300).
+       Un profil ecrit avant, jamais depense ni gagne (exactement 2048), est un profil
+       NEUF d'avant la regle : il repart a 300, UNE fois. Un solde gagne n'est pas touche. */
+    if (p.migrations.depart_300_265 !== true) {
+      if (p.dents === 2048) p.dents = 300;
+      p.migrations.depart_300_265 = true;
+      pose(p);
+    }
     p.schema_version = SCHEMA;
     return p;
   }

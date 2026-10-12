@@ -17,7 +17,7 @@
  */
 (function () {
   'use strict';
-  var PRIX = { dpl: 128, daily: 32 };            /* #45 D « ok » · #47 C ⓡ */
+  var PRIX = { dpl: 500, daily: 50 };            /* note 269 ② : MONNAIE §20 gravé (était 128 / 32) */
 
   /* [nom, perso imposé, conditions, objectif, compteurs du mur] — TICKETS §2.
      Note 202 (#47 E, « parfois le perso n'est pas imposé ») : `null` = perso LIBRE

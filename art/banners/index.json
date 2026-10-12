@@ -1,0 +1,61 @@
+{
+ "_": "note 270 (1) - les player banners de Croze (ASSETS/BANN NICKNAME), detourees par tools/bannieres_pseudo.py. Calque leger, jetable.",
+ "bannieres": [
+  {
+   "id": "originale",
+   "nom": "Original",
+   "fichier": "/art/banners/originale.webp",
+   "w": 860,
+   "h": 273,
+   "source": "BAnn originale.png"
+  },
+  {
+   "id": "originale_alt",
+   "nom": "Original (alt)",
+   "fichier": "/art/banners/originale_alt.webp",
+   "w": 860,
+   "h": 271,
+   "source": "BAnn originale alt.png"
+  },
+  {
+   "id": "fire",
+   "nom": "Wood Fire",
+   "fichier": "/art/banners/fire.webp",
+   "w": 860,
+   "h": 322,
+   "source": "bann wood fire.png"
+  },
+  {
+   "id": "chaos",
+   "nom": "Chaos",
+   "fichier": "/art/banners/chaos.webp",
+   "w": 860,
+   "h": 352,
+   "source": "bann  chaos.png"
+  },
+  {
+   "id": "arcane",
+   "nom": "Arcane",
+   "fichier": "/art/banners/arcane.webp",
+   "w": 860,
+   "h": 204,
+   "source": "bann arcane.png"
+  },
+  {
+   "id": "poison",
+   "nom": "Poison",
+   "fichier": "/art/banners/poison.webp",
+   "w": 860,
+   "h": 308,
+   "source": "bann poison.png"
+  },
+  {
+   "id": "stone",
+   "nom": "Stone",
+   "fichier": "/art/banners/stone.webp",
+   "w": 860,
+   "h": 293,
+   "source": "bann stone.png"
+  }
+ ]
+}

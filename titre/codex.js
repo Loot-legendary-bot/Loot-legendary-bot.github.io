@@ -154,6 +154,14 @@
     return out;
   }
 
+  /* note 271 (4) : l'id du dos équipé, ou null (Lick Floor, le CSS par défaut) */
+  function dosEquipe() {
+    try {
+      var p = window.LLProfil ? window.LLProfil.lis() : null;
+      var id = p && p.equipe ? p.equipe.dos : null;
+      return typeof id === 'string' && /^[a-z0-9_]+$/.test(id) ? id : null;
+    } catch (e) { return null; }
+  }
   function el(tag, cls, txt) {
     var e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -248,7 +256,7 @@
     var filtres = [{ cle: 'res', libelle: 'Result', valeurs: ['SUCCESS', 'FAILED'] }];
     if (valeurs('cond').length > 0) filtres.push({ cle: 'cond', libelle: 'Condition', valeurs: valeurs('cond') });
     if (valeurs('mois').length > 0) filtres.push({ cle: 'mois', libelle: 'Month', valeurs: valeurs('mois').sort().reverse() });
-    return { cle: DAILIES, libelle: 'Daily challenges', filtres: filtres, famille: null, items: items };
+    return { cle: DAILIES, libelle: 'Today\u2019s Dungeons', filtres: filtres, famille: null, items: items };
   }
   function passeDaily(it) {
     var q = etat.q.trim().toLowerCase();
@@ -388,6 +396,9 @@
       cadre.appendChild(im);
     } else {
       cadre.className = 'cx-img dos';   /* S1414 · CX-3 : une carte retournée, le dos Lick Floor */
+      /* note 271 (4) : LE DOS ÉQUIPÉ du joueur (profil equipe.dos ; null = Lick Floor) */
+      var dosEq = dosEquipe();
+      if (dosEq) cadre.style.backgroundImage = 'url(/art/dos/' + dosEq + '.webp)';
       cadre.appendChild(el('span', 'cx-q', '?'));
     }
     c.appendChild(cadre);
@@ -517,7 +528,7 @@
           grille.appendChild(ligneDaily(it, noms));
           n += 1;
         });
-        if (b.items.length === 0) grille.appendChild(el('div', 'cx-vide', 'No daily played yet \u2014 DIVE \u2192 TODAY\u2019S DUNGEON.'));
+        if (b.items.length === 0) grille.appendChild(el('div', 'cx-vide', 'No Today\u2019s Dungeon played yet \u2014 DIVE \u2192 TODAY\u2019S DUNGEON.'));
         else if (n === 0) grille.appendChild(el('div', 'cx-vide', 'Nothing matches.'));
         compteVisible.textContent = n + ' shown \u00b7 ' + b.items.length + ' played';
         grille.scrollTop = 0;
@@ -606,7 +617,7 @@
     var scd = el('span', 'cx-sceau');
     scd.style.setProperty('--cire', '#2f4a5c');
     btd.appendChild(scd);
-    btd.appendChild(el('div', 'cx-bnom', 'Daily challenges'));
+    btd.appendChild(el('div', 'cx-bnom', 'Today\u2019s Dungeons'));
     var cptd = el('div', 'cx-bcompte');
     cptd.appendChild(el('span', '', bd.items.length + ' played'));
     cptd.appendChild(el('span', '', bd.items.filter(function (x) { return x.r.reussi === true; }).length + ' succeeded'));

@@ -1,0 +1,40 @@
+{
+ "famille": "uni",
+ "couleurs": {
+  "corps": [
+   "#1e6b3a"
+  ],
+  "veines": null,
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#f0ede6"
+ },
+ "fini": {
+  "rugosite": 0.6,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.0,
+  "densite": 0.0,
+  "densite_paillettes": 0.0,
+  "rugosite_inclusions": 0.0
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.6,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "GABARIT plastique_* : de d entree, palier Common hors-mur. Une couleur a plat, mat 0.60, aretes arrondies (biseau 0.6), encre blanche gravee. Decliner = changer corps et chiffres SEULS."
+}

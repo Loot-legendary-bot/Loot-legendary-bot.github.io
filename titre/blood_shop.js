@@ -235,8 +235,8 @@
          jamais une MASSIVE, jamais plus qu'un mois de jeu gratuit, et jamais vendues seules. */
       corps.appendChild(el('p', 'bs-dit', 'Real money, once Steam is plugged in. Luck and essences are only ever sold in these two bundles — never alone, never a MASSIVE essence.'));
       g = el('div', 'bs-grille'); corps.appendChild(g);
-      item(g, { nom: 'Starter', quoi: "500 blood + one alt portrait of your choice + 1 Rabbit's Foot + 3 SMALL essences of your choice. First purchase only — ×2 on your first purchase.", ombre: "500 + portrait + Rabbit's Foot + 3 SMALL", euros: '4,99' });
-      item(g, { nom: 'Supporter', quoi: '2,600 blood + the title SUPPORTER + a unique card back + 1 Four-Leaf Clover + 3 BIG essences.', ombre: '2,600 + title + back + Clover + 3 BIG', euros: '19,99' });
+      item(g, { nom: 'Starter', quoi: "500 blood + one alt portrait of your choice + 1 FLOOR WAX + 3 SMALL essences of your choice. First purchase only — ×2 on your first purchase.", ombre: "500 + portrait + WAX + 3 SMALL", euros: '4,99' });
+      item(g, { nom: 'Supporter', quoi: '2,600 blood + the title SUPPORTER + a unique card back + 1 DUNGEON BLEACH + 3 BIG essences.', ombre: '2,600 + title + back + BLEACH + 3 BIG', euros: '19,99' });
     }
   }
   function pager(corps, pages) {

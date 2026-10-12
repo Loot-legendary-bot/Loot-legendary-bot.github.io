@@ -530,6 +530,8 @@
   .rt.ticket:hover svg,.rt.ticket.sel svg{opacity:1}
   .hero .shot .plate{position:absolute;inset:0;display:grid;place-items:center}
   .grid.dice{grid-template-columns:repeat(8,1fr)}
+  .grid .rayon-sect{grid-column:1/-1;font:900 1.5cqh/1 "Arial Black",sans-serif;letter-spacing:.14em;
+    text-transform:uppercase;color:#d8c9a8;padding:2.2cqh 0 .3cqh;border-bottom:1px solid rgba(216,201,168,.25)}
   .grid.curs{grid-template-columns:repeat(4,1fr)}
   /* S1407 - note 224 (DOS-2) : le rayon CARD BACKS, un dos debout par case. */
   /* note 237 (2) : dix dos (trois + les sept des esprits). Une case a
@@ -635,6 +637,9 @@
     font:400 1.2cqh/1 ui-monospace,monospace;letter-spacing:.18em;color:var(--blood)}
   .cell.locked img{filter:grayscale(1) brightness(.17) contrast(1.1)}
   .cell.locked:hover img{filter:grayscale(1) brightness(.3) contrast(1.1)}
+  /* note 266 (4) - le ticket DPT verrouille se lit encore : gris, pas noir (sa peinture est sombre). */
+  .cell.ticket-env.locked img{filter:grayscale(1) brightness(.55) contrast(1.05)}
+  .cell.ticket-env.locked:hover img{filter:grayscale(.3) brightness(.85)}
   /* (2) note 140 - verbatim Croze : *&laquo; pour les des faut qu'on voit la
      couleur quand on passe le curseur dessus parce qu'en full gris perma on
      peut pas savoir ce qu'on achete &raquo;*. Les deux rayons qu'on ACHETE
@@ -933,7 +938,7 @@
 .pf-compte .pf-btn{padding:4px 8px;font-size:11px;letter-spacing:.04em}
 .pf-btn:hover{border-color:#fff;background:rgba(255,255,255,.07)}
 .pf-dit{margin-top:8px;font-size:12px;opacity:.75;min-height:1em}
-</style><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/foils.js"></script>
+</style><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/foils.js"></script><script src="/titre/bannieres.js"></script>
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 
@@ -1042,6 +1047,14 @@
     </div>
   </section>
 
+  <!-- S1429 - RK-1 (note 269 (1)) : LE CLASSEMENT, peint par classement.js -->
+  <section class="view" id="v-ranking">
+    <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
+    <h2 class="htitle">Ranking</h2>
+    <div class="hsep sepimg"></div>
+    <div class="rk" id="ranking"></div>
+  </section>
+
   <section class="view" id="v-profil">
     <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
     <h2 class="htitle">Profile</h2>
@@ -1131,6 +1144,13 @@
     transition:background .14s,color .14s,box-shadow .14s}
   .bboard:hover,.bboard:focus{background:var(--blood);color:#efe6d2;outline:none;
     box-shadow:0 0 0 1px #000, 0 .6cqh 2.2cqh rgba(163,35,29,.45)}
+  /* note 271 (1) - Croze, capture 06 : l'encadre du mur est « desastreux ». Plus AUCUN
+     cadre : ni la peinture blanche ni la coulure de S1428 (note 265 (4)), ni le fond noir,
+     ni le liseré rouge d'avant. Le bloc nu sur la pierre ; le survol rougit le titre. */
+  .bboard{position:relative;border:0;border-radius:0;border-image:none;background:none;box-shadow:none;
+    text-shadow:0 .2cqh .7cqh #000,0 0 .3cqh #000}
+  .bboard::before{content:none}
+  .bboard:hover,.bboard:focus{background:none;box-shadow:none;color:var(--blood)}
   /* note 136 - la vitrine montre la PEAU, pas un de colorie. `contain` :
      les vitrines et les faces n'ont pas le meme cadrage, et une peau rognee
      se lit comme une peau ratee. */
@@ -1350,10 +1370,25 @@ const DICE=[
   ["Orange pearl dice","nacre_orange_argent",0],
   /* S1427 - note 259 : la peau `sceau` (forge 747b7ee, fusionnee 09111b6) - Dungeon 18
      du mur, « The Seal dice ». Sans cette ligne le mur disait « Arriving ». */
-  ["The Seal dice","sceau",0]];
+  ["The Seal dice","sceau",0],
+  /* note 268 (3), MONNAIE 17 : plastique_rouge + plastique_bleu (forge, fusion e5c7713) - la
+     VENTE LIBRE du rayon : aucun exploit au mur, debloquees a l'achat. */
+  ["Red plastic dice","plastique_rouge",0],
+  ["Blue plastic dice","plastique_bleu",0]];
 /* S1427 - note 263 : « les des the Seal me sont donnes - et ils ne sont PAS en vente au Vault ».
    Une peau HORS VENTE n'est au rayon que possedee (pour l'equiper), jamais au tirage. */
 const PEAUX_HORS_VENTE=['sceau'];
+/* note 266 (5) / 268 (3) - la VENTE LIBRE du rayon DICE : pas de verrou, un seul prix (MONNAIE 17 : 320 R). */
+const PEAUX_VENTE_LIBRE={plastique_rouge:200,plastique_bleu:200};   /* SUPER COMMON 200, MONNAIE §20 gravé */
+/* note 269 ② - MONNAIE §21 gravé : le prix d'une peau du mur est celui de son PALIER (7.2, la matiere),
+   Common 1 000 / Uncommon 2 000 / Rare 5 000, sans le x5 d'hier. Les peaux absentes du tableau 7.2
+   sont classees par leur matiere (Q-269-PALIERS) : nacre = Rare (reflet), cristal = Uncommon (translucide). */
+const PRIX_DU_PALIER={Common:1000,Uncommon:2000,Rare:5000};
+const PALIER_DES={rose_opaque:'Common',jaune_opaque:'Common',noir_vert_acide:'Common',
+  jaune_translucide:'Uncommon',vert_clair_marbre:'Uncommon',granite_bleu:'Uncommon',cristal_mauve:'Uncommon',
+  galaxie_vert_violet:'Rare',bleu_givre:'Rare',rouge_translucide:'Rare',eclaboussures_sang:'Rare',
+  nacre_turquoise_violet:'Rare',nacre_vert_or:'Rare',nacre_bleu_acier:'Rare',nacre_orange_argent:'Rare'};
+const prixDuDossier=d=>PEAUX_VENTE_LIBRE[d]!==undefined?PEAUX_VENTE_LIBRE[d]:PRIX_DU_PALIER[PALIER_DES[d]||'Uncommon'];
 /* MONNAIE.md 3 : une peau de des se paie 640 dents choisie, 480 en ticket
    random. Chiffres de PROPOSITION du classeur - Croze les corrige d'un mot,
    et c'est pour ca qu'ils sont ici, nommes, plutot que fondus dans
@@ -1397,7 +1432,7 @@ const CURSORS=[["Bones","bones",1],
    &raquo; en 7) ; le classeur a tranche 320/240 - *&laquo; petit cosmetique que
    toi seul vois &raquo;* (note 155 (5)), Croze a un veto d'un mot. Ils sont ici,
    nommes, comme PRIX_DES juste au-dessus. */
-const PRIX_CURSEURS={choisi:320,random:240};
+const PRIX_CURSEURS={choisi:1000,random:240};   /* note 269 ② : MONNAIE §21 gravé (curseur 1 000) */
 /* S1407 - note 224 (DOS-2 b) : LES DOS DE CARTE sont des peaux, comme les des
    et les curseurs. Croze : « les alt versions sont dispo dans la boutique VAULT >
    CARD BACKS ». LICK FLOOR, le dos de toujours, est offert et equipe par defaut ;
@@ -1405,8 +1440,10 @@ const PRIX_CURSEURS={choisi:320,random:240};
    `src/dos.gen.json`. Prix : 320 comme un curseur choisi, le double pour la
    legendaire (reco, Q-DOS-PRIX). [nom, id, possede, prix] */
 const BACKS=[["Lick Floor","lick_floor",1,0],
-  ["Alt","alt",0,320],
-  ["Alt Legendary","alt_legendary",0,640],
+  /* note 271 (6), MONNAIE 22 : les dos BETA (alt, alt legendary) passent au pool SEASON -
+     jamais vendus (prix null), badge SEASON (DOS_SAISON plus bas). */
+  ["Alt","alt",0,null],
+  ["Alt Legendary","alt_legendary",0,null],
   /* note 237 (2) - les sept dos des esprits, valides par Croze le 10/10 : le
      Bout de chaque esprit au mur (dos_dungeon = Donjon 18). Prix null = ils ne
      se vendent pas, ils se GAGNENT au mur ; possedes, ils s'equipent ici. */
@@ -1416,7 +1453,22 @@ const BACKS=[["Lick Floor","lick_floor",1,0],
   ["Poison","dos_poison",0,null],
   ["Lightning","dos_lightning",0,null],
   ["Frost","dos_frost",0,null],
-  ["Dungeon","dos_dungeon",0,null]];
+  ["Dungeon","dos_dungeon",0,null],
+  /* note 268 (2) - les dos de Croze (ASSETS/cardback, *BACKCARD) : vente libre.
+     note 271 (6), MONNAIE 22 : etages 300 (simples) / 500 (standard) / 800 (elabores) -
+     repartition = reco de l'ecran a l'inventaire, le classeur et Croze corrigent. */
+  ["Black Sober","black_sober",0,300],
+  ["Light Sober","light_sober",0,300],
+  ["Red Sober","red_sober",0,300],
+  ["Bones","bones_back",0,500],
+  ["Old Paper","old_paper",0,500],
+  ["Simple and Sunny","simple_and_sunny",0,500],
+  ["Gold and Red","gold_and_red",0,800],
+  ["Special Edition Iridescent","special_iridescent",0,800],
+  ["Stained Glass","stained_glass",0,800]];
+/* note 271 (6) - le pool season_reward : remis en fin de saison, jamais vendu. Les 2 des 9
+   *backcards qui y passent sont designes par le classeur (ajouter l'id ici, prix -> null). */
+const DOS_SAISON=new Set(["alt","alt_legendary"]);
 function gardeLesDos(){
   try{window.LLProfil.modifie(p=>{p.possede.dos=BACKS.filter(b=>b[2]&&b[1]!=='lick_floor').map(b=>b[1])
     .concat((p.possede.dos||[]).filter(id=>!BACKS.some(b=>b[1]===id)));});}catch(e){}
@@ -1577,6 +1629,13 @@ const ICONES={
   coffre:'<path d="M6 22h36v19H6z"/><path d="M6 21c0-8 7-12.5 18-12.5S42 13 42 21z"/>'+
     '<path class="trou" d="M6 20.5h36v3H6z"/><path class="cire" d="M20.5 19h7v10h-7z"/>'+
     '<path class="trou" d="M24 22.2a1.5 1.5 0 1 1-.01 0zM23.2 24.5h1.6l.4 2.6h-2.4z"/>',
+  /* note 266 (2) - le rayon CHARMS : plus de trefle ni de patte de lapin (Croze, 12/10).
+     Le pot de FLOOR WAX (repli de sa peinture, et l'onglet du rayon) ; le flacon de
+     DUNGEON BLEACH (dessine en attendant sa peinture dans ASSETS/vault icones). */
+  pot:'<path class="cire" d="M10 10h28v6H10z"/><path d="M12 16h24c2 2 3 5 3 9v13c0 3-2 5-5 5H14c-3 0-5-2-5-5V25c0-4 1-7 3-9z"/>'+
+    '<path class="trou" d="M14 25h20v10H14z"/><path class="cire" d="M17 29h14v2H17z"/>',
+  javel:'<path class="cire" d="M20 4h8v6h-8z"/><path d="M19 10h10l2 5c4 1.5 6 4.5 6 8.5V40c0 2.2-1.8 4-4 4H15c-2.2 0-4-1.8-4-4V23.5c0-4 2-7 6-8.5z"/>'+
+    '<path class="trou" d="M15 24h18v14H15z"/><path class="cire" d="M24 26.5c-2.4 3.6-3.6 5.4-3.6 7.2a3.6 3.6 0 0 0 7.2 0c0-1.8-1.2-3.6-3.6-7.2z"/>',
   /* note 237 (4) - le rayon LUCK : un trefle a quatre feuilles, et la patte de lapin */
   trefle:'<path d="M24 23c-3-6-11-6-11-1s6 6 11 1zM24 23c6-3 6-11 1-11s-6 6-1 11zM24 23c3 6 11 6 11 1s-6-6-11-1zM24 23c-6 3-6 11-1 11s6-6 1-11z"/>'+
     '<path class="trait" d="M25 30c2 4 3 8 2 13"/>',
@@ -1616,6 +1675,10 @@ if(window.LLBountyWall){
   });
 }
 /* S1414 : sans packshot connu (les essences), pas d'<img> - elle cachait la fiole jusqu'a son 404 */
+/* note 266 (2) - un charm a sa peinture quand Croze l'a deposee (FLOOR WAX), sinon son dessin.
+   note 271 (2) - DUNGEON BLEACH a la sienne (ASSETS/vault icones, 12/10). */
+const charmeShot=(id)=>'<div class="plate besace-shot"><img alt="" src="/art/vault/'+(id==='rabbit_foot'?'floor_wax':'dungeon_bleach')+'.webp" onerror="this.remove()">'+
+  '<svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[id==='rabbit_foot'?'pot':'javel']+'</svg></div>';
 const besaceObjet=(so)=>'<div class="plate besace-shot">'+(BESACE_FICHIER[so]?'<img alt="" src="/art/besace/'+BESACE_FICHIER[so]+'.webp"'+
   ' onerror="this.remove()">':'')+'<svg class="besace-sil" viewBox="0 0 48 48">'+BESACE_SILHOUETTE[so]+'</svg></div>';
 const deTicket=(cls)=>'<svg class="'+(cls||'')+'" viewBox="0 0 48 48">'+
@@ -1770,6 +1833,7 @@ function set(v,arg){
   if(v==='rules') peinsLesRegles();
   if(v==='board') peinsLeBoardgame();
   if(v==='codex' && window.LLCodex) window.LLCodex.peins();
+  if(v==='ranking' && window.LLClassement) window.LLClassement.peins();
   if(v==='stub'){
     document.getElementById('stubtitle').textContent=arg;
     document.getElementById('stubtext').textContent=
@@ -1863,7 +1927,7 @@ function peinsLeDev(box){
       P.modifie(function(p){ p.offrandes=[]; if(p.mur&&typeof p.mur==='object') p.mur.offertes=[]; }); return 'Offerings reset.'; }],
    /* S1427 - note 257 (3), MONNAIE 14 : dents a 300, grades a Bronze, essences et chance a zero,
       les Dailies du jour a zero tentative ; tout le debloque reste. */
-   ['WIPE','Teeth back to 300, DPT ranks back to Bronze, essences and luck gone, today\u2019s Daily tries cleared. Everything unlocked stays.',function(){
+   ['WIPE','Teeth back to 300, DPT ranks back to Bronze, essences and luck gone, today\u2019s Dungeon tries cleared. Everything unlocked stays.',function(){
       P.modifie(function(p){
         p.dents=300; p.offrandes=[]; p.chance=null; p.rang='Bronze III';
         if(p.options&&typeof p.options==='object') delete p.options.dailyJoue;
@@ -1871,6 +1935,14 @@ function peinsLeDev(box){
         if(p.compteurs&&typeof p.compteurs==='object') p.compteurs.rang_dpl=0;
         if(p.branches&&typeof p.branches==='object') Object.keys(p.branches).forEach(function(k){ if(p.branches[k]&&typeof p.branches[k]==='object') p.branches[k].rang_dpl=0; });
       }); return 'Wiped.'; }],
+   /* S1428 - note 265 (5) : WIPE PROFILE = l'etat du PREMIER lancement, vraiment vierge :
+      le profil neuf (300 dents, rien de possede, aucun perso), le curseur de base seul, le
+      tuto pas vu ; le rechargement refait choisir le personnage de depart. Le pseudo reste. */
+   ['WIPE PROFILE','Back to the very first launch: 300 teeth, the base cursor only, nothing owned, and you pick your starting character again.',function(){
+      var n=P.neuf(); try{ n.pseudo=P.lis().pseudo||n.pseudo; }catch(e){}
+      P.pose(n);
+      try{ ['ll.profil.curseurs','ll.profil.curseur','ll_tuto'].forEach(function(k){ localStorage.removeItem(k); }); }catch(e){}
+      window.location.reload(); return 'Wiped to a first launch.'; }],
    ['UNLOCK ALL','Every Bounty Wall branch completed and every reward taken.',function(){
       var n=toutDeverrouiller(); return n===false?'Not available here.':'Unlocked ('+n+' rewards).'; }],
    ['+10,000 TEETH','Ten thousand teeth in your purse.',function(){
@@ -1960,7 +2032,7 @@ function peinsLeProfil(){
   var pl=function(n,un,des){ return n+' '+(n>1?des:un); };
   var tk=window.LLTickets?window.LLTickets.enPoche(P):{dpl:0,daily:0};
   var objets=[];
-  if(tk.daily>0) objets.push(pl(tk.daily,'Daily Dungeon invitation','Daily Dungeon invitations'));
+  if(tk.daily>0) objets.push(pl(tk.daily,'Today\u2019s Dungeon invitation','Today\u2019s Dungeon invitations'));
   if(tk.dpl>0) objets.push(pl(tk.dpl,'DPT ticket','DPT tickets'));
   if(BW){
     var sacI=BW.sac(P);
@@ -1969,7 +2041,7 @@ function peinsLeProfil(){
   ligne(inv,'Items',objets.length?objets.join(' · ').toUpperCase():'nothing in your bag');
   /* note 237 (4) - la chance active et son compte de parties */
   var chI=BW&&BW.chance?BW.chance(P):null;
-  ligne(inv,'Luck',chI===null?'none':chI.nom.toUpperCase()+' · '+pl(chI.restant,'game left','games left')+' · essences ×'+chI.essences);
+  ligne(inv,'Charm',chI===null?'none':chI.nom.toUpperCase()+' · '+pl(chI.restant,'game left','games left')+' · essences ×'+chI.essences);
   var noms3=function(t){ return t.filter(function(x){ return x[2]; }).map(function(x){ return x[0]; }); };
   var dd=noms3(DICE), cc=noms3(CURSORS), bb=noms3(BACKS);
   ligne(inv,'Dice skins',dd.length?dd.join(' · '):'none');
@@ -2185,6 +2257,8 @@ const MENU=[
   /* S1416 - HM-5 (e) : "Vault = acheter et equiper, Codex = consulter" - le mot sur chaque onglet. */
   ["Vault","buy & equip \u00b7 characters \u00b7 dice sets \u00b7 cursors","collection",0],
   /* S1411 - CX-1 (note 229, CODEX 1) : "au HOME, a cote de DIVE, du VAULT et du MUR". */
+  /* S1429 - RK-1 (note 269 (1)) : RANKING au HOME - les joueurs classes, leurs points, un clic = ses stats. */
+  ["Ranking","players \u00b7 points \u00b7 grades \u00b7 find a player","ranking",0],
   ["Codex","browse \u00b7 tiles \u00b7 mobs \u00b7 loot cards \u00b7 quests \u00b7 characters","codex",0],
   /* S1414 - HM-4 (note 235 (8)) : le carnet devient RULES - la cheat sheet, les 20 classes,
      le Timer et le patch note, iso v0.999 (les images de `art/regles/`). */
@@ -2401,8 +2475,8 @@ function drawArena(){
 }
 /* note 136 - TROIS contextes, et chacun porte ses mots. Le surtitre ne dit
    plus "PvE" / "PvP" : ces deux entrees ont quitte le HOME. */
-const KICK={bots:'vs bots',daily:'daily dungeon',ranked:'dungeon pro tour \u00b7 ranked'};
-const TITRE_DU_MATCH={bots:'Vs bots',daily:'Daily Dungeon',ranked:'Dungeon Pro Tour'};
+const KICK={bots:'vs bots',daily:'today\u2019s dungeon',ranked:'dungeon pro tour \u00b7 ranked'};
+const TITRE_DU_MATCH={bots:'Vs bots',daily:'Today\u2019s Dungeon',ranked:'Dungeon Pro Tour'};
 /* La graine du jour est DERIVEE de la date (UTC), jamais tiree : une seule
    graine pour tous. L'ecran l'AFFICHE ; il ne decide aucune regle avec. */
 const GRAINE_DU_JOUR=(()=>{const d=new Date();return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');})();
@@ -2511,7 +2585,9 @@ const counts=()=>({chars:CHARS.filter(c=>c.owned).length+'/'+TOTAL_CHARS,
 /* S1388 · note 213 (6) - LA BESACE (TICKETS.md 4) : « tickets, ca ne va pas ». */
 /* S1405 - note 223 H : « LA BESACE » bof -> LES VIVRES (reco du classeur, Croze tranche le nom). */
 /* note 237 (4) : le rayon ESSENCES devient LUCK (les essences ne se vendent plus). */
-const TABS=[['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Luck','tick'],['Blood','blood']];
+/* note 271 (3), MONNAIE 22 - l'onglet BLOOD est MASQUE (« on oublie pour l'instant ») :
+   le rayon reste ecrit plus bas, il revient en remettant ['Blood','blood'] dans TABS. */
+const TABS=[['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Charms','tick']];
 /* S1418 - note 239 (3), MONNAIE.md 10 - LE RAYON BLOOD : les quatre rayons du Sang et
    leurs prix. Le Sang se COMPTE, rien ne se vend tant que Steam n'est pas la : la
    vitrine se lit, aucun bouton n'achete. [nom, icone, prix, ce que c'est]. */
@@ -2526,7 +2602,7 @@ TABS.forEach(([label,key],i)=>{
   const b=document.createElement('button');
   b.className='tab'+(i===0?' on':''); b.dataset.key=key;
   /* S1408 - IC-1 : chaque rayon porte son icone */
-  const ICO_RAYON={chars:'perso',dice:'des',curs:'curseur',backs:'dos',tick:'trefle',blood:'fiole'};
+  const ICO_RAYON={chars:'perso',dice:'des',curs:'curseur',backs:'dos',tick:'pot',blood:'fiole'};
   b.innerHTML='<svg class="besace-sil tab-ic" viewBox="0 0 48 48" aria-hidden="true">'+ICONES[ICO_RAYON[key]]+'</svg>'+
     label+'<i></i><span class="rule"></span>';
   b.querySelector('.rule').style.backgroundImage='url('+A.bar+')';
@@ -2561,13 +2637,14 @@ hero.addEventListener('click',e=>{
 /* S1427 - VL-2 (note 254 (2), BOUNTY_WALL 10 verdict 1) : un personnage du mur ne s'achete
    au Vault qu'une fois son palier ATTEINT (l'achat vient apres l'exploit). Rend null si le
    perso n'est pas au mur, ou si son noeud est pret / a toi ; sinon la condition en clair. */
-function verrouDuMur(persoId){
+function verrouDuMur(persoId,champ){
+  champ=champ||'p';
   const BW=window.LLBountyWall, P=window.LLProfil;
   if(!BW||!P||typeof BW.etat!=='function') return null;
   let ofs=[]; try{ ofs=OFFERTES; }catch(e){}
   const troncs=BW.etat(P.lis(),ofs);
   for(const tr of troncs) for(const g of tr.rangs) for(const x of g.noeuds){
-    if(x.p!==persoId) continue;
+    if(x[champ]!==persoId) continue;
     if(x.s!=='lock') return null;
     return g.l+' \u2014 '+fmt(Math.min(g.n,x.a))+' / '+fmt(x.a)+' ('+tr.t+')';
   }
@@ -2592,8 +2669,8 @@ function showHero(i){
     '<div class="foot2">'+(owned
       ? '<div class="own2">In your vault</div>'
       : verrou!==null
-      ? '<button class="cta" id="hbtn" disabled>Locked \u2014 '+verrou+'</button>'+
-        '<p class="dnote"><a href="#" id="hmur">Open it on the Bounty Wall \u2192</a></p>'
+      ? '<button class="cta" id="hbtn" disabled>Locked \u00b7 '+fmt(PRIX_PERSO.choisi)+' teeth</button>'+
+        '<p class="dnote">Bounty Wall: '+verrou+'. <a href="#" id="hmur">Open it on the Bounty Wall \u2192</a></p>'
       : '<button class="cta" id="hbtn"'+(can?'':' disabled')+'>Unlock \u00b7 '+
         fmt(PRIX_PERSO.choisi)+' teeth</button>'+
         (can?'':'<p class="dnote warn">Not enough teeth. You are '+
@@ -2676,8 +2753,15 @@ function fillGrid(key){
        (480 contre 640, MONNAIE.md 3) et la seule qui ne soit pas une peau :
        elle ouvre le rayon plutot que de se perdre au milieu des vitrines. */
     /* S1405 - note 221 (4) : « Random dice set » supprime (Croze : il n'existe plus). */
-    DICE.forEach(([name,dossier,owned],i)=>{
+    /* note 266 (5) - la VENTE LIBRE d'abord, sous son titre ; puis les peaux du mur. */
+    const libre=d=>PEAUX_VENTE_LIBRE[d[1]]!==undefined;
+    const titre=t=>{ const h=document.createElement('div'); h.className='rayon-sect'; h.textContent=t; grid.appendChild(h); };
+    const ordre=DICE.map((d,i)=>[d,i]).sort((a,b)=>(libre(b[0])?1:0)-(libre(a[0])?1:0));
+    let sect=null;
+    ordre.forEach(([[name,dossier,owned],i])=>{
       if(!owned&&PEAUX_HORS_VENTE.indexOf(dossier)>=0) return;
+      const s=libre(DICE[i])?'Open sale':'Bounty Wall';
+      if(s!==sect){ sect=s; titre(s); }
       const c=document.createElement('div');
       c.className='cell'+(owned?'':' locked')+(owned&&equipped.dice===i?' eq':''); c.tabIndex=0;
       const src=IMG_PEAU(dossier);
@@ -2706,12 +2790,14 @@ function fillGrid(key){
        AVANT l'achat : le tiroir dit la seed, l'objectif, les conditions, le perso. */
     const T=window.LLTickets; const poche=T.enPoche(window.LLProfil.lis());
     [['tdpl','/art/tickets/dpl_sceau.webp',T.PRIX.dpl,'Dungeon Pro Tour',poche.dpl],
-     ['tdaily','/art/tickets/daily_sceau.webp',T.PRIX.daily,'Daily Dungeon',poche.daily]].forEach(([k,src,prix,cap,n])=>{
+     ['tdaily','/art/tickets/daily_sceau.webp',T.PRIX.daily,'Today\u2019s Dungeon',poche.daily]].forEach(([k,src,prix,cap,n])=>{
       const c=document.createElement('div');
-      c.className='cell ticket-env'; c.tabIndex=0;
+      /* note 266 (4) - verrouille, il montre quand meme son prix (gris + cadenas + prix). */
+      const ferme=k==='tdpl'&&!window.LLBountyWall.dptOuvert(window.LLProfil.lis());
+      c.className='cell ticket-env'+(ferme?' locked':''); c.tabIndex=0;
       c.innerHTML='<div class="plate"><img alt="" src="'+src+'" style="width:100%;height:100%;object-fit:cover;display:block"></div>'+
         '<span class="ic-coin" title="'+cap+' - invitation"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[k==='tdpl'?'dpl':'daily']+'</svg></span>'+
-        '<div class="own">'+(k==='tdpl'&&!window.LLBountyWall.dptOuvert(window.LLProfil.lis())?'Bounty Wall':fmt(prix))+'</div>'+(n>0?'<div class="tagx">'+n+' in pocket</div>':'')+
+        (ferme?'<div class="hatch"></div>'+cadenas():'')+'<div class="own">'+fmt(prix)+'</div>'+(n>0?'<div class="tagx">'+n+' in pocket</div>':'')+
         '<div class="cap">'+cap+'</div>';
       c.addEventListener('click',()=>openSheet(k,-1));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -2747,7 +2833,7 @@ function fillGrid(key){
         const o=BW.CHANCES[id];
         const c=document.createElement('div');
         c.className='cell besace'; c.tabIndex=0;
-        c.innerHTML='<div class="plate besace-shot"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[id==='rabbit_foot'?'patte':'trefle']+'</svg></div>'+
+        c.innerHTML=charmeShot(id)+
           '<b class="besace-x">'+o.parties+' games</b>'+
           '<div class="own">'+fmt(o.prix)+'</div>'+(ch&&ch.id===id?'<div class="tagx">'+ch.restant+' games left</div>':'')+
           '<div class="cap">'+o.nom+'</div>';
@@ -2770,12 +2856,14 @@ function fillGrid(key){
     });
   } else if(key==='backs'){
     /* S1407 - note 224 (DOS-2 b) : le rayon CARD BACKS. */
-    BACKS.forEach(([name,id,owned,prix],i)=>{
+    /* note 268 (2) - la vente libre (un prix) d'abord, les dos du mur (prix null) ensuite. */
+    BACKS.map((b,i)=>[b,i]).sort((a,b)=>(a[0][3]===null?1:0)-(b[0][3]===null?1:0)).forEach(([[name,id,owned,prix],i])=>{
       const c=document.createElement('div');
       c.className='cell'+(owned?'':' locked')+(owned&&equipped.backs===i?' eq':''); c.tabIndex=0;
       c.innerHTML='<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>'+
         (owned?'':cadenas())+
-        (owned?'':'<div class="own">'+(prix===null?'Bounty Wall':fmt(prix))+'</div>')+
+        (owned?'':'<div class="own">'+(prix===null?(DOS_SAISON.has(id)?'Season':'Bounty Wall'):fmt(prix))+'</div>')+
+        (DOS_SAISON.has(id)&&!(owned&&equipped.backs===i)?'<div class="tagx">SEASON</div>':'')+
         (owned&&equipped.backs===i?'<div class="tagx">Equipped</div>':'')+
         '<div class="cap">'+name+'</div>';
       c.addEventListener('click',()=>openSheet('backs',i));
@@ -2811,6 +2899,8 @@ function fillGrid(key){
 const fmt=n=>n.toLocaleString('en-US');
 function paintHUD(flash){
   document.getElementById('who').textContent=PROFILE.pseudo;
+  /* note 270 (1) - la player banner de Croze sous le pseudo (calque leger, /titre/bannieres.js) */
+  if(window.LLBannieres) window.LLBannieres.pose(document.getElementById('who'));
   document.getElementById('rank').textContent=PROFILE.rank;
   /* S1416 - HM-5 (d) : le grade n'est plus qu'une icone, son nom au survol, clic = le profil */
   document.getElementById('rank').parentElement.title='Rank: '+PROFILE.rank+' — click for all your stats';
@@ -2841,13 +2931,14 @@ function openSheet(kind,i){
     const T=window.LLTickets; const dpl=kind==='tdpl';
     const sc=dpl?T.deLaSemaine():T.duJour(); const n=T.enPoche(window.LLProfil.lis())[dpl?'dpl':'daily'];
     owned=false;
-    shot='<div class="dshot"><div class="plate"><img alt="" src="/art/tickets/'+(dpl?'dpl':'daily')+
+    /* note 266 (3) - les peintures de Croze sont carrees : la fiche les montre entieres. */
+    shot='<div class="dshot besace"><div class="plate"><img alt="" src="/art/tickets/'+(dpl?'dpl':'daily')+
       '.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>';
-    kick=(dpl?'Dungeon Pro Tour \u00b7 this week':'Daily Dungeon \u00b7 invitation')+(n>0?' \u00b7 '+n+' in pocket':'');
-    name=dpl?sc.nom:'Daily Dungeon Invitation';
+    kick=(dpl?'Dungeon Pro Tour \u00b7 this week':'Today\u2019s Dungeon \u00b7 invitation')+(n>0?' \u00b7 '+n+' in pocket':'');
+    name=dpl?sc.nom:'Today\u2019s Dungeon Invitation';
     /* S1414 - DD-2 bis (note 235 (5)) : l'invitation est NEUTRE - le defi du
        jour se lit a l'entree DIVE -> DAILY DUNGEON, pas sur l'objet. */
-    if(!dpl) body='<div class="rows">'+row('What it does','Lets you into the Daily Dungeon once. Burned at the entrance.')
+    if(!dpl) body='<div class="rows">'+row('What it does','Lets you into Today\u2019s Dungeon once. Burned at the entrance.')
       +row('Today\u2019s challenge','Read at the entrance: Dive \u2192 Today\u2019s Dungeon')
       +row('Pays','\u00d72 the teeth \u00b7 +64 if the day\u2019s objective is met')+'</div>';
     else body='<div class="rows">'+row('Seed',sc.seed+(dpl?' \u2014 the same dungeon for every ticket this week':' \u2014 the same dungeon for everyone today'))
@@ -2860,8 +2951,8 @@ function openSheet(kind,i){
     const BW=window.LLBountyWall; const id=BW.SORTES_CHANCE[i]; const o=BW.CHANCES[id];
     const ch=BW.chance(window.LLProfil.lis());
     owned=false;
-    shot='<div class="dshot besace"><div class="plate besace-shot"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[id==='rabbit_foot'?'patte':'trefle']+'</svg></div></div>';
-    kick='Luck · '+(ch&&ch.id===id?ch.restant+' games left':o.parties+' games');
+    shot='<div class="dshot besace">'+charmeShot(id)+'</div>';
+    kick='Charm · '+(ch&&ch.id===id?ch.restant+' games left':o.parties+' games');
     name=o.nom;
     body='<div class="rows">'+row('Lasts',o.parties+' games')
       +row('Teeth',(o.dents===2?'×2':'+'+Math.round((o.dents-1)*100)+' %')+' — waits for the game to publish the teeth of a game')
@@ -2975,18 +3066,23 @@ function openSheet(kind,i){
     /* S1405 - note 221 (4) : les tickets random n'existent plus, leur rappel non plus. */
     /* S1347 \u00b7 note 200 (c) - LE CADENAS : une peau dont l'exploit n'est pas fait
        se montre, dit ou elle se gagne sur le mur, et ne s'achete pas. */
-    if(kind==='backs' && prix===null){ cta='<button class="cta" id="dbtn" disabled>Locked · Bounty Wall</button>'; note='Earned in the Bounty Wall, at the end of its spirit’s branch.'; warn=false; }
+    /* S1428 - note 265 (2), MONNAIE 15 : un curseur du mur ne s'achete qu'apres son exploit
+       (meme loi que VL-2 pour les persos) ; visible, grise, la condition en clair. */
+    const vc = kind==='curs' ? verrouDuMur(CURSORS[i][1],'u') : null;
+    if(vc!==null){ cta='<button class="cta" id="dbtn" disabled>Locked · Bounty Wall · '+fmt(prix)+' teeth</button>'; note='In the Bounty Wall: '+vc+'. Reach it, then unlock it here or on the wall.'; warn=false; }
+    if(kind==='backs' && DOS_SAISON.has(BACKS[i][1])){ cta='<button class="cta" id="dbtn" disabled>Locked · Season reward</button>'; note='A Season reward: given at the end of a season, by the tier you reach. Never sold.'; warn=false; }
+    else if(kind==='backs' && prix===null){ cta='<button class="cta" id="dbtn" disabled>Locked · Bounty Wall</button>'; note='Earned in the Bounty Wall, at the end of its spirit’s branch.'; warn=false; }
     const ex = kind==='dice' ? exploitDeLaPeau(DICE[i][1]) : null;
     if(ex!==null && !ex.ouverte){
-      cta='<button class="cta" id="dbtn" disabled>Locked \u00b7 Bounty Wall</button>';
+      cta='<button class="cta" id="dbtn" disabled>Locked \u00b7 Bounty Wall \u00b7 '+fmt(prix)+' teeth</button>';
       note='In the Bounty Wall: '+ex.l+' \u2014 '+fmt(Math.min(ex.n,ex.a))+' / '+fmt(ex.a)+'.'+
         '<span class="dbar"><i style="width:'+Math.round(100*Math.min(1,ex.n/ex.a))+'%"></i></span>'+
         'Reach it, then unlock it here or on the wall.';
       warn=false;
     }
     if(kind==='luck' && window.LLBountyWall.chance(window.LLProfil.lis())!==null){
-      cta='<button class="cta" id="dbtn" disabled>Your luck is running</button>';
-      note='One luck at a time: this one ends after '+window.LLBountyWall.chance(window.LLProfil.lis()).restant+' more games.'; warn=false;
+      cta='<button class="cta" id="dbtn" disabled>A charm is running</button>';
+      note='One charm at a time: this one ends after '+window.LLBountyWall.chance(window.LLProfil.lis()).restant+' more games.'; warn=false;
     }
     if(kind==='offr' && prix===null){
       cta='<button class="cta" id="dbtn" disabled>Found in play only</button>';
@@ -2996,10 +3092,10 @@ function openSheet(kind,i){
     /* S1415 - BW-5 (note 237 (1)) : l'achat de tickets DPT se debloque au Bounty Wall,
        palier 16 du Donjon (deux arbres d'esprit termines). */
     if(kind==='tdpl' && !window.LLBountyWall.dptOuvert(window.LLProfil.lis())){
-      cta='<button class="cta" id="dbtn" disabled>Locked \u00b7 Bounty Wall</button>';
+      cta='<button class="cta" id="dbtn" disabled>Locked \u00b7 Bounty Wall \u00b7 '+fmt(prix)+' teeth</button>';
       note='Spirit of the Dungeon, step 16: finish two spirit trees in the Bounty Wall, then take it.'; warn=false;
     } else if((kind==='tdpl'||kind==='tdaily') && can){
-      note='Kept in your pocket: play it from '+(kind==='tdpl'?'DUNGEON PRO TOUR':'DAILY DUNGEON')+' on the home screen.';
+      note='Kept in your pocket: play it from '+(kind==='tdpl'?'DUNGEON PRO TOUR':'TODAY\u2019S DUNGEON')+' on the home screen.';
     }
     if(kind==='ticket' && peauxTirables().length===0){
       cta='<button class="cta" id="dbtn" disabled>Draw \u00b7 '+fmt(PRIX_DES.random)+' teeth</button>';
@@ -3072,7 +3168,7 @@ function exploitDeLaPeau(id){
    un exploit) coute cinq fois son prix d'hier, au Vault comme au mur. */
 function prixDeLaPeau(i){
   const BW=window.LLBountyWall;
-  return PRIX_DES.choisi*(BW&&exploitDeLaPeau(DICE[i][1])!==null?BW.FOIS:1);
+  return prixDuDossier(DICE[i][1]);
 }
 /* Le ticket ne tire que parmi les peaux OUVERTES (exploit fait) et pas encore a toi. */
 function peauxTirables(){
@@ -3128,6 +3224,7 @@ function act(kind,i){
   const owned = kind==='chars'?ALPHA[i].owned:(kind==='dice'?DICE[i][2]:kind==='backs'?BACKS[i][2]:CURSORS[i][2]);
   /* S1347 - le cadenas tient aussi ici : le bouton est grise, et l'achat refuse. */
   if(!owned && kind==='dice'){ const ex=exploitDeLaPeau(DICE[i][1]); if(ex!==null && !ex.ouverte) return; }
+  if(!owned && kind==='curs' && verrouDuMur(CURSORS[i][1],'u')!==null) return;   /* S1428 - note 265 (2) */
   if(!owned){
     /* S1289 (CU-T2) - le curseur debitait `UNLOCK_PRICE` (1 280, l'echelle
        des PERSONNAGES) sous un bouton qui annoncait 320. */
@@ -3254,7 +3351,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
        Le ticket en poche part d'abord ; sans ticket, Start le paie (32 dents). */
     if (e.ctx === 'daily') {
       var T = window.LLTickets, P = window.LLProfil;
-      if (!T || !P) { refuse("The Daily can't be read \u2014 nothing was launched."); return; }
+      if (!T || !P) { refuse("Today's Dungeon can't be read \u2014 nothing was launched."); return; }
       var sc = T.duJour(), p = P.lis(), poche = T.enPoche(p).daily;
       /* S1427 - note 257 (1) : plus de « Come back tomorrow » — chaque tentative brule une invitation. */
       /* S1414 - DD-2 bis (note 235 (5), DAILY_DUNGEON 0 (2)) : il faut une
@@ -4744,7 +4841,8 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   window.LLMurAchete = achete;   /* S1393 - TOUT DEVERROUILLER passe par ce bouton */
   /* note 206 (2) : un personnage 3 200, une peau cinq fois son prix de Vault */
   /* S1427 - note 263 : une peau HORS VENTE (le sceau, Dungeon 18) est DONNEE par son palier. */
-  function prixDe(x) { return x.p ? BW.PRIX_PERSO : (x.d && PEAUX_HORS_VENTE.indexOf(x.d) >= 0) ? 0 : PRIX_DES.choisi * BW.FOIS; }
+  /* note 269 ② : au mur aussi, la grille gravee (perso 3 500, de par palier, curseur 1 000). */
+  function prixDe(x) { return x.p ? BW.PRIX_PERSO : (x.d && PEAUX_HORS_VENTE.indexOf(x.d) >= 0) ? 0 : x.d ? prixDuDossier(x.d) : x.u ? PRIX_CURSEURS.choisi : PRIX_DES.choisi * BW.FOIS; }
 
   /* Un médaillon : le portrait 200 px, ou la vitrine de la peau (bones et
      pierre n'ont pas de vitrine : leur face 20). */
