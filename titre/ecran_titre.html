@@ -731,6 +731,39 @@
   .cell .lockmark svg{width:100%;height:100%;display:block;fill:none;
     stroke:#efece3;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
   .cell:hover .lockmark,.cell:focus-visible .lockmark{opacity:1}
+  /* S1439 - note 287 (1) : LA GRAMMAIRE UNIQUE DU VAULT. Achetable = le prix seul, pleine
+     lumiere ; challenge = l'icone d'EXPLOIT (or) + le prix, l'exploit au survol ; possede =
+     OWNED discret ; equipe = les coins arcade du character select ; season = SEASON, sans prix. */
+  .cell .exmark,.rt .exmark{width:2.2cqh;height:2.2cqh;opacity:1}
+  .cell .exmark svg,.rt .exmark svg{stroke:#ffd23f}
+  .rt .exmark{position:absolute;right:.4cqw;top:.7cqh;z-index:3;filter:drop-shadow(0 .2cqh .5cqh rgba(0,0,0,.95))}
+  .rt .exmark svg{width:100%;height:100%;display:block;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .cell .own.vprix{color:#efe6cf;font-weight:700;letter-spacing:.12em;text-shadow:0 .2cqh .5cqh #000}
+  .cell.locked .own.vprix{color:#b9b0a0}
+  .cell .own.vowned{color:#8f887b;letter-spacing:.18em}
+  .cell .own.vseason{color:#d9b65a;letter-spacing:.18em;border:1px solid #6b5a2c;padding:.25cqh .4cqw;background:rgba(0,0,0,.6)}
+  .cell .exhint{position:absolute;left:.4cqw;right:.4cqw;top:3.8cqh;z-index:4;padding:.6cqh .5cqw;
+    background:rgba(8,8,10,.94);border:1px solid #6b5a2c;font:400 1.3cqh/1.25 "Courier Prime",ui-monospace,monospace;
+    color:#efe6cf;opacity:0;transition:opacity .2s;pointer-events:none}
+  .cell:hover .exhint,.cell:focus-visible .exhint{opacity:1}
+  .rt .rtb{position:absolute;right:.3cqw;bottom:.5cqh;z-index:3;font:700 1.05cqh/1 ui-monospace,monospace;
+    letter-spacing:.1em;color:#efe6cf;background:rgba(0,0,0,.72);padding:.2cqh .3cqw}
+  .rt .rtb.vowned{color:#8f887b;font-weight:400}
+  .cell.eq{border-color:#1e1e24}
+  .cell.eq::after{content:'';position:absolute;inset:0;z-index:5;pointer-events:none;
+    --c:#ffd23f;--l:30%;--e:.6cqh;
+    background:
+      linear-gradient(var(--c),var(--c)) top left/var(--l) var(--e) no-repeat,
+      linear-gradient(var(--c),var(--c)) top left/var(--e) var(--l) no-repeat,
+      linear-gradient(var(--c),var(--c)) top right/var(--l) var(--e) no-repeat,
+      linear-gradient(var(--c),var(--c)) top right/var(--e) var(--l) no-repeat,
+      linear-gradient(var(--c),var(--c)) bottom left/var(--l) var(--e) no-repeat,
+      linear-gradient(var(--c),var(--c)) bottom left/var(--e) var(--l) no-repeat,
+      linear-gradient(var(--c),var(--c)) bottom right/var(--l) var(--e) no-repeat,
+      linear-gradient(var(--c),var(--c)) bottom right/var(--e) var(--l) no-repeat;
+    filter:drop-shadow(0 0 .5cqh rgb(255 210 63 / .7));animation:coins-vault 1.1s ease-in-out infinite}
+  @keyframes coins-vault{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.965)}}
+  @media (prefers-reduced-motion:reduce){.cell.eq::after{animation:none}}
   /* LE TICKET RANDOM. Ce n'est pas une peau : il n'a pas de vitrine, il a un
      DESSIN - un de generique qui porte un « ? » a la place d'une face. */
   .grid.dice .cell.ticket{border-color:#3d3830}
@@ -1796,6 +1829,9 @@ const ICONES={
   cadenas:'<path class="trait anse" d="M15.5 22v-6.5C15.5 10 19 7 24 7s8.5 3 8.5 8.5V22"/>'+
     '<path d="M10 21h28v22H10z"/><path class="trou" d="M24 26.5a3 3 0 1 1-.01 0zM22.4 30h3.2l.8 6.5h-4.8z"/>'
 };
+/* S1439 - note 287 (1) : l'icone d'EXPLOIT (le trophee) - le cadenas dit « non », elle dit « va le gagner ». */
+ICONES.trophee='<path d="M16 8h16v9a8 8 0 0 1-16 0z"/><path d="M16 11h-5a5 5 0 0 0 5 7M32 11h5a5 5 0 0 1-5 7"/><path d="M24 25v8M20 33h8l1.5 7h-11z"/>';
+const exploitmark=t=>'<div class="lockmark exmark" title="'+String(t).replace(/"/g,'&quot;')+'"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES.trophee+'</svg></div>';
 const BESACE_SILHOUETTE={
   /* S1408 - IC-1 : la petite pomme, la grosse, l'arbre - les trois dessinees de neuf */
   pomme:'<g transform="translate(8 9) scale(.68)">'+ICONES.pomme+'</g>',
@@ -2508,6 +2544,12 @@ fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json(
    et la tonalité de l'image sont à elles. ⚠ Le mot « gold » sort d'ici aussi :
    la monnaie est une DENT depuis la note 136, et l'icône du bandeau est un
    ivoire depuis la 138 ①. */
+/* S1439 - note 292 (verdict Croze : « a lock le temps d'etre debloque ») : le DUNGEON PRO TOUR
+   se GRISE partout - la porte PLAY, le ticket du Vault, l'onglet PRO TOUR du mur. Visible,
+   indisponible : « The Pro Tour opens soon. » Rien ne se vend, rien ne se lance. Un seul
+   interrupteur : LL_DPT_ENDORMI = false le rouvre. */
+window.LL_DPT_ENDORMI = true;
+window.LL_DPT_DORT = 'The Pro Tour opens soon.';
 const DOORS=[
   ["Warm-up","Vs bots","Free-for-all or 2v2 against bots, alone or with a friend. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
   ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
@@ -2527,7 +2569,14 @@ DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
     (chip?'<span class="chip">'+chip+'</span>':'')+
     '<div class="body"><h3>'+title+'</h3><p>'+line+'</p></div><span class="rule"></span>';
   d.querySelector('.rule').style.backgroundImage='url('+A.bar+')';
-  const fire=()=>{ if(busy)return; d.classList.add('hit');
+  const dort = ident==='d-ranked' && window.LL_DPT_ENDORMI;
+  if(dort){
+    d.title=window.LL_DPT_DORT; d.style.cursor='not-allowed';
+    d.querySelector('img').style.filter='grayscale(1) brightness(.4)';
+    d.querySelector('.body p').textContent=window.LL_DPT_DORT;
+    const ch=d.querySelector('.chip'); if(ch) ch.remove();
+  }
+  const fire=()=>{ if(busy||dort)return; d.classList.add('hit');
     setTimeout(()=>d.classList.remove('hit'),300); fn(); };
   d.addEventListener('click',fire);
   d.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();fire();}});
@@ -2916,11 +2965,15 @@ function showHero(i){
 }
 function buildRoster(){
   roster.innerHTML='';
-  ALPHA.forEach((ch,i)=>{
+  /* S1439 - note 287 (1) : le roster suit la meme grammaire - trie achetable -> exploit -> a toi ;
+     achetable en pleine lumiere avec son prix, l'exploit (icone + prix) grise, OWNED discret. */
+  trieParEtat('chars',ALPHA).forEach(([ch,i])=>{
+    const st=etatVault('chars',i);
     const t=document.createElement('button');
-    t.className='rt'+(ch.owned?'':' lk'); t.tabIndex=0; t.dataset.i=String(i);
-    t.title=short(ch.name);
-    t.innerHTML=banner(ch.n)+(ch.owned?'':'<div class="hatch"></div>')+dot(ch.diff,'d');
+    t.className='rt'+(st.e==='ex'?' lk':''); t.tabIndex=0; t.dataset.i=String(i);
+    t.title=short(ch.name)+(st.e==='ex'?' — '+st.ex:'');
+    t.innerHTML=banner(ch.n)+(st.e==='ex'?'<div class="hatch"></div>'+exploitmark(st.ex):'')+dot(ch.diff,'d')+
+      (st.e==='own'?'<b class="rtb vowned">OWNED</b>':'<b class="rtb">'+fmt(st.prix)+'</b>');
     t.addEventListener('mouseenter',()=>showHero(i));          /* preview */
     t.addEventListener('focus',()=>{pinned=i;showHero(i);});
     t.addEventListener('click',()=>{pinned=i;showHero(i);});    /* pin */
@@ -2968,6 +3021,52 @@ roster.addEventListener('mouseleave',()=>showHero(pinned));
    Sans la seconde, tout retirer passerait au VERT. Quatre mutants
    falsifies au S1161, source rendue octet pour octet. */
 
+/* S1439 - note 287 (1) : LE SYSTEME D'ETATS DU VAULT, UNIFORME sur toutes les categories.
+   Plus de sections : une grille par rayon, TRIEE achetable -> challenge -> season (puis ce qui
+   est a toi), et l'etat se lit au BADGE (badgeVault). Phrase de Croze : « Dans n'importe quelle
+   categorie, je lis d'un coup d'oeil ce que je peux acheter, ce qu'un exploit garde, et ce que
+   je possede - meme grammaire partout. »
+   e : 'buy' (achetable) · 'ex' (garde par un exploit, ex = l'exploit en clair) · 'season' ·
+   'own' (possede) · 'eq' (possede et equipe). */
+function etatVault(kind,i){
+  if(kind==='dice'){
+    const owned=DICE[i][2];
+    if(owned) return {e:equipped.dice===i?'eq':'own'};
+    const ex=exploitDeLaPeau(DICE[i][1]), prix=prixDeLaPeau(i);
+    if(ex!==null&&!ex.ouverte) return {e:'ex',prix:prix,ex:ex.l+' — '+fmt(Math.min(ex.n,ex.a))+' / '+fmt(ex.a)};
+    return {e:'buy',prix:prix};
+  }
+  if(kind==='backs'){
+    const id=BACKS[i][1], owned=BACKS[i][2], prix=BACKS[i][3];
+    if(owned) return {e:equipped.backs===i?'eq':'own'};
+    if(DOS_SAISON.has(id)) return {e:'season'};
+    if(prix===null){ const v=verrouDuMur(id,'k'); return {e:'ex',prix:null,ex:v!==null?v:'Earned in the Bounty Wall'}; }
+    return {e:'buy',prix:prix};
+  }
+  if(kind==='curs'){
+    if(CURSORS[i][2]) return {e:equipped.curs===i?'eq':'own'};
+    const v=verrouDuMur(CURSORS[i][1],'u');
+    return v!==null?{e:'ex',prix:PRIX_CURSEURS.choisi,ex:v}:{e:'buy',prix:PRIX_CURSEURS.choisi};
+  }
+  if(kind==='chars'){
+    const c=ALPHA[i];
+    if(c.owned) return {e:'own'};
+    const v=verrouDuMur(idDuPerso(c.name));
+    return v!==null?{e:'ex',prix:PRIX_PERSO.choisi,ex:v}:{e:'buy',prix:PRIX_PERSO.choisi};
+  }
+  return {e:'buy'};
+}
+const RANG_ETAT={buy:0,ex:1,season:2,eq:3,own:4};
+const trieParEtat=(kind,liste)=>liste.map((x,i)=>[x,i]).sort((a,b)=>RANG_ETAT[etatVault(kind,a[1]).e]-RANG_ETAT[etatVault(kind,b[1]).e]);
+const classeVault=st=>'cell'+(st.e==='ex'||st.e==='season'?' locked':'')+(st.e==='eq'?' eq':'');
+function badgeVault(st){
+  return (st.e==='ex'||st.e==='season'?'<div class="hatch"></div>':'')+
+    (st.e==='ex'?exploitmark(st.ex):'')+
+    ((st.e==='buy'||st.e==='ex')&&st.prix!==null&&st.prix!==undefined?'<div class="own vprix">'+fmt(st.prix)+'</div>':'')+
+    (st.e==='season'?'<div class="own vseason">SEASON</div>':'')+
+    (st.e==='own'?'<div class="own vowned">OWNED</div>':'')+
+    (st.e==='ex'?'<div class="exhint">'+st.ex+'</div>':'');
+}
 function fillGrid(key){
   /* (1) note 140 — le rayon decide du fond : on le retient ici, seul
      endroit ou il est connu, et on repose le fond dans la foulee. */
@@ -2987,23 +3086,17 @@ function fillGrid(key){
     const libre=d=>PEAUX_VENTE_LIBRE[d[1]]!==undefined;
     const titre=t=>{ const h=document.createElement('div'); h.className='rayon-sect'; h.textContent=t; grid.appendChild(h); };
     /* note 275 (4) - trois sections : Starter set (a toi d'office), Open sale, Bounty Wall. */
-    const rang=d=>PEAUX_DE_DEPART.indexOf(d[1])>=0?0:libre(d)?1:2;
-    const ordre=DICE.map((d,i)=>[d,i]).sort((a,b)=>rang(a[0])-rang(b[0]));
-    let sect=null;
-    ordre.forEach(([[name,dossier,owned],i])=>{
+    /* S1439 - note 287 (1) : plus de sections (Starter set / Open sale / Bounty Wall) - une grille
+       triee par ETAT, l'etat au badge. */
+    trieParEtat('dice',DICE).forEach(([[name,dossier,owned],i])=>{
       if(!owned&&PEAUX_HORS_VENTE.indexOf(dossier)>=0) return;
-      const s=['Starter set','Open sale','Bounty Wall'][rang(DICE[i])];
-      if(s!==sect){ sect=s; titre(s); }
+      const st=etatVault('dice',i);
       const c=document.createElement('div');
-      c.className='cell'+(owned?'':' locked')+(owned&&equipped.dice===i?' eq':''); c.tabIndex=0;
+      c.className=classeVault(st); c.tabIndex=0;
       const src=IMG_PEAU(dossier);
       c.innerHTML='<div class="plate"><img class="peau" alt="" src="'+src[0]+'" '+
         'data-repli="'+src.slice(1).join('|')+'">'+
-        '</div>'+
-        (owned?'':'<div class="hatch"></div>')+
-        (owned?'':cadenas())+
-        (owned?'':'<div class="own">'+fmt(prixDeLaPeau(i))+'</div>')+
-        (owned&&equipped.dice===i?'<div class="tagx">Equipped</div>':'')+
+        '</div>'+badgeVault(st)+
         '<div class="cap">'+name+'</div>';
       c.addEventListener('click',()=>openSheet('dice',i));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -3021,19 +3114,21 @@ function fillGrid(key){
        puis les CONTRATS du Bounty Wall (BOUNTY_WALL 6 (7)). L'enveloppe s'ouvre
        AVANT l'achat : le tiroir dit la seed, l'objectif, les conditions, le perso. */
     const T=window.LLTickets; const poche=T.enPoche(window.LLProfil.lis());
+    /* S1439 - note 287 (1) : ce qu'un exploit garde passe APRES ce qui s'achete. */
+    const apres=[]; const EX_DPT=window.LL_DPT_ENDORMI ? window.LL_DPT_DORT : 'Spirit of the Dungeon, step 16: finish two spirit trees in the Bounty Wall';
     [['tdpl','/art/tickets/dpl_sceau.webp',T.PRIX.dpl,'Dungeon Pro Tour',poche.dpl],
      ['tdaily','/art/tickets/daily_sceau.webp',T.PRIX.daily,'Today\u2019s Dungeon',poche.daily]].forEach(([k,src,prix,cap,n])=>{
       const c=document.createElement('div');
       /* note 266 (4) - verrouille, il montre quand meme son prix (gris + cadenas + prix). */
-      const ferme=k==='tdpl'&&!window.LLBountyWall.dptOuvert(window.LLProfil.lis());
+      const ferme=k==='tdpl'&&(window.LL_DPT_ENDORMI||!window.LLBountyWall.dptOuvert(window.LLProfil.lis()));
       c.className='cell ticket-env'+(ferme?' locked':''); c.tabIndex=0;
       c.innerHTML='<div class="plate"><img alt="" src="'+src+'" style="width:100%;height:100%;object-fit:cover;display:block"></div>'+
         '<span class="ic-coin" title="'+cap+' - invitation"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[k==='tdpl'?'dpl':'daily']+'</svg></span>'+
-        (ferme?'<div class="hatch"></div>'+cadenas():'')+'<div class="own">'+fmt(prix)+'</div>'+(n>0?'<div class="tagx">'+n+' in pocket</div>':'')+
+        (ferme?'<div class="hatch"></div>'+exploitmark(EX_DPT):'')+'<div class="own vprix">'+fmt(prix)+'</div>'+(ferme?'<div class="exhint">'+EX_DPT+'</div>':'')+(n>0?'<div class="tagx">'+n+' in pocket</div>':'')+
         '<div class="cap">'+cap+'</div>';
       c.addEventListener('click',()=>openSheet(k,-1));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
-      grid.appendChild(c);
+      (ferme?apres:[]).push(c); if(!ferme) grid.appendChild(c);
     });
     /* S1373 · note 208 (§13.3) - le double et le triple serment sont RETIRES : le pacte
        (un seul esprit, x3) se passe au mur, et il n'a rien a acheter ici. */
@@ -3061,6 +3156,7 @@ function fillGrid(key){
         grid.appendChild(c);
       });
     }
+    apres.forEach(c=>grid.appendChild(c));
   } else if(key==='inv'){
     /* S1431 - note 272 (5) : des CASES (grille de RPG), une icone, une quantite ; l'equipe
        marque. Une rangee de cases vides prolonge chaque section : un sac, pas une liste. */
@@ -3098,15 +3194,12 @@ function fillGrid(key){
   } else if(key==='backs'){
     /* S1407 - note 224 (DOS-2 b) : le rayon CARD BACKS. */
     /* note 268 (2) - la vente libre (un prix) d'abord, les dos du mur (prix null) ensuite. */
-    BACKS.map((b,i)=>[b,i]).sort((a,b)=>(a[0][3]===null?1:0)-(b[0][3]===null?1:0)).forEach(([[name,id,owned,prix],i])=>{
+    /* S1439 - note 287 (1) : triee par ETAT, la meme grammaire que les des. */
+    trieParEtat('backs',BACKS).forEach(([[name,id,owned,prix],i])=>{
+      const st=etatVault('backs',i);
       const c=document.createElement('div');
-      c.className='cell'+(owned?'':' locked')+(owned&&equipped.backs===i?' eq':''); c.tabIndex=0;
-      c.innerHTML='<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>'+
-        (owned?'':'<div class="hatch"></div>')+
-        (owned?'':cadenas())+
-        (owned?'':'<div class="own">'+(prix===null?(DOS_SAISON.has(id)?'Season':'Bounty Wall'):fmt(prix))+'</div>')+
-        (DOS_SAISON.has(id)&&!(owned&&equipped.backs===i)?'<div class="tagx">SEASON</div>':'')+
-        (owned&&equipped.backs===i?'<div class="tagx">Equipped</div>':'')+
+      c.className=classeVault(st); c.tabIndex=0;
+      c.innerHTML='<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>'+badgeVault(st)+
         '<div class="cap">'+name+'</div>';
       c.addEventListener('click',()=>openSheet('backs',i));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -3116,20 +3209,18 @@ function fillGrid(key){
     /* S1289 (CU-T2) - LE TICKET DES CURSEURS, comme celui des des : 240 au
        hasard contre 320 au choix (note 155), tire parmi ce qui reste. */
     /* S1405 - note 221 (4) : « Random cursor » supprime (Croze : ils n'existent plus). */
-    CURSORS.forEach(([name,id,owned],i)=>{
+    /* S1439 - note 287 (1) : triee par ETAT, la meme grammaire. */
+    trieParEtat('curs',CURSORS).forEach(([[name,id,owned],i])=>{
+      const st=etatVault('curs',i);
       const c=document.createElement('div');
-      c.className='cell'+(owned?'':' locked')+(owned&&equipped.curs===i?' eq':''); c.tabIndex=0;
+      c.className=classeVault(st); c.tabIndex=0;
       /* S1231 (4) - LA VIGNETTE EST LE CURSEUR LUI-MEME. L'ancienne posait
          `A.bar` (un coup de pinceau) sous un filtre de couleur ; celle-ci pose
          le PNG livre par Croze. `contain`, jamais `cover` : un pointeur etire
          n'est plus un pointeur, et sa pointe n'est plus ou il la croit. */
       c.innerHTML='<div class="curmark" style="background-image:url('+
         IMG_CURSEUR(id)+');background-size:contain;background-repeat:no-repeat;'+
-        'background-position:center"></div>'+
-        (owned?'':'<div class="hatch"></div>')+
-        (owned?'':cadenas())+
-        (owned?'':'<div class="own">'+fmt(PRIX_CURSEURS.choisi)+'</div>')+
-        (owned&&equipped.curs===i?'<div class="tagx">Equipped</div>':'')+
+        'background-position:center"></div>'+badgeVault(st)+
         '<div class="cap">'+name+'</div>';
       c.addEventListener('click',()=>openSheet('curs',i));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -3343,7 +3434,10 @@ function openSheet(kind,i){
     }
     /* S1415 - BW-5 (note 237 (1)) : l'achat de tickets DPT se debloque au Bounty Wall,
        palier 16 du Donjon (deux arbres d'esprit termines). */
-    if(kind==='tdpl' && !window.LLBountyWall.dptOuvert(window.LLProfil.lis())){
+    if(kind==='tdpl' && window.LL_DPT_ENDORMI){
+      cta='<button class="cta" id="dbtn" disabled>Not open yet</button>';
+      note=window.LL_DPT_DORT; warn=false;
+    } else if(kind==='tdpl' && !window.LLBountyWall.dptOuvert(window.LLProfil.lis())){
       cta='<button class="cta" id="dbtn" disabled>Locked \u00b7 Bounty Wall \u00b7 '+fmt(prix)+' teeth</button>';
       note='Spirit of the Dungeon, step 16: finish two spirit trees in the Bounty Wall, then take it.'; warn=false;
     } else if((kind==='tdpl'||kind==='tdaily') && can){
@@ -4168,10 +4262,20 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   var b = document.createElement('button');
   b.id = 'tuto-entree';
   b.type = 'button';
-  b.title = 'A real game as the Guard, run by a dungeon master: he stops you on cards and walks you through every move.';
-  b.innerHTML = '<b>Tutorial</b><i>a game with a dungeon master</i>' +
-    (fini ? '' : '<span class="pastille">never played</span>');
+  /* S1439 - note 289 (verdict Croze : « le tuto n'est pas pret, grise-le ») : l'entree reste
+     VISIBLE, GRISEE, indisponible, et dit « The scribe is still writing this one. » (meme
+     traitement que le Goblin Den). Elle se rallume avec la v2 (TUTO.md 11) : TUTO_ENDORMI = false. */
+  var TUTO_ENDORMI = true;
+  var DORT = 'The scribe is still writing this one.';
+  b.title = TUTO_ENDORMI ? DORT : 'A real game as the Guard, run by a dungeon master: he stops you on cards and walks you through every move.';
+  b.innerHTML = '<b>Tutorial</b><i>' + (TUTO_ENDORMI ? DORT : 'a game with a dungeon master') + '</i>' +
+    (fini || TUTO_ENDORMI ? '' : '<span class="pastille">never played</span>');
+  if (TUTO_ENDORMI) {
+    b.setAttribute('aria-disabled', 'true');
+    b.style.cssText = 'cursor:not-allowed;filter:grayscale(1) brightness(.55);transform:rotate(2.2deg)';
+  }
   b.addEventListener('click', function () {
+    if (TUTO_ENDORMI) { return; }
     var q = new URLSearchParams(window.location.search);
     q.set('tuto', '1');
     q.set('perso', 'the_guard');
@@ -5079,6 +5183,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         ? [['Progress', 0, 3], ['Exploration', 3, 15], ['Pro Tour', 15, 21], ['Challenges', 21, 27]]
         : [['Progress', 0, 3], ['Exploration', 3, 15], ['Pro Tour', 15, t.rangs.length]];
       if (pageDonjon >= PAGES.length) pageDonjon = 0;
+      if (window.LL_DPT_ENDORMI && PAGES[pageDonjon][0] === 'Pro Tour') pageDonjon = 0;
       var pg = document.createElement('nav');
       pg.className = 'pages';
       PAGES.forEach(function (pa, i) {
@@ -5086,7 +5191,12 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         b.type = 'button';
         b.textContent = pa[0];
         b.className = i === pageDonjon ? 'on' : '';
-        b.addEventListener('click', function () { pageDonjon = i; peins(); });
+        if (pa[0] === 'Pro Tour' && window.LL_DPT_ENDORMI) {
+          b.disabled = true; b.title = window.LL_DPT_DORT;
+          b.style.cssText = 'cursor:not-allowed;opacity:.4;filter:grayscale(1)';
+          if (i === pageDonjon) { b.className = ''; }
+        }
+        b.addEventListener('click', function () { if (b.disabled) { return; } pageDonjon = i; peins(); });
         pg.appendChild(b);
       });
       br.appendChild(pg);

@@ -1745,10 +1745,25 @@
       .dicelayer.regard-tiers > * { transform: scale(.72); transform-origin: center; }
       /* S1437 · note 286 ⑪ — la fin en deux écrans : GAME (le podium) · REWARDS. */
       .fp1 .cache { display: none !important; }
-      .fp1-onglets { display: flex; justify-content: center; gap: 10px; margin: 6px 0 14px; }
-      .fp1-onglets button { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: .14em;
-        padding: 6px 22px; background: transparent; color: var(--stock-dim); border: 1px solid rgba(233,228,216,.3); cursor: pointer; }
-      .fp1-onglets button.on { color: var(--stock); border-color: var(--stock); background: rgba(233,228,216,.08); }
+      .fp1-onglets { display: flex; justify-content: center; gap: 14px; margin: 2px 0 10px; }
+      /* S1439 · note 293 ④ — « GAME / REWARDS pas assez visibles » : plus GROS et francs, l'actif PLEIN. */
+      .fp1-onglets button { font-family: var(--display); font-weight: 900; font-size: 30px; letter-spacing: .16em;
+        padding: 8px 40px; background: transparent; color: var(--stock-dim); border: 2px solid rgba(233,228,216,.45); cursor: pointer; }
+      .fp1-onglets button:hover { color: var(--stock); border-color: var(--stock); }
+      .fp1-onglets button.on { color: #0a0908; border-color: var(--stock); background: var(--stock); }
+      /* S1439 · note 293 ④ — REWARDS : la dent × le montant en GROS, compté ; les lignes qui tombent. */
+      @property --n { syntax: '<integer>'; initial-value: 0; inherits: false; }
+      .fin-dents-gros { font-family: var(--display); font-weight: 900; font-size: 64px; line-height: 1; gap: .25em; }
+      .fin-dents-gros .dent-ico { width: 1em; height: 1em; }
+      .fin-dents-gros .fin-mur-x { font-family: var(--mono); font-size: 22px; font-weight: 400; }
+      .fin-compte { --n: var(--cible); counter-reset: n var(--n); animation: fin-compte 1.1s ease-out .35s backwards; }
+      .fin-compte::after { content: attr(data-signe) counter(n); }
+      @keyframes fin-compte { from { --n: 0; } }
+      .fin-offrande { display: inline-flex; align-items: center; gap: 14px; }
+      .fin-offrande-img { width: 72px; height: 72px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,140,60,.5)); }
+      .fin-tombe { animation: fin-tombe .5s cubic-bezier(.2,.9,.3,1.3) backwards; animation-delay: calc(var(--i, 0) * 160ms); }
+      @keyframes fin-tombe { from { opacity: 0; transform: translateY(-34px) scale(.9); } }
+      @media (prefers-reduced-motion: reduce) { .fin-tombe, .fin-compte { animation: none; } }
       .fp1-gains { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 10px 0 24px; }
       .fp1-gains .fin-mur, .fp1-gains .fp1-profil { justify-content: center; flex-wrap: wrap; text-align: center; }
       .fp1-gains .fin-recompenses .fin-mur-drop { font-size: 34px; }
@@ -2303,6 +2318,8 @@
                  transition: opacity .18s ease, transform .22s var(--pop); }
       .dicelayer.coup-mob.t1 .cm-bloc, .dicelayer.coup-mob.fini .cm-bloc {
         opacity: 1; transform: none; }
+      /* S1439 · note 288 ③ — l'INTENTION : sans voile, la fiche du mob s'allume d'abord. */
+      .dicelayer.coup-mob.intention { background: none; pointer-events: none; animation: none; }
       .cm-mob { font-size: calc(13px * var(--lisible, 1)); letter-spacing: .22em; text-transform: uppercase;
                 color: var(--stock-dim); margin-bottom: 6px; }
       .cm-nom { font-family: var(--display); font-weight: 800;
@@ -3217,6 +3234,30 @@
       .scene-cadre .scene-nom { font-size: 30px; }
       /* Le lanceur porte les N faces : son cadre est le premier, et il se voit. */
       .scene-cadre.lanceur { border-color: var(--slate); }
+      /* S1439 · note 287 ② (capture 06) — LE GAGNANT D'UN JET À PLUSIEURS S'ENTOURE : les coins
+         arcade animés du character select (283 ①), même langage, au lieu du seul petit « WIN » perdu
+         en bas. Et la séquence canonique (288) : ni les coins ni le libellé avant que le dé soit
+         POSÉ (t3 / fini). */
+      .scene-cadre { position: relative; }
+      .dicelayer .scene-cadre.camp-win::after { content: ''; position: absolute; inset: -6px; z-index: 3;
+        pointer-events: none; opacity: 0; --c: #ffd23f; --l: 26%; --e: 7px;
+        background:
+          linear-gradient(var(--c), var(--c)) top left / var(--l) var(--e) no-repeat,
+          linear-gradient(var(--c), var(--c)) top left / var(--e) var(--l) no-repeat,
+          linear-gradient(var(--c), var(--c)) top right / var(--l) var(--e) no-repeat,
+          linear-gradient(var(--c), var(--c)) top right / var(--e) var(--l) no-repeat,
+          linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--e) no-repeat,
+          linear-gradient(var(--c), var(--c)) bottom left / var(--e) var(--l) no-repeat,
+          linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--e) no-repeat,
+          linear-gradient(var(--c), var(--c)) bottom right / var(--e) var(--l) no-repeat;
+        filter: drop-shadow(0 0 8px rgb(255 210 63 / .75)); }
+      .dicelayer.t3 .scene-cadre.camp-win::after, .dicelayer.fini .scene-cadre.camp-win::after {
+        opacity: 1; animation: coins-win 1.1s ease-in-out infinite; }
+      @keyframes coins-win { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .6; transform: scale(.975); } }
+      @media (prefers-reduced-motion: reduce) { .dicelayer.t3 .scene-cadre.camp-win::after,
+        .dicelayer.fini .scene-cadre.camp-win::after { animation: none; } }
+      .dicelayer .scene-cadre .win-tag { opacity: 0; font-size: 22px; color: #ffd23f; letter-spacing: .3em; }
+      .dicelayer.t3 .scene-cadre .win-tag, .dicelayer.fini .scene-cadre .win-tag { opacity: 1; transition: opacity .2s ease; }
       /* ⛑ S759 — LE DÉ DU COLLAPSE. Quatre dés de 118 px côte à côte débordent
          d'une ligne : le cadre du Collapse porte un dé plus court. La
          SILHOUETTE et la peau ne changent pas — seule la boîte rétrécit. */
@@ -12124,7 +12165,7 @@
          vainqueur en grand dans un cadre d'or, les autres en ronds dessous. */
       .nouvelle-table .fp1 {
         position: fixed; inset: 0; z-index: 930; overflow: hidden;
-        display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 34px 48px 28px;
+        display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 34px 48px 92px;
         background:
           radial-gradient(ellipse 60% 55% at 50% 38%, rgb(70 58 44 / .55), transparent 70%),
           radial-gradient(ellipse at center, #17130f 0%, #0a0908 75%);
@@ -12134,7 +12175,7 @@
       .fp1-cause { font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); color: var(--stock-dim); margin-top: -10px; }
       .fp1-heros { display: flex; align-items: center; gap: 40px; }
       .fp1-cadre {
-        height: 470px; aspect-ratio: 2 / 3; padding: 6px; border-radius: 6px;
+        height: 410px; aspect-ratio: 2 / 3; padding: 6px; border-radius: 6px;
         background: linear-gradient(145deg, #e8c46a, #8a6a24 45%, #d9b35a 70%, #6e5219);
         box-shadow: 0 0 0 1px #000, 0 18px 50px rgb(0 0 0 / .8), 0 0 60px rgb(217 179 90 / .25);
       }
@@ -12179,7 +12220,9 @@
         box-shadow: 0 0 0 3px var(--siege, var(--rule)), 0 8px 20px rgb(0 0 0 / .7);
       }
       .fp1-nom { font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); letter-spacing: .08em; }
-      .fp1-boutons { display: flex; gap: 16px; margin-top: auto; }
+      /* S1439 · note 293 ③ — « la fin de partie DÉBORDE en bas » (capture 08, mesuré : 1 056 → 1 102 sur
+         1 080) : le pied ne suit plus le contenu, il est POSÉ en bas de l'écran ; le cadre perd 60 px. */
+      .fp1-boutons { display: flex; gap: 16px; position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; }
       /* S1427 · DD-2 ter (note 256 ①) — la fin d'un Daily : l'objectif est THE MAIN INFO. */
       .fp1-daily { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 30px; text-align: center; }
       .fp1-daily-nom { font-family: var(--display); font-weight: 800; font-size: 34px; letter-spacing: .14em; color: var(--stock-dim); }
@@ -13478,7 +13521,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CkLDuuMS.js"></script>
+    <script type="module" crossorigin src="./assets/index-BA1xcqAA.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

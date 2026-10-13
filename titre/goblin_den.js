@@ -26,6 +26,13 @@
  */
 (function () {
   'use strict';
+  /* S1439 - note 287 ④ (GOBELIN §8, verdict Croze 13/10) : LE DEN SE GRISE. L'échoppe
+   * reste visible au HOME, indisponible, et dit seulement « The goblin will come when
+   * the time is right. » — les jeux sortent de la circulation. La v2 (étal ~6 items
+   * façon Dark and Darker, mises fixées par le gobelin, cap de paris) attend son mot :
+   * le code des jeux reste ici, endormi, et `ENDORMI = false` le rouvre tel quel. */
+  var ENDORMI = true;
+  var DORT = 'The goblin will come when the time is right.';
   var MISE_MIN = 32, MISE_MAX = 256;
   var MISES = [32, 64, 128, 256];
   var JEUX = [
@@ -323,7 +330,7 @@
   function ferme() { if (voile) { voile.remove(); voile = null; occupe = false; } }
   function ouvre() {
     var p = profil();
-    if (!ouvert(p)) { secoue(); return; }
+    if (ENDORMI || !ouvert(p)) { secoue(); return; }
     style();
     ferme();
     jeu = 'flip'; mise = MISE_MIN;
@@ -379,11 +386,11 @@
   function peinsLaPorte() {
     var b = document.getElementById('gdenbtn');
     if (!b) { return; }
-    var ferme_ = !ouvert(profil());
+    var ferme_ = ENDORMI || !ouvert(profil());
     b.classList.toggle('ferme', ferme_);
-    b.title = ferme_ ? 'Win your first game to open the Goblin Den.' : 'The goblin merchant: games of teeth';
+    b.title = ENDORMI ? DORT : (ferme_ ? 'Win your first game to open the Goblin Den.' : 'The goblin merchant: games of teeth');
     var s = b.querySelector('.gd-sous');
-    if (s) { s.textContent = ferme_ ? 'Win your first game to open the Den.' : 'games of teeth'; }
+    if (s) { s.textContent = ENDORMI ? DORT : (ferme_ ? 'Win your first game to open the Den.' : 'games of teeth'); }
   }
   function posLaPorte() {
     style();
