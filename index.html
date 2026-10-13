@@ -1733,6 +1733,34 @@
       }
       .porte-options:hover,
       .porte-options:focus-visible { opacity: 1; color: var(--stock); }
+      /* S1437 · note 286 ⑩ — la porte VITESSE, même plaque qu'OPTIONS, posée à sa gauche. */
+      .porte-options.porte-vitesse { right: calc(304px + 15.6em); }
+      .porte-options.porte-vitesse[hidden] { display: none; }
+      /* S1437 · note 286 ⑥ — la scène d'un combat TIERS regardé : une boîte dédiée au
+         centre-bas (là où Croze a écrit DICE ROLL), sans voile plein écran ; les fiches
+         restent lisibles autour. Le contenu est réduit pour tenir dans la boîte. */
+      .dicelayer.regard-tiers { inset: auto; left: 24%; right: 24%; top: 46%; bottom: 13%;
+        background: rgba(10, 8, 6, .82); border: 1px solid rgba(233, 228, 216, .25);
+        border-radius: 6px; overflow: hidden; }
+      .dicelayer.regard-tiers > * { transform: scale(.72); transform-origin: center; }
+      /* S1437 · note 286 ⑪ — la fin en deux écrans : GAME (le podium) · REWARDS. */
+      .fp1 .cache { display: none !important; }
+      .fp1-onglets { display: flex; justify-content: center; gap: 10px; margin: 6px 0 14px; }
+      .fp1-onglets button { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: .14em;
+        padding: 6px 22px; background: transparent; color: var(--stock-dim); border: 1px solid rgba(233,228,216,.3); cursor: pointer; }
+      .fp1-onglets button.on { color: var(--stock); border-color: var(--stock); background: rgba(233,228,216,.08); }
+      .fp1-gains { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 10px 0 24px; }
+      .fp1-gains .fin-mur, .fp1-gains .fp1-profil { justify-content: center; flex-wrap: wrap; text-align: center; }
+      .fp1-gains .fin-recompenses .fin-mur-drop { font-size: 34px; }
+      .fp1-gains .fin-mur .fin-mur-x { font-size: 20px; }
+      .fin-dents { display: inline-flex; align-items: center; gap: .3em; }
+      .fin-dents .dent-ico { width: 1.1em; height: 1.1em; }
+      .fp1-cliquable { cursor: pointer; }
+      .fp1-cliquable:hover { filter: brightness(1.12); }
+      .fp1-fiche { display: flex; flex-direction: column; gap: 8px; padding: 8px 4px; }
+      .fp1-fiche-cap { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: .14em; margin-top: 10px; }
+      .fp1-fiche-cartes { display: flex; flex-wrap: wrap; gap: 10px; }
+      .fp1-fiche-carte { height: 180px; width: auto; border-radius: 6px; }
 
       .porte-rapport {
         position: fixed; right: 6.2em; bottom: 0; z-index: var(--z-portes);
@@ -2287,6 +2315,9 @@
               font-size: clamp(56px, 7vh, 104px); line-height: 1; color: var(--stamp);
               text-shadow: 0 3px 0 var(--ink), 0 14px 30px rgba(0,0,0,.7); }
       .cm-lbl { font-size: calc(15px * var(--lisible, 1)); letter-spacing: .24em; color: var(--stock-dim); }
+      /* S1437 · note 286 ⑨ — le montant est DÉCLARÉ, pas encore appliqué. */
+      .cm-declare { margin-top: 8px; font-family: var(--mono); font-size: 14px; letter-spacing: .14em;
+        text-transform: uppercase; color: var(--stock-dim); }
       .cm-cible { margin-top: 10px; font-size: 16px; letter-spacing: .1em;
                   color: var(--stock); }
       /* S1436 - note 282 (2) : l'initiative d'un duel, lue dans COMBAT_OPENED (aucun de). */
@@ -3208,6 +3239,11 @@
       /* L'immunisé n'encaisse pas : son mot n'est pas de la couleur d'un coup. */
       .collapse-suite.immunise { color: var(--stock-dim); text-transform: none;
                                  letter-spacing: .04em; }
+      /* S1437 · note 286 ⑦ — « le résultat n'apparaît JAMAIS avant la fin du roll » : les
+         dégâts sous un dé de Collapse attendent que le dé se POSE (t2), comme la rareté sous
+         les dés d'un coffre (285 ③, même règle). */
+      .dicelayer:not(.t2):not(.fini) .collapse-suite { opacity: 0; }
+      .dicelayer.t2 .collapse-suite, .dicelayer.fini .collapse-suite { opacity: 1; transition: opacity .25s ease; }
       /*
        * ═══ ⛑ S1281 · C-T1 bis — LES TROIS TEMPS D'UN SIÈGE, DANS LA MÊME
        *            SCÈNE ══════════════════════════════════════════════════
@@ -13047,6 +13083,9 @@
         50% { transform: scale(1.04); filter: drop-shadow(0 0 10px rgba(238,75,75,.55)); }
       }
       @media (prefers-reduced-motion: reduce) { button.fin-de-tour-prete { animation: none; } }
+      /* S1437 · note 286 ④ — END TURN avant l'heure : visible, mais ÉTEINT (contour, encre
+         des libellés, aucune pulsation) — il ne doit pas donner envie de cliquer. */
+      button.fin-de-tour-eteinte { animation: none !important; color: var(--stock-dim) !important; filter: none; }
       .plein .djt { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px 40px;
         padding: 14px 18px; font-family: var(--mono); color: var(--stock); }
       .plein .djt-portail { grid-column: 1 / -1; }
@@ -13439,7 +13478,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CaBrmiM_.js"></script>
+    <script type="module" crossorigin src="./assets/index-DWfnX5oQ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

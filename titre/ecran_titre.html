@@ -556,9 +556,14 @@
   .grid.backs .cell{height:100%}
   .cell .dosmark{position:absolute;left:10%;right:10%;top:6%;bottom:20%;
     background-size:contain;background-repeat:no-repeat;background-position:center}
-  .grid.backs .cell.locked .dosmark{opacity:.35;transition:opacity .25s}
+  /* note 286 (2) : un dos non possede est GRISE EXACTEMENT COMME UN DE - la couleur attenuee,
+     le hachurage par-dessus, et le survol rend la vitrine pleine et propre. */
+  .grid.backs .cell.locked .dosmark{filter:saturate(.95) brightness(.5) contrast(1.04);transition:filter .25s}
   .grid.backs .cell.locked:hover .dosmark,
-  .grid.backs .cell.locked:focus-visible .dosmark{opacity:1}
+  .grid.backs .cell.locked:focus-visible .dosmark{filter:saturate(1.14) contrast(1.08) brightness(1.04)}
+  .grid.backs .cell.locked .hatch{transition:opacity .25s}
+  .grid.backs .cell.locked:hover .hatch,
+  .grid.backs .cell.locked:focus-visible .hatch{opacity:0}
   .dshot .dosmark{position:absolute;left:26%;right:26%;top:16%;bottom:4%;
     background-size:contain;background-repeat:no-repeat;background-position:center}
   .cell{position:relative;border:1px solid #1e1e24;background:#0a0a0d;overflow:hidden;
@@ -3068,18 +3073,11 @@ function fillGrid(key){
       const reste=(12-objets.length%12)%12+(objets.length===0?12:0);
       for(let k=0;k<reste;k++){ const c=document.createElement('div'); c.className='slot vide'; if(objets.length===0&&k===0) c.title=vide; grid.appendChild(c); }
     };
-    /* note 274 (3) : LES ESSENCES d'abord - une ligne par ecole, ses trois tailles */
-    const h=document.createElement('div'); h.className='rayon-sect'; h.textContent='Essences'; grid.appendChild(h);
-    inv.essences.forEach(e=>{
-      const l=document.createElement('div'); l.className='inv-ecole'; l.textContent=e.ecole; l.style.color=e.teinte; grid.appendChild(l);
-      e.cases.forEach(o=>{
-        const c=document.createElement('div');
-        c.className='slot'+(o.q>0?'':' zero'); c.title=o.nom+' \u00d7'+o.q;
-        c.innerHTML=o.html+'<b class="q">'+o.q+'</b>';
-        grid.appendChild(c);
-      });
-    });
-    section('Consumables',inv.conso,'Nothing else in your bag \u2014 charms and invitations are in CHARMS.');
+    /* note 286 (1) : PLUS DE BLOC ESSENCES a part - elles vivent dans la grille generale, section
+       CONSUMABLES, une case par essence qu'on a (un sac : ce qui est a zero n'y est pas). */
+    const ess=[];
+    inv.essences.forEach(e=>e.cases.forEach(o=>{ if(o.q>0) ess.push({nom:o.nom,q:o.q,html:o.html}); }));
+    section('Consumables',inv.conso.concat(ess),'Nothing else in your bag \u2014 charms and invitations are in CHARMS.');
     section('Owned',inv.possede,'Nothing owned yet.');
   } else if(key==='blood'){
     /* S1418 - note 239 (3) : le rayon BLOOD, vitrine sans achat. */
@@ -3100,6 +3098,7 @@ function fillGrid(key){
       const c=document.createElement('div');
       c.className='cell'+(owned?'':' locked')+(owned&&equipped.backs===i?' eq':''); c.tabIndex=0;
       c.innerHTML='<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>'+
+        (owned?'':'<div class="hatch"></div>')+
         (owned?'':cadenas())+
         (owned?'':'<div class="own">'+(prix===null?(DOS_SAISON.has(id)?'Season':'Bounty Wall'):fmt(prix))+'</div>')+
         (DOS_SAISON.has(id)&&!(owned&&equipped.backs===i)?'<div class="tagx">SEASON</div>':'')+
