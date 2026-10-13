@@ -2289,6 +2289,26 @@
       .cm-lbl { font-size: calc(15px * var(--lisible, 1)); letter-spacing: .24em; color: var(--stock-dim); }
       .cm-cible { margin-top: 10px; font-size: 16px; letter-spacing: .1em;
                   color: var(--stock); }
+      /* S1436 - note 282 (2) : l'initiative d'un duel, lue dans COMBAT_OPENED (aucun de). */
+      .duel-initiative { display: flex; flex-direction: column; align-items: center; gap: 4px;
+        margin-top: 12px; }
+      .duel-ini-titre { font-size: calc(12px * var(--lisible, 1)); letter-spacing: .3em; color: var(--stock-dim); }
+      .duel-ini-agi { font-family: var(--display); font-weight: 800; font-size: 24px;
+        letter-spacing: .04em; color: var(--stock); }
+      /* S1436 - note 281 (8) : le coup annule FOND a 0 -- le montant se liquefie
+         (descend, s'etire, s'efface, a la teinte de l'ecole), puis 0 se pose. */
+      .fonte-pile { display: inline-grid; }
+      .fonte-pile > .cm-n { grid-area: 1 / 1; text-align: center; }
+      .fonte-avant { transition: opacity .9s ease-in, transform .9s ease-in, color .5s ease;
+        transform-origin: 50% 100%; }
+      .fonte-apres { opacity: 0; transform: scale(1.25);
+        transition: opacity .35s ease .75s, transform .35s var(--pop) .75s; }
+      .dicelayer.fonte.t2 .fonte-avant { opacity: 0; color: var(--teinte, var(--stamp));
+        transform: translateY(26px) scaleY(.35) scaleX(1.25); }
+      .dicelayer.fonte.t2 .fonte-apres { opacity: 1; transform: none; color: var(--teinte, var(--stock)); }
+      @media (prefers-reduced-motion: reduce) {
+        .fonte-avant, .fonte-apres { transition: opacity .2s ease; transform: none; }
+      }
       @media (prefers-reduced-motion: reduce) {
         .cm-bloc { transition: opacity .18s ease; transform: none; }
       }
@@ -2780,7 +2800,7 @@
       .die-roule { position: absolute; top: 0; left: 0; height: 100%; width: 3600%;
                    max-width: none; pointer-events: none; opacity: 0; }
       @keyframes de-roule { from { transform: translateX(0); }
-                            to   { transform: translateX(-100%); } }
+                            to   { transform: translateX(var(--roule-fin, -100%)); } }
       .dicelayer.t1 .die-roule {
         opacity: 1;
         /*
@@ -6176,6 +6196,28 @@
       .fen-mob-att { font-size: calc(13px * var(--lisible, 1)); color: var(--dim); }
       .fen-mob-tx { font-size: calc(12px * var(--lisible, 1)); color: var(--dim); font-style: italic; }
       .fen-mob-passif { font-size: calc(12px * var(--lisible, 1)); color: var(--slate); }
+      /* S1436 - note 281 (8) : la capacite adverse, ZOOMEE -- le nom est ce qu'on lit d'abord. */
+      .fen-capa { display: flex; gap: 16px; align-items: center; margin: 8px 0;
+        padding: 12px 14px; border: 2px solid var(--siege, var(--ember));
+        background: rgba(0,0,0,.55); border-radius: 6px; }
+      .fen-capa-portrait { flex: 0 0 auto; width: 120px; height: 120px; object-fit: cover; object-position: 50% 30%;
+        border-radius: 50%; border: 3px solid var(--siege, var(--ember)); }
+      .fen-capa-carte { flex: 0 0 auto; width: 170px; }
+      .fen-capa-carte .cz { width: 100%; }
+      .fen-capa-dit { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+      .fen-capa-qui { font-size: calc(12px * var(--lisible, 1)); letter-spacing: .14em;
+        color: var(--siege, var(--stock)); font-weight: 700; }
+      .fen-capa-nom { font-family: var(--display); font-weight: 800; font-size: 34px;
+        line-height: 1.05; text-transform: uppercase; color: var(--stock); }
+      .fen-capa-effet { font-size: calc(14px * var(--lisible, 1)); color: var(--stock-2, #CFCFCF); }
+      .fen-capa-texte { font-size: 16px; line-height: 1.3; color: var(--stock); }
+      .fen-capa-montant { font-family: var(--display); font-size: 22px; font-weight: 800;
+        color: var(--ember); }
+      /* S1436 - note 282 (1) : la tuile tierce, et son passage en surbrillance. */
+      .fen-capa-tuile { flex: 0 0 auto; width: 190px; height: auto; border-radius: 4px;
+        border: 2px solid var(--siege, var(--ember)); }
+      .fen-capa-passage { background: rgba(255, 210, 63, .14); border-left: 3px solid #FFD23F;
+        padding: 6px 10px; font-size: 18px; }
 
 
       /*
@@ -13347,6 +13389,36 @@
           transform: translateY(calc(-1 * var(--plonge, 0px))) rotate(0deg);
         }
       }
+      /* S1436 - note 281 (10) : LA SIGNATURE EN PSEUDO-CARTE, au bout de la main.
+         Format d'une carte, face de fiche (encre + carton), jamais une illustration :
+         elle se lit « a part ». Prete = halo or vif qui respire (opacity seule). */
+      .card.carte-sig { aspect-ratio: 1004 / 1516; background: #121212;
+        border: 2px solid #3A3A3A; border-radius: 10px; overflow: visible;
+        display: flex; flex-direction: column; color: var(--stock); }
+      .carte-sig .cs-face { flex: 1; display: flex; flex-direction: column; gap: 8px;
+        padding: 14px 12px; text-align: center; overflow: hidden;
+        border-radius: 8px; border: 1px solid #2A2A2A; margin: 5px; }
+      .carte-sig .cs-titre { font-size: calc(11px * var(--lisible, 1)); letter-spacing: .24em;
+        color: var(--stock-dim, #9A9A9A); font-weight: 700; }
+      .carte-sig .cs-nom { font-size: 21px; font-weight: 800; line-height: 1.1;
+        text-transform: uppercase; letter-spacing: .03em; }
+      .carte-sig .cs-texte { font-size: calc(13px * var(--lisible, 1)); line-height: 1.3;
+        flex: 1; display: flex; align-items: center; justify-content: center; }
+      .carte-sig .cs-cout, .carte-sig .cs-regle { font-size: calc(11px * var(--lisible, 1));
+        color: var(--stock-dim, #9A9A9A); }
+      .carte-sig .cs-etat { font-size: 15px; font-weight: 800; letter-spacing: .16em;
+        padding: 4px 0; border-top: 1px solid #2A2A2A; color: #8A8A8A; }
+      .carte-sig .cs-etat.on { color: #FFD23F; }
+      .carte-sig .cs-motif, .carte-sig .cs-motif * { font-size: calc(10px * var(--lisible, 1));
+        line-height: 1.25; text-align: center; }
+      .card.carte-sig.no { filter: grayscale(1) brightness(.62); }
+      .card.carte-sig.prete { border-color: #FFD23F; }
+      .card.carte-sig.prete::before { content: ''; position: absolute; inset: -3px;
+        border-radius: 12px; pointer-events: none;
+        box-shadow: 0 0 18px 4px rgb(255 210 63 / .75), inset 0 0 14px rgb(255 210 63 / .35);
+        animation: sig-phospho 1.6s ease-in-out infinite; }
+      @keyframes sig-phospho { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+      @media (prefers-reduced-motion: reduce) { .card.carte-sig.prete::before { animation: none; } }
       .nouvelle-table .card.lit {
         border-color: var(--gold);
         box-shadow: inset 0 0 0 2px var(--gold), 0 0 12px rgba(144,144,144,.35);
@@ -13367,7 +13439,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-C0NEliMB.js"></script>
+    <script type="module" crossorigin src="./assets/index-CaBrmiM_.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
@@ -13379,6 +13451,6 @@
     -->
     <div id="composition">
       <div id="app"></div>
-    </div>
+    </div>
   </body>
 </html>

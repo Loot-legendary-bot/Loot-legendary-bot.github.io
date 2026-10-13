@@ -570,7 +570,14 @@
     box-shadow:0 0 0 1px #000,0 1.4cqh 3cqh rgba(0,0,0,.75)}
   .cell:focus-visible{outline:2px solid var(--blood);outline-offset:2px}
   .grid.chars .cell{aspect-ratio:auto;height:100%}
-  .grid.dice .cell{aspect-ratio:1}
+  /* note 285 (1) - le rayon DICE se chevauchait : la case a `aspect-ratio` ne donne pas sa
+     hauteur a la rangee (la faute des dos, note 237). La case porte une HAUTEUR : l'image
+     carree en haut, le nom sur SA ligne en dessous (deux lignes au plus), jamais sur l'image. */
+  .grid.dice .cell{aspect-ratio:auto;height:calc(10.2cqw + 5cqh)}
+  .grid.dice .cell .plate{bottom:5cqh}
+  .grid.dice .cell .hatch{bottom:5cqh}
+  .grid.dice .cell .cap{height:5cqh;padding:.6cqh .6cqw;display:flex;align-items:center;
+    background:#0a0a0d;border-top:1px solid #1e1e24;overflow:hidden}
   .grid.curs .cell{aspect-ratio:16/6}
   /* S1357 · note 201 (5) - le rayon des tickets et des contrats */
   /* S1370 · note 206 : une seule rangée (la seconde débordait sous 1080) ; S1373 · note 208 : deux tickets + deux offrandes, plus de serments */
@@ -598,6 +605,7 @@
   .pack-lot.revele .pack-face{transform:rotateY(0);border-color:#d9b25a;box-shadow:0 0 2.4cqh rgba(217,178,90,.35)}
   .pack-face i{font:700 1.3cqh/1 sans-serif;text-transform:uppercase;letter-spacing:.1em;color:#d9b25a;font-style:normal}
   .pack-face .pack-img{width:100%;flex:1;margin:1cqh 0;background:center/contain no-repeat}
+  .pack-perso .pack-face .pack-img{background-size:cover;background-position:50% 30%}
   .pack-face b{font:900 1.7cqh/1.15 "Arial Black",Impact,sans-serif;text-transform:uppercase}
   .pack-face span{font-size:1.25cqh;opacity:.75;margin-top:.6cqh}
   .pack-ok{font:900 2cqh/1 "Arial Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:.08em;padding:1.4cqh 3cqw;background:#a3231d;color:#efe6d2;border:0;cursor:pointer}
@@ -1652,7 +1660,8 @@ function packBetaOuvert(){ try{ const b=window.LLProfil.lis().betaPack; return !
 function tireLePackBeta(){
   const pioche=(liste,n)=>{ const l=liste.slice(), r=[]; while(r.length<n&&l.length>0){ r.push(l.splice(Math.floor(Math.random()*l.length),1)[0]); } return r; };
   const persos=pioche(CHARS.filter(c=>!c.owned),3).map(c=>({k:'perso',id:idDuPerso(c.name),nom:c.name,
-    img:'/art/personnages/all_ico_webp_CORRECTED_ALL/200px/'+idDuPerso(c.name)+'_200px.webp'}));
+    /* note 285 (2) - le PORTRAIT NORMAL, pleine resolution (jamais l'icone 200 px agrandie). */
+    img:'/art/personnages/grand/'+idDuPerso(c.name)+'.webp'}));
   const des=pioche(DICE.filter(d=>!d[2]&&PEAUX_HORS_VENTE.indexOf(d[1])<0),1).map(d=>({k:'de',id:d[1],nom:d[0],img:IMG_PEAU(d[1])[0]}));
   const dos=pioche(BACKS.filter(b=>!b[2]&&b[1]!=='lick_floor'&&!DOS_SAISON.has(b[1])),1).map(b=>({k:'dos',id:b[1],nom:b[0]+' card back',img:'/art/dos/'+b[1]+'.webp'}));
   const curs=pioche(CURSORS.filter(c=>!c[2]),1).map(c=>({k:'curseur',id:c[1],nom:c[0]+' cursor',img:IMG_CURSEUR(c[1])}));
