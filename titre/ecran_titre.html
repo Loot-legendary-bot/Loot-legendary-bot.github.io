@@ -1001,7 +1001,7 @@
 .pf-compte .pf-btn{padding:4px 8px;font-size:11px;letter-spacing:.04em}
 .pf-btn:hover{border-color:#fff;background:rgba(255,255,255,.07)}
 .pf-dit{margin-top:8px;font-size:12px;opacity:.75;min-height:1em}
-</style><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/foils.js"></script><script src="/titre/bannieres.js"></script>
+</style><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/foils.js"></script><script src="/titre/bannieres.js"></script>
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 
@@ -1982,6 +1982,8 @@ function set(v,arg){
   screenEl.classList.toggle('deep',v!=='title');
   /* S1419 - note 243 (8)(a) : le bloc BOUNTY WALL se pose sur le titre seulement. */
   document.getElementById('bboard').style.display = v==='title' ? '' : 'none';
+  /* note 283 (2) - la porte du GOBLIN DEN suit le mur (titre seulement) */
+  { const gd=document.getElementById('gdenbtn'); if(gd) gd.style.display = v==='title' ? '' : 'none'; }
   if(v==='title' && typeof peinsLeBlocDuMur==='function') peinsLeBlocDuMur();
   if(v==='league') pickNode(NODES.findIndex(n=>n.s==='open'));
   if(v==='match'){ tireLesSieges(); paintMatch(arg||matchCtx); }
@@ -2335,6 +2337,8 @@ function peinsLeBlocDuMur(){
   if(bb){ bb.classList.toggle('ferme-victoire',ferme); bb.title=ferme?'Win your first game to open the Bounty Wall.':'';
     var cad=bb.querySelector('.bb-cadenas'); if(ferme&&!cad){ cad=document.createElement('span'); cad.className='bb-cadenas'; cad.innerHTML=cadenas(); bb.querySelector('.bb-sceau').appendChild(cad); } }
   if(sous) sous.textContent = ferme ? 'Win your first game to open the Bounty Wall.' : 'the seven spirits — your challenges';
+  /* note 283 (2) - GOBLIN DEN : sa porte sous le mur, meme verrou (premiere victoire) */
+  if(window.LLGoblinDen) window.LLGoblinDen.posLaPorte();
 }
 setTimeout(peinsLeBlocDuMur, 0);
 
