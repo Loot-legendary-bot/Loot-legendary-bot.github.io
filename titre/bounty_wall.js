@@ -611,6 +611,7 @@
      que l'écran de fin doit dire. */
   /* l'école publiée par le moteur (`types.ts`, en minuscules) → l'esprit */
   var ESPRIT_DE_L_ECOLE = { arcane: 'arcane', chaos: 'chaos', fire: 'feu', frost: 'givre', lightning: 'foudre', poison: 'poison' };
+  var MAXIMA = ['serie_victoires_max'];
   function finDePartie(p, graine, ecolesPrises, gainsBruts) {
     eveille(p, 'neutre');
     var eveilles = [];
@@ -637,7 +638,11 @@
           vus[g.c] = true;
           var d = gainsBruts[g.c];
           if (typeof d !== 'number' || !(d > 0)) { return; }
-          b[g.c] = (typeof b[g.c] === 'number' ? b[g.c] : 0) + d * m;
+          var avant = typeof b[g.c] === 'number' ? b[g.c] : 0;
+          /* S1445 - note 304 (7) : un compteur MAX (la serie de victoires du Tamarin) porte
+             la valeur atteinte, pas un gain : la branche garde le plus haut, sans multiplicateur. */
+          if (MAXIMA.indexOf(g.c) >= 0) { if (d > avant) { b[g.c] = d; total += d - avant; } return; }
+          b[g.c] = avant + d * m;
           total += d * m;
         });
         if (total > 0) { gains.push({ esprit: t.id, n: total, x: m }); }
