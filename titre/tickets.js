@@ -26,7 +26,7 @@
     ['Night of the Skeletons', 'The Necromancer', 'Every mob drawn is a skeleton', 'Kill 5 skeletons and get out', 'Skeletons killed · Frost damage'],
     ['The Arsonist', 'The Wizard', 'All-Ruins dungeon · school forced: Fire', 'Deal 60 Fire damage before the first Collapse', 'Fire damage · WIS-based damage'],
     ['The Crossing', 'The Whiff', 'You cannot attack a mob — only flee', 'Get out alive with 3+ cards in hand', 'Successful flees'],
-    ['The Race', null, 'The Dungeon Timer runs twice as fast', 'Extract before turn 6', 'Successful extractions'],
+    ['Double Time', null, 'The Dungeon Timer runs twice as fast', 'Extract before turn 6', 'Successful extractions'],
     ['Feast', 'The Cook', 'Every draw gives one more consumable', 'Use 8 consumables', 'Consumables used'],
     ['Last One Standing', null, 'No portal: nobody gets out', 'Be the last alive at the last Collapse', 'Damage taken · Collapses survived'],
     ['Gold Rush', null, 'Golden items are three times as common', 'Equip 5 golden items', 'Golden items equipped'],
@@ -60,7 +60,7 @@
      [jour UTC (0 = dimanche), id, nom, perso (id ou null), conditions (jetons
      §2, TELS QUE le moteur les lit), ce que l'enveloppe en dit, objectif, mur]. */
   var SEMAINE = [
-    [1, 'la_course', 'The Race', null, ['TIMER_X2'],
+    [1, 'la_course', 'Double Time', null, ['TIMER_X2'],
       'The Dungeon Timer runs twice as fast', 'Extract before turn 6', 'Successful extractions'],
     [2, 'nuit_des_squelettes', 'Night of the Skeletons', 'the_necromancer',
       ['MOB_POOL(skeleton_duellist,skeleton_archer,longleg_skeleton,skeleton_elite,zombie,mummy)'],

@@ -5775,6 +5775,13 @@
       .dicelayer .scene-coffre-carte { display: block; margin: 0 auto 2vh; height: clamp(220px, 38vh, 460px);
                                        width: auto; border-radius: 12px; box-shadow: 0 14px 40px rgba(0,0,0,.7); }
       .dicelayer .dgroup.coffre-rangee { gap: 34px; margin-bottom: 5vh; }
+      /* S1447 · note 306 ⑬ — « remonte carte + jet + verdict pour que la main ne les masque jamais » :
+         mesuré (fenêtre 1222 px), raretés sous les dés jusqu'à ~954 px, la main dès 975 px au repos et
+         plus haut au survol. La scène du coffre s'ancre en HAUT et la carte rétrécit d'un cran : tout
+         finit au-dessus de l'apex de la main (~733 px à 1080). */
+      .dicelayer:has(.scene-coffre-carte) { place-content: start center; padding-top: calc(var(--uvh, 10.8px) * 8); }
+      .dicelayer .scene-coffre-carte { height: clamp(200px, calc(var(--uvh, 10.8px) * 33), 400px); margin-bottom: 1.4vh; }
+      .dicelayer:has(.scene-coffre-carte) .dgroup.coffre-rangee { margin-bottom: 2vh; }
       .dicelayer .rar-sous-de { position: absolute; left: 50%; top: calc(100% + 12px); transform: translateX(-50%);
                                 font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: .12em;
                                 white-space: nowrap; color: var(--stock-dim); transition: opacity .25s; }
@@ -11967,6 +11974,7 @@
       .nouvelle-table .ntt-pov .ntt-pov-lui { gap: 10px; }
       .nouvelle-table .ntt-pov .fiche-imprimee { width: 100%; }
       .nouvelle-table .ntt-pov .fiche-imprimee img { width: 100%; height: auto; }
+      .nouvelle-table .ntt-pov .fiche-imprimee img.cz-vignette { max-width: none; }   /* S1447 · note 306 ⑪ */
       /* S1406 · note 221 ⑫ — le combat regardé : la fiche prend toute sa colonne (400 px), lisible sans survol */
       .nouvelle-table .ntt-pov-combat .fi-carte .cz-vignette { max-width: none; }
       .nouvelle-table .ntt-pov-pv {
@@ -12493,6 +12501,49 @@
         box-shadow: 0 8px 20px rgb(0 0 0 / .6);
       }
       .ndr-carte img { display: block; width: 100%; height: auto; }
+      /* S1447 · note 306 ⑯ — la fiche du vaincu du Duel Final se déchire, puis le podium. */
+      .fin-dechirure { display: flex; gap: 48px; justify-content: center; align-items: center;
+        min-height: calc(var(--uvh, 10.8px) * 70); background: transparent; border: 0; }
+      .fin-dechirure .fd-carte { position: relative; width: min(420px, calc(var(--uvh, 10.8px) * 40));
+        aspect-ratio: 1414 / 2000; animation: fd-entre .5s ease-out var(--age, 0ms) both; }
+      .fin-dechirure .fd-moitie { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+        animation-duration: .9s; animation-timing-function: cubic-bezier(.3, .0, .4, 1); animation-fill-mode: both;
+        animation-delay: calc(var(--age, 0ms) + 600ms); }
+      .fin-dechirure .fd-gauche { clip-path: polygon(0 0, 52% 0, 47% 18%, 54% 36%, 46% 55%, 53% 74%, 48% 100%, 0 100%);
+        animation-name: fd-gauche; }
+      .fin-dechirure .fd-droite { clip-path: polygon(52% 0, 100% 0, 100% 100%, 48% 100%, 53% 74%, 46% 55%, 54% 36%, 47% 18%);
+        animation-name: fd-droite; }
+      .fin-dechirure .fd-nom { position: absolute; left: 0; right: 0; bottom: -54px; text-align: center;
+        font-family: var(--display); font-size: 34px; letter-spacing: .14em; color: var(--stock);
+        animation: fd-entre .4s ease-out calc(var(--age, 0ms) + 1300ms) both; }
+      @keyframes fd-entre { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+      @keyframes fd-gauche { from { transform: none; } to { transform: translate(-46px, 26px) rotate(-9deg); filter: grayscale(.8) brightness(.6); } }
+      @keyframes fd-droite { from { transform: none; } to { transform: translate(46px, 34px) rotate(8deg); filter: grayscale(.8) brightness(.6); } }
+      @media (prefers-reduced-motion: reduce) { .fin-dechirure .fd-moitie, .fin-dechirure .fd-carte, .fin-dechirure .fd-nom { animation: none; } }
+      /* S1447 · note 306 ⑫ — la carte jouée pâlit sur sa dernière demi-seconde au centre. */
+      .ndr-carte.ndr-ephemere > * { animation: ndr-efface .5s ease-in var(--efface, 2500ms) both; }
+      @keyframes ndr-efface { from { opacity: 1; } to { opacity: 0; } }
+      /* S1447 · note 306 ⑱ — REWARDS en lignes : le payout par source, le mur par branche puis par compteur. */
+      .fin-payout-lignes { display: flex; flex-direction: column; gap: 6px; margin: 6px 0 0 14px; }
+      .fin-payout { display: grid; grid-template-columns: 28px minmax(140px, auto) minmax(70px, auto) auto;
+        align-items: baseline; gap: 10px; font-size: 20px; color: var(--stock); }
+      .fin-payout-ico { font-size: 22px; text-align: center; }
+      .fin-payout-calc { color: var(--stock-dim); font-size: 16px; }
+      .fin-payout-dents { color: #f0a050; font-weight: 800; }
+      .fin-mur.fin-mur-lignes { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+      .fin-mur-branche { display: flex; flex-direction: column; gap: 3px; }
+      .fin-mur-progres { display: flex; gap: 14px; align-items: baseline; margin-left: 18px; font-size: 15px; }
+      .fin-mur-compteur { color: var(--stock-dim); }
+      .fin-mur-debloque { color: #ffd23f; font-weight: 800; letter-spacing: .06em; }
+      .fin-mur-prochain { color: var(--stock-dim); font-style: italic; }
+      /* S1447 · note 306 ⑫ — la puce d'une carte jouée dans le journal : la carte entière au survol / au clic. */
+      .fil-puce-carte { position: relative; display: inline-block; margin-left: 6px; padding: 0 5px;
+        border: 1px solid var(--rule); border-radius: 8px; cursor: zoom-in; font-size: 12px; line-height: 16px; }
+      .fil-puce-carte .fil-puce-grande { display: none; position: fixed; z-index: var(--z-portes, 330);
+        left: 0; top: 0; width: 240px; height: auto; border-radius: 10px;
+        box-shadow: 0 0 0 1px var(--rule), 0 18px 40px rgb(0 0 0 / .8); pointer-events: none; }
+      .fil-puce-carte:hover .fil-puce-grande, .fil-puce-carte:focus .fil-puce-grande,
+      .fil-puce-carte.epinglee .fil-puce-grande { display: block; }
       .ndr-carte-nom {
         padding: 3px 5px; font-family: var(--display); font-size: calc(13px * var(--lisible, 1)); color: var(--stock);
         white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -13335,6 +13386,9 @@
       }
       .nouvelle-table .bj-fiche .fiche-imprimee, .nouvelle-table .bj-fiche .fiche-cliquable { width: 100%; }
       .nouvelle-table .bj-fiche img { width: 100%; height: auto; }
+      /* S1447 · note 306 ⑪ — la fiche d'un joueur OBSERVÉ en grand, comme la mienne : sa vignette
+         gardait le `max-width` de `.cz-vignette` (183,6 px) — mesuré 208 × 294 contre 785 × 1110. */
+      .nouvelle-table .bj-fiche img.cz-vignette { max-width: none; }
       .nouvelle-table .bj-fiche .cz-zoom { display: none; }
       /* Les stats : les miennes en grand, celles des autres resserrées. */
       .nouvelle-table .bj-stats { flex: 0 0 auto; }
@@ -13605,7 +13659,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DGDtzLfY.js"></script>
+    <script type="module" crossorigin src="./assets/index-0zwW59y5.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

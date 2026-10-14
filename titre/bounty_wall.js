@@ -611,7 +611,8 @@
      que l'écran de fin doit dire. */
   /* l'école publiée par le moteur (`types.ts`, en minuscules) → l'esprit */
   var ESPRIT_DE_L_ECOLE = { arcane: 'arcane', chaos: 'chaos', fire: 'feu', frost: 'givre', lightning: 'foudre', poison: 'poison' };
-  var MAXIMA = ['serie_victoires_max'];
+  /* S1447 - note 307 (3) : le ManBearPig (signatures dans UNE partie) se lit aussi en MAX. */
+  var MAXIMA = ['serie_victoires_max', 'signatures_max_partie'];
   function finDePartie(p, graine, ecolesPrises, gainsBruts) {
     eveille(p, 'neutre');
     var eveilles = [];
@@ -633,6 +634,7 @@
         var b = p.branches[t.id] || (p.branches[t.id] = {});
         var vus = {};
         var total = 0;
+        var progres = [];
         t.rangs.forEach(function (g) {
           if (g.c === SERVIS || vus[g.c]) { return; }
           vus[g.c] = true;
@@ -641,11 +643,23 @@
           var avant = typeof b[g.c] === 'number' ? b[g.c] : 0;
           /* S1445 - note 304 (7) : un compteur MAX (la serie de victoires du Tamarin) porte
              la valeur atteinte, pas un gain : la branche garde le plus haut, sans multiplicateur. */
-          if (MAXIMA.indexOf(g.c) >= 0) { if (d > avant) { b[g.c] = d; total += d - avant; } return; }
-          b[g.c] = avant + d * m;
-          total += d * m;
+          if (MAXIMA.indexOf(g.c) >= 0) { if (d > avant) { b[g.c] = d; total += d - avant; } }
+          else { b[g.c] = avant + d * m; total += d * m; }
+          /* S1447 - note 306 (18) : la PROGRESSION du compteur sur sa branche - avant, apres,
+             les noeuds dont le seuil vient d'etre franchi, et le prochain - pour REWARDS. */
+          var apres = typeof b[g.c] === 'number' ? b[g.c] : avant;
+          if (apres <= avant) { return; }
+          var atteints = [], prochain = null;
+          t.rangs.forEach(function (r) {
+            if (r.c !== g.c) { return; }
+            r.noeuds.forEach(function (nd) {
+              if (avant < nd.a && apres >= nd.a) { atteints.push(nd.nom); }
+              else if (apres < nd.a && (prochain === null || nd.a < prochain.a)) { prochain = { nom: nd.nom, a: nd.a }; }
+            });
+          });
+          progres.push({ l: g.l, avant: Math.floor(avant), apres: Math.floor(apres), atteints: atteints, prochain: prochain });
         });
-        if (total > 0) { gains.push({ esprit: t.id, n: total, x: m }); }
+        if (total > 0) { gains.push({ esprit: t.id, n: total, x: m, progres: progres }); }
       });
     }
     var avant = [];
