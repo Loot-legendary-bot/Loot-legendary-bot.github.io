@@ -1,0 +1,46 @@
+corail_translucide — licences et provenance
+===========================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+SOURCE      AUCUNE PHOTOGRAPHIE. Cette peau est une TRANSPOSITION de
+            `bleu_translucide`, refaite le 12/10 sur la photographie que Croze
+            avait deposee pour elle. Mot de Croze, 13/10 : « tu m'en ferais des
+            comme ca corail ».
+            CE QUI EST REPRIS SANS UN BIT DE CHANGEMENT : la famille, le givre
+            (fini.rugosite 0,70), la transmission, l'ior, la densite du
+            volume, l'encre blanche, la gravure, la graine. CE QUI EST
+            TRANSPOSE : la couleur (surface #ff7a64, reflet corail pale
+            #ffd4c4), et la lumiere du fond, 1,4 au lieu de 1,0 : le corail est
+            une couleur CLAIRE, et sous 1,0 il rendait un orange brule. La
+            regle de la famille est gardee — le volume mange un canal EN ENTIER
+            ou pas du tout, parce qu'un canal mange a moitie fait diverger les
+            des entre eux (15 deg mesures sur la vitrine de bleu_translucide) ;
+            ici il ne mange RIEN, et la teinte est toute sur la surface.
+            La teinte est le choix de Croze sur des essais poses cote a cote :
+            cinq corails du d6 (de l'orange brule au saumon), puis le rose pale
+            contre une version plus saturee et plus orange (volume qui mange le
+            bleu, chroma rendue 65 au lieu de 50) — « c'etait mieux rose
+            pale ». Aucune couleur de
+            cette peau ne vient d'une photographie, et aucun chiffre de couleur
+            de son rapport n'a de cote reference : l'oeil de Croze est le seul
+            juge du corail, avec les portes, qui ne demandent pas de
+            photographie.
+
+NOM         La peau porte le nom de sa MATIERE — une resine corail translucide
+            givree, chiffres peints en blanc dans une gravure.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.

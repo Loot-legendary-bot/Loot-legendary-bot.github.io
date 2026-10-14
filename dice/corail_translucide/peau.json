@@ -1,0 +1,43 @@
+{
+ "peau": "corail_translucide",
+ "version": 1,
+ "faces": {
+  "px": 256
+ },
+ "bande": {
+  "images": 60,
+  "px": 256,
+  "ips": 30,
+  "duree_s": 2.0,
+  "presentation_images": 10
+ },
+ "apercu": {
+  "px": 512
+ },
+ "source": {
+  "modele": "procedural",
+  "references": [],
+  "materiau": "materiau.json"
+ },
+ "rendu": {
+  "blender": "5.2.0 LTS",
+  "moteur": "CYCLES",
+  "fond": "1.4",
+  "graine": 6,
+  "echantillons": 128,
+  "sha256_scene": "757555c7ce1acb54460df1904271f1d5bf6dc499be2455baaa0a2e5188b8342b",
+  "lumiere": {
+   "cle": "neutre",
+   "cle_taille": 1.0,
+   "cle_energie": 1.0,
+   "vue": "Standard",
+   "expo": -1.5,
+   "fond_rgb": [
+    1.4,
+    1.4,
+    1.4
+   ]
+  },
+  "cle_taille": 1.0
+ }
+}

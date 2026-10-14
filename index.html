@@ -44,6 +44,22 @@
        * (`ECRANS.md §15`). Ce fichier est donc un état, pas une décision.
        */
       /*
+       * S1442 · SEQUENCAGE §3 (note 299 ①, P0) — LA TABLE DES JETONS DE COUCHE. Plus aucun
+       * z-index de couche en dur : C0 table 0 · C1 panneaux 100 · couloir 150 · C2 scène 200 ·
+       * C3 interruption 300 · C4 système 400. L ordre RELATIF d avant est gardé à l identique
+       * (fleche < scène < file < HIDE < sortie < question < portes < butin < quêtes < plein <
+       * zoom < curseur < système < rapport) ; seuls les rangs internes des composants (0-93)
+       * restent locaux. Le « X is thinking » (9000) devient le couloir : il ne couvre plus C2.
+       */
+      :root {
+        --c0: 0; --c1: 100; --couloir: 150; --c2: 200; --c3: 300; --c4: 400;
+        --z-fleche: 140; --z-couloir: 150;
+        --z-scene: 200; --z-scene-file: 201; --z-scene-hide: 202; --z-scene-sortie: 205;
+        --z-question: 300; --z-question-main: 301; --z-butin-vol: 320; --z-quetes: 321;
+        --z-plein: 330; --z-curseur-point: 349; --z-curseur: 350;
+        --z-systeme: 400; --z-systeme-rapport: 401;
+      }
+      /*
        * ═══ ⛑⛑ S520 · LA DA PLUS SOMBRE — note 54 ⑥, ET LA PALETTE EST MESURÉE
        * DANS SES PROPRES RÉFÉRENCES, PAS CHOISIE ═══════════════════════════════
        *
@@ -241,7 +257,7 @@
          * Au-dessus de `.plein` (950), `.bv-couche` (940), `.dicelayer` (900) ;
          * sous le bandeau ADMIN (999), qui est un avertissement.
          */
-        --z-zoom: 960;
+        --z-zoom: 340;
         /* Les noms de l'ancienne couche, remappés : un seul jeu de jetons. */
         --bg: var(--ink); --panel: var(--ink-2); --raised: var(--ink-3);
         --dim: var(--stock-dim); --line: var(--rule); --edge: var(--rule);
@@ -1631,7 +1647,7 @@
        * `930` garde les deux bornes du critère : au-dessus de tout ce qui monte
        * pendant une fenêtre (920, 921), sous les deux surfaces pleines.
        */
-      :root { --z-portes: 930; }
+      :root { --z-portes: 310; }
 
       .porte-admin {
         position: fixed; right: 0; bottom: 0; z-index: var(--z-portes);
@@ -1676,7 +1692,7 @@
        *    Elle n'est peinte qu'une fois le curseur bougé (`.vive`) : une
        *    flèche posée d'avance pointerait un coin que personne n'a visé.
        */
-      #fleche { position: fixed; inset: 0; z-index: 800; pointer-events: none;
+      #fleche { position: fixed; inset: 0; z-index: var(--z-fleche); pointer-events: none;
                 width: 100%; height: 100%; opacity: 0; transition: opacity .12s; }
       #fleche.vive { opacity: 1; }
       #fleche-trait { fill: none;
@@ -1803,7 +1819,7 @@
        * ce qu'on relit dans un rapport, ce sont des colonnes.
        */
       .volet-rapport {
-        position: fixed; inset: 0; z-index: 1000;
+        position: fixed; inset: 0; z-index: var(--z-systeme-rapport);
         display: grid; place-content: center;
         background: rgba(10, 8, 6, .82);
       }
@@ -1889,7 +1905,7 @@
        * derrière lui ; une borne ANNONCE »*). L'ember garde sa place et son
        * rôle ; seule son assise change.
        */
-      .dicelayer { position: fixed; inset: 0; z-index: 900; display: grid; place-content: center;
+      .dicelayer { position: fixed; inset: 0; z-index: var(--z-scene); display: grid; place-content: center;
                    background:
                      radial-gradient(circle at 50% 44%,
                        rgba(199,74,18,.10) 0%, rgba(199,74,18,0) 62%),
@@ -2320,6 +2336,12 @@
         opacity: 1; transform: none; }
       /* S1439 · note 288 ③ — l'INTENTION : sans voile, la fiche du mob s'allume d'abord. */
       .dicelayer.coup-mob.intention { background: none; pointer-events: none; animation: none; }
+      /* S1443 · note 300 — le souffle entre deux mobs : la couche attend, invisible ; « next: » */
+      .dicelayer.souffle-mob { visibility: hidden; }
+      .dicelayer .mob-suivant { position: absolute; left: 0; right: 0; bottom: 18%; text-align: center;
+        font-size: calc(15px * var(--lisible, 1)); letter-spacing: .22em; text-transform: uppercase;
+        color: var(--slate); opacity: 0; }
+      .dicelayer.t1 .mob-suivant, .dicelayer.fini .mob-suivant { opacity: 1; transition: opacity .2s ease; }
       .cm-mob { font-size: calc(13px * var(--lisible, 1)); letter-spacing: .22em; text-transform: uppercase;
                 color: var(--stock-dim); margin-bottom: 6px; }
       .cm-nom { font-family: var(--display); font-weight: 800;
@@ -2821,7 +2843,7 @@
        * DÉPART est posée en `left/top/width` une fois pour toutes, et c'est le
        * `transform` qui voyage.
        */
-      .bv-couche { position: fixed; inset: 0; z-index: 940; pointer-events: none; }
+      .bv-couche { position: fixed; inset: 0; z-index: var(--z-butin-vol); pointer-events: none; }
       .bv-vol { position: fixed; pointer-events: none; transform-origin: top left;
                 transition: transform .4s cubic-bezier(.4, 0, .2, 1), opacity .4s ease; }
       @media (prefers-reduced-motion: reduce) {
@@ -3105,7 +3127,7 @@
        * ce placement est le nôtre, et il est déposé en arbitrage plutôt
        * qu'annoncé comme relevé.
        */
-      .hide-btn { position: fixed; right: 18px; bottom: 40px; z-index: 902;
+      .hide-btn { position: fixed; right: 18px; bottom: 40px; z-index: var(--z-scene-hide);
                   pointer-events: auto; background: none;
                   /* S1261 · H-T2 (Q-PLAQUE-ICONES) — un outil : le texte seul. */
                   border: 0;
@@ -3128,10 +3150,20 @@
        * sur un fond clair** — la vérification qui manquait au S291 et qui a
        * coûté un `1,70`. `--stamp` y rend **2,62**, `--alert` **5,55**.
        */
-      .file-tue { position: fixed; left: 18px; bottom: 16px; z-index: 901;
+      .file-tue { position: fixed; left: 18px; bottom: 16px; z-index: var(--z-scene-file);
                   max-width: calc(var(--uvw) * 46); font-size: calc(10px * var(--lisible, 1)); letter-spacing: .18em;
                   text-transform: uppercase; color: var(--alert);
                   pointer-events: none; }
+      /* S1442 · SEQUENCAGE §4 — le COULOIR D'ÉTAT : coin haut-droite, un message à la fois,
+         sous les scènes (--z-couloir 150). */
+      #couloir { position: fixed; top: 72px; right: 16px; z-index: var(--z-couloir);
+                 pointer-events: none; max-width: min(420px, calc(100vw - 32px)); }
+      #couloir .couloir-msg { padding: 6px 14px; background: rgb(10 10 10 / .88);
+                 border: 1px solid var(--stock, #fff); color: var(--stock, #fff);
+                 font-family: var(--display); font-weight: 800; letter-spacing: .06em;
+                 font-size: calc(13px * var(--lisible, 1)); text-transform: uppercase;
+                 animation: couloir-entre .18s ease-out; }
+      @keyframes couloir-entre { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
       .dicelayer .skip { position: fixed; right: 18px; bottom: 16px; font-size: calc(10px * var(--lisible, 1));
                          letter-spacing: .2em; text-transform: uppercase; color: var(--slate); }
       /*
@@ -3833,7 +3865,7 @@
        * la mesure : sans ça, la Signature est peinte, active et INATTEIGNABLE
        * pendant toute la fenêtre de réaction.
        */
-      .col-gauche.pendant-fenetre { z-index: 920; }
+      .col-gauche.pendant-fenetre { z-index: var(--z-question); }
       /*
        * ⛑⛑ **S504 — ET LE 920 A VOLÉ 90 % DE MON PROPRE BANDEAU, PENDANT
        * DEUX PALIERS, SANS QUE RIEN NE LE DISE.**
@@ -3885,7 +3917,10 @@
        * autre inatteignable, et le second effet ne se voit que si on balaie
        * l'état.*
        */
-      .main-basse.pendant-fenetre { z-index: 921; }
+      .main-basse.pendant-fenetre { z-index: var(--z-question-main); }
+      /* S1440 · note 295 ① — le jet d'un AUTRE siège : ma main reste au-dessus du voile et
+         de la photo figée, vivante (on la lit pendant le tour des autres). */
+      body.jet-d-un-autre .main-basse { z-index: var(--z-question-main); }
       @media (max-width: 1199px) {
         /* Empilé, même remède que ses deux sœurs. */
 :where(html[data-verrou="non"]) .col-gauche { position: static; max-height: none; overflow-y: visible; }
@@ -4245,7 +4280,7 @@
        * cette exception, comptée et nommée à part (`sousLaScène`).
        */
       .bande-timer .onglets { display: flex; gap: 8px; margin-left: auto;
-                              position: relative; z-index: 905; }
+                              position: relative; z-index: var(--z-scene-sortie); }
       .bt-tour { font-family: var(--display); font-weight: 800; font-size: calc(13px * var(--lisible, 1));
                  letter-spacing: .18em; text-transform: uppercase; color: var(--stock); }
       .bt-collapse { font-size: calc(10px * var(--lisible, 1)); letter-spacing: .14em; text-transform: uppercase;
@@ -5871,7 +5906,7 @@
        * — clic ailleurs ou `Échap`. C'est la seconde moitié de la règle du
        * moment 3, appliquée ici : *pas de panneau qui reste posé.*
        */
-      .plein { position: fixed; inset: 0; z-index: 950; display: grid; place-items: center;
+      .plein { position: fixed; inset: 0; z-index: var(--z-plein); display: grid; place-items: center;
                background: rgba(10, 8, 6, .82); padding: 24px; cursor: zoom-out;
                animation: fadein .14s ease; }
       .plein-boite { background: var(--ink-2); border: 2px solid var(--rule); cursor: default;
@@ -6116,7 +6151,7 @@
       body.avec-debug { padding-top: var(--bande-debug); }
       body.avec-debug::before {
         content: "ADMIN · ?debug=1 · CE N'EST PAS L'ÉCRAN DU JOUEUR";
-        position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+        position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-systeme);
         background: #22262C; color: #AEB4BC;
         border-bottom: 1px solid #333940;
         font: 700 10px/22px "Courier Prime", "Courier New", monospace;
@@ -6321,7 +6356,7 @@
       .reb .pause-bouton { flex: 0 0 auto; font-weight: 800; letter-spacing: .06em; }
       .reb-en-pause .reb-sec { color: #fff; }
       .pause-autre { position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
-                     z-index: 9000; padding: 8px 18px; background: rgba(0,0,0,.88);
+                     z-index: var(--z-couloir); padding: 8px 18px; background: rgba(0,0,0,.88);
                      border: 2px solid #fff; color: #fff; font-family: var(--display);
                      font-weight: 800; font-size: 20px; letter-spacing: .06em;
                      pointer-events: none; }
@@ -9915,7 +9950,7 @@
        * dans « jamais rendue ». Le fond est OPAQUE, pas un voile : c'est ce
        * qui rend « rien d'autre à cliquer » vrai plutôt que promis.
        */
-      .fin-run.fr-plein { position: fixed; inset: 0; z-index: 960;
+      .fin-run.fr-plein { position: fixed; inset: 0; z-index: var(--z-zoom);
                           background: var(--ink); overflow-y: auto;
                           padding: 20px; gap: 12px;
                           align-items: center; justify-content: flex-start; }
@@ -10224,7 +10259,7 @@
       /* ⛑ `.fin-run.fr-plein > *` borne chaque enfant à 1 100 px : le splash
          peint n'en couvrait que la gauche (vu au volet). Même poids de
          sélecteur, déclaré plus bas : celui-ci l'emporte. */
-      .fr-splash.peint { position: fixed; inset: 0; z-index: 950; display: grid;
+      .fr-splash.peint { position: fixed; inset: 0; z-index: var(--z-plein); display: grid;
                          max-width: none; width: auto;
                          place-items: center; padding: 0;
                          background: rgba(10, 8, 6, .94); }
@@ -11247,7 +11282,7 @@
                     color: var(--stock-dim); padding-top: 4px;
                     border-top: 1px solid var(--rule); }
       .porte-voile {
-        position: fixed; inset: 0; z-index: 1000;
+        position: fixed; inset: 0; z-index: var(--z-systeme-rapport);
         display: grid; place-content: center;
         background: rgba(10, 8, 6, .82);
       }
@@ -11496,7 +11531,7 @@
        * d'avaler un clic. Les onglets reprennent `auto` — `:hover`,
        * `:focus-within` et `.qt-carte` continuent de répondre, mesuré.
        */
-      .qcoin { position: fixed; left: calc(6.4 * var(--uvw)); top: 6px; z-index: 941;
+      .qcoin { position: fixed; left: calc(6.4 * var(--uvw)); top: 6px; z-index: var(--z-quetes);
                display: flex; gap: calc(.6 * var(--uvw)); pointer-events: none; }
       .qcoin > .qt { pointer-events: auto; }
       /*
@@ -12134,6 +12169,16 @@
       .nouvelle-table .nt-tour-seul .bt-etat { margin-left: 0; align-items: flex-end; text-align: right; }
       .nouvelle-table .nt-tour-seul .bt-tour { font-size: calc(15px * var(--lisible, 1)); }
       .nouvelle-table .nt-tour-seul .bt-collapse { font-size: calc(11px * var(--lisible, 1)); }
+      /* S1441 · note 298 ⑧ — l'en-tête du tour de donjon : replié = UNE ligne, plus grosse ; un clic déplie. */
+      .nouvelle-table .nt-entete-tour { cursor: pointer; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; user-select: none; }
+      .nouvelle-table .nt-entete-tour .nt-et-ligne { display: flex; align-items: center; justify-content: flex-end; gap: 8px; text-align: right;
+        font-family: var(--display); font-weight: 800; font-size: calc(17px * var(--lisible, 1)); letter-spacing: .03em; text-transform: uppercase; }
+      .nouvelle-table .nt-entete-tour .nt-et-chevron { font-size: .8em; opacity: .7; transition: transform .15s; }
+      .nouvelle-table .nt-entete-tour.deplie .nt-et-chevron { transform: rotate(180deg); }
+      .nouvelle-table .nt-entete-tour .nt-et-detail { display: none; }
+      .nouvelle-table .nt-entete-tour.deplie .nt-et-detail { display: flex; }
+      .nouvelle-table .nt-entete-tour .nt-et-detail .bt-tour { display: none; }
+      .nouvelle-table > .nt-memoire.nt-tour-seul:has(.nt-entete-tour) { max-width: 580px; }
       .bt-gemme {
         display: inline-block; width: 9px; height: 9px; margin-right: 9px;
         transform: rotate(45deg) translateY(-1px); vertical-align: middle;
@@ -12164,7 +12209,7 @@
       /* ⛑ S1338 · FP-1 (note 194) — l'écran de fin : fond de pierre sombre, le
          vainqueur en grand dans un cadre d'or, les autres en ronds dessous. */
       .nouvelle-table .fp1 {
-        position: fixed; inset: 0; z-index: 930; overflow: hidden;
+        position: fixed; inset: 0; z-index: var(--z-portes); overflow: hidden;
         display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 34px 48px 92px;
         background:
           radial-gradient(ellipse 60% 55% at 50% 38%, rgb(70 58 44 / .55), transparent 70%),
@@ -12639,12 +12684,12 @@
       .nouvelle-table .cj-carte:has(.cj-coin:hover) > .cj-grand { visibility: visible; opacity: 1; }
       /* S1354 · S-T2 — le curseur fantôme d'un bot, et son clic. */
       .fantome-curseur {
-        position: fixed; z-index: 970; width: 32px; height: 32px; opacity: .55;
+        position: fixed; z-index: var(--z-curseur); width: 32px; height: 32px; opacity: .55;
         pointer-events: none; image-rendering: auto;
       }
       .fantome-curseur.clic { scale: .85; opacity: .8; }
       .fantome-clic {
-        position: fixed; z-index: 969; width: 10px; height: 10px; margin: -5px 0 0 -5px;
+        position: fixed; z-index: var(--z-curseur-point); width: 10px; height: 10px; margin: -5px 0 0 -5px;
         border: 2px solid var(--stock); border-radius: 50%; pointer-events: none;
         animation: fantome-onde .45s ease-out both;
       }
@@ -13090,6 +13135,12 @@
       .nouvelle-table .ntt-cb2-fiche.fg-a-toi .fcz.ok::after { opacity: .7; }
       .nouvelle-table .ntt-cb2-fiche.fg-a-toi .fcz.ok:hover::after { opacity: 1; }
       .nouvelle-table .ntt-cb2-fiche.fg-a-toi .fcz.no { background: rgba(0, 0, 0, .4); }
+      /* S1441 · note 298 ⑦ — la loupe d'une ligne de skill : le carton recadré, ×2, au survol, en combat seulement. */
+      .fcz-loupe { position: absolute; display: none; pointer-events: none; background-repeat: no-repeat; }
+      .nouvelle-table .ntt-cb2-fiche .fcz:hover + .fcz-loupe,
+      .nouvelle-table .ntt-cb2-fiche .fcz:focus-visible + .fcz-loupe {
+        display: block; z-index: 40; transform: scale(2); transform-origin: left center;
+        outline: 2px solid var(--stock); box-shadow: 0 18px 40px -10px #000; }
       .nouvelle-table { position: relative; }
       .nouvelle-table .nt-retour { position: absolute; top: 12px; right: 48px; }
       /* ⛑ S1291 · LA-6 — SUIVRE L'ACTION, à gauche du lien de table, même ligne. */
@@ -13260,7 +13311,7 @@
            pendant une fenetre, `.main-basse.pendant-fenetre` monte a 921 et la carte
            (`cz-vignette`) couvrait la fiche (70). 930 : au-dessus de la main et de la
            colonne (920), sous `.bv-couche` (940) et `.plein` (950). */
-        z-index: 930;
+        z-index: var(--z-portes);
       }
       /* ⛑ S1396 · C-S2 (note 215 ⑤) — la fiche EN GRAND : le carton a la hauteur de
          l'ecran (1414 x 2000 reduit), au centre, sur un fond assombri. */
@@ -13521,7 +13572,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BA1xcqAA.js"></script>
+    <script type="module" crossorigin src="./assets/index-CoUtJKLN.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

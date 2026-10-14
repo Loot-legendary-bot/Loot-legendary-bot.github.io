@@ -2118,6 +2118,24 @@ function peinsLaLangue(){
     if (typeof window.LLVolumeMaitre==='function') window.LLVolumeMaitre(v);
   });
   ligneSon.appendChild(valSon); ligneSon.appendChild(curseurSon); box.appendChild(ligneSon);
+  /* S1441 - note 298 (5) : MASTER / MUSIC / EFFECTS / INTERFACE (pas d'Ambient pour l'instant).
+     Chaque curseur ecrit sa cle dans `ll.options.son` (celles que le jeu lit deja) ; MUSIC
+     regle aussi la musique du menu en direct, INTERFACE le clic des menus. */
+  [['MUSIC','volMusique','LLVolumeMusique'],['EFFECTS','volEffets',null],['INTERFACE','volInterface',null]].forEach(function(x){
+    var luX=1;
+    try { var rx=JSON.parse(localStorage.getItem('ll.options.son')||'null'); if(rx&&typeof rx[x[1]]==='number'&&isFinite(rx[x[1]])) luX=Math.min(1,Math.max(0,rx[x[1]])); } catch(e) {}
+    var lg=document.createElement('label'); lg.className='son-maitre';
+    var cu=document.createElement('input'); cu.type='range'; cu.min='0'; cu.max='100'; cu.step='5';
+    cu.value=String(Math.round(luX*100)); cu.setAttribute('aria-label',x[0]+' volume');
+    var va=document.createElement('span'); va.className='son-maitre-val'; va.textContent=x[0]+'  '+cu.value+' %';
+    cu.addEventListener('input',function(){
+      var v=Number(cu.value)/100;
+      va.textContent=x[0]+'  '+cu.value+' %';
+      try { var r=JSON.parse(localStorage.getItem('ll.options.son')||'null'); if(!r||typeof r!=='object') r={}; r[x[1]]=v; localStorage.setItem('ll.options.son',JSON.stringify(r)); } catch(e) {}
+      if (x[2] && typeof window[x[2]]==='function') window[x[2]](v);
+    });
+    lg.appendChild(va); lg.appendChild(cu); box.appendChild(lg);
+  });
   peinsLeDev(box);
 }
 /* S1419 - note 241 (8) : LE PANNEAU DEV. Croze : « reboot les offrandes sur mon profil,
@@ -3875,6 +3893,11 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
 
   function cible(){ return vol * reglage * maitre; }
   /* S1435 - note 281 (12) : le curseur SOUND d'Options regle la musique du menu en direct. */
+  /* S1441 - note 298 (5) : le curseur MUSIC d'Options regle aussi la musique du menu en direct. */
+  window.LLVolumeMusique = function(v){
+    reglage = Math.min(1, Math.max(0, v));
+    els.forEach(function(x){ if (!x.paused && !x.__rampe) { x.volume = Math.min(1, Math.max(0, cible())); } });
+  };
   window.LLVolumeMaitre = function(v){
     maitre = Math.min(1, Math.max(0, v));
     els.forEach(function(x){ if (!x.paused && !x.__rampe) { x.volume = Math.min(1, Math.max(0, cible())); } });
@@ -5633,7 +5656,8 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       var r = JSON.parse(window.localStorage.getItem('ll.options.son') || 'null');
       if (r && typeof r === 'object') {
         if (typeof r.effets === 'boolean') allume = r.effets;
-        if (typeof r.volEffets === 'number' && isFinite(r.volEffets)) v = Math.min(1, Math.max(0, r.volEffets));
+        if (typeof r.volInterface === 'number' && isFinite(r.volInterface)) v = Math.min(1, Math.max(0, r.volInterface));
+        if (typeof r.volMaster === 'number' && isFinite(r.volMaster)) v *= Math.min(1, Math.max(0, r.volMaster));
       }
     } catch (e) {}
     return allume ? gain * v : 0;
