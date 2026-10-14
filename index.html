@@ -2150,6 +2150,15 @@
                            font-size: clamp(11px, calc(var(--uvh) * 1.4), 17px);
                            color: var(--stock); }
 
+      /* S1447 · note 306 ③ — S-OUVERTURE-DE-COMBAT : la carte de chaque mob ENTRE, au-dessus du bandeau. */
+      .dicelayer.combat-ouvre .co-cartes { display: flex; gap: 22px; justify-content: center;
+        margin-bottom: 18px; }
+      .dicelayer.combat-ouvre .co-carte { height: min(300px, calc(var(--uvh, 10.8px) * 28));
+        width: auto; border-radius: 10px; box-shadow: 0 0 0 1px var(--rule), 0 14px 34px rgb(0 0 0 / .7);
+        animation: co-entre .45s var(--pop, ease-out) both; animation-delay: calc(var(--i, 0) * .12s); }
+      @keyframes co-entre { from { opacity: 0; transform: translateY(46px) scale(.9); }
+        to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) { .dicelayer.combat-ouvre .co-carte { animation: none; } }
       .borne-bloc { text-align: center; opacity: 0; transform: scale(.86);
                     transition: opacity .18s ease, transform .22s var(--pop); }
       .dicelayer.borne.t1 .borne-bloc, .dicelayer.borne.fini .borne-bloc {
@@ -5906,6 +5915,8 @@
        * — clic ailleurs ou `Échap`. C'est la seconde moitié de la règle du
        * moment 3, appliquée ici : *pas de panneau qui reste posé.*
        */
+      /* S1447 · note 306 ⑤ — les OPTIONS sont la couche C4 (SYSTÈME) : au-dessus de toute scène. */
+      .plein.plein-systeme { z-index: var(--z-systeme); }
       .plein { position: fixed; inset: 0; z-index: var(--z-plein); display: grid; place-items: center;
                background: rgba(10, 8, 6, .82); padding: 24px; cursor: zoom-out;
                animation: fadein .14s ease; }
@@ -13594,7 +13605,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-joEJqGeU.js"></script>
+    <script type="module" crossorigin src="./assets/index-DGDtzLfY.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
