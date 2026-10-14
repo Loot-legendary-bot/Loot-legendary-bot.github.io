@@ -12523,6 +12523,25 @@
       /* S1447 · note 306 ⑫ — la carte jouée pâlit sur sa dernière demi-seconde au centre. */
       .ndr-carte.ndr-ephemere > * { animation: ndr-efface .5s ease-in var(--efface, 2500ms) both; }
       @keyframes ndr-efface { from { opacity: 1; } to { opacity: 0; } }
+      /* S1447 · note 306 ⑧ — les pastilles dues brillent ; END TURN autonome à côté d'elles. */
+      .ep-boules.dues .boule.pleine:not(.boule-s) { animation: pip-brille 1.6s ease-in-out infinite;
+        box-shadow: 0 0 8px 2px rgb(255 210 63 / .75); }
+      @keyframes pip-brille { 0%, 100% { box-shadow: 0 0 8px 2px rgb(255 210 63 / .75); }
+        50% { box-shadow: 0 0 3px 1px rgb(255 210 63 / .35); } }
+      @media (prefers-reduced-motion: reduce) { .ep-boules.dues .boule.pleine:not(.boule-s) { animation: none; } }
+      .ep-boules .fin-autonome { display: inline-flex; align-items: center; gap: 8px; margin-left: 14px; }
+      .ep-boules .fin-autonome .filet { font-size: calc(10px * var(--lisible, 1)); }
+      /* S1447 · note 306 ⑨ — les effets actifs : une bande sous les PV, icône + compteur + infobulle. */
+      .fx-bande { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 2px; }
+      .fx-effet { display: inline-flex; align-items: center; gap: 3px; padding: 1px 7px; border-radius: 10px;
+        border: 1px solid rgb(240 210 120 / .55); background: rgb(240 210 120 / .10); cursor: help;
+        font-size: calc(12px * var(--lisible, 1)); color: var(--stock); }
+      .fx-effet.fx-malus { border-color: rgb(220 70 70 / .6); background: rgb(220 70 70 / .12); }
+      .fx-effet .fx-ico { font-size: 14px; }
+      .fx-effet .fx-n { font-weight: 800; }
+      .fx-effet.neuf { animation: fx-lueur 1.2s ease-out both; }
+      @keyframes fx-lueur { from { box-shadow: 0 0 0 0 rgb(255 210 63 / .9), 0 0 14px 4px rgb(255 210 63 / .8); }
+        to { box-shadow: 0 0 0 0 rgb(255 210 63 / 0), 0 0 0 0 rgb(255 210 63 / 0); } }
       /* S1447 · note 306 ⑱ — REWARDS en lignes : le payout par source, le mur par branche puis par compteur. */
       .fin-payout-lignes { display: flex; flex-direction: column; gap: 6px; margin: 6px 0 0 14px; }
       .fin-payout { display: grid; grid-template-columns: 28px minmax(140px, auto) minmax(70px, auto) auto;
@@ -13659,7 +13678,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-0zwW59y5.js"></script>
+    <script type="module" crossorigin src="./assets/index-BGYxrpj1.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

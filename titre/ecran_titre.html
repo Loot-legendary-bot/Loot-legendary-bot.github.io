@@ -2406,7 +2406,18 @@ const REGLES=[
   ['timer','Dungeon timer','the spiral · scoring','/art/regles/dungeon_timer.webp'],
   ['patch','Patch notes','what changed, version by version',null],
   /* S1427 - note 257 (4) : le mode d'emploi du jeu en ligne, une page, pour les amis (OU_ON_EN_EST 12/10 (3)). */
-  ['online','How to play online','friends · a room · a code',null]];
+  ['online','How to play online','friends · a room · a code',null],
+  /* S1447 - note 306 (8) : les phrases d'aide du panneau WHAT YOU CAN DO, retire de la table, vivent ici. */
+  ['tour','Your turn','actions · END TURN · discard',null]];
+const TON_TOUR=[
+  ['Your actions',[
+    'The two action pips next to your portrait <b>glow while they are due</b> and go out one by one as you spend them.',
+    'Your moves are on your character sheet: the lines you can play now are <b>framed in green</b>.',
+    'Cards in your hand and your Signature do not cost an action: they stay playable after your actions are spent.']],
+  ['Ending your turn',[
+    '<b>END TURN</b> sits next to your action pips. It stays neutral while you still have actions (you may end early), and <b>lights up</b> once both are spent.',
+    'When no action is left, your turn only ends with this button — or by itself when your turn timer runs out.',
+    'If your hand is over its limit, a frame asks you to <b>click the cards you discard</b> before ending the turn.']]];
 const COMMENT_EN_LIGNE=[
   ['The host (on the PC with JOUER.bat, or on the site)',[
     'Open the game. At the door, click <b>Create account</b>: a name, a password \u2014 and keep your recovery key somewhere safe (it is the only way back into your account).',
@@ -2469,6 +2480,10 @@ function peinsLesRegles(){
     const n=document.createElement('div');
     n.className='notes';
     let h='<h3>Patch notes</h3>';
+    if(r[0]==='tour'){
+      h='<h3>Your turn</h3>'+TON_TOUR.map(([tete,ls])=>'<h4>'+tete+'</h4><ul>'+ls.map(l=>'<li>'+l+'</li>').join('')+'</ul>').join('');
+      n.innerHTML=h; page.appendChild(n); box.appendChild(page); return;
+    }
     if(r[0]==='online'){
       h='<h3>How to play online</h3>'+COMMENT_EN_LIGNE.map(([tete,ls])=>'<h4>'+tete+'</h4><ol>'+ls.map(l=>'<li>'+l+'</li>').join('')+'</ol>').join('');
       n.innerHTML=h; page.appendChild(n); box.appendChild(page); return;
