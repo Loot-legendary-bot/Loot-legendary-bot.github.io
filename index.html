@@ -12523,6 +12523,28 @@
       /* S1447 · note 306 ⑫ — la carte jouée pâlit sur sa dernière demi-seconde au centre. */
       .ndr-carte.ndr-ephemere > * { animation: ndr-efface .5s ease-in var(--efface, 2500ms) both; }
       @keyframes ndr-efface { from { opacity: 1; } to { opacity: 0; } }
+      /* S1447 · note 306 C — les logs v2 : vignette, icône d'action, tour de joueur, bloc de combat, dégât en couleur. */
+      .vd-journal .vdj-tour-joueur { margin: 8px 0 2px; font-family: var(--display); letter-spacing: .1em;
+        font-size: 15px; color: var(--stock); border-bottom: 1px solid var(--rule); }
+      .vd-journal .vdj-combat { margin-left: 18px; padding-left: 8px; border-left: 2px solid rgb(224 74 58 / .55); }
+      .vd-journal .vdj-vignette { width: 22px; height: 22px; border-radius: 50%; object-fit: cover;
+        vertical-align: middle; margin-right: 6px; box-shadow: 0 0 0 1px var(--rule); }
+      .vd-journal .vdj-ico { display: inline-block; width: 20px; text-align: center; margin-right: 4px; }
+      .vd-journal .vdj-degat { color: var(--ecole, #e0d8c8); }
+      .vd-journal .vdj-ecole { margin-left: 6px; }
+      .vd-journal .vdj-pv { display: inline-block; width: 60px; height: 6px; margin-left: 10px; vertical-align: middle;
+        background: rgb(255 255 255 / .12); border-radius: 3px; overflow: hidden; }
+      .vd-journal .vdj-pv-plein { display: block; height: 100%; background: #c43a3a; }
+      /* S1447 · note 306 ④ — le jet partagé : le lanceur en tête, tous les dés, la sélection entourée au résultat. */
+      .dicelayer.jet-partage .jp-tete { display: flex; align-items: center; gap: 18px; justify-content: center; margin-bottom: 14px; }
+      .dicelayer.jet-partage .jp-portrait { width: 120px; height: 120px; object-fit: cover; object-position: 50% 25%;
+        border-radius: 50%; box-shadow: 0 0 0 2px var(--rule), 0 8px 22px rgb(0 0 0 / .7); }
+      .dicelayer.jet-partage .jp-titres { display: flex; flex-direction: column; gap: 6px; max-width: 760px; text-align: left; }
+      .dicelayer.jet-partage .jp-explication { font-size: 18px; color: var(--stock-dim); }
+      .dicelayer.jet-partage.t3 .scene-cadre.jp-malus { outline: 4px solid #e04a3a; outline-offset: 6px; border-radius: 14px;
+        box-shadow: 0 0 22px 4px rgb(224 74 58 / .6); }
+      .dicelayer.jet-partage.t3 .scene-cadre.jp-bonus { outline: 4px solid #4cbb3a; outline-offset: 6px; border-radius: 14px;
+        box-shadow: 0 0 22px 4px rgb(76 187 58 / .6); }
       /* S1447 · note 306 ⑧ — les pastilles dues brillent ; END TURN autonome à côté d'elles. */
       .ep-boules.dues .boule.pleine:not(.boule-s) { animation: pip-brille 1.6s ease-in-out infinite;
         box-shadow: 0 0 8px 2px rgb(255 210 63 / .75); }
@@ -13678,7 +13700,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BGYxrpj1.js"></script>
+    <script type="module" crossorigin src="./assets/index-CPHCC9n7.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

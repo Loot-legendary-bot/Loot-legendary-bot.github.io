@@ -181,6 +181,9 @@
     /* S1427 - vu en partie (l'Arene) : la consultation d'une tuile, `view.ts` du moteur
        (`${choice.reason} — choisissez une option`). */
     [/^(.+) — entrée — choisissez une option$/, '$1 — on entering — choose an option'],
+    /* S1447 - #59 (Razor Bridge) : la designation d une ENTREE de tuile, et sa description au journal. */
+    [/^(.+) — entrée — choose a target$/, '$1 — on entering — choose a target'],
+    [/^(.+) — entrée$/, '$1 — on entering'],
     [/^(.+) — choisissez une option$/, '$1 — choose an option'],
     [/^RUN (\d+) · TOUR DE DONJON (\d+)$/, 'RUN $1 · DUNGEON TURN $2'],
     [/^(\d+) POINTS?$/, '$1 POINTS'],
