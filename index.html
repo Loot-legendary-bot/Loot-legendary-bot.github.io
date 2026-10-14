@@ -13552,6 +13552,28 @@
         animation: sig-phospho 1.6s ease-in-out infinite; }
       @keyframes sig-phospho { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
       @media (prefers-reduced-motion: reduce) { .card.carte-sig.prete::before { animation: none; } }
+      /* S1446 - note 302 (1) : le perso en fond (sa banniere, cadree sur le visage),
+         sous un voile sombre en degrade porte par la face : le texte d'abord. */
+      .card.carte-sig { position: relative; }
+      .carte-sig .cs-fond { position: absolute; inset: 5px; width: calc(100% - 10px);
+        height: calc(100% - 10px); object-fit: cover; object-position: 50% 30%;
+        border-radius: 8px; z-index: 0; pointer-events: none; }
+      /* Le visage tient la bande libre entre le nom (en haut) et l'effet (pousse en bas). */
+      .carte-sig .cs-face { position: relative; z-index: 1;
+        background: linear-gradient(180deg, rgb(10 10 10 / .62) 0%, rgb(10 10 10 / .30) 20%,
+          rgb(10 10 10 / .08) 36%, rgb(10 10 10 / .55) 52%, rgb(10 10 10 / .86) 64%,
+          rgb(10 10 10 / .92) 100%); }
+      .carte-sig .cs-nom { margin-bottom: auto; }
+      .carte-sig .cs-texte { flex: 0 0 auto; }
+      .carte-sig .cs-titre, .carte-sig .cs-nom, .carte-sig .cs-texte {
+        text-shadow: 0 1px 3px rgb(0 0 0 / .95), 0 0 8px rgb(0 0 0 / .8); }
+      /* note 302 (3) : la sienne, face visible au bout de ses dos, lecture seule. */
+      .nouvelle-table .main-en-dos .carte-sig.adverse { width: 170px; flex: none;
+        margin-left: 18px; align-self: flex-end; margin-bottom: 6px; pointer-events: none; }
+      .main-en-dos .carte-sig.adverse .cs-face { padding: 10px 8px; gap: 5px; }
+      .main-en-dos .carte-sig.adverse .cs-nom { font-size: 14px; }
+      .main-en-dos .carte-sig.adverse .cs-texte { font-size: 10px; line-height: 1.25; }
+      .main-en-dos .carte-sig.adverse .cs-etat { font-size: 12px; }
       .nouvelle-table .card.lit {
         border-color: var(--gold);
         box-shadow: inset 0 0 0 2px var(--gold), 0 0 12px rgba(144,144,144,.35);
@@ -13572,7 +13594,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B-KqOha3.js"></script>
+    <script type="module" crossorigin src="./assets/index-3dHU_Rjq.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
