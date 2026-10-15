@@ -230,6 +230,12 @@
       corps.appendChild(el('p', 'bs-dit', 'The Dungeon Pro Tour season track: 20 cosmetic rewards earned by playing ranked. The free track exists; the pass doubles its steps. The only thing with an end date: the season.'));
       g = el('div', 'bs-grille'); corps.appendChild(g);
       item(g, { nom: 'Season pass', quoi: 'Season 1 premium track.', ombre: '20 rewards', prix: 1000 });
+      /* S1450 - note 311 (2) : le pass EST le Pro Tour - endormi avec lui (« The Pro Tour opens soon. »). */
+      if (window.LL_DPT_ENDORMI) {
+        var pz = g.lastChild; pz.title = window.LL_DPT_DORT;
+        pz.style.cssText += ';filter:grayscale(1);opacity:.45;cursor:not-allowed';
+        var oz = pz.querySelector('.bs-ombre'); if (oz) { oz.textContent = window.LL_DPT_DORT; }
+      }
     } else if (onglet === 'bundles') {
       /* S1426 - note 253 (3), MONNAIE 12 : les bundles portent aussi de la CHANCE et des ESSENCES --
          jamais une MASSIVE, jamais plus qu'un mois de jeu gratuit, et jamais vendues seules. */

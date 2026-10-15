@@ -1266,6 +1266,72 @@
               text-align: left; font-family: var(--mono); text-transform: none; letter-spacing: normal;
               box-shadow: 0 3px 12px rgba(0,0,0,.55); transition: transform .12s, box-shadow .12s; }
       .card:hover:not(:disabled) { transform: translateY(-5px); box-shadow: 0 10px 22px rgba(0,0,0,.62); }
+      /* S1450 · note 310 ⑥ — ma carte cliquée répond : enfoncée et lumineuse à l'appui, un élan au clic. */
+      .handslot .card:active:not(:disabled) { transform: translateY(4px) scale(.97); transition: transform .04s, box-shadow .04s;
+        box-shadow: 0 0 0 2px #f0d09e, 0 0 26px 6px rgba(240, 208, 158, .75); }
+      .handslot .card.cliquee { animation: carte-cliquee .45s ease-out; }
+      @keyframes carte-cliquee {
+        0% { transform: translateY(4px) scale(.97); box-shadow: 0 0 0 2px #f0d09e, 0 0 30px 8px rgba(240, 208, 158, .85); }
+        55% { transform: translateY(-16px) scale(1.03); box-shadow: 0 0 0 2px #f0d09e, 0 0 22px 4px rgba(240, 208, 158, .55); }
+        100% { transform: none; box-shadow: 0 3px 12px rgba(0, 0, 0, .55); } }
+      @media (prefers-reduced-motion: reduce) { .handslot .card.cliquee { animation: none; } }
+      /* S1450 · note 310 ③ — LOI 9 : mon jet d'exploration à côté de ma tuile, sans voile. */
+      .dicelayer.a-cote { inset: auto; background: none !important; place-content: center; border-radius: 12px; overflow: visible; }
+      .dicelayer.a-cote > div { transform: scale(.72); transform-origin: center; }
+      .dicelayer.a-cote .explore-verdict { font-size: 44px; white-space: nowrap; }
+      .dicelayer.a-cote .skip { display: none; }
+      /* S1450 · note 315 ③ — le rond en vrai portrait (l'atlas du select) ; N&B réservé à la mort. */
+      .nouvelle-table .nt-rond > .nt-vp { position: absolute; inset: 7px; border-radius: 50%; overflow: hidden; }
+      .nouvelle-table .nt-rond > .nt-vp > .ry { position: absolute; top: 0; left: -38.9%; width: 177.8%; height: 600%; }
+      .nouvelle-table .nt-rond > .nt-vp .rx { width: 800%; height: 100%; }
+      .nouvelle-table .nt-rond > .nt-vp img { width: 100%; height: 100%; object-fit: fill; display: block; }
+      .nouvelle-table .nt-presence:not(.nt-actif):not(.nt-parti):not(.nt-sorti) .nt-vp { filter: brightness(.82); }
+      .nouvelle-table .nt-presence.nt-parti .nt-vp { filter: none; }
+      .nouvelle-table .nt-presence.nt-mort-joue .nt-vp > .ry { animation: nt-sy-mort 1s steps(6, jump-none) 1 both; animation-delay: var(--fondu-age, 0ms); }
+      .nouvelle-table .nt-presence.nt-mort-joue .nt-vp .rx { animation: nt-sx-mort calc(1s / 6) steps(8, jump-none) 6 both; animation-delay: var(--fondu-age, 0ms); }
+      .nouvelle-table .nt-presence.nt-mort-fige .nt-vp > .ry { transform: translateY(-83.333%); }
+      .nouvelle-table .nt-presence.nt-mort-fige .nt-vp .rx { transform: translateX(-87.5%); }
+      .nouvelle-table .nt-rond > .nt-sortie { position: absolute; left: 50%; top: -6px; transform: translateX(-50%); z-index: 2;
+        font-family: var(--display); font-size: 10px; letter-spacing: .14em; color: #1a1410; background: #f0d09e;
+        padding: 1px 6px; border-radius: 6px; }
+      @keyframes nt-sy-mort { from { transform: translateY(0); } to { transform: translateY(-83.333%); } }
+      @keyframes nt-sx-mort { from { transform: translateX(0); } to { transform: translateX(-87.5%); } }
+      @media (prefers-reduced-motion: reduce) { .nouvelle-table .nt-presence.nt-mort-joue .nt-vp > .ry { animation: none; transform: translateY(-83.333%); }
+        .nouvelle-table .nt-presence.nt-mort-joue .nt-vp .rx { animation: none; transform: translateX(-87.5%); } }
+      /* S1450 · note 310 ⑧ — sur le rond : l'éclair de la signature, et les bulles du joueur actif. */
+      .nouvelle-table .nt-rond { position: relative; }
+      .nouvelle-table .nt-rond > .nt-eclair { position: absolute; top: -4px; right: -6px; z-index: 2; font-size: 17px; line-height: 1;
+        filter: drop-shadow(0 0 3px rgba(240, 208, 64, .55)); pointer-events: auto; }
+      .nouvelle-table .nt-rond > .nt-eclair.vif { filter: drop-shadow(0 0 7px rgba(255, 220, 80, .95)); animation: nt-eclair-vif 1.1s ease-in-out infinite alternate; }
+      .nouvelle-table .nt-rond > .nt-eclair.eteint { filter: grayscale(1); opacity: .28; }
+      @keyframes nt-eclair-vif { from { transform: scale(1); } to { transform: scale(1.18); } }
+      .nouvelle-table .nt-rond > .nt-bulles { position: absolute; left: 50%; bottom: -7px; transform: translateX(-50%); z-index: 2;
+        display: flex; gap: 4px; pointer-events: auto; }
+      .nouvelle-table .nt-bulle { width: 11px; height: 11px; border-radius: 50%; border: 1px solid #f0d09e; }
+      .nouvelle-table .nt-bulle.pleine { background: radial-gradient(circle at 35% 35%, #fffbe8 0%, #f0d09e 45%, #b8862f 100%);
+        box-shadow: 0 0 6px rgba(240, 208, 158, .7); }
+      .nouvelle-table .nt-bulle.vide { background: transparent; opacity: .35; }
+      @media (prefers-reduced-motion: reduce) { .nouvelle-table .nt-rond > .nt-eclair.vif { animation: none; } }
+      /* S1450 · note 310 ⑪ — le radar des écoles, compact, à droite des PV et des stats ; le détail au survol. */
+      .bj-stats { position: relative; }
+      .bj-stats .etoile.etoile-compacte { position: absolute; top: 2px; right: 4px; width: 72px; height: 72px; margin: 0; padding: 0;
+        display: block; cursor: help; }
+      .bj-stats .etoile.etoile-compacte svg { width: 100%; height: 100%; }
+      /* S1450 · note 310 ⑩ — mes bulles : grosses, l'éclair de la signature ; une bulle dépensée éclate. */
+      .bj-gestes .ep-bulles .boule { width: 30px; height: 30px; font-size: 17px; line-height: 28px; }
+      .bj-gestes .ep-bulles .boules { gap: 10px; }
+      .boule.eclate { animation: bulle-eclate .5s ease-out both; }
+      @keyframes bulle-eclate {
+        0% { transform: scale(1.25); box-shadow: 0 0 0 0 rgba(240, 208, 158, .9), 0 0 12px 4px rgba(240, 208, 158, .7); }
+        60% { transform: scale(.85); box-shadow: 0 0 0 10px rgba(240, 208, 158, 0), 0 0 2px 0 rgba(240, 208, 158, 0); }
+        100% { transform: scale(1); box-shadow: none; } }
+      @media (prefers-reduced-motion: reduce) { .boule.eclate { animation: none; } }
+      /* S1450 · note 310 ⑤ — la carte du bot qui s'envole de sa main vers le centre. */
+      .envol-carte { position: fixed; z-index: var(--z-zoom); pointer-events: none; border-radius: 10px; overflow: hidden;
+        background: #1a1410; display: flex; flex-direction: column; justify-content: flex-end; }
+      .envol-carte img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .envol-carte .envol-nom { position: relative; padding: 6px 8px; font-family: var(--display); font-size: 15px;
+        color: #f4eddc; background: linear-gradient(transparent, rgba(0, 0, 0, .85)); text-align: center; }
       /*
        * ⛑ S368 — LA CARTE RETENUE POUR LA DÉFAUSSE (note ㉞ ①). Elle se lève
        * comme au survol, mais **elle y reste** : c'est un état, pas un
@@ -1762,6 +1828,29 @@
       /* S1437 · note 286 ⑪ — la fin en deux écrans : GAME (le podium) · REWARDS. */
       .fp1 .cache { display: none !important; }
       .fp1-onglets { display: flex; justify-content: center; gap: 14px; margin: 2px 0 10px; }
+      /* S1450 · note 310 D — GAME centré ; l'onglet BOUNTY WALL : les sept esprits et leurs barres qui montent. */
+      .fp1-heros { justify-content: center; }
+      .fin-mur-vue { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; max-width: 1200px; margin: 6px auto 0; }
+      .fin-mur-vue.cache { display: none; }
+      .fmv-esprit { display: flex; gap: 14px; align-items: flex-start; padding: 10px 12px; border-left: 3px solid var(--teinte);
+        background: linear-gradient(90deg, color-mix(in srgb, var(--teinte) 14%, transparent), transparent 70%); }
+      .fmv-esprit.immobile { opacity: .45; }
+      .fmv-visage { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 2px var(--teinte); }
+      .fmv-corps { flex: 1 1 auto; min-width: 0; }
+      .fmv-nom { font-family: var(--display); font-size: 18px; letter-spacing: .08em; color: var(--teinte); }
+      .fmv-plus { color: #f4eddc; font-size: 15px; }
+      .fmv-rien { font-family: var(--mono); font-size: 12px; color: var(--stock-dim); margin-top: 4px; }
+      .fmv-defi { margin-top: 6px; }
+      .fmv-defi-nom { font-family: var(--mono); font-size: 12px; color: #e0d8c8; }
+      .fmv-barre { position: relative; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .1); overflow: hidden; margin-top: 3px; }
+      .fmv-barre > i { position: absolute; top: 0; bottom: 0; left: 0; display: block; }
+      .fmv-acquis { background: color-mix(in srgb, var(--teinte) 55%, #000); }
+      .fmv-pris { width: 0; background: #fff3c4; box-shadow: 0 0 8px #fff3c4;
+        animation: fmv-monte 1.2s ease-out .3s forwards, fmv-clignote .7s ease-in-out 1.5s 4 alternate; }
+      .fmv-debloque { margin-top: 3px; font-family: var(--display); font-size: 14px; letter-spacing: .06em; color: #f0d09e; }
+      @keyframes fmv-monte { from { width: 0; } to { width: var(--w, 0%); } }
+      @keyframes fmv-clignote { from { opacity: 1; } to { opacity: .35; } }
+      @media (prefers-reduced-motion: reduce) { .fmv-pris { animation: none; width: var(--w, 0%); } }
       /* S1439 · note 293 ④ — « GAME / REWARDS pas assez visibles » : plus GROS et francs, l'actif PLEIN. */
       .fp1-onglets button { font-family: var(--display); font-weight: 900; font-size: 30px; letter-spacing: .16em;
         padding: 8px 40px; background: transparent; color: var(--stock-dim); border: 2px solid rgba(233,228,216,.45); cursor: pointer; }
@@ -5930,6 +6019,16 @@
       .plein-boite { background: var(--ink-2); border: 2px solid var(--rule); cursor: default;
                      max-width: 1100px; width: 100%; max-height: calc(var(--uvh) * 88); overflow-y: auto;
                      animation: monte .18s var(--pop); }
+      /* S1450 — l'apparition ne se rejoue pas quand la couche, gardée, est déplacée par un rendu. */
+      .plein.plein-pose, .plein.plein-pose > .plein-boite { animation: none; }
+      /* S1450 · note 310 ⑬ — la cloche d'une carte qui peut ouvrir une fenêtre : 🔔 sonne, 🔕 coupée. */
+      .handslot > .cloche { position: absolute; top: 6px; right: 6px; z-index: 4; width: 28px; height: 28px; padding: 0;
+        border-radius: 50%; background: rgba(10, 8, 6, .82); border: 1px solid rgba(233, 228, 216, .45);
+        font-size: 15px; line-height: 26px; text-align: center; cursor: pointer; }
+      .handslot > .cloche:hover { border-color: #f4eddc; }
+      .handslot > .cloche.muette { border-color: #a3231d; box-shadow: 0 0 0 1px #a3231d; }
+      /* S1450 — le GAME LOG ne se recentre pas quand une ligne arrive : sa boîte a une hauteur fixe. */
+      .plein-boite:has(.journal-en-grand) { height: calc(var(--uvh) * 88); }
       @keyframes monte { from { transform: translateY(14px) scale(.985); opacity: 0 }
                          to   { transform: none; opacity: 1 } }
       .plein-tete { display: flex; align-items: baseline; gap: 16px; padding: 12px 16px;
@@ -9973,6 +10072,20 @@
                           padding: 20px; gap: 12px;
                           align-items: center; justify-content: flex-start; }
       .fin-run.fr-plein > * { max-width: 1100px; width: 100%; }
+      /* S1450 · note 310 ⑦ — le récit de la sortie avant l'écran de fin du run. */
+      .fin-recit { position: fixed; inset: 0; z-index: var(--z-zoom); background: rgba(8, 7, 6, .94);
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+      .fin-recit-tete { font-family: var(--display); letter-spacing: .3em; font-size: 16px; color: var(--stock-dim); }
+      .fin-recit-ligne { font-family: var(--display); font-size: 34px; letter-spacing: .04em; color: #f4eddc;
+        opacity: 0; animation: fin-recit-entre .5s ease-out both; }
+      .fin-recit-dernier { color: #ff6a55; }
+      .fin-recit-evicted { text-align: center; opacity: 0; animation: fin-recit-tampon .55s cubic-bezier(.2, 1.6, .4, 1) both; }
+      .fin-recit-ban { font-family: var(--display); font-weight: 900; font-size: 120px; line-height: 1; color: #c8281e;
+        letter-spacing: .06em; text-shadow: 0 0 30px rgba(200, 40, 30, .55); transform: rotate(-4deg); }
+      .fin-recit-phrase { margin-top: 16px; font-family: var(--mono); font-size: 20px; color: #f4eddc; max-width: 900px; }
+      .fin-recit-suite { margin-top: 26px; }
+      @keyframes fin-recit-entre { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+      @keyframes fin-recit-tampon { from { opacity: 0; transform: scale(1.6); } to { opacity: 1; transform: none; } }
       .fr-titre { text-align: center; padding: 6px 0 2px; }
       /*
        * ⛑⛑ S680 — LA SORTIE DE LA FRONTIÈRE, note 82 ⑤. Croze : *« START RUN 2
@@ -12535,6 +12648,17 @@
       .vd-journal .vdj-pv { display: inline-block; width: 60px; height: 6px; margin-left: 10px; vertical-align: middle;
         background: rgb(255 255 255 / .12); border-radius: 3px; overflow: hidden; }
       .vd-journal .vdj-pv-plein { display: block; height: 100%; background: #c43a3a; }
+      /* S1450 · note 310 C — la LOG v3 (`docs/LOG.md`) : une ligne = un résultat, le nombre en gras à la couleur de son école. */
+      :is(.vd-journal, .col-journal) .vdj-v3 { display: flex; align-items: center; gap: 0; padding: 3px 0; font-family: var(--mono);
+        font-size: calc(13px * var(--lisible, 1)); line-height: 1.45; color: #e0d8c8; }
+      :is(.vd-journal, .col-journal) .vdj-v3.vdj-dans-un-tour { padding-left: 14px; }
+      :is(.vd-journal, .col-journal) .vdj-v3.vdj-combat { margin-left: 32px; }
+      :is(.vd-journal, .col-journal) .vdj-v3 .vdj-texte { flex: 1 1 auto; min-width: 0; }
+      :is(.vd-journal, .col-journal) .vdj-v3 .vdj-nombre { font-weight: 800; color: #f4eddc; }
+      :is(.vd-journal, .col-journal) .vdj-v3.vdj-borne { justify-content: center; color: var(--stock); letter-spacing: .12em; padding: 8px 0; }
+      .col-journal .vdj-v3 .vdj-vignette { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 6px; }
+      .col-journal .vdj-v3 .vdj-ico { display: inline-block; width: 18px; text-align: center; margin-right: 4px; opacity: .75; }
+      .col-journal .vdj-v3.vdj-combat, .col-journal .vdj-v3.vdj-dans-un-tour { margin-left: 0; padding-left: 0; }
       /* S1447 · note 306 ④ — le jet partagé : le lanceur en tête, tous les dés, la sélection entourée au résultat. */
       .dicelayer.jet-partage .jp-tete { display: flex; align-items: center; gap: 18px; justify-content: center; margin-bottom: 14px; }
       .dicelayer.jet-partage .jp-portrait { width: 120px; height: 120px; object-fit: cover; object-position: 50% 25%;
@@ -13189,6 +13313,14 @@
         border-bottom-color: var(--ember); background: rgba(255,255,255,.07);
       }
       .nouvelle-table .ntt-onglet-cible.contre-moi { animation: noc-braise .9s ease-in-out infinite alternate; }
+      /* S1450 · note 310 ⑫ — la barre de l'onglet OUVERT, épaisse et belle ; les autres : le trait fin, en rouge. */
+      .nouvelle-table .ntt-onglet-cible.noc-mob .noc-barre > i { background: #c43a3a; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible.on .noc-barre { height: 12px; border-radius: 6px; background: rgba(0,0,0,.55);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible.on .noc-barre > i { border-radius: 6px;
+        background: linear-gradient(180deg, #ff6a55 0%, #c8281e 55%, #8f1610 100%); box-shadow: 0 0 10px rgba(255,90,70,.55); transition: width .4s ease; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible.on .noc-pv { font-size: calc(15px * var(--lisible, 1)); font-weight: 700; color: #f4eddc; }
+      .nouvelle-table .ntt-onglet-cible .noc-etat { grid-column: 2; font-size: calc(10px * var(--lisible, 1)); letter-spacing: .08em; }
       @keyframes noc-braise {
         from { box-shadow: 0 0 0 1px var(--ember); }
         to   { box-shadow: 0 0 0 3px var(--ember), 0 0 14px var(--ember); }
@@ -13696,11 +13828,14 @@
     <!-- S1370 · note 206 : la fin de partie éveille le Neutre, décompte les offrandes et tire le drop. -->
     <script src="/titre/bounty_wall.js"></script>
     <script src="/titre/tickets.js"></script>
+    <!-- S1450 - note 311 (1) : un fond au hasard a chaque partie, dans le lot de son mode. -->
+    <script src="/titre/fonds_modes.js"></script>
+    <script>window.LLFonds && window.LLFonds.poseLeFondDeLaPartie();</script>
     <!-- S1386 · V-T5 (note 213 ③) : les deux fiches en plein écran, au select comme au Vault. -->
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BBFnrrKG.js"></script>
+    <script type="module" crossorigin src="./assets/index-CmKLKtwN.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

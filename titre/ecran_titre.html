@@ -1034,7 +1034,7 @@
 .pf-compte .pf-btn{padding:4px 8px;font-size:11px;letter-spacing:.04em}
 .pf-btn:hover{border-color:#fff;background:rgba(255,255,255,.07)}
 .pf-dit{margin-top:8px;font-size:12px;opacity:.75;min-height:1em}
-</style><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/foils.js"></script><script src="/titre/bannieres.js"></script>
+</style><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/foils.js"></script><script src="/titre/bannieres.js"></script>
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 
@@ -2036,8 +2036,11 @@ function set(v,arg){
        meme cle de profil que le jeu (`langue.js`). Effet immediat. */
     if(arg==='Options') peinsLaLangue();
   }
+  /* S1450 - note 311 (1) : la page BOUNTY WALL tire sa texture a chaque ouverture (`fonds_modes.js`, lot `bounty`). */
+  if(v==='league' && window.LLFonds) FOND_DU_MUR = window.LLFonds.tire('bounty', PANNEAU.bounty);
   poseLeFondDuPanneau();
 }
+var FOND_DU_MUR = null;
 /* (1) note 140 — UN FOND PAR PANNEAU, et `#floorbg` est le seul endroit ou
    il se pose. *« les panneaux prennent un fond chacun : BOUNTY WALL = 01,
    VAULT = 14, DICE_SET = 17, OPTIONS = 11, character select = ui/floorblood
@@ -2052,7 +2055,7 @@ function set(v,arg){
    retire une source qu'apres avoir vu l'autre servir.* */
 let ongletDuVault = 'chars';
 function fondDuPanneau(){
-  if (view === 'league') return PANNEAU.bounty;
+  if (view === 'league') return FOND_DU_MUR || PANNEAU.bounty;
   if (view === 'stub' || view === 'profil') return PANNEAU.options;
   if (view === 'collection') {
     if (ongletDuVault === 'dice') return PANNEAU.dice_set;
@@ -3089,7 +3092,10 @@ function etatVault(kind,i){
   }
   return {e:'buy'};
 }
-const RANG_ETAT={buy:0,ex:1,season:2,eq:3,own:4};
+/* S1450 - note 315 (2) : Croze, « quand on selectionne des des dans le vault ca tp les des sur la selection ou on etait ». L'equipe
+   (eq) etait trie AVANT les possedes : equiper un article le faisait sauter a la place de l'ancien. Meme rang que own :
+   le tri est stable, aucun article ne bouge, le cadre va sur l'article clique (persos, des, dos, curseurs). */
+const RANG_ETAT={buy:0,ex:1,season:2,eq:4,own:4};
 const trieParEtat=(kind,liste)=>liste.map((x,i)=>[x,i]).sort((a,b)=>RANG_ETAT[etatVault(kind,a[1]).e]-RANG_ETAT[etatVault(kind,b[1]).e]);
 const classeVault=st=>'cell'+(st.e==='ex'||st.e==='season'?' locked':'')+(st.e==='eq'?' eq':'');
 function badgeVault(st){
@@ -5492,7 +5498,18 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         var droite = document.createElement('div');
         droite.className = 'rgs serre';
         t.rangs.slice(0, 15).forEach(function (g) { gauche.appendChild(rang(g)); });
-        t.rangs.slice(15).forEach(function (g) { droite.appendChild(rang(g)); });
+        /* S1450 - note 311 (2), 2e remontee : SEE ALL montrait les paliers Pro Tour (16-21) en clair,
+           et le 16 (« Take · DPT tickets ») se PRENAIT. Endormis comme l'onglet de la couronne :
+           gris, sans bouton, « The Pro Tour opens soon. » au survol. Les defis (22-27) restent. */
+        t.rangs.slice(15).forEach(function (g, i) {
+          var cr = rang(g);
+          if (window.LL_DPT_ENDORMI && (t.rangs.length !== 27 || i < 6)) {
+            cr.classList.add('dpt-dort'); cr.title = window.LL_DPT_DORT;
+            cr.querySelectorAll('.achete').forEach(function (bt) { bt.remove(); });
+            cr.style.cssText += ';filter:grayscale(1);opacity:.4;cursor:not-allowed';
+          }
+          droite.appendChild(cr);
+        });
         rgs.className = 'rgs-donjon';
         rgs.appendChild(gauche);
         rgs.appendChild(droite);

@@ -34,6 +34,12 @@
 /* ─── LA PIERRE : le fond de tout le jeu ─────────────────────────────────────── */
 html, body { background: #0b0b0b var(--da-pierre) 0 0 / 768px repeat; }
 
+/* S1450 - note 311 (1) : LE FOND DE LA PARTIE, tire dans le lot de son mode (`fonds_modes.js`).
+   Voile a 74 % : la lisibilite prime (note 244 (d)) - la texture se voile, jamais le texte ne s eclaircit. */
+html.da-fond-partie, html.da-fond-partie body {
+  background: linear-gradient(rgba(8,7,6,.74), rgba(8,7,6,.74)), #0b0b0b var(--da-fond-partie) center / cover no-repeat fixed;
+}
+
 /* ─── LE JEU (index.html) ─────────────────────────────────────────────────────── */
 
 /* Regarder un autre joueur (note 244 ⓒ, 243 ⑤) : la pierre, teintée à la couleur de sa
