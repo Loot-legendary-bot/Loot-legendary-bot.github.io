@@ -1,0 +1,56 @@
+{
+ "famille": "uni",
+ "couleurs": {
+  "corps": [
+   "#ece7dc"
+  ],
+  "veines": null,
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#c4520c"
+ },
+ "fini": {
+  "rugosite": 0.6,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.0,
+  "densite": 0.0,
+  "densite_paillettes": 0.0,
+  "rugosite_inclusions": 0.0
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.7
+ },
+ "forme": {
+  "biseau": 0.6,
+  "arrondi": 0.0
+ },
+ "usure": {
+  "eclats": 0.85,
+  "fissures": 0.12,
+  "couleur_eclat": "#b8a98e",
+  "couleur_fissure": "#7d6c55"
+ },
+ "bave": {
+  "couverture": 0.32,
+  "rugosite": 0.03,
+  "coulure": 0.5,
+  "morsure": 1.0,
+  "creux": 0.5,
+  "ronge": 0.35,
+  "gouttes": 1.0,
+  "flaque": 0.75
+ },
+ "graine": 6,
+ "notes": "DE RECRACHE PAR LA DICE-EATING GOOSE : plastique blanc d oie, chiffres orange bec, morsures crasseuses la ou le bec a serre, bave luisante (cle bave). Couleurs CHOISIES."
+}
