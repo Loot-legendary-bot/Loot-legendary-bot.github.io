@@ -1481,6 +1481,10 @@ const DICE=[
   /* note 275 (4) - `bones` refait (note 272 (6)) a sa vitrine : il ENTRE au rayon,
      possede d'office et equipe par defaut (la partie le prend quand rien n'est equipe :
      main.ts::PEAU_PAR_DEFAUT). La raison d'hier (« aucune vitrine forgee ») est perimee. */
+  /* note 317 (1)(3) - les deux des premium (forge 6b7d428, fusion a1d8e29) : Rare, 5 000 au Vault,
+     verrouilles par leur palier du mur (Progress 4 et 5) - l exploit d abord, l achat ensuite. */
+  ["Goose-chewed dice","plastique_machouille",0],
+  ["Half-drunk potion dice","potion_jaune_rose",0],
   ["Bones dice","bones",1]];
 /* note 275 (4) - les peaux DE DEPART : a toi sans achat, sous leur propre titre. */
 const PEAUX_DE_DEPART=['bones'];
@@ -1497,7 +1501,8 @@ const PRIX_DU_PALIER={Common:1000,Uncommon:2000,Rare:5000};
 const PALIER_DES={rose_opaque:'Common',jaune_opaque:'Common',noir_vert_acide:'Common',
   jaune_translucide:'Uncommon',vert_clair_marbre:'Uncommon',granite_bleu:'Uncommon',cristal_mauve:'Uncommon',
   galaxie_vert_violet:'Rare',bleu_givre:'Rare',rouge_translucide:'Rare',eclaboussures_sang:'Rare',
-  nacre_turquoise_violet:'Rare',nacre_vert_or:'Rare',nacre_bleu_acier:'Rare',nacre_orange_argent:'Rare'};
+  nacre_turquoise_violet:'Rare',nacre_vert_or:'Rare',nacre_bleu_acier:'Rare',nacre_orange_argent:'Rare',
+  plastique_machouille:'Rare',potion_jaune_rose:'Rare'};   /* note 317 (3) : 5 000 */
 const prixDuDossier=d=>PEAUX_VENTE_LIBRE[d]!==undefined?PEAUX_VENTE_LIBRE[d]:PRIX_DU_PALIER[PALIER_DES[d]||'Uncommon'];
 /* MONNAIE.md 3 : une peau de des se paie 640 dents choisie, 480 en ticket
    random. Chiffres de PROPOSITION du classeur - Croze les corrige d'un mot,
@@ -2902,7 +2907,8 @@ function inventaire(){
 /* note 271 (3), MONNAIE 22 - l'onglet BLOOD est MASQUE (« on oublie pour l'instant ») :
    le rayon reste ecrit plus bas, il revient en remettant ['Blood','blood'] dans TABS. */
 /* S1431 - note 272 (5) : l'onglet INVENTORY, a part, en cases de RPG : ce que j'ai (consommables, possedes). */
-const TABS=[['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Charms','tick'],['Inventory','inv']];
+/* note 328 ② (Croze, 19/10) : le premier rayon est l'inventaire, et il s'appelle MY VAULT ; le reste = la boutique. */
+const TABS=[['MY VAULT','inv'],['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Charms','tick']];
 /* S1418 - note 239 (3), MONNAIE.md 10 - LE RAYON BLOOD : les quatre rayons du Sang et
    leurs prix. Le Sang se COMPTE, rien ne se vend tant que Steam n'est pas la : la
    vitrine se lit, aucun bouton n'achete. [nom, icone, prix, ce que c'est]. */
@@ -2911,7 +2917,7 @@ const BLOOD=[
   ['Legendary card backs','dos','300','Card backs beyond the Bounty Wall ones. The Alt Legendary backs stay in teeth.'],
   ['Season pass','dpl','1,000','The Dungeon Pro Tour season track: 20 cosmetic rewards earned by playing ranked. The free track exists; the pass doubles its steps.'],
   ['Titles, name colours, profile frames','perso','100–150','What shows in the Dungeon Pro Tour ranking.']];
-let tab='chars';
+let tab='inv';
 const tabsEl=document.getElementById('tabs'), grid=document.getElementById('grid');
 TABS.forEach(([label,key],i)=>{
   const b=document.createElement('button');
@@ -3673,10 +3679,10 @@ document.addEventListener('keydown',e=>{
    de transition à jouer. */
 const ongletDOuverture=(()=>{
   const o=(new URLSearchParams(window.location.search).get('onglet')||'').trim();
-  if(o==='') return 'chars';
+  if(o==='') return 'inv';
   if(!TABS.some(([,k])=>k===o)){
     console.log('?onglet='+o+' : inconnu. Les rayons sont '+TABS.map(([,k])=>k).join(', '));
-    return 'chars';
+    return 'inv';
   }
   return o;
 })();
@@ -5223,9 +5229,10 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     var rangs = t.rangs;
     if (donjon && t.rangs.length >= 22) {
       /* note 275 (7) : une 4e page, CHALLENGES (les cinq defis du Donjon + le Bout). */
-      var PAGES = t.rangs.length === 27
-        ? [['Progress', 0, 3], ['Exploration', 3, 15], ['Pro Tour', 15, 21], ['Challenges', 21, 27]]
-        : [['Progress', 0, 3], ['Exploration', 3, 15], ['Pro Tour', 15, t.rangs.length]];
+      /* note 317 ② (v4.1) : Progress a 5 rangs (les deux des premium) - Exploration 5-17, Pro Tour 17-23. */
+      var PAGES = t.rangs.length === 29
+        ? [['Progress', 0, 5], ['Exploration', 5, 17], ['Pro Tour', 17, 23], ['Challenges', 23, 29]]
+        : [['Progress', 0, 5], ['Exploration', 5, 17], ['Pro Tour', 17, t.rangs.length]];
       if (pageDonjon >= PAGES.length) pageDonjon = 0;
       if (window.LL_DPT_ENDORMI && PAGES[pageDonjon][0] === 'Pro Tour') pageDonjon = 0;
       var pg = document.createElement('nav');
@@ -5497,13 +5504,13 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         gauche.className = 'rgs serre';
         var droite = document.createElement('div');
         droite.className = 'rgs serre';
-        t.rangs.slice(0, 15).forEach(function (g) { gauche.appendChild(rang(g)); });
+        t.rangs.slice(0, 17).forEach(function (g) { gauche.appendChild(rang(g)); });   /* 317 ② : +2 */
         /* S1450 - note 311 (2), 2e remontee : SEE ALL montrait les paliers Pro Tour (16-21) en clair,
            et le 16 (« Take · DPT tickets ») se PRENAIT. Endormis comme l'onglet de la couronne :
            gris, sans bouton, « The Pro Tour opens soon. » au survol. Les defis (22-27) restent. */
-        t.rangs.slice(15).forEach(function (g, i) {
+        t.rangs.slice(17).forEach(function (g, i) {
           var cr = rang(g);
-          if (window.LL_DPT_ENDORMI && (t.rangs.length !== 27 || i < 6)) {
+          if (window.LL_DPT_ENDORMI && (t.rangs.length !== 29 || i < 6)) {
             cr.classList.add('dpt-dort'); cr.title = window.LL_DPT_DORT;
             cr.querySelectorAll('.achete').forEach(function (bt) { bt.remove(); });
             cr.style.cssText += ';filter:grayscale(1);opacity:.4;cursor:not-allowed';

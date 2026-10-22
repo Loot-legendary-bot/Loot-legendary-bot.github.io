@@ -289,6 +289,9 @@
       /* note 275 (3) : l'option choisie par l'hote, relayee a tous par le setup */
       idleTimer: setup.idleTimer !== false,
       players: setup.players,
+      /* note 306 F / 297 ② : les cosmetiques EQUIPES de chaque siege (le relais les publie dans
+         `seats[].equipped`, moteur 895) - la partie rend ceux du PROPRIETAIRE, jamais les miens. */
+      equipped: etat && Array.isArray(etat.seats) ? etat.seats.map(function (x) { return x && x.equipped ? x.equipped : null; }) : [],
       seat: moi ? moi.seat : null,
       hote: !!(moi && moi.host),
       /* le jeton de CET onglet : deux comptes peuvent jouer depuis un même navigateur */

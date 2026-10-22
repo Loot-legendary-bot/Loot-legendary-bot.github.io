@@ -1304,6 +1304,11 @@
         filter: drop-shadow(0 0 3px rgba(240, 208, 64, .55)); pointer-events: auto; }
       .nouvelle-table .nt-rond > .nt-eclair.vif { filter: drop-shadow(0 0 7px rgba(255, 220, 80, .95)); animation: nt-eclair-vif 1.1s ease-in-out infinite alternate; }
       .nouvelle-table .nt-rond > .nt-eclair.eteint { filter: grayscale(1); opacity: .28; }
+      /* note 328 ③ — le sceau : la lueur prête est de sang, plus d'or d'éclair ; brisé, il pâlit. */
+      .nouvelle-table .nt-rond > .nt-eclair.vif { filter: drop-shadow(0 0 7px rgba(200, 30, 30, .95)); }
+      .nt-eclair svg, .boule-sceau svg { display: block; }
+      .boule.boule-s.boule-sceau { background: transparent; border-color: transparent; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+      .boule.boule-s.boule-sceau.vide svg { opacity: .45; }
       @keyframes nt-eclair-vif { from { transform: scale(1); } to { transform: scale(1.18); } }
       .nouvelle-table .nt-rond > .nt-bulles { position: absolute; left: 50%; bottom: -7px; transform: translateX(-50%); z-index: 2;
         display: flex; gap: 4px; pointer-events: auto; }
@@ -1317,6 +1322,13 @@
       .bj-stats .etoile.etoile-compacte { position: absolute; top: 2px; right: 4px; width: 72px; height: 72px; margin: 0; padding: 0;
         display: block; cursor: help; }
       .bj-stats .etoile.etoile-compacte svg { width: 100%; height: 100%; }
+      /* note 328 ① — l'école choisie, écrite en petit blanc sous le radar. */
+      .etoile.etoile-compacte { position: relative; }
+      .etoile.etoile-compacte .etoile-choix-court {
+        position: absolute; left: 0; right: 0; bottom: -12px; text-align: center; white-space: nowrap;
+        font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); font-weight: 700;
+        letter-spacing: .12em; color: #fff;
+      }
       /* S1450 · note 310 ⑩ — mes bulles : grosses, l'éclair de la signature ; une bulle dépensée éclate. */
       .bj-gestes .ep-bulles .boule { width: 30px; height: 30px; font-size: 17px; line-height: 28px; }
       .bj-gestes .ep-bulles .boules { gap: 10px; }
@@ -13256,6 +13268,25 @@
         background: rgba(255,255,255,.07);
       }
       .nouvelle-table .ntt-onglet-cible.interdit { filter: grayscale(1); opacity: .4; }
+      /* note 322 ① — QUI AGIT : l'onglet de celui dont c'est le tour de combat, allumé ; les autres restent en retrait. */
+      .nouvelle-table .ntt-onglet-cible.agit { opacity: 1; border-color: #fff; box-shadow: 0 0 0 1px #fff, 0 0 16px rgba(255,255,255,.35); }
+      .nouvelle-table .ntt-onglet-cible .noc-agit {
+        grid-column: 1 / -1; font-family: var(--mono); font-size: calc(10px * var(--lisible, 1));
+        letter-spacing: .2em; color: #fff; text-align: left;
+      }
+      .nouvelle-table .nt-presence.nt-agit-combat .nt-rond { box-shadow: 0 0 0 3px #fff, 0 0 18px rgba(255,255,255,.55); border-radius: 50%; }
+      /* note 318 ① — l'éclat du bandeau : ce qu'un autre prend recouvre un instant sa miniature. */
+      .nouvelle-table .nt-presence .nt-eclat-glyphe {
+        position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; background: rgba(0,0,0,.78); font-size: 30px; line-height: 1;
+        animation: nt-eclat 1.2s ease-out both;
+      }
+      @keyframes nt-eclat { 0% { opacity: 0; transform: scale(.6); } 15% { opacity: 1; transform: scale(1.08); } 80% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .nouvelle-table .nt-presence .nt-eclat-glyphe { animation: none; } }
+      .nouvelle-table .nt-presence .nt-agit-mot {
+        display: block; font-family: var(--mono); font-size: calc(10px * var(--lisible, 1));
+        letter-spacing: .2em; color: #fff; text-align: center; white-space: nowrap;
+      }
       .nouvelle-table .ntt-onglet-cible .noc-ico {
         width: 40px; height: 40px; flex: 0 0 40px; border-radius: 50%; object-fit: cover;
         border: 2px solid var(--siege, var(--stock));
@@ -13835,7 +13866,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CiVZH6_d.js"></script>
+    <script type="module" crossorigin src="./assets/index-CWXY3aA5.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

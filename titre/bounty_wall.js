@@ -185,6 +185,10 @@
       rg('kills_joueurs', 'Player kills', [d(15, 'eclaboussures_sang', 'Blood dice')]),
       rg('signatures_max_partie', 'Signatures in a single game', [p(8, 'the_manbearpig', 'The ManBearPig')]),
       rg('serie_victoires_max', 'Wins in a row', [p(5, 'the_tamarin', 'The Tamarin')]),
+      /* note 317 ② (BOUNTY_WALL_DEFIS v4.1) : les deux des premium, Progress 4 et 5 ; l'Exploration
+         passe en 6-17 et le Pro Tour en 18-23 (+2) - les dents prises sont re-cles par migreCles41. */
+      rg('oies_jouees', 'Dice-Eating Geese played', [d(10, 'plastique_machouille', 'Goose-chewed dice')]),
+      rg('consommables', 'Consumables used', [d(120, 'potion_jaune_rose', 'Half-drunk potion dice')]),
       /* Exploration (4-15) : seuils et compteurs lus dans le CODEX */
       cx(0), cx(1), cx(2), cx(3), cx(4), cx(5), cx(6), cx(7), cx(8), cx(9), cx(10), cx(11),
       /* Dungeon Pro Tour */
@@ -363,6 +367,22 @@
     return typeof v === 'number' && isFinite(v) && v > 0 ? Math.floor(v) : 0;
   }
 
+  /* note 317 ② — v4.1 insere deux rangs au Donjon apres le 3e (index 2) : une dent prise sous
+     `neutre:<n>` avec n >= 3 appartient desormais au rang n + 2. Une seule fois (`mur.cles41`) ;
+     `pourLire` rend la liste sans toucher au profil, `migreCles41` la reecrit avant toute prise. */
+  function remapCles41(liste) {
+    return liste.map(function (k) {
+      var m = /^neutre:(\d+)$/.exec(String(k));
+      return m && Number(m[1]) >= 3 ? 'neutre:' + (Number(m[1]) + 2) : k;
+    });
+  }
+  function migreCles41(p) {
+    if (typeof p.mur !== 'object' || p.mur === null) { p.mur = {}; }
+    if (p.mur.cles41 === true) { return; }
+    if (Array.isArray(p.mur.pris)) { p.mur.pris = remapCles41(p.mur.pris); }
+    p.mur.cles41 = true;
+  }
+
   /* `offertes` : les peaux que le registre donne d'office (`offerte`). Chaque
      nœud : `lock` (en route), `pret` (seuil atteint, pas acheté), `a_toi`. */
   function etat(profil, offertes) {
@@ -373,6 +393,7 @@
     var dos = Array.isArray(pp.dos) ? pp.dos : [];
     var off = Array.isArray(offertes) ? offertes : [];
     var pris = (profil && profil.mur && Array.isArray(profil.mur.pris)) ? profil.mur.pris : [];
+    if (!(profil && profil.mur && profil.mur.cles41 === true)) { pris = remapCles41(pris); }
     /* BW-5 : l'Exploration se lit dans le CODEX (chargé à part : sans lui, tout est « en route ») */
     var C = window.LLCodex && typeof window.LLCodex.noeuds === 'function' && window.LLCodex.pret && window.LLCodex.pret()
       ? window.LLCodex.noeuds() : null;
@@ -415,6 +436,7 @@
     var fait = false;
     window.LLProfil.modifie(function (p) {
       if (typeof p.mur !== 'object' || p.mur === null) { p.mur = {}; }
+      migreCles41(p);
       if (n.t) {
         if (!Array.isArray(p.mur.pris)) { p.mur.pris = []; }
         if (p.mur.pris.indexOf(n.cle) >= 0) { return; }
