@@ -12233,6 +12233,67 @@
       .nouvelle-table .nt-pa-quetes { left: calc(100% - 10px); top: 58%; transform: translateY(-50%); }
       .nouvelle-table .nt-pa-gear { left: 50%; top: calc(100% - 8px); transform: translateX(-50%); }
       html.table-v2 .nouvelle-table .nt-presence > .nt-qui { margin-top: 10px; font-weight: 700; letter-spacing: .1em; }
+      /* S1453 · note 330 ⑤ (P3) — le TP en éventail : les cartes de tuile en grand, au centre, ma salle derrière. */
+      .nouvelle-table .tv2-eventail {
+        display: flex; justify-content: center; align-items: flex-end; padding: 18px 0 8px; min-height: 0;
+      }
+      .nouvelle-table .tv2-tp-carte {
+        position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px;
+        width: min(220px, 19%); margin: 0 -10px; padding: 0; background: none; border: 0; cursor: pointer;
+        font: inherit; color: #EDE3CC; text-transform: none; letter-spacing: normal;
+        transform-origin: 50% 120%;
+        transform: rotate(calc(var(--i, 0) * 5deg)) translateY(calc(var(--i, 0) * var(--i, 0) * 6px));
+        transition: transform .15s ease-out, filter .15s;
+        filter: drop-shadow(0 10px 18px rgba(0,0,0,.75));
+      }
+      .nouvelle-table .tv2-tp-carte > :first-child { width: 100%; }
+      .nouvelle-table .tv2-tp-carte img { display: block; width: 100%; height: auto; }
+      .nouvelle-table .tv2-tp-n { position: absolute; left: 6px; top: 4px; color: #F2C46B; font-weight: 700;
+        text-shadow: 0 1px 2px #000; font-size: calc(18px * var(--lisible, 1)); }
+      .nouvelle-table .tv2-tp-nom { font-size: calc(15px * var(--lisible, 1)); text-align: center; }
+      .nouvelle-table .tv2-tp-carte:not(:disabled):hover, .nouvelle-table .tv2-tp-carte:not(:disabled):focus-visible,
+      .nouvelle-table .tv2-tp-carte.choisie {
+        z-index: 2; outline: none; color: #F2C46B;
+        transform: rotate(0deg) translateY(-18px) scale(1.06);
+        filter: drop-shadow(0 0 10px rgba(242,196,107,.65)) drop-shadow(0 14px 22px rgba(0,0,0,.8));
+      }
+      .nouvelle-table .tv2-tp-carte:disabled { filter: grayscale(1) brightness(.5); cursor: default; }
+      /* S1453 · note 330 ⑥ (P3) + addenda 21/10 — LE SEUIL, forme A : un bloc à CADRE NOIR par joueur dans
+         ma salle, posé au-dessus de la ligne de la main (la main = le quart bas, elle reste au-dessus de
+         tout), à droite de la scène. 1 autre : bloc ≤ 30 % de la hauteur ; 2 à 4 : rangée de blocs
+         égaux, celui dont c'est le tour avance (+20 %, plus clair) ; plaque courte, ses dos au survol. */
+      .nouvelle-table .ntt-table.tv2 .ntt-axe { position: relative; align-self: stretch; }
+      .nouvelle-table .ntt-axe.avec-seuil > .tv2-liste { width: min(calc(100% - var(--seuil-l, 30vh)), 900px); margin-right: auto; }
+      .nouvelle-table .tv2-seuil {
+        position: absolute; right: 8px; bottom: calc(25vh + 10px); z-index: 4;
+        display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 14px;
+      }
+      .nouvelle-table .tv2-seuil-bloc {
+        --seuil-w: 11vh; width: var(--seuil-w); display: flex; flex-direction: column;
+        background: #0b0a09; border: 3px solid #000; box-shadow: 0 12px 30px rgba(0,0,0,.85);
+        transform-origin: 50% 100%; transition: transform .2s ease-out, filter .2s; filter: brightness(.82);
+      }
+      .nouvelle-table .tv2-seuil.n1 .tv2-seuil-bloc { --seuil-w: 14vh; filter: none; }
+      .nouvelle-table .tv2-seuil-bloc.agit { transform: scale(1.2); filter: brightness(1.08); z-index: 1; }
+      .nouvelle-table .tv2-seuil-bloc.mort { filter: grayscale(1) brightness(.7); }
+      .nouvelle-table .tv2-seuil-bloc.avance { translate: -12px 0; filter: brightness(1.15); }
+      .nouvelle-table .tv2-seuil-bloc.entre { animation: tv2-seuil-entre 400ms ease-out both; }
+      @keyframes tv2-seuil-entre { from { opacity: 0; translate: 40px 0; } to { opacity: 1; translate: 0 0; } }
+      @media (prefers-reduced-motion: reduce) { .nouvelle-table .tv2-seuil-bloc.entre { animation: none; } }
+      .nouvelle-table .tv2-seuil-portrait { display: block; width: 100%; aspect-ratio: 3 / 5; object-fit: cover; object-position: 52% 30%; }
+      .nouvelle-table .tv2-seuil-plaque { padding: 5px 7px 7px; display: flex; flex-direction: column; gap: 3px; }
+      .nouvelle-table .tv2-seuil-nom {
+        font-family: var(--mono); font-weight: 700; letter-spacing: .1em; color: var(--siege, #EDE3CC);
+        font-size: calc(11px * var(--lisible, 1)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .nouvelle-table .tv2-seuil-pv { height: 6px; background: #2a0d0b; border: 1px solid #000; }
+      .nouvelle-table .tv2-seuil-pv-plein { display: block; height: 100%; background: #b3201a; }
+      .nouvelle-table .tv2-seuil-pv-nb { font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); color: #EDE3CC; text-align: right; }
+      .nouvelle-table .tv2-seuil-dos { display: flex; align-items: center; gap: 3px; }
+      .nouvelle-table .tv2-seuil-dos img { width: 18%; aspect-ratio: 5 / 7; object-fit: cover; border: 1px solid #000; }
+      .nouvelle-table .tv2-seuil-main { margin-left: 4px; font-family: var(--mono); font-size: calc(9px * var(--lisible, 1)); color: var(--stock-dim); }
+      .nouvelle-table .tv2-seuil:not(.n1) .tv2-seuil-dos { display: none; }
+      .nouvelle-table .tv2-seuil:not(.n1) .tv2-seuil-bloc:hover .tv2-seuil-dos { display: flex; }
       .nouvelle-table .cj2-zone {
         grid-column: 3; max-height: 540px; overflow: hidden; min-width: 0;
         border: 1px solid var(--rule); background: rgb(0 0 0 / .35); padding: 8px 10px;
@@ -13943,7 +14004,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-C_mMKIS4.js"></script>
+    <script type="module" crossorigin src="./assets/index-pGcJyUYJ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
