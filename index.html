@@ -12207,6 +12207,32 @@
       .nouvelle-table .tv2-vignette-nom { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .1em; color: var(--stock); }
       @keyframes tv2-vignette { from { opacity: 0; transform: scale(1.5) translateX(-30%); } to { opacity: 1; transform: none; } }
       @media (prefers-reduced-motion: reduce) { .nouvelle-table .tv2-vignette { animation: none; } }
+      /* S1453 · note 330, addendum 21/10 quater — (2) LA TUILE RÉDUITE SANS CADRE : la vignette sort du
+         cadre du journal et se pose AU-DESSUS de lui, dans la même colonne ; le journal se réduit, jamais
+         elle (④ bis). (4) LES POLICES DU BANDEAU DU HAUT ≈ +15 % : sièges, barre RUN / TURN / LOOT,
+         DUNGEON / LOG / FOLLOW (1,15 × 1,15). TABLE v2 seulement. */
+      .nouvelle-table .tv2-colonne {
+        grid-column: 3; display: flex; flex-direction: column; gap: 10px;
+        min-width: 0; min-height: 0; max-height: 540px;
+      }
+      .nouvelle-table .tv2-colonne > .cj2-zone { grid-column: auto; flex: 1 1 auto; min-height: 0; }
+      html.table-v2 .nouvelle-table .nt-presences, html.table-v2 .nouvelle-table .nt-entete-tour,
+      html.table-v2 .nouvelle-table .nt-suivre, html.table-v2 .nouvelle-table .nt-journal-bouton,
+      html.table-v2 .nouvelle-table .nt-donjon-bouton { --lisible: 1.3225; }
+      /* S1453 · addendum 21/10 quinquies — les trois compteurs en PASTILLES autour du cercle (maquette
+         12_*_sieges) : ◆ points à gauche, ⚑ quêtes à droite, ⚔ gear score en bas ; le nom seul dessous. */
+      .nouvelle-table .nt-pastille {
+        position: absolute; z-index: 3; display: inline-flex; align-items: center; gap: 3px;
+        padding: 1px 6px; border-radius: 10px; background: rgba(0,0,0,.86); border: 1px solid var(--stock-dim);
+        font-family: var(--mono); font-size: calc(10px * var(--lisible, 1)); line-height: 1.35; color: var(--stock);
+        white-space: nowrap; cursor: help;
+      }
+      .nouvelle-table .nt-pa-glyphe { font-size: .9em; }
+      .nouvelle-table .nt-pa-points .nt-pa-glyphe { color: #F2C46B; }
+      .nouvelle-table .nt-pa-points { right: calc(100% - 10px); top: 58%; transform: translateY(-50%); }
+      .nouvelle-table .nt-pa-quetes { left: calc(100% - 10px); top: 58%; transform: translateY(-50%); }
+      .nouvelle-table .nt-pa-gear { left: 50%; top: calc(100% - 8px); transform: translateX(-50%); }
+      html.table-v2 .nouvelle-table .nt-presence > .nt-qui { margin-top: 10px; font-weight: 700; letter-spacing: .1em; }
       .nouvelle-table .cj2-zone {
         grid-column: 3; max-height: 540px; overflow: hidden; min-width: 0;
         border: 1px solid var(--rule); background: rgb(0 0 0 / .35); padding: 8px 10px;
@@ -13917,7 +13943,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B-QHCXSz.js"></script>
+    <script type="module" crossorigin src="./assets/index-C_mMKIS4.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

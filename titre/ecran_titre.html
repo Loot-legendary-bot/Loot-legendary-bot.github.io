@@ -4318,7 +4318,10 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   var TUTO_ENDORMI = true;
   var DORT = 'The scribe is still writing this one.';
   b.title = TUTO_ENDORMI ? DORT : 'A real game as the Guard, run by a dungeon master: he stops you on cards and walks you through every move.';
-  b.innerHTML = '<b>Tutorial</b><i>' + (TUTO_ENDORMI ? DORT : 'a game with a dungeon master') + '</i>' +
+  /* S1453 - note 325 ter (1) (nom tranche par Croze le 21/10) : la carte du tuto s'appelle
+     FIRST STEPS. Grisee comme avant ; les quatre runs nommes et « 160 teeth each » viennent
+     avec la v2 (moteur 241). */
+  b.innerHTML = '<b>FIRST STEPS</b><i>' + (TUTO_ENDORMI ? DORT : 'a game with a dungeon master') + '</i>' +
     (fini || TUTO_ENDORMI ? '' : '<span class="pastille">never played</span>');
   if (TUTO_ENDORMI) {
     b.setAttribute('aria-disabled', 'true');
