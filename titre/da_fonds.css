@@ -40,6 +40,25 @@ html.da-fond-partie, html.da-fond-partie body {
   background: linear-gradient(rgba(8,7,6,.74), rgba(8,7,6,.74)), #0b0b0b var(--da-fond-partie) center / cover no-repeat fixed;
 }
 
+/* note 330 ① (TABLE v2, P1) — LA SALLE DE MA TUILE derrière la table. Le mur du mode reste au canvas ;
+   la salle est une couche fixe au-dessus de lui, sous tout le reste ; le body devient transparent
+   pour la laisser voir. Fondu 400 ms entre deux salles ; voile 55 % (`V` : 74 %, pour comparer) ;
+   une RUINS sans son master passe sous une teinte sang (en code, jamais en fichier). */
+html.da-salle body { background: transparent; }
+#ll-salle { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+html:not(.da-salle) #ll-salle { display: none; }
+#ll-salle .ll-salle-couche {
+  position: absolute; inset: 0; background: center / cover no-repeat;
+  animation: ll-salle-entre 400ms ease-out both;
+}
+#ll-salle .ll-salle-couche::after { content: ''; position: absolute; inset: 0; background: rgba(8,7,6,.55); transition: background 300ms ease; }
+html.da-salle-voile-lourd #ll-salle .ll-salle-couche::after { background: rgba(8,7,6,.74); }
+#ll-salle .ll-salle-couche.sang::before { content: ''; position: absolute; inset: 0; background: rgba(120,8,8,.42); mix-blend-mode: multiply; }
+#ll-salle .ll-salle-couche.sort { animation: ll-salle-sort 400ms ease-in both; }
+@keyframes ll-salle-entre { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ll-salle-sort { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { #ll-salle .ll-salle-couche, #ll-salle .ll-salle-couche.sort { animation: none; } }
+
 /* ─── LE JEU (index.html) ─────────────────────────────────────────────────────── */
 
 /* Regarder un autre joueur (note 244 ⓒ, 243 ⑤) : la pierre, teintée à la couleur de sa

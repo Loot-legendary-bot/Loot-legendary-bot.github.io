@@ -1178,6 +1178,20 @@
        */
       .handslot:hover + .handslot, .handslot:focus-within + .handslot { --pousse: 32px; }
       .handslot:has(+ .handslot:hover), .handslot:has(+ .handslot:focus-within) { --pousse: -32px; }
+      /* ═══ note 331 (TABLE v2) — LA MAIN v2 : au repos l'éventail reste plongé (l'image + le nom) ; la carte
+         survolée monte ENTIÈRE en grand au-dessus de l'éventail, lisible (texte de règle ≥ 16 px à 1080p : ×1,6, mesuré ~18 px),
+         sans pousser ses voisines. iPad : 1er tap = en grand (le survol), 2e tap = jouer. */
+      html.table-v2 .handslot:hover, html.table-v2 .handslot:focus-within { z-index: 80 !important; }
+      /* la CARTE seule grandit (son créneau garde ses boutons et son motif à leur taille, sous elle) */
+      html.table-v2 .handslot:hover > .card, html.table-v2 .handslot:focus-within > .card {
+        position: relative; z-index: 2; transform: scale(var(--zoom-main, 1.6)); transform-origin: 50% 100%;
+        transition: transform .18s var(--pop, ease-out);
+      }
+      @media (max-height: 900px) { html.table-v2 { --zoom-main: 1.45; } }
+      @media (max-height: 760px) { html.table-v2 { --zoom-main: 1.3; } }
+      html.table-v2 .handslot:hover + .handslot, html.table-v2 .handslot:focus-within + .handslot,
+      html.table-v2 .handslot:has(+ .handslot:hover), html.table-v2 .handslot:has(+ .handslot:focus-within) { --pousse: 0px; }
+      html.table-v2 .handslot:hover > .card, html.table-v2 .handslot:focus-within > .card { box-shadow: 0 18px 50px rgba(0,0,0,.85); }
       /*
        * ⛑ S1423 · HD-1 (note 248) — *« Ma main ne cache jamais mon gear ; un clic
        * ou H la range en bande fine, et elle revient quand j'en ai besoin. »*
@@ -12156,6 +12170,43 @@
       .nouvelle-table .ntt-pov-combat .ntt-pov-tete { margin-bottom: 6px; }
       /* ⛑ S1322 · CJ-2 — la zone des cartes jouées et des jets : la 3e colonne de la
          table (x 1572 → 1872), bornée au-dessus de la main (y 335 → 875). */
+      /* ═══ note 330 ② / 330 ter (TABLE v2) — LA LISTE de Baldur's Gate 3 : texte nu sur la salle, un dégradé
+         sombre doux pour la lisibilité, aucune boîte ; ivoire / gris sourd / or au survol, `»` dans la marge. */
+      .nouvelle-table .ntt-table.tv2 .ntt-axe { justify-content: flex-start; }
+      .nouvelle-table .tv2-liste {
+        align-self: stretch; width: min(100%, 900px); padding: 18px 28px 22px 34px;
+        background: radial-gradient(ellipse at 30% 50%, rgba(0,0,0,.62), rgba(0,0,0,.28) 70%, transparent);
+        font-family: Georgia, 'Times New Roman', serif; color: #EDE3CC; text-shadow: 0 1px 2px rgba(0,0,0,.9);
+      }
+      .nouvelle-table .tv2-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 18px; }
+      .nouvelle-table .tv2-titre { font-size: calc(24px * var(--lisible, 1)); letter-spacing: .04em; color: #F2C46B; }
+      .nouvelle-table .tv2-replique { font-size: calc(16px * var(--lisible, 1)); font-style: italic; text-align: right; max-width: 55%; }
+      .nouvelle-table .tv2-lignes { display: flex; flex-direction: column; gap: 14px; }
+      .nouvelle-table .tv2-ligne {
+        position: relative; display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 18px; align-items: baseline;
+        text-transform: none; letter-spacing: normal; min-height: 0; width: 100%;
+        background: none; border: 0; padding: 0 0 0 4px; margin: 0; text-align: left; cursor: pointer;
+        font: inherit; color: #EDE3CC; text-shadow: inherit;
+      }
+      .nouvelle-table .tv2-chevron { position: absolute; left: -26px; top: 0; color: #F2C46B; visibility: hidden; font-size: calc(22px * var(--lisible, 1)); }
+      .nouvelle-table .tv2-verbe { font-size: calc(24px * var(--lisible, 1)); font-weight: 700; letter-spacing: .03em; white-space: nowrap; }
+      .nouvelle-table .tv2-corps { font-size: calc(17px * var(--lisible, 1)); line-height: 1.4; }
+      .nouvelle-table .tv2-tag { color: #D29A5A; font-variant: small-caps; letter-spacing: .06em; }
+      .nouvelle-table .tv2-ligne:not(:disabled):hover, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible, .nouvelle-table .tv2-ligne.choisie { color: #F2C46B; outline: none; }
+      .nouvelle-table .tv2-ligne:not(:disabled):hover .tv2-chevron, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible .tv2-chevron, .nouvelle-table .tv2-ligne.choisie .tv2-chevron { visibility: visible; }
+      .nouvelle-table .tv2-ligne:not(:disabled):hover .tv2-tag, .nouvelle-table .tv2-ligne.choisie .tv2-tag { color: #F2C46B; }
+      .nouvelle-table .tv2-ligne:disabled { color: #6E6A62; text-shadow: none; cursor: default; }
+      .nouvelle-table .tv2-ligne:disabled .tv2-tag { color: #6E6A62; }
+      /* note 330 ④ / ④ bis — la vignette : au-dessus du journal, de sa largeur ; tap = la carte en grand. */
+      .nouvelle-table .tv2-vignette {
+        display: flex; flex-direction: column; align-items: center; gap: 4px; flex: none;
+        background: none; border: 0; padding: 0 0 6px; cursor: zoom-in;
+      }
+      .nouvelle-table .tv2-vignette.entre { animation: tv2-vignette 400ms ease-out both; }
+      .nouvelle-table .tv2-vignette img { display: block; width: 100%; max-height: 230px; object-fit: contain; }
+      .nouvelle-table .tv2-vignette-nom { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .1em; color: var(--stock); }
+      @keyframes tv2-vignette { from { opacity: 0; transform: scale(1.5) translateX(-30%); } to { opacity: 1; transform: none; } }
+      @media (prefers-reduced-motion: reduce) { .nouvelle-table .tv2-vignette { animation: none; } }
       .nouvelle-table .cj2-zone {
         grid-column: 3; max-height: 540px; overflow: hidden; min-width: 0;
         border: 1px solid var(--rule); background: rgb(0 0 0 / .35); padding: 8px 10px;
@@ -13866,7 +13917,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CWXY3aA5.js"></script>
+    <script type="module" crossorigin src="./assets/index-B-QHCXSz.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
