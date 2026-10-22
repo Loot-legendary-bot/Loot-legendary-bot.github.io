@@ -12277,6 +12277,28 @@
       .nouvelle-table .tv2-seuil-bloc.agit { transform: scale(1.2); filter: brightness(1.08); z-index: 1; }
       .nouvelle-table .tv2-seuil-bloc.mort { filter: grayscale(1) brightness(.7); }
       .nouvelle-table .tv2-seuil-bloc.avance { translate: -12px 0; filter: brightness(1.15); }
+      /* S1453 · note 330 ⑤ (P3) — « ça te vise » : la carte de la tuile de l'autre en grand, la question en sang. */
+      .nouvelle-table .tv2-liste.tv2-vise { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 16px; text-align: center; padding-top: 2vh; }
+      .nouvelle-table .tv2-vise-carte { flex: none; width: min(240px, 72%, 24vh); filter: drop-shadow(0 12px 24px rgba(0,0,0,.8)); }
+      .nouvelle-table .tv2-vise-carte img.cz-vignette { display: block; width: 100%; height: auto; }
+      .nouvelle-table .tv2-vise-carte .cz-zoom { display: none; }
+      /* S1453 · note 333 ① (TABLE v2) — la pioche : ma carte arrive de DOS (mon dos du Vault) et se retourne,
+         400 ms, après un court temps de dos. La face est dessous, le dos par-dessus, qui pivote et s'efface. */
+      .pioche-flip { position: relative; width: 168px; perspective: 900px; }
+      .pioche-flip > .pioche-flip-face { animation: pioche-face 200ms ease-out 900ms both; backface-visibility: hidden; }
+      .pioche-flip > .pioche-flip-dos {
+        position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 6px;
+        animation: pioche-dos 200ms ease-in 700ms both; backface-visibility: hidden;
+      }
+      @keyframes pioche-dos { from { transform: rotateY(0deg); opacity: 1; } 99% { opacity: 1; } to { transform: rotateY(90deg); opacity: 0; } }
+      @keyframes pioche-face { from { transform: rotateY(-90deg); } to { transform: rotateY(0deg); } }
+      .dicelayer.compacte .pioche-flip { width: 84px; }
+      @media (prefers-reduced-motion: reduce) { .pioche-flip > .pioche-flip-dos { animation: none; display: none; } .pioche-flip > .pioche-flip-face { animation: none; } }
+      .nouvelle-table .tv2-vise-texte { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+      .nouvelle-table .tv2-vise-qui { font-size: calc(17px * var(--lisible, 1)); letter-spacing: .05em; }
+      .nouvelle-table .tv2-vise-tuile { color: #EDE3CC; }
+      .nouvelle-table .tv2-vise-ligne { font-size: calc(30px * var(--lisible, 1)); color: #d0291f; text-shadow: 0 2px 6px rgba(0,0,0,.95); line-height: 1.2; }
+      .nouvelle-table .tv2-vise-renvoi { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .1em; color: var(--stock-dim); }
       .nouvelle-table .tv2-seuil-bloc.entre { animation: tv2-seuil-entre 400ms ease-out both; }
       @keyframes tv2-seuil-entre { from { opacity: 0; translate: 40px 0; } to { opacity: 1; translate: 0 0; } }
       @media (prefers-reduced-motion: reduce) { .nouvelle-table .tv2-seuil-bloc.entre { animation: none; } }
@@ -14004,7 +14026,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-pGcJyUYJ.js"></script>
+    <script type="module" crossorigin src="./assets/index-Dm-9qPyS.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
