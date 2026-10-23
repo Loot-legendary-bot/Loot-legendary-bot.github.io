@@ -12142,6 +12142,25 @@
       .nouvelle-table .nt-score-equipes { margin-top: 6px; font: 900 13px/1 "Arial Black", Impact, sans-serif; letter-spacing: .1em; }
       .nouvelle-table .nt-score-equipes .nt-se-nous { color: #efece3; }
       .nouvelle-table .nt-score-equipes .nt-se-eux { color: #a3231d; }
+      /* S1462 · note 341 bis — la couleur d'équipe : 0 = la mienne (os), 1 = sang, 2 = cuivre
+         (Q-COULEUR-EQUIPES). Un trait sous le médaillon, et ALLY sur mon coéquipier. */
+      .nouvelle-table .nt-score-equipes [data-camp="2"] { color: #c07a2c; }
+      .nouvelle-table .nt-presence[data-camp] { --camp: #efece3; }
+      .nouvelle-table .nt-presence[data-camp="1"] { --camp: #a3231d; }
+      .nouvelle-table .nt-presence[data-camp="2"] { --camp: #c07a2c; }
+      .nouvelle-table .nt-presence[data-camp] > .nt-rond::after {
+        content: ''; position: absolute; left: 18%; right: 18%; bottom: -5px; height: 3px;
+        border-radius: 2px; background: var(--camp); box-shadow: 0 0 6px var(--camp); pointer-events: none;
+      }
+      .tv2-seuil-bloc[data-camp], .ndr-duelliste[data-camp] { --camp: #efece3; }
+      .tv2-seuil-bloc[data-camp="1"], .ndr-duelliste[data-camp="1"] { --camp: #a3231d; }
+      .tv2-seuil-bloc[data-camp="2"], .ndr-duelliste[data-camp="2"] { --camp: #c07a2c; }
+      .tv2-seuil-bloc[data-camp] { box-shadow: inset 0 -3px 0 var(--camp); }
+      .ndr-duelliste[data-camp] { border-top: 3px solid var(--camp); }
+      .nouvelle-table .nt-presence .nt-allie-mot {
+        display: block; font-family: var(--mono); font-size: calc(10px * var(--lisible, 1));
+        letter-spacing: .2em; color: var(--camp, #efece3); text-align: center; white-space: nowrap;
+      }
       /* S1419 · note 243 ⑪ (SPAM) : le chiffre sur la cible, le flash de l'école, le KO tenu */
       .nt-duel-regarde .ndr-duelliste { position: relative; transition: transform .5s ease, filter .5s ease; }
       .nt-duel-regarde .ndr-duelliste .ar2-chiffre { position: absolute; left: 50%; top: 30%; z-index: 6; pointer-events: none;
@@ -12643,6 +12662,13 @@
       }
       .fp1-art { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; display: block; background: #000; }
       .fp1-heros-texte { display: flex; flex-direction: column; gap: 10px; min-width: 420px; }
+      /* S1462 · note 341 bis — le podium par équipe, une ligne sous le vainqueur. */
+      .fp1-equipes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin: 14px 0 4px;
+        font-family: var(--mono); font-size: 15px; letter-spacing: .12em; text-transform: uppercase; }
+      .fp1-equipes .fp1-eq-mot { color: #8f8a7e; }
+      .fp1-equipes .fp1-eq { color: #efece3; }
+      .fp1-equipes .fp1-eq[data-camp="1"] { color: #c8423a; }
+      .fp1-equipes .fp1-eq[data-camp="2"] { color: #c07a2c; }
       .fp1-mot {
         font-family: var(--display); font-weight: 900; font-size: 92px; line-height: .9; letter-spacing: .06em;
         color: var(--stock); text-shadow: 0 4px 0 #000, 0 0 30px rgb(255 255 255 / .15);
@@ -14205,7 +14231,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D5Oou2Rr.js"></script>
+    <script type="module" crossorigin src="./assets/index-CnK7W0oh.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

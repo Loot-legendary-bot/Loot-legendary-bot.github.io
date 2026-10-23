@@ -2687,7 +2687,9 @@ function pickNode(i){
 
 let matchCtx='bots', matchMode='ffa', friend=false;
 const MODES=[['ffa','Free-for-all','One winner. Everything funnels into the Final Duel.'],
-             ['2v2','2v2','Two teams of two. The run scores together, the duel does not.']];
+             ['2v2','2v2','Two teams of two. The run scores together, the duel does not.'],
+             /* S1462 - note 341 bis : le 2V2V2 (moteur 921, six sieges, trois camps). */
+             ['2v2v2','2v2v2','Three teams of two. Each team scores together; the duel is fought pair against pair.']];
 const mchips=document.getElementById('mchips'), arena=document.getElementById('arena');
 /* seat order is always [you, ally-or-slot, foe, foe] */
 const FFA =[[22,24],[78,24],[22,76],[78,76]];
@@ -2708,6 +2710,7 @@ function placesFFA(n){
 let siegesFFA=4;
 const tireLesSieges=()=>{};
 const P2V2=[[21,26],[21,74],[79,26],[79,74]];
+const P2V2V2=[[16,26],[16,74],[50,22],[50,78],[84,26],[84,74]];
 const CORNER=['tl','tr','bl','br'];
 const CSRC={tl:A.cTL,tr:A.cTR,bl:A.cBL,br:A.cBR};
 /* note 145 (1), verbatim Croze : « ton nom en blanc, les noms des bots en
@@ -2717,16 +2720,20 @@ const CSRC={tl:A.cTL,tr:A.cTR,bl:A.cBL,br:A.cBR};
 const MOI_COL='#efece3', ADV_COL='#a3231d';
 const SOLO_COL=[MOI_COL,ADV_COL,ADV_COL,ADV_COL,ADV_COL];
 const TEAM_COL=[MOI_COL,ADV_COL];
+/* S1462 - note 341 bis : la troisieme equipe, cuivre (reco Q-COULEUR-EQUIPES). */
+const CAMP3_COL='#c07a2c';
 function seat(x,y,col,label,slot){
   return '<div class="seat'+(slot?' slot':'')+'" style="left:'+x+'%;top:'+y+'%;color:'+col+
     '"><u></u>'+label+'</div>';
 }
 function drawArena(){
   const ffa = matchMode==='ffa';
-  const pts = ffa ? placesFFA(siegesFFA) : P2V2;
+  const trois = matchMode==='2v2v2';
+  const pts = ffa ? placesFFA(siegesFFA) : trois ? P2V2V2 : P2V2;
   const foe = matchCtx==='bots' || matchCtx==='daily' ? 'Bot' : 'Player';
   /* FFA corners follow the seats, 2v2 corners follow the side */
   const cols = ffa ? SOLO_COL
+             : trois ? [TEAM_COL[0],TEAM_COL[0],TEAM_COL[1],TEAM_COL[1],CAMP3_COL,CAMP3_COL]
                    : [TEAM_COL[0],TEAM_COL[0],TEAM_COL[1],TEAM_COL[1]];
   /* Les quatre coins restent un DECOR de cadre - et depuis la note 145 (1) ils
      ne portent plus la couleur d'un siege : « l'encadre tu mets en blanc (les
@@ -2739,7 +2746,14 @@ function drawArena(){
     '<line x1="'+x+'" y1="'+y+'" x2="50" y2="50" stroke="'+cols[i]+'" stroke-opacity=".3" '+
     'stroke-width="1.2" vector-effect="non-scaling-stroke"/>').join('');
   let frames='', labels='';
-  if(!ffa){
+  if(trois){
+    frames=[[4,TEAM_COL[0]],[38,TEAM_COL[1]],[72,CAMP3_COL]].map(([x,c])=>
+      '<rect x="'+x+'" y="12" width="24" height="76" fill="none" stroke="'+c+
+      '" stroke-opacity=".3" stroke-width="1" vector-effect="non-scaling-stroke"/>').join('');
+    labels='<div class="tlabel" style="left:16%;top:5%;color:'+TEAM_COL[0]+'">Your team</div>'+
+           '<div class="tlabel" style="left:50%;top:5%;color:'+TEAM_COL[1]+'">Team 2</div>'+
+           '<div class="tlabel" style="left:84%;top:5%;color:'+CAMP3_COL+'">Team 3</div>';
+  } else if(!ffa){
     frames='<rect x="8" y="12" width="26" height="76" fill="none" stroke="'+TEAM_COL[0]+
       '" stroke-opacity=".3" stroke-width="1" vector-effect="non-scaling-stroke"/>'+
       '<rect x="66" y="12" width="26" height="76" fill="none" stroke="'+TEAM_COL[1]+
@@ -2747,7 +2761,9 @@ function drawArena(){
     labels='<div class="tlabel" style="left:21%;top:5%;color:'+TEAM_COL[0]+'">Your team</div>'+
            '<div class="tlabel" style="left:79%;top:5%;color:'+TEAM_COL[1]+'">Them</div>';
   }
-  const seats = ffa
+  const seats = trois
+    ? pts.map((p,i)=>seat(p[0],p[1],cols[i],i===0?PROFILE.pseudo:i===1?'Bot ally':foe)).join('')
+    : ffa
     ? pts.map((p,i)=>seat(p[0],p[1],cols[i%cols.length],
         i===0?PROFILE.pseudo:foe)).join('')
     : seat(...pts[0],cols[0],PROFILE.pseudo)
@@ -2759,7 +2775,7 @@ function drawArena(){
     ? '<div class="hub">One run<i>'+(ffa?'best score':'two teams')+'</i></div>'
     : ffa
     ? '<div class="hub">Final Duel<i>one winner</i></div>'
-    : '<div class="hub">VS<i>two teams</i></div>';
+    : '<div class="hub">VS<i>'+(trois?'three teams':'two teams')+'</i></div>';
   arena.innerHTML=cn+'<svg viewBox="0 0 100 100" preserveAspectRatio="none">'+
     frames+lines+'</svg>'+seats+labels+hub;
 }
@@ -3806,6 +3822,12 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     /* S1419 - note 243 (10) : le 2V2 au menu VS BOTS. Toi + un bot allie contre deux
        bots ; l'allie est tire au hasard parmi les trois autres sieges (`?equipe=hasard`,
        une porte JOUEUR, pas la porte admin `?camps=`). */
+    if (e.mode === '2v2v2') {
+      var q3 = new URLSearchParams(window.location.search);
+      q3.delete('joueurs'); q3.delete('camps'); q3.set('equipe', 'trois');
+      window.location.href = '/?' + q3.toString();
+      return;
+    }
     if (e.mode === '2v2') {
       var q2 = new URLSearchParams(window.location.search);
       q2.delete('joueurs'); q2.delete('camps'); q2.set('equipe', 'hasard');
