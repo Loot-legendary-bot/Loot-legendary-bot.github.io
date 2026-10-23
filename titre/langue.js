@@ -1381,5 +1381,8 @@
     if (document.body) applique();
   }
 
-  window.LLLangue = { lis: lis, cible: cible, pose: pose, installe: installe, applique: applique, noms: noms };
+  /* S1457 - note 336 (5) : une phrase que l'ecran DECOUPE (le de en icone, l'objet colore) n'est plus un
+     seul noeud de texte, et le lexique ne reconnait pas ses morceaux : l'ecran la traduit ENTIERE avant. */
+  function traduis(s) { return dico === null ? s : traduisLaChaine(s); }
+  window.LLLangue = { lis: lis, cible: cible, pose: pose, installe: installe, applique: applique, noms: noms, traduis: traduis };
 })();

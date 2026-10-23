@@ -1178,20 +1178,9 @@
        */
       .handslot:hover + .handslot, .handslot:focus-within + .handslot { --pousse: 32px; }
       .handslot:has(+ .handslot:hover), .handslot:has(+ .handslot:focus-within) { --pousse: -32px; }
-      /* ═══ note 331 (TABLE v2) — LA MAIN v2 : au repos l'éventail reste plongé (l'image + le nom) ; la carte
-         survolée monte ENTIÈRE en grand au-dessus de l'éventail, lisible (texte de règle ≥ 16 px à 1080p : ×1,6, mesuré ~18 px),
-         sans pousser ses voisines. iPad : 1er tap = en grand (le survol), 2e tap = jouer. */
-      html.table-v2 .handslot:hover, html.table-v2 .handslot:focus-within { z-index: 80 !important; }
-      /* la CARTE seule grandit (son créneau garde ses boutons et son motif à leur taille, sous elle) */
-      html.table-v2 .handslot:hover > .card, html.table-v2 .handslot:focus-within > .card {
-        position: relative; z-index: 2; transform: scale(var(--zoom-main, 1.6)); transform-origin: 50% 100%;
-        transition: transform .18s var(--pop, ease-out);
-      }
-      @media (max-height: 900px) { html.table-v2 { --zoom-main: 1.45; } }
-      @media (max-height: 760px) { html.table-v2 { --zoom-main: 1.3; } }
-      html.table-v2 .handslot:hover + .handslot, html.table-v2 .handslot:focus-within + .handslot,
-      html.table-v2 .handslot:has(+ .handslot:hover), html.table-v2 .handslot:has(+ .handslot:focus-within) { --pousse: 0px; }
-      html.table-v2 .handslot:hover > .card, html.table-v2 .handslot:focus-within > .card { box-shadow: 0 18px 50px rgba(0,0,0,.85); }
+      /* S1457 · note 336 ① — Croze : « ma main est celle d'avant, la carte grossit sur place ». Le zoom propre
+         à la v2 (note 331 : la carte ×1,6 au-dessus de l'éventail, voisines figées) est RETIRÉ : TABLE v2 ON,
+         la main est celle de la v1, au pixel — aucune règle `html.table-v2` ne touche plus `.handslot`. */
       /*
        * ⛑ S1423 · HD-1 (note 248) — *« Ma main ne cache jamais mon gear ; un clic
        * ou H la range en bande fine, et elle revient quand j'en ai besoin. »*
@@ -10838,6 +10827,20 @@
            tient à une valeur fixe. *Couper l'animation ne coupe pas le signal.* */
         .boule.pleine::after { animation: none; opacity: .55; }
       }
+      /* S1457 · note 336 ③ — TABLE v2 : les actions restantes sont des TORCHES. Croze : « c'est là que
+         les torches doivent brûler ». Allumée (`torch_hover`, la flamme qui vacille) = action disponible ;
+         éteinte (`torch`, désaturée et sombre) = consommée. La différence pleine/vide reste une FORME ;
+         `tenue` (le siège d'un autre) brûle plus bas, sans halo : la réserve du S314 tient. Le sceau de
+         Signature (`boule-s`) ne change pas. */
+      html.table-v2 .boules .boule:not(.boule-s) { border: 0; border-radius: 0; color: transparent;
+        background: url(/art/curseurs-48/torch_hover.png) center / contain no-repeat; transform-origin: 50% 90%; }
+      html.table-v2 .boules .boule:not(.boule-s)::after { display: none; }
+      html.table-v2 .boules .boule.pleine:not(.boule-s) { animation: tv2-flamme 900ms ease-in-out infinite alternate;
+        filter: drop-shadow(0 0 5px rgba(255,140,40,.75)); }
+      html.table-v2 .boules .boule.tenue:not(.boule-s) { filter: saturate(.7) brightness(.85); }
+      html.table-v2 .boules .boule.vide:not(.boule-s) { background-image: url(/art/curseurs-48/torch.png);
+        filter: grayscale(1) brightness(.38); opacity: .9; }
+      @media (prefers-reduced-motion: reduce) { html.table-v2 .boules .boule.pleine:not(.boule-s) { animation: none; } }
       /* La rangée d'un AUTRE siège, dans son bloc info déplié (note ㉔ bis). */
       .pips-siege { display: inline-flex; align-items: center; gap: 5px; }
 
@@ -12194,12 +12197,13 @@
         text-transform: none; letter-spacing: normal; min-height: 0; width: 100%;
         background: none !important; border: 0 !important; box-shadow: none !important; outline: none; border-radius: 0;
         padding: 0 0 0 4px; margin: 0; text-align: left; cursor: pointer;
-        font: inherit; color: #8F8A80; text-shadow: inherit; transition: color .12s;
+        font: inherit; color: #E9E4D8; text-shadow: inherit; transition: color .12s, text-shadow .12s;
       }
       .nouvelle-table .tv2-lignes.entre > .tv2-ligne { animation: tv2-ligne-entre 320ms ease-out both; animation-delay: calc(var(--k, 0) * 60ms); }
       @keyframes tv2-ligne-entre { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
-      .nouvelle-table .tv2-chevron { position: absolute; left: -32px; top: -2px; width: 22px; height: 30px; visibility: hidden;
-        color: #FFFFFF; font-size: calc(22px * var(--lisible, 1)); pointer-events: none; }
+      .nouvelle-table .tv2-chevron { position: absolute; left: -30px; top: 0; width: 22px; height: 30px; visibility: hidden;
+        color: #F2C46B; font-size: calc(18px * var(--lisible, 1)); line-height: 30px; text-align: center; pointer-events: none;
+        text-shadow: 0 0 8px rgba(242,196,107,.65); }
       .nouvelle-table .tv2-chevron img { display: block; width: 22px; height: 22px; object-fit: contain; transform-origin: 50% 90%;
         animation: tv2-flamme 900ms ease-in-out infinite alternate; filter: drop-shadow(0 0 6px rgba(255,140,40,.7)); }
       @keyframes tv2-flamme { 0% { transform: scale(1, 1) rotate(-2deg); opacity: .92; } 35% { transform: scale(.94, 1.07) rotate(2deg); opacity: 1; }
@@ -12209,7 +12213,8 @@
       .nouvelle-table .tv2-tag { color: inherit; letter-spacing: .02em; }
       .nouvelle-table .tv2-nom-geste { font-size: calc(21px * var(--lisible, 1)); font-weight: 700; letter-spacing: .02em; }
       .nouvelle-table .tv2-sous-ligne { display: block; }
-      .nouvelle-table .tv2-ligne:not(:disabled):hover, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible, .nouvelle-table .tv2-ligne.choisie { color: #FFFFFF; outline: none; }
+      .nouvelle-table .tv2-ligne:not(:disabled):hover, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible, .nouvelle-table .tv2-ligne.choisie { color: #FFFFFF; outline: none;
+        text-shadow: 0 0 10px rgba(255,255,255,.45), 0 1px 3px rgba(0,0,0,.95); }
       .nouvelle-table .tv2-ligne:not(:disabled):hover .tv2-chevron, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible .tv2-chevron, .nouvelle-table .tv2-ligne.choisie .tv2-chevron { visibility: visible; }
       .nouvelle-table .tv2-ligne.choisie { animation: tv2-clignote 120ms steps(1, end) 2; }
       @keyframes tv2-clignote { 0% { opacity: 1; } 50% { opacity: .15; } 100% { opacity: 1; } }
@@ -12218,6 +12223,11 @@
       /* 335 ③ — le texte riche : la rareté à la couleur de son cadre, le boss en rouge, l'école en glyphe */
       .nouvelle-table .tv2-rarete { font-weight: 700; }
       .nouvelle-table .tv2-boss { color: #E0342A; font-weight: 700; }
+      /* S1457 · note 336 ⑤ — l'objet / le coffre à la couleur de sa rareté ; le dé en icône, à la taille du texte */
+      .nouvelle-table .tv2-objet { font-weight: 700; }
+      .nouvelle-table .tv2-de-ico { display: inline-flex; align-items: center; gap: .1em; vertical-align: -0.28em; margin: 0 .12em; }
+      .nouvelle-table .tv2-de-ico img { display: inline-block; width: 1.35em; height: 1.35em; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,.9)); }
+      .nouvelle-table .tv2-de-n { font-weight: 700; }
       .nouvelle-table .tv2-ecole { display: inline-block; font-style: normal; font-size: 1.05em; line-height: 1; margin: 0 .08em; text-shadow: 0 0 6px rgba(0,0,0,.9); }
       /* 335 ⑧ — l'exploration en faces de d6 : le rendu du dé, l'icône de l'issue dessous, sa couleur ; % au survol */
       .nouvelle-table .tv2-faces { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
@@ -12236,6 +12246,15 @@
       .nouvelle-table .tv2-vignette.entre { animation: tv2-vignette 400ms ease-out both; }
       .nouvelle-table .tv2-vignette img { display: block; width: 100%; max-height: 230px; object-fit: contain; }
       .nouvelle-table .tv2-vignette-nom { font-family: var(--mono); font-size: calc(11px * var(--lisible, 1)); letter-spacing: .1em; color: var(--stock); }
+      /* S1457 · note 336 ② — au survol, la carte SEULE en grand au centre (le geste de la fiche de perso). */
+      .nouvelle-table .tv2-vignette .tv2-vignette-grand {
+        position: fixed; left: 50%; top: 50%; z-index: var(--z-portes, 930); width: auto; max-width: 46vw; height: 86vh; max-height: 86vh;
+        object-fit: contain; transform: translate(-50%, -50%); pointer-events: none;
+        visibility: hidden; opacity: 0; transition: opacity .12s;
+        box-shadow: 0 0 0 4000px rgb(0 0 0 / .72), 0 24px 60px rgb(0 0 0 / .8);
+      }
+      .nouvelle-table .tv2-vignette:hover .tv2-vignette-grand { visibility: visible; opacity: 1; }
+      @media (hover: none) { .nouvelle-table .tv2-vignette .tv2-vignette-grand { display: none; } }
       @keyframes tv2-vignette { from { opacity: 0; transform: scale(1.5) translateX(-30%); } to { opacity: 1; transform: none; } }
       @media (prefers-reduced-motion: reduce) { .nouvelle-table .tv2-vignette { animation: none; } }
       /* S1453 · note 330, addendum 21/10 quater — (2) LA TUILE RÉDUITE SANS CADRE : la vignette sort du
@@ -14077,7 +14096,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-FawyUz3y.js"></script>
+    <script type="module" crossorigin src="./assets/index-Cp5ieAVn.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
