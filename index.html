@@ -12173,30 +12173,61 @@
       /* ═══ note 330 ② / 330 ter (TABLE v2) — LA LISTE de Baldur's Gate 3 : texte nu sur la salle, un dégradé
          sombre doux pour la lisibilité, aucune boîte ; ivoire / gris sourd / or au survol, `»` dans la marge. */
       .nouvelle-table .ntt-table.tv2 .ntt-axe { justify-content: flex-start; }
+      /* S1455 · note 335 ② ③ ⑤ ⑥ ⑨ — les retouches de Croze : polices du jeu (Alegreya, celle des cartons — titres
+         et corps ; plus de Georgia), TOUT EN GRIS par défaut, BLANC au survol, ROUGE si épuisée, au clic deux
+         battements (comme le menu titre) ; aucun encadré, aucun fond ; une petite flamme dans la marge ; un filet
+         or sous le nom de la tuile ; les lignes entrent l'une après l'autre (60 ms). */
       .nouvelle-table .tv2-liste {
-        align-self: stretch; width: min(100%, 900px); padding: 18px 28px 22px 34px;
+        align-self: stretch; width: min(100%, 900px); padding: 18px 28px 22px 40px;
         background: radial-gradient(ellipse at 30% 50%, rgba(0,0,0,.62), rgba(0,0,0,.28) 70%, transparent);
-        font-family: Georgia, 'Times New Roman', serif; color: #EDE3CC; text-shadow: 0 1px 2px rgba(0,0,0,.9);
+        font-family: "Alegreya", "Palatino Linotype", Georgia, serif; color: #8F8A80; text-shadow: 0 1px 3px rgba(0,0,0,.95);
       }
-      .nouvelle-table .tv2-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 18px; }
-      .nouvelle-table .tv2-titre { font-size: calc(24px * var(--lisible, 1)); letter-spacing: .04em; color: #F2C46B; }
-      .nouvelle-table .tv2-replique { font-size: calc(16px * var(--lisible, 1)); font-style: italic; text-align: right; max-width: 55%; }
+      .nouvelle-table .tv2-tete { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 18px;
+        padding-bottom: 8px; border-bottom: 1px solid transparent;
+        border-image: linear-gradient(90deg, rgba(242,196,107,.85), rgba(242,196,107,.35) 60%, transparent) 1; }
+      .nouvelle-table .tv2-titre { font-family: "Alegreya", "Palatino Linotype", Georgia, serif; font-weight: 700;
+        font-size: calc(28px * var(--lisible, 1)); letter-spacing: .05em; text-transform: none; color: #EDE3CC; }
+      .nouvelle-table .tv2-replique { font-size: calc(16px * var(--lisible, 1)); font-style: italic; text-align: right; max-width: 55%; color: #C9C3B4; }
       .nouvelle-table .tv2-lignes { display: flex; flex-direction: column; gap: 14px; }
       .nouvelle-table .tv2-ligne {
-        position: relative; display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 18px; align-items: baseline;
+        position: relative; display: grid; grid-template-columns: 230px minmax(0, 1fr); column-gap: 18px; align-items: baseline;
         text-transform: none; letter-spacing: normal; min-height: 0; width: 100%;
-        background: none; border: 0; padding: 0 0 0 4px; margin: 0; text-align: left; cursor: pointer;
-        font: inherit; color: #EDE3CC; text-shadow: inherit;
+        background: none !important; border: 0 !important; box-shadow: none !important; outline: none; border-radius: 0;
+        padding: 0 0 0 4px; margin: 0; text-align: left; cursor: pointer;
+        font: inherit; color: #8F8A80; text-shadow: inherit; transition: color .12s;
       }
-      .nouvelle-table .tv2-chevron { position: absolute; left: -26px; top: 0; color: #F2C46B; visibility: hidden; font-size: calc(22px * var(--lisible, 1)); }
+      .nouvelle-table .tv2-lignes.entre > .tv2-ligne { animation: tv2-ligne-entre 320ms ease-out both; animation-delay: calc(var(--k, 0) * 60ms); }
+      @keyframes tv2-ligne-entre { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+      .nouvelle-table .tv2-chevron { position: absolute; left: -32px; top: -2px; width: 22px; height: 30px; visibility: hidden;
+        color: #FFFFFF; font-size: calc(22px * var(--lisible, 1)); pointer-events: none; }
+      .nouvelle-table .tv2-chevron img { display: block; width: 22px; height: 22px; object-fit: contain; transform-origin: 50% 90%;
+        animation: tv2-flamme 900ms ease-in-out infinite alternate; filter: drop-shadow(0 0 6px rgba(255,140,40,.7)); }
+      @keyframes tv2-flamme { 0% { transform: scale(1, 1) rotate(-2deg); opacity: .92; } 35% { transform: scale(.94, 1.07) rotate(2deg); opacity: 1; }
+        70% { transform: scale(1.04, .95) rotate(-1deg); opacity: .85; } 100% { transform: scale(.97, 1.04) rotate(1.5deg); opacity: 1; } }
       .nouvelle-table .tv2-verbe { font-size: calc(24px * var(--lisible, 1)); font-weight: 700; letter-spacing: .03em; white-space: nowrap; }
       .nouvelle-table .tv2-corps { font-size: calc(17px * var(--lisible, 1)); line-height: 1.4; }
-      .nouvelle-table .tv2-tag { color: #D29A5A; font-variant: small-caps; letter-spacing: .06em; }
-      .nouvelle-table .tv2-ligne:not(:disabled):hover, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible, .nouvelle-table .tv2-ligne.choisie { color: #F2C46B; outline: none; }
+      .nouvelle-table .tv2-tag { color: inherit; letter-spacing: .02em; }
+      .nouvelle-table .tv2-nom-geste { font-size: calc(21px * var(--lisible, 1)); font-weight: 700; letter-spacing: .02em; }
+      .nouvelle-table .tv2-sous-ligne { display: block; }
+      .nouvelle-table .tv2-ligne:not(:disabled):hover, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible, .nouvelle-table .tv2-ligne.choisie { color: #FFFFFF; outline: none; }
       .nouvelle-table .tv2-ligne:not(:disabled):hover .tv2-chevron, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible .tv2-chevron, .nouvelle-table .tv2-ligne.choisie .tv2-chevron { visibility: visible; }
-      .nouvelle-table .tv2-ligne:not(:disabled):hover .tv2-tag, .nouvelle-table .tv2-ligne.choisie .tv2-tag { color: #F2C46B; }
-      .nouvelle-table .tv2-ligne:disabled { color: #6E6A62; text-shadow: none; cursor: default; }
-      .nouvelle-table .tv2-ligne:disabled .tv2-tag { color: #6E6A62; }
+      .nouvelle-table .tv2-ligne.choisie { animation: tv2-clignote 120ms steps(1, end) 2; }
+      @keyframes tv2-clignote { 0% { opacity: 1; } 50% { opacity: .15; } 100% { opacity: 1; } }
+      .nouvelle-table .tv2-ligne:disabled { color: #B23A31; text-shadow: 0 1px 3px rgba(0,0,0,.95); cursor: default; opacity: 1; }
+      .nouvelle-table .tv2-ligne:disabled .tv2-faces { filter: grayscale(1) brightness(.6); }
+      /* 335 ③ — le texte riche : la rareté à la couleur de son cadre, le boss en rouge, l'école en glyphe */
+      .nouvelle-table .tv2-rarete { font-weight: 700; }
+      .nouvelle-table .tv2-boss { color: #E0342A; font-weight: 700; }
+      .nouvelle-table .tv2-ecole { display: inline-block; font-style: normal; font-size: 1.05em; line-height: 1; margin: 0 .08em; text-shadow: 0 0 6px rgba(0,0,0,.9); }
+      /* 335 ⑧ — l'exploration en faces de d6 : le rendu du dé, l'icône de l'issue dessous, sa couleur ; % au survol */
+      .nouvelle-table .tv2-faces { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+      .nouvelle-table .tv2-face { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 52px; }
+      .nouvelle-table .tv2-face-de { display: block; width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 3px rgba(0,0,0,.8)); }
+      .nouvelle-table .tv2-face-n { display: block; width: 36px; height: 36px; line-height: 36px; text-align: center; font-weight: 700; border: 1px solid currentColor; }
+      .nouvelle-table .tv2-face-issue { display: block; width: 34px; height: 34px; object-fit: cover; object-position: 50% 52%;
+        border: 2px solid var(--issue, #6E6A62); border-radius: 3px; }
+      .nouvelle-table .tv2-face-mot { font-size: calc(11px * var(--lisible, 1)); line-height: 1.1; color: var(--issue, inherit); text-align: center; white-space: nowrap; }
+      .nouvelle-table .tv2-ligne:disabled .tv2-face-mot { color: inherit; }
       /* note 330 ④ / ④ bis — la vignette : au-dessus du journal, de sa largeur ; tap = la carte en grand. */
       .nouvelle-table .tv2-vignette {
         display: flex; flex-direction: column; align-items: center; gap: 4px; flex: none;
@@ -12736,6 +12767,22 @@
       /* ④ la barre de PV DESCEND, après les dégâts, depuis ce qu'on avait montré */
       .pv-pastille.pv-descend::before { transition: width var(--descente, 900ms) linear; }
       .pv-pastille.pv-coup { animation: pv-coup 900ms ease-out; }
+      /* S1455 · note 335 ⑦ — le soin se voit (TABLE v2, ma fiche) : la barre MONTE, un éclat vert, des « + » verts qui flottent. */
+      .table-v2 .pv-pastille.pv-soin { overflow: visible; animation: pv-eclat-vert var(--soin-montee, 600ms) ease-out both; animation-delay: var(--soin-delai, 0ms); }
+      .table-v2 .pv-pastille.pv-soin::before { border-radius: 999px 0 0 999px; animation: pv-monte var(--soin-montee, 600ms) ease-out both; animation-delay: var(--soin-delai, 0ms); }
+      @keyframes pv-monte { from { width: var(--de, 0%); background: rgba(70,220,90,.6); } 70% { background: rgba(70,220,90,.45); } to { width: var(--part, 0%); background: rgba(163,44,37,.28); } }
+      @keyframes pv-eclat-vert { 0% { box-shadow: 0 0 0 rgba(70,220,90,0); } 25% { box-shadow: 0 0 20px rgba(70,220,90,.95), inset 0 0 10px rgba(120,255,140,.6); } 100% { box-shadow: 0 0 0 rgba(70,220,90,0); } }
+      .table-v2 .pv-pastille > .pv-soin-plus { position: absolute; left: 50%; bottom: 100%; z-index: 5; pointer-events: none;
+        font: 900 calc(22px * var(--lisible, 1))/1 "Arial Black", Impact, sans-serif; color: #5BE36B; text-shadow: 0 2px 0 #000, 0 0 10px rgba(70,220,90,.8);
+        animation: pv-plus var(--soin-flotte, 1400ms) ease-out both; animation-delay: var(--soin-delai, 0ms); }
+      .table-v2 .pv-pastille > .pv-soin-plus.petit { font-size: calc(14px * var(--lisible, 1)); }
+      .table-v2 .pv-pastille > .pv-soin-plus.g { left: 18%; animation-name: pv-plus-g; }
+      .table-v2 .pv-pastille > .pv-soin-plus.d { left: 82%; animation-name: pv-plus-d; }
+      @keyframes pv-plus { 0% { opacity: 0; transform: translate(-50%, 10px) scale(.6); } 15% { opacity: 1; transform: translate(-50%, -4px) scale(1.1); }
+        100% { opacity: 0; transform: translate(-50%, -46px) scale(1); } }
+      @keyframes pv-plus-g { 0% { opacity: 0; transform: translate(-50%, 6px); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(-80%, -34px); } }
+      @keyframes pv-plus-d { 0% { opacity: 0; transform: translate(-50%, 6px); } 35% { opacity: 1; } 100% { opacity: 0; transform: translate(-20%, -40px); } }
+      @media (prefers-reduced-motion: reduce) { .table-v2 .pv-pastille.pv-soin::before { animation: none; } }
       @keyframes pv-coup { 0% { box-shadow: 0 0 0 rgba(200,16,46,0); } 20% { box-shadow: 0 0 18px rgba(200,16,46,.9); } 100% { box-shadow: 0 0 0 rgba(200,16,46,0); } }
       .ndr-nom { display: flex; align-items: center; gap: 10px; }
       .ndr-perso {
@@ -13824,6 +13871,10 @@
         position: absolute; inset: 0; z-index: 45; pointer-events: none;
       }
       .nouvelle-table .lanterne { background: rgb(0 0 0 / .30); }
+      /* S1455 · note 335 ① — TABLE v2 : la salle porte DÉJÀ son voile (30 %). Le calque de la Lanterne sans trou
+         (rien à éclairer : mon tour, la liste) doublait le noir sur tout l'écran — 30 % + 30 % = 51 % : « trop atténué ».
+         Il ne noircit plus que lorsqu'il a un trou à creuser (une question) ; OFF, rien ne bouge. */
+      html.table-v2 .nouvelle-table .lanterne:not([data-trou]) { background: transparent; }
       /* ⛑ S1308 · L-5 — mort : la lanterne est éteinte, lumière froide (tableau 07). */
       .nouvelle-table.nt-mort { --lanterne-chaude: rgb(176 184 196 / .05); }
       .nouvelle-table.nt-mort .lanterne { background: rgb(6 8 12 / .42); }
@@ -14026,7 +14077,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-wgjdF4R4.js"></script>
+    <script type="module" crossorigin src="./assets/index-Db7kii4h.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

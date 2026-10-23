@@ -51,8 +51,10 @@ html:not(.da-salle) #ll-salle { display: none; }
   position: absolute; inset: 0; background: center / cover no-repeat;
   animation: ll-salle-entre 400ms ease-out both;
 }
-#ll-salle .ll-salle-couche::after { content: ''; position: absolute; inset: 0; background: rgba(8,7,6,.55); transition: background 300ms ease; }
-html.da-salle-voile-lourd #ll-salle .ll-salle-couche::after { background: rgba(8,7,6,.74); }
+/* S1455 · note 335 ① — « trop atténué, tirant vers du terreux » : le voile était un brun-noir (8,7,6) à 55 %.
+   Il devient un assombrissement NEUTRE, noir pur à 30 %, sans teinte ni désaturation ; `V` rend l'ancien 55 % pour comparer. */
+#ll-salle .ll-salle-couche::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.30); transition: background 300ms ease; }
+html.da-salle-voile-lourd #ll-salle .ll-salle-couche::after { background: rgba(8,7,6,.55); }
 #ll-salle .ll-salle-couche.sang::before { content: ''; position: absolute; inset: 0; background: rgba(120,8,8,.42); mix-blend-mode: multiply; }
 #ll-salle .ll-salle-couche.sort { animation: ll-salle-sort 400ms ease-in both; }
 @keyframes ll-salle-entre { from { opacity: 0; } to { opacity: 1; } }
