@@ -1198,6 +1198,10 @@
     'free — it does not cost your Action': 'gratuit — ça ne coûte pas ton Action',
     'take the portal: you leave the dungeon for good': 'prends le portail : tu quittes le donjon pour de bon',
     'hand': 'main', 'empty hand': 'main vide',
+    /* S1465 · note 346 — le podium de fin de run : ordinaux, bouton, attente, gear vide. */
+    '1st': '1er', '2nd': '2e', '3rd': '3e', '4th': '4e', '5th': '5e', '6th': '6e',
+    'POINT DETAILS': 'DÉTAIL DES POINTS', 'waiting for the other players…': 'on attend les autres joueurs…',
+    'no Gear': 'aucun Gear',
     'no player is left in the dungeon': 'plus aucun joueur dans le donjon',
     'the whole table, wherever they are in the dungeon': 'toute la table, où qu’elle soit dans le donjon',
     '→ answer on the right': '→ réponds à droite', 'Pick a number': 'Choisis un nombre',
@@ -1222,7 +1226,10 @@
     'GRAVEYARD': 'CIMETIÈRE', 'No card played from a hand yet.': 'Aucune carte jouée de la main pour l’instant.',
     'no collapse': 'pas de Collapse', 'no portal': 'pas de portail', 'portal everywhere': 'portail partout',
     'TABLE v2': 'TABLE v2', 'the table (V: lighter / darker veil over the room)': 'la table (V : voile plus clair / plus sombre sur la salle)',
-    'the old table — switch ON to come back': 'l’ancienne table — passe sur ON pour revenir'
+    'the old table — switch ON to come back': 'l’ancienne table — passe sur ON pour revenir',
+    /* S1466 - note 350 (2) : le mot GENERIQUE de l'interface est « coffre » (l'issue d'exploration, l'activite
+       d'un siege) ; les noms de cartons composes (Large Chest, Marvelous Chest…) restent anglais. */
+    'Chest': 'Coffre', 'opening a chest': 'ouvre un coffre', 'a chest': 'un coffre'
   };
   for (var kj in EN_FR_JEU) { if (Object.prototype.hasOwnProperty.call(EN_FR_JEU, kj)) EN_FR[kj] = EN_FR_JEU[kj]; }
   var GESTE_FR = { 'Move': 'Se déplacer', 'Explore (1d6)': 'Explorer (1d6)', 'Interaction :': 'Interaction :',
@@ -1233,6 +1240,8 @@
       function (m, n, g) { return n + '. ' + GESTE_FR[g]; }],
     [/^TURN (\d+)$/, 'TOUR $1'], [/^collapse 1d(\d+)$/, 'Collapse 1d$1'], [/^portal (\d+) %$/, 'portail $1 %'],
     [/^ROUND (\d+)$/, 'MANCHE $1'],
+    /* S1466 - note 350 (2) : les presentations TEXT / PERCENT de l'exploration (« 6 Chest », « Chest 17 % »). */
+    [/^(\d+(?:-\d+)?) Chest$/, '$1 Coffre'], [/^Chest (\d+ %)$/, 'Coffre $1'],
     [/^ROLL (.+)$/, 'JET $1'],
     [/^ATTACK TABLE — (.+)$/, 'TABLE D’ATTAQUE — $1'],
     [/^→ the card reads this face: (.+)$/, function (m, c) { return '→ la carte lit cette face : ' + conditionFR(c); }],
@@ -1398,7 +1407,9 @@
     if (brut === null) return;
     var s = brut.trim();
     if (s === '') return;
-    var t = traduisLaChaine(s);
+    /* S1466 - note 350 (1) : sur un BOUTON, « BACK » est un retour (RETOUR), jamais l'emplacement DOS. */
+    var t = dico === EN_FR && s === 'BACK' && n.parentElement !== null && n.parentElement.closest('button') !== null
+      ? 'RETOUR' : traduisLaChaine(s);
     if (t === s) return;
     originaux.set(n, brut);
     n.nodeValue = brut.replace(s, t);

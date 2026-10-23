@@ -10278,18 +10278,45 @@
        * pourcents de Croze redeviennent les siens — plutôt que de retailler ses
        * proportions une à une.
        */
-      .fr-marches { display: flex; align-items: flex-end; justify-content: center;
-                    gap: 2.4%; width: 620px; max-width: 100%; height: 320px;
-                    margin: 0 auto; }
-      .fr-place { flex: 0 0 21%; height: 100%;
-                  display: flex; flex-direction: column;
-                  align-items: center; justify-content: flex-end; }
-      .fr-pod-qui { display: flex; flex-direction: column; align-items: center; gap: 5px;
-                    margin-bottom: 6px;
+      /*
+       * S1465 · note 346 ① — UNE GRILLE, DEUX RANGÉES : les marches (alignées en BAS, donc un seul sol,
+       * et la même largeur pour les trois), puis le butin de chacun sous sa marche. Les marches se
+       * touchent (aucun écart de colonne) : le trait du sol est la bordure haute de la rangée du butin.
+       */
+      .fr-marches { display: grid; grid-template-columns: repeat(var(--colonnes, 3), minmax(0, 240px));
+                    grid-template-rows: auto auto; align-items: end; justify-content: center;
+                    column-gap: 0; width: 100%; margin: 0 auto; }
+      .fr-place { display: flex; flex-direction: column;
+                  align-items: stretch; justify-content: flex-end; padding: 0 10px; }
+      .fr-pod-qui { display: flex; flex-direction: column; align-items: center; gap: 4px;
+                    margin-bottom: 8px;
                     animation: fr-pod-parait .5s ease-out; }
-      .fr-pod-qui img { width: 72%; aspect-ratio: 3 / 4; object-fit: cover;
-                        object-position: center 22%;
+      .fr-pod-ban { position: relative; width: 100%; }
+      .fr-pod-ban > img:first-child { width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+                        object-position: center 28%;
                         border: 1px solid var(--rule); display: block; }
+      .fr-pod-pion { position: absolute; left: 8px; bottom: 8px; width: 46px; height: 46px;
+                     image-rendering: pixelated; border: 1px solid var(--rule); background: var(--ink); }
+      .fr-pod-joueur { font-family: var(--display); font-weight: 800; font-size: 22px;
+                       letter-spacing: .06em; text-align: center; line-height: 1.1; }
+      .fr-pod-butin { border-top: 1px solid var(--rule); padding: 10px 10px 0;
+                      display: flex; flex-direction: column; gap: 6px; align-self: start; }
+      .fr-pod-gear, .fr-pod-main { display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; }
+      .fr-pod-main { flex-wrap: nowrap; gap: 0; }
+      .fr-pod-carte { width: 38px; aspect-ratio: 5 / 7; object-fit: cover; border: 1px solid var(--rule); }
+      .fr-pod-carte-nom { font-size: calc(10px * var(--lisible, 1)); color: var(--slate); }
+      /* la main en éventail serré : on compte les dos, on ne les lit pas */
+      .fr-pod-dos { width: 26px; aspect-ratio: 5 / 7; object-fit: cover; border-radius: 2px;
+                    box-shadow: -1px 0 2px rgba(0, 0, 0, .6); }
+      .fr-pod-dos + .fr-pod-dos { margin-left: -14px; }
+      .fr-tombe .fr-pod-ban > img:first-child { aspect-ratio: 16 / 9; }
+      .fr-tombe .fr-pod-pion { width: 34px; height: 34px; left: 5px; bottom: 5px; }
+      .fr-tombe .fr-pod-carte { width: 30px; }
+      .fin-run.fr-plein > .fr-detail { width: auto; }
+      .fr-detail { display: block; margin: 6px auto 0; padding: 9px 24px;
+                   font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .08em; }
+      .fr-attente { margin-top: 10px; font-family: var(--display); font-weight: 800; font-size: 16px;
+                    letter-spacing: .06em; color: var(--stock-dim); text-align: center; }
       /*
        * ⚠ **`84 %`, ET C'EST LE CHIFFRE DE SA RÉF, PAS UN RÉGLAGE.** Mon jet
        * précédent portait `88 %` : le buste du premier débordait la scène de
@@ -10297,7 +10324,7 @@
        * qu'elle laisse au-dessus n'est pas du vide, c'est ce qui fait tenir le
        * portrait le plus grand au-dessus de la marche la plus haute.
        */
-      .fr-place-1 .fr-pod-qui img { width: 84%; border-color: var(--stock); }
+      .fr-place-1 .fr-pod-ban > img:first-child { border-color: var(--stock); }
       .fr-pod-nom { font-family: var(--display); font-weight: 800; font-size: calc(12px * var(--lisible, 1));
                     letter-spacing: .08em; text-align: center; }
       /*
@@ -10331,9 +10358,12 @@
       .fr-place-1 .fr-marche { border-color: var(--stock); }
       .fr-pod-rang { font-family: var(--display); font-weight: 800; font-size: calc(11px * var(--lisible, 1));
                      letter-spacing: .24em; color: var(--stock-dim); }
-      .fr-pod-pts { font-family: var(--display); font-weight: 800; font-size: 38px;
+      .fr-pod-pts { font-family: var(--display); font-weight: 800; font-size: 52px;
                     line-height: 1; color: var(--activable); }
-      .fr-place-1 .fr-pod-pts { color: var(--stock); font-size: 46px; }
+      .fr-place-1 .fr-pod-pts { color: var(--stock); font-size: 68px; }
+      .fr-marche .fr-pod-rang { font-size: calc(15px * var(--lisible, 1)); }
+      .fr-marche-3 { gap: 0; }
+      .fr-marche-3 .fr-pod-pts { font-size: 40px; }
       .fr-pod-lbl { font-family: var(--display); font-weight: 800; font-size: calc(9px * var(--lisible, 1));
                     letter-spacing: .28em; color: var(--stock-dim); }
       .fr-sol-trait { height: 1px; background: var(--rule); margin: 0 4%; }
@@ -10352,13 +10382,16 @@
        * MORT ne se posent que sur un mort : la rangée dit la PLACE, le badge
        * dit l'ÉTAT.
        */
-      .fr-sol { display: flex; justify-content: flex-end; gap: 14px;
-                padding: 8px 4% 0;
+      .fr-sol { display: flex; justify-content: center; gap: 18px;
+                padding: 10px 4% 0;
                 animation: fr-sol-parait 1.3s ease-out; }
-      .fr-tombe { width: 120px; text-align: center; }
+      .fr-tombe { width: 190px; text-align: center; }
       .fr-tombe .fr-pod-qui { margin-bottom: 5px; }
-      .fr-tombe .fr-pod-qui img { width: 62%; }
-      .fr-tombe-mort .fr-pod-qui img { filter: grayscale(1) brightness(.55);
+      .fr-tombe .fr-pod-joueur { font-size: 16px; }
+      .fr-tombe .fr-pod-butin { border-top: none; padding: 6px 0 0; }
+      .fr-tombe > .fr-pod-rang { display: inline-block; margin-right: 8px; }
+      .fr-tombe > .fr-mort-badge, .fr-tombe > .fr-vif-badge { display: inline-block; }
+      .fr-tombe-mort .fr-pod-ban > img:first-child { filter: grayscale(1) brightness(.55);
                                        border-color: var(--rule); }
       .fr-tombe-mort .fr-pod-nom { color: var(--stock-dim); }
       /*
@@ -14093,6 +14126,14 @@
       }
       .nouvelle-table .ntc-mot, .plein .ntc-mot { font-family: var(--display); font-weight: 700;
                                  font-size: calc(13px * var(--lisible, 1)); color: var(--stock); }
+      /* S1465 · note 344 ① — la prédiction active, sous l'attaque en cours (toutes peaux) */
+      .nt-prediction { display: flex; flex-direction: column; gap: 4px; margin-top: 6px;
+        border: 1px solid #c9a227; background: rgba(201, 162, 39, .12); padding: 8px 14px; }
+      .ntp-ligne { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+        font-size: calc(14px * var(--lisible, 1)); color: var(--stock); }
+      .ntp-mot { font-family: var(--display); font-weight: 800; letter-spacing: .12em; color: #f0c94a; }
+      .ntp-valeur { font-family: var(--display); font-weight: 800; font-size: calc(18px * var(--lisible, 1)); color: #f0c94a; }
+      .ntp-de img { width: 26px; height: 26px; vertical-align: middle; }
       .nouvelle-table .nt-attaque {
         display: flex; align-items: center; gap: 28px;
         border: 1px solid var(--rule); background: var(--ink-2);
@@ -14246,7 +14287,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-QqhrBzCB.js"></script>
+    <script type="module" crossorigin src="./assets/index-D1avsQi9.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
