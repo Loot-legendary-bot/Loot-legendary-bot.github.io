@@ -12223,6 +12223,18 @@
       /* 335 ③ — le texte riche : la rareté à la couleur de son cadre, le boss en rouge, l'école en glyphe */
       .nouvelle-table .tv2-rarete { font-weight: 700; }
       .nouvelle-table .tv2-boss { color: #E0342A; font-weight: 700; }
+      /* S1458 · note 319 — le point virtuel : un pion ◆ allumé à côté du score ; s'allume / s'évanouit / devient plein */
+      .pts-virtuels { display: inline-flex; gap: .12em; margin-left: .3em; vertical-align: middle; pointer-events: auto; }
+      .pion-virtuel { color: #F2C46B; font-size: .8em; line-height: 1; text-shadow: 0 0 6px rgba(242,196,107,.85), 0 0 2px rgba(0,0,0,.9);
+        animation: pion-souffle 1.8s ease-in-out infinite; }
+      .pion-virtuel.allume { animation: pion-allume 900ms ease-out both; }
+      .pion-virtuel.evanoui { animation: pion-evanoui 900ms ease-in both; }
+      .pion-virtuel.plein { animation: pion-plein 900ms ease-out both; }
+      @keyframes pion-souffle { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+      @keyframes pion-allume { from { opacity: 0; transform: scale(2.2); } 60% { opacity: 1; transform: scale(.9); } to { transform: none; } }
+      @keyframes pion-evanoui { from { opacity: 1; } to { opacity: 0; transform: translateY(-6px) scale(.6); filter: grayscale(1); } }
+      @keyframes pion-plein { from { opacity: 1; transform: none; } 50% { transform: scale(1.8); color: #FFF; } to { opacity: 0; transform: scale(.4); } }
+      @media (prefers-reduced-motion: reduce) { .pion-virtuel, .pion-virtuel.allume { animation: none; } }
       /* S1457 · note 336 ⑤ — l'objet / le coffre à la couleur de sa rareté ; le dé en icône, à la taille du texte */
       .nouvelle-table .tv2-objet { font-weight: 700; }
       .nouvelle-table .tv2-de-ico { display: inline-flex; align-items: center; gap: .1em; vertical-align: -0.28em; margin: 0 .12em; }
@@ -14096,7 +14108,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-Cp5ieAVn.js"></script>
+    <script type="module" crossorigin src="./assets/index-DPx9jzwZ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
