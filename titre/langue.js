@@ -184,6 +184,12 @@
     /* S1447 - #59 (Razor Bridge) : la designation d une ENTREE de tuile, et sa description au journal. */
     [/^(.+) — entrée — choose a target$/, '$1 — on entering — choose a target'],
     [/^(.+) — entrée$/, '$1 — on entering'],
+    /* S1460 - note 339 (3) : « ROLL The Trigger Hall — entrée 1d20 » (capture 7 de Croze) : le libelle du moteur
+       (`tile.ts:616`, M-S1460) au milieu d'une ligne de jet. */
+    [/^(.*\S) — entrée(\s+\d*d\d+\s*)$/, '$1 — on entering$2'],
+    /* S1460 - note 339 (2) : l'audit a chaud EN (20 etats) — deux phrases du moteur restaient francaises. */
+    [/^(⊘ )?retirer « (.+) » ferait tomber son porteur à 0 PV — interdit$/, '$1removing « $2 » would drop its bearer to 0 HP — forbidden'],
+    [/^CONSULTATION — entrée au Goblin Casino — défausse 1 carte pour entrer dans la partie$/, 'CONSULTATION — entering the Goblin Casino — discard 1 card to join the game'],
     [/^(.+) — choisissez une option$/, '$1 — choose an option'],
     [/^RUN (\d+) · TOUR DE DONJON (\d+)$/, 'RUN $1 · DUNGEON TURN $2'],
     [/^(\d+) POINTS?$/, '$1 POINTS'],
@@ -1149,6 +1155,125 @@
     'The folder opens in your file explorer.': 'Le dossier s’ouvre dans ton explorateur.'
   };
   var EN_FR_MOTIFS = [];
+  /* S1460 - note 339 (2) : L'AUDIT A CHAUD EN FRANCAIS. Releve sur 57 etats deposes (iframes 1920 x 1080,
+     langue FR, texte visible, cartons retires par le corpus du catalogue) : 235 textes anglais peints.
+     Le texte IMPRIME des cartes et des tuiles reste anglais (339 (4)) ; les noms de personnages aussi
+     (ce sont des cartes). Le reste se traduit ici : les libelles fixes en cles exactes, les phrases a
+     trous en motifs. */
+  var ECOLE_FR = { Fire: 'Feu', Frost: 'Glace', Lightning: 'Foudre', Poison: 'Poison', Arcane: 'Arcane', Chaos: 'Chaos' };
+  var EMPLACEMENT_FR = { WEAPON: 'ARME', HEAD: 'TÊTE', CHEST: 'TORSE', LEGS: 'JAMBES', BACK: 'DOS', HANDS: 'MAINS',
+    FEET: 'PIEDS', RING: 'ANNEAU', 'RING 1': 'ANNEAU 1', 'RING 2': 'ANNEAU 2', CONSUMABLE: 'CONSOMMABLE' };
+  var CONDITION_FR = [
+    [/the modified total reaches (-?\d+)/g, 'le total modifié atteint $1'],
+    [/the modified total does not exceed (-?\d+)/g, 'le total modifié ne dépasse pas $1'],
+    [/the die face ([\d-]+)/g, 'la face $1'],
+    [/the roll fails, critical failure included/g, 'le jet échoue, échec critique compris'],
+    [/the roll succeeds, critical success included/g, 'le jet réussit, succès critique compris'],
+    [/applies no matter what/g, 's’applique quoi qu’il arrive'],
+    [/the LOWEST roll in range/g, 'le jet le plus BAS de la plage'],
+    [/the HIGHEST roll in range/g, 'le jet le plus HAUT de la plage'],
+    [/the caster’s character is /g, 'le personnage du lanceur est '],
+    [/ or /g, ' ou '], [/ and /g, ' et ']
+  ];
+  function conditionFR(s) {
+    var t = String(s);
+    for (var i = 0; i < CONDITION_FR.length; i += 1) t = t.replace(CONDITION_FR[i][0], CONDITION_FR[i][1]);
+    return t;
+  }
+  var ATTEND_FR = { 'a hit to be taken': 'un coup encaissé', 'a die to be rolled': 'un dé lancé',
+    'the opening of a combat': 'l’ouverture d’un combat' };
+  var CIBLE_FR = { 'a player on the Tile, of your choice': 'un joueur sur la Tuile, au choix',
+    'anyone on the Tile, player or Mob, caster excluded — of your choice': 'n’importe qui sur la Tuile, joueur ou Mob, lanceur exclu — au choix' };
+  var RELANCE_FR = { 'another reroll rule': 'une autre règle de relance', 'unchanged': 'inchangé',
+    'the trigger die': 'le dé déclencheur', 'the best face, automatically': 'la meilleure face, automatiquement' };
+  var EN_FR_JEU = {
+    'WEAPON': 'ARME', 'HEAD': 'TÊTE', 'CHEST': 'TORSE', 'LEGS': 'JAMBES', 'BACK': 'DOS', 'HANDS': 'MAINS',
+    'FEET': 'PIEDS', 'RING 1': 'ANNEAU 1', 'RING 2': 'ANNEAU 2', 'EMPTY': 'LIBRE',
+    'HIDE': 'MASQUER', 'READY': 'PRÊT', 'WIN': 'VICTOIRE', 'ROLL FOR FIRST PLAYER': 'JET DU PREMIER JOUEUR',
+    'ACTS NOW': 'AGIT', 'YOU ARE DEAD — YOU WATCH': 'TU ES MORT — TU REGARDES', 'mort — for good': 'mort — pour de bon',
+    'Draw a tile and go there.': 'Pioche une tuile et vas-y.',
+    'this tile cannot be explored': 'cette tuile ne s’explore pas',
+    'this tile has no interaction': 'cette tuile n’a pas d’interaction',
+    'already explored this visit': 'déjà explorée à cette visite',
+    'free — it does not cost your Action': 'gratuit — ça ne coûte pas ton Action',
+    'take the portal: you leave the dungeon for good': 'prends le portail : tu quittes le donjon pour de bon',
+    'hand': 'main', 'empty hand': 'main vide',
+    'no player is left in the dungeon': 'plus aucun joueur dans le donjon',
+    'the whole table, wherever they are in the dungeon': 'toute la table, où qu’elle soit dans le donjon',
+    '→ answer on the right': '→ réponds à droite', 'Pick a number': 'Choisis un nombre',
+    'THE CARD PLAYED': 'LA CARTE JOUÉE', 'THE RESPONSE': 'LA RÉPONSE', 'it moves on by itself': 'ça avance tout seul',
+    'PASS — I discard nothing': 'PASSER — je ne défausse rien',
+    '⊘ this question cannot be refused — only SILENCE ends it, and it answers “present no cards” (§7.2)':
+      '⊘ cette question ne se refuse pas — seul le SILENCE la clôt, et il répond « ne présenter aucune carte » (§7.2)',
+    'DON’T SIT (costs nothing)': 'NE PAS S’ASSEOIR (ne coûte rien)',
+    'not answering means not sitting — silence discards nothing (§7.2)':
+      'ne pas répondre, c’est ne pas s’asseoir — le silence ne défausse rien (§7.2)',
+    '◎ TARGETING YOU': '◎ TE VISE', 'BACK TO MENU': 'RETOUR AU MENU', 'END TURN': 'FIN DU TOUR',
+    'THROW NOTHING (you lose)': 'NE RIEN JOUER (tu perds)',
+    'both signs are revealed TOGETHER — nobody sees the other first. A tie is replayed (§6.5.2).':
+      'les deux signes se révèlent ENSEMBLE — personne ne voit l’autre d’abord. Une égalité se rejoue (§6.5.2).',
+    '⏱ the scene is still playing — your question comes right after, and nothing will pass for you before then':
+      '⏱ la scène se joue encore — ta question arrive juste après, et rien ne passera pour toi d’ici là',
+    '⏱ the die is still being shown — the countdown has not started, and nothing will pass for you before then':
+      '⏱ le dé est encore montré — le compte à rebours n’a pas commencé, et rien ne passera pour toi d’ici là',
+    '⊘ used this Dungeon Turn — back at the end of the Dungeon Turn':
+      '⊘ utilisée ce Tour de donjon — revient à la fin du Tour de donjon',
+    'DUNGEON': 'DONJON', 'LOG': 'JOURNAL', 'FOLLOW': 'SUIVRE', 'FOLLOWING': 'SUIVI', 'OPTIONS': 'OPTIONS',
+    'GRAVEYARD': 'CIMETIÈRE', 'No card played from a hand yet.': 'Aucune carte jouée de la main pour l’instant.',
+    'no collapse': 'pas de Collapse', 'no portal': 'pas de portail', 'portal everywhere': 'portail partout',
+    'TABLE v2': 'TABLE v2', 'the table (V: lighter / darker veil over the room)': 'la table (V : voile plus clair / plus sombre sur la salle)',
+    'the old table — switch ON to come back': 'l’ancienne table — passe sur ON pour revenir'
+  };
+  for (var kj in EN_FR_JEU) { if (Object.prototype.hasOwnProperty.call(EN_FR_JEU, kj)) EN_FR[kj] = EN_FR_JEU[kj]; }
+  var GESTE_FR = { 'Move': 'Se déplacer', 'Explore (1d6)': 'Explorer (1d6)', 'Interaction :': 'Interaction :',
+    'Extract': 'Sortir', 'Trade': 'Troc', 'Fight': 'Combattre', 'Loot the body': 'Fouiller le corps',
+    'Break the lock': 'Briser le verrou' };
+  EN_FR_MOTIFS = [
+    [/^(\d+)\. (Move|Explore \(1d6\)|Interaction :|Extract|Trade|Fight|Loot the body|Break the lock)$/,
+      function (m, n, g) { return n + '. ' + GESTE_FR[g]; }],
+    [/^TURN (\d+)$/, 'TOUR $1'], [/^collapse 1d(\d+)$/, 'Collapse 1d$1'], [/^portal (\d+) %$/, 'portail $1 %'],
+    [/^ROUND (\d+)$/, 'MANCHE $1'],
+    [/^ROLL (.+)$/, 'JET $1'],
+    [/^ATTACK TABLE — (.+)$/, 'TABLE D’ATTAQUE — $1'],
+    [/^→ the card reads this face: (.+)$/, function (m, c) { return '→ la carte lit cette face : ' + conditionFR(c); }],
+    [/^→ the card asked for (.+) — this face did not give it$/, function (m, c) { return '→ la carte demandait ' + conditionFR(c) + ' — cette face ne l’a pas donné'; }],
+    [/^→ (.+) flees to (.+?) — turn over$/, '→ $1 fuit vers $2 — fin du tour'],
+    [/^→ (.+) flees to (.+)$/, '→ $1 fuit vers $2'],
+    [/^(⊘ )?awaits (.+)$/, function (m, p, q) { return ATTEND_FR[q] === undefined ? m : (p || '') + 'attend ' + ATTEND_FR[q]; }],
+    [/^(⊘ )?nothing to target — (.+)$/, function (m, p, q) { return CIBLE_FR[q] === undefined ? m : (p || '') + 'rien à cibler — ' + CIBLE_FR[q]; }],
+    [/^⚔ (.+) fights (.+)$/, '⚔ $1 combat $2'],
+    [/^(.+) deals (Fire|Frost|Lightning|Poison|Arcane|Chaos) DMG to (.+)$/, function (m, a, e, b) { return a + ' inflige des DMG de ' + ECOLE_FR[e] + ' à ' + b; }],
+    [/^(.+) deals DMG to (.+)$/, '$1 inflige des DMG à $2'],
+    [/^☠ (.+) dies \((.+)\)$/, '☠ $1 meurt ($2)'],
+    [/^You draw (.+)$/, 'Tu pioches $1'],
+    [/^T(\d+) · (.+) plays “(.+)” · card$/, 'T$1 · $2 joue « $3 » · carte'],
+    [/^T(\d+) · 🎲 DIE REROLLED — (.+)$/, function (m, t, r) {
+      return 'T' + t + ' · 🎲 DÉ RELANCÉ — ' + r.split(' · ').map(function (x) { return RELANCE_FR[x] || x; }).join(' · '); }],
+    [/^(.+) plays (.+)$/, '$1 joue $2'],
+    [/^(.+) discards (.+)$/, '$1 défausse $2'],
+    [/^(.+) moves to (.+)$/, '$1 se rend à $2'],
+    [/^(.+) stuns (.+)$/, '$1 étourdit $2'],
+    [/^(.+) flees (.+)$/, '$1 fuit $2'],
+    [/^(\d+) cards? in hand$/, '$1 carte(s) en main'],
+    [/^waiting on: (.+)$/, function (m, q) { return 'on attend : ' + q.replace(/\bYOU\b/, 'TOI'); }],
+    [/^offered by : (.+)$/, 'proposé par : $1'],
+    [/^already seated : (.+)$/, 'déjà assis : $1'],
+    [/^sitting costs 1 card from hand — already seated: (.+)$/, 's’asseoir coûte 1 carte de la main — déjà assis : $1'],
+    [/^CONSULTATION — (.+) · asked by (.+) · (\d+) invited, (\d+) pending$/, 'CONSULTATION — $1 · posée par $2 · $3 invités, $4 en attente'],
+    [/^TILE ENTRY — (.+) enters (.+?) → Rock-Paper-Scissors, round (\d+)$/, 'ENTRÉE DE TUILE — $1 entre dans $2 → Pierre-feuille-ciseaux, manche $3'],
+    [/^TILE ENTRY — (.+) enters (.+)$/, 'ENTRÉE DE TUILE — $1 entre dans $2'],
+    [/^Slot taken — unequip (.+) to put this one on$/, 'Emplacement pris — retire $1 pour mettre celle-ci'],
+    [/^EQUIP → ([A-Z]+(?: \d)?)( · COSTS THE SKILL)?$/, function (m, s, c) { return 'ÉQUIPER → ' + (EMPLACEMENT_FR[s] || s) + (c ? ' · COÛTE LE SKILL' : ''); }],
+    [/^(.+) · USED TO RUN$/, '$1 · A SERVI À FUIR'],
+    [/^YOU (\d*d\d+)$/, 'TOI $1'],
+    [/^(\d+)d(\d+) — (\d+) dice read FACE BY FACE\. The sum decides nothing$/, '$1d$2 — $3 dés lus FACE PAR FACE. La somme ne décide rien'],
+    [/^(.+) · range ([\d-]+) → « (.+) » · ⚠ hits the whole table, wherever they are in the dungeon$/, '$1 · plage $2 → « $3 » · ⚠ touche toute la table, où qu’elle soit dans le donjon'],
+    [/^↳ in reaction to: (.+)$/, '↳ en réaction à : $1'],
+    [/^END TURN — (\d+) to discard$/, 'FIN DU TOUR — $1 à défausser']
+  ];
+  /* 339 (2) — l'ecran double ses blancs autour de « · » et de « — » (mesure : « ”  ·  card ») : chaque
+     espace d'un motif vaut UN OU PLUSIEURS blancs. */
+  EN_FR_MOTIFS = EN_FR_MOTIFS.map(function (m) { return [new RegExp(m[0].source.replace(/ /g, '\\s+'), m[0].flags), m[1]]; });
   /* S1419 - note 241 (1) : LE JEU EST ECRIT EN ANGLAIS, A LA SOURCE. `main.ts` portait
      son francais et ce module le traduisait libelle par libelle : une cle peinte dans
      une phrase composee passait en francais (« la piece retourne dans ta main — will

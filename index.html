@@ -11422,6 +11422,10 @@
                     padding: 3px 10px; cursor: pointer; flex: 0 0 auto; }
       .vdj-filtre.on { color: var(--stock); border-color: var(--stock-dim);
                        background: var(--raised); }
+      /* S1460 · note 338 ② — une pastille par personnage, à la couleur de son siège */
+      .vdj-sieges { display: flex; gap: 6px; flex: 0 1 auto; flex-wrap: wrap; }
+      .vdj-siege { color: var(--siege, var(--dim)); border-color: color-mix(in srgb, var(--siege, var(--rule)) 45%, transparent); }
+      .vdj-siege.on { color: var(--ink); background: var(--siege, var(--raised)); border-color: var(--siege, var(--stock-dim)); }
       /*
        * Le corps est la SEULE surface qui défile : la barre reste sous la main,
        * et le tour courant reste en tête de ce qui défile.
@@ -12223,6 +12227,22 @@
       /* 335 ③ — le texte riche : la rareté à la couleur de son cadre, le boss en rouge, l'école en glyphe */
       .nouvelle-table .tv2-rarete { font-weight: 700; }
       .nouvelle-table .tv2-boss { color: #E0342A; font-weight: 700; }
+      .nouvelle-table .tv2-sousboss { color: #FF7F66; font-weight: 700; }   /* 338 ⑥ — corail */
+      /* S1460 · note 338 ⑬ (reco du classeur, « veto d'un mot ») — DEUX polices, pas trois : l'affiche
+         (`--display`, celle de RUN / END TURN) pour les titres, les boutons et les gros appels ; Alegreya
+         (celle des cartons) pour tout ce qui se lit. La machine à écrire du HUD (`--mono`, 448 textes de la
+         table mesurés en Courier) disparaît : `--mono` devient Alegreya sous TABLE v2. Les étiquettes
+         (STR, WEAPON, RING 1) en petites capitales d'Alegreya. */
+      html.table-v2 { --mono: "Alegreya", "Palatino Linotype", Georgia, serif; }
+      html.table-v2 .stat-nom, html.table-v2 .creneau-nom { font-variant-caps: all-small-caps; letter-spacing: .06em; }
+      /* S1460 · note 338 ⑫ — « la bordure de la fiche est un peu dégueu » : en attendant les candidats de
+         Croze (`ASSETS\cadres\`, pas encore déposés), la planche cloutée réduite à 8 px — ses éclats clairs
+         s'y lisaient en papier déchiré — cède à un filet fin et sombre. Rien ne bouge : un `outline` ne
+         prend aucune place (la loi de `da_fonds.css`). */
+      html.table-v2 body .nouvelle-table .ntt-toi { border-image: none;
+        outline: 1px solid rgba(233, 228, 216, .14); outline-offset: 3px;
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, .55), 0 12px 28px -14px #000; }
+      .nouvelle-table .tv2-issue { font-weight: 700; }
       /* S1458 · note 319 — le point virtuel : un pion ◆ allumé à côté du score ; s'allume / s'évanouit / devient plein */
       .pts-virtuels { display: inline-flex; gap: .12em; margin-left: .3em; vertical-align: middle; pointer-events: auto; }
       .pion-virtuel { color: #F2C46B; font-size: .8em; line-height: 1; text-shadow: 0 0 6px rgba(242,196,107,.85), 0 0 2px rgba(0,0,0,.9);
@@ -12545,6 +12565,9 @@
       .nouvelle-table .nt-entete-tour.deplie .nt-et-detail { display: flex; }
       .nouvelle-table .nt-entete-tour .nt-et-detail .bt-tour { display: none; }
       .nouvelle-table > .nt-memoire.nt-tour-seul:has(.nt-entete-tour) { max-width: 580px; }
+      /* S1460 · note 338 ④ — TABLE v2 : la barre RUN tient sur UNE ligne (libellés courts, jamais de retour) */
+      html.table-v2 .nouvelle-table .nt-entete-tour .nt-et-ligne { white-space: nowrap; font-size: calc(17px * var(--lisible, 1) * var(--et-serre, 1)); }
+      html.table-v2 .nouvelle-table .nt-entete-tour .nt-et-texte { white-space: nowrap; }
       .bt-gemme {
         display: inline-block; width: 9px; height: 9px; margin-right: 9px;
         transform: rotate(45deg) translateY(-1px); vertical-align: middle;
@@ -13242,6 +13265,32 @@
       .nouvelle-table .ntt-table:not(.ntt-en-combat) .ntt-axe .tuile-art,
       .nouvelle-table .ntt-table:not(.ntt-en-combat) .ntt-axe.avec-question .tuile-art { height: 504px; }
       .nouvelle-table .ntt-question-cadre { position: relative; flex: 0 1 820px; min-width: 0; }
+      /* S1460 · note 338 ⑩ — TABLE v2 : le panneau du joueur suivi, plus grand ; ses ACTIONS en gros avec leur
+         image, le fil en sous-lignes ; il s'efface quand on le voit choisir lui-même. */
+      .nouvelle-table .ntt-pov-gestes.tv2-suivi { font-size: 1.15em; }
+      .nouvelle-table .tv2-actes { display: flex; flex-direction: column; gap: 8px; margin: 6px 0 12px; }
+      .nouvelle-table .tv2-acte { display: flex; align-items: center; gap: 12px; color: #f2ede4;
+        font-family: "Alegreya", "Palatino Linotype", Georgia, serif; font-weight: 700; font-size: 22px; line-height: 1.2; }
+      .nouvelle-table .tv2-acte-img { height: 84px; width: auto; border-radius: 4px; box-shadow: 0 4px 12px #000; flex: 0 0 auto; }
+      .nouvelle-table .tv2-suivi-sous { opacity: .72; font-size: .9em; }
+      .nouvelle-table .ntt-question-cadre.tv2-suivi-efface { opacity: .12; transition: opacity .4s; }
+      /* S1460 · note 338 ⑪ — le CIMETIÈRE : les cartes jouées empilées (le haut de chacune visible, la plus
+         récente devant), la pile défile DANS la colonne, sans barre (SC-1) ; survol = la carte sort de la pile. */
+      .nouvelle-table .tv2-cimetiere { display: flex; flex-direction: column; min-height: 0; }
+      .nouvelle-table .tv2-cim-liste { flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-width: none;
+        display: flex; flex-direction: column; padding: 4px 6px 120px; }
+      .nouvelle-table .tv2-cim-liste::-webkit-scrollbar { display: none; }
+      .nouvelle-table .tv2-cim-carte { position: relative; margin-bottom: -250px; transition: transform .18s;
+        border-left: 3px solid var(--siege, var(--rule)); padding-left: 6px; }
+      .nouvelle-table .tv2-cim-carte:hover { transform: translateX(-14px); z-index: 999 !important; }
+      .nouvelle-table .tv2-cim-legende { font-family: "Alegreya", "Palatino Linotype", Georgia, serif; font-size: 13px;
+        line-height: 1.2; color: #f2ede4; background: rgba(10, 8, 6, .86); padding: 2px 6px; }
+      .nouvelle-table .tv2-cim-qui { color: var(--siege, #f2ede4); font-weight: 700; }
+      .nouvelle-table .tv2-cim-tour { color: var(--stock-dim); }
+      .nouvelle-table .tv2-cim-reaction { color: #c9c2b4; font-style: italic; }
+      .nouvelle-table .tv2-cim-art { display: block; width: 100%; max-width: 210px; height: auto; border-radius: 6px;
+        box-shadow: 0 6px 16px -4px #000; }
+      .nouvelle-table .tv2-cim-nom { font-family: "Alegreya", serif; color: #f2ede4; padding: 6px; background: rgba(0,0,0,.6); }
       .nouvelle-table .ntt-table:not(.ntt-en-combat) .ntt-axe .ntt-question-cadre .ntt-sous-tuile {
         width: 100%; max-height: 470px; overflow: hidden;   /* S1291 · LA-4 : la table part de 251 (résumés sous les miniatures) → 721 < 733 */
       }
@@ -13671,6 +13720,22 @@
         background: transparent; border: 1px solid var(--stock-dim);
       }
       .nouvelle-table .nt-donjon-bouton:hover { border-color: var(--stock); }
+      /* S1460 · note 338 ⑦ ⑧ — TABLE v2 : les quatre vues, en icônes, en bas à droite (2 × 2) ; OPTIONS
+         quitte la barre du bas. FOLLOW allumé = plein, il luit. */
+      html.table-v2:has(.tv2-vues) .porte-options:not(.porte-vitesse) { display: none; }
+      .tv2-vues { position: fixed; right: 12px; bottom: 30px; z-index: 48;
+        display: grid; grid-template-columns: repeat(2, 70px); gap: 6px; }
+      .tv2-vue { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+        height: 60px; padding: 4px 2px; cursor: pointer; color: var(--stock);
+        background: rgba(10, 10, 10, .78); border: 1px solid rgba(233, 228, 216, .45); border-radius: 4px; }
+      .tv2-vue:hover { border-color: var(--stock); background: rgba(30, 28, 24, .9); }
+      .tv2-vue-ico { font-size: 24px; line-height: 26px; }
+      .tv2-vue-nom { font-family: var(--display); font-weight: 800; font-size: 10px; letter-spacing: .08em; }
+      .tv2-vue-suivre.on { color: var(--ink); background: var(--stock); border-color: var(--stock);
+        box-shadow: 0 0 12px 2px rgba(233, 228, 216, .55); animation: tv2-suivi 2s ease-in-out infinite; }
+      @keyframes tv2-suivi { 0%, 100% { box-shadow: 0 0 6px 1px rgba(233, 228, 216, .35); }
+        50% { box-shadow: 0 0 16px 4px rgba(233, 228, 216, .7); } }
+      @media (prefers-reduced-motion: reduce) { .tv2-vue-suivre.on { animation: none; } }
       /* S1435 · note 282 ③ — END TURN, posé quand tout est résolu : grand, tampon encré,
          pulsé doucement. « Quand je le vois, il est impossible à rater. » */
       button.fin-de-tour-prete { font-size: calc(18px * var(--lisible, 1)) !important; letter-spacing: .16em;
@@ -13684,6 +13749,10 @@
       /* S1437 · note 286 ④ — END TURN avant l'heure : visible, mais ÉTEINT (contour, encre
          des libellés, aucune pulsation) — il ne doit pas donner envie de cliquer. */
       button.fin-de-tour-eteinte { animation: none !important; color: var(--stock-dim) !important; filter: none; }
+      /* S1460 · note 338 ③ — TABLE v2 : « END TURN déborde de son cadre » (mesuré : texte 60 px de haut dans
+         une plaque de 44, largeur 160 imposée par la rangée) — une ligne, le bouton prend la largeur du texte. */
+      html.table-v2 button.fin-autonome-bouton { white-space: nowrap; flex: 0 0 auto; width: max-content; max-width: none; }
+      html.table-v2 .fin-autonome { flex: 0 0 auto; }
       .plein .djt { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px 40px;
         padding: 14px 18px; font-family: var(--mono); color: var(--stock); }
       .plein .djt-portail { grid-column: 1 / -1; }
@@ -14108,7 +14177,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DJKQLhXp.js"></script>
+    <script type="module" crossorigin src="./assets/index-CS_9-Sxc.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
