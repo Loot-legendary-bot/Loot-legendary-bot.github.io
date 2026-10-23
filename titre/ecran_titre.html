@@ -1987,12 +1987,14 @@ const CARROUSEL = Array.isArray(PANNEAU.carrousel) && PANNEAU.carrousel.length >
 /* note 278 (S1434) - LE CARROUSEL REVIENT (le retrait 275 (8) etait une mauvaise lecture :
    « obsolete » visait les IMAGES). Il lit `art/titre/carrousel/` (la serie recente 16:9,
    sans la pie) par `index.json` ; la pierre reste son repli s'il n'a rien a montrer. */
-CARROUSEL.forEach((s,i)=>{const d=document.createElement('div');d.className='diapo'+(i===0?' on':'');
+/* note 337 (2) - Croze : « mon HOME ne s'ouvre pas toujours sur la meme salle » : la premiere
+   diapo est tiree au hasard a chaque ouverture, l'ordre de defilement reste celui de l'index. */
+let bi=CARROUSEL.length>1?Math.floor(Math.random()*CARROUSEL.length):0;
+CARROUSEL.forEach((s,i)=>{const d=document.createElement('div');d.className='diapo'+(i===bi?' on':'');
   const f=new Image();f.className='flou';f.alt='';f.src=s;
   const n=new Image();n.className='net';n.alt='';n.src=s;
   d.appendChild(f);d.appendChild(n);bgw.appendChild(d);});
 if (bgw.children.length === 0) bgw.classList.add('pierre-seule');
-let bi=0;
 if (bgw.children.length > 1) setInterval(()=>{const im=bgw.children;im[bi].classList.remove('on');
   bi=(bi+1)%im.length;im[bi].classList.add('on');},5200);
 
