@@ -7547,6 +7547,16 @@
         /* Les deux faits restent LISIBLES sans mouvement : l'encre tient seule. */
         .fs-hp-bas .fs-n, .fs-haut .fs-n { animation: none; }
       }
+      /* S1466 · note 349 ② — LA STAT ÉLEVÉE (≥ 15) : une aura douce derrière le chiffre, qui scintille ;
+         sa teinte va de l'or pâle (15) à l'ambre chaud (25+) par `--chaleur`. Opacité seule en mouvement. */
+      .fs-eleve { isolation: isolate; }
+      .fs-eleve::before { content: ''; position: absolute; left: 50%; top: 50%; width: 115%; aspect-ratio: 1;
+        transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; z-index: -1;
+        background: radial-gradient(closest-side,
+          hsla(calc(48 - 26 * var(--chaleur, 0)), 100%, 58%, calc(.45 + .3 * var(--chaleur, 0))), transparent);
+        animation: fs-eleve-scintille 1.9s ease-in-out infinite; }
+      @keyframes fs-eleve-scintille { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .fs-eleve::before { animation: none; opacity: .8; } }
 
       /*
        * ⚠ **ET IL N'Y A QU'UNE FICHE À L'ÉCRAN.** La colonne gauche reste
@@ -12190,9 +12200,11 @@
       .nouvelle-table .nt-presence[data-camp] { --camp: #efece3; }
       .nouvelle-table .nt-presence[data-camp="1"] { --camp: #a3231d; }
       .nouvelle-table .nt-presence[data-camp="2"] { --camp: #c07a2c; }
-      .nouvelle-table .nt-presence[data-camp] > .nt-rond::after {
-        content: ''; position: absolute; left: 18%; right: 18%; bottom: -5px; height: 3px;
-        border-radius: 2px; background: var(--camp); box-shadow: 0 0 6px var(--camp); pointer-events: none;
+      /* S1466 · note 348 — le trait d'équipe vivait sur `.nt-rond::after`, le MÊME pseudo-élément que l'anneau du
+         siège actif (`inset: -5px` le remontait EN HAUT du cercle) et que l'anneau-timer masque (`display: none`) :
+         il apparaissait, sautait, disparaissait. Il souligne désormais le NOM du joueur, toujours au même endroit. */
+      .nouvelle-table .nt-presence[data-camp] > .nt-qui {
+        text-decoration: underline 3px var(--camp); text-underline-offset: 5px; text-decoration-skip-ink: none;
       }
       .tv2-seuil-bloc[data-camp], .ndr-duelliste[data-camp] { --camp: #efece3; }
       .tv2-seuil-bloc[data-camp="1"], .ndr-duelliste[data-camp="1"] { --camp: #a3231d; }
@@ -14287,7 +14299,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D1avsQi9.js"></script>
+    <script type="module" crossorigin src="./assets/index-CDLQWZcE.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

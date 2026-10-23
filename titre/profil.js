@@ -21,6 +21,21 @@
  * le pseudo et le rang sont ceux que le titre affichait en dur (aucune règle de
  * rang n'existe encore — une ligne de file, pas une invention).
  */
+/* S1466 - note 349 (1) : LE SON A 50 % PAR DEFAUT. Le volume MAITRE (`volMaster` de `ll.options.son`)
+   passe a 0,5 quand il n'a jamais ete pose ; un reglage reste a l'ancien defaut (1) est ramene a 0,5
+   UNE fois (la marque `maitre50`), puis le curseur d'OPTIONS fait foi pour toujours. Ici parce que ce
+   script est charge en tete par le titre ET par le jeu, avant tout lecteur du volume. */
+(function () {
+  try {
+    var r = JSON.parse(window.localStorage.getItem('ll.options.son') || 'null');
+    if (r === null || typeof r !== 'object') r = {};
+    if (r.maitre50 === true) return;
+    if (typeof r.volMaster !== 'number' || !isFinite(r.volMaster) || r.volMaster >= 1) r.volMaster = 0.5;
+    r.maitre50 = true;
+    window.localStorage.setItem('ll.options.son', JSON.stringify(r));
+  } catch (e) { /* stockage refuse : le defaut du lecteur vaut */ }
+})();
+
 (function () {
   'use strict';
   var CLE = 'll.profil.v1';

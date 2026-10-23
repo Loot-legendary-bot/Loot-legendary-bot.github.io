@@ -2120,7 +2120,7 @@ function peinsLaLangue(){
      (`volMaster` dans `ll.options.son`, la cle que le jeu lit deja), sans toucher a leurs
      reglages propres. */
   var t3=document.createElement('div'); t3.className='langue-titre'; t3.textContent='SOUND'; t3.style.marginTop='2.4cqh'; box.appendChild(t3);
-  var lu=1;
+  var lu=0.5; /* S1466 - note 349 (1) : 50 % par defaut */
   try { var rs=JSON.parse(localStorage.getItem('ll.options.son')||'null'); if(rs&&typeof rs.volMaster==='number'&&isFinite(rs.volMaster)) lu=Math.min(1,Math.max(0,rs.volMaster)); } catch(e) {}
   var ligneSon=document.createElement('label'); ligneSon.className='son-maitre';
   var curseurSon=document.createElement('input'); curseurSon.type='range'; curseurSon.min='0'; curseurSon.max='100'; curseurSon.step='5';
@@ -3924,7 +3924,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
 
   var vol = 1;                       /* le mix (cellule `gain_db`) */
   var reglage = 1;                   /* le curseur de Croze (`volMusique`) */
-  var maitre = 1;                    /* S1435 - note 281 (12) : le volume MAITRE (`volMaster`) */
+  var maitre = 0.5;                  /* S1435 - note 281 (12) : le volume MAITRE (`volMaster`) ; 50 % par defaut (349 (1)) */
   var allumee = true;                /* son interrupteur (`musique`) */
   var els = [], actif = 0, arme = false, pret = false;
 
