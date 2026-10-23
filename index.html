@@ -10833,13 +10833,15 @@
          `tenue` (le siège d'un autre) brûle plus bas, sans halo : la réserve du S314 tient. Le sceau de
          Signature (`boule-s`) ne change pas. */
       html.table-v2 .boules .boule:not(.boule-s) { border: 0; border-radius: 0; color: transparent;
-        background: url(/art/curseurs-48/torch_hover.png) center / contain no-repeat; transform-origin: 50% 90%; }
+        background: url(/art/hud/torche_allumee.webp) center / contain no-repeat; transform-origin: 50% 90%; }
       html.table-v2 .boules .boule:not(.boule-s)::after { display: none; }
       html.table-v2 .boules .boule.pleine:not(.boule-s) { animation: tv2-flamme 900ms ease-in-out infinite alternate;
         filter: drop-shadow(0 0 5px rgba(255,140,40,.75)); }
       html.table-v2 .boules .boule.tenue:not(.boule-s) { filter: saturate(.7) brightness(.85); }
-      html.table-v2 .boules .boule.vide:not(.boule-s) { background-image: url(/art/curseurs-48/torch.png);
-        filter: grayscale(1) brightness(.38); opacity: .9; }
+      /* S1461 · note 342 ② — les torches de Croze (`ASSETS/hud/torche_*.png`, détourées en webp) : l'éteinte
+         a sa propre image (le panier vide, la fumée), elle n'est plus une allumée passée au gris. */
+      html.table-v2 .boules .boule.vide:not(.boule-s) { background-image: url(/art/hud/torche_eteinte.webp);
+        filter: brightness(.8); opacity: .9; }
       @media (prefers-reduced-motion: reduce) { html.table-v2 .boules .boule.pleine:not(.boule-s) { animation: none; } }
       /* La rangée d'un AUTRE siège, dans son bloc info déplié (note ㉔ bis). */
       .pips-siege { display: inline-flex; align-items: center; gap: 5px; }
@@ -12208,6 +12210,9 @@
       .nouvelle-table .tv2-chevron { position: absolute; left: -30px; top: 0; width: 22px; height: 30px; visibility: hidden;
         color: #F2C46B; font-size: calc(18px * var(--lisible, 1)); line-height: 30px; text-align: center; pointer-events: none;
         text-shadow: 0 0 8px rgba(242,196,107,.65); }
+      /* S1461 · note 342 ⑤ — « le ◆ trop excentré » : il se colle au numéro (≈ 8 px, mesuré 554 − 546) et
+         descend à la hauteur des capitales du verbe (Alegreya 27,6 px : +10 px). */
+      .nouvelle-table .tv2-ligne > .tv2-chevron { left: auto; right: calc(100% + 4px); width: auto; top: 10px; }
       .nouvelle-table .tv2-chevron img { display: block; width: 22px; height: 22px; object-fit: contain; transform-origin: 50% 90%;
         animation: tv2-flamme 900ms ease-in-out infinite alternate; filter: drop-shadow(0 0 6px rgba(255,140,40,.7)); }
       @keyframes tv2-flamme { 0% { transform: scale(1, 1) rotate(-2deg); opacity: .92; } 35% { transform: scale(.94, 1.07) rotate(2deg); opacity: 1; }
@@ -12268,6 +12273,8 @@
       .nouvelle-table .tv2-face-n { display: block; width: 36px; height: 36px; line-height: 36px; text-align: center; font-weight: 700; border: 1px solid currentColor; }
       .nouvelle-table .tv2-face-issue { display: block; width: 34px; height: 34px; object-fit: cover; object-position: 50% 52%;
         border: 2px solid var(--issue, #6E6A62); border-radius: 3px; }
+      /* S1461 · note 342 ③ — l'illustration du carton du coffre (ses 15 %–60 % en hauteur), pas la carte entière */
+      .nouvelle-table .tv2-face-illu { background-repeat: no-repeat; background-size: 124% auto; background-position: 50% 23%; }
       .nouvelle-table .tv2-face-mot { font-size: calc(11px * var(--lisible, 1)); line-height: 1.1; color: var(--issue, inherit); text-align: center; white-space: nowrap; }
       .nouvelle-table .tv2-ligne:disabled .tv2-face-mot { color: inherit; }
       /* note 330 ④ / ④ bis — la vignette : au-dessus du journal, de sa largeur ; tap = la carte en grand. */
@@ -12312,8 +12319,15 @@
       .nouvelle-table .nt-pa-glyphe { font-size: .9em; }
       .nouvelle-table .nt-pa-points .nt-pa-glyphe { color: #F2C46B; }
       .nouvelle-table .nt-pa-points { right: calc(100% - 10px); top: 58%; transform: translateY(-50%); }
-      .nouvelle-table .nt-pa-quetes { left: calc(100% - 10px); top: 58%; transform: translateY(-50%); }
+      .nouvelle-table .nt-pa-quetes, .nouvelle-table .nt-pa-cartes { left: calc(100% - 10px); top: 58%; transform: translateY(-50%); }
       .nouvelle-table .nt-pa-gear { left: 50%; top: calc(100% - 8px); transform: translateX(-50%); }
+      /* S1461 · note 342 ① (reco ⓡ) — « trop bloc noir, trop de place » : plus de fond ni de bord, les
+         chiffres posés sur l'anneau en petites capitales fines, un liseré sombre pour la lisibilité. */
+      .nouvelle-table .nt-pastille {
+        background: none; border: 0; padding: 0 2px; gap: 2px; font-variant: small-caps; font-weight: 600;
+        text-shadow: 0 0 2px #000, 0 0 3px #000, 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+      }
+      .nouvelle-table .nt-pastille .glyphe-dessine { display: inline-flex; filter: drop-shadow(0 0 1.5px #000) drop-shadow(0 0 1px #000); }
       html.table-v2 .nouvelle-table .nt-presence > .nt-qui { margin-top: 10px; font-weight: 700; letter-spacing: .1em; }
       /* S1453 · note 330 ⑤ (P3) — le TP en éventail : les cartes de tuile en grand, au centre, ma salle derrière. */
       .nouvelle-table .tv2-eventail {
@@ -12568,6 +12582,20 @@
       /* S1460 · note 338 ④ — TABLE v2 : la barre RUN tient sur UNE ligne (libellés courts, jamais de retour) */
       html.table-v2 .nouvelle-table .nt-entete-tour .nt-et-ligne { white-space: nowrap; font-size: calc(17px * var(--lisible, 1) * var(--et-serre, 1)); }
       html.table-v2 .nouvelle-table .nt-entete-tour .nt-et-texte { white-space: nowrap; }
+      /* S1461 · note 342 ⑦ — la barre RUN prend la couleur de la rareté du tour (saturée) : vert unco, bleu
+         rare, violet epic, jaune legendary ; COMMON garde son ivoire. */
+      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="UNCOMMON"] .nt-et-ligne { color: #4FE021; }
+      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="RARE"] .nt-et-ligne { color: #2F86FF; }
+      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="EPIC"] .nt-et-ligne { color: #A65CFF; }
+      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="LEGENDARY"] .nt-et-ligne { color: #FFD21F; }
+      /* S1461 · note 342 ④ — END TURN sur une ligne, le compte à défausser en pastille rouge au coin */
+      .a-pastille-defausse { position: relative; white-space: nowrap; overflow: visible !important; }
+      .pastille-defausse { position: absolute; top: -9px; right: -9px; min-width: 20px; height: 20px; padding: 0 5px;
+        box-sizing: border-box; border-radius: 10px; background: #C8261C; color: #fff; font: 700 12px/20px "Alegreya", Georgia, serif;
+        text-align: center; letter-spacing: 0; box-shadow: 0 0 0 2px rgba(0,0,0,.85), 0 0 8px rgba(200,38,28,.6); pointer-events: none; }
+      .pastille-defausse.pulse { animation: pastille-defausse-pulse 520ms ease-out 1; }
+      @keyframes pastille-defausse-pulse { 0% { transform: scale(1); } 40% { transform: scale(1.45); } 100% { transform: scale(1); } }
+      @media (prefers-reduced-motion: reduce) { .pastille-defausse.pulse { animation: none; } }
       .bt-gemme {
         display: inline-block; width: 9px; height: 9px; margin-right: 9px;
         transform: rotate(45deg) translateY(-1px); vertical-align: middle;
@@ -14177,7 +14205,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CS_9-Sxc.js"></script>
+    <script type="module" crossorigin src="./assets/index-D5Oou2Rr.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

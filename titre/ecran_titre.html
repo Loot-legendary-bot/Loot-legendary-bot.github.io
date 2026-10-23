@@ -173,7 +173,9 @@
   /* (d) le grade : l'icone seule, collee au pseudo */
   .hud #who + .hbar{display:none}
   .hud .rank #rank{display:none}
-  .hud .rank{margin-left:.6cqw}
+  .hud .rank{margin-right:.7cqw}
+  /* S1461 - note 341 (1) : l'embleme a la hauteur du texte du pseudo (28 px a 1080), teinte du metal du grade */
+  .hud .rank svg.embleme{width:2.4cqh;height:2.8cqh;filter:drop-shadow(0 0 .3cqh rgba(0,0,0,.9))}
   .door.hit h3{color:var(--blood);animation:arcade .1s linear 3}
 
   .foot{position:absolute;left:0;right:0;bottom:2.4%;z-index:6;display:flex;
@@ -1181,12 +1183,15 @@
        ils ne peuvent plus se couvrir a AUCUNE taille. -->
   <div class="corner">
   <div class="hud">
+    <!-- S1461 - note 341 (1) (2) : facon triple A, l'EMBLEME DE RANG juste a GAUCHE du nom, a la hauteur
+         du texte (le nom du grade au survol) ; le vieux chevron double et le buff du Bounty Wall
+         (« Lightning x3 ») quittent le header. -->
+    <span class="rank serif" id="rankwrap"><svg class="embleme" viewBox="0 0 24 28" aria-hidden="true">
+      <path d="M12 1.5 21.5 5v8.2c0 6.2-4.1 10.6-9.5 13.3C6.6 23.8 2.5 19.4 2.5 13.2V5z" fill="var(--rang-fond,#5a3a22)"
+        stroke="var(--rang,#c8894f)" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M12 6.2 13.9 10.4 18.4 10.8 15 13.8 16 18.3 12 15.9 8 18.3 9 13.8 5.6 10.8 10.1 10.4z"
+        fill="var(--rang,#c8894f)"/></svg><span id="rank"></span></span>
     <span class="who" id="who"></span>
-    <span class="who-buff" id="whobuff"></span>
-    <span class="hbar"></span>
-    <span class="rank serif"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none"
-      stroke="#a3231d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 13l8-7 8 7"/><path d="M4 19l8-7 8 7"/></svg><span id="rank"></span></span>
     <span class="hbar"></span>
     <span class="gold" id="goldwrap"><svg viewBox="0 0 24 24" aria-hidden="true">
       <!-- note 138 (1), verbatim : *« la dent doit être sans la blood drop »*.
@@ -2910,15 +2915,25 @@ function inventaire(){
    le rayon reste ecrit plus bas, il revient en remettant ['Blood','blood'] dans TABS. */
 /* S1431 - note 272 (5) : l'onglet INVENTORY, a part, en cases de RPG : ce que j'ai (consommables, possedes). */
 /* note 328 ② (Croze, 19/10) : le premier rayon est l'inventaire, et il s'appelle MY VAULT ; le reste = la boutique. */
-const TABS=[['MY VAULT','inv'],['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Charms','tick']];
+/* S1461 - note 341 (3) (Croze, 23/10 : « OK pour le Sang ») : l'onglet BLOOD se REVEILLE, en dernier. */
+const TABS=[['MY VAULT','inv'],['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Charms','tick'],['Blood','blood']];
 /* S1418 - note 239 (3), MONNAIE.md 10 - LE RAYON BLOOD : les quatre rayons du Sang et
    leurs prix. Le Sang se COMPTE, rien ne se vend tant que Steam n'est pas la : la
    vitrine se lit, aucun bouton n'achete. [nom, icone, prix, ce que c'est]. */
+/* S1461 - note 341 (3) : les rayons de BS-1 (MONNAIE 11.4) et les DEUX ARTICLES NEUFS de Croze (les CADRES
+   DE FICHE, le premier offert ; la BANNIERE AVEC NOM). [nom, icone, prix affiche, ce que c'est, etiquette].
+   Les prix sont ceux de MONNAIE 10 / 11.1 ; un rayon que MONNAIE ne chiffre pas dit « price soon » et
+   attend Croze (Q-BLOOD-PRIX) — aucun prix invente. Le Sang n'achete jamais un perso, des dents, de la
+   puissance, de la chance (11.2) : aucun rayon ici ne le fait. */
 const BLOOD=[
-  ['Alt portraits','perso','200','The second art of a character: portrait, banner and icon. One per character, when Croze draws it.'],
-  ['Legendary card backs','dos','300','Card backs beyond the Bounty Wall ones. The Alt Legendary backs stay in teeth.'],
-  ['Season pass','dpl','1,000','The Dungeon Pro Tour season track: 20 cosmetic rewards earned by playing ranked. The free track exists; the pass doubles its steps.'],
-  ['Titles, name colours, profile frames','perso','100–150','What shows in the Dungeon Pro Tour ranking.']];
+  ['Character skins','perso','200 blood','The second art of a character: portrait, banner and icon. One per character, when Croze draws it.','soon'],
+  ['Card back series','dos','300 blood','Card backs beyond the Bounty Wall ones. The Alt Legendary backs stay in teeth.','soon'],
+  ['Cursors & particles','curseur','price soon','A cursor and its trail, seen by the whole table.','soon'],
+  ['Alt banners','perso','price soon','Another banner behind your name and your seat.','soon'],
+  ['Character sheet frames','cadenas','first one free','The frame around your character sheet. Several to buy; the first one is a gift.','new'],
+  ['Banner with your name','perso','price soon','Your profile banner, struck with your name.','new'],
+  ['Season bundles','coffre','4,99 € · 19,99 €','Starter: 500 blood and an alt portrait of your choice. Supporter: 2,600 blood, the SUPPORTER title and a unique card back.','soon'],
+  ['Season pass','dpl','1,000 blood','The Dungeon Pro Tour season track: 20 cosmetic rewards earned by playing ranked. The free track exists; the pass doubles its steps.','soon']];
 let tab='inv';
 const tabsEl=document.getElementById('tabs'), grid=document.getElementById('grid');
 TABS.forEach(([label,key],i)=>{
@@ -3232,7 +3247,7 @@ function fillGrid(key){
       const c=document.createElement('div');
       c.className='cell besace'; c.tabIndex=0;
       c.innerHTML='<div class="plate besace-shot"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[ico]+'</svg></div>'+
-        '<div class="own">'+prix+' blood</div><div class="tagx">soon</div>'+
+        '<div class="own">'+prix+'</div><div class="tagx">'+BLOOD[k][4]+'</div>'+
         '<div class="cap">'+nom+'</div>';
       c.addEventListener('click',()=>openSheet('blood',k));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -3291,6 +3306,11 @@ function paintHUD(flash){
     wb.style.display=actifs.length?'':'none'; })();
   /* S1416 - HM-5 (d) : le grade n'est plus qu'une icone, son nom au survol, clic = le profil */
   document.getElementById('rank').parentElement.title='Rank: '+PROFILE.rank+' — click for all your stats';
+  /* S1461 - note 341 (1) : la teinte de l'embleme = le metal nomme par le grade (affichage, aucune regle) */
+  (function(){ const r=String(PROFILE.rank||'').toLowerCase(), w=document.getElementById('rankwrap'); if(!w) return;
+    const M=[[/bronze/,'#c8894f','#4a2c17'],[/silver|argent/,'#d3d8de','#3a3f46'],[/gold|\bor\b/,'#f0c44c','#4d3a10'],
+      [/platin/,'#9fe3e0','#1e3d3c'],[/diamond|diamant/,'#a9c8ff','#1d2a4a'],[/master|ma[iî]tre|legend/,'#e05a4a','#3d1210']];
+    const m=M.find(x=>x[0].test(r)); w.style.setProperty('--rang',m?m[1]:'#c8894f'); w.style.setProperty('--rang-fond',m?m[2]:'#4a2c17'); })();
   document.getElementById('gold').textContent=fmt(PROFILE.gold);
   document.getElementById('sang').textContent=fmt(PROFILE.sang);
   if(flash){const g=document.getElementById('goldwrap');
@@ -3397,7 +3417,7 @@ function openSheet(kind,i){
   } else if(kind==='blood'){
     const o=BLOOD[i]; owned=true;
     shot='<div class="dshot besace"><div class="plate besace-shot"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[o[1]]+'</svg></div></div>';
-    kick='Blood · '+o[2]+' blood';
+    kick='Blood · '+o[2];
     name=o[0];
     body='<div class="rows">'+row('What',o[3])+row('Your blood',fmt(window.LLProfil.lis().sang||0))+'</div>';
   } else if(kind==='backs'){
