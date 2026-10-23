@@ -1312,6 +1312,11 @@
       .nt-eclair svg, .boule-sceau svg { display: block; }
       .boule.boule-s.boule-sceau { background: transparent; border-color: transparent; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
       .boule.boule-s.boule-sceau.vide svg { opacity: .45; }
+      /* S1464 · note 343 — le logo de Signature de Croze, à la taille du texte ; éteint = jouée ce tour de donjon. */
+      img.sceau-logo { width: 1.15em; height: 1.15em; display: inline-block; vertical-align: -.22em; object-fit: contain; }
+      img.sceau-logo.brise { filter: grayscale(1) brightness(.6); opacity: .7; }
+      .nt-eclair img.sceau-logo, .boule-sceau img.sceau-logo { display: block; }
+      .nouvelle-table .bj-sig.use, .nouvelle-table .nt-r-sig.use { text-decoration: none; }
       @keyframes nt-eclair-vif { from { transform: scale(1); } to { transform: scale(1.18); } }
       .nouvelle-table .nt-rond > .nt-bulles { position: absolute; left: 50%; bottom: -7px; transform: translateX(-50%); z-index: 2;
         display: flex; gap: 4px; pointer-events: auto; }
@@ -10843,6 +10848,10 @@
       html.table-v2 .boules .boule.vide:not(.boule-s) { background-image: url(/art/hud/torche_eteinte.webp);
         filter: brightness(.8); opacity: .9; }
       @media (prefers-reduced-motion: reduce) { html.table-v2 .boules .boule.pleine:not(.boule-s) { animation: none; } }
+      /* S1464 · note 342 ② — la TORCHE VIVANTE (la vidéo de Croze, détourée en code) remplace l'image fixe
+         et le vacillement CSS : la flamme bouge d'elle-même. Même taille que les anciens ronds. */
+      html.table-v2 .boules .boule.pleine:not(.boule-s):has(> canvas.torche-vivante) { background-image: none; animation: none; }
+      html.table-v2 .boules .boule > canvas.torche-vivante { display: block; width: 100%; height: 100%; pointer-events: none; }
       /* La rangée d'un AUTRE siège, dans son bloc info déplié (note ㉔ bis). */
       .pips-siege { display: inline-flex; align-items: center; gap: 5px; }
 
@@ -12348,6 +12357,12 @@
       }
       .nouvelle-table .nt-pastille .glyphe-dessine { display: inline-flex; filter: drop-shadow(0 0 1.5px #000) drop-shadow(0 0 1px #000); }
       html.table-v2 .nouvelle-table .nt-presence > .nt-qui { margin-top: 10px; font-weight: 700; letter-spacing: .1em; }
+      /* S1464 · note 342 ① VERDICT — les trois compteurs sur UNE ligne sous le médaillon, le nom dessous. */
+      .nouvelle-table .nt-compteurs { display: flex; justify-content: center; align-items: center; gap: 3px;
+        margin-top: 10px; white-space: nowrap; }
+      .nouvelle-table .nt-compteurs .nt-pastille { position: static; transform: none; }
+      .nouvelle-table .nt-compteurs-sep { color: var(--stock-dim); font-size: calc(10px * var(--lisible, 1)); }
+      html.table-v2 .nouvelle-table .nt-presence > .nt-compteurs + .nt-qui { margin-top: 1px; }
       /* S1453 · note 330 ⑤ (P3) — le TP en éventail : les cartes de tuile en grand, au centre, ma salle derrière. */
       .nouvelle-table .tv2-eventail {
         display: flex; justify-content: center; align-items: flex-end; padding: 18px 0 8px; min-height: 0;
@@ -14231,7 +14246,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CnK7W0oh.js"></script>
+    <script type="module" crossorigin src="./assets/index-QqhrBzCB.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
