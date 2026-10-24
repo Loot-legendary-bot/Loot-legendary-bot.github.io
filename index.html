@@ -12553,6 +12553,12 @@
       .nouvelle-table .tv2-vise-carte { flex: none; width: min(240px, 72%, 24vh); filter: drop-shadow(0 12px 24px rgba(0,0,0,.8)); }
       .nouvelle-table .tv2-vise-carte img.cz-vignette { display: block; width: 100%; height: auto; }
       .nouvelle-table .tv2-vise-carte .cz-zoom { display: none; }
+      /* S1472 · note 361 ② — côté consulté : la tuile EN GRAND, le médaillon du joueur actif sur son coin. */
+      .nouvelle-table .tv2-vise-cadre { position: relative; flex: none; width: min(400px, 88%, 50vh); }
+      .nouvelle-table .tv2-vise-cadre > .tv2-vise-carte { width: 100%; }
+      .nouvelle-table .tv2-vise-medaillon { position: absolute; top: -18px; left: -22px; width: 30%; aspect-ratio: 1;
+        border-radius: 50%; object-fit: cover; object-position: 50% 18%; border: 3px solid var(--siege, #EDE3CC);
+        box-shadow: 0 6px 18px rgba(0,0,0,.85); background: #120d0a; }
       /* S1453 · note 333 ① (TABLE v2) — la pioche : ma carte arrive de DOS (mon dos du Vault) et se retourne,
          400 ms, après un court temps de dos. La face est dessous, le dos par-dessus, qui pivote et s'efface. */
       .pioche-flip { position: relative; width: 168px; perspective: 900px; }
@@ -14452,7 +14458,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-ucw6bpbI.js"></script>
+    <script type="module" crossorigin src="./assets/index-D44M3fsz.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
