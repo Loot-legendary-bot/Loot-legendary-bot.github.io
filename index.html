@@ -6421,6 +6421,24 @@
       .fen-reagir-sous { font-size: 13px; margin: -4px 0 10px; }
       .creneau[data-offerte] { cursor: pointer; }
       /* S1481 · note 364 ③ — Blood Altar : MAKE YOUR CHOICE + la barre de temps */
+      /* S1486 · 364 ② — la chaîne de jets (Razor Loop) */
+      .chaine-jets { margin: 8px auto; padding: 10px 14px; max-width: 520px; background: rgba(12,9,7,.92);
+                     border: 1px solid var(--stock); border-radius: 6px; }
+      .chaine-jets .cj-titre { font-family: var(--display); font-weight: 800; letter-spacing: .06em;
+                               color: var(--stock); text-align: center; margin-bottom: 8px; }
+      .chaine-jets .cj-corps { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .chaine-jets .cj-cap { font-size: 11px; letter-spacing: .1em; margin-bottom: 6px; }
+      .chaine-jets .cj-jet { font-family: var(--display); font-size: 20px; }
+      .chaine-jets .cj-nat { font-size: 34px; font-weight: 800; margin-right: 4px; }
+      .chaine-jets .cj-total-jet { font-size: 26px; font-weight: 800; color: var(--stock); }
+      .chaine-jets .cj-verdict { font-family: var(--display); font-weight: 800; font-size: 18px; margin-top: 4px; }
+      .chaine-jets .cj-verdict.encore { color: #9fd18b; }
+      .chaine-jets .cj-verdict.blesse { color: #e0675d; }
+      .chaine-jets .cj-rang { font-size: 11px; }
+      .chaine-jets .cj-des { display: flex; flex-wrap: wrap; gap: 6px; min-height: 34px; }
+      .chaine-jets .cj-de { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;
+                            border: 2px solid var(--stock); border-radius: 6px; font-weight: 800; font-size: 16px; }
+      .chaine-jets .cj-total { font-family: var(--display); font-weight: 800; font-size: 28px; color: var(--stock); margin-top: 6px; }
       /* S1484 · 363 ② — le tablier du grade, en fin de partie */
       .fin-gp-tablier { height: 56px; width: auto; align-self: center; filter: drop-shadow(0 3px 6px rgba(0,0,0,.6)); }
       .rps-choisis { font-family: var(--display); font-weight: 800; font-size: 22px;
@@ -14551,7 +14569,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D7znqDvO.js"></script>
+    <script type="module" crossorigin src="./assets/index-1B7cn5m-.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
