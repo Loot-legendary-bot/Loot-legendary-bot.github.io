@@ -155,6 +155,14 @@
   /* S1419 - note 243 (8)(a) (BOUNTY_WALL 21) : le BOUNTY WALL revient, en evidence A DROITE
      du HOME, avec ses sept spheres (Donjon compris) ; il ne se pose que sur le titre. */
   #bboard{display:flex;flex-direction:column;align-items:center;gap:1.2cqh;padding:1.6cqh 1.6cqw 1.8cqh}
+  /* S1487 · note 367 ③ — « au HOME il n'y a plus de Goblin Den, et le Bounty Wall est à droite, à hauteur du
+     milieu » : le mur descend au milieu de l'écran (mesuré 1920×1080 : son centre passe de y≈318 à y≈560) ;
+     la porte du GOBLIN DEN est masquée, son code reste (comme l'onglet BLOOD). */
+  #bboard{margin-top:24cqh}
+  #gdenbtn{display:none !important}
+  /* S1487 · note 367 ② — la goutte des objets en Sang seulement */
+  .vsang{color:#e79a91}
+  svg.goutte{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.2em}
   #bboard .bb-titre{font:900 2.6cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.14em}
   #bboard .bb-sceau{position:relative;width:20cqh;height:20cqh}
   #bboard .bb-sceau img{position:absolute;width:5.6cqh;height:5.6cqh;border-radius:50%;object-fit:cover;
@@ -1519,6 +1527,13 @@ const PALIER_DES={rose_opaque:'Common',jaune_opaque:'Common',noir_vert_acide:'Co
   galaxie_vert_violet:'Rare',bleu_givre:'Rare',rouge_translucide:'Rare',eclaboussures_sang:'Rare',
   nacre_turquoise_violet:'Rare',nacre_vert_or:'Rare',nacre_bleu_acier:'Rare',nacre_orange_argent:'Rare',
   plastique_machouille:'Rare',potion_jaune_rose:'Rare'};   /* note 317 (3) : 5 000 */
+/* S1487 · note 367 ② (MONNAIE §31, verdict Croze) — ≈ 1 sur 10 du DICE SET et des CARD BACKS ne s'achète
+   qu'en SANG. Désignés par l'écran (reco, Croze corrige par nom) : dans le pool de vente hors mur et hors
+   saison, le dé le plus travaillé (Blue resin) + un plastique (White plastic), et le dos le plus travaillé hors
+   season_reward (Special Iridescent). Prix ⓡ : 300 Sang le dé, 150 Sang le dos. */
+const SANG_SEULEMENT={bleu_translucide:300,plastique_blanc:300,special_iridescent:150};
+const GOUTTE_SANG='<svg class="goutte" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4.2 5.6 7.4 5.6 10.6a5.6 5.6 0 0 1-11.2 0C6.4 10.4 9 7.2 12 3z" fill="#a3231d" stroke="#6d130f" stroke-width="1"/></svg>';
+const soldeDeSang=()=>{ try{ return window.LLProfil.lis().sang||0; }catch(e){ return 0; } };
 const prixDuDossier=d=>PEAUX_VENTE_LIBRE[d]!==undefined?PEAUX_VENTE_LIBRE[d]:PRIX_DU_PALIER[PALIER_DES[d]||'Uncommon'];
 /* MONNAIE.md 3 : une peau de des se paie 640 dents choisie, 480 en ticket
    random. Chiffres de PROPOSITION du classeur - Croze les corrige d'un mot,
@@ -2912,6 +2927,15 @@ const counts=()=>({chars:CHARS.filter(c=>c.owned).length+'/'+TOTAL_CHARS,
   inv:String((()=>{const v=inventaire();return v.conso.reduce((n,o)=>n+o.q,0)+v.essences.reduce((n,e)=>n+e.cases.reduce((m,c)=>m+c.q,0),0);})())});
 /* S1431 - note 272 (5) : L'INVENTAIRE, lu sur le profil et les rayons (rien d'ecrit ici).
    conso = [{nom, q, html, ouvre}] ; possede = [{nom, html, eq, ouvre}]. */
+/* S1487 · note 367 ① — le panneau d'un objet POSSÉDÉ, ouvert depuis MY VAULT, n'a jamais de BUY. */
+function sansAchat(n,ou){
+  const b=document.getElementById('dbtn'); if(!b) return;
+  const c=document.createElement('button'); c.className='cta'; c.id='dbtn'; c.disabled=true;
+  c.textContent='In your pocket · ×'+n; b.replaceWith(c);
+  const foot=document.querySelector('.dfoot'); if(!foot) return;
+  let nt=foot.querySelector('.dnote'); if(!nt){ nt=document.createElement('p'); nt.className='dnote'; foot.appendChild(nt); }
+  nt.classList.remove('warn'); nt.textContent='Play it from '+ou+' on the home screen.';
+}
 function inventaire(){
   const p=window.LLProfil.lis(), BW=window.LLBountyWall, T=window.LLTickets;
   const conso=[], possede=[];
@@ -2926,17 +2950,23 @@ function inventaire(){
   }
   /* note 277 - le BETA VERSION GIFT PACK, tant qu'il n'est pas ouvert */
   if(!packBetaOuvert()) conso.push({nom:'Beta Version Gift Pack — click to OPEN',q:1,html:'<div class="plate besace-shot pack-icone"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONE_PACK+'</svg></div>',ouvre:()=>{ const lots=ouvreLePackBeta(); if(lots!==null) reveleLePackBeta(lots); }});
+  /* S1487 · note 367 ① — UNE case par charm (le stock + l'état « running »), et elle ouvre le panneau
+     de l'objet POSSÉDÉ (USE / RUNNING), jamais celui du rayon (BUY). */
   const ch=BW&&BW.chance?BW.chance(p):null;
-  if(ch) conso.push({nom:ch.nom+' \u2014 running, '+ch.restant+' games left',q:ch.restant,html:charmeShot(ch.id),ouvre:()=>openSheet('luck',BW.SORTES_CHANCE.indexOf(ch.id))});
-  /* note 274 (4) : les charms en stock (empilables) */
   if(BW&&BW.stockDesCharmes){
     const st=BW.stockDesCharmes(p);
-    BW.SORTES_CHANCE.forEach((id,k)=>{ if(st[id]>0) conso.push({nom:BW.CHANCES[id].nom+' \u2014 '+st[id]+' in your stash',q:st[id],html:charmeShot(id),ouvre:()=>openSheet('luck',k)}); });
+    BW.SORTES_CHANCE.forEach((id,k)=>{
+      const court=ch!==null&&ch.id===id;
+      if(!court&&!(st[id]>0)) return;
+      conso.push({nom:BW.CHANCES[id].nom+(court?' — running, '+ch.restant+' games left':'')+(st[id]>0?' · '+st[id]+' in your stash':''),
+        q:st[id]+(court?1:0),html:charmeShot(id),ouvre:()=>openSheet('luckmine',k)});
+    });
   }
   if(T){
     const t=T.enPoche(p);
-    if(t.daily>0) conso.push({nom:'Today’s Dungeon invitation',q:t.daily,html:'<div class="plate"><img alt="" src="/art/tickets/daily_sceau.webp"></div>',ouvre:()=>openSheet('tdaily',-1)});
-    if(t.dpl>0) conso.push({nom:'Dungeon Pro Tour ticket',q:t.dpl,html:'<div class="plate"><img alt="" src="/art/tickets/dpl_sceau.webp"></div>',ouvre:()=>openSheet('tdpl',-1)});
+    /* S1487 · note 367 ① — un ticket POSSÉDÉ n'a pas de BUY dans MY VAULT : il se joue depuis le HOME. */
+    if(t.daily>0) conso.push({nom:'Today’s Dungeon invitation',q:t.daily,html:'<div class="plate"><img alt="" src="/art/tickets/daily_sceau.webp"></div>',ouvre:()=>{ openSheet('tdaily',-1); sansAchat(t.daily,'TODAY’S DUNGEON'); }});
+    if(t.dpl>0) conso.push({nom:'Dungeon Pro Tour ticket',q:t.dpl,html:'<div class="plate"><img alt="" src="/art/tickets/dpl_sceau.webp"></div>',ouvre:()=>{ openSheet('tdpl',-1); sansAchat(t.dpl,'DUNGEON PRO TOUR'); }});
   }
   DICE.forEach(([nom,dossier,owned],i)=>{ if(owned) possede.push({nom:nom,html:'<div class="plate"><img class="peau" alt="" src="'+IMG_PEAU(dossier)[0]+'"></div>',eq:equipped.dice===i,ouvre:()=>openSheet('dice',i)}); });
   BACKS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' (card back)',html:'<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>',eq:equipped.backs===i,ouvre:()=>openSheet('backs',i)}); });
@@ -3141,6 +3171,7 @@ function etatVault(kind,i){
     if(owned) return {e:equipped.dice===i?'eq':'own'};
     const ex=exploitDeLaPeau(DICE[i][1]), prix=prixDeLaPeau(i);
     if(ex!==null&&!ex.ouverte) return {e:'ex',prix:prix,ex:ex.l+' — '+fmt(Math.min(ex.n,ex.a))+' / '+fmt(ex.a)};
+    if(SANG_SEULEMENT[DICE[i][1]]!==undefined) return {e:'buy',prix:SANG_SEULEMENT[DICE[i][1]],sang:true};
     return {e:'buy',prix:prix};
   }
   if(kind==='backs'){
@@ -3148,6 +3179,7 @@ function etatVault(kind,i){
     if(owned) return {e:equipped.backs===i?'eq':'own'};
     if(DOS_SAISON.has(id)) return {e:'season'};
     if(prix===null){ const v=verrouDuMur(id,'k'); return {e:'ex',prix:null,ex:v!==null?v:'Earned in the Bounty Wall'}; }
+    if(SANG_SEULEMENT[id]!==undefined) return {e:'buy',prix:SANG_SEULEMENT[id],sang:true};
     return {e:'buy',prix:prix};
   }
   if(kind==='curs'){
@@ -3172,7 +3204,8 @@ const classeVault=st=>'cell'+(st.e==='ex'||st.e==='season'?' locked':'')+(st.e==
 function badgeVault(st){
   return (st.e==='ex'||st.e==='season'?'<div class="hatch"></div>':'')+
     (st.e==='ex'?exploitmark(st.ex):'')+
-    ((st.e==='buy'||st.e==='ex')&&st.prix!==null&&st.prix!==undefined?'<div class="own vprix">'+fmt(st.prix)+'</div>':'')+
+    (st.sang?'<div class="own vprix vsang">'+GOUTTE_SANG+fmt(st.prix)+'</div>'
+      :(st.e==='buy'||st.e==='ex')&&st.prix!==null&&st.prix!==undefined?'<div class="own vprix">'+fmt(st.prix)+'</div>':'')+
     (st.e==='season'?'<div class="own vseason">SEASON</div>':'')+
     (st.e==='own'?'<div class="own vowned">OWNED</div>':'')+
     (st.e==='ex'?'<div class="exhint">'+st.ex+'</div>':'');
@@ -3402,7 +3435,7 @@ function openSheet(kind,i){
       +row('Bounty Wall',sc.mur)
       +row('Pays',dpl?'\u00d73 the teeth of a normal game \u00b7 rank points \u00b7 ranked':'\u00d72 the teeth \u00b7 +64 if the objective is met')+'</div>'
       +(dpl?offrandeDuTicket():'');
-  } else if(kind==='luck'){
+  } else if(kind==='luck'||kind==='luckmine'){
     const BW=window.LLBountyWall; const id=BW.SORTES_CHANCE[i]; const o=BW.CHANCES[id];
     const ch=BW.chance(window.LLProfil.lis());
     owned=false;
@@ -3412,7 +3445,7 @@ function openSheet(kind,i){
     body='<div class="rows">'+row('Lasts','lasts '+o.parties+' games')
       +row('Teeth',(o.dents===2?'×2':'+'+Math.round((o.dents-1)*100)+' %')+' — waits for the game to publish the teeth of a game')
       +row('Essences','×'+o.essences+' on every essence a game drops')
-      +row('One at a time','Your luck runs out before you buy another')+'</div>';
+      +row('One at a time',kind==='luckmine'?'One runs at a time; the next one in your stash starts when it ends':'Your luck runs out before you buy another')+'</div>';
   } else if(kind==='offr'){
     const BW=window.LLBountyWall; const so=BW.SORTES[i]; const o=BW.OFFRANDES[so];
     const n=BW.sac(window.LLProfil.lis())[so];
@@ -3558,6 +3591,15 @@ function openSheet(kind,i){
     } else if((kind==='tdpl'||kind==='tdaily') && can){
       note='Kept in your pocket: play it from '+(kind==='tdpl'?'DUNGEON PRO TOUR':'TODAY\u2019S DUNGEON')+' on the home screen.';
     }
+    /* S1487 · note 367 ② — un objet en Sang seulement : son prix en Sang, la goutte, GET BLOOD si le solde manque. */
+    const idSang = kind==='dice' ? DICE[i][1] : kind==='backs' ? BACKS[i][1] : null;
+    if(idSang!==null && SANG_SEULEMENT[idSang]!==undefined && !cta.includes(' disabled>Locked')){
+      const ps=SANG_SEULEMENT[idSang], ok=soldeDeSang()>=ps;
+      cta='<button class="cta" id="dbtn"'+(ok?'':' disabled')+'>Buy · '+GOUTTE_SANG+fmt(ps)+' Blood</button>'
+        +(ok?'':'<button class="cta" id="dgetblood" type="button">GET BLOOD</button>');
+      note=ok?'Blood only: this one is never sold for teeth.':'Blood only. You are '+fmt(ps-soldeDeSang())+' Blood short.';
+      warn=!ok;
+    }
     if(kind==='ticket' && peauxTirables().length===0){
       cta='<button class="cta" id="dbtn" disabled>Draw \u00b7 '+fmt(PRIX_DES.random)+' teeth</button>';
       note='No dice skin is open yet: every one waits for its exploit in the Bounty Wall.'; warn=false;
@@ -3565,6 +3607,22 @@ function openSheet(kind,i){
   } else if(kind!=='chars'){
     const eq=(kind==='dice'?equipped.dice:kind==='backs'?equipped.backs:equipped.curs)===i;
     cta='<button class="cta" id="dbtn"'+(eq?' disabled':'')+'>'+(eq?'Equipped':'Equip')+'</button>';
+  }
+  /* S1487 · note 367 ① — le charm POSSÉDÉ (ouvert depuis MY VAULT) : USE, ou RUNNING ; jamais BUY. */
+  if(kind==='luckmine'){
+    const BW=window.LLBountyWall, pr=window.LLProfil.lis(), id=BW.SORTES_CHANCE[i];
+    const enCours=BW.chance(pr), st=BW.stockDesCharmes(pr)[id];
+    const stock=st>0?st+' in your stash — the next one starts automatically.':'';
+    if(enCours!==null&&enCours.id===id){
+      cta='<button class="cta" id="dbtn" disabled>Running · '+enCours.restant+' games left</button>';
+      note=stock; warn=false;
+    } else if(enCours!==null){
+      cta='<button class="cta" id="dbtn" disabled>Use</button>';
+      note=enCours.nom+' is running ('+enCours.restant+' games left) — one at a time.'+(stock?' '+stock:''); warn=false;
+    } else {
+      cta='<button class="cta" id="dbtn"'+(st>0?'':' disabled')+'>Use</button>';
+      note=st>0?st+' in your stash.':''; warn=false;
+    }
   }
   if(kind==='blood'){
     cta='<button class="cta" id="dbtn" disabled>Not for sale yet</button>';
@@ -3577,6 +3635,7 @@ function openSheet(kind,i){
   document.getElementById('dx').addEventListener('click',closeDrawer);
   const b=document.getElementById('dbtn');
   if(b&&!b.disabled) b.addEventListener('click',()=>act(kind,i));
+  { const gb=document.getElementById('dgetblood'); if(gb) gb.addEventListener('click',()=>{ if(window.LLBloodShop) window.LLBloodShop.ouvre(); }); }
   /* S1373 · note 208 (§13.4) - OFFRIR SUR CE TICKET */
   drawer.querySelectorAll('[data-tkoffr]').forEach(bo=>bo.addEventListener('click',()=>{
     if(window.LLBountyWall.offreSurLeTicket(bo.dataset.tkoffr)){ fillGrid(tab); refreshTabs(); openSheet(kind,i); }
@@ -3638,6 +3697,12 @@ function peauxTirables(){
 function act(kind,i){
   /* S1370 · note 206 (3) - acheter une offrande : elle va dans le sac du profil. */
   /* note 237 (4) - acheter la chance : elle court N parties dans le profil. */
+  if(kind==='luckmine'){
+    if(window.LLBountyWall.utiliseLeCharme(window.LLBountyWall.SORTES_CHANCE[i])){
+      paintHUD(true); fillGrid(tab); refreshTabs(); openSheet(kind,i);
+    }
+    return;
+  }
   if(kind==='luck'){
     if(window.LLBountyWall.acheteLaChance(window.LLBountyWall.SORTES_CHANCE[i])){
       paintHUD(true); fillGrid(tab); refreshTabs(); openSheet(kind,i);
@@ -3693,8 +3758,16 @@ function act(kind,i){
                : kind==='curs' ? PRIX_CURSEURS.choisi
                : kind==='backs' ? BACKS[i][3] : UNLOCK_PRICE;
     if(prix===null) return;
+    /* S1487 · note 367 ② — l'objet en Sang seulement se paie en Sang, jamais en dents. */
+    const idSang = kind==='dice' ? DICE[i][1] : kind==='backs' ? BACKS[i][1] : null;
+    if(idSang!==null && SANG_SEULEMENT[idSang]!==undefined){
+      const ps=SANG_SEULEMENT[idSang]; let payé=false;
+      window.LLProfil.modifie(p=>{ if((p.sang||0)>=ps){ p.sang=(p.sang||0)-ps; payé=true; } });
+      if(!payé) return;
+    } else {
     if(PROFILE.gold<prix) return;
     PROFILE.gold-=prix;
+    }
     if(kind==='chars')ALPHA[i].owned=true;
     else if(kind==='dice')DICE[i][2]=1;
     else if(kind==='backs'){ BACKS[i][2]=1; gardeLesDos(); }

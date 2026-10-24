@@ -295,6 +295,22 @@
     });
     return fait;
   }
+  /* S1487 · note 367 ① — USE : un charm du stock démarre MAINTENANT, seulement si aucun ne court
+     (« one at a time », MONNAIE §23). */
+  function utiliseLeCharme(id) {
+    var fait = false;
+    if (!CHANCES[id]) { return false; }
+    window.LLProfil.modifie(function (p) {
+      if (chance(p) !== null) { return; }
+      var n = stockDesCharmes(p);
+      if (!(n[id] > 0)) { return; }
+      n[id] -= 1;
+      p.charmes = n;
+      p.chance = { id: id, restant: CHANCES[id].parties };
+      fait = true;
+    });
+    return fait;
+  }
   /* les essences d'UN esprit, de la plus petite à la plus grande */
   function essencesDe(id) { return SORTES.filter(function (s) { return OFFRANDES[s].esprit === id; }); }
   /* le tableau général (« SEE ALL ») garde un filtre par esprit */
@@ -720,7 +736,7 @@
   window.LLBountyWall = { EPIC_FORGEE: false, refus: refus, verrouVictoire: verrouVictoire, aGagne: aGagne, PRIX_PERSO: PRIX_PERSO, FOIS: FOIS, TRONCS: TRONCS, FILTRES: FILTRES, SERVIS: SERVIS, etat: etat,
     compteur: compteur, compteurBranche: compteurBranche, actifs: actifs, PACTE: PACTE, ROMPRE: ROMPRE, pacte: pacte, prixDuPacte: prixDuPacte,
     passeLePacte: passeLePacte, romps: romps, prends1: prends1, dptOuvert: dptOuvert, CODEX: CODEX, ARBRES: ARBRES, DEFIS: DEFIS, ligueOuverte: ligueOuverte, surLeTicket: surLeTicket, offreSurLeTicket: offreSurLeTicket,
-    CHANCES: CHANCES, SORTES_CHANCE: SORTES_CHANCE, chance: chance, acheteLaChance: acheteLaChance, stockDesCharmes: stockDesCharmes,
+    CHANCES: CHANCES, SORTES_CHANCE: SORTES_CHANCE, chance: chance, acheteLaChance: acheteLaChance, utiliseLeCharme: utiliseLeCharme, stockDesCharmes: stockDesCharmes,
     OFFRANDES: OFFRANDES, SORTES: SORTES, TAILLES: TAILLES, essencesDe: essencesDe, eveilles: eveilles, dort: dort, sac: sac, brulent: brulent,
     multiplicateur: multiplicateur, affiche: affiche, gain: gain, offre: offre, achete: achete, tirage: tirage, finDePartie: finDePartie,
     nomDe: nomDe };
