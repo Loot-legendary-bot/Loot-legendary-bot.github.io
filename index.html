@@ -1886,6 +1886,24 @@
       .fin-dents-gros { font-family: var(--display); font-weight: 900; font-size: 64px; line-height: 1; gap: .25em; }
       .fin-dents-gros .dent-ico { width: 1em; height: 1em; }
       .fin-dents-gros .fin-mur-x { font-family: var(--mono); font-size: 22px; font-weight: 400; }
+      /* S1480 · note 314 ② — les points de grade : le gain en grand, le détail, la barre qui monte, la promotion. */
+      .fin-gp { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; min-width: 280px; }
+      .fin-gp-tete { display: flex; align-items: baseline; gap: 14px; }
+      .fin-gp-gain { font-family: var(--display); font-weight: 800; font-size: 48px; line-height: 1; color: #f4eddc; }
+      .fin-gp-gain.perte { color: #c9524a; }
+      .fin-gp-grade { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: .12em; color: #c9a227; }
+      .fin-gp-detail, .fin-gp-seuil { font-family: var(--mono); font-size: 14px; color: #b9b2a5; }
+      .fin-gp-barre { position: relative; height: 10px; border: 1px solid rgba(233, 228, 216, .45); background: rgba(0, 0, 0, .5); overflow: hidden; }
+      .fin-gp-barre > i { position: absolute; inset: 0; background: linear-gradient(90deg, #8a6d1a, #e9c46a);
+        transform-origin: left center; transform: scaleX(var(--de, 0)); animation: gp-monte 1.6s .8s ease-out forwards; }
+      @keyframes gp-monte { to { transform: scaleX(var(--a, 0)); } }
+      .fin-gp-promu { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: .14em; color: #e9c46a;
+        text-shadow: 0 0 14px rgba(233, 196, 106, .6); opacity: 0; animation: gp-promu .6s 2.5s ease-out forwards; }
+      @keyframes gp-promu { from { opacity: 0; transform: scale(1.4); } to { opacity: 1; transform: scale(1); } }
+      @media (prefers-reduced-motion: reduce) {
+        .fin-gp-barre > i { animation: none; transform: scaleX(var(--a, 0)); }
+        .fin-gp-promu { animation: none; opacity: 1; }
+      }
       .fin-compte { --n: var(--cible); counter-reset: n var(--n); animation: fin-compte 1.1s ease-out .35s backwards; }
       .fin-compte::after { content: attr(data-signe) counter(n); }
       @keyframes fin-compte { from { --n: 0; } }
@@ -14515,7 +14533,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BNoCj8Gt.js"></script>
+    <script type="module" crossorigin src="./assets/index-Cu_vME8r.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

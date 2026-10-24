@@ -1246,6 +1246,10 @@
       function (m, n, g) { return n + '. ' + GESTE_FR[g]; }],
     [/^TURN (\d+)$/, 'TOUR $1'], [/^collapse 1d(\d+)$/, 'Collapse 1d$1'], [/^portal (\d+) %$/, 'portail $1 %'],
     [/^ROUND (\d+)$/, 'MANCHE $1'],
+    /* S1480 - note 314 (2) : les points de grade de l'ecran de fin. */
+    [/^PROMOTED — GRADE (\d+)$/, 'PROMU — GRADE $1'],
+    [/^(\d+)(?:st|nd|rd|th) place(.*)$/, function (m, n, reste) {
+      return (n === '1' ? '1re' : n + 'e') + ' place' + reste.replace('streak', 'série'); }],
     /* S1466 - note 350 (2) : les presentations TEXT / PERCENT de l'exploration (« 6 Chest », « Chest 17 % »). */
     [/^(\d+(?:-\d+)?) Chest$/, '$1 Coffre'], [/^Chest (\d+ %)$/, 'Coffre $1'],
     [/^ROLL (.+)$/, 'JET $1'],

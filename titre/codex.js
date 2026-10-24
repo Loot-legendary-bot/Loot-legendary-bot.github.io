@@ -382,7 +382,15 @@
   var GRADES_GP = [0, 300, 600, 1000, 1400, 1800, 2200, 2600, 3000, 3400, 3800, 4200, 4600, 5000, 5800,
     6600, 7400, 8200, 9400, 10600, 11800, 13000, 14200, 15400, 16600, 17800, 19000, 20200, 21400,
     23400, 25400, 27400, null];
-  var MON_GRADE = 1;
+  /* S1480 · note 314 ② — le grade se lit sur les GP du profil (`gp`, posés à la fin de chaque partie
+     comptée, depuis `GAME_ENDED.grades` du moteur) : le plus haut seuil atteint. */
+  var MON_GRADE = (function () {
+    var gp = 0;
+    try { var p = window.LLProfil && window.LLProfil.lis(); if (p && typeof p.gp === 'number') gp = p.gp; } catch (e) { gp = 0; }
+    var g = 1;
+    for (var i = 0; i < GRADES_GP.length; i++) { if (GRADES_GP[i] !== null && gp >= GRADES_GP[i]) g = i + 1; }
+    return g;
+  })();
   function ouSeGagne(n) { return n <= 3 ? 'NORMAL PLAY' : n <= 29 ? 'DUNGEON PRO TOUR' : 'VIP TABLES'; }
   function boiteGrades() {
     var items = GRADES_EN.map(function (nom, i) {
