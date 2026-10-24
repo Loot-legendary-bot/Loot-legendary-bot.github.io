@@ -6517,6 +6517,15 @@
                      pointer-events: none; }
       /* S1468 · 352 ⑤ / 355 ③ — l'autre qui répond : même bandeau, liseré ambre. */
       .attente-autre { border-color: #e0a84a; top: 56px; }
+      /* S1470 · 355 ① — le timer GLOBAL de fin de tour : gros, au centre haut, il pope à l'apparition. */
+      .fin-de-tour-global { position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+                     z-index: var(--z-couloir); padding: 10px 26px; background: rgba(0,0,0,.9);
+                     border: 3px solid #e0a84a; color: #fff; font-family: var(--display);
+                     font-weight: 800; font-size: clamp(18px, 2.6vw, 30px); letter-spacing: .06em; pointer-events: none;
+                     white-space: nowrap; animation: fin-de-tour-pope .35s cubic-bezier(.2,1.6,.4,1) both; }
+      .fin-de-tour-global.a-moi { border-color: #d24a3a; }
+      @keyframes fin-de-tour-pope { from { transform: translateX(-50%) scale(.4); opacity: 0; }
+                                    to { transform: translateX(-50%) scale(1); opacity: 1; } }
       /* S1469 · 356 ③ — la réponse par défaut appliquée pour moi : toast 3 s, liseré rouge, sous les bandeaux. */
       .toast-delai { position: fixed; top: 100px; left: 50%; transform: translateX(-50%);
                      z-index: var(--z-couloir); padding: 8px 18px; background: rgba(0,0,0,.9);
@@ -14404,7 +14413,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-sToaoMmy.js"></script>
+    <script type="module" crossorigin src="./assets/index-D67D9NDe.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
