@@ -1845,6 +1845,11 @@
         background: rgba(10, 8, 6, .82); border: 1px solid rgba(233, 228, 216, .25);
         border-radius: 6px; overflow: hidden; }
       .dicelayer.regard-tiers > * { transform: scale(.72); transform-origin: center; }
+      /* S1468 · note 352 ② — TABLE v2 : les dés au MILIEU, sans voile plein écran — une ombre locale
+         sous les dés, la table reste visible derrière (moi, le spectateur, la vue d'un autre). */
+      .dicelayer.jet-au-milieu { inset: 0; border: 0; border-radius: 0;
+        background: radial-gradient(ellipse 34% 30% at 50% 50%, rgba(10, 8, 6, .78) 0%,
+          rgba(10, 8, 6, .55) 55%, rgba(10, 8, 6, 0) 100%) !important; }
       /* S1437 · note 286 ⑪ — la fin en deux écrans : GAME (le podium) · REWARDS. */
       .fp1 .cache { display: none !important; }
       .fp1-onglets { display: flex; justify-content: center; gap: 14px; margin: 2px 0 10px; }
@@ -6500,6 +6505,19 @@
                      border: 2px solid #fff; color: #fff; font-family: var(--display);
                      font-weight: 800; font-size: 20px; letter-spacing: .06em;
                      pointer-events: none; }
+      /* S1468 · 352 ⑤ / 355 ③ — l'autre qui répond : même bandeau, liseré ambre. */
+      .attente-autre { border-color: #e0a84a; top: 56px; }
+      /* S1468 · 355 ② — qui agit, en tête de scène, sous la rangée des sièges (hors flux : ne pousse rien). */
+      .nouvelle-table .nt-presences > .nt-qui-agit { position: absolute; left: 50%; bottom: -24px;
+        transform: translateX(-50%); white-space: nowrap; pointer-events: none; z-index: 2;
+        font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .08em;
+        color: #f0d09e; text-shadow: 0 1px 3px #000; }
+      .nt-qui-agit .nqa-reagit { color: #e0a84a; }
+      /* S1468 · 352 ① — l'arène du spectateur : stats vives + gear à la place de la fiche imprimée. */
+      .ndr-vif { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+      .ndr-ligne-en-cours { font-family: var(--display); font-weight: 800; color: #f0d09e;
+                            font-size: 15px; letter-spacing: .04em; margin: 2px 0 4px; }
+      .ndr-chrono { margin-left: 12px; font-family: var(--display); font-weight: 800; color: #e0a84a; }
 
       /*
        * ⚑ S174 — le compte des gestes SAUTÉS, sur le bloc qui montre la scène.
@@ -13863,6 +13881,15 @@
         50% { transform: scale(1.04); filter: drop-shadow(0 0 10px rgba(238,75,75,.55)); }
       }
       @media (prefers-reduced-motion: reduce) { button.fin-de-tour-prete { animation: none; } }
+      /* S1468 · note 355 ① — « quand je n'ai plus d'action END TURN brille » : TABLE v2, le bouton
+         s'ALLUME — fond rouge plein, encre blanche, halo qui pulse (on ne le voyait pas). */
+      html.table-v2 button.fin-de-tour-prete { background: #b8322a !important; color: #fff !important;
+        border-color: #ff8a7a !important; animation: fin-de-tour-allume 1.2s ease-in-out infinite; }
+      @keyframes fin-de-tour-allume {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 6px 1px rgba(238, 75, 75, .45); }
+        50% { transform: scale(1.06); box-shadow: 0 0 26px 8px rgba(238, 75, 75, .8); }
+      }
+      @media (prefers-reduced-motion: reduce) { html.table-v2 button.fin-de-tour-prete { animation: none; } }
       /* S1437 · note 286 ④ — END TURN avant l'heure : visible, mais ÉTEINT (contour, encre
          des libellés, aucune pulsation) — il ne doit pas donner envie de cliquer. */
       button.fin-de-tour-eteinte { animation: none !important; color: var(--stock-dim) !important; filter: none; }
@@ -14302,7 +14329,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CPuEl-NH.js"></script>
+    <script type="module" crossorigin src="./assets/index-C0nidRSF.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
