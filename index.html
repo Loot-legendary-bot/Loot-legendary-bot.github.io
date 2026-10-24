@@ -13738,6 +13738,9 @@
       .nouvelle-table .ntt-cb2-joueur > .bj-bandeau { flex: 1 1 0; min-height: 200px; height: auto; }
       .nouvelle-table .ntt-cb2-joueur .bj-nom { font-size: calc(13px * var(--lisible, 1)); }
       .nouvelle-table .ntt-cb2-joueur .bj-stats .pv-pastille { display: none; }
+      /* S1471 · 359 ② — ses stats vives en tête de sa fiche de combat ; ses PV sont déjà au-dessus. */
+      .nouvelle-table .ntt-cb2-fiche > .ntt-cb2-vif .pv-pastille { display: none; }
+      .nouvelle-table .ntt-cb2-fiche > .ntt-cb2-vif { flex: 0 0 auto; padding: 4px 6px; }
       .nouvelle-table .ntt-cb2-joueur .stat-n { font-size: 22px; }
       .nouvelle-table .ntt-cb2-joueur .stat-nom { font-size: calc(10px * var(--lisible, 1)); }
       .nouvelle-table .ntt-cb2-joueur .bj-lbl { font-size: calc(11px * var(--lisible, 1)); }
@@ -13858,6 +13861,10 @@
         background: linear-gradient(180deg, #ff6a55 0%, #c8281e 55%, #8f1610 100%); box-shadow: 0 0 10px rgba(255,90,70,.55); transition: width .4s ease; }
       .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible.on .noc-pv { font-size: calc(15px * var(--lisible, 1)); font-weight: 700; color: #f4eddc; }
       .nouvelle-table .ntt-onglet-cible .noc-etat { grid-column: 2; font-size: calc(10px * var(--lisible, 1)); letter-spacing: .08em; }
+      /* S1471 · note 359 ④ — « la barre du Guard quand il joue » : « ACTS NOW » (1 / -1) prend une ligne
+         entière, et la pastille de PV d'un JOUEUR, sans colonne, retombait dans celle du portrait (36 px) —
+         un petit cadre rouge avec un cœur. Elle garde sa colonne, comme les PV d'un mob. */
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-pastille { grid-column: 2; justify-self: start; }
       @keyframes noc-braise {
         from { box-shadow: 0 0 0 1px var(--ember); }
         to   { box-shadow: 0 0 0 3px var(--ember), 0 0 14px var(--ember); }
@@ -13968,6 +13975,7 @@
       /* S1468 · note 355 ① — « quand je n'ai plus d'action END TURN brille » : TABLE v2, le bouton
          s'ALLUME — fond rouge plein, encre blanche, halo qui pulse (on ne le voyait pas). */
       html.table-v2 button.fin-de-tour-prete { background: #b8322a !important; color: #fff !important;
+        border-image: none !important; border: 2px solid #ff8a7a !important; border-radius: 4px;   /* 359 ① : sans plaque peinte, partout */
         border-color: #ff8a7a !important; animation: fin-de-tour-allume 1.2s ease-in-out infinite; }
       @keyframes fin-de-tour-allume {
         0%, 100% { transform: scale(1); box-shadow: 0 0 6px 1px rgba(238, 75, 75, .45); }
@@ -13981,6 +13989,25 @@
          une plaque de 44, largeur 160 imposée par la rangée) — une ligne, le bouton prend la largeur du texte. */
       html.table-v2 button.fin-autonome-bouton { white-space: nowrap; flex: 0 0 auto; width: max-content; max-width: none; }
       html.table-v2 .fin-autonome { flex: 0 0 auto; }
+      /* S1471 · note 359 ① — END TURN en bas à droite de la scène, au-dessus de la ligne de la main et des
+         quatre vues ; toujours à la même place. Plus de plaque peinte (blanche, sous l'encre blanche de
+         l'état allumé : « une tache blanche griffée ») — fond plein, contour fin, police d'affiche. */
+      html.table-v2 .tv2-fin-de-tour { position: fixed; right: 12px; bottom: 176px; z-index: 48; margin: 0;
+        display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+      html.table-v2 .tv2-fin-de-tour button.fin-autonome-bouton { border-image: none !important;
+        height: 56px; min-width: 220px; padding: 0 30px !important; border-radius: 4px;
+        background: rgba(10, 10, 10, .86); border: 2px solid rgba(233, 228, 216, .45) !important;
+        font-family: var(--display); font-weight: 800; font-size: calc(22px * var(--lisible, 1)) !important;
+        letter-spacing: .14em; transform-origin: 100% 100%; }
+      html.table-v2 .tv2-fin-de-tour button.fin-autonome-bouton:hover:not(:disabled) { border-color: var(--stock) !important; }
+      html.table-v2 .tv2-fin-de-tour button.fin-de-tour-prete { background: #b8322a !important; color: #fff !important;
+        border-color: #ff8a7a !important; }
+      html.table-v2 .tv2-fin-de-tour .filet { font-size: calc(11px * var(--lisible, 1)); max-width: 300px; text-align: right;
+        background: rgba(0, 0, 0, .7); padding: 2px 6px; }
+      /* 359 ① — le timer global, chez moi, s'accole au-dessus d'END TURN (355 ①). */
+      html.table-v2 .fin-de-tour-global.a-moi { top: auto; left: auto; right: 12px; bottom: 240px; transform: none;
+        font-size: calc(18px * var(--lisible, 1)); padding: 6px 14px; animation: fin-de-tour-pope-coin .35s cubic-bezier(.2,1.6,.4,1) both; }
+      @keyframes fin-de-tour-pope-coin { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
       .plein .djt { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px 40px;
         padding: 14px 18px; font-family: var(--mono); color: var(--stock); }
       .plein .djt-portail { grid-column: 1 / -1; }
@@ -14413,7 +14440,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D67D9NDe.js"></script>
+    <script type="module" crossorigin src="./assets/index-CqbaI5Nq.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

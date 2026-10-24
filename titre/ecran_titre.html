@@ -254,7 +254,7 @@
      transform/opacity only). L'image est en plus mise à l'échelle 1,16 pour
      qu'aucun coin ne découvre le fond. */
   .doors{position:absolute;left:5cqw;right:5cqw;top:37.5cqh;bottom:9cqh;
-    display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw}
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1.6cqw}
   .door{position:relative;overflow:hidden;border:0;background:#0a0a0d;
     cursor:pointer;transform:skewX(-5deg);
     transition:border-color .16s,transform .16s,box-shadow .16s}
@@ -353,6 +353,10 @@
   .d-ranked .cap-top{left:0;right:0;bottom:0;height:1.2cqh;background:var(--blood)}
   .d-ranked .k{color:var(--blood)}
   .d-ranked h3{font-size:5cqh;color:var(--bone)}
+  /* S1471 - note 359 (3) : la porte EXPERIMENTAL, l'ambre du « en essai » ; le mot long tient a 4 portes. */
+  .d-exp .cap-top{left:0;top:0;width:100%;height:.5cqh;background:#e0a84a}
+  .d-exp .k{color:#e0a84a}
+  .d-exp h3{font-size:3.6cqh}
   .d-ranked .body{bottom:4.6cqh}
   .d-ranked .chip{position:absolute;right:1.4cqw;top:2.2cqh;z-index:3;
     padding:.35cqh .7cqw;border:1px solid var(--blood);border-radius:2px;
@@ -2436,13 +2440,13 @@ const TON_TOUR=[
 const COMMENT_EN_LIGNE=[
   ['The host (on the PC with JOUER.bat, or on the site)',[
     'Open the game. At the door, click <b>Create account</b>: a name, a password \u2014 and keep your recovery key somewhere safe (it is the only way back into your account).',
-    'Click <b>DIVE</b> \u2192 <b>Vs bots</b> \u2192 <b>Play with friends</b> \u2192 choose the seats and the mode \u2192 <b>Create</b>. A six-letter code appears.',
+    'Click <b>DIVE</b> \u2192 <b>Classic</b> \u2192 <b>Play with friends</b> \u2192 choose the seats and the mode \u2192 <b>Create</b>. A six-letter code appears.',
     'Send that code to your friends.',
     'When their names are in the room and they are <b>Ready</b>, click <b>Start</b>. You all play the same dungeon.']],
   ['A friend (in a browser, nothing to install)',[
     'Open <b>loot-legendary-bot.github.io</b> in Chrome or Edge and type the door password (the host gives it to you).',
     'Click <b>Create account</b>: a name, a password, keep your recovery key.',
-    'Click <b>DIVE</b> \u2192 <b>Vs bots</b> \u2192 <b>Play with friends</b> \u2192 <b>Join with a code</b> \u2192 type the code \u2192 <b>Join</b> \u2192 <b>Ready</b>.',
+    'Click <b>DIVE</b> \u2192 <b>Classic</b> \u2192 <b>Play with friends</b> \u2192 <b>Join with a code</b> \u2192 type the code \u2192 <b>Join</b> \u2192 <b>Ready</b>.',
     'Wait for the host to start. If your connection drops, open the page again: you are back where you were.']],
   ['If it says \u201cNo answer from \u2026\u201d',[
     'The message names the server. \u201cthis PC (localhost)\u201d: OPTIONS \u2192 Ctrl+Shift+D \u2192 <b>SERVER: FLY</b>. \u201clootlegendary-api.fly.dev\u201d: check your connection, or play offline.']]];
@@ -2525,7 +2529,7 @@ const MENU=[
      bounty WALL" -> l'entree principale s'appelle DIVE (elle remplace ENTER THE
      DUNGEON de la note 144 (1)). TODAY'S DUNGEON et BOUNTY WALL etaient deja
      poses ; seul ce libelle restait. */
-  ["Dive","vs bots \u00b7 today\u2019s dungeon \u00b7 dungeon pro tour","pve",0],
+  ["Dive","classic \u00b7 today\u2019s dungeon \u00b7 dungeon pro tour \u00b7 experimental","pve",0],
   /* (5) note 140 (2) : le drapeau `lower` etait encore ici. Le palier
      d'avant a ote la classe du TITRE DE PAGE et laisse celui de la TABLE :
      a l'ecran, PLAY / Vault / OPTIONS / QUIT. Mesure des QUATRE entrees
@@ -2599,9 +2603,12 @@ fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json(
 window.LL_DPT_ENDORMI = true;
 window.LL_DPT_DORT = 'The Pro Tour opens soon.';
 const DOORS=[
-  ["Warm-up","Vs bots","Free-for-all or 2v2 against bots, alone or with a friend. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
+  /* S1471 - note 359 (3) : VS BOTS devient CLASSIC (reco du classeur), le chacun-pour-soi a 3, 4 ou 5 ;
+     2V2, 2V2V2 et le FFA a six passent dans la porte EXPERIMENTAL (moteur 252 ter), sans classement. */
+  ["Against bots","Classic","Free-for-all against bots, 3 to 5 players, alone or with friends. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
   ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
-  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked','Bronze III']];
+  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked','Bronze III'],
+  ["Not ranked","Experimental","2v2, 2v2v2 and a six-player free-for-all against bots. Being tested \u2014 no ranking.",11,()=>setTimeout(()=>{matchCtx='exp';go('match','exp');},300),'d-exp',null]];
 const doors=document.getElementById('doors');
 DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
   const d=document.createElement('div');
@@ -2689,7 +2696,11 @@ let matchCtx='bots', matchMode='ffa', friend=false;
 const MODES=[['ffa','Free-for-all','One winner. Everything funnels into the Final Duel.'],
              ['2v2','2v2','Two teams of two. The run scores together, the duel does not.'],
              /* S1462 - note 341 bis : le 2V2V2 (moteur 921, six sieges, trois camps). */
-             ['2v2v2','2v2v2','Three teams of two. Each team scores together; the duel is fought pair against pair.']];
+             ['2v2v2','2v2v2','Three teams of two. Each team scores together; the duel is fought pair against pair.'],
+             /* S1471 - note 359 (3) : le FFA a six (moteur 252 ter), experimental. */
+             ['ffa6','Free-for-all \u00b7 6','Six players, each for themselves. One winner.']];
+/* 359 (3) : CLASSIC ne porte que le chacun-pour-soi ; EXPERIMENTAL porte le reste. */
+const MODES_DU_CTX = {bots:['ffa'], exp:['2v2','2v2v2','ffa6']};
 const mchips=document.getElementById('mchips'), arena=document.getElementById('arena');
 /* seat order is always [you, ally-or-slot, foe, foe] */
 const FFA =[[22,24],[78,24],[22,76],[78,76]];
@@ -2718,7 +2729,7 @@ const CSRC={tl:A.cTL,tr:A.cTR,bl:A.cBL,br:A.cBR};
    DEUX : l'os pour moi, le sang pour tout adversaire. La table peut monter a
    cinq sieges - les quatre bots restent rouges, et le cinquieme aussi. */
 const MOI_COL='#efece3', ADV_COL='#a3231d';
-const SOLO_COL=[MOI_COL,ADV_COL,ADV_COL,ADV_COL,ADV_COL];
+const SOLO_COL=[MOI_COL,ADV_COL,ADV_COL,ADV_COL,ADV_COL,ADV_COL];   /* 359 (3) : le sixieme siege du FFA a six */
 const TEAM_COL=[MOI_COL,ADV_COL];
 /* S1462 - note 341 bis : la troisieme equipe, cuivre (reco Q-COULEUR-EQUIPES). */
 const CAMP3_COL='#c07a2c';
@@ -2727,10 +2738,10 @@ function seat(x,y,col,label,slot){
     '"><u></u>'+label+'</div>';
 }
 function drawArena(){
-  const ffa = matchMode==='ffa';
+  const ffa = matchMode==='ffa' || matchMode==='ffa6';
   const trois = matchMode==='2v2v2';
   const pts = ffa ? placesFFA(siegesFFA) : trois ? P2V2V2 : P2V2;
-  const foe = matchCtx==='bots' || matchCtx==='daily' ? 'Bot' : 'Player';
+  const foe = matchCtx==='bots' || matchCtx==='exp' || matchCtx==='daily' ? 'Bot' : 'Player';
   /* FFA corners follow the seats, 2v2 corners follow the side */
   const cols = ffa ? SOLO_COL
              : trois ? [TEAM_COL[0],TEAM_COL[0],TEAM_COL[1],TEAM_COL[1],CAMP3_COL,CAMP3_COL]
@@ -2767,7 +2778,7 @@ function drawArena(){
     ? pts.map((p,i)=>seat(p[0],p[1],cols[i%cols.length],
         i===0?PROFILE.pseudo:foe)).join('')
     : seat(...pts[0],cols[0],PROFILE.pseudo)
-      + (matchCtx==='daily' || matchCtx==='bots' ? seat(...pts[1],cols[1],matchCtx==='bots'?'Bot ally':'Bot')   /* S1414 - DD-2 bis : l'allie du Daily est un bot ; S1419 - note 243 (10) : en VS BOTS aussi */
+      + (matchCtx==='daily' || matchCtx==='bots' || matchCtx==='exp' ? seat(...pts[1],cols[1],matchCtx==='daily'?'Bot':'Bot ally')   /* S1414 - DD-2 bis : l'allie du Daily est un bot ; S1419 - note 243 (10) : en VS BOTS aussi */
          : seat(...pts[1],cols[1],friend?'Friend':'Invite',!friend))
       + seat(...pts[2],cols[2],foe) + seat(...pts[3],cols[3],foe);
   /* S1413 - DD-2 : le Daily est UN run, sans Duel Final (DAILY_DUNGEON 0 (1)). */
@@ -2781,13 +2792,14 @@ function drawArena(){
 }
 /* note 136 - TROIS contextes, et chacun porte ses mots. Le surtitre ne dit
    plus "PvE" / "PvP" : ces deux entrees ont quitte le HOME. */
-const KICK={bots:'vs bots',daily:'today\u2019s dungeon',ranked:'dungeon pro tour \u00b7 ranked'};
-const TITRE_DU_MATCH={bots:'Vs bots',daily:'Today\u2019s Dungeon',ranked:'Dungeon Pro Tour'};
+const KICK={bots:'classic',exp:'experimental \u00b7 unranked',daily:'today\u2019s dungeon',ranked:'dungeon pro tour \u00b7 ranked'};
+const TITRE_DU_MATCH={bots:'Classic',exp:'Experimental',daily:'Today\u2019s Dungeon',ranked:'Dungeon Pro Tour'};
 /* La graine du jour est DERIVEE de la date (UTC), jamais tiree : une seule
    graine pour tous. L'ecran l'AFFICHE ; il ne decide aucune regle avec. */
 const GRAINE_DU_JOUR=(()=>{const d=new Date();return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');})();
 function paintMatch(ctx){
   matchCtx=ctx;
+  if(MODES_DU_CTX[ctx] && !MODES_DU_CTX[ctx].includes(matchMode)) matchMode = MODES_DU_CTX[ctx][0];
   document.getElementById('v-match').classList.toggle('daily', ctx==='daily');
   document.getElementById('mkick').textContent = KICK[ctx];
   const t=document.getElementById('mtitle');
@@ -2802,6 +2814,7 @@ function paintMatch(ctx){
   mchips.innerHTML='';
   MODES.forEach(([k,title])=>{
     if(ctx==='daily') return;   /* S1414 - DD-2 bis : aucun choix, la table est celle du defi */
+    if(MODES_DU_CTX[ctx] && !MODES_DU_CTX[ctx].includes(k)) return;   /* S1471 - note 359 (3) */
     const b=document.createElement('button');
     b.className='mchip'+(k===matchMode?' sel':''); b.textContent=title;
     b.addEventListener('click',()=>{matchMode=k;paintMatch(matchCtx);});
@@ -2836,7 +2849,7 @@ function paintMatch(ctx){
   const msieges=document.getElementById('msieges');
   msieges.innerHTML='';
   msieges.style.display = choixSieges ? '' : 'none';
-  if(!choixSieges) siegesFFA = tableDuJour ? tableDuJour.sieges : 4;
+  if(!choixSieges) siegesFFA = tableDuJour ? tableDuJour.sieges : matchMode==='ffa6' ? 6 : 4;
   if(choixSieges){
     const lab=document.createElement('i'); lab.textContent='Players'; msieges.appendChild(lab);
     [3,4,5].forEach(n=>{
@@ -2857,7 +2870,7 @@ function paintMatch(ctx){
      lieu de le griser - un geste qui ne peut pas se faire n'a pas de bouton -
      et `friend` retombe, sinon un ami invite en 2v2 resterait assis a la
      table en passant en FFA. */
-  if(matchMode==='ffa' || ctx==='daily'){ friend=false; inv.style.display='none'; }
+  if(matchMode==='ffa' || matchMode==='ffa6' || ctx==='daily'){ friend=false; inv.style.display='none'; }
   else {
     inv.style.display='';
     inv.className='invite'+(friend?' has':'');
@@ -3815,7 +3828,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       };
       return;
     }
-    if (e.ctx !== 'bots') {
+    if (e.ctx !== 'bots' && e.ctx !== 'exp') {
       refuse("Find match isn't open yet: the ranked queue doesn't exist.");
       return;
     }
@@ -3832,6 +3845,13 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       var q2 = new URLSearchParams(window.location.search);
       q2.delete('joueurs'); q2.delete('camps'); q2.set('equipe', 'hasard');
       window.location.href = '/?' + q2.toString();
+      return;
+    }
+    /* S1471 - note 359 (3) : le FFA a six, depuis EXPERIMENTAL (moteur 252 ter). */
+    if (e.mode === 'ffa6') {
+      var q6 = new URLSearchParams(window.location.search);
+      q6.delete('camps'); q6.delete('equipe'); q6.set('joueurs', '6');
+      window.location.href = '/?' + q6.toString();
       return;
     }
     if (e.mode !== 'ffa') {

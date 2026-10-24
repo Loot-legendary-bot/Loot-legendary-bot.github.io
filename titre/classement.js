@@ -121,7 +121,7 @@
     t.append(el('span', null, 'MODE'), el('span', null, 'PLAYED'), el('span', null, 'SUCCESS'), el('span', null, '%'));
     b.appendChild(t);
     var bm = c.by_mode || {};
-    [['VS BOTS', bm.bots, false], ['ONLINE', bm.online, false], ["TODAY'S DUNGEON", bm.daily, false],
+    [['CLASSIC', bm.bots, false], ['ONLINE', bm.online, false], ["TODAY'S DUNGEON", bm.daily, false],
      ['DUNGEON PRO TOUR', bm.dpt, window.LL_DPT_ENDORMI === true]].forEach(function (x) {
       var m = x[1] || {}, l = el('div', 'rk-mode' + (x[2] ? ' dort' : ''));
       l.appendChild(el('span', null, x[0]));
