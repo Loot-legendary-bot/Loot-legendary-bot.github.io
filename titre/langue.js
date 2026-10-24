@@ -1233,6 +1233,11 @@
     /* S1477 - note 358 bis : l'oeil des cartes de de, et son reglage dans OPTIONS. */
     'ASK ME': 'DEMANDE-MOI', 'MUTED': 'MUETTE', 'DICE CARDS': 'CARTES DE DÉ',
     '▼ PLAY A LIT CARD FROM YOUR HAND': '▼ JOUE UNE CARTE ALLUMÉE DE TA MAIN',
+    /* S1481 - note 364 (6) : la fenetre de reaction, une pause */
+    'You have time to play reactions — lit cards, Signature, gear':
+      'Tu as le temps de jouer des réactions — cartes allumées, Signature, équipement',
+    'OK · CONTINUE': 'OK · CONTINUER',
+    'MAKE YOUR CHOICE': 'FAIS TON CHOIX',
     'NO CARD': 'AUCUNE', 'THE ONES I OPEN': 'CELLES QUE J’OUVRE', 'EVERY CARD': 'TOUTES',
     'ask me for dice cards (rerolls, +N, Signature) — a new card arrives muted; open its eye to be asked':
       'me demander pour les cartes de dé (relances, +N, Signature) — une carte neuve arrive muette ; ouvre son œil pour être interrogé'

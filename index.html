@@ -1324,6 +1324,13 @@
       .nouvelle-table .nt-bulle.pleine { background: radial-gradient(circle at 35% 35%, #fffbe8 0%, #f0d09e 45%, #b8862f 100%);
         box-shadow: 0 0 6px rgba(240, 208, 158, .7); }
       .nouvelle-table .nt-bulle.vide { background: transparent; opacity: .35; }
+      /* S1481 · note 364 ① — TABLE v2 : au bandeau, les actions du joueur actif sont des torches */
+      .nouvelle-table .nt-bulle.nt-torche { width: 18px; height: 24px; border: 0; border-radius: 0; box-shadow: none;
+        background: url(/art/hud/torche_allumee.webp) center / contain no-repeat; opacity: 1; }
+      .nouvelle-table .nt-bulle.nt-torche.vide { background-image: url(/art/hud/torche_eteinte.webp); filter: brightness(.8); }
+      .nouvelle-table .nt-bulle.nt-torche:has(> canvas.torche-vivante) { background-image: none; }
+      .nouvelle-table .nt-bulle.nt-torche > canvas.torche-vivante { display: block; width: 100%; height: 100%; pointer-events: none; }
+      .nouvelle-table .nt-rond > .nt-bulles:has(> .nt-torche) { bottom: -14px; gap: 1px; }
       @media (prefers-reduced-motion: reduce) { .nouvelle-table .nt-rond > .nt-eclair.vif { animation: none; } }
       /* S1450 · note 310 ⑪ — le radar des écoles, compact, à droite des PV et des stats ; le détail au survol. */
       .bj-stats { position: relative; }
@@ -6410,6 +6417,15 @@
       .fen-recois-visuel.fen-mob-art { width: 96px; }
       .fen-reagir { font-family: var(--display); font-weight: 800; font-size: 18px;
                     letter-spacing: .04em; color: var(--stock); margin: 2px 0 8px; }
+      /* S1481 · note 364 ⑥ — la ligne sous DO YOU REACT ; la pièce offerte se clique dans l'inventaire */
+      .fen-reagir-sous { font-size: 13px; margin: -4px 0 10px; }
+      .creneau[data-offerte] { cursor: pointer; }
+      /* S1481 · note 364 ③ — Blood Altar : MAKE YOUR CHOICE + la barre de temps */
+      .rps-choisis { font-family: var(--display); font-weight: 800; font-size: 22px;
+                     letter-spacing: .06em; color: var(--stock); margin: 4px 0 10px; }
+      .rps-barre { height: 8px; margin: 12px 0 4px; background: #2a2520; border-radius: 4px; overflow: hidden; }
+      .rps-barre-jauge { display: block; height: 100%; background: var(--stock);
+                         transform-origin: left center; }
       .sig-carte { display: flex; flex-direction: column; justify-content: space-between;
                    flex: 0 0 auto; width: 120px; min-height: 160px; padding: 10px 8px;
                    border: 2px solid var(--stock); border-radius: 6px; background: var(--ink);
@@ -14533,7 +14549,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-Cu_vME8r.js"></script>
+    <script type="module" crossorigin src="./assets/index-DeUiVFrr.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
