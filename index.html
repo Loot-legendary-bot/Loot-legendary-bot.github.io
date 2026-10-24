@@ -14014,6 +14014,14 @@
       html.table-v2 .fin-de-tour-global.a-moi { top: auto; left: auto; right: 12px; bottom: 240px; transform: none;
         font-size: calc(18px * var(--lisible, 1)); padding: 6px 14px; animation: fin-de-tour-pope-coin .35s cubic-bezier(.2,1.6,.4,1) both; }
       @keyframes fin-de-tour-pope-coin { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      /* S1472 · 360 ④ — le RPS d'initiative (Shitty Slope) : un titre, la tête du porteur, les signes en gros. */
+      .rps-initiative { display: flex; align-items: center; gap: 14px; margin: 6px 0 12px; }
+      .rps-initiative-portrait { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; object-position: 50% 18%;
+        border: 3px solid var(--siege, #EDE3CC); flex: none; }
+      .rps-initiative-titre { font-family: var(--display); font-weight: 800; letter-spacing: .05em;
+        font-size: calc(18px * var(--lisible, 1)); color: #f2ede4; line-height: 1.25; }
+      .decision.rps-gros button.rps-choix { font-size: calc(18px * var(--lisible, 1)); padding: 12px 18px; min-width: 120px; }
+      .decision.rps-gros button.rps-choix svg, .decision.rps-gros button.rps-choix img { width: 64px; height: 64px; }
       /* S1472 · 360 ⑤ — « Who do you invite » : les portraits à cocher, VALIDATE ✓ en gros, « invite nobody » en second. */
       .invites-portraits { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 12px; }
       .invite-portrait { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 104px;
@@ -14488,7 +14496,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BzYMk5UA.js"></script>
+    <script type="module" crossorigin src="./assets/index-WUsQPRNg.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
