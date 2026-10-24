@@ -41,6 +41,7 @@ dice_roll_2d6_01,SFX,sfx/dice_roll_2d6_01.ogg,DICE_ROLLED:die=2d6,,0,non,4,-18.5
 dice_roll_2d6_02,SFX,sfx/dice_roll_2d6_02.ogg,TODO_EVENT,,0,non,3,-18.2,-1.1,freesound_community-075220_2d6-rolling-dice-35981.mp3,
 gag_turd_01,SFX,sfx/gag_turd_01.ogg,ABILITY_DAMAGE_SELF,for turd,0,non,18,-30.5,-1.1,freesound_community-dungeon-fart-for turd74529.mp3,
 equip_weapon_blade,SFX,sfx/melee_sword_slash_01.ogg,EQUIPPED:target.slot=WEAPON,EQUIP WEAPON = la lame tirée (note 243 ⑥),0,non,1,,,melee_sword_slash_01.ogg,
+party_mask_jingle,SFX,sfx/result_good_01.ogg,EQUIPPED:cardId=dungeon_party_mask_epic,DUNGEON PARTY MASK - jingle (note 354 6 : pas de party_mask.ogg depose),0,non,4,-11.7,-0.9,freesound_community-goodresult-82807.mp3,
 equip_head_metal,SFX,sfx/melee_axe_hit_01.ogg,EQUIPPED:target.slot=HEAD,EQUIP HEAD = métal (note 243 ⑥),0,non,1,,,melee_axe_hit_01.ogg,
 equip_chest_metal,SFX,sfx/melee_axe_hit_01.ogg,EQUIPPED:target.slot=CHEST,EQUIP CHEST = métal (note 243 ⑥),0,non,1,,,melee_axe_hit_01.ogg,
 equip_legs_metal,SFX,sfx/melee_axe_hit_01.ogg,EQUIPPED:target.slot=LEGS,EQUIP LEGS = métal (note 243 ⑥),0,non,1,,,melee_axe_hit_01.ogg,

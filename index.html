@@ -5700,6 +5700,11 @@
         opacity: 1; visibility: visible; pointer-events: auto;
         transform: translate(-50%, -50%) scale(1);
       }
+      /* S1468 · note 354 ② — « mon gear s'ouvre dès que je passe dessus » : l'aperçu d'une CARTE
+         (inventaire, main, cimetière) laisse passer la souris — centré, il recouvrait sa case, la
+         gardait ouverte tant que le curseur était dessus et bloquait le clic de la case. Il suit
+         désormais la case seule : ouvert à l'entrée, fermé à la sortie, sans délai. */
+      #zoom-coin > .cz-zoom.zc-ouvert { pointer-events: none; transition-duration: 40ms; }
       /* La fiche imprimée garde sa largeur et son plafond hors de sa colonne. */
       #zoom-coin > .ep-fiche.zc-ouvert {
         position: fixed; left: 50%; top: 50%; right: auto;
@@ -6507,12 +6512,43 @@
                      pointer-events: none; }
       /* S1468 · 352 ⑤ / 355 ③ — l'autre qui répond : même bandeau, liseré ambre. */
       .attente-autre { border-color: #e0a84a; top: 56px; }
+      /* S1468 · 354 ⑥ — la fête du DUNGEON PARTY MASK : 1,5 s, par-dessus tout, sans prendre la souris. */
+      .fete-du-masque { position: fixed; inset: 0; z-index: var(--z-zoom); pointer-events: none; overflow: hidden;
+        animation: fdm-voile 1.5s ease-out forwards; }
+      @keyframes fdm-voile { 0% { background: rgba(40, 6, 40, 0); } 20% { background: rgba(40, 6, 40, .35); }
+        100% { background: rgba(40, 6, 40, 0); } }
+      .fdm-masque { position: absolute; left: 50%; top: 42%; width: min(240px, 22vw); border-radius: 10px;
+        box-shadow: 0 0 40px 10px rgba(190, 60, 220, .55); animation: fdm-tombe 1.5s cubic-bezier(.2,.9,.3,1.2) forwards; }
+      @keyframes fdm-tombe { 0% { transform: translate(-50%, -160%) rotate(-25deg) scale(.6); opacity: 0; }
+        35% { transform: translate(-50%, -50%) rotate(6deg) scale(1.08); opacity: 1; }
+        50% { transform: translate(-50%, -50%) rotate(-3deg) scale(1); }
+        85% { transform: translate(-50%, -50%) rotate(0) scale(1); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(.9); opacity: 0; } }
+      .fdm-titre { position: absolute; left: 50%; top: 70%; transform: translateX(-50%); font-family: var(--display);
+        font-weight: 800; font-size: 46px; letter-spacing: .12em; color: #e9a6ff; text-shadow: 0 0 18px #7a1d8a, 0 2px 4px #000;
+        animation: fdm-titre 1.5s ease-out forwards; }
+      @keyframes fdm-titre { 0%, 25% { opacity: 0; transform: translateX(-50%) scale(.7); }
+        45% { opacity: 1; transform: translateX(-50%) scale(1.1); } 85% { opacity: 1; transform: translateX(-50%) scale(1); }
+        100% { opacity: 0; } }
+      .fdm-confetti { position: absolute; top: -20px; width: 9px; height: 14px; border-radius: 2px;
+        background: #3a0f45; box-shadow: inset 0 0 0 1px #8d3aa0; animation: fdm-confetti 1.2s ease-in forwards; }
+      .fdm-confetti:nth-child(3n) { background: #1d1022; }
+      .fdm-confetti:nth-child(4n) { background: #5b1a1a; }
+      @keyframes fdm-confetti { to { transform: translate(var(--derive), 110vh) rotate(var(--tour)); opacity: .9; } }
+      html.fdm-torches .nouvelle-table { animation: fdm-torches .25s steps(2) 6; }
+      @keyframes fdm-torches { 0% { filter: brightness(1.15) saturate(1.2); } 50% { filter: brightness(.75); }
+        100% { filter: brightness(1.1); } }
+      @media (prefers-reduced-motion: reduce) { .fdm-confetti { display: none; } html.fdm-torches .nouvelle-table { animation: none; } }
       /* S1468 · 355 ② — qui agit, en tête de scène, sous la rangée des sièges (hors flux : ne pousse rien). */
       .nouvelle-table .nt-presences > .nt-qui-agit { position: absolute; left: 50%; bottom: -24px;
         transform: translateX(-50%); white-space: nowrap; pointer-events: none; z-index: 2;
         font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .08em;
         color: #f0d09e; text-shadow: 0 1px 3px #000; }
       .nt-qui-agit .nqa-reagit { color: #e0a84a; }
+      /* S1468 · note 355 ④ — « chaque question tient en une ligne » : l'aide longue d'une question (TABLE v2)
+         se replie sur UNE ligne, entière au survol ; le titre, les cartes et le temps restant ne bougent pas. */
+      html.table-v2 .les-choix .rien { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+      html.table-v2 .les-choix .rien:hover { white-space: normal; overflow: visible; }
       /* S1468 · 352 ① — l'arène du spectateur : stats vives + gear à la place de la fiche imprimée. */
       .ndr-vif { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
       .ndr-ligne-en-cours { font-family: var(--display); font-weight: 800; color: #f0d09e;
@@ -9026,7 +9062,7 @@
        * `fil-decor` n'est posée QUE par le mode joueur de `renderFil` : elle n'a
        * pas besoin d'ANCÊTRE pour être sûre, elle a besoin d'être posée.
        */
-      .fil-decor { opacity: .62; }
+      .fil-decor { font-size: .9em; }   /* S1468 · 354 ⑤ — plus de fondu : la taille seule */
 
       .siege-mort { border: 1px dashed var(--rule); background: var(--ink-2);
                     padding: 10px 12px; display: grid; gap: 4px; }
@@ -12182,7 +12218,7 @@
       }
       .nouvelle-table .nt-resume-l1 { display: flex; justify-content: center; gap: 6px; white-space: nowrap; }
       .nouvelle-table .nt-resume-l2 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--stock); }
-      .nouvelle-table .nt-resume-l2.rien { color: var(--stock-dim); opacity: .7; }
+      .nouvelle-table .nt-resume-l2.rien { color: var(--stock-dim); }
       .nouvelle-table .nt-r-combat { color: var(--rouge-vif); font-weight: 700; }
       .nouvelle-table .nt-r-act { color: var(--stock); max-width: 70px; overflow: hidden; text-overflow: ellipsis; }
       .nouvelle-table .nt-r-pv { color: var(--stamp); }
@@ -13407,8 +13443,9 @@
       .nouvelle-table .tv2-acte { display: flex; align-items: center; gap: 12px; color: #f2ede4;
         font-family: "Alegreya", "Palatino Linotype", Georgia, serif; font-weight: 700; font-size: 22px; line-height: 1.2; }
       .nouvelle-table .tv2-acte-img { height: 84px; width: auto; border-radius: 4px; box-shadow: 0 4px 12px #000; flex: 0 0 auto; }
-      .nouvelle-table .tv2-suivi-sous { opacity: .72; font-size: .9em; }
-      .nouvelle-table .ntt-question-cadre.tv2-suivi-efface { opacity: .12; transition: opacity .4s; }
+      /* S1468 · note 354 ⑤ — aucune transparence sur l'information : le « passé » se distingue par la taille. */
+      .nouvelle-table .tv2-suivi-sous { font-size: .86em; }
+      .nouvelle-table .ntt-question-cadre.tv2-suivi-efface { visibility: hidden; }   /* 354 ⑤ : effacé, jamais délavé */
       /* S1460 · note 338 ⑪ — le CIMETIÈRE : les cartes jouées empilées (le haut de chacune visible, la plus
          récente devant), la pile défile DANS la colonne, sans barre (SC-1) ; survol = la carte sort de la pile. */
       .nouvelle-table .tv2-cimetiere { display: flex; flex-direction: column; min-height: 0; }
@@ -13426,6 +13463,14 @@
       .nouvelle-table .tv2-cim-art { display: block; width: 100%; max-width: 210px; height: auto; border-radius: 6px;
         box-shadow: 0 6px 16px -4px #000; }
       .nouvelle-table .tv2-cim-nom { font-family: "Alegreya", serif; color: #f2ede4; padding: 6px; background: rgba(0,0,0,.6); }
+      /* S1468 · note 354 ④ — « le cimetière est discret » : une pile de VIGNETTES étroite (110 px, collée
+         à droite, chaque carte ne montre que sa tête), la carte en grand seulement au survol. */
+      .nouvelle-table .tv2-cimetiere .tv2-cim-liste { align-items: flex-end; padding-bottom: 60px; }
+      .nouvelle-table .tv2-cimetiere .tv2-cim-carte { width: 110px; margin-bottom: -128px; }
+      .nouvelle-table .tv2-cimetiere .tv2-cim-legende { font-size: 11px; padding: 1px 4px; }
+      .nouvelle-table .tv2-cimetiere .tv2-cim-art { max-width: 110px; transition: transform .12s; transform-origin: right top; }
+      .nouvelle-table .tv2-cimetiere .tv2-cim-carte:hover { transform: none; }
+      .nouvelle-table .tv2-cimetiere .tv2-cim-carte:hover .tv2-cim-art { transform: scale(2.1); position: relative; z-index: 999; }
       .nouvelle-table .ntt-table:not(.ntt-en-combat) .ntt-axe .ntt-question-cadre .ntt-sous-tuile {
         width: 100%; max-height: 470px; overflow: hidden;   /* S1291 · LA-4 : la table part de 251 (résumés sous les miniatures) → 721 < 733 */
       }
@@ -14329,7 +14374,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-C0nidRSF.js"></script>
+    <script type="module" crossorigin src="./assets/index-B2sFb_7e.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
