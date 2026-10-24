@@ -29,10 +29,10 @@
     '.rk-find input{flex:1;min-width:0;background:#0d0c0b;border:1px solid rgba(233,226,212,.35);color:#f4eddc;' +
     'font:700 2cqh/1 var(--mono,monospace);padding:1.1cqh 1cqw;letter-spacing:.04em}' +
     '.rk-find input::placeholder{color:rgba(233,226,212,.4)}' +
-    '.rk-find button{background:#a3231d;color:#fff0d8;border:0;font:900 1.7cqh/1 "Arial Black",sans-serif;letter-spacing:.12em;' +
+    '.rk-find button{background:#a3231d;color:#fff0d8;border:0;font:900 1.7cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.12em;' +
     'padding:0 1.6cqw;cursor:pointer;text-transform:uppercase}' +
     '.rk-tete,.rk-l{display:grid;grid-template-columns:4.5cqw minmax(0,1fr) 9cqw 9cqw;gap:1cqw;align-items:baseline;padding:.9cqh .8cqw}' +
-    '.rk-tete{font:900 1.3cqh/1 "Arial Black",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(233,226,212,.55);' +
+    '.rk-tete{font:900 1.3cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(233,226,212,.55);' +
     'border-bottom:1px solid rgba(233,226,212,.25)}' +
     '.rk-liste{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none}' +
     '.rk-liste::-webkit-scrollbar{display:none}' +
@@ -43,25 +43,25 @@
     '.rk-dit{font-size:1.7cqh;line-height:1.5;color:rgba(233,226,212,.75);padding:1.4cqh .8cqw}' +
     '.rk-dit b{color:#f4eddc}' +
     '.rk-fiche{border-left:1px solid rgba(233,226,212,.2);padding-left:2cqw;overflow-y:auto;scrollbar-width:none}' +
-    '.rk-fiche h3{font:900 3.4cqh/1.1 "Arial Black",sans-serif;letter-spacing:.06em;margin:0 0 .6cqh;color:#f4eddc}' +
-    '.rk-fiche .rk-k{font:900 1.3cqh/1 "Arial Black",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(233,226,212,.55);margin:2cqh 0 .6cqh}' +
+    '.rk-fiche h3{font:900 3.4cqh/1.1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.06em;margin:0 0 .6cqh;color:#f4eddc}' +
+    '.rk-fiche .rk-k{font:900 1.3cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(233,226,212,.55);margin:2cqh 0 .6cqh}' +
     '.rk-kv{display:flex;justify-content:space-between;gap:1cqw;font-size:1.8cqh;padding:.45cqh 0;border-bottom:1px solid rgba(233,226,212,.08)}' +
     '.rk-kv span:last-child{color:#d9b35a;font-weight:700;text-align:right}' +
     /* S1459 - note 324 : les deux onglets, et la carriere */
     '.rk-onglets{position:absolute;left:0;top:-5.6cqh;display:flex;gap:1.2cqw;z-index:1}' +
     '.rk-onglet{background:none;border:0;border-bottom:3px solid transparent;color:rgba(233,226,212,.55);cursor:pointer;' +
-    'font:900 1.9cqh/1 "Arial Black",sans-serif;letter-spacing:.16em;padding:.6cqh .2cqw;text-transform:uppercase}' +
+    'font:900 1.9cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.16em;padding:.6cqh .2cqw;text-transform:uppercase}' +
     '.rk-onglet.on{color:#f4eddc;border-bottom-color:#a3231d}' +
     '.rk-car{display:flex;flex-direction:column;gap:1.4cqh}' +
     '.rk-gros{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4cqw}' +
     '.rk-gros div{border:1px solid rgba(233,226,212,.18);padding:1.4cqh 1cqw;text-align:center}' +
-    '.rk-gros b{display:block;font:900 5cqh/1 "Arial Black",sans-serif;color:#d9b35a}' +
-    '.rk-gros span{display:block;margin-top:.8cqh;font:900 1.25cqh/1 "Arial Black",sans-serif;letter-spacing:.16em;color:rgba(233,226,212,.6)}' +
+    '.rk-gros b{display:block;font:900 5cqh/1 "Big Shoulders Display","Arial Black",sans-serif;color:#d9b35a}' +
+    '.rk-gros span{display:block;margin-top:.8cqh;font:900 1.25cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.16em;color:rgba(233,226,212,.6)}' +
     '.rk-mode{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:1cqw;font-size:1.8cqh;padding:.6cqh 0;' +
     'border-bottom:1px solid rgba(233,226,212,.08)}' +
     '.rk-mode span:not(:first-child){text-align:right;color:#d9b35a;font-weight:700}' +
     '.rk-mode.dort{opacity:.45}.rk-mode.dort span:not(:first-child){color:inherit;font-weight:400}' +
-    '.rk-mode.tete{font:900 1.2cqh/1 "Arial Black",sans-serif;letter-spacing:.16em;color:rgba(233,226,212,.55)}' +
+    '.rk-mode.tete{font:900 1.2cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.16em;color:rgba(233,226,212,.55)}' +
     '.rk-mode.tete span:not(:first-child){color:inherit}';
 
   var etat = { liste: null, choisi: null, motif: null, onglet: 'RANKED' };

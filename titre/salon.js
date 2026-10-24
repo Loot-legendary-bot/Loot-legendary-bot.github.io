@@ -46,28 +46,28 @@
       'background:radial-gradient(90% 80% at 50% 40%,rgba(23,18,15,.97) 0%,rgba(7,6,5,.98) 80%)}' +
       '#salon .cb{width:52cqw;max-height:92cqh;overflow:hidden;padding:4cqh 3.2cqw;background:#0e0c0a;' +
       'border:.25cqh solid rgba(233,228,216,.22);text-align:left}' +
-      '#salon h2{margin:0 0 .8cqh;font:900 4.2cqh/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;' +
+      '#salon h2{margin:0 0 .8cqh;font:900 4.2cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.06em;' +
       'text-transform:uppercase;color:#e9e4d8}' +
-      '#salon h3{margin:2.4cqh 0 .6cqh;font:700 1.6cqh/1 ui-monospace,monospace;letter-spacing:.12em;' +
+      '#salon h3{margin:2.4cqh 0 .6cqh;font:700 1.6cqh/1 "Alegreya",Georgia,serif;letter-spacing:.12em;' +
       'text-transform:uppercase;color:#cfc6b4}' +
-      '#salon p{margin:0 0 1.2cqh;font:400 1.9cqh/1.35 "Courier Prime",ui-monospace,monospace;color:#9d9586}' +
+      '#salon p{margin:0 0 1.2cqh;font:400 1.9cqh/1.35 "Alegreya",Georgia,serif;color:#9d9586}' +
       '#salon input[type=text]{box-sizing:border-box;width:14cqw;padding:1cqh 1cqw;text-transform:uppercase;' +
-      'font:900 2.6cqh/1 ui-monospace,monospace;letter-spacing:.2em;color:#efece3;background:#060506;' +
+      'font:900 2.6cqh/1 "Alegreya",Georgia,serif;letter-spacing:.2em;color:#efece3;background:#060506;' +
       'border:.2cqh solid #3a3631;outline:0}' +
       '#salon input:focus{border-color:#a3231d}' +
       '#salon .err{min-height:2.4cqh;margin:1.4cqh 0 0;color:#e0564c}' +
       '#salon .row{display:flex;gap:1.2cqw;align-items:center;margin-top:1.6cqh;flex-wrap:wrap}' +
-      '#salon button{all:unset;cursor:pointer;padding:1.2cqh 1.8cqw;font:900 1.9cqh/1 "Arial Black",sans-serif;' +
+      '#salon button{all:unset;cursor:pointer;padding:1.2cqh 1.8cqw;font:900 1.9cqh/1 "Big Shoulders Display","Arial Black",sans-serif;' +
       'text-transform:uppercase;letter-spacing:.05em;color:#cfc6b4;border:.2cqh solid rgba(233,228,216,.3)}' +
       '#salon button.oui{background:#a3231d;color:#f4ecda;border-color:#a3231d}' +
       '#salon button.sel{color:#f4ecda;border-color:#e9e4d8}' +
       '#salon button[disabled]{opacity:.35;cursor:not-allowed}' +
       '#salon button:hover:not([disabled]){color:#fff}' +
-      '#salon .code{margin:1.6cqh 0;padding:1.8cqh 0;text-align:center;font:900 6cqh/1 ui-monospace,monospace;' +
+      '#salon .code{margin:1.6cqh 0;padding:1.8cqh 0;text-align:center;font:900 6cqh/1 "Alegreya",Georgia,serif;' +
       'letter-spacing:.3em;color:#efece3;background:#060506;border:.25cqh dashed #a3231d;user-select:all}' +
       '#salon ol{margin:1cqh 0 0;padding:0;list-style:none}' +
       '#salon li{display:flex;gap:1.2cqw;align-items:baseline;padding:1cqh 1cqw;margin-bottom:.6cqh;' +
-      'font:400 2cqh/1 ui-monospace,monospace;color:#cfc6b4;background:#060506;border-left:.4cqh solid #3a3631}' +
+      'font:400 2cqh/1 "Alegreya",Georgia,serif;color:#cfc6b4;background:#060506;border-left:.4cqh solid #3a3631}' +
       '#salon li.moi{border-left-color:#a3231d}' +
       '#salon li b{min-width:7cqw;color:#efece3}' +
       '#salon li .nom{flex:1;color:#efece3}' +

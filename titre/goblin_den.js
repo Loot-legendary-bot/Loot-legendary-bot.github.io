@@ -101,31 +101,31 @@
       'border-bottom-color:#efe3c4;border-top:0}' +
       '#gden-voile .gd-droite{display:flex;flex-direction:column;gap:1.8cqh;min-height:0}' +
       '#gden-voile .gd-tete{display:flex;align-items:center;gap:2cqw}' +
-      '#gden-voile h2{margin:0;font:900 4.8cqh/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#d9b65a}' +
-      '#gden-voile .gd-solde{font:700 2.6cqh/1 ui-monospace,monospace;color:#f2ead6}' +
+      '#gden-voile h2{margin:0;font:900 4.8cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#d9b65a}' +
+      '#gden-voile .gd-solde{font:700 2.6cqh/1 "Alegreya",Georgia,serif;color:#f2ead6}' +
       '#gden-voile .gd-solde.flash{animation:gd-flash .7s ease-out}' +
       '@keyframes gd-flash{0%{color:#fff;transform:scale(1.18)}100%{color:#f2ead6;transform:scale(1)}}' +
       '#gden-voile .gd-vide{flex:1}' +
-      '#gden-voile button{all:unset;cursor:pointer;padding:1.2cqh 1.6cqw;font:900 2cqh/1 "Arial Black",sans-serif;' +
+      '#gden-voile button{all:unset;cursor:pointer;padding:1.2cqh 1.6cqw;font:900 2cqh/1 "Big Shoulders Display","Arial Black",sans-serif;' +
       'text-transform:uppercase;letter-spacing:.05em;color:#d8cfbb;border:.2cqh solid rgba(233,228,216,.32);text-align:center}' +
       '#gden-voile button:hover{color:#fff;border-color:#d9b65a}' +
       '#gden-voile button.sel{color:#1b1206;background:#d9b65a;border-color:#d9b65a}' +
       '#gden-voile button[disabled]{cursor:not-allowed;opacity:.35}' +
       '#gden-voile .gd-jeux{display:grid;grid-template-columns:repeat(4,1fr);gap:1cqw}' +
       '#gden-voile .gd-jeux button{display:flex;flex-direction:column;gap:.8cqh;padding:1.6cqh 1cqw}' +
-      '#gden-voile .gd-jeux small{font:400 1.6cqh/1.25 "Courier Prime",ui-monospace,monospace;text-transform:none;letter-spacing:0;color:inherit;opacity:.85}' +
-      '#gden-voile .gd-mises{display:flex;align-items:center;gap:1cqw;font:700 2cqh/1 ui-monospace,monospace;color:#b9ae98}' +
+      '#gden-voile .gd-jeux small{font:400 1.6cqh/1.25 "Alegreya",Georgia,serif;text-transform:none;letter-spacing:0;color:inherit;opacity:.85}' +
+      '#gden-voile .gd-mises{display:flex;align-items:center;gap:1cqw;font:700 2cqh/1 "Alegreya",Georgia,serif;color:#b9ae98}' +
       '#gden-voile .gd-table{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.4cqh;' +
       'background:radial-gradient(60% 70% at 50% 50%,rgba(40,70,40,.55),rgba(10,14,9,.9));border:.3cqh solid #4a3a1c}' +
       '#gden-voile .gd-coups{display:flex;gap:2cqw}' +
-      '#gden-voile .gd-issue{min-height:3.4cqh;font:900 3cqh/1.1 "Arial Black",sans-serif;text-transform:uppercase;letter-spacing:.05em;text-align:center}' +
+      '#gden-voile .gd-issue{min-height:3.4cqh;font:900 3cqh/1.1 "Big Shoulders Display","Arial Black",sans-serif;text-transform:uppercase;letter-spacing:.05em;text-align:center}' +
       '#gden-voile .gd-issue.gagne{color:#8fd46b}#gden-voile .gd-issue.perd{color:#e0574c}#gden-voile .gd-issue.egal{color:#d9b65a}' +
-      '#gden-voile .gd-dit{margin:0;font:400 1.8cqh/1.35 "Courier Prime",ui-monospace,monospace;color:#a89f8d;text-align:center;max-width:46cqw}' +
-      '#gden-voile .gd-pied{font:400 1.6cqh/1.3 "Courier Prime",monospace;color:#8a8273}' +
+      '#gden-voile .gd-dit{margin:0;font:400 1.8cqh/1.35 "Alegreya",Georgia,serif;color:#a89f8d;text-align:center;max-width:46cqw}' +
+      '#gden-voile .gd-pied{font:400 1.6cqh/1.3 "Alegreya",Georgia,serif;color:#8a8273}' +
       /* la pièce-dent : tourne, puis se pose sur sa face */
       '#gden-voile .gd-piece{width:16cqh;height:16cqh;border-radius:50%;display:grid;place-items:center;' +
       'background:radial-gradient(circle at 35% 30%,#f7ecc8,#c9a24a 60%,#7a5a1c);color:#3a2708;' +
-      'font:900 2.6cqh/1 "Arial Black",sans-serif;box-shadow:0 1cqh 2cqh rgba(0,0,0,.6)}' +
+      'font:900 2.6cqh/1 "Big Shoulders Display","Arial Black",sans-serif;box-shadow:0 1cqh 2cqh rgba(0,0,0,.6)}' +
       '#gden-voile .gd-piece.tourne{animation:gd-tourne .18s linear infinite}' +
       '@keyframes gd-tourne{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}' +
       /* les gobelets */
@@ -138,17 +138,17 @@
       '#gden-voile .gd-gob:hover .gd-tasse{filter:brightness(1.25)}' +
       /* les deux d20 */
       '#gden-voile .gd-des{display:flex;gap:5cqw;align-items:center}' +
-      '#gden-voile .gd-d20{display:flex;flex-direction:column;align-items:center;gap:1cqh;font:700 1.8cqh/1 ui-monospace,monospace;color:#b9ae98}' +
-      '#gden-voile .gd-d20 b{width:13cqh;height:13cqh;display:grid;place-items:center;font:900 5cqh/1 "Arial Black",sans-serif;color:#f4ecda;' +
+      '#gden-voile .gd-d20{display:flex;flex-direction:column;align-items:center;gap:1cqh;font:700 1.8cqh/1 "Alegreya",Georgia,serif;color:#b9ae98}' +
+      '#gden-voile .gd-d20 b{width:13cqh;height:13cqh;display:grid;place-items:center;font:900 5cqh/1 "Big Shoulders Display","Arial Black",sans-serif;color:#f4ecda;' +
       'background:#2a1d10;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);}' +
       '#gden-voile .gd-d20 b.roule{animation:gd-secoue .12s linear infinite}' +
       '@keyframes gd-secoue{0%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}100%{transform:rotate(-8deg)}}' +
       /* la porte au HOME, sous le Bounty Wall */
       '#gdenbtn{all:unset;cursor:pointer;display:flex;align-items:center;gap:1cqw;padding:.6cqh .8cqw;' +
-      'font:900 2.2cqh/1 "Arial Black",Impact,sans-serif;letter-spacing:.12em;color:#e9e4d8;' +
+      'font:900 2.2cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.12em;color:#e9e4d8;' +
       'text-shadow:0 .2cqh .7cqh #000,0 0 .3cqh #000}' +
       '#gdenbtn img{width:6.4cqh;height:6.4cqh;border-radius:50%;object-fit:cover;border:.25cqh solid #c9a24a}' +
-      '#gdenbtn .gd-sous{display:block;font:400 1.25cqh/1.2 "Courier Prime",ui-monospace,monospace;letter-spacing:.04em;color:#b9b0a0}' +
+      '#gdenbtn .gd-sous{display:block;font:400 1.25cqh/1.2 "Alegreya",Georgia,serif;letter-spacing:.04em;color:#b9b0a0}' +
       '#gdenbtn:hover,#gdenbtn:focus{color:#d9b65a;outline:none}' +
       '#gdenbtn.ferme{cursor:not-allowed}' +
       '#gdenbtn.ferme img,#gdenbtn.ferme .gd-titre{filter:grayscale(1) brightness(.45)}' +

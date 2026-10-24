@@ -31,9 +31,9 @@
       'font:400 7vh/1 Georgia,serif;color:#e9e4d8;opacity:.55;padding:1vh 1vw}' +
       '#deux-fiches button:hover,#deux-fiches button:focus-visible{opacity:1}' +
       '#deux-fiches .prec{left:.6vw}#deux-fiches .suiv{right:.6vw}' +
-      '#deux-fiches .x{top:2.4vh;right:1.2vw;transform:none;font:400 3.4vh/1 ui-monospace,monospace}' +
+      '#deux-fiches .x{top:2.4vh;right:1.2vw;transform:none;font:400 3.4vh/1 "Alegreya",Georgia,serif}' +
       '#deux-fiches .nom{position:absolute;left:0;right:0;bottom:1.2vh;text-align:center;' +
-      'font:400 1.6vh/1 ui-monospace,monospace;letter-spacing:.3em;text-transform:uppercase;color:#8d8578}';
+      'font:400 1.6vh/1 "Alegreya",Georgia,serif;letter-spacing:.3em;text-transform:uppercase;color:#8d8578}';
     document.head.appendChild(s);
   }
 

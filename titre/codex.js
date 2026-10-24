@@ -31,7 +31,7 @@
     s.textContent =
       '#v-codex .htitle,#v-codex .hsep{display:none}' +
       '.cx{position:absolute;left:3cqw;right:3cqw;top:17cqh;bottom:4cqh;display:grid;' +
-        'grid-template-columns:19cqw minmax(0,1fr) 19cqw;gap:1.6cqw;font-family:ui-monospace,monospace;color:#e9e2d4}' +
+        'grid-template-columns:19cqw minmax(0,1fr) 19cqw;gap:1.6cqw;font-family:"Alegreya",Georgia,serif;color:#e9e2d4}' +
       '.cx-col{min-height:0;display:flex;flex-direction:column;gap:1.1cqh}' +
       '.cx-titre{font:700 4.6cqh/1 "Archivo Black",Impact,sans-serif;letter-spacing:.04em;text-transform:uppercase}' +
       '.cx-sous{font-size:1.5cqh;letter-spacing:.14em;opacity:.7;text-transform:uppercase}' +

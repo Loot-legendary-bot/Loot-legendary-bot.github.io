@@ -86,17 +86,17 @@
       'padding:4cqh 4cqw;box-sizing:border-box;gap:1.6cqh;color:#e9e4d8;' +
       'background:radial-gradient(90% 80% at 50% 30%,rgba(40,10,9,.97) 0%,rgba(7,6,5,.985) 75%)}' +
       '#bshop .bs-tete{display:flex;align-items:center;gap:2cqw}' +
-      '#bshop h2{margin:0;font:900 4.6cqh/1 "Arial Black",Impact,sans-serif;letter-spacing:.06em;text-transform:uppercase}' +
-      '#bshop .bs-solde{font:700 2.2cqh/1 ui-monospace,monospace;color:#e79a91}' +
+      '#bshop h2{margin:0;font:900 4.6cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.06em;text-transform:uppercase}' +
+      '#bshop .bs-solde{font:700 2.2cqh/1 "Alegreya",Georgia,serif;color:#e79a91}' +
       '#bshop .bs-vide{flex:1}' +
-      '#bshop button{all:unset;cursor:pointer;padding:1.1cqh 1.6cqw;font:900 1.8cqh/1 "Arial Black",sans-serif;' +
+      '#bshop button{all:unset;cursor:pointer;padding:1.1cqh 1.6cqw;font:900 1.8cqh/1 "Big Shoulders Display","Arial Black",sans-serif;' +
       'text-transform:uppercase;letter-spacing:.05em;color:#cfc6b4;border:.2cqh solid rgba(233,228,216,.3)}' +
       '#bshop button:hover{color:#fff}' +
       '#bshop button.rouge{background:#a3231d;color:#f4ecda;border-color:#a3231d}' +
       '#bshop .bs-onglets{display:flex;gap:.8cqw;flex-wrap:wrap}' +
       '#bshop .bs-onglets button.sel{color:#f4ecda;border-color:#e9e4d8;background:rgba(163,35,29,.35)}' +
       '#bshop .bs-corps{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:1.4cqh}' +
-      '#bshop .bs-dit{margin:0;font:400 1.9cqh/1.35 "Courier Prime",ui-monospace,monospace;color:#9d9586}' +
+      '#bshop .bs-dit{margin:0;font:400 1.9cqh/1.35 "Alegreya",Georgia,serif;color:#9d9586}' +
       '#bshop .bs-grille{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6cqw;min-height:0}' +
       '#bshop .bs-grille.six{grid-template-columns:repeat(6,1fr)}' +
       '#bshop .bs-item{position:relative;display:flex;flex-direction:column;gap:.8cqh;padding:1.4cqh 1cqw;' +
@@ -105,15 +105,15 @@
       '#bshop .bs-art{height:22cqh;display:grid;place-items:center;overflow:hidden;background:#0b0a09}' +
       '#bshop .bs-grille.six .bs-art{height:18cqh}' +
       '#bshop .bs-art img{max-width:100%;max-height:100%;object-fit:contain}' +
-      '#bshop .bs-art .bs-ombre{font:400 1.6cqh/1.3 "Courier Prime",monospace;color:#6f685d;text-align:center;padding:0 1cqw}' +
-      '#bshop .bs-nom{font:900 1.9cqh/1.1 "Arial Black",sans-serif;text-transform:uppercase;letter-spacing:.03em}' +
-      '#bshop .bs-quoi{font:400 1.5cqh/1.3 "Courier Prime",monospace;color:#9d9586}' +
-      '#bshop .bs-prix{display:flex;align-items:baseline;gap:.8cqw;font:700 2cqh/1 ui-monospace,monospace;color:#e79a91}' +
+      '#bshop .bs-art .bs-ombre{font:400 1.6cqh/1.3 "Alegreya",Georgia,serif;color:#6f685d;text-align:center;padding:0 1cqw}' +
+      '#bshop .bs-nom{font:900 1.9cqh/1.1 "Big Shoulders Display","Arial Black",sans-serif;text-transform:uppercase;letter-spacing:.03em}' +
+      '#bshop .bs-quoi{font:400 1.5cqh/1.3 "Alegreya",Georgia,serif;color:#9d9586}' +
+      '#bshop .bs-prix{display:flex;align-items:baseline;gap:.8cqw;font:700 2cqh/1 "Alegreya",Georgia,serif;color:#e79a91}' +
       '#bshop .bs-prix s{color:#6f685d;font-weight:400}' +
       '#bshop .bs-prix i{font-style:normal;font-weight:400;color:#cfc6b4;font-size:1.6cqh}' +
-      '#bshop .bs-remise{position:absolute;z-index:2;top:1cqh;right:1cqw;padding:.4cqh .6cqw;font:900 1.4cqh/1 "Arial Black",sans-serif;' +
+      '#bshop .bs-remise{position:absolute;z-index:2;top:1cqh;right:1cqw;padding:.4cqh .6cqw;font:900 1.4cqh/1 "Big Shoulders Display","Arial Black",sans-serif;' +
       'background:#a3231d;color:#f4ecda}' +
-      '#bshop .bs-pied{display:flex;align-items:center;gap:1.6cqw;font:400 1.7cqh/1.3 "Courier Prime",monospace;color:#9d9586}' +
+      '#bshop .bs-pied{display:flex;align-items:center;gap:1.6cqw;font:400 1.7cqh/1.3 "Alegreya",Georgia,serif;color:#9d9586}' +
       '#bshop .bs-msg{color:#e9e4d8}' +
       /* la FOIL : cadre doré et reflet qui passe (cosmétique pur, §11.1) */
       '#bshop .foil{position:relative;display:inline-block;max-height:100%;border:.35cqh solid #c9a24a;' +
