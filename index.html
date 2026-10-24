@@ -6062,6 +6062,18 @@
         font-size: 15px; line-height: 26px; text-align: center; cursor: pointer; }
       .handslot > .cloche:hover { border-color: #f4eddc; }
       .handslot > .cloche.muette { border-color: #a3231d; box-shadow: 0 0 0 1px #a3231d; }
+      /* S1477 · note 358 bis — l'œil d'une carte de dé : ouvert = ASK ME (or), fermé = MUTED (gris). */
+      .oeil { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px 2px 5px; border-radius: 12px;
+        background: rgba(10, 8, 6, .86); border: 1px solid rgba(233, 228, 216, .4); color: #9a948a;
+        font: 700 10px/1 var(--police-ui, sans-serif); letter-spacing: .06em; cursor: pointer; }
+      .oeil.ouvert { color: #f2c14e; border-color: #f2c14e; box-shadow: 0 0 6px rgba(242, 193, 78, .45); }
+      .oeil:hover { border-color: #f4eddc; }
+      .handslot > .oeil { position: absolute; top: 6px; left: 6px; z-index: 4; width: 28px; height: 28px; padding: 0;
+        justify-content: center; border-radius: 50%; }
+      .handslot > .oeil .oeil-mot { display: none; }
+      .handslot > .oeil:hover { width: auto; padding: 2px 7px 2px 5px; border-radius: 14px; }
+      .handslot > .oeil:hover .oeil-mot { display: inline; }
+      .eps-tete > .oeil { margin-left: 8px; vertical-align: middle; }
       /* S1450 — le GAME LOG ne se recentre pas quand une ligne arrive : sa boîte a une hauteur fixe. */
       .plein-boite:has(.journal-en-grand) { height: calc(var(--uvh) * 88); }
       @keyframes monte { from { transform: translateY(14px) scale(.985); opacity: 0 }
@@ -14496,7 +14508,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-WUsQPRNg.js"></script>
+    <script type="module" crossorigin src="./assets/index-DY12PwqP.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

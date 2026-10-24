@@ -1229,7 +1229,12 @@
     'the old table — switch ON to come back': 'l’ancienne table — passe sur ON pour revenir',
     /* S1466 - note 350 (2) : le mot GENERIQUE de l'interface est « coffre » (l'issue d'exploration, l'activite
        d'un siege) ; les noms de cartons composes (Large Chest, Marvelous Chest…) restent anglais. */
-    'Chest': 'Coffre', 'opening a chest': 'ouvre un coffre', 'a chest': 'un coffre'
+    'Chest': 'Coffre', 'opening a chest': 'ouvre un coffre', 'a chest': 'un coffre',
+    /* S1477 - note 358 bis : l'oeil des cartes de de, et son reglage dans OPTIONS. */
+    'ASK ME': 'DEMANDE-MOI', 'MUTED': 'MUETTE', 'DICE CARDS': 'CARTES DE DÉ',
+    'NO CARD': 'AUCUNE', 'THE ONES I OPEN': 'CELLES QUE J’OUVRE', 'EVERY CARD': 'TOUTES',
+    'ask me for dice cards (rerolls, +N, Signature) — a new card arrives muted; open its eye to be asked':
+      'me demander pour les cartes de dé (relances, +N, Signature) — une carte neuve arrive muette ; ouvre son œil pour être interrogé'
   };
   for (var kj in EN_FR_JEU) { if (Object.prototype.hasOwnProperty.call(EN_FR_JEU, kj)) EN_FR[kj] = EN_FR_JEU[kj]; }
   var GESTE_FR = { 'Move': 'Se déplacer', 'Explore (1d6)': 'Explorer (1d6)', 'Interaction :': 'Interaction :',
