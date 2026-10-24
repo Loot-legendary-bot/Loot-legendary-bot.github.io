@@ -149,6 +149,8 @@
         'clip-path:polygon(0 0,100% 0,100% 58%,50% 100%,0 58%);background:linear-gradient(180deg,#7a1717,#3a0b0b);' +
         'box-shadow:inset 0 0 1.4cqh rgba(0,0,0,.6)}' +
       '.cx-ecu-n{font:700 4.4cqh/1 "Archivo Black",Impact,sans-serif;color:#e9d9b0;margin-bottom:1.2cqh}' +
+      /* S1484 · 366 ③ : le tablier */
+      '.cx-tablier{width:70%;aspect-ratio:1/1;object-fit:contain;filter:drop-shadow(0 .4cqh .8cqh rgba(0,0,0,.6))}' +
       '.cx-gnum{font-size:1.15cqh;letter-spacing:.2em;opacity:.7}' +
       '.cx-grade .cx-nom{font-weight:700;opacity:1}' +
       '.cx-ggp{font-size:1.3cqh;color:#e9d9b0}' +
@@ -358,8 +360,8 @@
      où il se gagne. 1-3 = le jeu normal (l'échelon ouvert, marqué) ; 4-29 = le Pro Tour,
      30-33 = les tables VIP : fermés avec le DPT, grisés « opens later ». Ton grade est
      allumé : le moteur ne compte pas encore les GP (moteur 229, Q-GRD1), donc tu es au 1
-     (seuil 0 GP). Les 33 tabliers de Croze ne sont pas au dépôt (ni `ASSETS/tabliers`, ni
-     `public/`) : un écu numéroté les attend, en code. Phrase de Croze : « au CODEX, la boîte
+     (seuil 0 GP). Les 33 tabliers de Croze sont posés (S1484, `public/art/grades/`) ; l'écu numéroté
+     reste le repli. Phrase de Croze : « au CODEX, la boîte
      GRADES : les 33 grades, leur nom, leurs GP, le mien allumé, le Pro Tour grisé ». */
   var GRADES = 'grades';
   var GRADES_EN = ['Apprentice Floor-Licker', 'Fellow Chewer', 'Master Molar', 'Master Keyhole-Eye',
@@ -404,9 +406,17 @@
     var ferme = it.n > 3;
     var c = el('div', 'cx-carte cx-grade' + (ferme ? ' ferme' : ' ouvert') + (it.n === MON_GRADE ? ' mien' : ''));
     c.title = it.fr;
+    /* S1484 · note 366 ③ — le TABLIER de Croze (ASSETS/tabliers, détouré par tools/tabliers_webp.py) ;
+       l'écu numéroté reste le repli si l'image manque. */
     var ecu = el('div', 'cx-ecu');
     ecu.appendChild(el('span', 'cx-ecu-n', String(it.n)));
-    c.appendChild(ecu);
+    var tab = document.createElement('img');
+    tab.className = 'cx-tablier';
+    tab.alt = it.nom;
+    tab.loading = 'lazy';
+    tab.src = '/art/grades/tablier_' + (it.n < 10 ? '0' : '') + it.n + '.webp';
+    tab.onerror = function () { tab.replaceWith(ecu); };
+    c.appendChild(tab);
     c.appendChild(el('div', 'cx-gnum', 'GRADE ' + it.n));
     c.appendChild(el('div', 'cx-nom', it.nom));
     c.appendChild(el('div', 'cx-ggp', it.gp === null ? 'top 10 of the season' : it.gp.toLocaleString('en-US') + ' GP'));
