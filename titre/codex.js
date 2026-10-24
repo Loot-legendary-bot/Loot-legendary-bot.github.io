@@ -130,6 +130,8 @@
       '.cx-perso.a-toi .cx-owned{opacity:1;color:#9fd18b}' +
       '.cx-grand-perso img{max-height:86cqh}' +
       '.cx-decks{gap:.3cqh}.cx-decks .cx-boite{padding-top:.15cqh;padding-bottom:.15cqh}' +
+      /* S1472 · 362 ① : la dixième boîte (GRADES) tient dans la colonne */
+      '.cx-decks .cx-bcompte{margin-top:.3cqh}.cx-decks .cx-barre{margin-top:.3cqh}.cx-decks .cx-next{margin-top:.25cqh}' +
       /* S1418 · CX-4 : la boîte DAILY CHALLENGES est une liste de rangs, pas une grille */
       '.cx-grille.cx-lignes{display:flex;flex-direction:column;gap:.7cqh}' +
       '.cx-daily{display:grid;grid-template-columns:7.5cqw 1fr 8cqw 6cqw;gap:.3cqh 1cqw;align-items:baseline;' +
@@ -140,7 +142,21 @@
       '.cx-dres{font-size:1.4cqh;font-weight:700;letter-spacing:.14em;text-align:right}' +
       '.cx-daily.ok .cx-dres{color:#9fd18b}.cx-daily.ko .cx-dres{color:#e0675d}' +
       '.cx-ddents{font-size:1.3cqh;opacity:.75;text-align:right}' +
-      '.cx-dinfo{grid-column:2/-1;font-size:1.25cqh;opacity:.8}';
+      '.cx-dinfo{grid-column:2/-1;font-size:1.25cqh;opacity:.8}' +
+      /* S1472 · note 362 ① : la galerie des GRADES (écu numéroté tant que les tabliers manquent) */
+      '.cx-grade{gap:.35cqh;align-items:center;text-align:center;padding:.8cqh .3cqw;border:1px solid rgba(233,226,212,.14);background:rgba(0,0,0,.38)}' +
+      '.cx-ecu{width:62%;aspect-ratio:5/6;display:flex;align-items:center;justify-content:center;' +
+        'clip-path:polygon(0 0,100% 0,100% 58%,50% 100%,0 58%);background:linear-gradient(180deg,#7a1717,#3a0b0b);' +
+        'box-shadow:inset 0 0 1.4cqh rgba(0,0,0,.6)}' +
+      '.cx-ecu-n{font:700 4.4cqh/1 "Archivo Black",Impact,sans-serif;color:#e9d9b0;margin-bottom:1.2cqh}' +
+      '.cx-gnum{font-size:1.15cqh;letter-spacing:.2em;opacity:.7}' +
+      '.cx-grade .cx-nom{font-weight:700;opacity:1}' +
+      '.cx-ggp{font-size:1.3cqh;color:#e9d9b0}' +
+      '.cx-gou{font-size:1.05cqh;letter-spacing:.12em;opacity:.65}' +
+      '.cx-grade.ouvert{border-color:rgba(201,162,39,.55)}' +
+      '.cx-grade.ferme{filter:grayscale(1);opacity:.45}' +
+      '.cx-grade.mien{border-color:#e9d9b0;background:rgba(201,162,39,.16);box-shadow:0 0 1.6cqh rgba(201,162,39,.55)}' +
+      '.cx-grade.mien .cx-gou{color:#e9d9b0;opacity:1;font-weight:700}';
     document.head.appendChild(s);
   }
 
@@ -337,9 +353,63 @@
     return box;
   }
 
+  /* S1472 · note 362 ① (GRADES §10 ⑥, §11 ②) — LA DIXIÈME BOÎTE : GRADES. Les 33, en
+     galerie : le titre EN (le FR au survol, « garde la traduction FR »), le seuil de GP et
+     où il se gagne. 1-3 = le jeu normal (l'échelon ouvert, marqué) ; 4-29 = le Pro Tour,
+     30-33 = les tables VIP : fermés avec le DPT, grisés « opens later ». Ton grade est
+     allumé : le moteur ne compte pas encore les GP (moteur 229, Q-GRD1), donc tu es au 1
+     (seuil 0 GP). Les 33 tabliers de Croze ne sont pas au dépôt (ni `ASSETS/tabliers`, ni
+     `public/`) : un écu numéroté les attend, en code. Phrase de Croze : « au CODEX, la boîte
+     GRADES : les 33 grades, leur nom, leurs GP, le mien allumé, le Pro Tour grisé ». */
+  var GRADES = 'grades';
+  var GRADES_EN = ['Apprentice Floor-Licker', 'Fellow Chewer', 'Master Molar', 'Master Keyhole-Eye',
+    'Master Not-Yet-Dead', 'Nosy Secretary', 'Provost of the Keyring', 'Steward of the Portcullis',
+    'Elect of the Low Blow', 'Elect of the Three Skulls', 'Sublime Torchbearer', 'Grand Master of the Die',
+    'Royal Strongbox', 'Grand Elect of the Cavity', 'Knight of the Fountain', 'Prince of the Two Cats',
+    'Knight of the Grimoire', 'Bleeding Rose', 'Two-Headed Grand Pontiff', 'Master ad D20', 'Night Owl',
+    'Prince of the Onion', 'Chief of the Magpies', 'Prince of the Crabs', 'Knight of the Brazen Tongue',
+    'Prince of the Apple', 'Commander of the Flail', 'Knight of the Grey Star', 'Saint Bone',
+    'Kadosh of the Fork', 'Grand Dental Inquisitor', 'Prince of the Harlequin’s Secret', 'Sovereign Grand Licker'];
+  var GRADES_FR = ['Apprenti Lèche-Dalle', 'Compagnon Mâcheur', 'Maître Molaire', 'Maître Œil-de-Serrure',
+    'Maître Pas-Encore-Mort', 'Secrétaire Indiscret', 'Prévôt du Trousseau', 'Intendant de la Herse',
+    'Élu du Coup Bas', 'Élu des Trois Crânes', 'Sublime Porte-Torche', 'Grand Maître du Dé',
+    'Royal Coffre-Fort', 'Grand Élu de la Carie', 'Chevalier de la Fontaine', 'Prince des Deux Chats',
+    'Chevalier du Grimoire', 'Rose-Saignée', 'Grand Pontife Bicéphale', 'Maître ad D20', 'Noctambule',
+    'Prince de l’Oignon', 'Chef des Pies', 'Prince des Crabes', 'Chevalier de la Langue d’Airain',
+    'Prince de la Pomme', 'Commandeur du Fléau', 'Chevalier de l’Étoile Grise', 'Saint-Os',
+    'Kadosh à la Fourchette', 'Grand Inquisiteur Dentaire', 'Prince du Secret d’Arlequin', 'Souverain Grand Lécheur'];
+  /* GRADES §11 ② : les GP pour ATTEINDRE le grade n (le 33 = le top 10 de la saison) */
+  var GRADES_GP = [0, 300, 600, 1000, 1400, 1800, 2200, 2600, 3000, 3400, 3800, 4200, 4600, 5000, 5800,
+    6600, 7400, 8200, 9400, 10600, 11800, 13000, 14200, 15400, 16600, 17800, 19000, 20200, 21400,
+    23400, 25400, 27400, null];
+  var MON_GRADE = 1;
+  function ouSeGagne(n) { return n <= 3 ? 'NORMAL PLAY' : n <= 29 ? 'DUNGEON PRO TOUR' : 'VIP TABLES'; }
+  function boiteGrades() {
+    var items = GRADES_EN.map(function (nom, i) {
+      var n = i + 1;
+      return { n: n, nom: nom, fr: GRADES_FR[i], gp: GRADES_GP[i], f: { ou: [ouSeGagne(n)] } };
+    });
+    return { cle: GRADES, libelle: 'Grades', famille: null, items: items,
+      filtres: [{ cle: 'ou', libelle: 'Earned in', valeurs: ['NORMAL PLAY', 'DUNGEON PRO TOUR', 'VIP TABLES'] }] };
+  }
+  function carteGrade(it) {
+    var ferme = it.n > 3;
+    var c = el('div', 'cx-carte cx-grade' + (ferme ? ' ferme' : ' ouvert') + (it.n === MON_GRADE ? ' mien' : ''));
+    c.title = it.fr;
+    var ecu = el('div', 'cx-ecu');
+    ecu.appendChild(el('span', 'cx-ecu-n', String(it.n)));
+    c.appendChild(ecu);
+    c.appendChild(el('div', 'cx-gnum', 'GRADE ' + it.n));
+    c.appendChild(el('div', 'cx-nom', it.nom));
+    c.appendChild(el('div', 'cx-ggp', it.gp === null ? 'top 10 of the season' : it.gp.toLocaleString('en-US') + ' GP'));
+    c.appendChild(el('div', 'cx-gou', it.n === MON_GRADE ? 'YOUR GRADE' : ferme ? ouSeGagne(it.n) + ' · opens later' : ouSeGagne(it.n)));
+    return c;
+  }
+
   function boiteOuverte() {
     if (etat.boite === PERSOS) return boitePersos();
     if (etat.boite === DAILIES) return boiteDailies();
+    if (etat.boite === GRADES) return boiteGrades();
     for (var i = 0; i < DONNEE.boites.length; i++) {
       if (DONNEE.boites[i].cle === etat.boite) return DONNEE.boites[i];
     }
@@ -534,6 +604,20 @@
         grille.scrollTop = 0;
         return;
       }
+      if (b.cle === GRADES) {
+        var qg = etat.q.trim().toLowerCase();
+        var ou = etat.f.ou || [];
+        b.items.forEach(function (it) {
+          if (qg !== '' && (it.nom + ' ' + it.fr).toLowerCase().indexOf(qg) < 0) return;
+          if (ou.length > 0 && ou.indexOf(it.f.ou[0]) < 0) return;
+          grille.appendChild(carteGrade(it));
+          n += 1;
+        });
+        if (n === 0) grille.appendChild(el('div', 'cx-vide', 'Nothing matches.'));
+        compteVisible.textContent = n + ' shown · your grade: ' + MON_GRADE + ' · grades 1-3 open in normal play';
+        grille.scrollTop = 0;
+        return;
+      }
       if (b.cle === PERSOS) {
         var qp = etat.q.trim().toLowerCase();
         b.items.forEach(function (it) {
@@ -624,6 +708,18 @@
     btd.appendChild(cptd);
     btd.addEventListener('click', function () { etat.boite = DAILIES; etat.f = {}; peins(); });
     d.appendChild(btd);
+    var btg = el('button', 'cx-boite' + (b.cle === GRADES ? ' on' : ''));
+    btg.type = 'button';
+    var scg = el('span', 'cx-sceau');
+    scg.style.setProperty('--cire', '#8a1c1c');
+    btg.appendChild(scg);
+    btg.appendChild(el('div', 'cx-bnom', 'Grades'));
+    var cptg = el('div', 'cx-bcompte');
+    cptg.appendChild(el('span', '', '33 grades'));
+    cptg.appendChild(el('span', '', 'yours: ' + MON_GRADE));
+    btg.appendChild(cptg);
+    btg.addEventListener('click', function () { etat.boite = GRADES; etat.f = {}; peins(); });
+    d.appendChild(btg);
     box.appendChild(d);
   }
 
