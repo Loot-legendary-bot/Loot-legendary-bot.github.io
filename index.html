@@ -14014,6 +14014,14 @@
       html.table-v2 .fin-de-tour-global.a-moi { top: auto; left: auto; right: 12px; bottom: 240px; transform: none;
         font-size: calc(18px * var(--lisible, 1)); padding: 6px 14px; animation: fin-de-tour-pope-coin .35s cubic-bezier(.2,1.6,.4,1) both; }
       @keyframes fin-de-tour-pope-coin { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      /* S1472 · 360 ① — la fenêtre de réponse : la tête de qui joue, sa carte en grand. */
+      .fen-provoque { display: flex; align-items: center; gap: 16px; margin: 8px 0 10px; }
+      .fen-provoque-qui { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: none; }
+      .fen-provoque-portrait { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; object-position: 50% 18%;
+        border: 3px solid var(--siege, #EDE3CC); box-shadow: 0 6px 16px rgba(0,0,0,.8); background: #120d0a; }
+      .fen-provoque-nom { font-family: var(--display); font-weight: 800; letter-spacing: .06em; font-size: calc(15px * var(--lisible, 1)); }
+      .fen-provoque-carte { flex: none; width: 180px; }
+      .fen-provoque-carte img { width: 100%; height: auto; display: block; }
       /* S1472 · 361 ① — l'emplacement RÉSERVÉ au-dessus du cimetière, et le dock des bandeaux posé dessus.
          Vide sans timer ; rien ne se pose plus par-dessus la scène. */
       html.table-v2 .nouvelle-table .tv2-chronos { flex: 0 0 auto; height: 84px; }
@@ -14458,7 +14466,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D44M3fsz.js"></script>
+    <script type="module" crossorigin src="./assets/index-BdSZNVPx.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

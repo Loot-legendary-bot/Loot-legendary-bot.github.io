@@ -441,6 +441,19 @@
     window.location.reload();
   }
 
+  /* S1472 · note 360 ⑪ — « je peux me déconnecter » : LOG OUT / SWITCH PROFILE, depuis OPTIONS et le HOME.
+     Ferme le profil courant et REVIENT AU CHOIX DE PROFIL (la porte du compte : log in · create · play
+     offline) — à la différence de « Log out » du compte, qui restait hors ligne sans rien redemander. En
+     ligne, la session du navigateur est oubliée ; le profil hors ligne mis de côté est rendu. */
+  function changeDeProfil() {
+    lsDel(CLE_SESSION);
+    lsDel(CLE_HORSLIGNE);
+    var copie = lsGet(CLE_COPIE);
+    if (copie !== null && window.LLProfil) { lsSet(window.LLProfil.CLE, copie); lsDel(CLE_COPIE); }
+    try { window.sessionStorage.removeItem('ll.compte.lu'); } catch (e) { /* idem */ }
+    window.location.reload();
+  }
+
   /* ── au lancement du HOME ─────────────────────────────────────────────── */
   function auLancement() {
     var s = session();
@@ -466,5 +479,5 @@
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', auLancement); }
   else { auLancement(); }
 
-  window.LLCompte = { appel: appel, session: session, serveur: serveur, accueil: accueil, blocDuProfil: blocDuProfil, phrase: phrase, sansReponse: sansReponse, DEFAUT: SERVEUR_DEFAUT };
+  window.LLCompte = { appel: appel, session: session, serveur: serveur, accueil: accueil, blocDuProfil: blocDuProfil, changeDeProfil: changeDeProfil, phrase: phrase, sansReponse: sansReponse, DEFAUT: SERVEUR_DEFAUT };
 })();

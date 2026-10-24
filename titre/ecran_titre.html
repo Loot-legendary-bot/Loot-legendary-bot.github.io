@@ -818,6 +818,10 @@
   .hud .who{font:400 1.9cqh/1 ui-monospace,monospace;letter-spacing:.26em;
     text-transform:uppercase;color:var(--dust)}
   .hud .hbar{width:1px;height:2.2cqh;background:#2a2a31}
+  .hud .hud-logout{pointer-events:auto;cursor:pointer;background:transparent;color:var(--dust);
+    border:1px solid rgba(255,255,255,.22);font:400 1.25cqh/1 ui-monospace,monospace;letter-spacing:.18em;
+    padding:.45cqh .5cqw}
+  .hud .hud-logout:hover{color:var(--bone);border-color:var(--bone)}
   .hud .rank{display:flex;align-items:center;gap:.5cqw;font-size:2.2cqh;color:var(--bone)}
   .hud .rank svg{width:1.9cqh;height:1.9cqh;flex:0 0 auto}
   .hud .gold{display:flex;align-items:center;gap:.55cqw;
@@ -1196,6 +1200,9 @@
       <path d="M12 6.2 13.9 10.4 18.4 10.8 15 13.8 16 18.3 12 15.9 8 18.3 9 13.8 5.6 10.8 10.1 10.4z"
         fill="var(--rang,#c8894f)"/></svg><span id="rank"></span></span>
     <span class="who" id="who"></span>
+    <!-- S1472 - note 360 (11) : LOG OUT / SWITCH PROFILE, sur le HOME a cote du pseudo -->
+    <button type="button" class="hud-logout" id="hud-logout" title="LOG OUT / SWITCH PROFILE"
+      onclick="if(window.LLCompte&&window.LLCompte.changeDeProfil)window.LLCompte.changeDeProfil()">LOG OUT</button>
     <span class="hbar"></span>
     <span class="gold" id="goldwrap"><svg viewBox="0 0 24 24" aria-hidden="true">
       <!-- note 138 (1), verbatim : *« la dent doit être sans la blood drop »*.
@@ -2155,6 +2162,18 @@ function peinsLaLangue(){
     });
     lg.appendChild(va); lg.appendChild(cu); box.appendChild(lg);
   });
+  /* S1472 - note 360 (11) : « je peux me deconnecter » - LOG OUT / SWITCH PROFILE ferme le profil
+     courant et revient au choix de profil (compte.js, changeDeProfil). */
+  var t4=document.createElement('div'); t4.className='langue-titre'; t4.textContent='PROFILE'; t4.style.marginTop='2.4cqh'; box.appendChild(t4);
+  var sess=(window.LLCompte&&typeof window.LLCompte.session==='function')?window.LLCompte.session():null;
+  var quiEst=document.createElement('div'); quiEst.className='son-maitre-val';
+  quiEst.textContent=sess?('SIGNED IN AS '+String(sess.pseudo).toUpperCase()):'OFFLINE PROFILE';
+  box.appendChild(quiEst);
+  var sortie=document.createElement('button'); sortie.type='button'; sortie.className='langue-btn';
+  sortie.id='options-logout';
+  sortie.textContent='LOG OUT / SWITCH PROFILE';
+  sortie.addEventListener('click',function(){ if(window.LLCompte&&typeof window.LLCompte.changeDeProfil==='function') window.LLCompte.changeDeProfil(); });
+  box.appendChild(sortie);
   peinsLeDev(box);
 }
 /* S1419 - note 241 (8) : LE PANNEAU DEV. Croze : « reboot les offrandes sur mon profil,
