@@ -46,7 +46,9 @@
      (écran titre, `lePremierLancement`), les deux autres se gagnent sur le mur.
      Un profil déjà écrit garde ce qu'il a : `complete` ne vide jamais une liste. */
   var PERSOS_DE_DEPART = [];
-  var TRIO_DE_DEPART = ['the_green', 'the_necromancer', 'the_mailman'];
+  /* S1514 - note 379 (verdict Croze 25/10) : « the cook, the mailman ou the necromancer, dans cet ordre » ;
+     The Green sort du trio et se gagne au mur comme les autres. Un profil qui l'a deja le garde. */
+  var TRIO_DE_DEPART = ['the_cook', 'the_mailman', 'the_necromancer'];
 
   function neuf() {
     return {

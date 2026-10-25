@@ -23,7 +23,7 @@
      Note 202 (#47 E, « parfois le perso n'est pas imposé ») : `null` = perso LIBRE
      (La Course, Le Dernier Debout, Gold Rush, Chasse au Boss) — on vient avec le sien. */
   var SCENARIOS = [
-    ['Night of the Skeletons', 'The Necromancer', 'Every mob drawn is a skeleton', 'Kill 5 skeletons and get out', 'Skeletons killed · Frost damage'],
+    /* S1514 - note 379 : « Night of the Skeletons » retire (verdict Croze, « pas de nuit des squelettes »). */
     ['The Arsonist', 'The Wizard', 'All-Ruins dungeon · school forced: Fire', 'Deal 60 Fire damage before the first Collapse', 'Fire damage · WIS-based damage'],
     ['The Crossing', 'The Whiff', 'You cannot attack a mob — only flee', 'Get out alive with 3+ cards in hand', 'Successful flees'],
     ['Short Fuse', null, 'The Dungeon Timer runs twice as fast', 'Extract before turn 6', 'Successful extractions'],
@@ -51,7 +51,7 @@
   }
   function deux(n) { return (n < 10 ? '0' : '') + String(n); }
   function scenario(i, seed, genre) {
-    var s = SCENARIOS[((i % 12) + 12) % 12];
+    var s = SCENARIOS[((i % SCENARIOS.length) + SCENARIOS.length) % SCENARIOS.length];
     return { genre: genre, nom: s[0], perso: s[1], conditions: s[2], objectif: s[3], mur: s[4], seed: seed };
   }
   /* S1413 · DD-2 (notes 226 ⑥, 233 ②) — LE DAILY TOURNE SUR LA SEMAINE, plus sur
@@ -62,9 +62,10 @@
   var SEMAINE = [
     [1, 'la_course', 'Short Fuse', null, ['TIMER_X2'],
       'The Dungeon Timer runs twice as fast', 'Extract before turn 6', 'Successful extractions'],
-    [2, 'nuit_des_squelettes', 'Night of the Skeletons', 'the_necromancer',
-      ['MOB_POOL(skeleton_duellist,skeleton_archer,longleg_skeleton,skeleton_elite,zombie,mummy)'],
-      'Every normal mob drawn is undead', 'Kill 2 of them and get out', 'Skeletons killed · Frost damage'],
+    /* S1514 - note 379 : le mardi n'est plus la nuit des squelettes ; c'est le FILET du moteur (`daily.json`
+       `filet`, palier 279) : le Necromancer, tout Ruins, 100 Chaos. */
+    [2, 'ruins_of_chaos', 'Ruins of Chaos', 'the_necromancer', ['TILE_DECK:RUINS'],
+      'All-Ruins dungeon', 'Deal 100 Chaos damage', 'Chaos damage'],
     [3, 'sang_pour_sang', 'Blood for Blood', 'the_vampire', ['DAMAGE_X2(CHAOS)'],
       'Chaos damage is doubled, for everyone', 'Deal 100 Chaos damage', 'Chaos damage'],
     [4, 'le_dernier_debout', 'Last One Standing', null, ['NO_PORTAL'],
@@ -83,7 +84,7 @@
      `Scenario.table` (note moteur 181) : l'écran pose la table par les portes
      qui existent (`poserLesSiègesAvantLaPartie`, `poserLesCampsAvantLaPartie`). */
   var TABLES = {
-    la_course: { sieges: 5, mode: 'FFA' }, nuit_des_squelettes: { sieges: 4, mode: 'FFA' },
+    la_course: { sieges: 5, mode: 'FFA' }, ruins_of_chaos: { sieges: 4, mode: 'FFA' },
     sang_pour_sang: { sieges: 4, mode: '2V2' }, le_dernier_debout: { sieges: 5, mode: 'FFA' },
     triple_un: { sieges: 3, mode: 'FFA' }, le_facteur: { sieges: 4, mode: '2V2' },
     le_pyromane: { sieges: 4, mode: 'FFA' }
@@ -96,8 +97,7 @@
      et retombe sur « en attente du moteur » si le moteur refuse. */
   var OBJECTIFS = {
     la_course: { kind: 'EXTRACT', avant_tour: 6 },
-    nuit_des_squelettes: { kind: 'KILLS', mobs: ['skeleton_duellist', 'skeleton_archer', 'longleg_skeleton',
-      'skeleton_elite', 'zombie', 'mummy'], n: 2, et: 'EXTRACT' },
+    ruins_of_chaos: { kind: 'DAMAGE_DEALT', ecole: 'CHAOS', n: 100 },
     sang_pour_sang: { kind: 'DAMAGE_DEALT', ecole: 'CHAOS', n: 100 },
     le_dernier_debout: { kind: 'LAST_ALIVE' },
     triple_un: { kind: 'NATURAL_ONES', n: 3 },

@@ -5772,6 +5772,9 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   try { persos = window.LLProfil.lis().possede.persos || []; } catch (e) { persos = []; }
   if (persos.length > 0) { return; }
   var trio = window.LLProfil.TRIO_DE_DEPART || [];
+  /* S1514 - note 379 : la phrase du Cook au premier choix (la nourriture : il encaisse, il nourrit sa tuile) ;
+     le Mailman et le Necromancer gardent la leur. */
+  var PHRASE_DU_PREMIER_CHOIX = { 'The Cook': 'Food is your weapon. You take the hits and you feed your tile.' };
   var cartes = trio.map(function (id) {
     for (var k = 0; k < CHARS.length; k++) { if (idDuPerso(CHARS[k].name) === id) { return CHARS[k]; } }
     return null;
@@ -5820,7 +5823,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     b.className = 'pc';
     b.dataset.perso = id;
     b.innerHTML = '<div class="vp" style="background-image:url(/art/personnages/atlas/' + id + '.webp)"></div>' +
-      '<b>' + c.name + '</b><i>' + c.read + '</i>';
+      '<b>' + c.name + '</b><i>' + (PHRASE_DU_PREMIER_CHOIX[c.name] || c.read) + '</i>';
     b.addEventListener('click', function () {
       choisi = c;
       ok.querySelector('h3').textContent = c.name;

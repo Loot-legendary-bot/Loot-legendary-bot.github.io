@@ -13250,6 +13250,11 @@
         box-shadow: 0 0 22px 4px rgb(224 74 58 / .6); }
       .dicelayer.jet-partage.t3 .scene-cadre.jp-bonus { outline: 4px solid #4cbb3a; outline-offset: 6px; border-radius: 14px;
         box-shadow: 0 0 22px 4px rgb(76 187 58 / .6); }
+      /* S1515 · note 380 — le coup du perdant, écrit SUR son cadre au résultat (« −3 CHAOS », « 0 — IMMUNE »). */
+      .dicelayer.jet-partage .scene-cadre .jp-coup { opacity: 0; transform: translateY(-6px); margin-top: 6px;
+        font-size: 26px; font-weight: 900; letter-spacing: .04em; color: #ff6a55; text-align: center;
+        text-shadow: 0 2px 8px rgb(0 0 0 / .85); transition: opacity .25s ease, transform .25s ease; }
+      .dicelayer.jet-partage.t3 .scene-cadre .jp-coup { opacity: 1; transform: none; }
       /* S1447 · note 306 ⑧ — les pastilles dues brillent ; END TURN autonome à côté d'elles. */
       .ep-boules.dues .boule.pleine:not(.boule-s) { animation: pip-brille 1.6s ease-in-out infinite;
         box-shadow: 0 0 8px 2px rgb(255 210 63 / .75); }
@@ -14649,7 +14654,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BU2rERZy.js"></script>
+    <script type="module" crossorigin src="./assets/index-BODJavpk.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
