@@ -2443,7 +2443,8 @@ function peinsLeBlocDuMur(){
   var ferme=!BW.aGagne(profil), bb=document.getElementById('bboard');
   if(bb){ bb.classList.toggle('ferme-victoire',ferme); bb.title=ferme?'Win your first game to open the Bounty Wall.':'';
     var cad=bb.querySelector('.bb-cadenas'); if(ferme&&!cad){ cad=document.createElement('span'); cad.className='bb-cadenas'; cad.innerHTML=cadenas(); bb.querySelector('.bb-sceau').appendChild(cad); } }
-  if(sous) sous.textContent = ferme ? 'Win your first game to open the Bounty Wall.' : 'the seven spirits — your challenges';
+  /* S1489 - note 368 (3) : « the seven spirits — your challenges » disparait (Croze, capture 3). */
+  if(sous) sous.textContent = ferme ? 'Win your first game to open the Bounty Wall.' : '';
   /* note 283 (2) - GOBLIN DEN : sa porte sous le mur, meme verrou (premiere victoire) */
   if(window.LLGoblinDen) window.LLGoblinDen.posLaPorte();
 }
@@ -2639,7 +2640,8 @@ window.LL_DPT_DORT = 'The Pro Tour opens soon.';
 const DOORS=[
   /* S1471 - note 359 (3) : VS BOTS devient CLASSIC (reco du classeur), le chacun-pour-soi a 3, 4 ou 5 ;
      2V2, 2V2V2 et le FFA a six passent dans la porte EXPERIMENTAL (moteur 252 ter), sans classement. */
-  ["Against bots","Classic","Free-for-all against bots, 3 to 5 players, alone or with friends. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
+  /* S1489 - note 368 (6) : « AGAINST BOTS AND/OR PLAYERS » (Croze, capture 4). */
+  ["Against bots and/or players","Classic","Free-for-all against bots and/or players, 3 to 5 players, alone or with friends. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
   ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
   ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked','Bronze III'],
   ["Not ranked","Experimental","2v2, 2v2v2 and a six-player free-for-all against bots. Being tested \u2014 no ranking.",11,()=>setTimeout(()=>{matchCtx='exp';go('match','exp');},300),'d-exp',null]];

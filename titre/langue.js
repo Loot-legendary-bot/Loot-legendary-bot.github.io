@@ -1237,6 +1237,32 @@
     'You have time to play reactions — lit cards, Signature, gear':
       'Tu as le temps de jouer des réactions — cartes allumées, Signature, équipement',
     'OK · CONTINUE': 'OK · CONTINUER',
+    'HOW IT ENDED': 'COMMENT ÇA S’EST FINI', 'tie — rerolled': 'égalité — relancé',
+    /* S1489 - note 368 (1)(b) : une langue par ecran -- l'annonce des fenetres de reaction (`annonce`, main.ts). */
+    'A CARD HAS JUST BEEN DRAWN': 'UNE CARTE VIENT D’ÊTRE PIOCHÉE',
+    'A PLAYER TURN BEGINS': 'UN TOUR DE JOUEUR COMMENCE',
+    'A PLAYER TURN ENDS': 'UN TOUR DE JOUEUR SE TERMINE',
+    'THE RUN BEGINS': 'LE RUN COMMENCE',
+    'A COMBAT OPENS': 'UN COMBAT S’OUVRE',
+    'SOMEONE ENTERS A TILE': 'QUELQU’UN ENTRE SUR UNE TUILE',
+    'SOMEONE ENTERS YOUR TILE': 'QUELQU’UN ENTRE SUR TA TUILE',
+    'A MOVE HAS JUST BEEN DECLARED': 'UN DÉPLACEMENT VIENT D’ÊTRE DÉCLARÉ',
+    'A CARD HAS JUST BEEN PLAYED': 'UNE CARTE VIENT D’ÊTRE JOUÉE',
+    'A HIT HAS JUST BEEN TAKEN': 'UN COUP VIENT D’ÊTRE ENCAISSÉ',
+    'SOMEONE HAS JUST BEEN TARGETED': 'QUELQU’UN VIENT D’ÊTRE CIBLÉ',
+    'SOMEONE IS ABOUT TO FALL — the last window before the fall': 'QUELQU’UN VA TOMBER — la dernière fenêtre avant la chute',
+    'SOMEONE HAS JUST BEEN KILLED': 'QUELQU’UN VIENT D’ÊTRE TUÉ',
+    'A MOB HAS JUST BEEN DRAWN': 'UN MOB VIENT D’ÊTRE PIOCHÉ',
+    'A PLAYER HAS JUST DIED': 'UN JOUEUR VIENT DE MOURIR',
+    'A DIE HAS JUST BEEN ROLLED': 'UN DÉ VIENT D’ÊTRE LANCÉ',
+    'A PIECE HAS JUST BEEN EQUIPPED': 'UNE PIÈCE VIENT D’ÊTRE ÉQUIPÉE',
+    'A TRADE HAS JUST TAKEN PLACE': 'UN TROC VIENT D’AVOIR LIEU',
+    'SOMEONE HAS JUST DISCARDED': 'QUELQU’UN VIENT DE DÉFAUSSER',
+    'SOMEONE HAS JUST FLED FROM YOU': 'QUELQU’UN VIENT DE TE FUIR',
+    'AN OFFER HAS JUST BEEN ACCEPTED': 'UNE OFFRE VIENT D’ÊTRE ACCEPTÉE',
+    'AN OFFER HAS JUST BEEN REFUSED': 'UNE OFFRE VIENT D’ÊTRE REFUSÉE',
+    'A GEAR PIECE HAS JUST BEEN DRAWN': 'UNE PIÈCE DE GEAR VIENT D’ÊTRE PIOCHÉE',
+    'A TILE HAS JUST BEEN DRAWN': 'UNE TUILE VIENT D’ÊTRE PIOCHÉE',
     'MAKE YOUR CHOICE': 'FAIS TON CHOIX',
     'NO CARD': 'AUCUNE', 'THE ONES I OPEN': 'CELLES QUE J’OUVRE', 'EVERY CARD': 'TOUTES',
     'ask me for dice cards (rerolls, +N, Signature) — a new card arrives muted; open its eye to be asked':
@@ -1293,7 +1319,14 @@
     [/^(\d+)d(\d+) — (\d+) dice read FACE BY FACE\. The sum decides nothing$/, '$1d$2 — $3 dés lus FACE PAR FACE. La somme ne décide rien'],
     [/^(.+) · range ([\d-]+) → « (.+) » · ⚠ hits the whole table, wherever they are in the dungeon$/, '$1 · plage $2 → « $3 » · ⚠ touche toute la table, où qu’elle soit dans le donjon'],
     [/^↳ in reaction to: (.+)$/, '↳ en réaction à : $1'],
-    [/^END TURN — (\d+) to discard$/, 'FIN DU TOUR — $1 à défausser']
+    [/^END TURN — (\d+) to discard$/, 'FIN DU TOUR — $1 à défausser'],
+    /* S1489 - note 368 (10) et (5) : HOW IT ENDED et les des du draft, en francais. */
+    [/^(.+) was killed by (.+)$/, function (m, a, b) { return a + ' a été tué par ' + (b === 'the Collapse' ? 'le Collapse' : b); }],
+    [/^(.+) stays dead — no return this run$/, '$1 reste mort — pas de retour ce run'],
+    [/^(.+) extracted through a portal$/, '$1 est sorti par un portail'],
+    [/^(.+) was the last one inside — extracted automatically \(\+(\d+) pt\)$/, '$1 était le dernier dedans — sorti d’office (+$2 pt)'],
+    [/^(.+) died$/, '$1 est mort'],
+    [/^WHO PICKS FIRST — 1d(\d+)$/, 'QUI CHOISIT EN PREMIER — 1d$1']
   ];
   /* 339 (2) — l'ecran double ses blancs autour de « · » et de « — » (mesure : « ”  ·  card ») : chaque
      espace d'un motif vaut UN OU PLUSIEURS blancs. */

@@ -2303,6 +2303,9 @@
       @keyframes co-entre { from { opacity: 0; transform: translateY(46px) scale(.9); }
         to { opacity: 1; transform: none; } }
       @media (prefers-reduced-motion: reduce) { .dicelayer.combat-ouvre .co-carte { animation: none; } }
+      /* S1489 - note 368 (0) : l'initiative entre en SECOND temps, apres la carte lue (classe t2). */
+      .dicelayer.combat-ouvre .co-temps2 { opacity: 0; transition: opacity .25s ease; }
+      .dicelayer.combat-ouvre.t2 .co-temps2, .dicelayer.combat-ouvre.fini .co-temps2 { opacity: 1; }
       .borne-bloc { text-align: center; opacity: 0; transform: scale(.86);
                     transition: opacity .18s ease, transform .22s var(--pop); }
       .dicelayer.borne.t1 .borne-bloc, .dicelayer.borne.fini .borne-bloc {
@@ -2352,6 +2355,10 @@
       .borne-cause { font-family: var(--display); font-size: calc(15px * var(--lisible, 1));
                      letter-spacing: .14em; text-transform: uppercase;
                      color: var(--rouge-vif); margin-top: 12px; opacity: .92; }
+      /* S1501 · note 371 ③ — la carte qui détruit : ce qu'elle a MANGÉ se lit en grand, sous qui la joue. */
+      .destruction-de-carte .borne-titre { font-size: clamp(36px, calc(var(--uvh) * 4.2), 64px); }
+      .destruction-de-carte .borne-cause { font-size: calc(30px * var(--lisible, 1)); color: var(--stock);
+                                           margin-top: 18px; opacity: 1; }
       /*
        * ⛑⛑ S1080 — LA PILE AU MILIEU (note 130 ⑧ de Croze) : la carte jouée
        * en grand, la réponse à côté avec son siège, le signe du contre entre
@@ -3148,6 +3155,10 @@
         letter-spacing: .06em; text-transform: uppercase; color: var(--stock); }
       .dicelayer .aj-degats-n { font-family: var(--display); font-weight: 800; font-size: 96px;
         line-height: 1; color: var(--ember); }
+      /* S1489 - note 368 (9) : le CRITIQUE, en grand (taille : TAILLE_DU_CRITIQUE_PX, main.ts). */
+      .dicelayer .aj-critique { font-family: var(--display); font-weight: 800; line-height: 1; margin-top: 10px;
+        letter-spacing: .06em; color: #ffd479; text-align: center; opacity: 0; }
+      .dicelayer.t3 .aj-critique, .dicelayer.fini .aj-critique { opacity: 1; transition: opacity .22s ease; }
       .dicelayer.annonce-jet .rollcible-arme { display: none; }
       .dicelayer.annonce-jet .rollcible-lbl, .dicelayer.annonce-jet .rollcible-qui { font-size: 20px; }
       /*
@@ -11400,6 +11411,21 @@
                                     height: 1px; background: var(--rule); }
       .ouv-deux-blocs > .ouv-sous { position: absolute; top: 12.5%; left: 2.4%;
                                     width: 45%; margin: 0; text-align: left; }
+      /* S1489 - note 368 (10) : HOW IT ENDED, en tete de l'ecran de fin. */
+      .how-it-ended { margin: 10px auto 14px; max-width: 900px; text-align: center; position: relative; z-index: 3; }
+      .how-it-ended-titre { font: 700 13px/1 var(--mono); letter-spacing: .3em; color: var(--stock-dim); margin-bottom: 6px; }
+      .how-it-ended-ligne { font-family: var(--display); font-size: 18px; line-height: 1.45; color: var(--stock); }
+      /* S1489 - note 368 (5) : les des du draft (un d20 par siege, dans l'ordre), avant le premier choix. */
+      .ouv-deux-blocs > .ouv-draft { position: absolute; top: 16.6%; left: 2.4%; width: 45%; z-index: 6;
+        display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 6px 16px; }
+      .ouv-draft-titre { font: 700 12px/1 var(--mono); letter-spacing: .2em; color: var(--stock-dim); }
+      .ouv-draft-siege { display: inline-flex; align-items: baseline; gap: 6px; color: var(--stock); }
+      .ouv-draft-siege.moi { color: #e8d9a8; }
+      .ouv-draft-rang { font-family: var(--display); font-size: 14px; }
+      .ouv-draft-qui { font-family: var(--display); font-size: 15px; letter-spacing: .04em; }
+      .ouv-draft-de { font-family: var(--display); font-weight: 800; font-size: 22px; min-width: 1.6em;
+        text-align: center; border: 1px solid var(--rule); border-radius: 6px; padding: 1px 4px; }
+      .ouv-draft-egal { font: 11px/1 var(--mono); color: var(--stock-dim); }
       /* ② LES FICHES — colonne GAUCHE. */
       /*
        * ⛑⛑ **S577 — LA RÉF v12 LES MET CÔTE À CÔTE, ELLE NE LES EMPILE PLUS.**
@@ -14072,6 +14098,27 @@
         font-family: var(--display); font-weight: 800; font-size: calc(22px * var(--lisible, 1)) !important;
         letter-spacing: .14em; transform-origin: 100% 100%; }
       html.table-v2 .tv2-fin-de-tour button.fin-autonome-bouton:hover:not(:disabled) { border-color: var(--stock) !important; }
+      /* S1506 · note 368 ① (c) — la bannière du Final Duel, en tête de la scène de combat */
+      .nouvelle-table .ntt-banniere-duel { align-self: center; font-family: var(--display); font-weight: 800;
+        font-size: calc(30px * var(--lisible, 1)); letter-spacing: .22em; color: #f0c94a;
+        padding: 6px 28px; border-top: 2px solid rgba(240, 201, 74, .6); border-bottom: 2px solid rgba(240, 201, 74, .6);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, .9); margin: 4px 0 8px; }
+      /* S1505 · note 369 ② — la fenêtre de dé : le dé GROS, la phrase dessous */
+      .fen-de.fen-de-gros { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 6px 0 4px; }
+      .fen-de.fen-de-gros .die { width: 112px !important; height: 112px !important; font-size: 52px !important; }
+      .fen-de.fen-de-gros .fen-de-suite { font-size: calc(17px * var(--lisible, 1)); text-align: center; }
+      /* S1504 · note 370 ⑥ — torche · torche · Signature, au-dessus de END TURN, aussi large que lui */
+      html.table-v2 .tv2-torches-fin { align-self: stretch; display: flex; justify-content: space-evenly; align-items: flex-end;
+        height: 58px; padding: 4px 6px 2px; pointer-events: auto; box-sizing: border-box;
+        background: rgba(10, 10, 10, .86); border: 1px solid rgba(233, 228, 216, .25); border-radius: 4px; }
+      html.table-v2 .tv2-torche-fin { width: 34px; height: 48px; flex: none;
+        background: url(/art/hud/torche_eteinte.webp) center bottom / contain no-repeat; }
+      /* l'image éteinte de Croze est sombre (luminance ~46/255) : sur le fond noir, éclaircie et liserée */
+      html.table-v2 .tv2-torche-fin.eteinte { filter: brightness(2.2) drop-shadow(0 0 2px rgba(233, 228, 216, .45)); }
+      html.table-v2 .tv2-torche-fin.allumee { background-image: none; }
+      html.table-v2 .tv2-torche-fin > canvas.torche-vivante { display: block; width: 100%; height: 100%; pointer-events: none; }
+      html.table-v2 .tv2-sceau-fin { display: flex; align-items: flex-end; height: 48px; }
+      html.table-v2 .tv2-sceau-fin img.sceau { width: 40px; height: 40px; }
       html.table-v2 .tv2-fin-de-tour button.fin-de-tour-prete { background: #b8322a !important; color: #fff !important;
         border-color: #ff8a7a !important; }
       html.table-v2 .tv2-fin-de-tour .filet { font-size: calc(11px * var(--lisible, 1)); max-width: 300px; text-align: right;
@@ -14126,10 +14173,10 @@
       html.table-v2 #chronos-dock > div { position: static; transform: none; margin: 0; box-sizing: border-box;
         width: 100%; white-space: normal; text-align: center; font-size: calc(14px * var(--lisible, 1));
         line-height: 1.2; padding: 5px 8px; }
-      html.table-v2 #chronos-dock > .fin-de-tour-global { order: 1; font-size: calc(16px * var(--lisible, 1));
+      html.table-v2 #chronos-dock > .fin-de-tour-global { font-size: calc(16px * var(--lisible, 1));
         animation: fin-de-tour-pope-coin .35s cubic-bezier(.2,1.6,.4,1) both; }
-      html.table-v2 #chronos-dock > .attente-autre { order: 2; }
-      html.table-v2 #chronos-dock > .pause-autre:not(.attente-autre) { order: 3; }
+      /* S1503 · 370 ⑤ — une seule ligne : l'ordre du dock est la priorité, les suivantes attendent */
+      html.table-v2 #chronos-dock > .dock-tu { display: none !important; }
       .plein .djt { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px 40px;
         padding: 14px 18px; font-family: var(--mono); color: var(--stock); }
       .plein .djt-portail { grid-column: 1 / -1; }
@@ -14409,22 +14456,6 @@
       .ntp-mot { font-family: var(--display); font-weight: 800; letter-spacing: .12em; color: #f0c94a; }
       .ntp-valeur { font-family: var(--display); font-weight: 800; font-size: calc(18px * var(--lisible, 1)); color: #f0c94a; }
       .ntp-de img { width: 26px; height: 26px; vertical-align: middle; }
-      .nouvelle-table .nt-attaque {
-        display: flex; align-items: center; gap: 28px;
-        border: 1px solid var(--rule); background: var(--ink-2);
-        padding: 10px 18px;
-      }
-      .nouvelle-table .nta-qui { display: flex; flex-direction: column; min-width: 240px; }
-      .nouvelle-table .nta-nom { font-family: var(--display); font-weight: 700;
-                                 font-size: 17px; color: var(--stock); }
-      .nouvelle-table .nta-sous { font-family: var(--mono); font-size: calc(10px * var(--lisible, 1));
-                                  color: var(--stock-dim); }
-      .nouvelle-table .nta-champ { display: flex; flex-direction: column; }
-      .nouvelle-table .nta-lbl { font-family: var(--mono); font-size: calc(9px * var(--lisible, 1));
-                                 letter-spacing: .16em; color: var(--stock-dim); }
-      .nouvelle-table .nta-val { font-family: var(--display); font-weight: 700;
-                                 font-size: calc(15px * var(--lisible, 1)); color: var(--stock); }
-      .nouvelle-table .nta-champ:last-child .nta-val { color: var(--stamp); }
       /* L'ART DE LA CARTE : borné, jamais déformé — `object-fit` garde le
          cadrage que Croze a peint, on ne fait que réduire la fenêtre dessus. */
       .nouvelle-table .nt-centre .mc-art {
@@ -14569,7 +14600,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-_cc90bLQ.js"></script>
+    <script type="module" crossorigin src="./assets/index-DAggKd32.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
