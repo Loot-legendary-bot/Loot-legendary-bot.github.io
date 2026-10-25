@@ -184,6 +184,9 @@
   .hud .rank{margin-right:.7cqw}
   /* S1461 - note 341 (1) : l'embleme a la hauteur du texte du pseudo (28 px a 1080), teinte du metal du grade */
   .hud .rank svg.embleme{width:2.4cqh;height:2.8cqh;filter:drop-shadow(0 0 .3cqh rgba(0,0,0,.9))}
+  /* S1507 - note 373 (4) : le tablier du grade, a la hauteur du pseudo ; le bouclier se cache quand il est la */
+  .hud .rank img.tablier{height:3.6cqh;width:auto;vertical-align:middle;filter:drop-shadow(0 0 .3cqh rgba(0,0,0,.9))}
+  .hud .rank.a-tablier svg.embleme{display:none}
   .door.hit h3{color:var(--blood);animation:arcade .1s linear 3}
 
   .foot{position:absolute;left:0;right:0;bottom:2.4%;z-index:6;display:flex;
@@ -3394,6 +3397,21 @@ function paintHUD(flash){
     const M=[[/bronze/,'#c8894f','#4a2c17'],[/silver|argent/,'#d3d8de','#3a3f46'],[/gold|\bor\b/,'#f0c44c','#4d3a10'],
       [/platin/,'#9fe3e0','#1e3d3c'],[/diamond|diamant/,'#a9c8ff','#1d2a4a'],[/master|ma[iî]tre|legend/,'#e05a4a','#3d1210']];
     const m=M.find(x=>x[0].test(r)); w.style.setProperty('--rang',m?m[1]:'#c8894f'); w.style.setProperty('--rang-fond',m?m[2]:'#4a2c17'); })();
+  /* S1507 - note 373 (4) / 368 (2) : le TABLIER du grade a la place du bouclier generique. Le numero 1-33 est
+     celui que le moteur publie en fin de partie (GAME_ENDED.grades, ecrit au profil : Q-GRD3 = A) ; un profil
+     qui n'a encore fini aucune partie est au grade 1. Le bouclier ne revient que si l'image manque. */
+  (function(){ const w=document.getElementById('rankwrap'); if(!w) return;
+    let p=null; try{ p=window.LLProfil.lis(); }catch(e){ p=null; }
+    const g=p!==null&&typeof p.grade==='number'&&p.grade>=1&&p.grade<=33 ? Math.round(p.grade) : 1;
+    const src='/art/grades/tablier_'+String(g).padStart(2,'0')+'.webp';
+    let img=w.querySelector('img.tablier');
+    if(img===null){ img=document.createElement('img'); img.className='tablier'; img.alt='';
+      img.onload=function(){ w.classList.add('a-tablier'); };
+      img.onerror=function(){ w.classList.remove('a-tablier'); img.remove(); };
+      w.insertBefore(img,w.firstChild); }
+    if(img.getAttribute('src')!==src) img.setAttribute('src',src);
+    w.dataset.grade=String(g);
+    w.title='Grade '+String(g)+' — click for all your stats'; })();
   document.getElementById('gold').textContent=fmt(PROFILE.gold);
   document.getElementById('sang').textContent=fmt(PROFILE.sang);
   if(flash){const g=document.getElementById('goldwrap');
