@@ -1918,6 +1918,31 @@
       .fin-offrande-img { width: 72px; height: 72px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,140,60,.5)); }
       .fin-tombe { animation: fin-tombe .5s cubic-bezier(.2,.9,.3,1.3) backwards; animation-delay: calc(var(--i, 0) * 160ms); }
       @keyframes fin-tombe { from { opacity: 0; transform: translateY(-34px) scale(.9); } }
+      /* S1530 · note 382 ① — la frise des dents. */
+      .nouvelle-table .fp1.frise, .fp1.frise, .nouvelle-table .ntt-axe > .fp1.frise.ntt-fin {
+        display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 16px; text-align: left; }
+      .fp1.frise .frise-onglets { display: flex; gap: 10px; justify-content: center; }
+      .fp1.frise .frise-onglets button { font-size: 15px; padding: 6px 16px; }
+      .fp1.frise .frise-total, .fp1.frise .frise-solde, .fp1.frise .frise-gp { align-self: center; }
+      .frise-liste { width: min(820px, 92vw); max-height: 50vh; overflow-y: auto; display: flex; flex-direction: column;
+        gap: 4px; cursor: pointer; padding: 6px 4px; }
+      .frise-ligne { display: grid; grid-template-columns: 120px 1fr 80px; align-items: baseline; gap: 14px;
+        font-family: var(--mono); font-size: calc(16px * var(--lisible, 1)); color: #efe6cf;
+        animation: frise-ligne .35s ease-out var(--d, 0ms) backwards; }
+      .frise-ligne.frise-zero { color: #7d7466; }
+      .frise-quand { color: #b9a77e; letter-spacing: .08em; }
+      .frise-ligne.frise-zero .frise-quand { color: #6d6658; }
+      .frise-dents { text-align: right; font-family: var(--display); font-weight: 800; }
+      @keyframes frise-ligne { from { opacity: 0; transform: translateX(-16px); } }
+      .frise-total { display: flex; align-items: center; gap: 22px; margin-top: 6px; }
+      .frise-total-mot { font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: .2em; color: #c9a227; }
+      .frise-compte { --n: var(--cible); counter-reset: n var(--n); animation: fin-compte var(--dur, 1s) linear var(--d, 0ms) backwards; }
+      .frise-compte::after { content: attr(data-signe) counter(n); }
+      .frise-solde, .frise-gp { font-family: var(--display); font-size: 22px; letter-spacing: .08em; color: #efe6cf;
+        animation: frise-ligne .4s ease-out var(--d, 0ms) backwards; }
+      .frise-gp { color: #e9c46a; font-size: 18px; }
+      .frise-sautee .frise-ligne, .frise-sautee .frise-compte, .frise-sautee .frise-apres { animation: none; }
+      @media (prefers-reduced-motion: reduce) { .frise-ligne, .frise-compte, .frise-apres { animation: none; } }
       @media (prefers-reduced-motion: reduce) { .fin-tombe, .fin-compte { animation: none; } }
       .fp1-gains { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 10px 0 24px; }
       .fp1-gains .fin-mur, .fp1-gains .fp1-profil { justify-content: center; flex-wrap: wrap; text-align: center; }
@@ -14746,7 +14771,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-SmLQCAhD.js"></script>
+    <script type="module" crossorigin src="./assets/index-QD_fJ8tq.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
