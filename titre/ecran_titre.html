@@ -1065,7 +1065,7 @@
 .pf-compte .pf-btn{padding:4px 8px;font-size:11px;letter-spacing:.04em}
 .pf-btn:hover{border-color:#fff;background:rgba(255,255,255,.07)}
 .pf-dit{margin-top:8px;font-size:12px;opacity:.75;min-height:1em}
-</style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). */(function(){try{var q=new URLSearchParams(location.search);if(q.has('salon')){q.delete('salon');var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/foils.js"></script><script src="/titre/bannieres.js"></script>
+</style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). */(function(){try{var q=new URLSearchParams(location.search);if(q.has('salon')){q.delete('salon');var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/foils.js"></script><script src="/titre/des_foil.js"></script><script src="/titre/bannieres.js"></script>
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 
@@ -2332,6 +2332,21 @@ function peinsLeProfil(){
   var jeu=bloc('Games');
   ligne(jeu,'Played',String(parties));
   ligne(jeu,'Won',String(victoires));
+  /* S1548 - note 387 (3) : le NIVEAU de chaque perso joue - « LEVEL 4 · 612 / 1,000 XP » et sa barre.
+     Le niveau est celui que le juge du moteur (niveauDePersonnage) a rendu au dernier credit de l'ecran
+     de jeu (personnages[id].niveau) : cette page ne calcule aucun seuil. */
+  var joues=Object.keys(per).filter(function(id){ var x=per[id]; return x&&x.niveau&&typeof x.xp==='number'; })
+    .sort(function(a,b){ return per[b].xp-per[a].xp; });
+  if(joues.length){
+    var niv=bloc('Characters','pf-niveaux');
+    joues.forEach(function(id){
+      var x=per[id], n=x.niveau, c=CHARS.find(function(k){ return idDuPerso(k.name)===id; });
+      var d=ligne(niv,c?c.name:id,'LEVEL '+n.n+' \u00b7 '+fmt(x.xp)+(n.prochain===null?' XP \u2014 MAX':' / '+fmt(n.prochain)+' XP'));
+      var barre=el('div','pf-gp-barre pf-niveau-barre'); var plein=el('i');
+      plein.style.width=(n.prochain===null?100:Math.max(0,Math.min(100,(x.xp-n.seuil)/Math.max(1,n.prochain-n.seuil)*100))).toFixed(1)+'%';
+      barre.appendChild(plein); d.after(barre);
+    });
+  }
   ligne(jeu,'Extractions',typeof cpt.extractions==='number'?fmt(cpt.extractions):'0 (counted once the engine reports it)');
 
   /* ce qu'il possede : les tables du Vault, la meme verite que ses rayons */
@@ -3688,6 +3703,13 @@ function openSheet(kind,i){
   } else if(kind!=='chars'){
     const eq=(kind==='dice'?equipped.dice:kind==='backs'?equipped.backs:equipped.curs)===i;
     cta='<button class="cta" id="dbtn"'+(eq?' disabled':'')+'>'+(eq?'Equipped':'Equip')+'</button>';
+    /* S1550 - note 385 (2b), MONNAIE 32 (b) : le FOIL d'un set possede - ON / OFF au grade 10, verrouille avant. */
+    if(kind==='dice' && window.LLDesFoil){
+      const F=window.LLDesFoil, peau=DICE[i][1];
+      if(F.debloque()) cta+='<button class="cta" id="dfoil" type="button">Foil \u00b7 '+(F.actif(peau)?'ON':'OFF')+'</button>';
+      else { cta+='<button class="cta" id="dfoil" type="button" disabled>Foil \u00b7 reach grade '+F.GRADE+'</button>';
+             note='Foil dice: the same faces, with shine and glowing edges. Unlocked at grade '+F.GRADE+'.'; warn=false; }
+    }
   }
   /* S1487 · note 367 ① — le charm POSSÉDÉ (ouvert depuis MY VAULT) : USE, ou RUNNING ; jamais BUY. */
   if(kind==='luckmine'){
@@ -3716,6 +3738,7 @@ function openSheet(kind,i){
   document.getElementById('dx').addEventListener('click',closeDrawer);
   const b=document.getElementById('dbtn');
   if(b&&!b.disabled) b.addEventListener('click',()=>act(kind,i));
+  { const fb=document.getElementById('dfoil'); if(fb&&!fb.disabled) fb.addEventListener('click',()=>{ window.LLDesFoil.bascule(DICE[i][1]); openSheet(kind,i); }); }
   { const gb=document.getElementById('dgetblood'); if(gb) gb.addEventListener('click',()=>{ if(window.LLBloodShop) window.LLBloodShop.ouvre(); }); }
   /* S1373 · note 208 (§13.4) - OFFRIR SUR CE TICKET */
   drawer.querySelectorAll('[data-tkoffr]').forEach(bo=>bo.addEventListener('click',()=>{
@@ -4552,9 +4575,11 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   /* S1439 - note 289 (verdict Croze : « le tuto n'est pas pret, grise-le ») : l'entree reste
      VISIBLE, GRISEE, indisponible, et dit « The scribe is still writing this one. » (meme
      traitement que le Goblin Den). Elle se rallume avec la v2 (TUTO.md 11) : TUTO_ENDORMI = false. */
-  var TUTO_ENDORMI = true;
+  /* S1546 - note 387 (1) : le moteur a livre la graine (5885, palier 996) et les quetes forcees
+     (hauts.quests, palier 998) - FIRST STEPS se rallume. */
+  var TUTO_ENDORMI = false;
   var DORT = 'The scribe is still writing this one.';
-  b.title = TUTO_ENDORMI ? DORT : 'A real game as the Guard, run by a dungeon master: he stops you on cards and walks you through every move.';
+  b.title = TUTO_ENDORMI ? DORT : 'A real game as the Mailman, run by a dungeon master: he stops you on cards and walks you through every move.';
   /* S1453 - note 325 ter (1) (nom tranche par Croze le 21/10) : la carte du tuto s'appelle
      FIRST STEPS. Grisee comme avant ; les quatre runs nommes et « 160 teeth each » viennent
      avec la v2 (moteur 241). */

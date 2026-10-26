@@ -222,6 +222,26 @@
     var n = el('div', 'cx-notice');
     n.appendChild(el('b', '', it.nom));
     n.appendChild(document.createTextNode((it.lu || '') + ' — ' + (it.possede ? 'owned' : 'not owned: buy it at the Vault') + '.'));
+    /* S1548 · note 387 ③ — le NIVEAU du perso sur sa fiche : « LEVEL 4 · 612 / 1,000 XP » et sa barre. Le niveau
+       est celui que le juge du moteur (`niveauDePersonnage`) a rendu au dernier crédit de l'écran de jeu
+       (`personnages[id].niveau`) ; un perso jamais joué est au niveau 1, 0 XP. Cette page ne calcule aucun seuil. */
+    var pr = window.LLProfil ? window.LLProfil.lis() : null;
+    var x = pr && pr.personnages ? pr.personnages[it.id] : null;
+    var nv = x && x.niveau && typeof x.xp === 'number' ? x.niveau : null;
+    var fmt = function (k) { return Number(k || 0).toLocaleString('en-US'); };
+    var ligneNiv = el('div', 'cx-niveau', nv === null ? 'LEVEL 1 \u00b7 0 XP'
+      : 'LEVEL ' + nv.n + ' \u00b7 ' + fmt(x.xp) + (nv.prochain === null ? ' XP \u2014 MAX' : ' / ' + fmt(nv.prochain) + ' XP'));
+    ligneNiv.style.cssText = 'margin:.8em 0 .3em;font-weight:800;letter-spacing:.12em;color:#efe6cf';
+    n.appendChild(ligneNiv);
+    if (nv !== null) {
+      var barre = el('div', 'cx-niveau-barre');
+      barre.style.cssText = 'height:6px;max-width:260px;background:rgba(239,230,207,.14);margin-bottom:.6em';
+      var plein = el('i');
+      plein.style.cssText = 'display:block;height:100%;background:#e9c46a;width:'
+        + (nv.prochain === null ? 100 : Math.max(0, Math.min(100, (x.xp - nv.seuil) / Math.max(1, nv.prochain - nv.seuil) * 100))).toFixed(1) + '%';
+      barre.appendChild(plein);
+      n.appendChild(barre);
+    }
     var tourne = el('button', 'cx-puce on', 'VERSO');
     tourne.type = 'button';
     tourne.addEventListener('click', function (e) {
@@ -234,6 +254,25 @@
       if (face === 'versos') { tourne.remove(); face = 'fiches'; im.src = '/art/personnages/fiches/' + it.id + '.webp'; }
     };
     n.appendChild(tourne);
+    /* S1549 · note 387 ② (TUTO.md §14.2) — « MASTER THE <NAME> » : la porte du tuto de maîtrise du perso, la même
+       que FIRST STEPS (`/?tuto=<id>`). Grisée tant que son scénario n'est pas dans `tuto.json` (`maitrises`). */
+    var tutoDuPerso = DONNEE && DONNEE.maitrises ? DONNEE.maitrises[it.id] : undefined;
+    var maitre = el('button', 'cx-puce cx-maitrise' + (tutoDuPerso ? ' on' : ''), 'MASTER ' + String(it.nom).toUpperCase());
+    maitre.type = 'button';
+    if (!tutoDuPerso) {
+      maitre.setAttribute('aria-disabled', 'true');
+      maitre.title = 'The scribe is still writing this one.';
+      maitre.style.cssText = 'cursor:not-allowed;opacity:.45;margin-left:.6em';
+    } else {
+      maitre.style.marginLeft = '.6em';
+      maitre.title = 'A scripted run that teaches ' + it.nom + ': Signature, Reaction, passives and skills.';
+    }
+    maitre.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (!tutoDuPerso) { return; }
+      window.location.href = '/?tuto=' + encodeURIComponent(tutoDuPerso);
+    });
+    n.appendChild(maitre);
     g.appendChild(n);
     var ferme = function () { g.remove(); document.removeEventListener('keydown', esc, true); };
     var esc = function (e) { if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); ferme(); } };
