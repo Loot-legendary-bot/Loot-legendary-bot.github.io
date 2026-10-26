@@ -1924,6 +1924,13 @@
       .fp1.frise .frise-onglets { display: flex; gap: 10px; justify-content: center; }
       .fp1.frise .frise-onglets button { font-size: 15px; padding: 6px 16px; }
       .fp1.frise .frise-total, .fp1.frise .frise-solde, .fp1.frise .frise-gp { align-self: center; }
+      /* S1533 · 384 ② — la frise posée dans l'onglet REWARDS, puis une ligne de sous-totaux */
+      .frise-onglet.frise { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 0 0 14px; text-align: left; }
+      .frise-onglet .frise-onglets { display: flex; gap: 10px; justify-content: center; }
+      .frise-onglet .frise-onglets button { font-size: 15px; padding: 6px 16px; }
+      .frise-onglet .frise-liste { max-height: 38vh; }
+      .fin-sous-totaux { font-family: var(--display); font-weight: 700; letter-spacing: .04em; color: #e8dcc0;
+        font-size: 16px; text-align: center; margin: 4px 0 10px; }
       .frise-liste { width: min(820px, 92vw); max-height: 50vh; overflow-y: auto; display: flex; flex-direction: column;
         gap: 4px; cursor: pointer; padding: 6px 4px; }
       .frise-ligne { display: grid; grid-template-columns: 120px 1fr 80px; align-items: baseline; gap: 14px;
@@ -3428,6 +3435,17 @@
       .relance-case { display: flex; flex-direction: column; align-items: center;
                       gap: 6px; }
       .relance-avant { opacity: .48; }
+      /* S1533 · 386 ④ — le dé changé : par qui (icône de la carte), l'ancien barré, le verdict du check. */
+      .relance-par { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 4px 0 8px;
+        font-family: var(--display); font-weight: 800; letter-spacing: .03em; color: #f2ede4; }
+      .relance-carte { width: 44px; height: 62px; object-fit: cover; border-radius: 4px; box-shadow: 0 3px 8px rgba(0,0,0,.6); }
+      .relance-barre { position: relative; }
+      .relance-barre .die::after { content: ''; position: absolute; left: -10%; right: -10%; top: 50%; height: 4px;
+        background: #c0392b; transform: rotate(-20deg); border-radius: 2px; }
+      .relance-barre .die { position: relative; }
+      .relance-verdict { margin-top: 10px; font-family: var(--display); font-weight: 800; letter-spacing: .04em; font-size: 18px; }
+      .relance-verdict.ok { color: #7fc97f; }
+      .relance-verdict.rate { color: #e06a5a; }
       .relance-fleche { font-family: var(--display); font-size: 26px;
                         opacity: .7; }
       .relance-mot { font-family: var(--display); font-size: calc(10px * var(--lisible, 1));
@@ -14780,7 +14798,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DBNH_kqH.js"></script>
+    <script type="module" crossorigin src="./assets/index-ChWRau2j.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

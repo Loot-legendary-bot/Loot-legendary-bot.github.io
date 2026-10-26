@@ -1043,6 +1043,16 @@
 .profil{position:absolute;left:5.1%;right:5.1%;top:37%;bottom:6%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 36px;align-content:start;font-family:var(--mono,monospace);color:#e9e2d4}
 .pf-bloc{min-width:0}
 .pf-bloc.pf-fichier{grid-column:1 / -1}
+/* S1533 - note 384 (3) : MON COMPTE - le tablier, la barre de GP, LOG OUT */
+.pf-grade-tete{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.pf-tablier{height:64px;width:auto;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
+.pf-tablier-petit{height:28px;width:auto;vertical-align:middle;opacity:.85}
+.pf-grade-num{font-weight:800;letter-spacing:.12em;font-size:18px}
+.pf-gp-barre{height:10px;border-radius:5px;background:rgba(255,255,255,.12);overflow:hidden;margin:4px 0 6px}
+.pf-gp-barre i{display:block;height:100%;background:linear-gradient(90deg,#c9a227,#f0c44c)}
+.pf-gp-suite{display:flex;align-items:center;gap:10px;font-size:13px}
+.pf-gp-vers{opacity:.75}
+.pf-logout{grid-column:1 / -1;justify-self:start;margin-top:10px}
 .pf-titre{font-weight:700;letter-spacing:.2em;font-size:11px;opacity:.7;margin-bottom:8px;text-transform:uppercase}
 .pf-ligne{display:flex;gap:14px;align-items:baseline;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:13px}
 .pf-k{flex:0 0 118px;opacity:.65;letter-spacing:.08em;font-size:11px;text-transform:uppercase}
@@ -2292,6 +2302,29 @@ function peinsLeProfil(){
   /* S1424 - NET-1 (note 250 (3)) : le compte, dans le bloc du joueur */
   if(window.LLCompte) window.LLCompte.blocDuProfil(joueur);
 
+  /* S1533 - note 384 (3) : « je clique CROZE et je vois qui je suis dans le jeu » - le tablier du grade et la
+     barre de GP vers le grade suivant (seuils poses au profil par le jeu en fin de partie, lus dans grades.json). */
+  var gr=bloc('Grade','pf-grade');
+  var gNum=typeof P.grade==='number'&&P.grade>=1&&P.grade<=33?Math.round(P.grade):1;
+  var gp=typeof P.gp==='number'?P.gp:0;
+  var tete=el('div','pf-grade-tete');
+  var tab=el('img','pf-tablier'); tab.alt='GRADE '+gNum; tab.src='/art/grades/tablier_'+String(gNum).padStart(2,'0')+'.webp';
+  tab.onerror=function(){ tab.remove(); };
+  tete.appendChild(tab); tete.appendChild(el('span','pf-grade-num','GRADE '+gNum)); gr.appendChild(tete);
+  var bas=typeof P.gp_bas==='number'?P.gp_bas:null, haut=typeof P.gp_haut==='number'?P.gp_haut:null;
+  if(bas!==null&&haut!==null&&haut>bas){
+    var barre=el('div','pf-gp-barre'); var plein=el('i'); plein.style.width=Math.max(0,Math.min(100,(gp-bas)/(haut-bas)*100)).toFixed(1)+'%';
+    barre.appendChild(plein); gr.appendChild(barre);
+    var suite=el('div','pf-gp-suite');
+    suite.appendChild(el('span','pf-gp-n',fmt(gp)+' / '+fmt(haut)+' GP'));
+    var prochain=el('img','pf-tablier-petit'); prochain.alt=''; prochain.src='/art/grades/tablier_'+String(gNum+1).padStart(2,'0')+'.webp';
+    prochain.onerror=function(){ prochain.remove(); };
+    suite.appendChild(el('span','pf-gp-vers','next: GRADE '+(gNum+1))); suite.appendChild(prochain);
+    gr.appendChild(suite);
+  } else {
+    gr.appendChild(el('div','pf-gp-n',fmt(gp)+' GP'+(haut===null&&bas!==null?' — top grade':' — the bar appears after your next game')));
+  }
+
   /* les parties */
   var parties=0, victoires=0, per=P.personnages||{};
   Object.keys(per).forEach(function(id){ parties+=(per[id].parties|0); victoires+=(per[id].victoires|0); });
@@ -2394,6 +2427,10 @@ function peinsLeProfil(){
       peinsLeProfil();
     });
   });
+  /* S1533 - note 384 (3) / 368 (2) : LOG OUT en bas de MON COMPTE */
+  var sortie=el('button','pf-btn pf-logout','LOG OUT'); sortie.type='button';
+  sortie.addEventListener('click',function(){ if(window.LLCompte&&typeof window.LLCompte.changeDeProfil==='function') window.LLCompte.changeDeProfil(); });
+  box.appendChild(sortie);
 }
 function go(v,arg,el,paint){ transit(()=>set(v,arg), el, paint); }
 function back(){
