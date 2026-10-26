@@ -10542,6 +10542,15 @@
       .fr-pod-dos + .fr-pod-dos { margin-left: -14px; }
       .fr-tombe .fr-pod-ban > img:first-child { aspect-ratio: 16 / 9; }
       .fr-tombe .fr-pod-pion { width: 34px; height: 34px; left: 5px; bottom: 5px; }
+      /* S1543 · 385 ② (a) — le cadre de grade autour de MON médaillon au podium (mêmes SVG qu'au bandeau) */
+      .fr-pod-pion.fr-pod-pion-cadre { border-radius: 50%; border: 0; }
+      .fr-pod-grade { position: absolute; left: -1px; bottom: -1px; width: 64px; height: 64px; pointer-events: none;
+        z-index: 1; background: center / contain no-repeat; filter: drop-shadow(0 2px 3px rgba(0,0,0,.6)); }
+      .fr-tombe .fr-pod-grade { left: -2px; bottom: -2px; width: 48px; height: 48px; }
+      .fr-pod-grade-bronze { background-image: url('/art/grades/cadres/cadre_bronze.svg'); }
+      .fr-pod-grade-argent { background-image: url('/art/grades/cadres/cadre_argent.svg'); }
+      .fr-pod-grade-or { background-image: url('/art/grades/cadres/cadre_or.svg'); }
+      .fr-pod-grade-legendaire { background-image: url('/art/grades/cadres/cadre_legendaire.svg'); }
       .fr-tombe .fr-pod-carte { width: 30px; }
       .fin-run.fr-plein > .fr-detail { width: auto; }
       .fr-detail { display: block; margin: 6px auto 0; padding: 9px 24px;
@@ -14846,7 +14855,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B-11sdkC.js"></script>
+    <script type="module" crossorigin src="./assets/index-DXWJ2Aq-.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

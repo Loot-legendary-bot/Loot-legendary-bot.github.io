@@ -4567,8 +4567,9 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   b.addEventListener('click', function () {
     if (TUTO_ENDORMI) { return; }
     var q = new URLSearchParams(window.location.search);
-    q.set('tuto', '1');
-    q.set('perso', 'the_guard');
+    /* S1541 - note 387 (1) : la porte ouvre TUTO 1 du depot (tuto.json, the_mailman impose par le scenario). */
+    q.set('tuto', 'tuto_1_the_run');
+    q.delete('perso');
     window.location.href = '/?' + q.toString();
   });
   page.appendChild(b);
