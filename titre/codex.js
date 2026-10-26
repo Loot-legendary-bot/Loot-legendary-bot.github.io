@@ -65,6 +65,8 @@
       '.cx-q{font:700 7cqh/1 "Archivo Black",Impact,sans-serif;opacity:.35}' +
       '.cx-nom{font-size:1.3cqh;line-height:1.25;letter-spacing:.04em;overflow-wrap:anywhere}' +
       '.cx-carte:not(.vu) .cx-nom{opacity:.6}' +
+      '.cx-tirage{font-size:1.1cqh;letter-spacing:.06em;color:#c9a227;margin-top:.3cqh}' +
+      '.cx-notice .cx-tirage{font-size:1.5cqh;margin-top:1cqh}' +
       '.cx-vide{grid-column:1/-1;opacity:.6;font-size:1.6cqh;padding:2cqh 0}' +
       '.cx-boite{display:block;width:100%;text-align:left;background:rgba(0,0,0,.42);color:inherit;' +
         'border:1px solid rgba(255,255,255,.2);padding:1.1cqh .9cqw;font:inherit;cursor:pointer}' +
@@ -465,6 +467,8 @@
     var n = el('div', 'cx-notice');
     n.appendChild(el('b', '', it.nom));
     n.appendChild(document.createTextNode(it.texte || ''));
+    /* S1536 · note 384 ⑦ — « au Codex je vois qu'un Fairy Garden sort dix fois moins qu'une tuile normale » */
+    if (typeof it.tirage === 'number') n.appendChild(el('div', 'cx-tirage', 'Draw chance: ' + Math.round(it.tirage * 100) + ' % of a normal tile'));
     g.appendChild(n);
     var ferme = function () { g.remove(); document.removeEventListener('keydown', esc, true); };
     var esc = function (e) { if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); ferme(); } };
@@ -491,6 +495,8 @@
     }
     c.appendChild(cadre);
     c.appendChild(el('div', 'cx-nom', it.nom));
+    /* S1536 · note 384 ⑦ — le poids de tirage (v158) : « 10 % » sous le nom d'une tuile spéciale */
+    if (typeof it.tirage === 'number') c.appendChild(el('div', 'cx-tirage', 'draw chance ' + Math.round(it.tirage * 100) + ' %'));
     if (vu) c.addEventListener('click', function () { agrandis(it); });
     return c;
   }
