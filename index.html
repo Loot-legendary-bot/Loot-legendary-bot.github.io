@@ -12357,6 +12357,13 @@
         text-align: center;
       }
       .nouvelle-table .nt-rond { position: relative; width: 88px; height: 88px; }
+      /* S1538 · 385 ② (a) — le cadre de grade autour de MON portrait (quatre SVG, `art/grades/cadres/`) */
+      .nouvelle-table .nt-rond > .nt-cadre { position: absolute; inset: -9px; pointer-events: none; z-index: 1;
+        background: center / contain no-repeat; filter: drop-shadow(0 2px 3px rgba(0,0,0,.6)); }
+      .nouvelle-table .nt-cadre-bronze { background-image: url('/art/grades/cadres/cadre_bronze.svg'); }
+      .nouvelle-table .nt-cadre-argent { background-image: url('/art/grades/cadres/cadre_argent.svg'); }
+      .nouvelle-table .nt-cadre-or { background-image: url('/art/grades/cadres/cadre_or.svg'); }
+      .nouvelle-table .nt-cadre-legendaire { background-image: url('/art/grades/cadres/cadre_legendaire.svg'); }
       .nouvelle-table .nt-anneau {
         position: absolute; inset: 0; width: 100%; height: 100%;
         transform: rotate(-90deg);   /* l'arc part du HAUT, pas de trois heures */
@@ -14245,6 +14252,8 @@
       .rps-initiative-titre { font-family: var(--display); font-weight: 800; letter-spacing: .05em;
         font-size: calc(18px * var(--lisible, 1)); color: #f2ede4; line-height: 1.25; }
       .decision.rps-gros button.rps-choix { font-size: calc(18px * var(--lisible, 1)); padding: 12px 18px; min-width: 120px; }
+      /* S1538 · 384 ⑥ — la salle animée : la boucle couvre la couche, l'image fixe dessous. */
+      .ll-salle-couche .ll-salle-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
       /* S1536 · 384 ④ — la table du Casino vue par un invité assis : les dés, le palier, les boutons grisés. */
       .casino-table { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 12px auto;
         padding: 14px 20px; border: 2px solid #c9a227; border-radius: 10px; background: rgba(20, 14, 6, .82); max-width: 520px; }
@@ -14722,6 +14731,30 @@
       .carte-rea .cr-symbole { font-size: calc(44px * var(--lisible, 1)); line-height: 1; font-weight: 800;
         color: #8EC9FF; text-shadow: 0 2px 0 #000, 0 0 14px rgb(142 201 255 / .8); }
       .carte-rea .cs-titre { color: #BFDFFF; }
+      /* S1538 · note 384 ⑧ (proposition, Croze juge) — QUAND ELLE PEUT TOMBER, la carte de Réaction s'ÉLÈVE au-dessus
+         de la main, en ÉCLAT DÉCHIRÉ (silhouette dentelée), bord épais et lumineux, halo PULSÉ, particules qui
+         montent, « ↺ » qui tourne lentement. Au repos elle n'existe pas (378 ①). */
+      .handslot-rea:has(.carte-rea.prete) { position: relative; z-index: 60 !important;
+        animation: reaHalo 1.6s ease-in-out infinite; }
+      @keyframes reaHalo {
+        0%, 100% { filter: drop-shadow(0 0 8px rgb(142 201 255 / .85)) drop-shadow(0 0 18px rgb(142 201 255 / .45)); }
+        50% { filter: drop-shadow(0 0 14px rgb(205 232 255 / 1)) drop-shadow(0 0 38px rgb(142 201 255 / .85)); } }
+      .card.carte-sig.carte-rea.prete { transform: translateY(-34px) scale(1.08); border-width: 4px; border-color: #D8EEFF;
+        clip-path: polygon(0% 4%, 8% 0%, 18% 3%, 30% 0%, 42% 2.5%, 55% 0%, 66% 3%, 78% 0%, 90% 2%, 100% 0%, 98% 12%, 100% 25%,
+          97% 38%, 100% 50%, 98% 63%, 100% 76%, 97% 88%, 100% 100%, 88% 97%, 76% 100%, 63% 98%, 50% 100%, 38% 97%, 25% 100%,
+          12% 98%, 0% 100%, 3% 88%, 0% 75%, 2% 62%, 0% 50%, 3% 37%, 0% 25%, 2% 12%); }
+      .carte-rea.prete .cr-symbole { display: inline-block; animation: reaTourne 4s linear infinite; }
+      @keyframes reaTourne { to { transform: rotate(-360deg); } }
+      .handslot-rea:has(.carte-rea.prete)::after { content: ''; position: absolute; left: 6%; right: 6%; bottom: 10%; height: 130%;
+        pointer-events: none; opacity: .85;
+        background-image: radial-gradient(circle, rgb(205 232 255 / .95) 0 2px, transparent 3px),
+          radial-gradient(circle, rgb(142 201 255 / .85) 0 1.5px, transparent 2.5px);
+        background-size: 28px 36px, 41px 47px; animation: reaParticules 2.4s linear infinite;
+        -webkit-mask-image: linear-gradient(to top, transparent, #000 25%, #000 60%, transparent);
+        mask-image: linear-gradient(to top, transparent, #000 25%, #000 60%, transparent); }
+      @keyframes reaParticules { from { background-position: 0 0, 14px 20px; } to { background-position: 0 -72px, 14px -74px; } }
+      @media (prefers-reduced-motion: reduce) {
+        .handslot-rea:has(.carte-rea.prete), .carte-rea.prete .cr-symbole, .handslot-rea:has(.carte-rea.prete)::after { animation: none; } }
       .carte-rea .cs-etat.on { color: #8EC9FF; }
       /* 377 ② — l'œil de la Réaction posé sur sa bande du carton, au coin haut-droit de la bande */
       .fcz-oeil { position: absolute; transform: translate(-50%, -75%); z-index: 6; width: 24px; height: 24px;
@@ -14813,7 +14846,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D1XYEmKG.js"></script>
+    <script type="module" crossorigin src="./assets/index-7NYbs7mR.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
