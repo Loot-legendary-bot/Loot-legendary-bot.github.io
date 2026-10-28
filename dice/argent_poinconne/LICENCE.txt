@@ -1,0 +1,40 @@
+argent_poinconne — licences et provenance
+=========================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Cinzel Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Cinzel Project Authors
+            (https://github.com/NDISCOVER/Cinzel)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Cinzel.txt et
+            polices/PROVENANCE-Cinzel.txt.
+
+POINTS      Les points du d6 sont des disques construits par forge_blender.py
+            (_maillage_des_points), disposes comme sur tout d6.
+
+POINCON     La face 1 de chaque de porte, a la place du chiffre 1 (du point
+            unique sur le d6), une langue gravee en creux : son contour et son
+            sillon central, pour le logo du jeu, LICK FLOOR
+            (packages/debug-ui/public/art/titre/ui/logo.webp). La forme suit
+            une image donnee par Croze comme consigne ; elle est redessinee en
+            geometrie par packages/debug-ui/tools/forge_des/poincons.py
+            (_langue, une courbe passant par des points releves a la main).
+            Aucune image n'est copiee ni tracee.
+
+PHOTO       Aucune. Cette peau n'a pas de photographie de reference : l'argent
+            est un albedo CHOISI (la reflectance de l'argent poli), pas mesure.
+            Le rapport n'imprime donc aucune table de couleur.
+
+NOM         La peau dit sa matiere : de l'argent, poinconne.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze. La famille `metal`
+            ajoute trois panneaux de studio que seuls les REFLETS voient
+            (forge_blender.py, poser_le_studio) : ils n'eclairent ni le sol ni
+            l'ombre.
