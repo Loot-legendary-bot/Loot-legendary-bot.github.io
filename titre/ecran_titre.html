@@ -2442,6 +2442,16 @@ function peinsLeProfil(){
       peinsLeProfil();
     });
   });
+  /* S1552 - note 390 (5) : la langue se regle aussi dans MON COMPTE (memes boutons qu'OPTIONS, meme cle du profil) */
+  if(window.LLLangue){
+    var lt=el('div','langue-titre','LANGUAGE'); lt.style.marginTop='1.6cqh'; box.appendChild(lt);
+    [['EN','ENGLISH'],['FR','FRAN\u00c7AIS']].forEach(function(x){
+      var on=window.LLLangue.cible()===x[0];
+      var lb=el('button','langue-btn'+(on?' on':''),(on?'\u25cf  ':'\u25cb  ')+x[1]); lb.type='button';
+      lb.addEventListener('click',function(){ window.LLLangue.pose(x[0]); peinsLeProfil(); });
+      box.appendChild(lb);
+    });
+  }
   /* S1533 - note 384 (3) / 368 (2) : LOG OUT en bas de MON COMPTE */
   var sortie=el('button','pf-btn pf-logout','LOG OUT'); sortie.type='button';
   sortie.addEventListener('click',function(){ if(window.LLCompte&&typeof window.LLCompte.changeDeProfil==='function') window.LLCompte.changeDeProfil(); });
@@ -3076,7 +3086,7 @@ TABS.forEach(([label,key],i)=>{
   b.className='tab'+(i===0?' on':''); b.dataset.key=key;
   /* S1408 - IC-1 : chaque rayon porte son icone */
   const ICO_RAYON={chars:'perso',dice:'des',curs:'curseur',backs:'dos',tick:'pot',blood:'fiole',inv:'coffre'};
-  b.innerHTML='<svg class="besace-sil tab-ic" viewBox="0 0 48 48" aria-hidden="true">'+ICONES[ICO_RAYON[key]]+'</svg>'+
+  b.innerHTML='<svg class="besace-sil tab-ic" viewBox="0 0 48 48" aria-hidden="true">'+(ICONES[ICO_RAYON[key]]||'')/* S1552 : le rayon GRADE n'a pas d'icone - rien, jamais « undefined » */+'</svg>'+
     label+'<i></i><span class="rule"></span>';
   b.querySelector('.rule').style.backgroundImage='url('+A.bar+')';
   b.addEventListener('click',()=>{

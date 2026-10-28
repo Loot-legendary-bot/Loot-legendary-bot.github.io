@@ -1268,6 +1268,280 @@
     'ask me for dice cards (rerolls, +N, Signature) — a new card arrives muted; open its eye to be asked':
       'me demander pour les cartes de dé (relances, +N, Signature) — une carte neuve arrive muette ; ouvre son œil pour être interrogé'
   };
+  /* 392 (4) - LE TUTO EN FRANCAIS ENTIER quand le profil est FR (GLOSSAIRE 1 bis : jamais un ecran mixte) ;
+     textes de TUTO.md 12.1 traduits au glossaire, noms propres gardes (THE MAILMAN, Blessed, Apple, Touch Grass). */
+  var EN_FR_TUTO = {
+    "I am your game master. You play THE MAILMAN. A run is simple: get in, loot, get out with points.": "Je suis ton maître du jeu. Tu joues THE MAILMAN. Une Run, c’est simple : entrer, piller, ressortir avec des points.",
+    "TO THE FLOOR.": "DANS LE DONJON.",
+    "TO THE FLOOR": "DANS LE DONJON",
+    "Two quests since turn one. Each one done is a point, and points win the game. One of them needs a fight — next time.": "Deux quêtes dès le premier tour. Chacune accomplie vaut un point, et les points font gagner la partie. L’une d’elles demande un combat — ce sera pour la prochaine fois.",
+    "Tap your quests.": "Touche tes quêtes.",
+    "You don't walk this dungeon — you draw it.": "Ce donjon, tu ne le parcours pas — tu le tires.",
+    "MOVE.": "SE DÉPLACER.",
+    "Turn one is a single action; then two a turn.": "Le premier tour, une seule action ; ensuite deux par tour.",
+    "END TURN.": "FIN DU TOUR.",
+    "Every room hides a die — trap, mob or chest.": "Chaque salle cache un dé — piège, mob ou coffre.",
+    "EXPLORE.": "EXPLORER.",
+    "A chest is three dice — each one a card, or nothing.": "Un coffre, c’est trois dés — chacun une carte, ou rien.",
+    "OPEN IT.": "OUVRE-LE.",
+    "Seven cards at most: gear is worn, consumables are played.": "Sept cartes au plus : l’équipement se porte, les consommables se jouent.",
+    "Wear the gloves and the pants.": "Porte les gants et le pantalon.",
+    "DEX aims — your Mail Bag hits 1d4+DEX, and DEX just doubled.": "La DEX vise — ton Mail Bag frappe à 1d4+DEX, et ta DEX vient de doubler.",
+    "Tap DEX.": "Touche DEX.",
+    "Two actions a turn. Some rooms test you when you enter.": "Deux actions par tour. Certaines salles te mettent à l’épreuve quand tu entres.",
+    "22 on the die: Blessed is done. A quest counts once revealed.": "22 au dé : Blessed est accomplie. Une quête compte une fois révélée.",
+    "Reveal it.": "Révèle-la.",
+    "Each dungeon turn the timer steps: everyone draws, loot gets rarer.": "À chaque tour de donjon, le Dungeon Timer avance : tout le monde pioche, le butin monte en rareté.",
+    "Rooms with a die are where loot lives — and traps.": "Les salles à dé, c’est là que vit le butin — et les pièges.",
+    "A 1 to 3 here is a trap.": "Ici, un 1 à 3, c’est un piège.",
+    "Bone Spike: 3d12 minus DEX — your gear just ate 6 of it.": "Bone Spike : 3d12 moins DEX — ton équipement vient d’en encaisser 6.",
+    "Play the Apple.": "Joue l’Apple.",
+    "Turn 4: the dungeon starts to bite back.": "Tour 4 : le donjon commence à mordre.",
+    "The Collapse: each turn a die hits everyone — no parry, no armor. A 6 just opened a PORTAL on your tile.": "Le Collapse : à chaque tour, un dé frappe tout le monde — ni parade, ni armure. Un 6 vient d’ouvrir un PORTAIL sur ta tuile.",
+    "Play the Heal Potion.": "Joue la Heal Potion.",
+    "Every room has one INTERACT, once per tile.": "Chaque salle a une INTERACTION, une fois par tuile.",
+    "Out with your loot: your score freezes, your gear stays — and the dungeon goes on without you.": "Dehors avec ton butin : ton score se fige, ton équipement reste — et le donjon continue sans toi.",
+    "USE PORTAL.": "PRENDRE LE PORTAIL.",
+    "One quest, one point: your first run is done. Points come from quests, kills, Last Out and the Final Duel — the rest you'll learn by playing.": "Une quête, un point : ta première Run est finie. Les points viennent des quêtes, des mobs tués, du Last Out et du Duel Final — le reste, tu l’apprendras en jouant.",
+    "TO THE TABLE.": "À LA TABLE.",
+    "TO THE TABLE": "À LA TABLE",
+    "YOU NOW KNOW": "TU SAIS MAINTENANT",
+    "— MOVE draws a room": "— SE DÉPLACER tire une salle",
+    "— EXPLORE rolls its die": "— EXPLORER lance son dé",
+    "— gear is worn, consumables are played": "— l’équipement se porte, les consommables se jouent",
+    "— quests are points": "— les quêtes sont des points",
+    "— the portal gets you out": "— le portail te fait sortir",
+    "160 teeth — the first time": "160 dents — la première fois",
+    "BACK TO THE MENU": "RETOUR AU MENU",
+    "I'll manage": "Je me débrouille",
+    "leaves this tutorial — RULES → TUTORIAL to play it again": "quitte ce tutoriel — RÈGLES → TUTORIEL pour le rejouer",
+    "Rules": "Règles",
+    "Trap": "Piège",
+    "YOUR TURN": "TON TOUR",
+    "· YOU are reacting": "· TU réagis",
+    "Large Chest": "Grand coffre",
+    "⏱ IF YOU DON’T ACT, I’LL END YOUR TURN IN": "⏱ SI TU N’AGIS PAS, JE FINIS TON TOUR DANS",
+    "end": "fin",
+    "T1 · free": "T1 · libre",
+    "T1 · end": "T1 · fin",
+    "T1 · in the explore": "T1 · dans l’exploration",
+    "T2 · free": "T2 · libre",
+    "T2 · end": "T2 · fin",
+    "T2 · in the explore": "T2 · dans l’exploration",
+    "T3 · free": "T3 · libre",
+    "T3 · end": "T3 · fin",
+    "T3 · in the explore": "T3 · dans l’exploration",
+    "T4 · free": "T4 · libre",
+    "T4 · end": "T4 · fin",
+    "T4 · in the explore": "T4 · dans l’exploration"
+  };
+  for (var kt in EN_FR_TUTO) { if (Object.prototype.hasOwnProperty.call(EN_FR_TUTO, kt)) EN_FR[kt] = EN_FR_TUTO[kt]; }
+  /* 390 (3) - S1552 : le HOME et MON COMPTE en FR, releves au DOM (un texte visible que `traduis` rend inchange). Noms propres
+     et modes gardes (Classic, Experimental, Pro Tour, Vault, Codex, Bounty Wall) ; Daily -> Defi du jour (GLOSSAIRE 1). */
+  var EN_FR_HOME = {
+    "click a menu entry · esc goes back · backgrounds cycle on their own": "clique une entrée · échap revient · les fonds changent seuls",
+    "Dive": "Plonger",
+    "classic · today’s dungeon · dungeon pro tour · experimental": "classic · défi du jour · dungeon pro tour · experimental",
+    "buy & equip · characters · dice sets · cursors": "acheter et équiper · personnages · sets de dés · curseurs",
+    "browse · tiles · mobs · loot cards · quests · characters": "parcourir · tuiles · mobs · cartes de butin · quêtes · personnages",
+    "Ranking": "Classement",
+    "Boardgame": "Jeu de plateau",
+    "Back to menu": "Retour au menu",
+    "Against bots and/or players": "Contre des bots et/ou des joueurs",
+    "Free-for-all against bots and/or players, 3 to 5 players, alone or with friends. Pays out in teeth.": "Chacun pour soi contre des bots et/ou des joueurs, de 3 à 5 joueurs, seul ou entre amis. Rapporte des dents.",
+    "One a day": "Un par jour",
+    "Today’s Dungeon": "Défi du jour",
+    "One seed for everyone — try as often as you like, your best try counts.": "Une même graine pour tous — essaie autant que tu veux, ton meilleur essai compte.",
+    "Ranked ladder": "Classement compétitif",
+    "The Pro Tour opens soon.": "Le Pro Tour ouvre bientôt.",
+    "Not ranked": "Non classé",
+    "2v2, 2v2v2 and a six-player free-for-all against bots. Being tested — no ranking.": "2v2, 2v2v2 et un chacun pour soi à six contre des bots. En test — pas de classement.",
+    "Fire": "Feu",
+    "Lightning": "Foudre",
+    "Frost": "Givre",
+    "Seven spirits": "Sept esprits",
+    "Click a face: its path opens around it.": "Clique un visage : son chemin s’ouvre autour de lui.",
+    "SEE ALL shows every path side by side.": "TOUT VOIR montre chaque chemin côte à côte.",
+    "See all": "Tout voir",
+    "Play with friends": "Jouer entre amis",
+    "MY VAULT": "MON VAULT",
+    "Dice set": "Set de dés",
+    "Charms": "Charmes",
+    "Charm": "Charme",
+    "Consumables": "Consommables",
+    "LICK FLOOR exists on a table.": "LICK FLOOR existe sur une table.",
+    "The physical game is coming.": "Le jeu physique arrive.",
+    "Leave your email: you’ll know before everyone.": "Laisse ton e-mail : tu le sauras avant tout le monde.",
+    "I want to know first": "Je veux savoir en premier",
+    "Account": "Compte",
+    "offline: your progress lives on this PC only": "hors ligne : ta progression vit sur ce PC seulement",
+    "Log in or create account": "Se connecter ou créer un compte",
+    "Inventory": "Inventaire",
+    "Items": "Objets",
+    "nothing in your bag": "rien dans ton sac",
+    "Dice skins": "Peaux de dés",
+    "LOG OUT": "SE DÉCONNECTER",
+    "Win your first game to open the Bounty Wall.": "Gagne ta première partie pour ouvrir le Bounty Wall.",
+    "OPENING — THE TABLE CONFIRMS": "OUVERTURE — LA TABLE CONFIRME",
+    "Nothing in the game is drawn before the last READY: the first Upkeep, the starting Tiles and the turn-order roll wait behind this gate.": "Rien n’est tiré avant le dernier PRÊT : le premier Upkeep, les tuiles de départ et le jet d’ordre du tour attendent derrière cette porte.",
+    "TAKEN": "PRIS"
+  };
+  /* 390 (3) - S1553 : les compteurs du Bounty Wall (« <libelle> N / M »), au CHARACTER SELECT. */
+  var COMPTEUR_FR = { "Consumables used": "Consommables utilisés", "Convocations / invitations played": "Convocations / invitations jouées",
+    "Suicides": "Suicides", "Victories": "Victoires", "Player kills": "Joueurs tués", "Natural 1s rolled": "1 naturels obtenus",
+    "WIS-based damage dealt": "Dégâts à base de SAG infligés", "Locks opened with a key": "Serrures ouvertes avec une clé",
+    "Golden items equipped": "Objets dorés équipés", "Wins in a row": "Victoires d’affilée", "Successful fuit": "Fuites réussies",
+    "Successful flees": "Fuites réussies", "Fire damage dealt": "Dégâts de Feu infligés", "Frost damage dealt": "Dégâts de Givre infligés",
+    "Lightning damage dealt": "Dégâts de Foudre infligés", "Poison damage dealt": "Dégâts de Poison infligés",
+    "Arcane damage dealt": "Dégâts d’Arcane infligés", "Chaos damage dealt": "Dégâts de Chaos infligés",
+    "Bosses felled by two": "Boss abattus à deux", "Bosses killed": "Boss tués", "Chests opened": "Coffres ouverts",
+    "DPT games played": "Parties DPT jouées", "DPT rank reached (Diamond)": "Rang DPT atteint (Diamond)",
+    "DPT rank reached (Gold)": "Rang DPT atteint (Gold)", "DPT wins": "Victoires DPT", "Damage dealt": "Dégâts infligés",
+    "Damage taken (all schools)": "Dégâts subis (toutes écoles)", "Dice-Eating Geese played": "Dice-Eating Geese jouées",
+    "Extractions": "Extractions", "Fake co-ops pulled off": "Fake co-ops réussis", "HP healed": "PV soignés",
+    "Mobs killed": "Mobs tués", "Natural 20s rolled": "20 naturels obtenus", "RUINS tiles entered": "Tuiles RUINS visitées",
+    "Signatures in a single game": "Signatures en une seule partie", "Trades made": "Trocs faits",
+    "Trades with players": "Trocs avec des joueurs" };
+  for (var kh in EN_FR_HOME) { if (Object.prototype.hasOwnProperty.call(EN_FR_HOME, kh)) EN_FR[kh] = EN_FR_HOME[kh]; }
+  /* S1555 - note 390 (3) : les SURFACES DE JEU en FR, relevees au DOM (DO YOU REACT, consultation, Casino) -- un
+     texte visible que `traduis` rendait inchange. Stats FOR / DEX / SAG / AGI (391 (1) c), PV (GLOSSAIRE 2). */
+  var EN_FR_JEU390 = {
+    '⚠ YOU ARE TARGETED': '⚠ TU ES CIBLÉ', '⚠ IT’S HAPPENING TO YOU': '⚠ ÇA T’ARRIVE',
+    '⚠ YOUR INVENTORY IS TARGETED': '⚠ TON INVENTAIRE EST CIBLÉ', '⚠ YOUR TILE IS TARGETED': '⚠ TA TUILE EST CIBLÉE',
+    'You have time to play reactions — lit cards, Signature, gear — or/then press OK CONTINUE':
+      'Tu as le temps de jouer des réactions — cartes allumées, Signature, équipement — puis OK · CONTINUER',
+    'REACTION': 'RÉACTION', 'REACT NOW': 'RÉAGIS MAINTENANT', 'NOT NOW': 'PAS MAINTENANT',
+    'STR': 'FOR', 'WIS': 'SAG', 'OUT': 'SORTI', 'unplayable': 'injouable', 'portal taken': 'portail pris',
+    'COMMON': 'COMMUN', 'UNCOMMON': 'PEU COMMUN', 'EPIC': 'ÉPIQUE', 'LEGENDARY': 'LÉGENDAIRE',
+    'Common': 'Commun', 'Uncommon': 'Peu commun', 'Epic': 'Épique', 'Legendary': 'Légendaire',
+    /* S1557 - 389 (2) : la serrure de The Cell */
+    'ROLL 1d20+STR (20 or more)': 'JET 1d20+FOR (20 ou plus)', 'DISCARD YOUR HAND': 'DÉFAUSSE TA MAIN', 'USE YOUR KEY': 'UTILISE TA CLÉ',
+    'the Action is spent even on failure · success teleports you': 'l’Action est dépensée même en cas d’échec · la réussite te téléporte',
+    'Roll': 'Jet', 'dmg': 'dégâts','FIRE': 'FEU', 'FROST': 'GIVRE', 'LIGHTNING': 'FOUDRE',
+    'forced target:': 'cible imposée :', '(only candidate — no choice to make)': '(seul candidat — aucun choix à faire)',
+    'OVER': 'TERMINÉ', 'WINNER': 'VAINQUEUR', 'DEAD': 'MORT', 'YOUR BET': 'TON PARI',
+    'scroll up': 'remonter', 'more below': 'la suite plus bas',
+    'GAME OVER': 'FIN DE PARTIE', 'GAME': 'PARTIE', 'REWARDS': 'GAINS', '⤢ DETAILS': '⤢ DÉTAILS',
+    'NEW GAME': 'NOUVELLE PARTIE', '⚔ FINAL DUEL': '⚔ DUEL FINAL',
+    'TEETH EARNED': 'DENTS GAGNÉES', 'Table bonus': 'Prime de table',
+    /* le troc (364 (5), protocole du moteur 956) */
+    'YOUR CARDS — click to put on the table': 'TES CARTES — clique pour la poser sur la table', 'WORN': 'PORTÉE',
+    'VALIDATE': 'VALIDER', 'CANCEL': 'ANNULER', '✓ VALIDATED': '✓ VALIDÉ', '✓ VALIDATED — waiting': '✓ VALIDÉ — on attend',
+    'the trade happens when both of you validate the same table — any change takes both validations back':
+      'le troc a lieu quand vous validez tous les deux la même table — tout changement reprend les deux validations',
+    'click = put it on the table': 'clic = la poser sur la table', 'click = take it back': 'clic = la reprendre',
+    /* les libelles litteraux de main.ts restes anglais (harnais : langue.js sous node, profil FR, el('…', '<litteral>')),
+       hors couche admin / debug. */
+    'AUTO-EXTRACT — the last one in the dungeon': 'AUTO-EXTRACTION — le dernier dans le donjon',
+    'auto-extract — the last one in the dungeon': 'auto-extraction — le dernier dans le donjon',
+    'YOU TAKE THE PORTAL': 'TU PRENDS LE PORTAIL',
+    'the first': 'le premier', 'the second': 'le second', 'THE SECRET NUMBER': 'LE NOMBRE SECRET',
+    'GOBLIN CASINO (RUINS) — THE SECRET BET': 'GOBLIN CASINO (RUINS) — LA MISE SECRÈTE',
+    '→ NOBODY ELSE IN THE DUNGEON — THE ALTAR AWAITS OTHER VISITORS': '→ PERSONNE D’AUTRE DANS LE DONJON — L’AUTEL ATTEND D’AUTRES VISITEURS',
+    'THE FINAL DUEL': 'LE DUEL FINAL', 'no killing blow': 'pas de coup fatal', 'BACK IN THE DUNGEON': 'DE RETOUR DANS LE DONJON',
+    'nothing lost': 'rien de perdu', 'IMMUNITY INACTIVE': 'IMMUNITÉ INACTIVE', 'no answer given': 'aucune réponse donnée',
+    'THE LOCK GIVES — WHAT IT COSTS': 'LA SERRURE CÈDE — CE QUE ÇA COÛTE', 'CASINO — YOU BUST': 'CASINO — TU SAUTES',
+    'THE PROMISE ARRIVES': 'LA PROMESSE ARRIVE', 'the Flee': 'la fuite', 'TRAP': 'PIÈGE', '☠ TRAP': '☠ PIÈGE',
+    'A TRAP CHANGES VICTIM': 'UN PIÈGE CHANGE DE VICTIME', 'A HIT IS REFLECTED': 'UN COUP EST RENVOYÉ',
+    'THE OFFERING HAS SPOKEN': 'L’OFFRANDE A PARLÉ', 'DRAW REROLL': 'RELANCE DU TIRAGE',
+    'A DIE ROLLED FOR NOTHING': 'UN DÉ LANCÉ POUR RIEN', 'YOUR WHOLE HAND GOES': 'TOUTE TA MAIN PART',
+    'your hand was already empty — nothing went': 'ta main était déjà vide — rien n’est parti',
+    'FORCED — you didn’t have to click': 'FORCÉ — tu n’avais pas à cliquer',
+    'DECLARED — applied after the reactions': 'DÉCLARÉ — appliqué après les réactions', '— after the reveal': '— après la révélation',
+    'everything this seat has seen — most recent on top': 'tout ce que ce siège a vu — le plus récent en haut',
+    'no Tile in play': 'aucune tuile en jeu', 'no points scored': 'aucun point marqué',
+    'No abilities on this sheet.': 'Aucune capacité sur cette fiche.', 'GEAR · AUTOMATIC': 'ÉQUIPEMENT · AUTOMATIQUE',
+    'goes off on its own — you won’t be asked': 'part tout seul — on ne te demandera rien', 'GEAR': 'ÉQUIPEMENT', 'Gear': 'Équipement',
+    '— you cannot pay': '— tu ne peux pas payer', 'LEAVES PLAY:': 'QUITTE LE JEU :',
+    'PASSIVES — they apply on their own': 'PASSIFS — ils s’appliquent seuls', 'EQUIP from hand:': 'ÉQUIPER depuis la main :',
+    'UNEQUIP to hand:': 'RETIRER vers la main :', '⚠ BY EQUIPPING, YOU JUST LOST': '⚠ EN ÉQUIPANT, TU VIENS DE PERDRE',
+    '⊘ no valid target here': '⊘ aucune cible valable ici', '(or leave empty: the decision will open)': '(ou laisse vide : la décision s’ouvrira)',
+    'TIE — goes to the roller': 'ÉGALITÉ — va au lanceur', 'BUST': 'SAUTÉ', '— an exit is available on this Tile': '— une sortie est disponible sur cette tuile',
+    'THE CELL — break the lock:': 'THE CELL — briser la serrure :', 'no way offered this turn': 'aucun moyen offert ce tour',
+    '⏸ PAUSED — the timer is stopped at': '⏸ EN PAUSE — le minuteur est arrêté à', '· your reserve is draining:': '· ta réserve s’épuise :',
+    '① the roll': '① le jet', 'WHY YOU ROLL': 'POURQUOI TU LANCES', 'IT TARGETS YOU': 'ÇA TE VISE', 'YOU TAKE': 'TU PRENDS',
+    'TRADE (free, outside the Action count):': 'TROC (gratuit, hors du compte des Actions) :', 'no other seat at this table': 'aucun autre siège à cette table',
+    'hand verdict (step by step):': 'verdict de la main (pas à pas) :', 'empty hand': 'main vide', '☠ remains of': '☠ restes de',
+    '⎋ Esc puts back all raised cards': '⎋ Échap repose toutes les cartes levées', 'no drawn Tile is known on this decision': 'aucune tuile tirée connue sur cette décision',
+    '⚠ you are destroying a piece equipped by': '⚠ tu détruis une pièce équipée par', 'asks you for this card': 'te demande cette carte',
+    'TURN:': 'TOUR :', 'WAITING ON:': 'ON ATTEND :', '— no winner': '— pas de vainqueur', 'Dead — run lost': 'Mort — run perdu',
+    'THE DUNGEON EMPTIES': 'LE DONJON SE VIDE', 'your partner:': 'ton partenaire :', 'No deaths: no one has a choice to make.': 'Aucun mort : personne n’a de choix à faire.',
+    'YOUR QUESTS FOR RUN 2': 'TES QUÊTES POUR LE RUN 2', 'you keep your character — you may redraw your unfinished quests': 'tu gardes ton personnage — tu peux retirer tes quêtes inachevées',
+    'Choose your school': 'Choisis ton école', 'WHERE THE POINTS CAME FROM': 'D’OÙ VIENNENT LES POINTS', 'HAND': 'MAIN',
+    'no event this game': 'aucun événement cette partie', 'NO WINNER': 'PAS DE VAINQUEUR', 'nothing earned this game': 'rien gagné cette partie',
+    '× — not included yet': '× — pas encore inclus', 'nothing found this game': 'rien trouvé cette partie', 'nothing moved this game': 'rien n’a bougé cette partie',
+    'the Bounty Wall is not loaded here': 'le Bounty Wall n’est pas chargé ici', 'NO WINNER — nobody wins this game': 'PAS DE VAINQUEUR — personne ne gagne cette partie',
+    'YOUR PROFILE': 'TON PROFIL', 'no points scored this game': 'aucun point marqué cette partie', 'WHAT THE WHOLE GAME DID': 'CE QUE LA PARTIE ENTIÈRE A FAIT',
+    '↻ YOUR CHANCE TO RESPOND': '↻ TA CHANCE DE RÉPONDRE', 'nothing yet.': 'rien pour l’instant.', 'YOUR TURN TO PLAY': 'À TOI DE JOUER',
+    '· YOU': '· TOI', 'nothing yet this turn': 'rien encore ce tour', 'roll?': 'jet ?', 'DAMAGE': 'DÉGÂTS', 'choose where you go': 'choisis où tu vas',
+    'none of your attacks can target it right now': 'aucune de tes attaques ne peut le cibler maintenant',
+    'they win: you get double · they lose: you lose your teeth': 's’il gagne : tu touches le double · s’il perd : tu perds tes dents',
+    'BETS CLOSED — the first blow has been struck': 'PARIS FERMÉS — le premier coup est porté', 'PLACE YOUR BET — before the first blow': 'PARIE — avant le premier coup',
+    'nothing has happened in this combat yet': 'rien ne s’est encore passé dans ce combat', 'nothing equipped — they carried nothing': 'rien d’équipé — il ne portait rien',
+    'ON THEM': 'SUR LUI', 'ON THE GROUND': 'AU SOL', 'the whole table — key points in bold': 'toute la table — l’essentiel en gras',
+    'the duel is over.': 'le duel est fini.', 'each loss with its source — nothing is summed': 'chaque perte avec sa source — rien n’est additionné',
+    'NO OPPONENT TO SHOW': 'AUCUN ADVERSAIRE À MONTRER', 'IMMUNE — the school doesn’t get through': 'IMMUNISÉ — l’école ne passe pas',
+    'DAMAGE TAKEN': 'DÉGÂTS SUBIS', 'no loot to reveal': 'aucun butin à révéler', 'no outcome fact known since the opening': 'aucune issue connue depuis l’ouverture',
+    'TARGET OF YOUR NEXT MOVE': 'CIBLE DE TON PROCHAIN COUP', 'no fighter left standing opposite': 'plus aucun combattant debout en face',
+    'INITIATIVE · order fixed at opening:': 'INITIATIVE · ordre fixé à l’ouverture :', 'TO ANSWER': 'À RÉPONDRE', 'applies on its own': 's’applique seul',
+    'THE COMBAT, IN ORDER': 'LE COMBAT, DANS L’ORDRE', 'the combat has just opened — nothing has landed yet': 'le combat vient de s’ouvrir — rien n’a encore porté',
+    'LOOT': 'BUTIN', 'YOU GIVE': 'TU DONNES', 'nothing yet — click a card below': 'rien pour l’instant — clique une carte en dessous',
+    '✓ YOU VALIDATED': '✓ TU AS VALIDÉ', 'nothing yet': 'rien pour l’instant', 'NO CHOICE REQUESTED': 'AUCUN CHOIX DEMANDÉ',
+    'nothing is known about this seat yet': 'on ne sait encore rien de ce siège', 'no Mob known in this combat': 'aucun Mob connu dans ce combat',
+    '🗝 OPENING A CHEST': '🗝 OUVERTURE D’UN COFFRE', 'no action roll known for this seat': 'aucun jet d’action connu pour ce siège',
+    'how the Explore line of TABLE v2 shows the tile’s die': 'comment la ligne Explorer de la TABLE v2 montre le dé de la tuile',
+    'music, effects and interface together': 'musique, effets et interface ensemble',
+    'turn start and end, the turn timer, menu clicks': 'début et fin de tour, le minuteur du tour, les clics de menu',
+    'the move is resolving — END TURN comes once the damage has landed': 'le coup se résout — FIN DU TOUR vient une fois les dégâts posés',
+    'the dungeon turn by turn — Esc to go back': 'le donjon tour par tour — Échap pour revenir',
+    'FOLLOW THE ACTION: the view will follow whoever plays': 'SUIVRE L’ACTION : la vue suit celui qui joue',
+    'options — Esc opens and closes': 'options — Échap ouvre et ferme',
+    'click for the detail': 'clique pour le détail',
+    'Signature available': 'Signature disponible', 'Signature spent this Dungeon Turn': 'Signature employée ce tour de donjon',
+    'Signature ready — playable now': 'Signature prête — jouable maintenant',
+    'BET 1 CARD TO SIT AT THE TABLE': 'MISE 1 CARTE POUR T’ASSEOIR À LA TABLE',
+    '⊘ empty hand — nothing to bet, you cannot sit': '⊘ main vide — rien à miser, tu ne peux pas t’asseoir',
+    'GRAVEYARD ⤢': 'CIMETIÈRE ⤢',
+    'HOW MANY CARDS DO YOU DISCARD, IN SECRET?': 'COMBIEN DE CARTES DÉFAUSSES-TU, EN SECRET ?',
+    'open the graveyard: every card played from a hand, full size': 'ouvrir le cimetière : chaque carte jouée d’une main, en grand',
+    'the commit and time YOUR server started (JOUER.bat) — quote it in every report. If it is from yesterday, close the black window and relaunch: the code has moved since, your screen has not':
+      'le commit et l’heure où TON serveur a démarré (JOUER.bat) — cite-le dans chaque rapport. S’il date d’hier, ferme la fenêtre noire et relance : le code a bougé depuis, ton écran non',
+    'which commit this screen is built from, and when it was built — quote it in every report: a stale screen gives a false verdict':
+      'de quel commit cet écran est construit, et quand — cite-le dans chaque rapport : un écran périmé rend un faux verdict',
+    'seed · turn · who the game is waiting on · how long nothing has moved · the last 40 log lines — one symptom = one paste. Works with a frozen game, and without a clipboard.':
+      'graine · tour · qui la partie attend · depuis quand rien ne bouge · les 40 dernières lignes du journal — un symptôme = un collage. Marche avec une partie figée, et sans presse-papiers.',
+    'open admin mode (?debug=1) — this is not the player screen':'ouvrir le mode admin (?debug=1) — ce n’est pas l’écran du joueur',
+    /* les annonces des fenetres, en minuscules dans « en reaction a : » (le cimetiere) */
+    'SOMEONE IS ABOUT TO FALL': 'QUELQU’UN VA TOMBER', 'SOMEONE HAS JUST FLED FROM YOU': 'QUELQU’UN VIENT DE TE FUIR',
+    'AN OFFER HAS JUST BEEN ACCEPTED': 'UNE OFFRE VIENT D’ÊTRE ACCEPTÉE', 'AN OFFER HAS JUST BEEN REFUSED': 'UNE OFFRE VIENT D’ÊTRE REFUSÉE',
+    'A GEAR PIECE HAS JUST BEEN DRAWN': 'UNE PIÈCE D’ÉQUIPEMENT VIENT D’ÊTRE PIOCHÉE', 'A TILE HAS JUST BEEN DRAWN': 'UNE TUILE VIENT D’ÊTRE TIRÉE'
+  };
+  for (var k390 in EN_FR_JEU390) { if (Object.prototype.hasOwnProperty.call(EN_FR_JEU390, k390)) EN_FR[k390] = EN_FR_JEU390[k390]; }
+  /* « en attente de … » : la table `attente` des declencheurs (main.ts, DECLENCHEUR_EN_FRANCAIS), entiere. */
+  var ATTEND_390 = { 'a card to be drawn': 'qu’une carte soit piochée', 'the start of a player turn': 'le début d’un tour de joueur',
+    'the end of a player turn': 'la fin d’un tour de joueur', 'the start of the Run': 'le début du Run',
+    'someone to enter a Tile': 'que quelqu’un entre sur une tuile', 'someone to enter your Tile': 'que quelqu’un entre sur ta tuile',
+    'the bearer to declare they will leave their Tile': 'que le porteur déclare quitter sa tuile',
+    'a card to be played': 'qu’une carte soit jouée', 'someone to be targeted': 'que quelqu’un soit ciblé',
+    'someone to be about to fall': 'que quelqu’un soit sur le point de tomber', 'someone to be killed': 'que quelqu’un soit tué',
+    'a Mob to be drawn': 'qu’un Mob soit pioché', 'a player to die': 'qu’un joueur meure',
+    'a piece to be equipped': 'qu’une pièce soit équipée', 'a trade to take place': 'qu’un troc ait lieu',
+    'someone to discard': 'que quelqu’un défausse', 'someone to flee from you': 'qu’on te fuie',
+    'an offer to be accepted': 'qu’une offre soit acceptée', 'an offer to be refused': 'qu’une offre soit refusée',
+    'a Gear piece to be drawn': 'qu’une pièce d’équipement soit piochée', 'a Tile to be drawn': 'qu’une tuile soit tirée' };
+  for (var ka in ATTEND_390) { if (Object.prototype.hasOwnProperty.call(ATTEND_390, ka) && ATTEND_FR[ka] === undefined) ATTEND_FR[ka] = ATTEND_390[ka]; }
+  function attendFR(q) {
+    var l = q.split(', or ');
+    for (var i = 0; i < l.length; i += 1) { if (ATTEND_FR[l[i]] === undefined) return null; l[i] = ATTEND_FR[l[i]]; }
+    return l.join(', ou ');
+  }
+  function annonceFR(s) {
+    var k = s.toUpperCase();
+    return Object.prototype.hasOwnProperty.call(EN_FR, k) ? EN_FR[k].toLowerCase() : s;
+  }
+  function statsFR(s) { return s.replace(/\bSTR\b/g, 'FOR').replace(/\bWIS\b/g, 'SAG'); }
+  var STAT_FR = { STR: 'FOR', DEX: 'DEX', WIS: 'SAG', AGI: 'AGI' };
+  var ECOLE_MIN_FR = { arcane: 'arcane', chaos: 'chaos', fire: 'feu', frost: 'givre', lightning: 'foudre', poison: 'poison' };
   for (var kj in EN_FR_JEU) { if (Object.prototype.hasOwnProperty.call(EN_FR_JEU, kj)) EN_FR[kj] = EN_FR_JEU[kj]; }
   var GESTE_FR = { 'Move': 'Se déplacer', 'Explore (1d6)': 'Explorer (1d6)', 'Interaction :': 'Interaction :',
     'Extract': 'Sortir', 'Trade': 'Troc', 'Fight': 'Combattre', 'Loot the body': 'Fouiller le corps',
@@ -1277,6 +1551,21 @@
       function (m, n, g) { return n + '. ' + GESTE_FR[g]; }],
     [/^TURN (\d+)$/, 'TOUR $1'], [/^collapse 1d(\d+)$/, 'Collapse 1d$1'], [/^portal (\d+) %$/, 'portail $1 %'],
     [/^ROUND (\d+)$/, 'MANCHE $1'],
+    [/^next: (.+)$/, 'suivant : $1'], [/^LEVEL (\d+) · (.+)$/, 'NIVEAU $1 · $2'],
+    [/^LEVEL (\d+)$/, 'NIVEAU $1'], [/^MASTER (THE .+)$/, 'MAÎTRISER $1'], [/^OWNED (.+)$/, 'POSSÉDÉS $1'],
+    [/^(\d+) seat\(s\) to confirm:$/, '$1 siège(s) à confirmer :'],
+    [/^New game — (.+) · the table confirms its READY$/, 'Nouvelle partie — $1 · la table confirme son PRÊT'],
+    [/^(.+) (\d+) \/ (\d+)$/, function (m, l, a, b) { return COMPTEUR_FR[l] === undefined ? m : COMPTEUR_FR[l] + ' ' + a + ' / ' + b; }],
+    /* 392 (4) - les restes anglais du tuto joue en FR (mesures au DOM, S1551). */
+    [/^⏱ NO ACTION LEFT — END TURN IN (\d+) s$/, '⏱ PLUS D’ACTION — FIN DU TOUR DANS $1 s'],
+    [/^(.+)'s turn$/, 'TOUR DE $1'], [/^· (.+) is reacting$/, '· $1 réagit'],
+    [/^⏳ WAITING — (.+) is reacting · (\d+) s$/, '⏳ EN ATTENTE — $1 réagit · $2 s'],
+    /* 388 (2) / 390 (6) - la raison d'un Skill refuse, dans l'aide du tour de combat. */
+    [/^(.+) — unavailable: the target is protected — (.+)$/, '$1 — indisponible : la cible est protégée — $2'],
+    [/^(.+) — unavailable: the target is protected$/, '$1 — indisponible : la cible est protégée'],
+    [/^(.+) — unavailable: (.+)$/, '$1 — indisponible : $2'],
+    /* 392 (4) - GLOSSAIRE 3 : « THE BOLTWRIGHT STARTS » -> « THE BOLTWRIGHT COMMENCE » (le jet du premier joueur). */
+    [/^(→ )?(.+) STARTS$/, function (m, f, q) { return (f || '') + q + ' COMMENCE'; }],
     /* S1480 - note 314 (2) : les points de grade de l'ecran de fin. */
     [/^PROMOTED — GRADE (\d+)$/, 'PROMU — GRADE $1'],
     [/^(\d+)(?:st|nd|rd|th) place(.*)$/, function (m, n, reste) {
@@ -1289,7 +1578,7 @@
     [/^→ the card asked for (.+) — this face did not give it$/, function (m, c) { return '→ la carte demandait ' + conditionFR(c) + ' — cette face ne l’a pas donné'; }],
     [/^→ (.+) flees to (.+?) — turn over$/, '→ $1 fuit vers $2 — fin du tour'],
     [/^→ (.+) flees to (.+)$/, '→ $1 fuit vers $2'],
-    [/^(⊘ )?awaits (.+)$/, function (m, p, q) { return ATTEND_FR[q] === undefined ? m : (p || '') + 'attend ' + ATTEND_FR[q]; }],
+    [/^(⊘ )?awaits (.+)$/, function (m, p, q) { var a = attendFR(q); return a === null ? m : (p || '') + 'attend ' + a; }],
     [/^(⊘ )?nothing to target — (.+)$/, function (m, p, q) { return CIBLE_FR[q] === undefined ? m : (p || '') + 'rien à cibler — ' + CIBLE_FR[q]; }],
     [/^⚔ (.+) fights (.+)$/, '⚔ $1 combat $2'],
     [/^(.+) deals (Fire|Frost|Lightning|Poison|Arcane|Chaos) DMG to (.+)$/, function (m, a, e, b) { return a + ' inflige des DMG de ' + ECOLE_FR[e] + ' à ' + b; }],
@@ -1318,7 +1607,83 @@
     [/^YOU (\d*d\d+)$/, 'TOI $1'],
     [/^(\d+)d(\d+) — (\d+) dice read FACE BY FACE\. The sum decides nothing$/, '$1d$2 — $3 dés lus FACE PAR FACE. La somme ne décide rien'],
     [/^(.+) · range ([\d-]+) → « (.+) » · ⚠ hits the whole table, wherever they are in the dungeon$/, '$1 · plage $2 → « $3 » · ⚠ touche toute la table, où qu’elle soit dans le donjon'],
-    [/^↳ in reaction to: (.+)$/, '↳ en réaction à : $1'],
+    [/^↳ in reaction to: (.+)$/, function (m, q) { return '↳ en réaction à : ' + annonceFR(q); }],
+    /* S1555 - note 390 (3) : les surfaces de jeu (DO YOU REACT, consultation, Casino), relevees au DOM. */
+    [/^(.+) — (.+) — in reaction to: (.+)$/, function (m, a, b, q) { return a + ' — ' + b + ' — en réaction à : ' + annonceFR(q); }],
+    [/^(ARME · )?(.+) — sheet weapon · (.+)$/, function (m, s, a, f) { return (s || '') + a + ' — arme de fiche · ' + statsFR(f); }],
+    [/^(STR|DEX|WIS|AGI) (-?\d+) — base (-?\d+)(?: · modifier ([+-]\d+))?$/, function (m, st, v, b, mo) { return STAT_FR[st] + ' ' + v + ' — base ' + b + (mo ? ' · modificateur ' + mo : ''); }],
+    [/^(STR|DEX|WIS|AGI) (-?\d+)$/, function (m, st, v) { return STAT_FR[st] + ' ' + v; }],
+    [/^(STR|DEX|WIS|AGI) (-?\d+) — base (-?\d+) · modifier ([+-]?\d+) · floored at 0 \(actual sum (-?\d+), §[\d.]+\)$/, function (m, st, v, b, mo, s) { return STAT_FR[st] + ' ' + v + ' — base ' + b + ' · modificateur ' + mo + ' · plancher à 0 (somme réelle ' + s + ')'; }],
+    [/^real sum (-?\d+) — floored at 0 — removing a malus gives nothing back until the debt is covered\.$/, 'somme réelle $1 — plancher à 0 — retirer un malus ne rend rien tant que la dette n’est pas couverte.'],
+    [/^the piece goes back to your hand — it will cost (\d+) HP$/, 'la pièce retourne dans ta main — ça coûtera $1 PV'],
+    [/^(\d+) HP$/, '$1 PV'], [/^(.+) · (\d+) \/ (\d+) HP · (\d+) card\(s\) in hand$/, '$1 · $2 / $3 PV · $4 carte(s) en main'],
+    [/^(\d) — (Trap|Mob|Chest) · (.+)$/, function (m, f, i, r) { return f + ' — ' + ({ Trap: 'Piège', Mob: 'Mob', Chest: 'Coffre' })[i] + ' · ' + r; }],
+    [/^(.+) is muted: it never opens a window for you — click to be asked$/, '$1 est en sourdine : elle n’ouvre jamais de fenêtre pour toi — clique pour être interrogé'],
+    [/^(.+) is muted: it changes rolls only if you open its eye — click to be asked$/, '$1 est en sourdine : elle ne change les jets que si tu ouvres son œil — clique pour être interrogé'],
+    [/^\+(STR|DEX|WIS|AGI):$/, function (m, st) { return '+' + STAT_FR[st] + ' :'; }],
+    [/^(\d+)\+ : Loot$/, '$1+ : Butin'],
+    [/^SPECTATING — (.+) vs (.+)$/, 'EN TRAIN DE REGARDER — $1 contre $2'],
+    [/^(\d+) slot\(s\) on this sheet$/, '$1 emplacement(s) sur cette fiche'],
+    [/^(.+) WINS$/, '$1 GAGNE'], [/^\+(\d+) teeth — (.+) won$/, '+$1 dents — $2 a gagné'],
+    [/^✦ (.+) completes (.+) \(\+(\d+) pts?\)$/, '✦ $1 accomplit $2 (+$3 pt)'],
+    [/^☠ (.+) kills (.+) \(\+(\d+) pts?\)$/, '☠ $1 tue $2 (+$3 pt)'],
+    [/^(.+) deals$/, '$1 inflige'], [/^DMG to (.+)$/, 'DÉGÂTS à $1'],
+    [/^(\d+) HP of (\d+) — below the alert threshold of (\d+)$/, '$1 PV sur $2 — sous le seuil d’alerte de $3'],
+    [/^Max HP: (\d+)$/, 'PV max : $1'], [/^(\d+) HP of (\d+)$/, '$1 PV sur $2'],
+    [/^SCHOOLS OF MAGIC ([\s\S]+)$/, function (m, r) { return 'ÉCOLES DE MAGIE\n' + (r === 'none' ? 'aucune' : r.replace(/\b(FIRE|FROST|LIGHTNING)\b/g, function (e) { return ({ FIRE: 'FEU', FROST: 'GIVRE', LIGHTNING: 'FOUDRE' })[e]; })); }],
+    [/^(FIRE|FROST|LIGHTNING) (\d+)$/, function (m, e, v) { return ({ FIRE: 'FEU', FROST: 'GIVRE', LIGHTNING: 'FOUDRE' })[e] + ' ' + v; }],
+    [/^(.+) — click: hand, gear, points$/, function (m, a) { return (a === 'no points scored' ? 'aucun point marqué' : a) + ' — clic : main, équipement, points'; }],
+    [/^(\d+) deaths? in the game$/, '$1 mort(s) dans la partie'],
+    /* les gabarits `${…}` de main.ts restes anglais (harnais, meme tamis) */
+    [/^(.+) DIES$/, '$1 MEURT'], [/^(.+) TAKES THE PORTAL$/, '$1 PREND LE PORTAIL'], [/^(.+) LOSES (.+)$/, '$1 PERD $2'],
+    [/^(.+)’S TABLE — THE GOBLIN CASINO$/, 'LA TABLE DE $1 — THE GOBLIN CASINO'], [/^LOOP ROLL · (.+)$/, 'JET EN BOUCLE · $1'],
+    [/^CHOOSE YOUR TARGET · (.+)$/, 'CHOISIS TA CIBLE · $1'], [/^(.+) GIVES (\d+)$/, '$1 DONNE $2'], [/^(.+) GIVES$/, '$1 DONNE'],
+    /* le bandeau d'attente d'un autre siege (main.ts::peindreLAttenteDUnAutre), avec ou sans chrono */
+    [/^⏳ (WAITING — )?(.+) is (reacting|choosing… (.+?))( · .+)?$/, function (m, w, n, v, q, c) {
+      var Q = { 'a target': 'une cible', 'rock-paper-scissors': 'pierre-feuille-ciseaux', 'loot': 'un butin', 'a discard': 'une défausse',
+        'flee or fight': 'fuir ou combattre', 'a card': 'une carte', 'an invitation': 'une invitation', 'a number': 'un nombre', 'an answer': 'une réponse' };
+      return '⏳ ' + (w ? 'EN ATTENTE — ' : '') + n + (q === undefined ? ' réagit' : ' choisit… ' + (Q[q] || q)) + (c || '');
+    }],
+    [/^(⊘ )?combat turn of (.+) — not yours$/, function (m, p, n) { return (p || '') + 'tour de combat de ' + n + ' — pas le tien'; }],
+    /* S1556 - 389 (1) : l'encart des copies (Copy Cats, Confused Parrot) */
+    [/^(.+) — WHO GETS EACH COPY\?$/, '$1 — QUI REÇOIT CHAQUE COPIE ?'], [/^Copy (\d+) →$/, 'Copie $1 →'],
+    [/^(.+) \(you\)$/, '$1 (toi)'],
+    [/^TRADE WITH (.+)$/, 'TROC AVEC $1'], [/^(.+) ⇄ (.+) — TRADING$/, '$1 ⇄ $2 — EN TROC'], [/^hand revealed: (.+)$/, 'main révélée : $1'], [/^(.+) broke the tie$/, '$1 a départagé'],
+    [/^gives back (.+)$/, 'rend $1'], [/^drawn from the deck (.+)$/, 'tiré du paquet $1'], [/^1d(\d+) — landed on (\d+)$/, '1d$1 — tombé sur $2'],
+    [/^from (\d+) to (\d+):$/, 'de $1 à $2 :'],
+    [/^Last one inside — the dungeon doesn't do private parties\. It spat you out\.(.*)$/, 'Dernier dedans — le donjon ne fait pas de soirées privées. Il t’a recraché.$1'],
+    [/^(\d+) cards? — (.+) \(the cards stay secret\)$/, '$1 carte(s) — $2 (les cartes restent secrètes)'],
+    [/^(.+) on (.+) · (.+) →$/, '$1 sur $2 · $3 →'], [/^(\d+) teeth on (.+)$/, '$1 dents sur $2'],
+    [/^(\d+) to (\d+) teeth · they win: double · they lose: you lose them$/, '$1 à $2 dents · s’il gagne : le double · s’il perd : tu les perds'],
+    [/^(\d+) possible targets — your target:$/, '$1 cibles possibles — ta cible :'], [/^(\d+) cards? in hand$/, '$1 carte(s) en main'],
+    [/^the last of (\d+)$/, 'le dernier de $1'], [/^the sheet has no (.+) slot$/, 'la fiche n’a pas d’emplacement $1'],
+    [/^teeth ×2 · \+(\d+) if the objective is met — awaiting the engine$/, 'dents ×2 · +$1 si l’objectif est atteint — en attente du moteur'],
+    [/^today’s twist not yet in the engine: (.+)$/, 'la variante du jour n’est pas encore dans le moteur : $1'],
+    [/^roll (\d+)$/, 'jet $1'],
+    /* la borne du tour de donjon (main.ts, palier du tour) : « draw LEGENDARY · Collapse 1d20 · portal at 1+ » */
+    [/^(?:draw [A-Z]+|Collapse 1d\d+|portal at \d+\+)(?: · (?:draw [A-Z]+|Collapse 1d\d+|portal at \d+\+))*$/, function (m) {
+      return m.split(/\s+·\s+/).map(function (b) {
+        var d = /^draw ([A-Z]+)$/.exec(b);
+        if (d) return 'pioche ' + ({ COMMON: 'COMMUN', UNCOMMON: 'PEU COMMUN', RARE: 'RARE', EPIC: 'ÉPIQUE', LEGENDARY: 'LÉGENDAIRE' }[d[1]] || d[1]);
+        var p = /^portal at (\d+)\+$/.exec(b);
+        return p ? 'portail à ' + p[1] + '+' : b;
+      }).join('  ·  ');
+    }],
+    [/^killed by (.+)$/, function (m, b) { return 'tué par ' + (b === 'the Collapse' ? 'le Collapse' : b); }],
+    [/^you kill (.+)$/, 'tu tues $1'], [/^YOUR TEETH (.+)$/, 'TES DENTS $1'],
+    [/^\+(\d+) XP → (.+) level (\d+)$/, '+$1 XP → $2 niveau $3'],
+    [/^Mob kills (\d+)$/, 'Mobs tués $1'], [/^Table bonus (\d+)$/, 'Prime de table $1'],
+    [/^arcane (\d+) · chaos (\d+) · fire (\d+) · frost (\d+) · lightning (\d+) · poison (\d+)$/, 'arcane $1 · chaos $2 · feu $3 · givre $4 · foudre $5 · poison $6'],
+    [/^(.+) — your target: your attack goes at them$/, '$1 — ta cible : ton attaque va sur lui'],
+    [/^target (.+)$/, 'cibler $1'],
+    [/^(.+) will ask you when it can answer — click to mute it$/, '$1 te demandera quand elle peut répondre — clique pour la mettre en sourdine'],
+    [/^(.+) — tap: the card in big$/, '$1 — touche : la carte en grand'],
+    [/^grade (\d+) frame$/, 'cadre de grade $1'], [/^(\d+) points? this game$/, '$1 point(s) cette partie'],
+    [/^gear score (\d+) — what they carry, weighted by rarity$/, 'score d’équipement $1 — ce qu’il porte, pondéré par la rareté'],
+    [/^(\d+) action\(s\) left of (\d+)$/, '$1 action(s) restante(s) sur $2'],
+    [/^(.+?) · (.+?) · (\d+) HP out of (\d+) · (\d+) card\(s\) · (.+)$/, function (m, a, b, h, x, c, o) { return a + ' · ' + b + ' · ' + h + ' PV sur ' + x + ' · ' + c + ' carte(s) · ' + (o === '— off-tile' ? '— hors tuile' : o); }],
+    [/^(.+) joins the fight(?: — (.+))?$/, function (m, a, r) { return a + ' entre dans le combat' + (r ? ' — ' + r.split(' · ').map(function (x) { return x === 'CANNOT BE KILLED' ? 'INTUABLE' : x.replace(/^(\d+) HP$/, '$1 PV'); }).join(' · ') : ''); }],
+    [/^server started (.+)$/, 'serveur démarré $1'],
     [/^END TURN — (\d+) to discard$/, 'FIN DU TOUR — $1 à défausser'],
     /* S1489 - note 368 (10) et (5) : HOW IT ENDED et les des du draft, en francais. */
     [/^(.+) was killed by (.+)$/, function (m, a, b) { return a + ' a été tué par ' + (b === 'the Collapse' ? 'le Collapse' : b); }],
@@ -1364,7 +1729,12 @@
      surfaces (la cible du jeu, Croze 14/09). Avant : la langue d'ORIGINE de
      chaque page, donc le jeu en français chez qui n'avait jamais ouvert
      OPTIONS — les captures de Croze. */
-  function cible() { return lis() || 'EN'; }
+  /* S1552 - note 390 (5) : au PREMIER lancement (aucun reglage au profil), la langue du navigateur ; ensuite celle
+     du profil, qui ne change jamais toute seule (GLOSSAIRE 1 bis). */
+  function duNavigateur() {
+    try { return /^fr\b/i.test(String(navigator.language || '')) ? 'FR' : 'EN'; } catch (e) { return 'EN'; }
+  }
+  function cible() { return lis() || duNavigateur(); }
 
   /* ⛑ S1392 · O-T3 (note 215 ②) — « les noms des personnages à la place de
      JOUEUR N, partout ». Le jeu imprime l'identifiant du siège en cent
