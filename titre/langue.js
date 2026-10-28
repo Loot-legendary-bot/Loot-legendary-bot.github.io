@@ -1299,6 +1299,8 @@
     "Turn 4: the dungeon starts to bite back.": "Tour 4 : le donjon commence à mordre.",
     "The Collapse: each turn a die hits everyone — no parry, no armor. A 6 just opened a PORTAL on your tile.": "Le Collapse : à chaque tour, un dé frappe tout le monde — ni parade, ni armure. Un 6 vient d’ouvrir un PORTAIL sur ta tuile.",
     "Play the Heal Potion.": "Joue la Heal Potion.",
+    "That 6 came out of your HP.": "Ce 6, tu l’as pris dans tes HP.",
+    "Tap to continue.": "Touche pour continuer.",
     "Every room has one INTERACT, once per tile.": "Chaque salle a une INTERACTION, une fois par tuile.",
     "Out with your loot: your score freezes, your gear stays — and the dungeon goes on without you.": "Dehors avec ton butin : ton score se fige, ton équipement reste — et le donjon continue sans toi.",
     "USE PORTAL.": "PRENDRE LE PORTAIL.",
