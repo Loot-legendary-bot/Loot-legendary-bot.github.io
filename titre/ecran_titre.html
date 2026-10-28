@@ -826,6 +826,9 @@
     flex-direction:column;align-items:flex-end;gap:1.6cqh}
   .hud{position:static;display:flex;align-items:center;
     gap:1.2cqw;pointer-events:none}
+  /* S1562 - Croze 28/10 : « ces infos si on clique sur le pseudo ou le tablier » - le .hud est sans clic,
+     et le pseudo et le tablier heritaient de ce none : leur go('profil') ne recevait jamais le clic. */
+  .hud .who,.hud .rank{pointer-events:auto;cursor:pointer}
   .hud .who{font:400 1.9cqh/1 "Alegreya",Georgia,serif;letter-spacing:.26em;
     text-transform:uppercase;color:var(--dust)}
   .hud .hbar{width:1px;height:2.2cqh;background:#2a2a31}
