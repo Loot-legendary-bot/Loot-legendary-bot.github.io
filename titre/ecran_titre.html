@@ -2698,6 +2698,45 @@ document.getElementById('fr').textContent='Dive';
 /* S1382 · B-T9 (note 213) : le commit qui tourne, en bas, petit — servi par vite.config.ts (versionServie). */
 fetch('/@vite/client',{method:'HEAD',cache:'no-store'}).then(function(r){if(r.ok){window.__llDev=true;if(typeof tab!=='undefined'&&tab==='tick'&&typeof fillGrid==='function')fillGrid('tick');}}).catch(function(){});
 fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(v){if(v&&v.sha){document.getElementById('version').textContent='ecran '+v.sha+(v.date?' · '+v.date:'');}}).catch(function(){});
+/* S1570 - note 400 (8) : « je clique la version en bas, je lis ce qui a change ». La fenetre lit
+   docs/PATCH_NOTES.md (ecrit par le CLASSEUR, le plus recent en haut), servi a /__patch_notes.md. */
+(function(){
+  const v=document.getElementById('version'); if(!v) return;
+  v.style.cursor='pointer'; v.title='patch notes — what changed';
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const ligne=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\*(.+?)\*/g,'<i>$1</i>').replace(/`(.+?)`/g,'<code>$1</code>');
+  function rendu(md){
+    let h='', liste=false;
+    md.split(/\r?\n/).forEach(function(l){
+      const t=l.trim();
+      if(/^- /.test(t)){ if(!liste){h+='<ul>';liste=true;} h+='<li>'+ligne(t.slice(2))+'</li>'; return; }
+      if(liste){h+='</ul>';liste=false;}
+      if(/^# /.test(t)) h+='<h2>'+ligne(t.slice(2))+'</h2>';
+      else if(/^## /.test(t)) h+='<h3>'+ligne(t.slice(3))+'</h3>';
+      /* une ligne tout en italique (*…*) est la note de travail du fichier, pas une note de patch : on la saute */
+      else if(t!=='' && !/^\*[^*].*[^*]\*$/.test(t)) h+='<p>'+ligne(t)+'</p>';
+    });
+    if(liste) h+='</ul>';
+    return h;
+  }
+  v.addEventListener('click',function(ev){
+    ev.stopPropagation();
+    if(document.getElementById('notes-patch')) return;
+    const voile=document.createElement('div'); voile.id='notes-patch';
+    voile.style.cssText='position:fixed;inset:0;z-index:9400;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center';
+    const b=document.createElement('div');
+    b.style.cssText='width:min(720px,92vw);max-height:82vh;overflow:auto;background:#16120e;border:2px solid #5a4a3a;border-radius:4px;padding:18px 24px;color:#efe6cf;font:16px/1.5 Georgia,serif';
+    b.innerHTML='<div style="text-align:right"><button type="button" id="notes-patch-x" style="background:transparent;color:#efe6cf;border:1px solid #5a4a3a;padding:4px 12px;cursor:pointer;letter-spacing:.1em">CLOSE</button></div><div class="np-corps">Loading…</div>';
+    voile.appendChild(b); document.body.appendChild(voile);
+    const ferme=()=>voile.remove();
+    voile.addEventListener('click',e=>{ if(e.target===voile) ferme(); });
+    b.querySelector('#notes-patch-x').onclick=ferme;
+    document.addEventListener('keydown',function k(e){ if(e.key==='Escape'){ ferme(); document.removeEventListener('keydown',k); } });
+    fetch('/__patch_notes.md',{cache:'no-store'}).then(r=>r.ok?r.text():'').then(function(md){
+      b.querySelector('.np-corps').innerHTML = md.trim()==='' ? '<p>No patch notes yet.</p>' : rendu(md);
+    }).catch(function(){ b.querySelector('.np-corps').innerHTML='<p>The patch notes could not be loaded.</p>'; });
+  });
+})();
 
 /* (3) note 138 — SIXIÈME COLONNE : la CLASSE d'identité. Les trois portes ne
    partagent plus que leur forme ; la couleur d'accent, le bord haut, le mot-clé
