@@ -136,7 +136,8 @@
       rg('mobs_tues', 'Mobs killed', [d(75, 'vert_clair_marbre', 'Green marble dice')]),
       rg('serrures_cle', 'Locks opened with a key', [p(20, 'the_rogue', 'The Rogue')]),
       rg('degats_infliges', 'Damage dealt', [p(100, 'the_green', 'The Green')]),   /* note 275 (5), BW 24 */
-      rg('d20_nat20', 'Natural 20s rolled', [p(150, 'the_poisoner', 'The Poisoner')]),
+      /* S1566 - note 404 (verdict Croze 28/10) : « Poisoner accessible a 50 naturels 20 » (150 -> 50) */
+      rg('d20_nat20', 'Natural 20s rolled', [p(50, 'the_poisoner', 'The Poisoner')]),
       rg('degats_poison', 'Poison damage dealt', [u(2500, 'fiole', 'Vial cursor')]),
       rg(DEFIS, 'Card challenges done', [k(5, 'dos_poison', 'Poison card back (Epic)')])] },
     { id: 'chaos', t: 'Chaos', f: 'chaos', pointe: 1, teinte: '#d8409e', rangs: [

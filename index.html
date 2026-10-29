@@ -1548,7 +1548,9 @@
        * se replie est la RAISON — *« toujours affiché, ça capte trop
        * l'attention et ça noie le joueur »*, décision de Croze, close.
        */
-      .stamp { position: absolute; left: 50%; top: 52%;
+      /* S1566 · note 401 — « le injouable doit être plus haut, au niveau de l'image, afin qu'on puisse la lire » :
+         le tampon passe de 52 % (sur le texte) à 30 % (la moitié haute, l'illustration). */
+      .stamp { position: absolute; left: 50%; top: 30%;
                transform: translate(-50%, -50%) rotate(-11deg) scale(.94);
                border: 2px solid var(--stamp); outline: 1px solid var(--stamp); outline-offset: 2px;
                color: var(--stamp); background: rgba(217,211,194,.86);
@@ -12192,6 +12194,33 @@
       .maitrise-perso { font-family: var(--display);
                         letter-spacing: .1em; font-size: 13px; }
       .maitrise-perso[aria-disabled="true"] { cursor: not-allowed; opacity: .45; }
+      /* S1566 · note 400 ③ — en spectateur, la carte cliquée s'ouvre en grand */
+      .carte-agrandissable { cursor: zoom-in; }
+      .carte-en-grand { display: block; max-width: min(90vw, 720px); max-height: 80vh; margin: 0 auto; object-fit: contain; }
+      /* S1566 · note 400 ⑤ — STUN : le drapeau à côté des PV, et trois étoiles qui tournent au-dessus, en boucle */
+      .drapeau-stun { display: inline-flex; align-items: center; gap: 4px; padding: 1px 6px 1px 4px; border-radius: 3px;
+        background: #f0c44c; color: #2a1e08; font-family: var(--display); font-weight: 800; font-size: 13px;
+        letter-spacing: .1em; line-height: 1.3; vertical-align: middle; box-shadow: 0 0 8px rgba(240, 196, 76, .6); }
+      .drapeau-stun .ds-ico { display: inline-flex; width: 15px; height: 15px; }
+      .drapeau-stun .ds-ico svg { width: 100%; height: 100%; }
+      .etourdi { position: relative; }
+      .vfx-stun { position: absolute; left: 50%; top: 34px; width: 0; height: 0; z-index: 6; pointer-events: none; }
+      .vfx-stun .vs-etoile { position: absolute; left: -8px; top: -10px; font-size: 18px; color: #f0c44c;
+        text-shadow: 0 0 6px rgba(240, 196, 76, .9);
+        animation: stun-tourne 1.8s linear infinite; animation-delay: calc(var(--k) * -0.6s); }
+      @keyframes stun-tourne {
+        0%   { transform: rotate(0deg) translateX(34px) rotate(0deg) scaleY(.8); opacity: 1; }
+        50%  { opacity: .55; }
+        100% { transform: rotate(360deg) translateX(34px) rotate(-360deg) scaleY(.8); opacity: 1; }
+      }
+      @media (prefers-reduced-motion: reduce) { .vfx-stun .vs-etoile { animation-duration: 6s; } }
+      /* S1566 · note 400 ⑨ — le tour interrompu : un bandeau en haut, au centre, tant que le moteur le publie */
+      .tour-interrompu { position: fixed; top: 64px; left: 50%; transform: translateX(-50%); z-index: 950;
+        padding: 10px 22px; background: rgba(20, 16, 12, .94); border: 2px solid #c9524a; border-radius: 4px;
+        font-family: var(--display); font-size: 20px; letter-spacing: .08em; color: #efe6cf; white-space: nowrap;
+        box-shadow: 0 0 18px rgba(201, 82, 74, .45); pointer-events: none; }
+      .tour-interrompu .ti-qui { font-weight: 800; }
+      .tour-interrompu .ti-cause { opacity: .8; }
       .frise-xp { font-family: var(--display); font-size: 18px; letter-spacing: .08em; color: #9fd3a8; align-self: center; }
       /* S1564 · note 399 ① — la barre du niveau, sous la ligne XP de la frise */
       .frise-xp-barre { align-self: center; width: 240px; margin-top: 4px; }
@@ -12744,6 +12773,10 @@
       .nouvelle-table .tv2-seuil.n1 .tv2-seuil-bloc { --seuil-w: 14vh; filter: none; }
       .nouvelle-table .tv2-seuil-bloc.agit { transform: scale(1.2); filter: brightness(1.08); z-index: 1; }
       .nouvelle-table .tv2-seuil-bloc.mort { filter: grayscale(1) brightness(.7); }
+      /* S1566 · note 400 ④ — le crâne sur le portrait d'un mort de la tuile */
+      .nouvelle-table .tv2-seuil-bloc { position: relative; }
+      .nouvelle-table .tv2-seuil-crane { position: absolute; left: 50%; top: 28%; transform: translate(-50%, -50%);
+        font-size: 40px; line-height: 1; color: #efe6cf; text-shadow: 0 0 10px #000, 0 0 3px #000; pointer-events: none; }
       .nouvelle-table .tv2-seuil-bloc.avance { translate: -12px 0; filter: brightness(1.15); }
       /* S1453 · note 330 ⑤ (P3) — « ça te vise » : la carte de la tuile de l'autre en grand, la question en sang. */
       .nouvelle-table .tv2-liste.tv2-vise { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 16px; text-align: center; padding-top: 2vh; }
@@ -14886,7 +14919,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-XaFGw7JM.js"></script>
+    <script type="module" crossorigin src="./assets/index-DJX2TpFS.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

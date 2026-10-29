@@ -1414,6 +1414,9 @@
       'Tu as le temps de jouer des réactions — cartes allumées, Signature, équipement — puis OK · CONTINUER',
     'REACTION': 'RÉACTION', 'REACT NOW': 'RÉAGIS MAINTENANT', 'NOT NOW': 'PAS MAINTENANT',
     'OUT': 'SORTI', 'unplayable': 'injouable', 'portal taken': 'portail pris',
+    /* S1566 - 400 (9) le tour interrompu ; 299 (1) le Sceau de Salomon */
+    'YOUR TURN IS INTERRUPTED BY': 'TON TOUR EST INTERROMPU PAR', '— IT RESUMES AFTER THEIR ACTION': '— IL REPREND APRÈS SON ACTION',
+    'PASS': 'PASSER', 'USE IT NOW': 'L’UTILISER MAINTENANT', 'EQUIP IT NOW': 'L’ÉQUIPER MAINTENANT', 'KEEP IT IN HAND': 'LA GARDER EN MAIN',
     'COMMON': 'COMMUN', 'UNCOMMON': 'PEU COMMUN', 'EPIC': 'ÉPIQUE', 'LEGENDARY': 'LÉGENDAIRE',
     'Common': 'Commun', 'Uncommon': 'Peu commun', 'Epic': 'Épique', 'Legendary': 'Légendaire',
     /* S1557 - 389 (2) : la serrure de The Cell */
