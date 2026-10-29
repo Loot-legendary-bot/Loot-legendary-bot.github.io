@@ -1562,6 +1562,8 @@
     [/^(\d+)\. (Move|Explore \(1d6\)|Interaction :|Extract|Trade|Fight|Loot the body|Break the lock)$/,
       function (m, n, g) { return n + '. ' + GESTE_FR[g]; }],
     [/^TURN (\d+)$/, 'TOUR $1'], [/^collapse 1d(\d+)$/, 'Collapse 1d$1'], [/^portal (\d+) %$/, 'portail $1 %'],
+    /* S1567 - note 403 (1) : PROCHAIN COLLAPSE · PROCHAIN PORTAIL */
+    [/^next collapse 1d(\d+)$/, 'prochain Collapse 1d$1'], [/^next portal (\d+) %$/, 'prochain portail $1 %'],
     [/^ROUND (\d+)$/, 'MANCHE $1'],
     [/^next: (.+)$/, 'suivant : $1'], [/^LEVEL (\d+) · (.+)$/, 'NIVEAU $1 · $2'],
     [/^LEVEL (\d+)$/, 'NIVEAU $1'], [/^MASTER (THE .+)$/, 'MAÎTRISER $1'], [/^OWNED (.+)$/, 'POSSÉDÉS $1'],
