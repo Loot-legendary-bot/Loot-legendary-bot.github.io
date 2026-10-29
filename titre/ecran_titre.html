@@ -187,6 +187,11 @@
   /* S1507 - note 373 (4) : le tablier du grade, a la hauteur du pseudo ; le bouclier se cache quand il est la */
   .hud .rank img.tablier{height:3.6cqh;width:auto;vertical-align:middle;filter:drop-shadow(0 0 .3cqh rgba(0,0,0,.9))}
   .hud .rank.a-tablier svg.embleme{display:none}
+  /* S1565 - note 399 (1), mot de Croze 29/10 « barre au home aussi » : PETITE, a cote du tablier (S1561 etait trop grosse) */
+  .hud .rank .rank-gp{display:flex;flex-direction:column;gap:.35cqh;width:8.5cqw;font:600 1.15cqh/1 "Alegreya Sans",system-ui,sans-serif;letter-spacing:.04em}
+  .hud .rank .rank-gp-t{display:flex;justify-content:space-between;gap:.5cqw;color:var(--bone);white-space:nowrap;opacity:.85}
+  .hud .rank .rank-gp-b{display:block;height:.55cqh;border-radius:.3cqh;background:rgba(255,255,255,.14);overflow:hidden}
+  .hud .rank .rank-gp-b i{display:block;height:100%;min-width:2px;background:linear-gradient(90deg,#c9a227,#f0c44c)}
   .door.hit h3{color:var(--blood);animation:arcade .1s linear 3}
 
   .foot{position:absolute;left:0;right:0;bottom:2.4%;z-index:6;display:flex;
@@ -3500,7 +3505,23 @@ function paintHUD(flash){
       w.insertBefore(img,w.firstChild); }
     if(img.getAttribute('src')!==src) img.setAttribute('src',src);
     w.dataset.grade=String(g);
-    w.title='Grade '+String(g)+' — click for all your stats'; })();
+    w.title='Grade '+String(g)+' — click for all your stats';
+    /* S1565 - note 399 (1), mot de Croze (29/10) : « barre au home aussi ». Petite : « 140 / 300 GP » et la jauge
+       sous le texte ; le detail reste dans PROFILE (clic). Seuils poses au profil par le jeu (grades.json) : lus. */
+    let gpb=w.querySelector('.rank-gp'); if(gpb!==null) gpb.remove();
+    const gp=p!==null&&typeof p.gp==='number'?p.gp:0;
+    const bas=p!==null&&typeof p.gp_bas==='number'?p.gp_bas:null, haut=p!==null&&typeof p.gp_haut==='number'?p.gp_haut:null;
+    if(bas!==null&&haut!==null&&haut>bas){
+      gpb=document.createElement('span'); gpb.className='rank-gp';
+      const t=document.createElement('span'); t.className='rank-gp-t';
+      const a=document.createElement('span'); a.textContent='GRADE '+String(g);
+      const z=document.createElement('span'); z.textContent=fmt(gp)+' / '+fmt(haut)+' GP';
+      t.appendChild(a); t.appendChild(z); gpb.appendChild(t);
+      const b=document.createElement('span'); b.className='rank-gp-b';
+      const pl=document.createElement('i'); pl.style.width=Math.max(0,Math.min(100,(gp-bas)/(haut-bas)*100)).toFixed(1)+'%';
+      b.appendChild(pl); gpb.appendChild(b); w.appendChild(gpb);
+      w.title='Grade '+String(g)+' · '+fmt(gp)+' / '+fmt(haut)+' GP → GRADE '+String(g+1)+' — click for all your stats';
+    } })();
   document.getElementById('gold').textContent=fmt(PROFILE.gold);
   document.getElementById('sang').textContent=fmt(PROFILE.sang);
   if(flash){const g=document.getElementById('goldwrap');

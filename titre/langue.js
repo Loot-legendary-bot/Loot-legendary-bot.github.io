@@ -1391,7 +1391,7 @@
   /* 390 (3) - S1553 : les compteurs du Bounty Wall (« <libelle> N / M »), au CHARACTER SELECT. */
   var COMPTEUR_FR = { "Consumables used": "Consommables utilisés", "Convocations / invitations played": "Convocations / invitations jouées",
     "Suicides": "Suicides", "Victories": "Victoires", "Player kills": "Joueurs tués", "Natural 1s rolled": "1 naturels obtenus",
-    "WIS-based damage dealt": "Dégâts à base de SAG infligés", "Locks opened with a key": "Serrures ouvertes avec une clé",
+    "WIS-based damage dealt": "Dégâts à base de WIS infligés", "Locks opened with a key": "Serrures ouvertes avec une clé",
     "Golden items equipped": "Objets dorés équipés", "Wins in a row": "Victoires d’affilée", "Successful fuit": "Fuites réussies",
     "Successful flees": "Fuites réussies", "Fire damage dealt": "Dégâts de Feu infligés", "Frost damage dealt": "Dégâts de Givre infligés",
     "Lightning damage dealt": "Dégâts de Foudre infligés", "Poison damage dealt": "Dégâts de Poison infligés",
@@ -1413,11 +1413,11 @@
     'You have time to play reactions — lit cards, Signature, gear — or/then press OK CONTINUE':
       'Tu as le temps de jouer des réactions — cartes allumées, Signature, équipement — puis OK · CONTINUER',
     'REACTION': 'RÉACTION', 'REACT NOW': 'RÉAGIS MAINTENANT', 'NOT NOW': 'PAS MAINTENANT',
-    'STR': 'FOR', 'WIS': 'SAG', 'OUT': 'SORTI', 'unplayable': 'injouable', 'portal taken': 'portail pris',
+    'OUT': 'SORTI', 'unplayable': 'injouable', 'portal taken': 'portail pris',
     'COMMON': 'COMMUN', 'UNCOMMON': 'PEU COMMUN', 'EPIC': 'ÉPIQUE', 'LEGENDARY': 'LÉGENDAIRE',
     'Common': 'Commun', 'Uncommon': 'Peu commun', 'Epic': 'Épique', 'Legendary': 'Légendaire',
     /* S1557 - 389 (2) : la serrure de The Cell */
-    'ROLL 1d20+STR (20 or more)': 'JET 1d20+FOR (20 ou plus)', 'DISCARD YOUR HAND': 'DÉFAUSSE TA MAIN', 'USE YOUR KEY': 'UTILISE TA CLÉ',
+    'ROLL 1d20+STR (20 or more)': 'JET 1d20+STR (20 ou plus)', 'DISCARD YOUR HAND': 'DÉFAUSSE TA MAIN', 'USE YOUR KEY': 'UTILISE TA CLÉ',
     'the Action is spent even on failure · success teleports you': 'l’Action est dépensée même en cas d’échec · la réussite te téléporte',
     'Roll': 'Jet', 'dmg': 'dégâts','FIRE': 'FEU', 'FROST': 'GIVRE', 'LIGHTNING': 'FOUDRE',
     'forced target:': 'cible imposée :', '(only candidate — no choice to make)': '(seul candidat — aucun choix à faire)',
@@ -1541,8 +1541,15 @@
     var k = s.toUpperCase();
     return Object.prototype.hasOwnProperty.call(EN_FR, k) ? EN_FR[k].toLowerCase() : s;
   }
-  function statsFR(s) { return s.replace(/\bSTR\b/g, 'FOR').replace(/\bWIS\b/g, 'SAG'); }
-  var STAT_FR = { STR: 'FOR', DEX: 'DEX', WIS: 'SAG', AGI: 'AGI' };
+  /* S1565 - note 400 (6), verdict Croze 28/10 : « on garde STR DEX WIS AGI MAX HP partout, toujours en anglais » --
+     les stats ne se traduisent plus (remplace FOR / SAG de 391 (1) c). */
+  function statsFR(s) { return s; }
+  var STAT_FR = { STR: 'STR', DEX: 'DEX', WIS: 'WIS', AGI: 'AGI' };
+  /* ... et HP / MAX HP au lieu de PV / PV max, y compris dans les phrases francaises du moteur, que le profil FR
+     affiche telles quelles : derniere passe de `traduisLaChaine` en FR. */
+  function hpEnAnglais(s) {
+    return s.replace(/\bPV (?:max(?:imum)?|MAX)\b/g, 'MAX HP').replace(/\bPV\b/g, 'HP');
+  }
   var ECOLE_MIN_FR = { arcane: 'arcane', chaos: 'chaos', fire: 'feu', frost: 'givre', lightning: 'foudre', poison: 'poison' };
   for (var kj in EN_FR_JEU) { if (Object.prototype.hasOwnProperty.call(EN_FR_JEU, kj)) EN_FR[kj] = EN_FR_JEU[kj]; }
   var GESTE_FR = { 'Move': 'Se déplacer', 'Explore (1d6)': 'Explorer (1d6)', 'Interaction :': 'Interaction :',
@@ -1807,7 +1814,8 @@
         if (remplacé !== source) t = remplacé;
       }
     }
-    return t === null ? nommé : t;
+    var rendu = t === null ? nommé : t;
+    return dico === EN_FR ? hpEnAnglais(rendu) : rendu;
   }
   var RE_SOUS_CHAINES = undefined;
   function sousChaines() {
