@@ -5789,6 +5789,22 @@
       /* ⛑ S1311 · IN-2 — un item porté se déséquipe au clic : la main le dit. */
       /* S1570 · note 400 ⑦ — le retrait est au clic DROIT : le curseur le dit */
       .creneau.cr-clic { cursor: context-menu; }
+      /* S1576 · note 412 ① — le clic principal retire de nouveau (ou ouvre UNEQUIP · USE) : la main le dit. */
+      .creneau.cr-clic[data-retirable] { cursor: pointer; }
+      /* S1577 · note 407 ② — l'emplacement mangé par les Devouring Moths : la petite boucle des mites, dans la case, jamais plein écran. */
+      .creneau.cr-mange { position: relative; overflow: hidden; }
+      .creneau.cr-mange > video.cr-mites { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+        pointer-events: none; z-index: 0; opacity: .9; }
+      .creneau.cr-mange > :not(video) { position: relative; z-index: 1; }
+      /* S1576 · note 412 ③ — l'arme de fiche : la formule d'abord, entière ; le nom tronqué après. */
+      .creneau-carte.arme-socle { display: flex; gap: 4px; align-items: baseline; min-width: 0; max-width: 100%; overflow: hidden; }
+      .creneau-carte.arme-socle > .arme-formule { flex: none; font-weight: 700; white-space: nowrap; }
+      .creneau-carte.arme-socle > .arme-nom { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .ll-menu-piece { position: fixed; z-index: 100000; display: flex; gap: 6px; padding: 6px;
+        background: #1b1712; border: 2px solid #c9a24a; border-radius: 6px; box-shadow: 0 6px 18px rgba(0,0,0,.6); }
+      .ll-menu-piece > button { min-height: 34px; min-width: 88px; padding: 6px 14px; font-family: inherit; font-weight: 700; font-size: 15px; line-height: 1;
+        letter-spacing: .06em; color: #f3e7c8; background: #3a2d1b; border: 1px solid #c9a24a; border-radius: 4px; cursor: pointer; }
+      .ll-menu-piece > button:hover, .ll-menu-piece > button:focus-visible { background: #6b5124; outline: none; }
       /* ⛑ S1309 · IN-1 — survol de l'inventaire : la carte seule, sans le texte qui la redit. */
       #zoom-coin > .cz-zoom.zc-carte-seule > .cz-cote { display: none; }
       #zoom-coin > .zc-ouvert {
@@ -14981,7 +14997,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CnNhsca9.js"></script>
+    <script type="module" crossorigin src="./assets/index-Dq6rcy3K.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
