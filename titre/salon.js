@@ -70,7 +70,8 @@
       'font:400 2cqh/1 "Alegreya",Georgia,serif;color:#cfc6b4;background:#060506;border-left:.4cqh solid #3a3631}' +
       '#salon li.moi{border-left-color:#a3231d}' +
       '#salon li b{min-width:7cqw;color:#efece3}' +
-      '#salon li .nom{flex:1;color:#efece3}' +
+      '#salon li .nom{flex:1;color:#efece3;display:flex;align-items:center;gap:.8cqw}' +
+      '#salon li img.tablier{height:3.6cqh;width:auto;flex:0 0 auto;filter:drop-shadow(0 0 .3cqh rgba(0,0,0,.9))}' +
       '#salon li .vide{flex:1;color:#6f685d}' +
       '#salon li .pret{color:#7fbf6a}' +
       '#salon li .attend{color:#d8a24a}' +
@@ -248,7 +249,22 @@
         } else {
           assis += 1;
           if (!x.ready) { tousPrets = false; }
-          li.appendChild(el('span', 'nom', x.pseudo + (etat.host && x.pseudo.toLowerCase() === etat.host.toLowerCase() ? ' (host)' : '')));
+          var nom = el('span', 'nom', x.pseudo + (etat.host && x.pseudo.toLowerCase() === etat.host.toLowerCase() ? ' (host)' : ''));
+          /* S1579 - mot de Croze (29/10) : « le tablier a cote du pseudo de chaque personne ». Le grade 1-33 est
+             celui du siege si la salle le publie (`seats[].grade`, demande M-S1579 au serveur) ; mon siege le lit
+             a mon profil, comme le HOME. Sans grade connu, pas de tablier (jamais un grade 1 suppose a un autre). */
+          var g = typeof x.grade === 'number' ? x.grade : null;
+          if (g === null && moi && moi.seat === x.seat) {
+            try { var pr = window.LLProfil && window.LLProfil.lis(); g = pr && typeof pr.grade === 'number' ? pr.grade : 1; } catch (e) { g = null; }
+          }
+          if (g !== null && g >= 1 && g <= 33) {
+            var tab = document.createElement('img'); tab.className = 'tablier'; tab.alt = 'GRADE ' + Math.round(g);
+            tab.title = 'GRADE ' + Math.round(g);
+            tab.src = '/art/grades/tablier_' + String(Math.round(g)).padStart(2, '0') + '.webp';
+            tab.onerror = function () { this.remove(); };
+            nom.insertBefore(tab, nom.firstChild);
+          }
+          li.appendChild(nom);
           li.appendChild(el('span', x.connected ? (x.ready ? 'pret' : 'attend') : 'horsligne',
             x.connected ? (x.ready ? 'ready' : 'not ready') : 'away'));
         }
