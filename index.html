@@ -14185,6 +14185,26 @@
       }
       .nouvelle-table .noc-raison { font-family: var(--mono); font-size: calc(12px * var(--lisible, 1)); color: var(--rouge-vif); }
       .nouvelle-table .ntt-cb2-inv { flex: 0 0 auto; }
+      /*
+       * S1571 · Croze (29/10) : « l'écran de duel n'est pas clean niveau gear ». Mesuré au Duel Final (1920 × 1080,
+       * `?etat=avant-mort&siege=Joueur 2`) : la grille entière des 9 créneaux de 164 × 232 sous chaque fiche — 7
+       * « LIBRE » sur 9 chez le Golmon — et l'inventaire DÉBORDAIT du cadre (bas du cadre 1 006 px, inventaires
+       * jusqu'à 1 247 et 1 598 px : coupé). Dans l'arène : les pièces PORTÉES seules, en vignettes sur une rangée
+       * (le zoom au survol reste), sans les créneaux vides ni la note de compte.
+       */
+      .bj-inv.ntt-cb2-inv .corps-libre { display: flex; flex-wrap: wrap; gap: 6px; }
+      .bj-inv.ntt-cb2-inv .creneau.libre,
+      .bj-inv.ntt-cb2-inv .creneau-note { display: none; }
+      .bj-inv.ntt-cb2-inv .creneau.porte { width: 64px; height: auto; min-height: 0; flex: 0 0 64px;
+        flex-direction: column; align-items: center; gap: 2px; padding: 0; }
+      .bj-inv.ntt-cb2-inv .creneau.porte .creneau-nom { display: none; }
+      .bj-inv.ntt-cb2-inv .creneau.porte .creneau-carte { width: 64px; }
+      .bj-inv.ntt-cb2-inv .creneau.porte .cz-vignette { width: 64px; height: auto; display: block; }
+      /* l'image en double (`inv-art`) et l'effet écrit sortent : l'effet se lit dans le zoom, au survol */
+      .bj-inv.ntt-cb2-inv .creneau.porte .inv-art,
+      .bj-inv.ntt-cb2-inv .creneau.porte .cr-effet { display: none; }
+      .bj-inv.ntt-cb2-inv .creneau.porte .cr-nom { font-size: 11px; line-height: 1.15; text-align: center;
+        max-height: 2.3em; overflow: hidden; }
       /* ⛑ S1331 · FG-1 — rien à faire : la fiche à 45 %, désaturée ; à faire :
          liseré clair au repos sur ce qui se clique, le reste assombri (≈ 60 %). */
       .nouvelle-table .ntt-cb2-fiche .fc-boite { transition: opacity .2s ease, filter .2s ease; }
@@ -14921,7 +14941,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-QDPeuFT6.js"></script>
+    <script type="module" crossorigin src="./assets/index-D6IvC0Rn.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
