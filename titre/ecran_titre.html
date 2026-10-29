@@ -188,10 +188,20 @@
   .hud .rank img.tablier{height:3.6cqh;width:auto;vertical-align:middle;filter:drop-shadow(0 0 .3cqh rgba(0,0,0,.9))}
   .hud .rank.a-tablier svg.embleme{display:none}
   /* S1565 - note 399 (1), mot de Croze 29/10 « barre au home aussi » : PETITE, a cote du tablier (S1561 etait trop grosse) */
-  .hud .rank .rank-gp{display:flex;flex-direction:column;gap:.35cqh;width:8.5cqw;font:600 max(14px, 1.15cqh)/1 "Alegreya Sans",system-ui,sans-serif;letter-spacing:.04em}
-  .hud .rank .rank-gp-t{display:flex;justify-content:space-between;gap:.5cqw;color:var(--bone);white-space:nowrap;opacity:.85}
-  .hud .rank .rank-gp-b{display:block;height:.55cqh;border-radius:.3cqh;background:rgba(255,255,255,.14);overflow:hidden}
-  .hud .rank .rank-gp-b i{display:block;height:100%;min-width:2px;background:linear-gradient(90deg,#c9a227,#f0c44c)}
+  /* S1578 - note 413 (2) : la petite fenetre du grade, au clic sur le tablier */
+  .gradepop{position:fixed;z-index:60;width:230px;padding:12px 14px;border:1px solid rgba(201,162,39,.55);border-radius:6px;
+    background:rgba(12,10,8,.96);box-shadow:0 8px 28px rgba(0,0,0,.75);color:var(--bone);font:600 15px/1.25 "Alegreya Sans",system-ui,sans-serif;letter-spacing:.03em}
+  .gradepop .gp-tete{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .gradepop .gp-tab{height:56px;width:auto;filter:drop-shadow(0 0 4px rgba(0,0,0,.9))}
+  .gradepop .gp-num{font-size:20px;letter-spacing:.08em}
+  .gradepop .gp-barre{height:8px;border-radius:4px;background:rgba(255,255,255,.14);overflow:hidden}
+  .gradepop .gp-barre i{display:block;height:100%;min-width:2px;background:linear-gradient(90deg,#c9a227,#f0c44c)}
+  .gradepop .gp-n{margin-top:6px;opacity:.9}
+  .gradepop .gp-suite{display:flex;align-items:center;justify-content:space-between;margin-top:8px;color:var(--dust)}
+  .gradepop .gp-tab-petit{height:34px;width:auto;opacity:.85}
+  .gradepop .gp-tout{display:block;width:100%;margin-top:12px;padding:7px 0;border:1px solid rgba(239,236,227,.35);border-radius:4px;
+    background:none;color:var(--bone);font:600 14px/1 "Alegreya Sans",system-ui,sans-serif;letter-spacing:.1em;cursor:pointer}
+  .gradepop .gp-tout:hover{border-color:#f0c44c;color:#f0c44c}
   .door.hit h3{color:var(--blood);animation:arcade .1s linear 3}
 
   .foot{position:absolute;left:0;right:0;bottom:2.4%;z-index:6;display:flex;
@@ -838,8 +848,8 @@
     text-transform:uppercase;color:var(--dust)}
   .hud .hbar{width:1px;height:2.2cqh;background:#2a2a31}
   .hud .hud-logout{pointer-events:auto;cursor:pointer;background:transparent;color:var(--dust);
-    border:1px solid rgba(255,255,255,.22);font:400 max(14px, 1.25cqh)/1 "Alegreya",Georgia,serif;letter-spacing:.18em;
-    padding:.45cqh .5cqw}
+    border:0;padding:.3cqh;display:inline-flex;align-items:center;justify-content:center}
+  .hud .hud-logout svg{width:max(18px, 2.3cqh);height:max(18px, 2.3cqh);display:block}
   .hud .hud-logout:hover{color:var(--bone);border-color:var(--bone)}
   .hud .rank{display:flex;align-items:center;gap:.5cqw;font-size:max(14px, 2.2cqh);color:var(--bone)}
   .hud .rank svg{width:1.9cqh;height:1.9cqh;flex:0 0 auto}
@@ -1231,7 +1241,10 @@
     <span class="who" id="who"></span>
     <!-- S1472 - note 360 (11) : LOG OUT / SWITCH PROFILE, sur le HOME a cote du pseudo -->
     <button type="button" class="hud-logout" id="hud-logout" title="LOG OUT / SWITCH PROFILE"
-      onclick="if(window.LLCompte&&window.LLCompte.changeDeProfil)window.LLCompte.changeDeProfil()">LOG OUT</button>
+      aria-label="LOG OUT / SWITCH PROFILE"
+      onclick="if(window.LLCompte&&window.LLCompte.changeDeProfil)window.LLCompte.changeDeProfil()"><!-- S1578 - mot de Croze (29/10) : « vire le se deconnecter, une petite icone a la place » - la porte et sa fleche, le libelle au survol -->
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 4h4.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H14"/><path d="M9.5 8 5.5 12l4 4"/><path d="M5.5 12H15"/></svg></button>
     <span class="hbar"></span>
     <span class="gold" id="goldwrap"><svg viewBox="0 0 24 24" aria-hidden="true">
       <!-- note 138 (1), verbatim : *« la dent doit être sans la blood drop »*.
@@ -2696,9 +2709,42 @@ document.getElementById('fr').textContent='Dive';
 ['who','rank'].forEach(function(id){
   const e=document.getElementById(id); if(!e) return;
   const cible=id==='rank' ? (e.parentElement||e) : e;
-  cible.style.cursor='pointer'; cible.title=id==='who' ? 'your profile' : 'your rank and all your stats';
-  cible.addEventListener('click',function(){ go('profil'); });
+  cible.style.cursor='pointer'; cible.title=id==='who' ? 'your profile' : 'your grade';
+  /* S1578 - note 413 (2) : le tablier ouvre SA petite fenetre (grade, barre de GP, prochain tablier) ;
+     le pseudo ouvre toujours le profil entier. */
+  cible.addEventListener('click',function(ev){ if(id==='rank'){ ev.stopPropagation(); fenetreDuGrade(cible); } else go('profil'); });
 });
+/* S1578 - note 413 (2) : la petite fenetre du grade, collee sous le tablier. Tout se LIT au profil
+   (grade, gp, gp_bas, gp_haut poses par le jeu depuis grades.json) - aucune regle ici. La recompense du
+   prochain grade (410 (1)) s'ecrira quand grades.json portera `recompenses` : absente aujourd'hui. */
+function fenetreDuGrade(ancre){
+  let f=document.getElementById('gradepop');
+  if(f!==null){ f.remove(); return; }
+  let p=null; try{ p=window.LLProfil.lis(); }catch(e){ p=null; }
+  const g=p!==null&&typeof p.grade==='number'&&p.grade>=1&&p.grade<=33?Math.round(p.grade):1;
+  const gp=p!==null&&typeof p.gp==='number'?p.gp:0;
+  const bas=p!==null&&typeof p.gp_bas==='number'?p.gp_bas:null, haut=p!==null&&typeof p.gp_haut==='number'?p.gp_haut:null;
+  const mk=(t,c,x)=>{ const n=document.createElement(t); if(c) n.className=c; if(x!=null) n.textContent=x; return n; };
+  const img=(n,c)=>{ const i=mk('img',c); i.alt=''; i.src='/art/grades/tablier_'+String(n).padStart(2,'0')+'.webp'; i.onerror=()=>i.remove(); return i; };
+  f=mk('div','gradepop'); f.id='gradepop';
+  const tete=mk('div','gp-tete'); tete.appendChild(img(g,'gp-tab')); tete.appendChild(mk('div','gp-num','GRADE '+g)); f.appendChild(tete);
+  if(bas!==null&&haut!==null&&haut>bas){
+    const b=mk('div','gp-barre'); const pl=mk('i'); pl.style.width=Math.max(0,Math.min(100,(gp-bas)/(haut-bas)*100)).toFixed(1)+'%'; b.appendChild(pl); f.appendChild(b);
+    f.appendChild(mk('div','gp-n',fmt(gp)+' / '+fmt(haut)+' GP'));
+    const s=mk('div','gp-suite'); s.appendChild(mk('span','gp-vers','Next: GRADE '+(g+1))); s.appendChild(img(g+1,'gp-tab-petit')); f.appendChild(s);
+  } else {
+    f.appendChild(mk('div','gp-n',fmt(gp)+' GP'+(haut===null&&bas!==null?' — top grade':' — the bar appears after your next game')));
+  }
+  const tout=mk('button','gp-tout','ALL YOUR STATS'); tout.type='button';
+  tout.addEventListener('click',()=>{ f.remove(); go('profil'); }); f.appendChild(tout);
+  document.body.appendChild(f);
+  const r=ancre.getBoundingClientRect(), L=f.offsetWidth, H=f.offsetHeight;
+  f.style.left=Math.max(4,Math.min(innerWidth-L-4,r.left))+'px';
+  f.style.top=(r.bottom+6+H>innerHeight-4?Math.max(4,r.top-6-H):r.bottom+6)+'px';
+  const ferme=(ev)=>{ if(ev.type==='keydown'&&ev.key!=='Escape') return; if(ev.type==='pointerdown'&&(f.contains(ev.target)||ancre.contains(ev.target))) return;
+    f.remove(); document.removeEventListener('pointerdown',ferme,true); document.removeEventListener('keydown',ferme,true); };
+  document.addEventListener('pointerdown',ferme,true); document.addEventListener('keydown',ferme,true);
+}
 /* S1382 · B-T9 (note 213) : le commit qui tourne, en bas, petit — servi par vite.config.ts (versionServie). */
 fetch('/@vite/client',{method:'HEAD',cache:'no-store'}).then(function(r){if(r.ok){window.__llDev=true;if(typeof tab!=='undefined'&&tab==='tick'&&typeof fillGrid==='function')fillGrid('tick');}}).catch(function(){});
 fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(v){if(v&&v.sha){document.getElementById('version').textContent='ecran '+v.sha+(v.utc?' · '+v.utc:(v.date?' · '+v.date:''));}}).catch(function(){});
@@ -3556,23 +3602,11 @@ function paintHUD(flash){
       w.insertBefore(img,w.firstChild); }
     if(img.getAttribute('src')!==src) img.setAttribute('src',src);
     w.dataset.grade=String(g);
-    w.title='Grade '+String(g)+' — click for all your stats';
-    /* S1565 - note 399 (1), mot de Croze (29/10) : « barre au home aussi ». Petite : « 140 / 300 GP » et la jauge
-       sous le texte ; le detail reste dans PROFILE (clic). Seuils poses au profil par le jeu (grades.json) : lus. */
-    let gpb=w.querySelector('.rank-gp'); if(gpb!==null) gpb.remove();
-    const gp=p!==null&&typeof p.gp==='number'?p.gp:0;
-    const bas=p!==null&&typeof p.gp_bas==='number'?p.gp_bas:null, haut=p!==null&&typeof p.gp_haut==='number'?p.gp_haut:null;
-    if(bas!==null&&haut!==null&&haut>bas){
-      gpb=document.createElement('span'); gpb.className='rank-gp';
-      const t=document.createElement('span'); t.className='rank-gp-t';
-      const a=document.createElement('span'); a.textContent='GRADE '+String(g);
-      const z=document.createElement('span'); z.textContent=fmt(gp)+' / '+fmt(haut)+' GP';
-      t.appendChild(a); t.appendChild(z); gpb.appendChild(t);
-      const b=document.createElement('span'); b.className='rank-gp-b';
-      const pl=document.createElement('i'); pl.style.width=Math.max(0,Math.min(100,(gp-bas)/(haut-bas)*100)).toFixed(1)+'%';
-      b.appendChild(pl); gpb.appendChild(b); w.appendChild(gpb);
-      w.title='Grade '+String(g)+' · '+fmt(gp)+' / '+fmt(haut)+' GP → GRADE '+String(g+1)+' — click for all your stats';
-    } })();
+    w.title='Grade '+String(g)+' — click';
+    /* S1578 - note 413 (2), mot de Croze (29/10) : « pas de "grade 1" avec la barre au HOME - uniquement le
+       tablier ; le reste, c'est quand on clique ». La barre de S1565 quitte le HUD : elle vit dans la petite
+       fenetre du clic (fenetreDuGrade). */
+    const gpb=w.querySelector('.rank-gp'); if(gpb!==null) gpb.remove(); })();
   document.getElementById('gold').textContent=fmt(PROFILE.gold);
   document.getElementById('sang').textContent=fmt(PROFILE.sang);
   if(flash){const g=document.getElementById('goldwrap');

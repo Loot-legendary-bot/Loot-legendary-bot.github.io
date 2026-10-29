@@ -10,6 +10,7 @@
 ## 28 Oct 2026
 - **23:43** — No die-card question on a flee roll. Caltrops cancels a flee in PvP.
 - **21:39** — Onion: crush it at any moment of a trade to start a fight with First Strike.
-- **20:38** — Mirror of Reversal and Astragor Poo redirect potions, delayed effects (Bandages) and self cards. Confused Parrot copies Bandages.
+- **20:38** — Mirror of Reversal and Astragor Poo redirect potions, delayed effects (Bandages) and self cards.
+- **21:00** — Confused Parrot copies Bandages (the copy heals at the end of the player's turn too).
 - **17:00** — Pavise works (immune to melee and ranged until your first Skill). Casino: choose which die a card changes. HI-SCORE quests chain. Smarter bots.
 - **12:03** — Tutorial playable end to end. New dice skin: Silver Hallmark, with the tongue on the 1. All abilities translated to French.
