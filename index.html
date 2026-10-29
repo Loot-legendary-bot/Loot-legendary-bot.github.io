@@ -2663,6 +2663,11 @@
       .de-offert { display: grid; justify-items: center; align-content: center;
                    gap: 8px; padding: 12px 16px; }
       .de-offert .die { width: 84px; height: 84px; font-size: 48px; }
+      /* S1572 · note 399 ⑦ — « les deux dés s'allument » : chaque dé offert luit, en boucle, jusqu'au clic */
+      .de-offert { border: 2px solid #f0c44c; border-radius: 6px; animation: de-offert-luit 1.2s ease-in-out infinite alternate; cursor: pointer; }
+      .de-offert:hover { animation: none; box-shadow: 0 0 22px rgba(240,196,76,.95); }
+      @keyframes de-offert-luit { from { box-shadow: 0 0 4px rgba(240,196,76,.35); } to { box-shadow: 0 0 18px rgba(240,196,76,.85); } }
+      @media (prefers-reduced-motion: reduce) { .de-offert { animation: none; box-shadow: 0 0 12px rgba(240,196,76,.7); } }
       .de-offert-dit { font-size: calc(13px * var(--lisible, 1)); line-height: 1.3; }
       /*
        * ═══ SIX TAILLES, SIX FORMES ═══════════════════════════════════════
@@ -12438,6 +12443,8 @@
         background: var(--ink-2);
         box-shadow: 0 0 0 1px var(--siege, var(--rule));
       }
+      /* S1572 · note 397 ⑤ — le portrait à l'huile (16:9) cadré sur le visage dans le médaillon rond */
+      .nouvelle-table .nt-portrait.nt-portrait-huile { object-position: 50% 32%; transform: scale(1.0); }
       /* Le siège dont le tour est ouvert porte un second anneau, STATIQUE. */
       .nouvelle-table .nt-presence.nt-actif .nt-rond::after {
         content: ""; position: absolute; inset: -5px;
@@ -14591,6 +14598,15 @@
       .nouvelle-table .bj-inv .cr-effet, .nouvelle-table .bj-inv .creneau-motif,
       .nouvelle-table .bj-inv .creneau-note, .nouvelle-table .bj-inv .noteDesCreneaux,
       .nouvelle-table .bj-inv .cz, .nouvelle-table .bj-inv .cr-retirer { display: none; }
+      /* S1573 · Croze 29/10 : « le gear qu'on peut pas unequip ». Cette règle cachait la prise UNEQUIP depuis que le
+         CLIC sur le créneau retirait la pièce (S1311) ; S1570 (note 400 ⑦) a ôté ce clic — il ne restait que le clic
+         droit, invisible. La prise revient sur MES pièces (elle n'est posée que sur ma fiche), au survol ou au focus
+         du créneau, dans son coin ; le clic droit reste. */
+      .nouvelle-table .bj-inv .creneau:hover > .creneau-carte .cr-retirer,
+      .nouvelle-table .bj-inv .creneau:focus-within > .creneau-carte .cr-retirer,
+      .nouvelle-table .bj-inv .creneau:hover .cr-retirer,
+      .nouvelle-table .bj-inv .creneau:focus-within .cr-retirer {
+        display: block; font-size: 11px; padding: 3px 7px; right: 2px; bottom: 2px; }
       .nouvelle-table .bj-inv .creneau-carte {
         font-size: calc(10px * var(--lisible, 1)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
       }
@@ -14941,7 +14957,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D6IvC0Rn.js"></script>
+    <script type="module" crossorigin src="./assets/index-nV2o1qeE.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

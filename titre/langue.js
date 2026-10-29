@@ -1424,7 +1424,7 @@
     /* S1568 - 400 (12) la porte HI-SCORE */
     'Alone · 20 turns': 'Seul · 20 tours', 'Alone against the dungeon for twenty turns. Score as much as you can.':
       'Seul contre le donjon pendant vingt tours. Marque le plus de points possible.',
-    'PASS': 'PASSER', 'USE IT NOW': 'L’UTILISER MAINTENANT', 'EQUIP IT NOW': 'L’ÉQUIPER MAINTENANT', 'KEEP IT IN HAND': 'LA GARDER EN MAIN',
+    'CHOOSE THE DIE': 'CHOISIS LE DÉ', 'PASS': 'PASSER', 'USE IT NOW': 'L’UTILISER MAINTENANT', 'EQUIP IT NOW': 'L’ÉQUIPER MAINTENANT', 'KEEP IT IN HAND': 'LA GARDER EN MAIN',
     'COMMON': 'COMMUN', 'UNCOMMON': 'PEU COMMUN', 'EPIC': 'ÉPIQUE', 'LEGENDARY': 'LÉGENDAIRE',
     'Common': 'Commun', 'Uncommon': 'Peu commun', 'Epic': 'Épique', 'Legendary': 'Légendaire',
     /* S1557 - 389 (2) : la serrure de The Cell */

@@ -1530,6 +1530,10 @@ const DICE=[
      verrouilles par leur palier du mur (Progress 4 et 5) - l exploit d abord, l achat ensuite. */
   ["Goose-chewed dice","plastique_machouille",0],
   ["Half-drunk potion dice","potion_jaune_rose",0],
+  /* S1572 - note 399 (3) : « au Vault je prends les des argent, et quand je fais 1, je vois la langue » - la peau
+     argent_poinconne (forge 894bdd8, fusion d3aa5ee) etait au registre et PAS au rayon. Nom : celui des notes de
+     patch (« Silver Hallmark »). Prix : aucun n'est ecrit - le defaut du rayon s'applique, a corriger d'un mot. */
+  ["Silver Hallmark dice","argent_poinconne",0],
   ["Bones dice","bones",1]];
 /* note 275 (4) - les peaux DE DEPART : a toi sans achat, sous leur propre titre. */
 const PEAUX_DE_DEPART=['bones'];
@@ -2697,7 +2701,7 @@ document.getElementById('fr').textContent='Dive';
 });
 /* S1382 · B-T9 (note 213) : le commit qui tourne, en bas, petit — servi par vite.config.ts (versionServie). */
 fetch('/@vite/client',{method:'HEAD',cache:'no-store'}).then(function(r){if(r.ok){window.__llDev=true;if(typeof tab!=='undefined'&&tab==='tick'&&typeof fillGrid==='function')fillGrid('tick');}}).catch(function(){});
-fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(v){if(v&&v.sha){document.getElementById('version').textContent='ecran '+v.sha+(v.date?' · '+v.date:'');}}).catch(function(){});
+fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(v){if(v&&v.sha){document.getElementById('version').textContent='ecran '+v.sha+(v.utc?' · '+v.utc:(v.date?' · '+v.date:''));}}).catch(function(){});
 /* S1570 - note 400 (8) : « je clique la version en bas, je lis ce qui a change ». La fenetre lit
    docs/PATCH_NOTES.md (ecrit par le CLASSEUR, le plus recent en haut), servi a /__patch_notes.md. */
 (function(){
