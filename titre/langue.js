@@ -1416,6 +1416,9 @@
     'OUT': 'SORTI', 'unplayable': 'injouable', 'portal taken': 'portail pris',
     /* S1566 - 400 (9) le tour interrompu ; 299 (1) le Sceau de Salomon */
     'YOUR TURN IS INTERRUPTED BY': 'TON TOUR EST INTERROMPU PAR', '— IT RESUMES AFTER THEIR ACTION': '— IL REPREND APRÈS SON ACTION',
+    /* S1568 - 400 (12) la porte HI-SCORE */
+    'Alone · 20 turns': 'Seul · 20 tours', 'Alone against the dungeon for twenty turns. Score as much as you can.':
+      'Seul contre le donjon pendant vingt tours. Marque le plus de points possible.',
     'PASS': 'PASSER', 'USE IT NOW': 'L’UTILISER MAINTENANT', 'EQUIP IT NOW': 'L’ÉQUIPER MAINTENANT', 'KEEP IT IN HAND': 'LA GARDER EN MAIN',
     'COMMON': 'COMMUN', 'UNCOMMON': 'PEU COMMUN', 'EPIC': 'ÉPIQUE', 'LEGENDARY': 'LÉGENDAIRE',
     'Common': 'Commun', 'Uncommon': 'Peu commun', 'Epic': 'Épique', 'Legendary': 'Légendaire',

@@ -2717,7 +2717,15 @@ const DOORS=[
   ["Against bots and/or players","Classic","Free-for-all against bots and/or players, 3 to 5 players, alone or with friends. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
   ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
   ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked','Bronze III'],
-  ["Not ranked","Experimental","2v2, 2v2v2 and a six-player free-for-all against bots. Being tested \u2014 no ranking.",11,()=>setTimeout(()=>{matchCtx='exp';go('match','exp');},300),'d-exp',null]];
+  ["Not ranked","Experimental","2v2, 2v2v2 and a six-player free-for-all against bots. Being tested \u2014 no ranking.",11,()=>setTimeout(()=>{matchCtx='exp';go('match','exp');},300),'d-exp',null],
+  /* S1568 - note 400 (12) : HI-SCORE n'avait aucune entree (moteur 1018). Un siege, vingt tours ; la graine est
+     tiree ici (\u00ab chaque tour est random \u00bb), le scenario est celui du moteur (main.ts, porte ?hiscore=). */
+  ["Alone \u00b7 20 turns","Hi-Score","Alone against the dungeon for twenty turns. Score as much as you can.",13,()=>setTimeout(()=>{
+    const q=new URLSearchParams(window.location.search);
+    q.delete('daily'); q.delete('seed'); q.delete('joueurs');
+    q.set('hiscore', String(Math.floor(Math.random()*2147483647)));
+    window.location.href='/?'+q.toString();
+  },300),'d-hiscore',null]];
 const doors=document.getElementById('doors');
 DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
   const d=document.createElement('div');
