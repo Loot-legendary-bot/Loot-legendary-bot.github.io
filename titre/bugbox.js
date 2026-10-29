@@ -126,12 +126,12 @@
     document.body.appendChild(b);
     if (window.location.pathname.indexOf('/titre/') !== 0) document.body.classList.add('bugbox-jeu');
     var st = document.createElement('style');
-    st.textContent = '.bugbox-porte{position:fixed;right:14px;bottom:44px;z-index:9000;padding:3px 9px;font:700 12px/1.2 system-ui,sans-serif;'
+    st.textContent = '.bugbox-porte{position:fixed;right:14px;bottom:44px;z-index:9000;padding:3px 9px;font:700 14px/1.2 system-ui,sans-serif;'
       + 'letter-spacing:.12em;color:#efe6cf;background:rgba(20,16,12,.85);border:1px solid #8c5a54;border-radius:3px;cursor:pointer;opacity:.75}'
       + '.bugbox-porte:hover{opacity:1;border-color:#c9524a}'
       /* en partie, le coin bas-droit porte DONJON / JOURNAL / SUIVRE / OPTIONS : BUG se range dessous, dans la
          bande du bas, a cote de « 📋 rapport » (mesure : aucun chevauchement a 1920 x 1080) */
-      + 'body.bugbox-jeu .bugbox-porte{bottom:2px;right:8px;padding:1px 8px;font-size:11px}'
+      + 'body.bugbox-jeu .bugbox-porte{bottom:2px;right:8px;padding:1px 8px;font-size:14px}'
       + '.bugbox-voile{position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}'
       + '.bugbox-boite{width:min(520px,92vw);background:#16120e;border:2px solid #8c5a54;border-radius:4px;padding:16px 18px;color:#efe6cf;font:15px/1.4 system-ui,sans-serif}'
       + '.bugbox-titre{font-weight:800;letter-spacing:.14em;margin-bottom:10px}'
