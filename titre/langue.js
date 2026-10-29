@@ -1416,6 +1416,11 @@
     'OUT': 'SORTI', 'unplayable': 'injouable', 'portal taken': 'portail pris',
     /* S1566 - 400 (9) le tour interrompu ; 299 (1) le Sceau de Salomon */
     'YOUR TURN IS INTERRUPTED BY': 'TON TOUR EST INTERROMPU PAR', '— IT RESUMES AFTER THEIR ACTION': '— IL REPREND APRÈS SON ACTION',
+    /* S1569 - 399 (4) / 400 (13) la BUG BOX */
+    'REPORT A BUG': 'SIGNALER UN BUG', 'The game attaches the rest by itself: version, game, turn, log, screen.':
+      'Le jeu joint le reste tout seul : version, partie, tour, journal, écran.',
+    'Write one line first.': 'Écris d’abord une ligne.', 'Sending…': 'Envoi…', 'Sent, thank you.': 'Envoyé, merci.',
+    'No connection — kept here, it will be sent at the next launch.': 'Pas de connexion — gardé ici, il partira au prochain lancement.',
     /* S1568 - 400 (12) la porte HI-SCORE */
     'Alone · 20 turns': 'Seul · 20 tours', 'Alone against the dungeon for twenty turns. Score as much as you can.':
       'Seul contre le donjon pendant vingt tours. Marque le plus de points possible.',
