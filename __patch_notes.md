@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 30 Oct 2026
+- **21:46** — Character select opens with no portrait pre-framed: a card is framed only when you pick it.
+- **21:37** — Character select: WHO PICKS FIRST names everyone — BOT 1, BOT 2… for the bots, your grade apron, YOU and your name on your seat (no more “Player 3”).
 - **20:45** — Magic Leeches can only be played on a player who is in the fight (out of combat: "nobody is in combat"). A damage line with no type now takes the card's own type and school (Shock Eel deals AOE damage, LIGHTNING).
 - **20:39** — The dice box is now a dice tray: fixed size, green casino felt in a wooden rim, dice always the same size with no glow. What is rolled on top, the result below — for a chest, the rarities you drew (EPIC · UNCO · RARE…).
 - **20:20** — Clicking your Reaction card: it drops back into your hand at once (PLAYED…), dimmed, instead of staying raised and glowing until the move resolves; a refused Reaction drops back too, with its reason.
