@@ -12889,6 +12889,21 @@
       .boite-des .bd-tapis .bd-des:not(.triangle) .die { width: 56px; height: 56px; font-size: 28px; }
       .boite-des .bd-tapis .bd-des.triangle .die { width: 52px; height: 52px; }
       .boite-des .bd-tapis .bd-des.triangle { grid-template-columns: repeat(2, 52px); gap: 2px 12px; }
+      /* S1587 · note 435 ③ — les dés ×2, ÉPARS sur le tapis (place tirée par jet dans `posesSurLeTapis`), chacun avec
+         son OMBRE PORTÉE sur le feutre. L'ombre livrée (`die_shadow.png`, `.die::before`, z-index −1) passait SOUS le
+         tapis, invisible : elle est retirée ici, et l'ombre est portée par le groupe des dés (`drop-shadow` sur la forme
+         de chaque dé, toujours vers le bas-droite quel que soit l'angle du dé). Au repos, la bande de roulé et sa fenêtre sont RETIRÉES (pas masquées) : plus rien derrière le dé. */
+      .boite-des .bd-tapis { position: relative; }
+      .boite-des .bd-tapis .bd-des.bd-epars { position: absolute; inset: 6px; display: block; max-width: none;
+        container-type: size; }
+      .boite-des .bd-tapis .bd-des.bd-epars .die { --bd-t: calc(var(--bd-k, .5) * 100cqh);
+        position: absolute; margin: 0; z-index: 1; width: var(--bd-t); height: var(--bd-t); font-size: calc(var(--bd-t) * .5);
+        left: calc(var(--bd-x, .5) * (100cqw - var(--bd-t))); top: calc(var(--bd-y, .5) * (100cqh - var(--bd-t)));
+        transform: rotate(var(--bd-r, 0deg)); }
+      .boite-des .bd-tapis .bd-des.bd-epars { filter: drop-shadow(5px 9px 5px rgba(0, 0, 0, .7)); }
+      .boite-des .bd-tapis .bd-des.bd-epars .die.die-rendue::before { content: none; }
+      .boite-des:not(.bd-roule) .bd-tapis .bd-des.bd-epars .die-roule,
+      .boite-des:not(.bd-roule) .bd-tapis .bd-des.bd-epars .die-fenetre { display: none; }
       .boite-des .bd-resultat { flex: none; min-height: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
         column-gap: 4px; line-height: 1.15; text-align: center;
         font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: .04em; color: #efe6cf; }
@@ -15093,7 +15108,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D_vXJneX.js"></script>
+    <script type="module" crossorigin src="./assets/index-CXHGWk8Q.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

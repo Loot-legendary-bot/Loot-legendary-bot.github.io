@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 30 Oct 2026
+- **22:58** — Dice tray: the dice are bigger (one die about twice the old size), scattered at random on the felt, each casting a shadow; nothing pale left behind them. Gorma Juice played on an opposed roll during someone else's roll now waits its turn and adds +2 (it was ignored).
 - **21:46** — Character select opens with no portrait pre-framed: a card is framed only when you pick it.
 - **21:37** — Character select: WHO PICKS FIRST names everyone — BOT 1, BOT 2… for the bots, your grade apron, YOU and your name on your seat (no more “Player 3”).
 - **20:45** — Magic Leeches can only be played on a player who is in the fight (out of combat: "nobody is in combat"). A damage line with no type now takes the card's own type and school (Shock Eel deals AOE damage, LIGHTNING).
