@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 30 Oct 2026
+- **01:57** — When a player dies, their portrait plays its death animation (the one from character select) instead of just turning grey.
 - **01:32** — Paying a discard cost (Fire Camp, any "discard X"): clicking a card in your hand now SELECTS it, it never plays it — then CONFIRM DISCARD (n/N). Watching someone fight a mob, you see the combat log. Hover help sits above the zoomed card, not on it. The Wizard's school wheel no longer covers the stats. A countered card shows who played it and who countered it. Devouring Moths' loop plays 30 s, then stops. Quest labels back to their old size. Vampire Sword heals on a kill; Salmon Cloak's wearer can't be targeted by player effects; Ring of Hi-Five heals 2 HP.
 
 ## 29 Oct 2026

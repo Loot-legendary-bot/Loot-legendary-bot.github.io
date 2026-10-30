@@ -10724,6 +10724,16 @@
         aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 18%; border-radius: 10px;
         border: 3px solid #F2F2F2; box-shadow: 0 6px 28px rgba(0,0,0,.8); }
       .dicelayer.mort-vue .scene-mort-portrait { filter: grayscale(1) contrast(1.1); }
+      /* S1582 · note 414 ⑤ — la mort jouée : l'atlas du character select (8 × 6 images 16:9), une fois, puis la dernière. */
+      .scene-mort-anim { position: relative; overflow: hidden; margin: 0 auto 14px; width: clamp(260px, 36vh, 460px);
+        aspect-ratio: 16 / 9; border-radius: 10px; border: 3px solid #F2F2F2; box-shadow: 0 6px 28px rgba(0,0,0,.8); }
+      .scene-mort-anim > .ry { position: absolute; top: 0; left: 0; width: 100%; height: 600%;
+        animation: nt-sy-mort 1.4s steps(6, jump-none) .3s 1 both; }
+      .scene-mort-anim .rx { width: 800%; height: 100%; animation: nt-sx-mort calc(1.4s / 6) steps(8, jump-none) .3s 6 both; }
+      .scene-mort-anim img { width: 100%; height: 100%; object-fit: fill; display: block; }
+      @media (prefers-reduced-motion: reduce) {
+        .scene-mort-anim > .ry { animation: none; transform: translateY(-83.333%); }
+        .scene-mort-anim .rx { animation: none; transform: translateX(-87.5%); } }
       .nouvelle-table .nt-rond > .nt-portail { position: absolute; left: 50%; top: -14px; transform: translateX(-50%);
         width: 30px; height: 30px; z-index: 2; filter: drop-shadow(0 0 6px rgba(120,200,255,.9)); }
       /* Le titre rouge (`--rouge-vif`) posé sur la peinture SANG ne se lit pas
@@ -15045,7 +15055,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CQFcPXOf.js"></script>
+    <script type="module" crossorigin src="./assets/index-DV_Plh-U.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
