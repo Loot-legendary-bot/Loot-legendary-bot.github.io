@@ -127,8 +127,11 @@
     if (window.location.pathname.indexOf('/titre/') !== 0) document.body.classList.add('bugbox-jeu');
     var st = document.createElement('style');
     st.textContent = '.bugbox-porte{position:fixed;right:14px;bottom:44px;z-index:9000;padding:3px 9px;font:700 14px/1.2 system-ui,sans-serif;'
-      + 'letter-spacing:.12em;color:#efe6cf;background:rgba(20,16,12,.85);border:1px solid #8c5a54;border-radius:3px;cursor:pointer;opacity:.75}'
-      + '.bugbox-porte:hover{opacity:1;border-color:#c9524a}'
+      /* S1583 - note 420 : rouge sang PLEIN (l'aplat de la DA, `--rouge` #8B0D0D d'index.html), BUG blanc, opaque ;
+         au survol plus clair et bord blanc. Un seul composant : le HOME et la partie chargent ce fichier. */
+      + 'letter-spacing:.12em;color:#fff;background:#8B0D0D;border:1px solid #8B0D0D;border-radius:3px;cursor:pointer;opacity:1;'
+      + 'text-transform:uppercase;box-shadow:0 1px 4px rgba(0,0,0,.6)}'
+      + '.bugbox-porte:hover{background:#A81616;border-color:#fff}'
       /* en partie, le coin bas-droit porte DONJON / JOURNAL / SUIVRE / OPTIONS : BUG se range dessous, dans la
          bande du bas, a cote de « 📋 rapport » (mesure : aucun chevauchement a 1920 x 1080) */
       + 'body.bugbox-jeu .bugbox-porte{bottom:2px;right:8px;padding:1px 8px;font-size:14px}'

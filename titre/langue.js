@@ -248,6 +248,7 @@
     '⊘ déjà employée ce TOUR DE DONJON — elle revient à la fin du tour de donjon, pas à la fin de ton tour': '⊘ already used this DUNGEON TURN — it comes back at the end of the dungeon turn, not at the end of your turn',
     '⊘ changer d\'équipement appartient à son propre tour de combat': '⊘ changing Gear belongs to your own combat turn',
     'CE QU’IL FAIT': 'WHAT THEY DO',
+    'CE QU’IL A FAIT À SON DERNIER TOUR': 'WHAT THEY DID LAST TURN',
     'CE QU’IL PORTE': 'WHAT THEY WEAR',
     'PLUS DE COLLAPSE — le Duel Final n’a ni tour de donjon ni Upkeep': 'NO MORE COLLAPSE — the Final Duel has neither dungeon turn nor Upkeep',
     '⊘ un Skill se déclare sur son tour de COMBAT': '⊘ a Skill is declared on your COMBAT turn',
