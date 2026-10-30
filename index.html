@@ -1347,6 +1347,14 @@
         font-family: var(--mono); font-size: max(14px, calc(9px * var(--lisible, 1))); font-weight: 700;
         letter-spacing: .12em; color: #fff;
       }
+      /* S1581 · note 417 ① — Croze (capture, le Wizard) : « la roue et FIRE ×2 montent SUR la colonne AGI ». Mesuré
+         à 1600 × 900 : le radar (absolu, x 227 → 287) couvrait l'AGI (x 240). Il rentre dans le FLUX : sa propre ligne
+         sous les PV et les stats, calée à droite, l'école choisie écrite à côté — jamais sur une stat, quelle que soit
+         la largeur du nom d'école. */
+      .bj-stats .etoile.etoile-compacte { position: static; flex: 0 0 100%; width: auto; height: auto;
+        display: flex; flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px; }
+      .bj-stats .etoile.etoile-compacte svg { width: 56px; height: 56px; flex: 0 0 auto; }
+      .bj-stats .etoile.etoile-compacte .etoile-choix-court { position: static; order: -1; }
       /* S1450 · note 310 ⑩ — mes bulles : grosses, l'éclair de la signature ; une bulle dépensée éclate. */
       .bj-gestes .ep-bulles .boule { width: 30px; height: 30px; font-size: 17px; line-height: 28px; }
       .bj-gestes .ep-bulles .boules { gap: 10px; }
@@ -1372,6 +1380,9 @@
       .card.retenue { transform: translateY(-14px); box-shadow: 0 14px 26px rgba(0,0,0,.66);
                       border-color: var(--activable); }
       .card.retenue:hover:not(:disabled) { transform: translateY(-16px); }
+      /* S1581 · note 418 ① — sélectionnée pour une défausse : un contour franc ; hors des options du coût : éteinte. */
+      .card.retenue { outline: 3px solid var(--activable); outline-offset: 2px; }
+      .card.hors-du-choix { filter: grayscale(.85) brightness(.55); cursor: not-allowed; }
       .cz-retenue { color: var(--activable); font-weight: 800; letter-spacing: .04em; }
       .cz-a-retenir { color: var(--slate); }
       .card .woke { color: var(--ember); }
@@ -1543,6 +1554,12 @@
       .cz-bandeau .motif-lu { padding-top: 0; color: #E2A79E; }
       .cz-bandeau .motif-lu.neutre { color: #CFC8B8; }
       .cz-bandeau .prix { margin-top: 0; }
+      /* S1581 · note 418 ② — Croze : « VOUS POUVEZ — ON VOUS LE DEMANDERA… écrit PAR-DESSUS l'illustration et le texte
+         de la carte » (Listener Scarab en zoom). Quand la carte se lit (survol = zoom), la mention quitte le carton et
+         se pose JUSTE AU-DESSUS (sous la carte, c'est le bas de l'écran) : la carte reste lisible en entier. */
+      .handslot:hover .cz-bandeau, .handslot:focus-within .cz-bandeau {
+        top: auto; bottom: calc(100% + 4px); padding: 4px 8px;
+        background: rgba(14,12,9,.94); border: 1px solid rgba(207,200,184,.35); border-radius: 4px; }
 
       /*
        * ─── LE TAMPON DE REFUS (§3) ────────────────────────────────────────
@@ -2428,6 +2445,12 @@
       .pile-role { font-family: var(--display); font-size: calc(14px * var(--lisible, 1));
                    letter-spacing: .22em; text-transform: uppercase;
                    color: var(--rouge-vif); margin-top: 10px; }
+      /* S1581 · note 414 ④ — qui lance, qui contre : le portrait rond et le nom sous chaque carte. */
+      .pile-qui { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+      .pile-qui .scene-portrait { width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
+                                  border: 2px solid var(--rouge-vif); }
+      .pile-qui-nom { font-family: var(--display); font-size: calc(16px * var(--lisible, 1)); font-weight: 800;
+                      letter-spacing: .12em; color: var(--stock); }
       .pile-signe { font-family: var(--display); font-size: 52px;
                     align-self: center; color: var(--rouge-vif); }
       /* (6) note 140 - LA PROMESSE QUI ARRIVE, verbatim Croze : *« la bandage
@@ -12070,7 +12093,7 @@
             background: rgba(0, 0, 0, .72); padding: .5em .9em;
             transform: skewX(-10deg); transition: border-color .12s; }
       .qt > b { display: block; transform: skewX(10deg); font-family: var(--display);
-                font-weight: 800; font-size: 14px /* S1574 · 394 ① — était clamp(7px, …, 11px) */;
+                font-weight: 800; font-size: clamp(7px, calc(.72 * var(--uvw)), 11px) /* S1581 · 414 ③ — Croze : « remets-les comme avant niveau typo » (S1574 avait posé 14px) */;
                 letter-spacing: .14em; text-transform: uppercase;
                 color: var(--stock-dim); white-space: nowrap; }
       .qt:hover, .qt:focus-within { border-color: var(--stock); z-index: 12; }
@@ -12162,7 +12185,7 @@
        */
       .qt-etat { display: block; transform: skewX(10deg); margin-top: .25em;
                  font-family: var(--display); font-weight: 800;
-                 font-size: 14px /* S1574 · 394 ① — était clamp(6px, …, 9px) */; letter-spacing: .18em;
+                 font-size: clamp(6px, calc(.58 * var(--uvw)), 9px) /* S1581 · 414 ③ — la taille d'avant S1574 */; letter-spacing: .18em;
                  color: var(--stock-dim); }
       /*
        * ⛑ **CE COMMENTAIRE DISAIT « LE VERT JOUABLE », ET C'ÉTAIT FAUX** —
@@ -15022,7 +15045,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BDWhIW-G.js"></script>
+    <script type="module" crossorigin src="./assets/index-CQFcPXOf.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
