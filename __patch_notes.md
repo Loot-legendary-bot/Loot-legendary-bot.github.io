@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 30 Oct 2026
+- **20:45** — Magic Leeches can only be played on a player who is in the fight (out of combat: "nobody is in combat"). A damage line with no type now takes the card's own type and school (Shock Eel deals AOE damage, LIGHTNING).
+- **20:39** — The dice box is now a dice tray: fixed size, green casino felt in a wooden rim, dice always the same size with no glow. What is rolled on top, the result below — for a chest, the rarities you drew (EPIC · UNCO · RARE…).
 - **20:20** — Clicking your Reaction card: it drops back into your hand at once (PLAYED…), dimmed, instead of staying raised and glowing until the move resolves; a refused Reaction drops back too, with its reason.
 - **19:53** — HI-SCORE opens on the arcade board first: the best runs (all time, this week, today), your line in red, then PRESS START to play. Your HI-SCORE runs now reach the board when you are logged in.
 - **19:27** — New LICK FLOOR logo on the HOME. Watching another player while the table waits for them: their page says what they must do (THEY MUST — pick their die…). A fight that opens during the Upkeep no longer eats your first turn. Gorma Juice on an opposed roll adds to the total, never to the die face.

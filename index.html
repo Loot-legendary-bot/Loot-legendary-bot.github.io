@@ -12870,6 +12870,34 @@
       .boite-des .bd-carte[data-rar="epic"] { border-color: #b23cff; box-shadow: 0 0 12px rgba(178, 60, 255, .7); }
       .boite-des .bd-carte[data-rar="legendary"] { border-color: #ff9a1a; box-shadow: 0 0 14px rgba(255, 154, 26, .8); }
       .boite-des .bd-carte-nom { font-size: 14px; color: #efe6cf; }
+      /* S1585 · note 433 ① ② — LE BAC À DÉS : cadre de taille FIXE (toute la colonne, 244 px de haut : la place entre la tuile et la plaque FIN DU TOUR, fixe à 176 px du bas), fond OPAQUE,
+         bord os épais ; dedans le tapis vert feutré de casino dans un liseré bois (CSS en attendant l'asset du CLASSEUR,
+         `ASSETS\dicebox\`) ; les dés à taille constante, SANS halo ni ombre lumineuse ; WHAT en haut, RÉSULTAT en bas. */
+      .boite-des { --bd-fond: #14100c; --bd-bord: #e9e1cf; --bd-tapis: #1f4d2e; --bd-bois: #6b4423;
+        box-sizing: border-box; width: 100%; height: 244px; flex: none; justify-content: space-between;
+        border-width: 5px; border-radius: 10px; padding: 6px 8px; gap: 4px; overflow: hidden; }
+      .boite-des .bd-tapis { flex: 1 1 auto; min-height: 0; width: 100%; box-sizing: border-box; display: flex;
+        align-items: center; justify-content: center; border-radius: 8px; border: 7px solid var(--bd-bois);
+        background: radial-gradient(ellipse at 50% 40%, #2a6640 0%, var(--bd-tapis) 60%, #163a22 100%);
+        box-shadow: inset 0 0 18px rgba(0, 0, 0, .65); }
+      .boite-des .bd-tapis .bd-des { flex-wrap: wrap; max-width: 100%; }
+      .boite-des .bd-tapis .bd-des .die, .boite-des .bd-tapis .bd-des .die * { filter: none !important; text-shadow: none; }
+      .boite-des .bd-tapis .bd-des:not(.triangle) { gap: 6px; }
+      .boite-des .bd-tapis .bd-des:not(.triangle) .die { width: 56px; height: 56px; font-size: 28px; }
+      .boite-des .bd-tapis .bd-des.triangle .die { width: 52px; height: 52px; }
+      .boite-des .bd-tapis .bd-des.triangle { grid-template-columns: repeat(2, 52px); gap: 2px 12px; }
+      .boite-des .bd-resultat { flex: none; min-height: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+        column-gap: 4px; line-height: 1.15; text-align: center;
+        font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: .04em; color: #efe6cf; }
+      .boite-des .bd-resultat > span { white-space: nowrap; }
+      .boite-des .bd-cause { flex: none; }
+      .boite-des .bd-resultat .bd-total { font-size: 22px; }
+      .boite-des .bd-rar[data-rar="common"] { color: #c9ced3; }
+      .boite-des .bd-rar[data-rar="uncommon"] { color: #27d35a; }
+      .boite-des .bd-rar[data-rar="rare"] { color: #1f8bff; }
+      .boite-des .bd-rar[data-rar="epic"] { color: #b23cff; }
+      .boite-des .bd-rar[data-rar="legendary"] { color: #ff9a1a; }
+      .boite-des .bd-sep { color: #8a7d66; }
       /* S1566 · note 400 ④ — le crâne sur le portrait d'un mort de la tuile */
       .nouvelle-table .tv2-seuil-bloc { position: relative; }
       .nouvelle-table .tv2-seuil-crane { position: absolute; left: 50%; top: 28%; transform: translate(-50%, -50%);
@@ -15062,7 +15090,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-YC7vjnNQ.js"></script>
+    <script type="module" crossorigin src="./assets/index-DA6mslQD.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
@@ -15074,6 +15102,6 @@
     -->
     <div id="composition">
       <div id="app"></div>
-    </div>
+    </div>
   </body>
 </html>

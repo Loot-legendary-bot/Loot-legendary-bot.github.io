@@ -1460,7 +1460,7 @@
     '⚠ YOUR INVENTORY IS TARGETED': '⚠ TON INVENTAIRE EST CIBLÉ', '⚠ YOUR TILE IS TARGETED': '⚠ TA TUILE EST CIBLÉE',
     'You have time to play reactions — lit cards, Signature, gear — or/then press OK CONTINUE':
       'Tu as le temps de jouer des réactions — cartes allumées, Signature, équipement — puis OK · CONTINUER',
-    'REACTION': 'RÉACTION', 'REACT NOW': 'RÉAGIS MAINTENANT', 'NOT NOW': 'PAS MAINTENANT', 'PLAYED…': 'JOUÉE…',
+    'REACTION': 'RÉACTION', 'REACT NOW': 'RÉAGIS MAINTENANT', 'NOT NOW': 'PAS MAINTENANT', 'PLAYED…': 'JOUÉE…', 'UNCO': 'PEU COM.',
     'OUT': 'SORTI', 'unplayable': 'injouable', 'portal taken': 'portail pris',
     /* S1566 - 400 (9) le tour interrompu ; 299 (1) le Sceau de Salomon */
     'YOUR TURN IS INTERRUPTED BY': 'TON TOUR EST INTERROMPU PAR', '— IT RESUMES AFTER THEIR ACTION': '— IL REPREND APRÈS SON ACTION',
