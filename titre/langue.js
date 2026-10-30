@@ -1129,6 +1129,18 @@
      Dungeon Pro League…) restent : ce sont des titres de Croze, pas des mots. */
   var EN_FR = {
     'Back': 'Retour',
+    /* S1584 - note 426 : la borne HI-SCORE (borne.js). */
+    'All time': 'Depuis toujours',
+    'This week': 'Cette semaine',
+    'ALONE · 20 TURNS · THE BEST RUNS': 'SEUL · 20 TOURS · LES MEILLEURES PARTIES',
+    'RANK': 'RANG',
+    'NAME': 'NOM',
+    'CHARACTER': 'PERSONNAGE',
+    'PRESS START': 'APPUIE SUR START',
+    'Loading the scores…': 'Chargement des scores…',
+    'Log in (HOME → your name) to see the scores. You can still play: PRESS START.': 'Connecte-toi (HOME → ton nom) pour voir les scores. Tu peux jouer quand même : APPUIE SUR START.',
+    'The server does not answer. You can still play: PRESS START.': 'Le serveur ne répond pas. Tu peux jouer quand même : APPUIE SUR START.',
+    'No score yet. Be the first: PRESS START.': 'Aucun score pour l’instant. Sois le premier : APPUIE SUR START.',
     /* S1409 - note 226 (3) : le HOME passe en anglais ; en FRANCAIS, ces
        libelles retrouvent leurs mots d'avant (« Les Vivres » est le nom de Croze). */
     'Provisions': 'Les Vivres',
