@@ -14957,6 +14957,8 @@
       @media (prefers-reduced-motion: reduce) {
         .handslot-rea:has(.carte-rea.prete), .carte-rea.prete .cr-symbole, .handslot-rea:has(.carte-rea.prete)::after { animation: none; } }
       .carte-rea .cs-etat.on { color: #8EC9FF; }
+      /* S1585 · note 432 ① — cliquée (ou refusée) : elle redescend dans la main, éteinte, sans halo ni éclat. */
+      .card.carte-sig.carte-rea.redescendue { transform: none; filter: saturate(.55) brightness(.8); }
       /* 377 ② — l'œil de la Réaction posé sur sa bande du carton, au coin haut-droit de la bande */
       .fcz-oeil { position: absolute; transform: translate(-50%, -75%); z-index: 6; width: 24px; height: 24px;
         padding: 0; justify-content: center; border-radius: 50%; }
@@ -15060,7 +15062,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DR7Xt41W.js"></script>
+    <script type="module" crossorigin src="./assets/index-YC7vjnNQ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
