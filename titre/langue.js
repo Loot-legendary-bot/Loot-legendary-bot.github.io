@@ -1764,7 +1764,11 @@
     [/^WHO PICKS FIRST — 1d(\d+)$/, 'QUI CHOISIT EN PREMIER — 1d$1'],
     /* S1596 - note 442 (4) : la carte que le Miroir / une contre vise */
     [/^↪ REDIRECTS (.+) \((.+)\)$/, function (m, c, q) { return '↪ RENVOIE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }],
-    [/^✕ CANCELS (.+) \((.+)\)$/, function (m, c, q) { return '✕ ANNULE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }]
+    [/^✕ CANCELS (.+) \((.+)\)$/, function (m, c, q) { return '✕ ANNULE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }],
+    /* S1598 - note 435 (9) : la boite READY avant le run 2 */
+    [/^RUN 2 — READY\?$/, 'RUN 2 — PRÊT ?'],
+    [/^Run 2 is about to start\. Ready\?$/, 'Le run 2 va commencer. Prêt ?'],
+    [/^(\d+) \/ (\d+) READY — the run starts when everyone is$/, '$1 / $2 PRÊTS — le run démarre quand tout le monde l’est']
   ];
   /* 339 (2) — l'ecran double ses blancs autour de « · » et de « — » (mesure : « ”  ·  card ») : chaque
      espace d'un motif vaut UN OU PLUSIEURS blancs. */
