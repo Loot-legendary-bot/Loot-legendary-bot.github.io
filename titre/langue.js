@@ -1767,6 +1767,8 @@
     [/^✕ CANCELS (.+) \((.+)\)$/, function (m, c, q) { return '✕ ANNULE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }],
     /* S1598 - note 435 (9) : la boite READY avant le run 2 */
     [/^RUN 2 — READY\?$/, 'RUN 2 — PRÊT ?'],
+    /* S1600 - note 431 (4) : le gros bouton */
+    [/^CONFIRM CHARACTER$/, 'CONFIRMER LE PERSONNAGE'],
     /* S1599 - note 431 (5) : l'ecole du Wizard */
     [/^Click a school$/, 'Clique une école'],
     [/^Your school: (.+)$/, function (m, e) { var F = { FIRE: 'FEU', FROST: 'GIVRE', LIGHTNING: 'FOUDRE', POISON: 'POISON', ARCANE: 'ARCANE', CHAOS: 'CHAOS' }; return 'Ton école : ' + (F[e] || e); }],

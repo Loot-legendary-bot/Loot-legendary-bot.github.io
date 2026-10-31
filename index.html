@@ -1386,6 +1386,19 @@
       .cz-retenue { color: var(--activable); font-weight: 800; letter-spacing: .04em; }
       .cz-a-retenir { color: var(--slate); }
       .card .woke { color: var(--ember); }
+      /* S1600 · note 431 ④ (MAQUETTE) — la cible de sa capture 4 : les portraits en CARRÉS pleins (plus de
+         parallélogrammes : la case et tous ses contre-redressements perdent leur skew), la fiche qui prend la
+         hauteur (pas fait : la fiche de cette page n'est pas `.sel-fiche`), et le gros bouton CONFIRM CHARACTER (la plaque du jeu). */
+      .roster .cell, .roster .cell.cell-verrou:hover, .roster .cell.dead:hover { transform: none; }
+      .roster .cell:hover, .roster .cell:focus-visible { transform: scale(1.05); }
+      .roster .cell:nth-child(n+6):nth-child(-n+10), .roster .cell:nth-child(n+16):nth-child(-n+20) { margin-left: 0; }
+      .roster .vp { transform: scale(1.08); }
+      .roster .cell-cadenas { transform: translate(-50%, -50%); }
+      .roster .cell-voile, .roster .cell-tier, .roster .cell-cond, .roster .cell-nom,
+      .roster .cell-pastille, .roster .cell-point { transform: none; }
+      /* la plaque peinte du jeu (`button.plaque`), à l'échelle 64 / 44 : mêmes tranches, bouts à leur rapport */
+      .porte-boutons button.plaque.gros-confirmer { height: 64px; min-width: 300px; padding: 0 44px; font-size: 24px;
+        letter-spacing: .14em; border-image-width: 0 17.7px 0 21.4px; white-space: nowrap; width: auto; }
       /* S1599 · note 431 ⑤ — l'école du Wizard : six vignettes, un clic = choisie */
       .porte-popup-ecoles { min-width: 640px; }
       .porte-ecoles { display: grid; grid-template-columns: repeat(3, 180px); gap: 14px; justify-content: center; margin: 14px 0 10px; }
@@ -15146,7 +15159,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BKM5NNye.js"></script>
+    <script type="module" crossorigin src="./assets/index-FfQE6Jkd.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
