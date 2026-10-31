@@ -1761,7 +1761,10 @@
     [/^(.+) extracted through a portal$/, '$1 est sorti par un portail'],
     [/^(.+) was the last one inside — extracted automatically \(\+(\d+) pt\)$/, '$1 était le dernier dedans — sorti d’office (+$2 pt)'],
     [/^(.+) died$/, '$1 est mort'],
-    [/^WHO PICKS FIRST — 1d(\d+)$/, 'QUI CHOISIT EN PREMIER — 1d$1']
+    [/^WHO PICKS FIRST — 1d(\d+)$/, 'QUI CHOISIT EN PREMIER — 1d$1'],
+    /* S1596 - note 442 (4) : la carte que le Miroir / une contre vise */
+    [/^↪ REDIRECTS (.+) \((.+)\)$/, function (m, c, q) { return '↪ RENVOIE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }],
+    [/^✕ CANCELS (.+) \((.+)\)$/, function (m, c, q) { return '✕ ANNULE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }]
   ];
   /* 339 (2) — l'ecran double ses blancs autour de « · » et de « — » (mesure : « ”  ·  card ») : chaque
      espace d'un motif vaut UN OU PLUSIEURS blancs. */
