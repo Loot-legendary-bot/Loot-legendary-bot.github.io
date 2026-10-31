@@ -12911,10 +12911,10 @@
       .boite-des .bd-cause { flex: none; }
       .boite-des .bd-resultat .bd-total { font-size: 22px; }
       .boite-des .bd-rar[data-rar="common"] { color: #c9ced3; }
-      .boite-des .bd-rar[data-rar="uncommon"] { color: #27d35a; }
-      .boite-des .bd-rar[data-rar="rare"] { color: #1f8bff; }
-      .boite-des .bd-rar[data-rar="epic"] { color: #b23cff; }
-      .boite-des .bd-rar[data-rar="legendary"] { color: #ff9a1a; }
+      .boite-des .bd-rar[data-rar="uncommon"] { color: var(--rar-vif-uncommon); }
+      .boite-des .bd-rar[data-rar="rare"] { color: var(--rar-vif-rare); }
+      .boite-des .bd-rar[data-rar="epic"] { color: var(--rar-vif-epic); }
+      .boite-des .bd-rar[data-rar="legendary"] { color: var(--rar-vif-legendary); }
       .boite-des .bd-sep { color: #8a7d66; }
       /* S1566 · note 400 ④ — le crâne sur le portrait d'un mort de la tuile */
       .nouvelle-table .tv2-seuil-bloc { position: relative; }
@@ -13138,10 +13138,12 @@
       html.table-v2 .nouvelle-table .nt-entete-tour .nt-et-texte { white-space: nowrap; }
       /* S1461 · note 342 ⑦ — la barre RUN prend la couleur de la rareté du tour (saturée) : vert unco, bleu
          rare, violet epic, jaune legendary ; COMMON garde son ivoire. */
-      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="UNCOMMON"] .nt-et-ligne { color: #4FE021; }
-      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="RARE"] .nt-et-ligne { color: #2F86FF; }
-      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="EPIC"] .nt-et-ligne { color: #A65CFF; }
-      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="LEGENDARY"] .nt-et-ligne { color: #FFD21F; }
+      /* S1587 · note 434 ① — la palette saturée du bandeau devient UNE source (`--rar-vif-*`) : le bac à dés écrit ses raretés avec. */
+      :root { --rar-vif-uncommon: #4FE021; --rar-vif-rare: #2F86FF; --rar-vif-epic: #A65CFF; --rar-vif-legendary: #FFD21F; }
+      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="UNCOMMON"] .nt-et-ligne { color: var(--rar-vif-uncommon); }
+      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="RARE"] .nt-et-ligne { color: var(--rar-vif-rare); }
+      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="EPIC"] .nt-et-ligne { color: var(--rar-vif-epic); }
+      html.table-v2 .nouvelle-table .nt-entete-tour[data-rar="LEGENDARY"] .nt-et-ligne { color: var(--rar-vif-legendary); }
       /* S1461 · note 342 ④ — END TURN sur une ligne, le compte à défausser en pastille rouge au coin */
       .a-pastille-defausse { position: relative; white-space: nowrap; overflow: visible !important; }
       .pastille-defausse { position: absolute; top: -9px; right: -9px; min-width: 20px; height: 20px; padding: 0 5px;
@@ -13632,6 +13634,9 @@
       }
       .ndr-compte { font-family: var(--mono); font-size: calc(14px * var(--lisible, 1)); color: var(--stock); white-space: nowrap; }
       .arene-spec .nt-duel-regarde { height: calc(100vh - 220px); }
+      /* S1588 · note 435 ① — à 4+ combattants, l'arène prend la vue du combattant suivi (la grille de la table) */
+      .arene-spec .nouvelle-table.ndr-435-hote { min-height: 0; height: calc(100vh - 220px); padding: 0; }
+      .plein-boite:has(.ndr-435-hote) { max-width: 1760px; width: 1760px; }
       .plein-boite:has(.nt-duel-regarde) { max-width: 1760px; width: 1760px; }
       /*
        * ─── LA TABLE, HORS COMBAT ─── S1233 · P3-T1ter ─────────────────────
@@ -15108,7 +15113,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CXHGWk8Q.js"></script>
+    <script type="module" crossorigin src="./assets/index-CwVE85Zx.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

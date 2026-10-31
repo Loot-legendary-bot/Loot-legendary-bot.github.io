@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 31 Oct 2026
+- **09:55** — Watching a fight of four or more players: you see the screen of the fighter you follow (their sheet on the left, the other fighters on the right, the log and the bets in the middle); up to three, the VS columns stay. The Collapse die no longer rolls a second time in your dice tray after the table roll. The rarities in the dice tray use the same colours as the run banner. Gorma Juice and Clover can now be played before the die is thrown on an ability roll, a weapon's damage dice, the exploration d6, the exploration heal d20 and the coffin d20: the bonus is added and the dice roll once. After your Signature on a hit, your Reaction is offered again. A card that moves you out before a hit lands makes it miss you. Prismatic Ring works on any die, in combat too. Ring of Lava deals 5 Fire to the other players of your tile when you enter it or someone enters yours. Sala Septa no longer adds one Fire too many: it deals what its card says.
+
 ## 30 Oct 2026
 - **22:58** — Dice tray: the dice are bigger (one die about twice the old size), scattered at random on the felt, each casting a shadow; nothing pale left behind them. Gorma Juice played on an opposed roll during someone else's roll now waits its turn and adds +2 (it was ignored).
 - **21:46** — Character select opens with no portrait pre-framed: a card is framed only when you pick it.

@@ -1,0 +1,55 @@
+{
+ "famille": "uni",
+ "couleurs": {
+  "corps": [
+   "#121212"
+  ],
+  "veines": null,
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#f4f2ee"
+ },
+ "fini": {
+  "rugosite": 0.8,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.0,
+  "densite": 0.0,
+  "densite_paillettes": 0.0,
+  "rugosite_inclusions": 0.0
+ },
+ "chiffres": {
+  "style": "peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.5,
+  "paroi": "distance"
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "empatement": {
+  "epaisseur": 0.08,
+  "brosse": 0.8,
+  "sec": 0.65
+ },
+ "coulure": {
+  "couleur": "#8b0d0d",
+  "bande": 0.16,
+  "longueur": 0.0,
+  "largeur": 0.07,
+  "decalage": 0.42,
+  "epaisseur": 0.05,
+  "rugosite": 0.2
+ },
+ "graine": 6,
+ "notes": "Kit HUD peinture blanche transpose au de : noir mat, chiffres en peinture blanche epaisse brossee (empatement), une arete trempee dans le sang, sans goutte (coulure)."
+}
