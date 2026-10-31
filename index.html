@@ -12900,6 +12900,10 @@
       .boite-des.bd-roule .die-roule { opacity: 1; animation-name: de-roule; animation-iteration-count: 1;
         animation-fill-mode: both; }
       .boite-des.bd-roule .die-rendu, .boite-des.bd-roule .bd-total { opacity: 0; }
+      /* S1601 · note 443 ③ — le résultat après le roulé ; la scène du jet au bac ne voile rien et ne prend aucun clic */
+      .boite-des.bd-roule .bd-resultat { visibility: hidden; }
+      .dicelayer.bac-roule { background: none; pointer-events: none; }
+      .dicelayer.bac-roule::before, .dicelayer.bac-roule::after, .dicelayer.bac-roule .hide-btn { display: none; }
       .boite-des.bd-roule .die.die-roulant { color: transparent; }
       .boite-des .bd-total { font-size: 28px; }
       /* S1579 · 414 ⑦ — contre un mob, l'initiative en une petite ligne discrète */
@@ -15159,7 +15163,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-FfQE6Jkd.js"></script>
+    <script type="module" crossorigin src="./assets/index-BAgaCQ1x.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 31 Oct 2026
+- **19:05** — Traps and chests now play in order: first the card alone in the middle, then your dice roll in your dice tray, then the result (the damage you take, or the rarities you draw). The result no longer shows before the card.
 - **16:58** — Character select: the portraits are full squares, and you confirm with a big CONFIRM CHARACTER plate (the game's painted button), BACK beside it.
 - **15:35** — The Wizard picks his school in a real window: the six schools as big tiles, one click to choose, your choice written below, then OK (no more drop-down list).
 - **14:38** — Before run 2 starts, a READY box: "RUN 2 — READY?", how many players are ready, a READY button and the timer; nothing of run 2 (draw, Collapse) happens before everyone is ready.
