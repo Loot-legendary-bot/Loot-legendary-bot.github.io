@@ -1386,6 +1386,25 @@
       .cz-retenue { color: var(--activable); font-weight: 800; letter-spacing: .04em; }
       .cz-a-retenir { color: var(--slate); }
       .card .woke { color: var(--ember); }
+      /* S1599 · note 431 ⑤ — l'école du Wizard : six vignettes, un clic = choisie */
+      .porte-popup-ecoles { min-width: 640px; }
+      .porte-ecoles { display: grid; grid-template-columns: repeat(3, 180px); gap: 14px; justify-content: center; margin: 14px 0 10px; }
+      .porte-ecole-tuile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+        height: 132px; border: 2px solid rgba(255,255,255,.18); border-radius: 10px; cursor: pointer;
+        background: radial-gradient(circle at 50% 38%, var(--pe-teinte, #555) 0%, rgba(0,0,0,.85) 72%); color: #f1e9d6;
+        transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease; }
+      .porte-ecole-tuile:hover { transform: scale(1.06); border-color: rgba(255,255,255,.7); }
+      .porte-ecole-tuile.choisie { border-color: var(--gold, #e8b84a); box-shadow: 0 0 0 3px rgba(232,184,74,.35), 0 0 22px rgba(232,184,74,.45); }
+      .porte-ecole-tuile .pe-icone { font-size: 46px; line-height: 1; }
+      .porte-ecole-tuile .pe-nom { font-size: 18px; letter-spacing: .14em; font-weight: 700; }
+      .porte-ecole-tuile[data-ecole="fire"] { --pe-teinte: #b8331c; }
+      .porte-ecole-tuile[data-ecole="frost"] { --pe-teinte: #4f9fd0; }
+      .porte-ecole-tuile[data-ecole="lightning"] { --pe-teinte: #c9a51a; }
+      .porte-ecole-tuile[data-ecole="poison"] { --pe-teinte: #4c9a2a; }
+      .porte-ecole-tuile[data-ecole="arcane"] { --pe-teinte: #7a3fc2; }
+      .porte-ecole-tuile[data-ecole="chaos"] { --pe-teinte: #b0257a; }
+      .porte-ecole-choix { text-align: center; font-size: 16px; letter-spacing: .08em; opacity: .7; margin-bottom: 8px; }
+      .porte-ecole-choix.pris { opacity: 1; color: var(--gold, #e8b84a); font-weight: 700; }
       /* S1598 · note 435 ⑨ — la boîte READY avant le run 2 */
       .ready-titre { font-family: var(--titre, inherit); font-size: 34px; letter-spacing: .08em; color: var(--gold); margin: 6px 0 2px; }
       .ready-compte { font-size: 15px; letter-spacing: .04em; color: var(--slate, #b8b0a0); margin-bottom: 8px; }
@@ -15127,7 +15146,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DZ3R190G.js"></script>
+    <script type="module" crossorigin src="./assets/index-BKM5NNye.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

@@ -1767,6 +1767,9 @@
     [/^✕ CANCELS (.+) \((.+)\)$/, function (m, c, q) { return '✕ ANNULE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }],
     /* S1598 - note 435 (9) : la boite READY avant le run 2 */
     [/^RUN 2 — READY\?$/, 'RUN 2 — PRÊT ?'],
+    /* S1599 - note 431 (5) : l'ecole du Wizard */
+    [/^Click a school$/, 'Clique une école'],
+    [/^Your school: (.+)$/, function (m, e) { var F = { FIRE: 'FEU', FROST: 'GIVRE', LIGHTNING: 'FOUDRE', POISON: 'POISON', ARCANE: 'ARCANE', CHAOS: 'CHAOS' }; return 'Ton école : ' + (F[e] || e); }],
     [/^Run 2 is about to start\. Ready\?$/, 'Le run 2 va commencer. Prêt ?'],
     [/^(\d+) \/ (\d+) READY — the run starts when everyone is$/, '$1 / $2 PRÊTS — le run démarre quand tout le monde l’est']
   ];
