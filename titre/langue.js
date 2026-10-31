@@ -1266,6 +1266,10 @@
       'les deux signes se révèlent ENSEMBLE — personne ne voit l’autre d’abord. Une égalité se rejoue (§6.5.2).',
     '⏱ the scene is still playing — your question comes right after, and nothing will pass for you before then':
       '⏱ la scène se joue encore — ta question arrive juste après, et rien ne passera pour toi d’ici là',
+    'Leave the table?': 'Quitter la table ?', 'The others are waiting for you.': 'Les autres t’attendent.',
+    'STAY': 'RESTER', 'LEAVE': 'QUITTER',
+    '⏱ time’s up — the game applied its default answer, and this question is still open: answer it to continue':
+      '⏱ temps écoulé — le jeu a appliqué sa réponse par défaut, et cette question reste ouverte : réponds-y pour continuer',
     '⏱ the die is still being shown — the countdown has not started, and nothing will pass for you before then':
       '⏱ le dé est encore montré — le compte à rebours n’a pas commencé, et rien ne passera pour toi d’ici là',
     '⊘ used this Dungeon Turn — back at the end of the Dungeon Turn':
