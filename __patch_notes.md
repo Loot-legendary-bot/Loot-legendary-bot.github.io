@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 31 Oct 2026
+- **13:02** — The Dining Room's animated room: no more black bars at the top and bottom, its colours match the still picture, and the loop no longer jumps when it starts over.
 - **12:07** — Dice tray: your dice now roll in your tray, not in the middle of the screen (rolls of the whole table, like the Collapse, still play in the middle and then land in the tray already rolled). Each roll plays once, one smooth turn — no more double spin. Coming back to a finished fight, another player's page or a reloaded game: the dice are already lying on their faces. Out of combat the dice are 30% smaller.
 - **11:40** — The Dining Room is now animated: when you stand on it, the room behind the table moves (the fire burns), in a silent loop. The other rooms are unchanged. It is a test before animating every room.
 - **10:30** — A mob that strikes first no longer hits from an empty table: after its card is revealed, the fight (COMBAT, you vs the mob, its card as YOUR TARGET) is on screen before its hit, and your HP and the log line come after the hit.
