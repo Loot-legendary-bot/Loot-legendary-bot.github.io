@@ -1426,6 +1426,7 @@
     "Ranked — the same dungeon for everyone this week, and grade points": "Classé — le même donjon pour tous cette semaine, et des points de grade", "Green felt": "Feutre vert", "Red felt": "Feutre rouge", "Blue felt": "Feutre bleu",
     "Your dice tray: your dice roll on it, in game": "Ton bac à dés : tes dés y roulent, en partie",
     "Charms": "Charmes",
+    "Supplies": "Provisions",
     "Charm": "Charme",
     "Consumables": "Consommables",
     "LICK FLOOR exists on a table.": "LICK FLOOR existe sur une table.",
