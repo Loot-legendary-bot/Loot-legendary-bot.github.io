@@ -1774,7 +1774,7 @@
     /* S1600 - note 431 (4) : le gros bouton */
     [/^CONFIRM CHARACTER$/, 'CONFIRMER LE PERSONNAGE'],
     /* S1599 - note 431 (5) : l'ecole du Wizard */
-    [/^Click a school$/, 'Clique une école'],
+    [/^Click a school$/, 'Clique une école'], [/^\(recommended\)$/, '(recommandé)'],
     [/^Your school: (.+)$/, function (m, e) { var F = { FIRE: 'FEU', FROST: 'GIVRE', LIGHTNING: 'FOUDRE', POISON: 'POISON', ARCANE: 'ARCANE', CHAOS: 'CHAOS' }; return 'Ton école : ' + (F[e] || e); }],
     [/^Run 2 is about to start\. Ready\?$/, 'Le run 2 va commencer. Prêt ?'],
     [/^(\d+) \/ (\d+) READY — the run starts when everyone is$/, '$1 / $2 PRÊTS — le run démarre quand tout le monde l’est']
