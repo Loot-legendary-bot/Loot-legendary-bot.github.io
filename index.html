@@ -12965,7 +12965,10 @@
       .boite-des .bd-tapis { position: relative; }
       .boite-des .bd-tapis .bd-des.bd-epars { position: absolute; inset: 6px; display: block; max-width: none;
         container-type: size; }
-      .boite-des .bd-tapis .bd-des.bd-epars .die { --bd-t: calc(var(--bd-k, .5) * 100cqh);
+      /* S1609 · Croze (01/11) — « les dés ont des tailles immenses » : la taille suivait la hauteur du bac, et le bac
+         a grandi à 364 px (437 ④) — un d20 de 165 px mesuré. Elle se lit sur une hauteur PLAFONNÉE à 140 px : un dé
+         seul de combat = 0,8 × 140 = 112 px (le « ×2 des 56 px » de 435 ③), hors combat 78 px ; le bac garde sa taille. */
+      .boite-des .bd-tapis .bd-des.bd-epars .die { --bd-t: calc(var(--bd-k, .5) * min(100cqh, 140px));
         position: absolute; margin: 0; z-index: 1; width: var(--bd-t); height: var(--bd-t); font-size: calc(var(--bd-t) * .5);
         left: calc(var(--bd-x, .5) * (100cqw - var(--bd-t))); top: calc(var(--bd-y, .5) * (100cqh - var(--bd-t)));
         transform: rotate(var(--bd-r, 0deg)); }
@@ -14255,7 +14258,9 @@
       .nouvelle-table .ntt-cb2-texte { flex: 1 1 0; min-height: 0; overflow: hidden; font-size: max(14px, calc(13px * var(--lisible, 1))); }
       /* ⛑ S1325 · CO-2 — contre un joueur : la cible à droite, plus large que le mob ;
          le bloc joueur (BJ-1) agrandi, un seul cœur (celui de la tête). */
-      .nouvelle-table .ntt-table.ntt-cb2.ntt-cb2-pvp { grid-template-columns: 400px minmax(0, 1fr) 520px; }
+      /* S1609 · Croze (01/11) — « l'encadré de l'adversaire ne doit pas être plus large que celui du joueur à gauche » :
+         les deux à 400 px (mesuré : 400 | 968 | 400, sa fiche 382 px, rien ne déborde). */
+      .nouvelle-table .ntt-table.ntt-cb2.ntt-cb2-pvp { grid-template-columns: 400px minmax(0, 1fr) 400px; }
       .nouvelle-table .bj-autre.ntt-cb2-joueur {
         max-width: none; height: auto; cursor: default; gap: 10px; padding: 8px;
       }
@@ -14373,6 +14378,19 @@
         grid-column: 2; display: block; height: 4px; background: rgba(255,255,255,.15); overflow: hidden;
       }
       .nouvelle-table .ntt-onglet-cible .noc-barre > i { display: block; height: 100%; background: var(--stock); }
+      /* S1609 · Croze (01/11) — « la box du Wizard est toujours large en hauteur » : l'onglet de la cible sur UNE ligne,
+         comme ma ligne à gauche (miniature · nom · AGIT · PV) ; mesuré avant : 81 px (101 avec AGIT), la colonne
+         ouverte à y 112. La marge du haut reste juste sous le badge du tour (y 84). */
+      .nouvelle-table .ntt-cb2-onglets > .ntt-cb2-mobs { padding-top: 50px; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible {
+        grid-template-columns: 30px minmax(0, 1fr) auto auto; grid-template-rows: auto; row-gap: 0; padding: 4px 7px;
+      }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-ico { grid-row: 1; width: 30px; height: 30px; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-nom { grid-column: 2; -webkit-line-clamp: 1; white-space: nowrap; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-agit { grid-column: 3; grid-row: 1; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .pv-pastille,
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-pv { grid-column: 4; grid-row: 1; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-barre { grid-column: 1 / -1; grid-row: 2; }
       .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible.on {
         border-bottom-color: var(--ember); background: rgba(255,255,255,.07);
       }
@@ -14388,7 +14406,7 @@
       /* S1471 · note 359 ④ — « la barre du Guard quand il joue » : « ACTS NOW » (1 / -1) prend une ligne
          entière, et la pastille de PV d'un JOUEUR, sans colonne, retombait dans celle du portrait (36 px) —
          un petit cadre rouge avec un cœur. Elle garde sa colonne, comme les PV d'un mob. */
-      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-pastille { grid-column: 2; justify-self: start; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-pastille { grid-column: 4; grid-row: 1; justify-self: end; }   /* S1609 : une ligne (était grid-column: 2) */
       @keyframes noc-braise {
         from { box-shadow: 0 0 0 1px var(--ember); }
         to   { box-shadow: 0 0 0 3px var(--ember), 0 0 14px var(--ember); }
@@ -14680,6 +14698,21 @@
       /* S1472 · 361 ① — l'emplacement RÉSERVÉ au-dessus du cimetière, et le dock des bandeaux posé dessus.
          Vide sans timer ; rien ne se pose plus par-dessus la scène. */
       html.table-v2 .nouvelle-table .tv2-chronos { flex: 0 0 auto; height: 84px; }
+      /* S1609 · Croze (01/11) — END TURN hors combat dans la fente entre la tuile et le bac : la plaque prend la fente. */
+      html.table-v2 .nouvelle-table .tv2-chronos > .tv2-fin-de-tour { position: static; height: 100%; align-items: stretch; }
+      html.table-v2 .nouvelle-table .tv2-chronos > .tv2-fin-de-tour button.fin-autonome-bouton { width: 100%; height: 100%; min-width: 0; }
+      /* S1609 — END TURN de combat, « un poil plus visible » quand c'est mon tour */
+      .fin-combat-visible { opacity: 1 !important; font-size: calc(18px * var(--lisible, 1)) !important; padding: 10px 26px !important;
+        border: 2px solid #e9e4d8 !important; background: #8a1c16 !important; color: #fff !important; letter-spacing: .12em; }
+      /* S1609 — la sécurité OK / BACK */
+      .cv-confirme { position: fixed; inset: 0; z-index: 99990; background: rgba(0,0,0,.55); display: grid; place-items: center; }
+      .cv-confirme-boite { min-width: 420px; max-width: 560px; padding: 22px 26px; background: #14110e; border: 2px solid #b3261e;
+        box-shadow: 0 12px 50px rgba(0,0,0,.8); }
+      .cv-confirme-texte { font: 900 22px/1.25 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .04em; color: #e9e4d8; }
+      .cv-confirme-boutons { display: flex; gap: 12px; margin-top: 18px; justify-content: flex-end; }
+      .cv-confirme-boutons button { font: 900 18px/1 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .08em;
+        padding: 12px 24px; color: #e9e4d8; background: #1c1814; border: 1px solid rgba(233,228,216,.35); cursor: pointer; }
+      .cv-confirme-boutons button.cv-ok { background: #a3231d; border-color: #a3231d; }
       #chronos-dock { position: fixed; z-index: var(--z-couloir); display: flex; flex-direction: column;
         justify-content: flex-end; gap: 4px; pointer-events: none; transform-origin: 0 0; }
       html.table-v2 #chronos-dock > div { position: static; transform: none; margin: 0; box-sizing: border-box;
@@ -15289,7 +15322,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DzHS4ag8.js"></script>
+    <script type="module" crossorigin src="./assets/index-DlWlG8l1.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
@@ -15301,6 +15334,6 @@
     -->
     <div id="composition">
       <div id="app"></div>
-    </div>
+    </div>
   </body>
 </html>

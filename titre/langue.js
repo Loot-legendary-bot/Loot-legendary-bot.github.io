@@ -1780,6 +1780,9 @@
     [/^(.+) was the last one inside — extracted automatically \(\+(\d+) pt\)$/, '$1 était le dernier dedans — sorti d’office (+$2 pt)'],
     [/^(.+) died$/, '$1 est mort'],
     [/^WHO PICKS FIRST — 1d(\d+)$/, 'QUI CHOISIT EN PREMIER — 1d$1'],
+    /* S1609 — les sécurités de FIN DU TOUR */
+    [/^You still have (\d+) actions? this turn — end it anyway\?$/, function (m, n) { return 'Il te reste ' + n + ' action' + (n === '1' ? '' : 's') + ' ce tour — le finir quand même ?'; }],
+    [/^You have not used a skill this combat turn — end it anyway\?$/, 'Tu n’as fait aucune compétence ce tour de combat — le finir quand même ?'],
     /* S1596 - note 442 (4) : la carte que le Miroir / une contre vise */
     [/^↪ REDIRECTS (.+) \((.+)\)$/, function (m, c, q) { return '↪ RENVOIE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }],
     [/^✕ CANCELS (.+) \((.+)\)$/, function (m, c, q) { return '✕ ANNULE ' + c + ' (' + (q === 'YOU' ? 'TOI' : q) + ')'; }],
