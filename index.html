@@ -14438,6 +14438,22 @@
       .nouvelle-table .ntt-cb2-fiche .fcz:focus-visible + .fcz-loupe {
         display: block; z-index: 40; transform: scale(2); transform-origin: left center;
         outline: 2px solid var(--stock); box-shadow: 0 18px 40px -10px #000; }
+      /* S1605 · note 447 — la loupe d'une ligne ne naît plus (une seule fenêtre : `ouvrirFicheEnGrand`).
+         ③ ▶ ce qui se clique, ◇ ce qui agit seul : dans la marge gauche de la ligne, encre de l'imprimé
+         (le carton est crème quel que soit le thème), taille en `cqw` pour suivre le carton jusque dans le zoom.
+         Le glyphe est forcé en TEXTE : sous Windows, ▶ sort sinon en emoji bleu. */
+      .fc-calque { container-type: inline-size; }
+      .fcz-sym { position: absolute; width: 3.5%; display: flex; align-items: center; justify-content: center;
+        pointer-events: none; font-family: 'Segoe UI Symbol', 'DejaVu Sans', sans-serif; font-variant-emoji: text;
+        font-size: max(11px, 2.6cqw); line-height: 1; color: #5a1a0e; }
+      .fcz-sym.eteint { opacity: .35; }
+      /* ② le zoom : le carton s'ouvre au clic (hors d'une ligne), ou par ⤢ dans son coin */
+      .fc-zoomable .fc-art { cursor: zoom-in; }
+      .fc-loupe-bouton { position: absolute; top: 6px; right: 6px; z-index: 3; }
+      .plein-boite:has(.fiche-en-grand) { width: auto; max-width: none; }
+      .fiche-en-grand { width: min(634px, calc((var(--uvh) * 88 - 80px) * 1414 / 2000)); margin: 0 auto; padding: 0 16px 16px; }
+      .fiche-en-grand .fc-boite { max-width: none; }
+      .fiche-en-grand .fc-art { border: 2px solid var(--stock); border-radius: 4px; }
       .nouvelle-table { position: relative; }
       .nouvelle-table .nt-retour { position: absolute; top: 12px; right: 48px; }
       /* ⛑ S1291 · LA-6 — SUIVRE L'ACTION, à gauche du lien de table, même ligne. */
@@ -15177,7 +15193,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-TOuY_mYJ.js"></script>
+    <script type="module" crossorigin src="./assets/index-BywsX4h3.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
