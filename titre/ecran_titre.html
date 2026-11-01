@@ -1723,9 +1723,9 @@ function gardeLesDos(){
 }());
 /* S1607 - notes 436 (5), 445 (2), 449 (1) : le rayon DICE TRAYS. Les trois tapis de Croze (PNG 3:2, rognes au cadre
    640 x 440, public/art/ui/dicebox/) : le VERT a tous et equipe par defaut (equipe.tapis = null), le ROUGE et le BLEU
-   au Vault, au prix de l'etage standard (MONNAIE 22 : 500, un mot le corrige). Le serveur lit equipe.tapis (`tray`,
-   salons.ts) ; le jeu pose le tapis equipe dans le bac (main.ts). [nom, id, possede, prix] */
-const TRAYS=[["Green felt","vert",1,0],["Red felt","rouge",0,500],["Blue felt","bleu",0,500]];
+   au Vault a 10 000 dents (note 451 (2), Croze 01/11 : « voire beaucoup plus cher »). Le serveur lit equipe.tapis
+   (`tray`, salons.ts) ; le jeu pose le tapis equipe dans le bac (main.ts). [nom, id, possede, prix] */
+const TRAYS=[["Green felt","vert",1,0],["Red felt","rouge",0,10000],["Blue felt","bleu",0,10000]];
 function gardeLesTapis(){
   try{window.LLProfil.modifie(p=>{p.possede.tapis=TRAYS.filter(t=>t[2]&&t[1]!=='vert').map(t=>t[1]);});}catch(e){}
 }
@@ -2322,6 +2322,14 @@ function peinsLeDev(box){
   var P=window.LLProfil; if(!P) return;
   var d=document.createElement('div'); d.id='dev-panel'; d.style.marginTop='2.4cqh';
   var t=document.createElement('div'); t.className='langue-titre'; t.textContent='DEV  \u00b7  Ctrl+Shift+D'; d.appendChild(t);
+  /* note 428 - LE BANC D'ESSAI v2 : l'editeur de scenarios (/?banc=1). Jamais sur le site public :
+     le bouton n'existe que sous __llDev (vite dev, ou JOUER.bat), et la page ne l'ouvre que sous PORTE_ADMIN. */
+  if(window.__llDev){
+    var bb=document.createElement('button'); bb.type='button'; bb.className='langue-btn'; bb.textContent='TEST BENCH';
+    bb.title='Set up a fight (characters, hands, gear, forced dice) and play it with the real engine. Sandbox: nothing is credited.';
+    bb.addEventListener('click',function(){ window.location.href='/?banc=1'; });
+    d.appendChild(bb);
+  }
   var fin=function(msg){ if(typeof paintHUD==='function') paintHUD(true); var m=document.getElementById('dev-msg'); if(m) m.textContent=msg; };
   [['RESET OFFERINGS','Every essence you own and every offering burning goes back to zero.',function(){
       P.modifie(function(p){ p.offrandes=[]; if(p.mur&&typeof p.mur==='object') p.mur.offertes=[]; }); return 'Offerings reset.'; }],

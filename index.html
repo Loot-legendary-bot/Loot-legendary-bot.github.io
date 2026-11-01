@@ -15221,6 +15221,53 @@
         border-radius: 4px; font: 700 17px/1.2 "Alegreya", Georgia, serif; letter-spacing: .12em; cursor: pointer;
         box-shadow: 0 3px 0 #120d08; }   /* 392 ③ : le premier bouton lisible, jamais un rectangle blanc */
       .tuto-carton button:hover { background: #3d3022; color: #fff1c4; }
+      /* note 442 — LES BRAIN CARDS EN PARCOURS GUIDÉ (maquette validée par Croze, 01/11) */
+      .cv-panneau { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; min-width: min(560px, 100%); }
+      .cv-fil { display: flex; gap: 6px; }
+      .cv-fil span { flex: 1; text-align: center; padding: 6px 2px; font: 800 14px/1.1 var(--display, "Big Shoulders Display"), sans-serif;
+        letter-spacing: .06em; border: 1px solid rgba(233,228,216,.18); color: #7d756a; text-transform: uppercase; }
+      .cv-fil span.cv-fait { color: #cfc6b2; border-color: rgba(233,228,216,.35); }
+      .cv-fil span.cv-ici { color: #fff; background: #8a1c16; border-color: #b3261e; }
+      .cv-attaque { display: flex; gap: 14px; align-items: center; background: #0e0c0a; border: 1px solid rgba(233,228,216,.15); padding: 10px; }
+      .cv-portrait { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #6fa8dc; flex: none; }
+      .cv-ident { flex: 1; min-width: 0; }
+      .cv-qui { font: 700 14px/1.1 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .12em; color: #6fa8dc; }
+      .cv-nom { font: 900 28px/1 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .03em; margin: 2px 0 6px; }
+      .cv-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+      .cv-pill { font: 800 15px/1 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .08em; padding: 6px 10px;
+        border: 1px solid rgba(233,228,216,.3); border-radius: 14px; background: #2b2620; }
+      .cv-pill.cv-barree { text-decoration: line-through; opacity: .55; }
+      .cv-pill.cv-fire { background: #5a2412; border-color: #ff7a3a; color: #ffb48a; }
+      .cv-pill.cv-frost { background: #12324a; border-color: #7ec8ff; color: #bfe4ff; }
+      .cv-pill.cv-lightning { background: #4a3d10; border-color: #f0d040; color: #fbe98a; }
+      .cv-pill.cv-poison { background: #1f3d16; border-color: #66cc44; color: #aef08a; }
+      .cv-pill.cv-arcane { background: #33204a; border-color: #c080ff; color: #e0c4ff; }
+      .cv-pill.cv-chaos { background: #4a1630; border-color: #ff4fa8; color: #ffb3d9; }
+      .cv-dmg { text-align: right; font: 900 34px/1 var(--display, "Big Shoulders Display"), sans-serif; color: #ff6a5a; flex: none; }
+      .cv-dmg small { display: block; font: 700 13px var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .1em; color: #a39a8a; }
+      .cv-q { font: 900 22px/1.15 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .06em; margin-top: 6px; }
+      .cv-gros { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .cv-gros button, .cv-valeurs button { font: 900 20px/1 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .06em;
+        color: #e9e4d8; background: #1c1814; border: 1px solid rgba(233,228,216,.3); padding: 16px 8px; cursor: pointer; }
+      .cv-gros button:hover, .cv-valeurs button:hover:not(:disabled) { background: #8a1c16; border-color: #e05a4e; }
+      .cv-gros button small, .cv-valeurs button small { display: block; font: 400 14px "Alegreya", Georgia, serif; letter-spacing: 0;
+        color: #a39a8a; margin-top: 6px; text-transform: none; }
+      .cv-valeurs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }   /* une rangée : le cadre ne rétrécit pas */
+      .cv-valeurs button { padding: 12px 2px; font-size: 16px; }
+      .cv-valeurs button.cv-actuelle { opacity: .35; cursor: not-allowed; }
+      .cv-aide { padding: 8px 10px; border-left: 3px solid #d8b25a; color: #d8cfb8; font-size: 16px; background: rgba(216,178,90,.07); }
+      .cv-carte { color: #a39a8a; font-size: 14px; }
+      .cv-actions { display: flex; gap: 10px; }
+      .cv-actions button { font: 900 18px/1 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .06em; padding: 12px 18px;
+        color: #e9e4d8; background: #1c1814; border: 1px solid rgba(233,228,216,.3); cursor: pointer; }
+      .cv-actions button.cv-ok { flex: 1; background: #a3231d; border-color: #a3231d; }
+      .cv-rps { margin: 6px 0 10px; padding: 10px 12px; border: 1px dashed rgba(233,228,216,.4); background: rgba(216,178,90,.08);
+        font: 900 20px/1.2 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .05em; color: #f3dc9a; }
+      .cv-resultat { position: fixed; left: 50%; top: 18%; transform: translateX(-50%); z-index: 9000; min-width: 420px;
+        padding: 16px 22px; background: rgba(14,12,10,.97); border: 2px solid #66cc44; box-shadow: 0 10px 40px rgba(0,0,0,.7); cursor: pointer; }
+      .cv-res-titre { font: 800 14px var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .18em; color: #aef08a; }
+      .cv-res-l1 { font: 900 26px/1.15 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .03em; margin-top: 6px; }
+      .cv-res-l2 { font: 700 20px/1.2 var(--display, "Big Shoulders Display"), sans-serif; color: #ff9a8a; }
     </style>
     <!-- S1289 · CU-T1 (note 178) : le curseur équipé, lu dans le profil local — le même fichier que l'écran titre. -->
     <script src="/titre/curseur.js"></script>
@@ -15242,7 +15289,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BhAnEhje.js"></script>
+    <script type="module" crossorigin src="./assets/index-DzHS4ag8.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
