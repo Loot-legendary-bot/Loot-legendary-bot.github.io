@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 01 Nov 2026
+- **01:02** — The Dining Room is a still picture again (the animated test is switched off: it was unstable and pixelated). Your Signature card stays lit from the start of the game: it only turns grey once you have used it this Dungeon Turn; when it cannot be played right now it keeps its colours and says why at its foot.
+
 ## 31 Oct 2026
 - **21:28** — Online: when you are asked, OK · CONTINUE always passes now, and at 0 s the game passes for you — even after a lost connection or a move the server refused (before, every later pass of that seat was silently dropped). When time runs out on a question the game does not answer for you (discarding down to your hand limit), the screen says so and waits for your cards instead of claiming "PASS applied". Character select: BACK TO MENU asks first — "Leave the table?" STAY / LEAVE. Dice rolled by a card or a room are named ("The Squire Spa · Purifying Bath · heal 2d10"), not "an op's die argument". Troll Milk, Troll Yogurt and the third Troll now add up.
 - **19:05** — Traps and chests now play in order: first the card alone in the middle, then your dice roll in your dice tray, then the result (the damage you take, or the rarities you draw). The result no longer shows before the card.
