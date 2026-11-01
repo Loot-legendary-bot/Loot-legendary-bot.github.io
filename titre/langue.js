@@ -1289,6 +1289,7 @@
     'You have time to play reactions — lit cards, Signature, gear':
       'Tu as le temps de jouer des réactions — cartes allumées, Signature, équipement',
     'OK · CONTINUE': 'OK · CONTINUER',
+    'ROLL THE DIE': 'LANCE LE DÉ', 'A DIE IS ABOUT TO BE ROLLED': 'UN DÉ VA ÊTRE LANCÉ',
     'HOW IT ENDED': 'COMMENT ÇA S’EST FINI', 'tie — rerolled': 'égalité — relancé',
     /* S1489 - note 368 (1)(b) : une langue par ecran -- l'annonce des fenetres de reaction (`annonce`, main.ts). */
     'A CARD HAS JUST BEEN DRAWN': 'UNE CARTE VIENT D’ÊTRE PIOCHÉE',

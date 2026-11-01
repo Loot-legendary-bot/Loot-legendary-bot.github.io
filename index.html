@@ -12963,6 +12963,26 @@
         left: calc(var(--bd-x, .5) * (100cqw - var(--bd-t))); top: calc(var(--bd-y, .5) * (100cqh - var(--bd-t)));
         transform: rotate(var(--bd-r, 0deg)); }
       .boite-des .bd-tapis .bd-des.bd-epars { filter: drop-shadow(5px 9px 5px rgba(0, 0, 0, .7)); }
+      /* S1607 · note 427 — les cartes posées AVANT le jet (Gorma, Clover…) : leurs vignettes sur le tapis, coin haut-gauche,
+         sous les dés (z-index 0), avec le bonus publié par le moteur. */
+      .boite-des .bd-tapis .bd-posees { position: absolute; left: 6px; top: 6px; bottom: 6px; z-index: 0; display: flex;
+        align-items: flex-start; gap: 4px; pointer-events: auto; }
+      .boite-des .bd-tapis .bd-posee { height: 62%; aspect-ratio: 5 / 7; border-radius: 4px; overflow: hidden;
+        transform: rotate(-6deg); box-shadow: 3px 5px 6px rgba(0, 0, 0, .65); background: #2a2018; }
+      .boite-des .bd-tapis .bd-posee:nth-child(2n) { transform: rotate(5deg); }
+      .boite-des .bd-tapis .bd-posee img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .boite-des .bd-tapis .bd-posee-nom { display: block; padding: 3px; font-size: 14px; color: #e9e1cf; line-height: 1.1; }
+      /* S1607 · note 443 ② — la carte anti-stuff vole du rond du lanceur au rond de sa cible (chez tous). */
+      .vol-de-carte .vdc-carte { position: fixed; left: 0; top: 0; width: 120px; aspect-ratio: 5 / 7; z-index: 2;
+        border-radius: 6px; box-shadow: 0 10px 22px rgba(0, 0, 0, .75); pointer-events: none;
+        transform: translate(calc(var(--x0) - 50%), calc(var(--y0) - 50%)) scale(.6);
+        animation: vdc-vol 1.5s cubic-bezier(.45, 0, .3, 1) .35s forwards; }
+      @keyframes vdc-vol {
+        0% { transform: translate(calc(var(--x0) - 50%), calc(var(--y0) - 50%)) scale(.6) rotate(0deg); }
+        45% { transform: translate(calc((var(--x0) + var(--x1)) / 2 - 50%), calc((var(--y0) + var(--y1)) / 2 + 160px)) scale(1.5) rotate(-8deg); }
+        100% { transform: translate(calc(var(--x1) - 50%), calc(var(--y1) - 50%)) scale(.5) rotate(4deg); opacity: .85; } }
+      .boite-des .bd-tapis .bd-posee-bonus { align-self: flex-end; font-size: 22px; font-weight: 700; color: #f2c14e;
+        text-shadow: 0 2px 3px rgba(0, 0, 0, .8); }
       .boite-des .bd-tapis .bd-des.bd-epars .die.die-rendue::before { content: none; }
       .boite-des:not(.bd-roule) .bd-tapis .bd-des.bd-epars .die-roule,
       .boite-des:not(.bd-roule) .bd-tapis .bd-des.bd-epars .die-fenetre { display: none; }
@@ -14445,6 +14465,11 @@
          (le carton est crème quel que soit le thème), taille en `cqw` pour suivre le carton jusque dans le zoom.
          Le glyphe est forcé en TEXTE : sous Windows, ▶ sort sinon en emoji bleu. */
       .fc-calque { container-type: inline-size; }
+      /* S1607 · note 450 ② — la loupe d'une ligne revient : un encadré flottant ×1,6, opaque, bord net, à côté du
+         curseur, rabattu dans l'écran (posé et placé par `poseLaLoupe`). */
+      .loupe-de-ligne { position: fixed; z-index: 9500; pointer-events: none; box-sizing: content-box;
+        background-color: #efe5cf; background-repeat: no-repeat; border: 3px solid #2a1a0e; border-radius: 6px;
+        outline: 2px solid var(--stock, #e9e1cf); box-shadow: 0 14px 34px -6px rgba(0, 0, 0, .85); }
       .fcz-sym { position: absolute; width: 3.5%; display: flex; align-items: center; justify-content: center;
         pointer-events: none; font-family: 'Segoe UI Symbol', 'DejaVu Sans', sans-serif; font-variant-emoji: text;
         font-size: max(11px, 2.6cqw); line-height: 1; color: #5a1a0e; }
@@ -14536,6 +14561,16 @@
         font-family: var(--display); font-weight: 800; font-size: calc(22px * var(--lisible, 1)) !important;
         letter-spacing: .14em; transform-origin: 100% 100%; }
       html.table-v2 .tv2-fin-de-tour button.fin-autonome-bouton:hover:not(:disabled) { border-color: var(--stock) !important; }
+      /* S1607 · note 437 ④ — END TURN dans la box de la main (troisième case de la grille, juste à droite de la main) ;
+         le compte à rebours sur le bouton (`data-rebours`) ; le bac reprend la place libérée dans la colonne. */
+      html.table-v2 .mb-flanc-droit { justify-self: start; align-self: end; pointer-events: none; padding: 0 0 18px 22px; }
+      html.table-v2 .mb-flanc-droit .tv2-fin-de-tour { position: static; pointer-events: auto; align-items: stretch; }
+      html.table-v2 .tv2-fin-de-tour button.fin-autonome-bouton[data-rebours] { height: auto; min-height: 56px;
+        padding: 6px 30px !important; display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
+      html.table-v2 .tv2-fin-de-tour button.fin-autonome-bouton[data-rebours]::after { content: 'ENDS IN ' attr(data-rebours);
+        font-size: calc(15px * var(--lisible, 1)); letter-spacing: .08em; font-weight: 700; opacity: .9; }
+      html[lang="fr"].table-v2 .tv2-fin-de-tour button.fin-autonome-bouton[data-rebours]::after { content: 'FIN DANS ' attr(data-rebours); }
+      html.table-v2 .tv2-colonne .boite-des { height: 364px; }
       /* S1506 · note 368 ① (c) — la bannière du Final Duel, en tête de la scène de combat */
       .nouvelle-table .ntt-banniere-duel { align-self: center; font-family: var(--display); font-weight: 800;
         font-size: calc(30px * var(--lisible, 1)); letter-spacing: .22em; color: #f0c94a;
@@ -15195,7 +15230,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-zEWbE0qq.js"></script>
+    <script type="module" crossorigin src="./assets/index-DSszioXq.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
