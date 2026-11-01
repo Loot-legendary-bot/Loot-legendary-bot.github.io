@@ -12970,6 +12970,11 @@
         left: calc(var(--bd-x, .5) * (100cqw - var(--bd-t))); top: calc(var(--bd-y, .5) * (100cqh - var(--bd-t)));
         transform: rotate(var(--bd-r, 0deg)); }
       .boite-des .bd-tapis .bd-des.bd-epars { filter: drop-shadow(5px 9px 5px rgba(0, 0, 0, .7)); }
+      /* S1607 · notes 436 ⑤ / 445 ② — le tapis PEINT de Croze (640 × 440 : cadre bois ~28 px, coins laiton ~37 px) :
+         en `border-image`, les coins gardent leur forme quelle que soit la taille du bac, le feutre s'étire au centre.
+         Remplace le bord bois et le dégradé de feutre dessinés en CSS (433 ①). */
+      .boite-des .bd-tapis.bd-tapis-peint { background: none; box-shadow: none; border-radius: 0;
+        border: 16px solid transparent; border-image: var(--bd-tapis-img) 38 fill / 16px stretch; }
       /* S1607 · note 427 — les cartes posées AVANT le jet (Gorma, Clover…) : leurs vignettes sur le tapis, coin haut-gauche,
          sous les dés (z-index 0), avec le bonus publié par le moteur. */
       .boite-des .bd-tapis .bd-posees { position: absolute; left: 6px; top: 6px; bottom: 6px; z-index: 0; display: flex;
@@ -15237,7 +15242,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CzPuJ0-C.js"></script>
+    <script type="module" crossorigin src="./assets/index-01PkB29a.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

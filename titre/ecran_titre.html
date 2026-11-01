@@ -598,6 +598,14 @@
   .grid.backs .cell.locked:focus-visible .hatch{opacity:0}
   .dshot .dosmark{position:absolute;left:26%;right:26%;top:16%;bottom:4%;
     background-size:contain;background-repeat:no-repeat;background-position:center}
+  /* S1607 - 445 (2) : un tapis est en paysage (640 x 440) ; grise comme un dos tant qu'il n'est pas a soi. */
+  .grid.trays{grid-template-columns:repeat(3,1fr);grid-auto-rows:22cqw}
+  .grid.trays .cell{height:100%}
+  .cell .dosmark.tapismark{left:5%;right:5%}
+  .dshot .dosmark.tapismark{left:6%;right:6%;top:10%;bottom:10%}
+  .grid.trays .cell.locked .dosmark{filter:saturate(.95) brightness(.5) contrast(1.04);transition:filter .25s}
+  .grid.trays .cell.locked:hover .dosmark,
+  .grid.trays .cell.locked:focus-visible .dosmark{filter:saturate(1.14) contrast(1.08) brightness(1.04)}
   .cell{position:relative;border:1px solid #1e1e24;background:#0a0a0d;overflow:hidden;
     cursor:pointer;transition:border-color .14s,transform .14s,box-shadow .14s}
   .cell:hover{border-color:#3a3a42}
@@ -1417,7 +1425,7 @@ const UNLOCK_PRICE=PRIX_PERSO.choisi;
    marquerait « Equipped » sur la PREMIERE peau du rayon, qui n'est meme pas
    possedee. -1 ne designe aucune case, et c'est le fait : le rayon n'a rien
    d'equipe tant que Croze n'a rien achete. */
-let equipped={dice:-1,curs:0,backs:0};
+let equipped={dice:-1,curs:0,backs:0,trays:0};
 
 /* roster : index+1 = bandeau. Mapping measured on the 18 zip files plus the separate
    Necromancer -- zip 1 -> 1, zip k -> k+1 for k>=2, Necromancer -> 2. */
@@ -1677,6 +1685,22 @@ function gardeLesDos(){
   const k=BACKS.findIndex(b=>b[1]===eq&&b[2]);
   equipped.backs=k>=0?k:0;
 }());
+/* S1607 - notes 436 (5), 445 (2), 449 (1) : le rayon DICE TRAYS. Les trois tapis de Croze (PNG 3:2, rognes au cadre
+   640 x 440, public/art/ui/dicebox/) : le VERT a tous et equipe par defaut (equipe.tapis = null), le ROUGE et le BLEU
+   au Vault, au prix de l'etage standard (MONNAIE 22 : 500, un mot le corrige). Le serveur lit equipe.tapis (`tray`,
+   salons.ts) ; le jeu pose le tapis equipe dans le bac (main.ts). [nom, id, possede, prix] */
+const TRAYS=[["Green felt","vert",1,0],["Red felt","rouge",0,500],["Blue felt","bleu",0,500]];
+function gardeLesTapis(){
+  try{window.LLProfil.modifie(p=>{p.possede.tapis=TRAYS.filter(t=>t[2]&&t[1]!=='vert').map(t=>t[1]);});}catch(e){}
+}
+(function(){
+  let ids=[], eq=null;
+  try{const p=window.LLProfil.lis(); ids=p.possede.tapis; eq=p.equipe.tapis;}catch(e){ids=[];eq=null;}
+  if(Array.isArray(ids)) TRAYS.forEach(t=>{if(ids.indexOf(t[1])>=0)t[2]=1;});
+  const k=TRAYS.findIndex(t=>t[1]===eq&&t[2]);
+  equipped.trays=k>=0?k:0;
+}());
+const tapisImg=id=>'/art/ui/dicebox/tapis_'+id+'.webp';
 /* S1289 (CU-T1 / CU-T2, note 178) - L'ACHAT ET L'EQUIPEMENT SE GARDENT.
    Jusqu'ici tout vivait en memoire : un curseur achete s'oubliait au
    rechargement, et l'equipe n'atteignait jamais la partie (une AUTRE page).
@@ -3106,6 +3130,7 @@ const counts=()=>({chars:CHARS.filter(c=>c.owned).length+'/'+TOTAL_CHARS,
   dice:DICE.filter(d=>d[2]).length+'/'+DICE.length,
   curs:CURSORS.filter(c=>c[2]).length+'/'+CURSORS.length,
   backs:BACKS.filter(b=>b[2]).length+'/'+BACKS.length,
+  trays:TRAYS.filter(t=>t[2]).length+'/'+TRAYS.length,
   /* S1357 \u00b7 note 201 (5) - les tickets en poche */
   tick:(()=>{const p=window.LLProfil.lis();const t=window.LLTickets?window.LLTickets.enPoche(p):{dpl:0,daily:0};const ch=window.LLBountyWall&&window.LLBountyWall.chance?window.LLBountyWall.chance(p):null;return String(t.dpl+t.daily+(ch?1:0));})(),
   /* S1418 - le Sang en poche */
@@ -3156,6 +3181,7 @@ function inventaire(){
     if(t.dpl>0) conso.push({nom:'Dungeon Pro Tour ticket',q:t.dpl,html:'<div class="plate"><img alt="" src="/art/tickets/dpl_sceau.webp"></div>',ouvre:()=>{ openSheet('tdpl',-1); sansAchat(t.dpl,'DUNGEON PRO TOUR'); }});
   }
   DICE.forEach(([nom,dossier,owned],i)=>{ if(owned) possede.push({nom:nom,html:'<div class="plate"><img class="peau" alt="" src="'+IMG_PEAU(dossier)[0]+'"></div>',eq:equipped.dice===i,ouvre:()=>openSheet('dice',i)}); });
+  TRAYS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' (dice tray)',html:'<div class="dosmark tapismark" style="background-image:url('+tapisImg(id)+')"></div>',eq:equipped.trays===i,ouvre:()=>openSheet('trays',i)}); });
   BACKS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' (card back)',html:'<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>',eq:equipped.backs===i,ouvre:()=>openSheet('backs',i)}); });
   CURSORS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' cursor',html:'<div class="curmark" style="background-image:url('+IMG_CURSEUR(id)+')"></div>',eq:equipped.curs===i,ouvre:()=>openSheet('curs',i)}); });
   CHARS.forEach(c=>{ if(c.owned) possede.push({nom:c.name,html:'<div class="plate"><img alt="" src="/art/personnages/all_ico_webp_CORRECTED_ALL/200px/'+idDuPerso(c.name)+'_200px.webp"></div>',eq:false,ouvre:null}); });
@@ -3181,7 +3207,7 @@ function inventaire(){
 /* S1431 - note 272 (5) : l'onglet INVENTORY, a part, en cases de RPG : ce que j'ai (consommables, possedes). */
 /* note 328 ② (Croze, 19/10) : le premier rayon est l'inventaire, et il s'appelle MY VAULT ; le reste = la boutique. */
 /* S1461 - note 341 (3) (Croze, 23/10 : « OK pour le Sang ») : l'onglet BLOOD se REVEILLE, en dernier. */
-const TABS=[['MY VAULT','inv'],['Characters','chars'],['Dice set','dice'],['Cursors','curs'],['Card backs','backs'],['Charms','tick'],['Blood','blood'],['Grade','grade']];   /* S1540 - note 385 (2c) : le rayon GRADE */
+const TABS=[['MY VAULT','inv'],['Characters','chars'],['Dice set','dice'],['Dice trays','trays'],['Cursors','curs'],['Card backs','backs'],['Charms','tick'],['Blood','blood'],['Grade','grade']];   /* S1540 - note 385 (2c) : le rayon GRADE */
 /* S1418 - note 239 (3), MONNAIE.md 10 - LE RAYON BLOOD : les quatre rayons du Sang et
    leurs prix. Le Sang se COMPTE, rien ne se vend tant que Steam n'est pas la : la
    vitrine se lit, aucun bouton n'achete. [nom, icone, prix, ce que c'est]. */
@@ -3360,6 +3386,10 @@ function etatVault(kind,i){
     if(ex!==null&&!ex.ouverte) return {e:'ex',prix:prix,ex:ex.l+' — '+fmt(Math.min(ex.n,ex.a))+' / '+fmt(ex.a)};
     if(SANG_SEULEMENT[DICE[i][1]]!==undefined) return {e:'buy',prix:SANG_SEULEMENT[DICE[i][1]],sang:true};
     return {e:'buy',prix:prix};
+  }
+  if(kind==='trays'){
+    if(TRAYS[i][2]) return {e:equipped.trays===i?'eq':'own'};
+    return {e:'buy',prix:TRAYS[i][3]};
   }
   if(kind==='backs'){
     const id=BACKS[i][1], owned=BACKS[i][2], prix=BACKS[i][3];
@@ -3542,6 +3572,18 @@ function fillGrid(key){
         '<div class="own">'+prix+'</div><div class="tagx">'+BLOOD[k][4]+'</div>'+
         '<div class="cap">'+nom+'</div>';
       c.addEventListener('click',()=>openSheet('blood',k));
+      c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
+      grid.appendChild(c);
+    });
+  } else if(key==='trays'){
+    /* S1607 - 445 (2) : le rayon DICE TRAYS, meme grammaire que les dos. */
+    trieParEtat('trays',TRAYS).forEach(([[name,id],i])=>{
+      const st=etatVault('trays',i);
+      const c=document.createElement('div');
+      c.className=classeVault(st); c.tabIndex=0;
+      c.innerHTML='<div class="dosmark tapismark" style="background-image:url('+tapisImg(id)+')"></div>'+badgeVault(st)+
+        '<div class="cap">'+name+'</div>';
+      c.addEventListener('click',()=>openSheet('trays',i));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
       grid.appendChild(c);
     });
@@ -3731,6 +3773,13 @@ function openSheet(kind,i){
     kick='Blood · '+o[2];
     name=o[0];
     body='<div class="rows">'+row('What',o[3])+row('Your blood',fmt(window.LLProfil.lis().sang||0))+'</div>';
+  } else if(kind==='trays'){
+    const t=TRAYS[i]; owned=t[2];
+    shot='<div class="dshot"><div class="dosmark tapismark" style="background-image:url('+tapisImg(t[1])+')"></div></div>';
+    kick='Dice tray \u00b7 '+(owned?(equipped.trays===i?'Equipped':'Owned'):'Locked');
+    name=t[0];
+    body='<div class="rows">'+row('Used for','Your dice tray: your dice roll on it, in game')+
+      row('Default','Green felt')+'</div>';
   } else if(kind==='backs'){
     const b=BACKS[i]; owned=b[2];
     shot='<div class="dshot"><div class="dosmark" style="background-image:url(/art/dos/'+b[1]+'.webp)"></div></div>';
@@ -3775,6 +3824,7 @@ function openSheet(kind,i){
                : kind==='ticketc' ? PRIX_CURSEURS.random
                : kind==='curs' ? PRIX_CURSEURS.choisi
                : kind==='backs' ? BACKS[i][3]
+               : kind==='trays' ? TRAYS[i][3]
                : kind==='tdpl' ? window.LLTickets.PRIX.dpl
                : kind==='tdaily' ? window.LLTickets.PRIX.daily : UNLOCK_PRICE;
     const can=PROFILE.gold>=prix;
@@ -3835,7 +3885,7 @@ function openSheet(kind,i){
       note='No dice skin is open yet: every one waits for its exploit in the Bounty Wall.'; warn=false;
     }
   } else if(kind!=='chars'){
-    const eq=(kind==='dice'?equipped.dice:kind==='backs'?equipped.backs:equipped.curs)===i;
+    const eq=(kind==='dice'?equipped.dice:kind==='backs'?equipped.backs:kind==='trays'?equipped.trays:equipped.curs)===i;
     cta='<button class="cta" id="dbtn"'+(eq?' disabled':'')+'>'+(eq?'Equipped':'Equip')+'</button>';
     /* S1550 - note 385 (2b), MONNAIE 32 (b) : le FOIL d'un set possede - ON / OFF au grade 10, verrouille avant. */
     if(kind==='dice' && window.LLDesFoil){
@@ -3985,7 +4035,7 @@ function act(kind,i){
     fillGrid(tab); refreshTabs(); openSheet('curs',k);
     return;
   }
-  const owned = kind==='chars'?ALPHA[i].owned:(kind==='dice'?DICE[i][2]:kind==='backs'?BACKS[i][2]:CURSORS[i][2]);
+  const owned = kind==='chars'?ALPHA[i].owned:(kind==='dice'?DICE[i][2]:kind==='backs'?BACKS[i][2]:kind==='trays'?TRAYS[i][2]:CURSORS[i][2]);
   /* S1347 - le cadenas tient aussi ici : le bouton est grise, et l'achat refuse. */
   if(!owned && kind==='dice'){ const ex=exploitDeLaPeau(DICE[i][1]); if(ex!==null && !ex.ouverte) return; }
   if(!owned && kind==='curs' && verrouDuMur(CURSORS[i][1],'u')!==null) return;   /* S1428 - note 265 (2) */
@@ -3994,7 +4044,8 @@ function act(kind,i){
        des PERSONNAGES) sous un bouton qui annoncait 320. */
     const prix = kind==='dice' ? prixDeLaPeau(i)
                : kind==='curs' ? PRIX_CURSEURS.choisi
-               : kind==='backs' ? BACKS[i][3] : UNLOCK_PRICE;
+               : kind==='backs' ? BACKS[i][3]
+               : kind==='trays' ? TRAYS[i][3] : UNLOCK_PRICE;
     if(prix===null) return;
     /* S1487 · note 367 ② — l'objet en Sang seulement se paie en Sang, jamais en dents. */
     const idSang = kind==='dice' ? DICE[i][1] : kind==='backs' ? BACKS[i][1] : null;
@@ -4009,6 +4060,7 @@ function act(kind,i){
     if(kind==='chars')ALPHA[i].owned=true;
     else if(kind==='dice')DICE[i][2]=1;
     else if(kind==='backs'){ BACKS[i][2]=1; gardeLesDos(); }
+    else if(kind==='trays'){ TRAYS[i][2]=1; gardeLesTapis(); }
     else { CURSORS[i][2]=1; gardeLesCurseurs(); }
     gardeLesPossessions();
     paintHUD(true);
@@ -4022,6 +4074,11 @@ function act(kind,i){
       equipped.backs=i;
       /* S1407 - note 224 : equipe = ECRIT (lick_floor = null, le defaut). */
       try{window.LLProfil.modifie(p=>{p.equipe.dos=BACKS[i][1]==='lick_floor'?null:BACKS[i][1];});}catch(e){}
+    }
+    else if(kind==='trays'){
+      equipped.trays=i;
+      /* S1607 - 445 (2) : equipe = ECRIT (vert = null, le defaut) ; le serveur le lit (`tray`), la partie aussi. */
+      try{window.LLProfil.modifie(p=>{p.equipe.tapis=TRAYS[i][1]==='vert'?null:TRAYS[i][1];});}catch(e){}
     }
     else if(kind==='curs'){
       equipped.curs=i;

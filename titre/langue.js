@@ -1421,6 +1421,8 @@
     "Play with friends": "Jouer entre amis",
     "MY VAULT": "MON VAULT",
     "Dice set": "Set de dés",
+    "Dice trays": "Tapis de dés", "Green felt": "Feutre vert", "Red felt": "Feutre rouge", "Blue felt": "Feutre bleu",
+    "Your dice tray: your dice roll on it, in game": "Ton bac à dés : tes dés y roulent, en partie",
     "Charms": "Charmes",
     "Charm": "Charme",
     "Consumables": "Consommables",
@@ -1521,6 +1523,7 @@
     '— you cannot pay': '— tu ne peux pas payer', 'LEAVES PLAY:': 'QUITTE LE JEU :',
     'PASSIVES — they apply on their own': 'PASSIFS — ils s’appliquent seuls', 'EQUIP from hand:': 'ÉQUIPER depuis la main :',
     'UNEQUIP to hand:': 'RETIRER vers la main :', '⚠ BY EQUIPPING, YOU JUST LOST': '⚠ EN ÉQUIPANT, TU VIENS DE PERDRE',
+    '⚠ NO LONGER PLAYABLE AFTER THIS EQUIP': '⚠ PLUS JOUABLE APRÈS CET ÉQUIPEMENT',
     '⊘ no valid target here': '⊘ aucune cible valable ici', '(or leave empty: the decision will open)': '(ou laisse vide : la décision s’ouvrira)',
     'TIE — goes to the roller': 'ÉGALITÉ — va au lanceur', 'BUST': 'SAUTÉ', '— an exit is available on this Tile': '— une sortie est disponible sur cette tuile',
     'THE CELL — break the lock:': 'THE CELL — briser la serrure :', 'no way offered this turn': 'aucun moyen offert ce tour',
@@ -1623,6 +1626,11 @@
     [/^(\d+)\. (Move|Explore \(1d6\)|Interaction :|Extract|Trade|Fight|Loot the body|Break the lock)$/,
       function (m, n, g) { return n + '. ' + GESTE_FR[g]; }],
     [/^TURN (\d+)$/, 'TOUR $1'], [/^collapse 1d(\d+)$/, 'Collapse 1d$1'], [/^portal (\d+) %$/, 'portail $1 %'],
+    /* S1608 - note 450 (5) : la ligne de la banniere d'equipement, ecrite sur unplayableCost */
+    [/^needs (\d+) cards? to discard — your hand is empty$/, 'il faut défausser $1 carte(s) — ta main est vide'],
+    [/^needs (\d+) consumables? to discard — you hold no consumable$/, 'il faut défausser $1 consommable(s) — tu n’en as aucun'],
+    [/^needs (\d+) cards? to discard — you hold (\d+)$/, 'il faut défausser $1 carte(s) — tu en as $2'],
+    [/^needs (\d+) consumables? to discard — you hold (\d+)$/, 'il faut défausser $1 consommable(s) — tu en as $2'],
     /* S1567 - note 403 (1) : PROCHAIN COLLAPSE · PROCHAIN PORTAIL */
     [/^next collapse 1d(\d+)$/, 'prochain Collapse 1d$1'], [/^next portal (\d+) %$/, 'prochain portail $1 %'],
     [/^ROUND (\d+)$/, 'MANCHE $1'],

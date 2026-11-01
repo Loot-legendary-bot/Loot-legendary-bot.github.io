@@ -61,8 +61,8 @@
       /* S1340 · PR-1 (note 194) — `persos` : les personnages possédés (ids du
          jeu). Au départ, les six que le Vault montrait déjà possédés (Q-PR1,
          veto d'un mot). `des` : les peaux achetées — `bones` l'est d'office. */
-      possede: { persos: PERSOS_DE_DEPART.slice(), des: [], curseurs: [], dos: [], peaux: [], foils: [] },  /* S1426 - FL-1 : les Foils (ids de cartes de loot) */
-      equipe: { de: null, curseur: null, dos: null },
+      possede: { persos: PERSOS_DE_DEPART.slice(), des: [], curseurs: [], dos: [], peaux: [], foils: [], tapis: [] },  /* S1426 - FL-1 : les Foils (ids de cartes de loot) ; S1607 - 445 (2) : les tapis du bac */
+      equipe: { de: null, curseur: null, dos: null, tapis: null },   /* tapis : null = le vert (le serveur lit `equipe.tapis`, salons.ts) */
       bounty: {},
       today: [],
       options: {},
