@@ -882,6 +882,13 @@
   .drawer .x:hover{color:var(--bone)}
   .dshot{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#0a0a0d;
     border:1px solid #1e1e24;margin-bottom:2.4cqh}
+  /* S1608 - note 449 (2) : « l'image du skin collee sous le bandeau du pseudo » - mesure a 1920 x 1080 : le bandeau
+     (118 -> 161 px) recouvre le haut du panneau, la vitrine commencait 2 px dessous et avait 36 px d'air sous elle.
+     Le cadre de la vitrine (les des le remplissent) descend a 24 px sous le bandeau (161 + 24), l'air qu'il a sous lui. */
+  .drawer .dshot{margin-top:67px}
+  /* S1608 - 449 (5) : le defi de la semaine, en petit sous la fiche du ticket */
+  .dpt-semaine{margin-top:1.6cqh;font-size:13px;line-height:1.4;color:#a9a294;border-top:1px solid #2a2620;padding-top:1.2cqh}
+  .dpt-semaine b{color:#d8cfbd;font-weight:700;letter-spacing:.04em}
   .dshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
     filter:grayscale(.2) brightness(.95) contrast(1.05)}
   .dshot.off img{filter:grayscale(1) brightness(.2)}
@@ -3694,19 +3701,21 @@ function openSheet(kind,i){
     /* note 266 (3) - les peintures de Croze sont carrees : la fiche les montre entieres. */
     shot='<div class="dshot besace"><div class="plate"><img alt="" src="/art/tickets/'+(dpl?'dpl':'daily')+
       '.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>';
-    kick=(dpl?'Dungeon Pro Tour \u00b7 this week':'Today\u2019s Dungeon \u00b7 invitation')+(n>0?' \u00b7 '+n+' in pocket':'');
-    name=dpl?sc.nom:'Today\u2019s Dungeon Invitation';
+    kick=(dpl?'Dungeon Pro Tour \u00b7 ticket \u00b7 '+fmt(T.PRIX.dpl)+' \ud83e\uddb7':'Today\u2019s Dungeon \u00b7 invitation')+(n>0?' \u00b7 '+n+' in pocket':'');
+    /* S1608 - note 449 (5) : « ca doit couter 500, et la description c'est juste de pouvoir entrer dans ce mode » -
+       la fiche montre d'abord le TICKET et le mode ; le defi de la semaine passe en petit sous « this week ». */
+    name=dpl?'Dungeon Pro Tour ticket':'Today\u2019s Dungeon Invitation';
     /* S1414 - DD-2 bis (note 235 (5)) : l'invitation est NEUTRE - le defi du
        jour se lit a l'entree DIVE -> DAILY DUNGEON, pas sur l'objet. */
     if(!dpl) body='<div class="rows">'+row('What it does','Lets you into Today\u2019s Dungeon once. Burned at the entrance.')
       +row('Today\u2019s challenge','Read at the entrance: Dive \u2192 Today\u2019s Dungeon')
       +row('Pays','\u00d72 the teeth \u00b7 +64 if the day\u2019s objective is met')+'</div>';
-    else body='<div class="rows">'+row('Seed',sc.seed+(dpl?' \u2014 the same dungeon for every ticket this week':' \u2014 the same dungeon for everyone today'))
-      +row('Objective',sc.objectif)+row('Conditions',sc.conditions)
-      +row('Character',sc.perso?sc.perso+' \u2014 given for the run':'Free \u2014 bring any character you own')
-      +row('Bounty Wall',sc.mur)
-      +row('Pays',dpl?'\u00d73 the teeth of a normal game \u00b7 rank points \u00b7 ranked':'\u00d72 the teeth \u00b7 +64 if the objective is met')+'</div>'
-      +(dpl?offrandeDuTicket():'');
+    else body='<div class="rows">'+row('The mode','Ranked \u2014 the same dungeon for everyone this week, and grade points')
+      +row('The ticket',fmt(T.PRIX.dpl)+' \ud83e\uddb7 \u2014 one entry, burned at the door')
+      +row('Pays','\u00d73 the teeth of a normal game \u00b7 rank points')+'</div>'
+      +'<div class="dpt-semaine"><b>This week \u00b7 '+sc.nom+'</b> \u2014 seed '+sc.seed+' \u00b7 '+sc.objectif
+      +(sc.conditions?' \u00b7 '+sc.conditions:'')+' \u00b7 '+(sc.perso?sc.perso:'any character')+'</div>'
+      +offrandeDuTicket();
   } else if(kind==='luck'||kind==='luckmine'){
     const BW=window.LLBountyWall; const id=BW.SORTES_CHANCE[i]; const o=BW.CHANCES[id];
     const ch=BW.chance(window.LLProfil.lis());
@@ -3829,7 +3838,7 @@ function openSheet(kind,i){
                : kind==='tdaily' ? window.LLTickets.PRIX.daily : UNLOCK_PRICE;
     const can=PROFILE.gold>=prix;
     cta='<button class="cta" id="dbtn"'+(can?'':' disabled')+'>'+
-        (kind==='ticket'||kind==='ticketc'?'Draw':kind==='tdpl'||kind==='tdaily'||kind==='offr'||kind==='luck'?'Buy':'Unlock')+' \u00b7 '+fmt(prix===null?0:prix)+' teeth</button>';
+        (kind==='ticket'||kind==='ticketc'?'Draw':kind==='tdpl'?'Enter':kind==='tdaily'||kind==='offr'||kind==='luck'?'Buy':'Unlock')+' \u00b7 '+fmt(prix===null?0:prix)+' teeth</button>';
     if(!can){note='Not enough teeth. You are '+fmt(prix-PROFILE.gold)+' short.';warn=true;}
     /* S1405 - note 221 (4) : les tickets random n'existent plus, leur rappel non plus. */
     /* S1347 \u00b7 note 200 (c) - LE CADENAS : une peau dont l'exploit n'est pas fait
@@ -3863,7 +3872,7 @@ function openSheet(kind,i){
     /* S1415 - BW-5 (note 237 (1)) : l'achat de tickets DPT se debloque au Bounty Wall,
        palier 16 du Donjon (deux arbres d'esprit termines). */
     if(kind==='tdpl' && window.LL_DPT_ENDORMI){
-      cta='<button class="cta" id="dbtn" disabled>Not open yet</button>';
+      cta='<button class="cta" id="dbtn" disabled>Enter \u00b7 '+fmt(prix)+' teeth \u2014 not open yet</button>';
       note=window.LL_DPT_DORT; warn=false;
     } else if(kind==='tdpl' && !window.LLBountyWall.dptOuvert(window.LLProfil.lis())){
       cta='<button class="cta" id="dbtn" disabled>Locked \u00b7 Bounty Wall \u00b7 '+fmt(prix)+' teeth</button>';
