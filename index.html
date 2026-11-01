@@ -3129,6 +3129,16 @@
        */
       .die-fenetre { position: absolute; inset: 0; overflow: hidden;
                      pointer-events: none; }
+      /* S1604 · note 446 ③ (Croze : « on garde le d6 à la même taille, et tous les autres dés on les met à l'échelle
+         par rapport au 1d6 ») — MESURÉ sur les rendus (`public/dice/<peau>/dN_face_1`, alpha > 40, identique dans les 28
+         peaux) : le d6 occupe 73 % de son image, le d4 63 %, le d8 52 %, le d10 60 %, le d12 66 %, le d20 69 % (la plus
+         grande des deux dimensions). Chaque dé est agrandi de 0,73 / sa part : même taille apparente que le d6, seul ou
+         à plusieurs, dans le bac comme au milieu. `scale` (et non `transform`) : il se compose avec le roulé. */
+      .die[data-faces="4"] > .die-rendu, .die[data-faces="4"] > .die-fenetre { scale: 1.16; }
+      .die[data-faces="8"] > .die-rendu, .die[data-faces="8"] > .die-fenetre { scale: 1.4; }
+      .die[data-faces="10"] > .die-rendu, .die[data-faces="10"] > .die-fenetre { scale: 1.22; }
+      .die[data-faces="12"] > .die-rendu, .die[data-faces="12"] > .die-fenetre { scale: 1.11; }
+      .die[data-faces="20"] > .die-rendu, .die[data-faces="20"] > .die-fenetre { scale: 1.06; }
       /*
        * ⛑⛑ S802 · NOTE 97 (a) — **CES DEUX NOMBRES SONT LE DÉFAUT LEGACY, PLUS
        * LA RÈGLE.** `3600%` et `steps(36)` valent *« 36 images »*, ce que Croze
@@ -15167,7 +15177,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CI8GhCP7.js"></script>
+    <script type="module" crossorigin src="./assets/index-TOuY_mYJ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

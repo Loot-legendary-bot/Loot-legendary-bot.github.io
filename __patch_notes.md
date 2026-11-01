@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 01 Nov 2026
+- **01:20** — Dice: every die now looks the same size as the d6 (d4, d8, d10, d12 and d20 were drawn smaller), alone or several at once, in your dice tray and in the middle of the screen.
 - **01:02** — The Dining Room is a still picture again (the animated test is switched off: it was unstable and pixelated). Your Signature card stays lit from the start of the game: it only turns grey once you have used it this Dungeon Turn; when it cannot be played right now it keeps its colours and says why at its foot.
 
 ## 31 Oct 2026
