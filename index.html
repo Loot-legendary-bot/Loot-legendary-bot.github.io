@@ -5321,6 +5321,13 @@
       /* c) L'ÉTOILE DES ÉCOLES — six valeurs d'un coup d'œil. */
       .etoile { display: flex; flex-direction: column; align-items: center; gap: 2px; }
       .etoile svg { width: 96px; height: 96px; }
+      /* S1607 · note 450 ③ — la boîte du dessin passe à ±62 (les chiffres des branches haute et basse sortaient) :
+         le dessin garde sa taille (96 × 124 / 100), et chaque branche a une prise invisible qui porte sa bulle. */
+      .etoile:not(.etoile-compacte) svg { width: 119px; height: 119px; }
+      .etoile svg .br-prise { stroke: transparent; stroke-width: 11; pointer-events: stroke; cursor: help; }
+      .etoile-bulle { position: fixed; z-index: 9500; pointer-events: none; white-space: nowrap; padding: 4px 9px;
+        background: rgba(14, 10, 8, .95); color: #f2ede4; border: 1px solid rgba(233, 228, 216, .5); border-radius: 4px;
+        font-size: max(14px, calc(13px * var(--lisible, 1))); }
       .etoile .br { stroke-width: 4; stroke-linecap: round; }
       .etoile .br.off { opacity: .18; }
       .etoile text { font-family: var(--mono); font-size: max(14px, calc(11px * var(--lisible, 1))); font-weight: 700; }
@@ -15230,7 +15237,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DSszioXq.js"></script>
+    <script type="module" crossorigin src="./assets/index-CzPuJ0-C.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
