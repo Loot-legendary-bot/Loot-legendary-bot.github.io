@@ -522,6 +522,35 @@
   #v-collection .htitle{top:16.5cqh}
   #v-collection .tabs{top:25cqh}
   #v-collection .grid{top:33cqh}
+  /* note 449 (3) (Croze, 01/11 : « Oui, code-le ») - LE RAIL : une ligne par rayon (icone, nom entier,
+     compteur lisible), le rayon actif allume en rouge, la grille prend tout le cote droit. */
+  #v-collection .tabs{top:25cqh;bottom:4cqh;width:17.5cqw;flex-direction:column;gap:0;
+    border-right:1px solid #2a2722;padding-right:1.2cqw;box-sizing:border-box;overflow-y:auto;scrollbar-width:none}
+  #v-collection .tabs::-webkit-scrollbar{display:none}
+  #v-collection .tab{display:flex;align-items:center;flex:none;width:100%;height:4.6cqh;padding:0 .8cqw;
+    border-left:3px solid transparent;font-size:max(14px, 2.2cqh);text-align:left;white-space:nowrap}
+  #v-collection .tab.sub{height:4.2cqh;padding-left:1.5cqw;font-size:max(14px, 2cqh)}
+  #v-collection .tab .rule{display:none}
+  #v-collection .tab.on{background:linear-gradient(90deg,rgba(179,38,30,.32),rgba(179,38,30,0));border-left-color:var(--blood)}
+  #v-collection .tab i{margin-left:auto;padding-left:.8cqw;font-size:max(14px, 1.9cqh);letter-spacing:.04em;
+    text-transform:none;color:#8d8676;vertical-align:0}
+  #v-collection .tab i b{font-weight:700;color:#cfc6b2}
+  #v-collection .tab.on i,#v-collection .tab.on i b{color:var(--bone)}
+  #v-collection .rail-grp{flex:none;margin:2.2cqh 0 .7cqh .8cqw;
+    font:800 max(14px, 1.45cqh)/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;
+    letter-spacing:.32em;text-transform:uppercase;color:#6b6457}
+  #v-collection .rail-gap{flex:none;height:2.6cqh}
+  #v-collection .grid{top:25cqh;left:23cqw}
+  #v-collection .csel{top:25cqh;left:23cqw}
+  /* la grille a perdu un cinquieme de sa largeur : les hauteurs de ligne pensees pour l'ancienne suivent
+     (memes proportions, mesurees : tapis 0,73, dos 1,28, des 8 colonnes) */
+  #v-collection .grid.trays{grid-auto-rows:17.2cqw}
+  #v-collection .grid.backs{grid-auto-rows:12.2cqw}
+  #v-collection .grid.dice .cell{height:calc(8cqw + 5cqh)}
+  /* le rayon GRADE n'avait jamais recu de colonnes (S1540) : une seule colonne, des cases de 2 px - mesure.
+     Quatre cadres sur une rangee, carres ; le de foil dessous, a la meme taille. */
+  #v-collection .grid.grade{grid-template-columns:repeat(5,1fr)}
+  #v-collection .grid.grade .cell{aspect-ratio:1/1}
 
   /* ---------- character select : one big plate, the roster beside it ---------- */
   .csel{position:absolute;left:3.6cqw;right:3.6cqw;top:33cqh;bottom:4cqh;
@@ -1932,6 +1961,10 @@ const ICONES={
      DUNGEON BLEACH (dessine en attendant sa peinture dans ASSETS/vault icones). */
   pot:'<path class="cire" d="M10 10h28v6H10z"/><path d="M12 16h24c2 2 3 5 3 9v13c0 3-2 5-5 5H14c-3 0-5-2-5-5V25c0-4 1-7 3-9z"/>'+
     '<path class="trou" d="M14 25h20v10H14z"/><path class="cire" d="M17 29h14v2H17z"/>',
+  /* note 449 (3) - les deux rayons qui n'avaient pas d'icone : le tapis de des (feutre, cadre, un de) et le grade (medaille). */
+  tapis:'<path d="M4 11h40v26H4z"/><path class="cire" d="M8 15h32v18H8z"/><path class="trou" d="M27 19h8v8h-8z"/>',
+  medaille:'<path class="cire" d="M15 4h7l2 12-6 3zM33 4h-7l-2 12 6 3z"/><circle cx="24" cy="31" r="12"/>'+
+    '<path class="trou" d="M24 23.5l2.3 4.7 5.2.8-3.8 3.6.9 5.1-4.6-2.4-4.6 2.4.9-5.1-3.8-3.6 5.2-.8z"/>',
   /* note 449 (4) - le rayon SUPPLIES : une besace (sangle, rabat, boucle). */
   sac:'<path class="trait" d="M15 18c0-9 4-13 9-13s9 4 9 13"/>'+
     '<path d="M8 19h32l-2 22c0 1.7-1.3 3-3 3H13c-1.7 0-3-1.3-3-3z"/>'+
@@ -3146,6 +3179,8 @@ const counts=()=>({chars:CHARS.filter(c=>c.owned).length+'/'+TOTAL_CHARS,
   tick:(()=>{const p=window.LLProfil.lis();const t=window.LLTickets?window.LLTickets.enPoche(p):{dpl:0,daily:0};const ch=window.LLBountyWall&&window.LLBountyWall.chance?window.LLBountyWall.chance(p):null;return String(t.dpl+t.daily+(ch?1:0));})(),
   /* S1418 - le Sang en poche */
   blood:fmt(window.LLProfil.lis().sang||0),
+  /* note 449 (3) : le grade du profil sur les 33 (MONNAIE 32), lu comme le rayon GRADE le lit */
+  grade:(()=>{let pg=null;try{pg=window.LLProfil.lis();}catch(e){pg=null;}return (pg!==null&&typeof pg.grade==='number'&&pg.grade>=1?Math.round(pg.grade):1)+'/33';})(),
   /* S1431 - note 272 (5) : les consommables en poche */
   inv:String((()=>{const v=inventaire();return v.conso.reduce((n,o)=>n+o.q,0)+v.essences.reduce((n,e)=>n+e.cases.reduce((m,c)=>m+c.q,0),0);})())});
 /* S1431 - note 272 (5) : L'INVENTAIRE, lu sur le profil et les rayons (rien d'ecrit ici).
@@ -3218,7 +3253,7 @@ function inventaire(){
 /* S1431 - note 272 (5) : l'onglet INVENTORY, a part, en cases de RPG : ce que j'ai (consommables, possedes). */
 /* note 328 ② (Croze, 19/10) : le premier rayon est l'inventaire, et il s'appelle MY VAULT ; le reste = la boutique. */
 /* S1461 - note 341 (3) (Croze, 23/10 : « OK pour le Sang ») : l'onglet BLOOD se REVEILLE, en dernier. */
-const TABS=[['MY VAULT','inv'],['Characters','chars'],['Dice set','dice'],['Dice trays','trays'],['Cursors','curs'],['Card backs','backs'],['Supplies','tick'],['Blood','blood'],['Grade','grade']];   /* S1540 - note 385 (2c) : le rayon GRADE */
+const TABS=[['MY VAULT','inv'],['Characters','chars'],['Dice sets','dice'],['Dice trays','trays'],['Card backs','backs'],['Cursors','curs'],['Supplies','tick'],['Blood','blood'],['Grade','grade']];   /* S1540 - note 385 (2c) : le rayon GRADE */
 /* S1418 - note 239 (3), MONNAIE.md 10 - LE RAYON BLOOD : les quatre rayons du Sang et
    leurs prix. Le Sang se COMPTE, rien ne se vend tant que Steam n'est pas la : la
    vitrine se lit, aucun bouton n'achete. [nom, icone, prix, ce que c'est]. */
@@ -3238,12 +3273,18 @@ const BLOOD=[
   ['Season pass','dpl','1,000 blood','The Dungeon Pro Tour season track: 20 cosmetic rewards earned by playing ranked. The free track exists; the pass doubles its steps.','soon']];
 let tab='inv';
 const tabsEl=document.getElementById('tabs'), grid=document.getElementById('grid');
+/* note 449 (3) (Croze, 01/11 : « Oui, code-le » sur la maquette `maquettes/vault_rail.html`) - LE RAIL :
+   les rayons en colonne a gauche, regroupes (MY VAULT · COSMETICS · SUPPLIES · BLOOD · GRADE),
+   la grille a droite. Les en-tetes de groupe vivent DANS #tabs : tout parcours des onglets lit `.tab`. */
+const RAYONS_COSMETIQUES=['chars','dice','trays','backs','curs'];
 TABS.forEach(([label,key],i)=>{
+  if(key==='chars'){ const g=document.createElement('div'); g.className='rail-grp'; g.textContent='Cosmetics'; tabsEl.appendChild(g); }
+  if(key==='tick'){ const g=document.createElement('div'); g.className='rail-gap'; tabsEl.appendChild(g); }
   const b=document.createElement('button');
-  b.className='tab'+(i===0?' on':''); b.dataset.key=key;
+  b.className='tab'+(i===0?' on':'')+(RAYONS_COSMETIQUES.indexOf(key)>=0?' sub':''); b.dataset.key=key;
   /* S1408 - IC-1 : chaque rayon porte son icone */
   /* note 449 (4) : CHARMS -> SUPPLIES (tout ce qu'on achete pour son donjon) : un sac, pas un bocal. */
-  const ICO_RAYON={chars:'perso',dice:'des',curs:'curseur',backs:'dos',tick:'sac',blood:'fiole',inv:'coffre'};
+  const ICO_RAYON={chars:'perso',dice:'des',trays:'tapis',curs:'curseur',backs:'dos',tick:'sac',blood:'fiole',inv:'coffre',grade:'medaille'};
   b.innerHTML='<svg class="besace-sil tab-ic" viewBox="0 0 48 48" aria-hidden="true">'+(ICONES[ICO_RAYON[key]]||'')/* S1552 : le rayon GRADE n'a pas d'icone - rien, jamais « undefined » */+'</svg>'+
     label+'<i></i><span class="rule"></span>';
   b.querySelector('.rule').style.backgroundImage='url('+A.bar+')';
@@ -3252,8 +3293,14 @@ TABS.forEach(([label,key],i)=>{
     tab=key;closeDrawer();fillGrid(key);});
   tabsEl.appendChild(b);
 });
+/* note 449 (3) : le compteur se lit « 20 / 20 », le premier nombre en clair - jamais « 20/20 » en 11 px. */
 function refreshTabs(){const c=counts();
-  [...tabsEl.children].forEach(b=>b.querySelector('i').textContent=c[b.dataset.key]);}
+  tabsEl.querySelectorAll('.tab').forEach(b=>{
+    const v=c[b.dataset.key];
+    if(v===undefined||v===null||v===''){ b.querySelector('i').textContent=''; return; }
+    const m=String(v).split('/');
+    b.querySelector('i').innerHTML='<b>'+m[0]+'</b>'+(m.length>1?' / '+m[1]:'');
+  });}
 const banner=n=>'<img src="'+BAN[n-1]+'" alt="">';
 function dot(d,cls){
   return '<svg class="'+(cls||'dif')+'" viewBox="0 0 10 10" aria-hidden="true">'+

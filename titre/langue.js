@@ -1427,6 +1427,8 @@
     "Your dice tray: your dice roll on it, in game": "Ton bac à dés : tes dés y roulent, en partie",
     "Charms": "Charmes",
     "Supplies": "Provisions",
+    "Dice sets": "Sets de dés",
+    "Cosmetics": "Cosmétiques",
     "Charm": "Charme",
     "Consumables": "Consommables",
     "LICK FLOOR exists on a table.": "LICK FLOOR existe sur une table.",
