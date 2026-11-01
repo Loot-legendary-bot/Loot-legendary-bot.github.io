@@ -14334,6 +14334,11 @@
         letter-spacing: .05em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left;
       }
       .nouvelle-table .ntt-onglet-cible .pv-pastille { flex: 0 0 auto; }
+      /* S1613 · note 453 ③ — l'école de l'adversaire : le radar compact à droite de ses PV, dans l'onglet. */
+      .nouvelle-table .ntt-onglet-cible .etoile.noc-ecoles { flex: 0 0 auto; display: flex; flex-direction: row; align-items: center;
+        gap: 6px; margin: -6px 0; padding: 0; cursor: help; }
+      .nouvelle-table .ntt-onglet-cible .etoile.noc-ecoles svg { width: 34px; height: 34px; flex: 0 0 auto; }
+      .nouvelle-table .ntt-onglet-cible .etoile.noc-ecoles .etoile-choix-court { position: static; order: -1; }
       .nouvelle-table .ntt-cibles > .ntt-cb2-joueur { flex: 1 1 0; min-height: 0; }
       /*
        * ⛑⛑ S1366 · note 204 ③ — EUX, EN ONGLETS, MOBS ET JOUEURS. Un onglet =
@@ -14407,6 +14412,9 @@
          entière, et la pastille de PV d'un JOUEUR, sans colonne, retombait dans celle du portrait (36 px) —
          un petit cadre rouge avec un cœur. Elle garde sa colonne, comme les PV d'un mob. */
       .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-pastille { grid-column: 4; grid-row: 1; justify-self: end; }   /* S1609 : une ligne (était grid-column: 2) */
+      /* S1613 · note 453 ③ — le radar d'école de l'adversaire : une cinquième colonne, sur la même ligne, à droite des PV. */
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible:has(> .noc-ecoles) { grid-template-columns: 30px minmax(0, 1fr) auto auto auto; column-gap: 8px; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible .noc-ecoles { grid-column: 5; grid-row: 1; justify-self: end; }
       @keyframes noc-braise {
         from { box-shadow: 0 0 0 1px var(--ember); }
         to   { box-shadow: 0 0 0 3px var(--ember), 0 0 14px var(--ember); }
@@ -15322,7 +15330,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-tKXQysYe.js"></script>
+    <script type="module" crossorigin src="./assets/index-keHyOnA-.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
