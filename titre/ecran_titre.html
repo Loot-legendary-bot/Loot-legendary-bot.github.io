@@ -280,7 +280,7 @@
      transform/opacity only). L'image est en plus mise à l'échelle 1,16 pour
      qu'aucun coin ne découvre le fond. */
   .doors{position:absolute;left:5cqw;right:5cqw;top:37.5cqh;bottom:9cqh;
-    display:grid;grid-template-columns:repeat(4,1fr);gap:1.6cqw}
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw}   /* S1621 - 463 (5) : trois portes */
   .door{position:relative;overflow:hidden;border:0;background:#0a0a0d;
     cursor:pointer;transform:skewX(-5deg);
     transition:border-color .16s,transform .16s,box-shadow .16s}
@@ -451,6 +451,13 @@
   .mchip.sel{color:var(--ink);min-width:18.06cqh;
     border-image:url(/art/hud/controls/button_solid.png) 0 100 0 120 fill / 0 1.56cqh 0 1.87cqh stretch}
   .mchip:focus-visible{outline:2px solid var(--blood);outline-offset:2px}
+  /* S1621 - 463 (5) : la ligne des formats en test, sous CLASSIC (l'ambre de l'ancienne porte EXPERIMENTAL) */
+  .mchips-test{position:relative;display:flex;align-items:center;gap:.8cqw;
+    border-left:1px solid #e0a84a;padding-left:1.4cqw}
+  .mchips-test>i{position:absolute;left:1.4cqw;top:-2.6cqh;font:400 max(11px,1.4cqh)/1 "Alegreya",Georgia,serif;
+    font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#e0a84a;white-space:nowrap}
+  .mchips-test .mchip{min-width:7.5cqh;height:4.8cqh;padding:0 1.2cqw;font-size:max(13px,2cqh)}
+  .mchips-test .mchip.sel{min-width:8.6cqh}
   .mline{position:absolute;left:3.6cqw;top:46.5cqh;font:400 max(14px, 1.95cqh)/1.45 "Alegreya",Georgia,serif;
     color:var(--dust);max-width:38cqw}
   /* S1414 - DD-2 bis : au Daily il n'y a ni puces ni sieges a choisir, et le
@@ -2755,7 +2762,7 @@ const MENU=[
      bounty WALL" -> l'entree principale s'appelle DIVE (elle remplace ENTER THE
      DUNGEON de la note 144 (1)). TODAY'S DUNGEON et BOUNTY WALL etaient deja
      poses ; seul ce libelle restait. */
-  ["Dive","classic \u00b7 today\u2019s dungeon \u00b7 dungeon pro tour \u00b7 experimental","pve",0],
+  ["Dive","classic \u00b7 today\u2019s dungeon \u00b7 dungeon pro tour","pve",0],   /* S1621 - 463 (5) : trois modes */
   /* (5) note 140 (2) : le drapeau `lower` etait encore ici. Le palier
      d'avant a ote la classe du TITRE DE PAGE et laisse celui de la TABLE :
      a l'ecran, PLAY / Vault / OPTIONS / QUIT. Mesure des QUATRE entrees
@@ -2906,20 +2913,10 @@ const DOORS=[
   /* S1489 - note 368 (6) : « AGAINST BOTS AND/OR PLAYERS » (Croze, capture 4). */
   ["Against bots and/or players","Classic","Free-for-all against bots and/or players, 3 to 5 players, alone or with friends. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
   ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
-  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked','Bronze III'],
-  ["Not ranked","Experimental","2v2, 2v2v2 and a six-player free-for-all against bots. Being tested \u2014 no ranking.",11,()=>setTimeout(()=>{matchCtx='exp';go('match','exp');},300),'d-exp',null],
-  /* S1568 - note 400 (12) : HI-SCORE n'avait aucune entree (moteur 1018). Un siege, vingt tours ; la graine est
-     tiree ici (\u00ab chaque tour est random \u00bb), le scenario est celui du moteur (main.ts, porte ?hiscore=). */
-  /* S1584 - note 426 (= 412 (2)) : la BORNE d'abord (classement plein ecran, borne.js), PRESS START lance ensuite. */
-  ["Alone \u00b7 20 turns","Hi-Score","Alone against the dungeon for twenty turns. Score as much as you can.",13,()=>setTimeout(()=>{
-    const lancer=()=>{
-      const q=new URLSearchParams(window.location.search);
-      q.delete('daily'); q.delete('seed'); q.delete('joueurs');
-      q.set('hiscore', String(Math.floor(Math.random()*2147483647)));
-      window.location.href='/?'+q.toString();
-    };
-    if(window.LLBorne) window.LLBorne.ouvre(lancer); else lancer();
-  },300),'d-hiscore',null]];
+  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked','Bronze III']];
+  /* S1621 - note 463 (5) = 445 (4) : DIVE a TROIS portes. La porte EXPERIMENTAL est fondue dans CLASSIC
+     (ses trois formats y sont, sous \u00ab being tested - no ranking \u00bb, voir MODES_DU_CTX) ; la porte HI-SCORE
+     est retiree (la borne, borne.js, et la porte ?hiscore= de main.ts restent, sans entree au menu). */
 const doors=document.getElementById('doors');
 DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
   const d=document.createElement('div');
@@ -3011,7 +3008,9 @@ const MODES=[['ffa','Free-for-all','One winner. Everything funnels into the Fina
              /* S1471 - note 359 (3) : le FFA a six (moteur 252 ter), experimental. */
              ['ffa6','Free-for-all \u00b7 6','Six players, each for themselves. One winner.']];
 /* 359 (3) : CLASSIC ne porte que le chacun-pour-soi ; EXPERIMENTAL porte le reste. */
-const MODES_DU_CTX = {bots:['ffa'], exp:['2v2','2v2v2','ffa6']};
+/* S1621 - note 463 (5) = 445 (4) : CLASSIC ouvre le sous-choix - le chacun-pour-soi, puis les trois formats en test. */
+const MODES_DU_CTX = {bots:['ffa','2v2','2v2v2','ffa6'], exp:['2v2','2v2v2','ffa6']};
+const MODES_EN_TEST = ['2v2','2v2v2','ffa6'];
 const mchips=document.getElementById('mchips'), arena=document.getElementById('arena');
 /* seat order is always [you, ally-or-slot, foe, foe] */
 const FFA =[[22,24],[78,24],[22,76],[78,76]];
@@ -3126,10 +3125,21 @@ function paintMatch(ctx){
   MODES.forEach(([k,title])=>{
     if(ctx==='daily') return;   /* S1414 - DD-2 bis : aucun choix, la table est celle du defi */
     if(MODES_DU_CTX[ctx] && !MODES_DU_CTX[ctx].includes(k)) return;   /* S1471 - note 359 (3) */
+    /* S1621 - 463 (5) : sous CLASSIC, les formats en test vont dans leur groupe, sous leur etiquette. */
+    let parent=mchips;
+    if(ctx==='bots' && MODES_EN_TEST.includes(k)){
+      let g=mchips.querySelector('.mchips-test');
+      if(!g){
+        g=document.createElement('span'); g.className='mchips-test';
+        const lab=document.createElement('i'); lab.textContent='being tested — no ranking';
+        g.appendChild(lab); mchips.appendChild(g);
+      }
+      parent=g;
+    }
     const b=document.createElement('button');
     b.className='mchip'+(k===matchMode?' sel':''); b.textContent=title;
     b.addEventListener('click',()=>{matchMode=k;paintMatch(matchCtx);});
-    mchips.appendChild(b);
+    parent.appendChild(b);
   });
   /* S1413 - DD-2 (note 233 (2)) : le Daily est une table FIXE (DAILY_DUNGEON 0 (3)) -
      chacun pour soi, 4 sieges ; et l'enveloppe du jour se lit AVANT de payer. */
@@ -3139,6 +3149,7 @@ function paintMatch(ctx){
   if(ctx==='daily') matchMode = tableDuJour && tableDuJour.mode==='2V2' ? '2v2' : 'ffa';
   const choixSieges = matchMode==='ffa' && ctx==='bots';
   document.getElementById('mline').textContent=MODES.find(m=>m[0]===matchMode)[2]
+    + (MODES_EN_TEST.includes(matchMode) ? ' Being tested — no ranking.' : '')   /* S1621 - 463 (5) */
     + (matchMode==='ffa' && !choixSieges
        ? ' Seats are drawn at random \u2014 3 to 5.'
        : '');

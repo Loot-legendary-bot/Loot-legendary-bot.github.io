@@ -1397,6 +1397,9 @@
     "click a menu entry · esc goes back · backgrounds cycle on their own": "clique une entrée · échap revient · les fonds changent seuls",
     "Dive": "Plonger",
     "classic · today’s dungeon · dungeon pro tour · experimental": "classic · défi du jour · dungeon pro tour · experimental",
+    /* S1621 - 463 (5) : DIVE a trois modes ; les formats en test sous CLASSIC */
+    "classic · today’s dungeon · dungeon pro tour": "classic · défi du jour · dungeon pro tour",
+    "being tested — no ranking": "en test — pas de classement",
     "buy & equip · characters · dice sets · cursors": "acheter et équiper · personnages · sets de dés · curseurs",
     "browse · tiles · mobs · loot cards · quests · characters": "parcourir · tuiles · mobs · cartes de butin · quêtes · personnages",
     "Ranking": "Classement",
