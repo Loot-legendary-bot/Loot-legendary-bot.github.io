@@ -6774,6 +6774,15 @@
                      pointer-events: none; }
       /* S1468 · 352 ⑤ / 355 ③ — l'autre qui répond : même bandeau, liseré ambre. */
       .attente-autre { border-color: #e0a84a; top: 56px; }
+      /* S1624 · note 457 ⑤ — la pause de table (contre des bots seulement) : un voile plein écran, RESUME. */
+      .pause-de-table { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column;
+                        align-items: center; justify-content: center; gap: 18px;
+                        background: rgba(0,0,0,.72); color: #fff; font-family: var(--display); }
+      .pause-de-table-titre { font-size: 96px; font-weight: 900; letter-spacing: .18em;
+                              animation: pause-de-table-pulse 1.6s ease-in-out infinite; }
+      .pause-de-table-tx { font-size: 18px; opacity: .85; letter-spacing: .04em; }
+      .pause-de-table-bouton { font-size: 24px; padding: 12px 36px; }
+      @keyframes pause-de-table-pulse { 50% { opacity: .55; } }
       /* S1470 · 355 ① — le timer GLOBAL de fin de tour : gros, au centre haut, il pope à l'apparition. */
       .fin-de-tour-global { position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
                      z-index: var(--z-couloir); padding: 10px 26px; background: rgba(0,0,0,.9);
@@ -15366,7 +15375,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CWSN4jDy.js"></script>
+    <script type="module" crossorigin src="./assets/index-feuMAlFJ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
