@@ -1532,7 +1532,7 @@
     '⊘ no valid target here': '⊘ aucune cible valable ici', '(or leave empty: the decision will open)': '(ou laisse vide : la décision s’ouvrira)',
     'TIE — goes to the roller': 'ÉGALITÉ — va au lanceur', 'BUST': 'SAUTÉ', '— an exit is available on this Tile': '— une sortie est disponible sur cette tuile',
     'THE CELL — break the lock:': 'THE CELL — briser la serrure :', 'no way offered this turn': 'aucun moyen offert ce tour',
-    '⏸ PAUSED — the timer is stopped at': '⏸ EN PAUSE — le minuteur est arrêté à', '· your reserve is draining:': '· ta réserve s’épuise :',
+    '⏸ PAUSED — the timer is stopped at': '⏸ EN PAUSE — le minuteur est arrêté à', '· your reserve is draining:': '· ta réserve s’épuise :', '⏸ PAUSED · YOUR RESERVE IS DRAINING': '⏸ EN PAUSE · TA RÉSERVE S’ÉPUISE',
     '① the roll': '① le jet', 'WHY YOU ROLL': 'POURQUOI TU LANCES', 'IT TARGETS YOU': 'ÇA TE VISE', 'YOU TAKE': 'TU PRENDS',
     'TRADE (free, outside the Action count):': 'TROC (gratuit, hors du compte des Actions) :', 'no other seat at this table': 'aucun autre siège à cette table',
     'hand verdict (step by step):': 'verdict de la main (pas à pas) :', 'empty hand': 'main vide', '☠ remains of': '☠ restes de',

@@ -6754,6 +6754,16 @@
          et le bandeau « X réfléchit » que toute la table voit. */
       .reb .pause-bouton { flex: 0 0 auto; font-weight: 800; letter-spacing: .06em; }
       .reb-en-pause .reb-sec { color: #fff; }
+      /* S1615 · note 456 ② — en pause, le compteur CLIGNOTE (le bandeau du haut et la réserve de la fenêtre) :
+         on voit que la réserve s'écoule. */
+      @keyframes pause-clignote { 0%, 55% { opacity: 1; } 56%, 100% { opacity: .25; } }
+      .pause-moi { border-color: #e0a84a; }
+      .pause-moi .pm-sec { margin-left: .4em; }
+      .pause-moi .pm-sec, .reb-en-pause .pause-reserve-sec { color: #e0a84a;
+        animation: pause-clignote 1s steps(1, end) infinite; }
+      @media (prefers-reduced-motion: reduce) {
+        .pause-moi .pm-sec, .reb-en-pause .pause-reserve-sec { animation: none; text-decoration: underline; }
+      }
       .pause-autre { position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
                      z-index: var(--z-couloir); padding: 8px 18px; background: rgba(0,0,0,.88);
                      border: 2px solid #fff; color: #fff; font-family: var(--display);
@@ -15330,7 +15340,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-eTUbh5kR.js"></script>
+    <script type="module" crossorigin src="./assets/index-UHaBXibZ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

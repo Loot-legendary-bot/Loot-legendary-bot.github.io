@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 02 Nov 2026
+- **00:47** — Pause: when you pause, a banner now appears above the dice tray — "PAUSED · YOUR RESERVE IS DRAINING" — and its seconds blink, so you can see your reserve running down (the seconds in the question window blink too). RESUME removes it.
+
 ## 01 Nov 2026
 - **23:53** — CLASSIC is a normal game again: after a Today's Dungeon, going back to the menu and launching CLASSIC no longer replays the daily challenge — your two quests and your score are back. The Skeleton Warrior card is ready for the Necromancer's Bone Call. Engine: Ice Block no longer causes a false death; a heal no longer queues a death.
 - **23:27** — No action left: the countdown is written on the END TURN plate again ("ENDS IN n s"), instead of a banner that covered the plate.
