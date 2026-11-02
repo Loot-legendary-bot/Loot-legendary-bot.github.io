@@ -11635,6 +11635,17 @@
       .ouv-draft-de { font-family: var(--display); font-weight: 800; font-size: 22px; min-width: 1.6em;
         text-align: center; border: 1px solid var(--rule); border-radius: 6px; padding: 1px 4px; }
       .ouv-draft-egal { font: 14px/1 var(--mono); color: var(--stock-dim); }
+      /* S1622 - note 431 (3) : le tour du draft, siege apres siege. */
+      .ouv-draft-siege.en-train { color: #f3d27a; animation: draft-choisit 1s ease-in-out infinite alternate; }
+      .ouv-draft-pris { font: 700 13px/1 var(--mono); letter-spacing: .06em; color: #e8d9a8; }
+      @keyframes draft-choisit { from { opacity: .55; } to { opacity: 1; } }
+      .roster-attente { flex: 0 0 100%; margin-bottom: 8px; padding: 8px 0; text-align: center;
+                        font: 700 18px/1 var(--display); letter-spacing: .14em; color: #f3d27a;
+                        animation: draft-choisit 1s ease-in-out infinite alternate; }
+      .cell.cell-attente { filter: grayscale(.55) brightness(.75); cursor: wait; }
+      .cell.cell-vient-de-prendre { animation: draft-prise .7s ease-out; z-index: 2; }
+      @keyframes draft-prise { 0% { transform: scale(1.14); box-shadow: 0 0 28px 6px var(--siege, #f3d27a); }
+                               100% { transform: scale(1); box-shadow: none; } }
       /* S1586 - note 431 (2) : mon tablier de grade et mon pseudo a cote de YOU. */
       .ouv-draft-tablier { height: 26px; width: auto; align-self: center; }
       .ouv-draft-pseudo { font: 700 13px/1 var(--mono); letter-spacing: .08em; color: var(--stock-dim); }
@@ -15355,7 +15366,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-9BIxAjKq.js"></script>
+    <script type="module" crossorigin src="./assets/index-hhqqqZJM.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
