@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 02 Nov 2026
+- **01:20** — In combat, your equipped cards no longer each repeat a cut-off "changing Gear b…" line: the reason you can't unequip right now is written once, under your Gear. "CANNOT BE REMOVED" is smaller.
 - **00:47** — Pause: when you pause, a banner now appears above the dice tray — "PAUSED · YOUR RESERVE IS DRAINING" — and its seconds blink, so you can see your reserve running down (the seconds in the question window blink too). RESUME removes it.
 
 ## 01 Nov 2026
