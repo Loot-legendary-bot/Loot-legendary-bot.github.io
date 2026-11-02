@@ -22,7 +22,8 @@
 (function () {
   'use strict';
   var DONNEE = null;
-  var etat = { boite: 'tiles', q: '', partout: false, vus: true, pasVus: true, f: {} };
+  /* note 461 ③ (Croze, 02/11) : le CODEX s'ouvre sur les cartes de main (boîte `loots`, LOOT CARDS) */
+  var etat = { boite: 'loots', q: '', partout: false, vus: true, pasVus: true, f: {} };
 
   function style() {
     if (document.getElementById('cx-style')) return;

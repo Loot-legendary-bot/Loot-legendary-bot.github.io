@@ -630,8 +630,15 @@
   /* S1607 - 445 (2) : un tapis est en paysage (640 x 440) ; grise comme un dos tant qu'il n'est pas a soi. */
   .grid.trays{grid-template-columns:repeat(3,1fr);grid-auto-rows:22cqw}
   .grid.trays .cell{height:100%}
-  .cell .dosmark.tapismark{left:5%;right:5%}
-  .dshot .dosmark.tapismark{left:6%;right:6%;top:10%;bottom:10%}
+  /* S1620 - notes 458 / 461 (2) : le tapis du Vault = celui du bac en jeu. Meme proportion (252 x 288, mesure a
+     1920 x 1080), meme border-image (tranche 38, bord 16 px sur 252 x 288 = 6,35 % x 5,56 %), le centre etire comme
+     en partie : on voit au Vault exactement ce que le bac montrera. */
+  .dosmark.tapismark{background:none;border:1px solid transparent;box-sizing:border-box;
+    border-image:var(--tapis) 38 fill / 5.56% 6.35% stretch;aspect-ratio:252/288;height:auto;
+    left:50%;right:auto;transform:translateX(-50%);filter:drop-shadow(0 6px 10px rgba(0,0,0,.6))}
+  .cell .dosmark.tapismark{top:6%;bottom:auto;height:72%;width:auto}
+  .dshot .dosmark.tapismark{top:8%;bottom:auto;height:84%;width:auto}
+  .grid.inv .slot .dosmark.tapismark{position:static;transform:none;width:auto;height:88%;margin:6% auto 0}
   .grid.trays .cell.locked .dosmark{filter:saturate(.95) brightness(.5) contrast(1.04);transition:filter .25s}
   .grid.trays .cell.locked:hover .dosmark,
   .grid.trays .cell.locked:focus-visible .dosmark{filter:saturate(1.14) contrast(1.08) brightness(1.04)}
@@ -1725,7 +1732,14 @@ function gardeLesDos(){
    640 x 440, public/art/ui/dicebox/) : le VERT a tous et equipe par defaut (equipe.tapis = null), le ROUGE et le BLEU
    au Vault a 10 000 dents (note 451 (2), Croze 01/11 : « voire beaucoup plus cher »). Le serveur lit equipe.tapis
    (`tray`, salons.ts) ; le jeu pose le tapis equipe dans le bac (main.ts). [nom, id, possede, prix] */
-const TRAYS=[["Green felt","vert",1,0],["Red felt","rouge",0,10000],["Blue felt","bleu",0,10000]];
+const TRAYS=[["Green felt","vert",1,0],["Red felt","rouge",0,10000],["Blue felt","bleu",0,10000],
+  /* S1620 - notes 461 (2) / 458 : les quinze tapis de ASSETS/trays (Croze, 02/11), rognes au format du bac en jeu
+     (504 x 576 = 2 x 252 x 288, mesure a l'oeil) ; les noms suivent ceux des fichiers, a 10 000 dents comme les autres. */
+  ["Framed green","cadre_vert",0,10000],["Framed red","cadre_rouge",0,10000],["Framed slate","cadre_ardoise",0,10000],
+  ["Framed rust","cadre_rouille",0,10000],["Framed black","cadre_noir",0,10000],["Framed purple","cadre_violet",0,10000],
+  ["Beautiful stones","pierres",0,10000],["Brand new leather","cuir_neuf",0,10000],["Brown croco leather","croco",0,10000],
+  ["Chiasse cuir","chiasse_cuir",0,10000],["Deep blue","bleu_profond",0,10000],["Elegant green leather","cuir_vert",0,10000],
+  ["Green & damaged","vert_abime",0,10000],["Herm-style","herm",0,10000],["Red & damaged","rouge_abime",0,10000]];
 function gardeLesTapis(){
   try{window.LLProfil.modifie(p=>{p.possede.tapis=TRAYS.filter(t=>t[2]&&t[1]!=='vert').map(t=>t[1]);});}catch(e){}
 }
@@ -3235,7 +3249,7 @@ function inventaire(){
     if(t.dpl>0) conso.push({nom:'Dungeon Pro Tour ticket',q:t.dpl,html:'<div class="plate"><img alt="" src="/art/tickets/dpl_sceau.webp"></div>',ouvre:()=>{ openSheet('tdpl',-1); sansAchat(t.dpl,'DUNGEON PRO TOUR'); }});
   }
   DICE.forEach(([nom,dossier,owned],i)=>{ if(owned) possede.push({nom:nom,html:'<div class="plate"><img class="peau" alt="" src="'+IMG_PEAU(dossier)[0]+'"></div>',eq:equipped.dice===i,ouvre:()=>openSheet('dice',i)}); });
-  TRAYS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' (dice tray)',html:'<div class="dosmark tapismark" style="background-image:url('+tapisImg(id)+')"></div>',eq:equipped.trays===i,ouvre:()=>openSheet('trays',i)}); });
+  TRAYS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' (dice tray)',html:'<div class="dosmark tapismark" style="--tapis:url('+tapisImg(id)+')"></div>',eq:equipped.trays===i,ouvre:()=>openSheet('trays',i)}); });
   BACKS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' (card back)',html:'<div class="dosmark" style="background-image:url(/art/dos/'+id+'.webp)"></div>',eq:equipped.backs===i,ouvre:()=>openSheet('backs',i)}); });
   CURSORS.forEach(([nom,id,owned],i)=>{ if(owned) possede.push({nom:nom+' cursor',html:'<div class="curmark" style="background-image:url('+IMG_CURSEUR(id)+')"></div>',eq:equipped.curs===i,ouvre:()=>openSheet('curs',i)}); });
   CHARS.forEach(c=>{ if(c.owned) possede.push({nom:c.name,html:'<div class="plate"><img alt="" src="/art/personnages/all_ico_webp_CORRECTED_ALL/200px/'+idDuPerso(c.name)+'_200px.webp"></div>',eq:false,ouvre:null}); });
@@ -3648,7 +3662,7 @@ function fillGrid(key){
       const st=etatVault('trays',i);
       const c=document.createElement('div');
       c.className=classeVault(st); c.tabIndex=0;
-      c.innerHTML='<div class="dosmark tapismark" style="background-image:url('+tapisImg(id)+')"></div>'+badgeVault(st)+
+      c.innerHTML='<div class="dosmark tapismark" style="--tapis:url('+tapisImg(id)+')"></div>'+badgeVault(st)+
         '<div class="cap">'+name+'</div>';
       c.addEventListener('click',()=>openSheet('trays',i));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -3844,7 +3858,7 @@ function openSheet(kind,i){
     body='<div class="rows">'+row('What',o[3])+row('Your blood',fmt(window.LLProfil.lis().sang||0))+'</div>';
   } else if(kind==='trays'){
     const t=TRAYS[i]; owned=t[2];
-    shot='<div class="dshot"><div class="dosmark tapismark" style="background-image:url('+tapisImg(t[1])+')"></div></div>';
+    shot='<div class="dshot"><div class="dosmark tapismark" style="--tapis:url('+tapisImg(t[1])+')"></div></div>';
     kick='Dice tray \u00b7 '+(owned?(equipped.trays===i?'Equipped':'Owned'):'Locked');
     name=t[0];
     body='<div class="rows">'+row('Used for','Your dice tray: your dice roll on it, in game')+
