@@ -153,6 +153,16 @@
     var b = String((s && s.base) || (c ? c.serveur() : ''));
     return b.replace(/^[a-z]+:\/\//i, '').replace(/\/.*$/, '') || 'the server';
   }
+  /* S1628 - mot de Croze (03/11) : « RANKING n'affiche pas le bon nom de grade ». Le serveur ecrivait
+     dans `grade` le nom de LIGUE DPT (« Bronze III », `gradeDe`) ; le grade du jeu est un NOMBRE 1-33
+     (`profil.grade`, pose depuis GAME_ENDED.grades) et son nom vient de la table du CODEX. Une ligne
+     sans nombre ne montre rien plutot qu'un nom faux (demande M-S1628 au moteur : le nombre dans /ranking). */
+  function nomDuGrade(n) {
+    var C = window.LLCodex; return C && typeof C.nomDuGrade === 'function' ? C.nomDuGrade(n) : null;
+  }
+  function monGrade() {
+    var P = moi(); return P && typeof P.grade === 'number' ? P.grade : 1;
+  }
   function moi() {
     try { return window.LLProfil ? window.LLProfil.lis() : null; } catch (e) { return null; }
   }
@@ -162,7 +172,7 @@
     if (!Array.isArray(l)) { return null; }
     return l.map(function (x) {
       return { pseudo: String(x.pseudo || x.name || '?'), points: x.points !== undefined ? x.points : x.pts,
-               grade: x.grade || x.rang || x.rank || '' };
+               grade: nomDuGrade(typeof x.grade === 'number' ? x.grade : x.grade_num) || '' };
     });
   }
 
@@ -181,7 +191,7 @@
       var d = el('div', 'rk-dit'); d.innerHTML = etat.liste.erreur; zone.appendChild(d);
       /* ta ligne, tant que le serveur n'a pas de classement : ce PC sait ton pseudo et ton grade */
       if (nom) {
-        var l = ligne({ pseudo: nom, points: null, grade: P.rang || '' }, '—', true);
+        var l = ligne({ pseudo: nom, points: null, grade: '' }, '—', true);
         l.title = 'you, read on this PC';
         zone.appendChild(l);
       }
@@ -196,7 +206,7 @@
     l.appendChild(el('span', 'rk-pos', pos));
     l.appendChild(el('span', 'rk-ps', x.pseudo));
     l.appendChild(el('span', 'rk-pts', fmt(x.points)));
-    l.appendChild(el('span', 'rk-gr', x.grade || '—'));
+    l.appendChild(el('span', 'rk-gr', (estMoi ? nomDuGrade(monGrade()) : x.grade) || '—'));
     l.addEventListener('click', function () { inspecte(x.pseudo); });
     l.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); inspecte(x.pseudo); } });
     return l;
@@ -216,7 +226,8 @@
     if (c.attente) { f.appendChild(el('div', 'rk-dit', 'Asking ' + hote() + '…')); return; }
     if (c.erreur) { var d = el('div', 'rk-dit'); d.innerHTML = c.erreur; f.appendChild(d); return; }
     var p = c.profil || {};
-    if (p.rang || p.grade) { f.appendChild(el('div', 'rk-kv')).append(el('span', null, 'Grade'), el('span', null, p.rang || p.grade)); }
+    var gNom = nomDuGrade(c.pseudo === (moi() || {}).pseudo ? monGrade() : p.grade);
+    if (gNom) { f.appendChild(el('div', 'rk-kv')).append(el('span', null, 'Grade'), el('span', null, gNom)); }
     /* note 324 ① — sa CARRIERE, quand le serveur porte le bloc ; sinon la phrase d'attente */
     if (estUneCarriere(p.stats)) { f.appendChild(el('div', 'rk-k', 'Career')); f.appendChild(blocCarriere(p.stats)); }
     else { f.appendChild(el('div', 'rk-dit', hote() + ' does not serve the career lines yet.')); }

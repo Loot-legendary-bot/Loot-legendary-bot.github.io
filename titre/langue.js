@@ -1412,6 +1412,7 @@
     "One seed for everyone — try as often as you like, your best try counts.": "Une même graine pour tous — essaie autant que tu veux, ton meilleur essai compte.",
     "Ranked ladder": "Classement compétitif",
     "The Pro Tour opens soon.": "Le Pro Tour ouvre bientôt.",
+    "Today’s Dungeon is coming back soon.": "Le défi du jour revient bientôt.",   /* S1625 - 466 (1) */
     "Not ranked": "Non classé",
     "2v2, 2v2v2 and a six-player free-for-all against bots. Being tested — no ranking.": "2v2, 2v2v2 et un chacun pour soi à six contre des bots. En test — pas de classement.",
     "Fire": "Feu",
@@ -1536,6 +1537,7 @@
     'TIE — goes to the roller': 'ÉGALITÉ — va au lanceur', 'BUST': 'SAUTÉ', '— an exit is available on this Tile': '— une sortie est disponible sur cette tuile',
     'THE CELL — break the lock:': 'THE CELL — briser la serrure :', 'no way offered this turn': 'aucun moyen offert ce tour',
     '⏸ PAUSED — the timer is stopped at': '⏸ EN PAUSE — le minuteur est arrêté à', '· your reserve is draining:': '· ta réserve s’épuise :', '⏸ PAUSED · YOUR RESERVE IS DRAINING': '⏸ EN PAUSE · TA RÉSERVE S’ÉPUISE',
+    /* S1624 · note 457 ⑤ — la pause de table */ '⏸ PAUSE THE GAME': '⏸ METTRE LA PARTIE EN PAUSE', 'the game is stopped — the bots and the timers wait for you': 'la partie est arrêtée — les bots et les minuteurs t’attendent', '▶ RESUME': '▶ REPRENDRE', 'only against bots: everything stops until you resume': 'seulement contre des bots : tout s’arrête jusqu’à ce que tu reprennes',
     '① the roll': '① le jet', 'WHY YOU ROLL': 'POURQUOI TU LANCES', 'IT TARGETS YOU': 'ÇA TE VISE', 'YOU TAKE': 'TU PRENDS',
     'TRADE (free, outside the Action count):': 'TROC (gratuit, hors du compte des Actions) :', 'no other seat at this table': 'aucun autre siège à cette table',
     'hand verdict (step by step):': 'verdict de la main (pas à pas) :', 'empty hand': 'main vide', '☠ remains of': '☠ restes de',

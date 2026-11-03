@@ -1116,6 +1116,9 @@
 .regles .notes p{margin:0 0 .6cqh}
 .regles .notes ul{margin:0 0 1.6cqh;padding-left:2.2cqh}
 .regles .notes li{margin:0 0 .5cqh}
+/* S1628 - mot de Croze (03/11) : « RULES : la categorie affiche le tuto, en plus du reste » */
+.regles .notes .tuto-go{margin:.6cqh 0 1.4cqh;padding:.9cqh 1.8cqh;cursor:pointer;border:.3cqh solid #a3231d;border-radius:.4cqh;background:transparent;font:900 max(14px, 2.2cqh)/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.08em;color:#a3231d}
+.regles .notes .tuto-go:hover,.regles .notes .tuto-go:focus-visible{background:#a3231d;color:#fff;outline:none}
 .profil{position:absolute;left:5.1%;right:5.1%;top:37%;bottom:6%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 36px;align-content:start;font-family:var(--mono,monospace);color:#e9e2d4}
 .pf-bloc{min-width:0}
 .pf-bloc.pf-fichier{grid-column:1 / -1}
@@ -2183,6 +2186,7 @@ function transit(fn,el,paint){
 }
 
 let view='title';
+window.__llVue=function(){return view;}; /* S1626 - 467 : home_pnc.js lit la vue courante */
 function set(v,arg){
   view=v;
   document.querySelectorAll('.view').forEach(s=>s.classList.remove('on'));
@@ -2215,6 +2219,12 @@ function set(v,arg){
   /* S1450 - note 311 (1) : la page BOUNTY WALL tire sa texture a chaque ouverture (`fonds_modes.js`, lot `bounty`). */
   if(v==='league' && window.LLFonds) FOND_DU_MUR = window.LLFonds.tire('bounty', PANNEAU.bounty);
   poseLeFondDuPanneau();
+  /* S1626 - note 467 : le HOME point & click se pose sur le titre (home_pnc.js) */
+  if(window.LLHomePnc) window.LLHomePnc.surLaVue(v);
+  /* S1627 - note 467 : l'esprit demande par le HOME, lu une fois */
+  if(v==='league' && window.LLHomePnc && window.LLHomePnc.espritDemande && window.LLMurOuvre){
+    window.LLMurOuvre(window.LLHomePnc.espritDemande); window.LLHomePnc.espritDemande=null;
+  }
 }
 var FOND_DU_MUR = null;
 /* (1) note 140 — UN FOND PAR PANNEAU, et `#floorbg` est le seul endroit ou
@@ -2327,6 +2337,8 @@ function peinsLaLangue(){
   sortie.textContent='LOG OUT / SWITCH PROFILE';
   sortie.addEventListener('click',function(){ if(window.LLCompte&&typeof window.LLCompte.changeDeProfil==='function') window.LLCompte.changeDeProfil(); });
   box.appendChild(sortie);
+  /* S1626 - note 467 9 : HOME - CLASSIC MENU, HIGH QUALITY BACKGROUND, REDUCED ANIMATIONS */
+  if(window.LLHomePnc) window.LLHomePnc.lignesOptions(box);
   peinsLeDev(box);
 }
 /* S1419 - note 241 (8) : LE PANNEAU DEV. Croze : « reboot les offrandes sur mon profil,
@@ -2660,7 +2672,9 @@ const REGLES=[
   /* S1427 - note 257 (4) : le mode d'emploi du jeu en ligne, une page, pour les amis (OU_ON_EN_EST 12/10 (3)). */
   ['online','How to play online','friends · a room · a code',null],
   /* S1447 - note 306 (8) : les phrases d'aide du panneau WHAT YOU CAN DO, retire de la table, vivent ici. */
-  ['tour','Your turn','actions · END TURN · discard',null]];
+  ['tour','Your turn','actions · END TURN · discard',null],
+  /* S1628 - mot de Croze (03/11) : le tuto dans RULES, en plus du reste - le lancer, et relire ses fiches */
+  ['tuto','First steps','the tutorial · play it · its cards',null]];
 const TON_TOUR=[
   ['Your actions',[
     'The two action pips next to your portrait <b>glow while they are due</b> and go out one by one as you spend them.',
@@ -2735,6 +2749,19 @@ function peinsLesRegles(){
     if(r[0]==='tour'){
       h='<h3>Your turn</h3>'+TON_TOUR.map(([tete,ls])=>'<h4>'+tete+'</h4><ul>'+ls.map(l=>'<li>'+l+'</li>').join('')+'</ul>').join('');
       n.innerHTML=h; page.appendChild(n); box.appendChild(page); return;
+    }
+    if(r[0]==='tuto'){
+      n.innerHTML='<h3>First steps</h3><p>A real game as the Mailman, run by a dungeon master: he stops you on cards and walks you through every move.</p>';
+      const go1=document.createElement('button'); go1.type='button'; go1.className='tuto-go'; go1.textContent='PLAY FIRST STEPS';
+      /* la meme porte que la fiche FIRST STEPS de DIVE (lEntreeTutoriel) */
+      go1.addEventListener('click',()=>{ const q=new URLSearchParams(window.location.search); q.set('tuto','tuto_1_the_run'); q.delete('perso'); window.location.href='/?'+q.toString(); });
+      n.appendChild(go1);
+      const liste=document.createElement('div'); liste.innerHTML='<h4>The dungeon master’s cards</h4><p>…</p>'; n.appendChild(liste);
+      fetch('/titre/tuto_fiches.gen.json').then(x=>x.json()).then(d=>{
+        const fs=(d&&d.fiches)||[];
+        liste.innerHTML='<h4>The dungeon master’s cards</h4>'+fs.map(f=>'<p><b>'+f.n+'. '+(f.titre_en||f.titre)+'</b></p><ul><li>'+(f.corps_en||f.corps)+'</li></ul>').join('');
+      }).catch(()=>{ liste.innerHTML='<h4>The dungeon master’s cards</h4><p>The cards could not be read.</p>'; });
+      page.appendChild(n); box.appendChild(page); return;
     }
     if(r[0]==='online'){
       h='<h3>How to play online</h3>'+COMMENT_EN_LIGNE.map(([tete,ls])=>'<h4>'+tete+'</h4><ol>'+ls.map(l=>'<li>'+l+'</li>').join('')+'</ol>').join('');
@@ -2907,6 +2934,12 @@ fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json(
    interrupteur : LL_DPT_ENDORMI = false le rouvre. */
 window.LL_DPT_ENDORMI = true;
 window.LL_DPT_DORT = 'The Pro Tour opens soon.';
+/* S1625 - note 466 (1) (Croze, 02/11 : « on va le lock comme le mode Dungeon Pro Tour, ferme le temps
+   qu'on rework les defis ») : TODAY'S DUNGEON se GRISE comme le Pro Tour - la porte, l'enveloppe du
+   Vault, le tiroir. Visible, fermee : rien ne se lance, aucune invitation ne se brule. Un seul
+   interrupteur : LL_DAILY_ENDORMI = false le rouvre. */
+window.LL_DAILY_ENDORMI = true;
+window.LL_DAILY_DORT = 'Today’s Dungeon is coming back soon.';
 const DOORS=[
   /* S1471 - note 359 (3) : VS BOTS devient CLASSIC (reco du classeur), le chacun-pour-soi a 3, 4 ou 5 ;
      2V2, 2V2V2 et le FFA a six passent dans la porte EXPERIMENTAL (moteur 252 ter), sans classement. */
@@ -2932,11 +2965,12 @@ DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
     (chip?'<span class="chip">'+chip+'</span>':'')+
     '<div class="body"><h3>'+title+'</h3><p>'+line+'</p></div><span class="rule"></span>';
   d.querySelector('.rule').style.backgroundImage='url('+A.bar+')';
-  const dort = ident==='d-ranked' && window.LL_DPT_ENDORMI;
+  const dort = (ident==='d-ranked' && window.LL_DPT_ENDORMI) || (ident==='d-daily' && window.LL_DAILY_ENDORMI);
   if(dort){
-    d.title=window.LL_DPT_DORT; d.style.cursor='not-allowed';
+    const dit = ident==='d-daily' ? window.LL_DAILY_DORT : window.LL_DPT_DORT;
+    d.title=dit; d.style.cursor='not-allowed';
     d.querySelector('img').style.filter='grayscale(1) brightness(.4)';
-    d.querySelector('.body p').textContent=window.LL_DPT_DORT;
+    d.querySelector('.body p').textContent=dit;
     const ch=d.querySelector('.chip'); if(ch) ch.remove();
   }
   const fire=()=>{ if(busy||dort)return; d.classList.add('hit');
@@ -3572,11 +3606,13 @@ function fillGrid(key){
      ['tdaily','/art/tickets/daily_sceau.webp',T.PRIX.daily,'Today\u2019s Dungeon',poche.daily]].forEach(([k,src,prix,cap,n])=>{
       const c=document.createElement('div');
       /* note 266 (4) - verrouille, il montre quand meme son prix (gris + cadenas + prix). */
-      const ferme=k==='tdpl'&&(window.LL_DPT_ENDORMI||!window.LLBountyWall.dptOuvert(window.LLProfil.lis()));
+      const ferme=(k==='tdpl'&&(window.LL_DPT_ENDORMI||!window.LLBountyWall.dptOuvert(window.LLProfil.lis())))
+        || (k==='tdaily'&&window.LL_DAILY_ENDORMI);   /* S1625 - 466 (1) */
+      const EX=k==='tdaily'?window.LL_DAILY_DORT:EX_DPT;
       c.className='cell ticket-env'+(ferme?' locked':''); c.tabIndex=0;
       c.innerHTML='<div class="plate"><img alt="" src="'+src+'" style="width:100%;height:100%;object-fit:cover;display:block"></div>'+
         '<span class="ic-coin" title="'+cap+' - invitation"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[k==='tdpl'?'dpl':'daily']+'</svg></span>'+
-        (ferme?'<div class="hatch"></div>'+exploitmark(EX_DPT):'')+'<div class="own vprix">'+fmt(prix)+'</div>'+(ferme?'<div class="exhint">'+EX_DPT+'</div>':'')+(n>0?'<div class="tagx">'+n+' in pocket</div>':'')+
+        (ferme?'<div class="hatch"></div>'+exploitmark(EX):'')+'<div class="own vprix">'+fmt(prix)+'</div>'+(ferme?'<div class="exhint">'+EX+'</div>':'')+(n>0?'<div class="tagx">'+n+' in pocket</div>':'')+
         '<div class="cap">'+cap+'</div>';
       c.addEventListener('click',()=>openSheet(k,-1));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -3956,7 +3992,10 @@ function openSheet(kind,i){
     }
     /* S1415 - BW-5 (note 237 (1)) : l'achat de tickets DPT se debloque au Bounty Wall,
        palier 16 du Donjon (deux arbres d'esprit termines). */
-    if(kind==='tdpl' && window.LL_DPT_ENDORMI){
+    if(kind==='tdaily' && window.LL_DAILY_ENDORMI){   /* S1625 - 466 (1) : ferme, rien ne s'achete */
+      cta='<button class="cta" id="dbtn" disabled>Buy · '+fmt(prix)+' teeth — not open yet</button>';
+      note=window.LL_DAILY_DORT; warn=false;
+    } else if(kind==='tdpl' && window.LL_DPT_ENDORMI){
       cta='<button class="cta" id="dbtn" disabled>Enter \u00b7 '+fmt(prix)+' teeth \u2014 not open yet</button>';
       note=window.LL_DPT_DORT; warn=false;
     } else if(kind==='tdpl' && !window.LLBountyWall.dptOuvert(window.LLProfil.lis())){
@@ -6120,6 +6159,8 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   }
   peins();
   document.getElementById('bboard').addEventListener('click', peins);
+  /* S1627 - note 467 : un esprit clique sur le HOME ouvre le mur SUR sa branche (les six visages, pas SEE ALL) */
+  window.LLMurOuvre = function (id) { page.classList.remove('bw-tout'); peinsLaBascule(); ouvert = id; peins(); };
 }());
 
 /*
@@ -6265,4 +6306,4 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     window.__sonDuMenu = (window.__sonDuMenu | 0) + 1;
   }, true);
 }());
-</script></body></html>
+</script><script src="/titre/home_pnc.js"></script></body></html>

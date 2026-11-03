@@ -918,5 +918,7 @@
   /* BW-5 : le mur lit l'Exploration ici ; il demande d'abord si l'index est chargé. */
   function pret() { return DONNEE !== null; }
   window.LLCodex = { peins: peins, charge: charge, progres: progres, noeuds: noeuds, dort: dort, pret: pret,
-    touche: touche, prochainDe: prochainDe };
+    touche: touche, prochainDe: prochainDe,
+    /* S1628 - mot de Croze (03/11) : « RANKING n'affiche pas le bon nom de grade » - le nom d'un grade 1-33, lu ICI (la table du CODEX) */
+    nomDuGrade: function (n) { n = Number(n); return Number.isInteger(n) && n >= 1 && n <= GRADES_EN.length ? GRADES_EN[n - 1] : null; } };
 })();
