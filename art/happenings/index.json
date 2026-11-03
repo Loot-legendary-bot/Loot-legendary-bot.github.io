@@ -1,6 +1,4 @@
 [
- "TILE.BLOOD_ALTAR_RUINS.mp4",
- "TILE.THE_DINING_ROOM.mp4",
  "loot.devouring_moths.mp4",
  "loot.dungeon_PARTY_MASK.mp4",
  "loot.leeches.mp4",
@@ -8,6 +6,11 @@
  "loot.magpie.mp4",
  "mob.astragor.mp4",
  "mob.bad_fairy.mp4",
+ "mob.good_fairy.mp4",
  "mob.skeleton_warrior.mp4",
- "portal.mp4"
+ "portal.mp4",
+ "TILE.BLOOD_ALTAR_RUINS.mp4",
+ "TILE.THE_ARENA_RUINS.mp4",
+ "TILE.THE_DINING_ROOM.mp4",
+ "TILE.THE_NEXUS_GATE_RUINS.mp4"
 ]
