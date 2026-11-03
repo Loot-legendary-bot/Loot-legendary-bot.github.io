@@ -10836,6 +10836,21 @@
          donc le mot à l'ENCRE et à sa taille, pas en blanc. */
       .dicelayer.transition.run-annonce .borne-titre { color: var(--ink); text-shadow: none;
         font-size: clamp(54px, calc(var(--uvh) * 6.4), 96px); letter-spacing: .22em; }
+      /* S1636 · notes 470 ⑤ / 462 ② — LA DESCENTE : logo sur noir (1 s) → la vidéo → à sa moitié RUN 1 et la
+         bande blanche → la vidéo s'efface à sa fin, le titre reste sur le jeu. */
+      .dicelayer.descente { background: #000; transition: background-color .6s ease; }
+      .dicelayer.descente.clip-fini { background: transparent; }
+      .dicelayer.descente .descente-clip { z-index: 0; transition: opacity .6s ease; }
+      .dicelayer.descente.clip-fini .descente-clip { opacity: 0; }
+      .dicelayer.descente .descente-noir { position: absolute; inset: 0; z-index: 3; background: #000;
+        display: grid; place-items: center; pointer-events: none; transition: opacity .4s ease; }
+      .dicelayer.descente.noir-fini .descente-noir { opacity: 0; }
+      .descente-logo { width: min(62vw, 1100px); height: auto; animation: descente-logo .6s var(--pop, ease-out) both; }
+      @keyframes descente-logo { from { opacity: 0; transform: scale(.82); } to { opacity: 1; transform: none; } }
+      .dicelayer.descente video[data-transition] { z-index: 1; opacity: 0; }
+      .dicelayer.descente.run-vient video[data-transition] { opacity: 1; }
+      .dicelayer.descente > .borne-bloc { z-index: 2; }
+      @media (prefers-reduced-motion: reduce) { .descente-logo { animation: none; } }
       /* ⛑ `.fin-run.fr-plein > *` borne chaque enfant à 1 100 px : le splash
          peint n'en couvrait que la gauche (vu au volet). Même poids de
          sélecteur, déclaré plus bas : celui-ci l'emporte. */
@@ -15379,7 +15394,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CrkfKB8i.js"></script>
+    <script type="module" crossorigin src="./assets/index-BcelKLGH.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
