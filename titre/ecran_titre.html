@@ -316,6 +316,14 @@
        dominante, et elle n'etait accusee par personne. */
     filter:grayscale(.9) brightness(.55) contrast(1);transition:filter .25s}
   .door:hover img{filter:grayscale(.15) brightness(.66) contrast(1.35)}
+  /* S1636 - note 471 (1) : la porte FERMEE - le cadenas du choix des persos, la condition sous le titre */
+  .door.door-ferme:hover{transform:skewX(-5deg)}
+  .door.door-ferme h3{color:#7d776c}
+  .door .door-cadenas{position:absolute;left:50%;top:40%;width:5.5cqh;aspect-ratio:3/4;z-index:2;pointer-events:none;
+    transform:translate(-50%,-50%) skewX(5deg);filter:drop-shadow(0 .3cqh .8cqh rgba(0,0,0,.95));
+    background:no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'%3E%3Cpath d='M6 14V9a6 6 0 0 1 12 0v5' fill='none' stroke='%23e9dcc4' stroke-width='3'/%3E%3Crect x='2' y='14' width='20' height='16' rx='2' fill='%23e9dcc4'/%3E%3Crect x='10.5' y='19' width='3' height='6' fill='%230b0b0b'/%3E%3C/svg%3E")}
+  .door .door-cond{margin-top:1cqh;font:800 max(14px, 1.6cqh)/1.2 "Big Shoulders Display","Arial Black",Impact,sans-serif;
+    letter-spacing:.06em;text-transform:uppercase;color:#e9dcc4}
   /* Le voile est ARRETE A 45 % : il garde sa forme (clair en haut, sombre en
      bas, pour que le titre pose dessus reste lisible) mais il ne va plus
      jusqu'a 95 %, ou il effacait ce que le brightness venait de rendre.
@@ -2972,6 +2980,14 @@ DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
     d.querySelector('img').style.filter='grayscale(1) brightness(.4)';
     d.querySelector('.body p').textContent=dit;
     const ch=d.querySelector('.chip'); if(ch) ch.remove();
+    /* S1636 - note 471 (1) (Croze, 03/11 : « tu mets un locker sur les trucs inaccessibles et tu m'ecris
+       la condition d'acces, comme le lock des persos du character screen ») : le cadenas du choix des
+       persos au centre de la porte, et la condition ecrite sous le titre. */
+    d.classList.add('door-ferme');
+    const cad=document.createElement('span'); cad.className='door-cadenas'; d.appendChild(cad);
+    const cond=document.createElement('div'); cond.className='door-cond';
+    cond.textContent = ident==='d-daily' ? 'Locked — comes back with the new challenges' : 'Locked — opens with the Pro Tour season';
+    d.querySelector('.body').appendChild(cond);
   }
   const fire=()=>{ if(busy||dort)return; d.classList.add('hit');
     setTimeout(()=>d.classList.remove('hit'),300); fn(); };
@@ -4458,7 +4474,10 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
  * dans `main.ts`. Sur le HOME, le geste vient toujours : c'est un menu.
  */
 (function(){
-  var FICHIER = 'menu_home_1';
+  /* S1636 - notes 469 (2) et 471 (2) (a) : le CARROUSEL du HOME - la nouvelle piste 1re, la musique
+     d'avant 2e, en boucle alternee, fondu croise a chaque couture. Lues par leur sound_id. */
+  var FICHIERS = ['sombra_humida', 'menu_home_1'];
+  var DEMI = 0.5;                    /* S1636 - note 469 (3) : le maitre divise par deux, comme en jeu (gainMaitre) */
   var FONDU   = 2.0;                 /* secondes, de chaque cote de la couture */
   var CLE     = 'll.options.son';
 
@@ -4467,6 +4486,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   var maitre = 0.5;                  /* S1435 - note 281 (12) : le volume MAITRE (`volMaster`) ; 50 % par defaut (349 (1)) */
   var allumee = true;                /* son interrupteur (`musique`) */
   var els = [], actif = 0, arme = false, pret = false;
+  var pistes = [], rang = 0;         /* les pistes lues, et celle qui sonne */
 
   /* Le meme calcul que `gainVersVolume` dans `main.ts` : un gain positif est
      ecrete a 1, `HTMLAudioElement.volume` n amplifie pas. */
@@ -4502,29 +4522,32 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     }, pas);
   }
 
-  function cible(){ return vol * reglage * maitre; }
+  function cible(a){ return (a && typeof a.__vol === 'number' ? a.__vol : vol) * reglage * maitre * DEMI; }
   /* S1435 - note 281 (12) : le curseur SOUND d'Options regle la musique du menu en direct. */
   /* S1441 - note 298 (5) : le curseur MUSIC d'Options regle aussi la musique du menu en direct. */
   window.LLVolumeMusique = function(v){
     reglage = Math.min(1, Math.max(0, v));
-    els.forEach(function(x){ if (!x.paused && !x.__rampe) { x.volume = Math.min(1, Math.max(0, cible())); } });
+    els.forEach(function(x){ if (!x.paused && !x.__rampe) { x.volume = Math.min(1, Math.max(0, cible(x))); } });
   };
   window.LLVolumeMaitre = function(v){
     maitre = Math.min(1, Math.max(0, v));
-    els.forEach(function(x){ if (!x.paused && !x.__rampe) { x.volume = Math.min(1, Math.max(0, cible())); } });
+    els.forEach(function(x){ if (!x.paused && !x.__rampe) { x.volume = Math.min(1, Math.max(0, cible(x))); } });
   };
 
   function lance(i){
     var a = els[i];
+    var t = pistes[rang % pistes.length];
+    if (a.__chemin !== t.chemin) { a.src = t.chemin; a.__chemin = t.chemin; }
+    a.__vol = t.vol;
     a.__couture = false;
     try { a.currentTime = 0; } catch (e) {}
     a.volume = 0;
     var p = a.play();
     if (p && p.catch) {
-      p.then(function(){ rampe(a, 0, cible(), FONDU); })
+      p.then(function(){ rampe(a, 0, cible(a), FONDU); })
        .catch(function(){ armeLePremierGeste(); });
     } else {
-      rampe(a, 0, cible(), FONDU);
+      rampe(a, 0, cible(a), FONDU);
     }
   }
 
@@ -4549,6 +4572,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     a.__couture = true;
     rampe(a, a.volume, 0, FONDU, function(){ a.pause(); });
     actif = 1 - actif;
+    rang = (rang + 1) % pistes.length;
     lance(actif);
   }
 
@@ -4565,22 +4589,25 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       var entete = (lignes.shift() || '').split(',').map(function(s){ return s.trim(); });
       var iId = entete.indexOf('sound_id'), iF = entete.indexOf('fichier'), iG = entete.indexOf('gain_db');
       if (iId < 0 || iF < 0 || iG < 0) return;
-      var mienne = null;
-      for (var k = 0; k < lignes.length; k++) {
-        var c = lignes[k].split(',');
-        if ((c[iId] || '').trim() === FICHIER) { mienne = c; break; }
+      for (var w = 0; w < FICHIERS.length; w++) {
+        for (var k = 0; k < lignes.length; k++) {
+          var c = lignes[k].split(',');
+          if ((c[iId] || '').trim() !== FICHIERS[w]) continue;
+          var gk = parseFloat((c[iG] || '0').trim());
+          pistes.push({ id: FICHIERS[w], chemin: '/snd/' + (c[iF] || '').trim(), vol: isFinite(gk) ? gainVersVolume(gk) : 1 });
+          break;
+        }
       }
-      if (mienne === null) return;
-      var g = parseFloat((mienne[iG] || '0').trim());
-      vol = isFinite(g) ? gainVersVolume(g) : 1;
-      var chemin = '/snd/' + (mienne[iF] || '').trim();
+      if (pistes.length === 0) return;
+      vol = pistes[0].vol;
+      var g = null;
+      var chemin = pistes.map(function(x){ return x.chemin; }).join(' -> ');
 
       litLesReglages();
       for (var j = 0; j < 2; j++) {
         var a = new Audio();
         a.preload = 'auto';
         a.loop = false;
-        a.src = chemin;
         a.volume = 0;
         a.addEventListener('timeupdate', suitLaCouture);
         els.push(a);
@@ -4590,7 +4617,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       window.__musiqueDuHome = function(){
         return {
           chemin: chemin, gain_db: g, mix: vol, reglage: reglage, allumee: allumee,
-          cible: cible(), pret: pret, arme: arme, actif: actif,
+          cible: cible(els[actif]), pret: pret, rang: rang, pistes: pistes.map(function(x){ return x.id; }), arme: arme, actif: actif,
           els: els.map(function(x){
             return { src: (x.src || '').split('/snd/')[1] || null, volume: x.volume,
                      paused: x.paused, t: Number(x.currentTime.toFixed(2)),

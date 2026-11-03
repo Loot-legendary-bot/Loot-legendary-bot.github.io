@@ -1413,6 +1413,8 @@
     "Ranked ladder": "Classement compétitif",
     "The Pro Tour opens soon.": "Le Pro Tour ouvre bientôt.",
     "Today’s Dungeon is coming back soon.": "Le défi du jour revient bientôt.",   /* S1625 - 466 (1) */
+    "Locked — comes back with the new challenges": "Fermé — revient avec les nouveaux défis",   /* S1636 - 471 (1) */
+    "Locked — opens with the Pro Tour season": "Fermé — ouvre avec la saison du Pro Tour",
     "Not ranked": "Non classé",
     "2v2, 2v2v2 and a six-player free-for-all against bots. Being tested — no ranking.": "2v2, 2v2v2 et un chacun pour soi à six contre des bots. En test — pas de classement.",
     "Fire": "Feu",
@@ -1572,6 +1574,9 @@
     'DARKER BACKGROUND': 'FOND PLUS SOMBRE', 'DARK': 'SOMBRE', 'VERY DARK': 'TRÈS SOMBRE',
     'how much the room behind the table is darkened (V: next notch)': 'combien la salle derrière la table est assombrie (V : cran suivant)',
     'music, effects and interface together': 'musique, effets et interface ensemble',
+    '⏭  NEXT TRACK': '⏭  PISTE SUIVANTE',   /* S1636 - 471 (2) (b) */
+    'or press M during a game': 'ou la touche M en partie',
+    'boss fight — the boss track plays until it ends': 'combat de boss — sa musique joue jusqu’à la fin du combat',
     'turn start and end, the turn timer, menu clicks': 'début et fin de tour, le minuteur du tour, les clics de menu',
     'the move is resolving — END TURN comes once the damage has landed': 'le coup se résout — FIN DU TOUR vient une fois les dégâts posés',
     'the dungeon turn by turn — Esc to go back': 'le donjon tour par tour — Échap pour revenir',
