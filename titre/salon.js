@@ -254,6 +254,11 @@
              celui du siege si la salle le publie (`seats[].grade`, demande M-S1579 au serveur) ; mon siege le lit
              a mon profil, comme le HOME. Sans grade connu, pas de tablier (jamais un grade 1 suppose a un autre). */
           var g = typeof x.grade === 'number' ? x.grade : null;
+          /* S1637 - mot de Croze (03/11) : « dans un lobby, je vois mon tablier mais pas ceux des autres ». Le serveur
+             publie `grade: null` pour un profil qui n'a encore fini aucune partie (`gradeDuProfil`) : c'est le grade 1,
+             celui que ce joueur voit sur son propre HOME (`ecran_titre.html`, « un profil qui n'a encore fini aucune
+             partie est au grade 1 »). Un serveur qui ne publie PAS le champ ne fait toujours rien supposer. */
+          if (g === null && Object.prototype.hasOwnProperty.call(x, 'grade') && x.grade === null) { g = 1; }
           if (g === null && moi && moi.seat === x.seat) {
             try { var pr = window.LLProfil && window.LLProfil.lis(); g = pr && typeof pr.grade === 'number' ? pr.grade : 1; } catch (e) { g = null; }
           }

@@ -31,7 +31,7 @@
     '.rk-find input::placeholder{color:rgba(233,226,212,.4)}' +
     '.rk-find button{background:#a3231d;color:#fff0d8;border:0;font:900 1.7cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.12em;' +
     'padding:0 1.6cqw;cursor:pointer;text-transform:uppercase}' +
-    '.rk-tete,.rk-l{display:grid;grid-template-columns:4.5cqw minmax(0,1fr) 9cqw 9cqw;gap:1cqw;align-items:baseline;padding:.9cqh .8cqw}' +
+    '.rk-tete,.rk-l{display:grid;grid-template-columns:4.5cqw minmax(0,1fr) 16cqw 6cqw;gap:1cqw;align-items:baseline;padding:.9cqh .8cqw}' +
     '.rk-tete{font:900 1.3cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(233,226,212,.55);' +
     'border-bottom:1px solid rgba(233,226,212,.25)}' +
     '.rk-liste{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none}' +
@@ -40,6 +40,10 @@
     '.rk-l:hover,.rk-l:focus-visible{background:rgba(163,35,29,.28);outline:none}' +
     '.rk-l.moi{border-left:3px solid #d9b35a}' +
     '.rk-pos{color:rgba(233,226,212,.55)}.rk-pts{text-align:right;color:#d9b35a;font-weight:700}.rk-gr{text-align:right}' +
+    /* S1637 - note 472 (2) + mot de Croze (03/11) : le TABLIER du grade devant son nom */
+    '.rk-l .rk-ps{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
+    '.rk-l{align-items:center}.rk-l .rk-gr{display:flex;align-items:center;justify-content:flex-end;gap:.8cqw}' +
+    '.rk-tab{height:4.2cqh;width:auto;filter:drop-shadow(0 .3cqh .6cqh rgba(0,0,0,.6))}' +
     '.rk-dit{font-size:1.7cqh;line-height:1.5;color:rgba(233,226,212,.75);padding:1.4cqh .8cqw}' +
     '.rk-dit b{color:#f4eddc}' +
     '.rk-fiche{border-left:1px solid rgba(233,226,212,.2);padding-left:2cqw;overflow-y:auto;scrollbar-width:none}' +
@@ -172,7 +176,11 @@
     if (!Array.isArray(l)) { return null; }
     return l.map(function (x) {
       return { pseudo: String(x.pseudo || x.name || '?'), points: x.points !== undefined ? x.points : x.pts,
-               grade: nomDuGrade(typeof x.grade === 'number' ? x.grade : x.grade_num) || '' };
+               gradeNum: typeof x.grade === 'number' ? x.grade : (typeof x.grade_num === 'number' ? x.grade_num : null),
+               grade: nomDuGrade(typeof x.grade === 'number' ? x.grade : x.grade_num) || '',
+               /* S1637 - note 472 (2) : les parties gagnees et la plaque, quand le serveur les porte (M-S1636) */
+               wins: typeof x.wins === 'number' ? x.wins : (typeof x.victoires === 'number' ? x.victoires : null),
+               banniere: typeof x.banniere === 'string' ? x.banniere : (typeof x.plaque === 'string' ? x.plaque : null) };
     });
   }
 
@@ -201,12 +209,28 @@
     etat.liste.lignes.forEach(function (x, i) { zone.appendChild(ligne(x, i + 1, x.pseudo === nom)); });
   }
 
+  /* S1637 - note 472 (2) : mes parties gagnees, lues sur ce PC (la meme somme que CAREER) */
+  function mesVictoires() {
+    var P = moi(), n = 0, ps = P && P.personnages && typeof P.personnages === 'object' ? P.personnages : {};
+    Object.keys(ps).forEach(function (id) { var v = ps[id]; if (v && typeof v.victoires === 'number' && isFinite(v.victoires)) { n += v.victoires; } });
+    return n;
+  }
+  /* S1637 - note 472 (2), et le mot de Croze du 03/11 : « le ranking c'est par grade [...] faut afficher
+     le nom, le tablier, le rang et le nombre de parties gagnees, qui est le deuxieme filtre a egalite ».
+     Ligne = rang · pseudo · tablier + nom du grade · parties gagnees ; les points la quittent. L'ORDRE
+     reste celui du serveur (grade puis parties gagnees : demande M-S1637) - le client ne trie pas. */
   function ligne(x, pos, estMoi) {
     var l = el('div', 'rk-l' + (estMoi ? ' moi' : '')); l.tabIndex = 0;
     l.appendChild(el('span', 'rk-pos', pos));
     l.appendChild(el('span', 'rk-ps', x.pseudo));
-    l.appendChild(el('span', 'rk-pts', fmt(x.points)));
-    l.appendChild(el('span', 'rk-gr', (estMoi ? nomDuGrade(monGrade()) : x.grade) || '—'));
+    var gNum = estMoi ? monGrade() : x.gradeNum, gr = el('span', 'rk-gr');
+    if (typeof gNum === 'number' && gNum >= 1) {
+      var tab = el('img', 'rk-tab'); tab.alt = ''; tab.src = '/art/grades/tablier_' + (gNum < 10 ? '0' : '') + Math.round(gNum) + '.webp';
+      tab.onerror = function () { tab.remove(); }; gr.appendChild(tab);
+    }
+    gr.appendChild(el('span', null, (estMoi ? nomDuGrade(monGrade()) : x.grade) || '—'));
+    l.appendChild(gr);
+    l.appendChild(el('span', 'rk-pts', fmt(estMoi ? mesVictoires() : x.wins)));
     l.addEventListener('click', function () { inspecte(x.pseudo); });
     l.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); inspecte(x.pseudo); } });
     return l;
@@ -273,6 +297,11 @@
       var lignes = r.ok ? lignesDe(r.corps) : null;
       if (lignes) { etat.liste = { lignes: lignes }; }
       else if (r.statut === 0) { etat.liste = { erreur: echappe(c.sansReponse()) }; }
+      /* S1637 - mesure du 03/11 : Fly SERT /ranking, mais a un compte connecte (401 UNAUTHORIZED) ;
+         la phrase « no ranking yet » mentait sur ce cas. */
+      else if (r.statut === 401) {
+        etat.liste = { erreur: 'Log in to see the ranking (<b>' + echappe(hote()) + '</b> shows it to signed-in players). Your own line, read on this PC:' };
+      }
       else {
         etat.liste = { erreur: '<b>' + echappe(hote()) + '</b> has no ranking yet: it opens with the next server update. ' +
           'Your own line, read on this PC:' };
@@ -324,7 +353,7 @@
     find.addEventListener('submit', function (e) { e.preventDefault(); inspecte(inp.value); });
     gauche.appendChild(find);
     var tete = el('div', 'rk-tete');
-    tete.append(el('span', null, '#'), el('span', null, 'Player'), el('span', 'rk-pts', 'Points'), el('span', 'rk-gr', 'Grade'));
+    tete.append(el('span', null, '#'), el('span', null, 'Player'), el('span', 'rk-gr', 'Grade'), el('span', 'rk-pts', 'Wins'));
     gauche.appendChild(tete);
     var zone = el('div', 'rk-liste'); zone.id = 'rk-liste';
     gauche.appendChild(zone);

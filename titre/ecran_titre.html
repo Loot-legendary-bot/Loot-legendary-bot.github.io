@@ -1097,6 +1097,22 @@
 .bg1-carte.c1{left:48%;transform:rotate(-12deg)}
 .bg1-carte.c2{left:60%;transform:rotate(0deg);z-index:1}
 .bg1-carte.c3{left:72%;transform:rotate(12deg)}
+/* S1637 - note 472 (1) : la galerie des photos du boardgame - une photo a la fois, entiere
+   (contain, trois portraits sur cinq), sur son propre flou ; fleches, points, defilement. */
+.bg1-galerie{display:flex;flex-direction:column}
+.bg1-cadre{position:relative;flex:1 1 auto;min-height:0;overflow:hidden;cursor:zoom-in;background:#000;
+  border:.15cqh solid rgba(233,228,216,.25);box-shadow:0 2cqh 5cqh rgba(0,0,0,.8)}
+.bg1-cadre .fond{position:absolute;inset:-6%;width:112%;height:112%;object-fit:cover;filter:blur(2.4cqh) brightness(.45)}
+.bg1-cadre .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .6s ease}
+.bg1-cadre .photo.on{opacity:1}
+.bg1-cadre.grand{position:fixed;inset:0;z-index:900;border:0;cursor:zoom-out}
+.bg1-fl{all:unset;cursor:pointer;position:absolute;top:calc(50% - 2.4cqh);width:5cqh;height:5cqh;display:grid;place-items:center;
+  background:rgba(0,0,0,.55);color:#e9e4d8;font-size:max(14px, 2.2cqh);border:.15cqh solid rgba(233,228,216,.35);z-index:2}
+.bg1-fl:hover,.bg1-fl:focus-visible{border-color:#e9e4d8;background:rgba(0,0,0,.8)}
+.bg1-fl.g{left:1cqh} .bg1-fl.d{right:1cqh}
+.bg1-points{display:flex;justify-content:center;gap:1.2cqh;padding-top:1.6cqh}
+.bg1-points button{all:unset;cursor:pointer;width:1.4cqh;height:1.4cqh;border-radius:50%;border:.15cqh solid rgba(233,228,216,.6)}
+.bg1-points button.on{background:#e9e4d8}
 .bg1-texte p{margin:0 0 1.6cqh;font:900 max(14px, 3.4cqh)/1.2 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.03em;text-transform:uppercase;color:#e9e4d8}
 .bg1-form{display:flex;gap:1cqw;margin-top:4cqh}
 .bg1-form input{flex:1 1 auto;min-width:0;background:rgba(0,0,0,.55);border:.15cqh solid rgba(233,228,216,.4);color:#e9e4d8;
@@ -1242,11 +1258,12 @@
     <h2 class="htitle">Boardgame</h2>
     <div class="hsep sepimg"></div>
     <div class="bg1" id="bg1">
-      <div class="bg1-visuel">
-        <img class="bg1-banniere" alt="" src="/art/personnages/grand/the_boltwright.webp">
-        <img class="bg1-carte c1" alt="" src="/art/cartes/astral_hammer_legendary.webp">
-        <img class="bg1-carte c2" alt="" src="/art/cartes/cloak_of_sala_legendary.webp">
-        <img class="bg1-carte c3" alt="" src="/art/cartes/chaos_cuirass_legendary.webp">
+      <!-- S1637 - note 472 (1) : les photos du boardgame, en galerie (le visuel d'avant cede sa place) -->
+      <div class="bg1-visuel bg1-galerie" id="bg1gal">
+        <div class="bg1-cadre" id="bg1cadre" title="click to enlarge"></div>
+        <button class="bg1-fl g" type="button" id="bg1prec" aria-label="previous photo">&#9664;</button>
+        <button class="bg1-fl d" type="button" id="bg1suiv" aria-label="next photo">&#9654;</button>
+        <div class="bg1-points" id="bg1points"></div>
       </div>
       <div class="bg1-texte">
         <p>LICK FLOOR exists on a table.</p>
@@ -2715,7 +2732,42 @@ const PATCH_NOTES=[
    je mets mon mail, je clique, et on me dit que je serai le premier informe. » Le jeu n'a
    pas de serveur : l'adresse est gardee au profil (`preorder.email`) ; l'envoi au collecteur
    attend l'adresse que Croze choisira (#55 A) - aucun envoi ne part d'ici d'ici la. */
+/* S1637 - note 472 (1) - Phrase de Croze : « j'ouvre BOARDGAME et je vois nos parties sur
+   la table, une photo apres l'autre ». Les cinq fichiers de `ASSETS/image boardgame/`, en
+   WebP (orientation EXIF appliquee). Legende : a poser plus tard (472 (1)). */
+const PHOTOS_BG=['table_1','table_2','table_3','table_4','table_5'].map(n=>'/art/boardgame/'+n+'.webp');
+let bgPhoto=0, bgMinuteur=null;
+function peinsLaGalerieBg(){
+  const cadre=document.getElementById('bg1cadre'), pts=document.getElementById('bg1points');
+  if(!cadre) return;
+  if(!cadre.childElementCount){
+    const fond=document.createElement('img'); fond.className='fond'; fond.alt=''; cadre.appendChild(fond);
+    PHOTOS_BG.forEach((src,i)=>{
+      const im=document.createElement('img'); im.className='photo'; im.alt='LICK FLOOR on a table, photo '+(i+1); im.src=src; cadre.appendChild(im);
+      const b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','photo '+(i+1));
+      b.addEventListener('click',()=>{ montre(i); relance(); }); pts.appendChild(b);
+    });
+    cadre.addEventListener('click',()=>cadre.classList.toggle('grand'));
+    document.getElementById('bg1prec').onclick=()=>{ montre(bgPhoto-1); relance(); };
+    document.getElementById('bg1suiv').onclick=()=>{ montre(bgPhoto+1); relance(); };
+  }
+  function montre(i){
+    bgPhoto=(i+PHOTOS_BG.length)%PHOTOS_BG.length;
+    cadre.querySelectorAll('.photo').forEach((im,k)=>im.classList.toggle('on',k===bgPhoto));
+    pts.querySelectorAll('button').forEach((b,k)=>b.classList.toggle('on',k===bgPhoto));
+    cadre.querySelector('.fond').src=PHOTOS_BG[bgPhoto];
+  }
+  function relance(){
+    clearInterval(bgMinuteur);
+    bgMinuteur=setInterval(()=>{
+      if(!document.getElementById('v-board').classList.contains('on')){ clearInterval(bgMinuteur); return; }
+      if(!cadre.classList.contains('grand')) montre(bgPhoto+1);
+    },5000);
+  }
+  montre(bgPhoto); relance();
+}
 function peinsLeBoardgame(){
+  peinsLaGalerieBg();
   const P=window.LLProfil; if(!P) return;
   const deja=(P.lis().preorder||{}).email||'';
   const mail=document.getElementById('bg1mail'), ok=document.getElementById('bg1ok');
