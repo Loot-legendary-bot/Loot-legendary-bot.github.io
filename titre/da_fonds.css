@@ -55,6 +55,8 @@ html:not(.da-salle) #ll-salle { display: none; }
    Il devient un assombrissement NEUTRE, noir pur à 30 %, sans teinte ni désaturation ; `V` rend l'ancien 55 % pour comparer. */
 #ll-salle .ll-salle-couche::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.30); transition: background 300ms ease; }
 html.da-salle-voile-lourd #ll-salle .ll-salle-couche::after { background: rgba(8,7,6,.55); }
+/* S1633 · note 464 ① (b) — le troisième cran du fond plus sombre (OPTIONS) : la valeur du mur du mode, 74 %. */
+html.da-salle-voile-tres #ll-salle .ll-salle-couche::after { background: rgba(0,0,0,.74); }
 #ll-salle .ll-salle-couche.sang::before { content: ''; position: absolute; inset: 0; background: rgba(120,8,8,.42); mix-blend-mode: multiply; }
 #ll-salle .ll-salle-couche.sort { animation: ll-salle-sort 400ms ease-in both; }
 @keyframes ll-salle-entre { from { opacity: 0; } to { opacity: 1; } }

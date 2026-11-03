@@ -1277,7 +1277,7 @@
     'DUNGEON': 'DONJON', 'LOG': 'JOURNAL', 'FOLLOW': 'SUIVRE', 'FOLLOWING': 'SUIVI', 'OPTIONS': 'OPTIONS',
     'GRAVEYARD': 'CIMETIÈRE', 'No card played from a hand yet.': 'Aucune carte jouée de la main pour l’instant.',
     'no collapse': 'pas de Collapse', 'no portal': 'pas de portail', 'portal everywhere': 'portail partout',
-    'TABLE v2': 'TABLE v2', 'the table (V: lighter / darker veil over the room)': 'la table (V : voile plus clair / plus sombre sur la salle)',
+    'TABLE v2': 'TABLE v2', 'the table (V: darker background, one notch at a time)': 'la table (V : fond plus sombre, un cran à la fois)',
     'the old table — switch ON to come back': 'l’ancienne table — passe sur ON pour revenir',
     /* S1466 - note 350 (2) : le mot GENERIQUE de l'interface est « coffre » (l'issue d'exploration, l'activite
        d'un siege) ; les noms de cartons composes (Large Chest, Marvelous Chest…) restent anglais. */
@@ -1569,6 +1569,8 @@
     'nothing is known about this seat yet': 'on ne sait encore rien de ce siège', 'no Mob known in this combat': 'aucun Mob connu dans ce combat',
     '🗝 OPENING A CHEST': '🗝 OUVERTURE D’UN COFFRE', 'no action roll known for this seat': 'aucun jet d’action connu pour ce siège',
     'how the Explore line of TABLE v2 shows the tile’s die': 'comment la ligne Explorer de la TABLE v2 montre le dé de la tuile',
+    'DARKER BACKGROUND': 'FOND PLUS SOMBRE', 'DARK': 'SOMBRE', 'VERY DARK': 'TRÈS SOMBRE',
+    'how much the room behind the table is darkened (V: next notch)': 'combien la salle derrière la table est assombrie (V : cran suivant)',
     'music, effects and interface together': 'musique, effets et interface ensemble',
     'turn start and end, the turn timer, menu clicks': 'début et fin de tour, le minuteur du tour, les clics de menu',
     'the move is resolving — END TURN comes once the damage has landed': 'le coup se résout — FIN DU TOUR vient une fois les dégâts posés',
