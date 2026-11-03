@@ -1171,6 +1171,87 @@
 </style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). S1614 - note 457 (3) ALERTE ROUGE : ni la porte d'une AUTRE partie - le retour au menu apres un Today's Dungeon gardait ?daily=<graine>, et CLASSIC (qui repasse la chaine telle quelle) relancait le Daily : plus de quetes ni de points. Meme famille pour ?hiscore=, ?tuto=, ?equipe=. */(function(){try{var q=new URLSearchParams(location.search);var K=['salon','daily','hiscore','tuto','equipe'];if(K.some(function(k){return q.has(k);})){K.forEach(function(k){q.delete(k);});var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/bugbox.js"></script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/borne.js"></script><script src="/titre/foils.js"></script><script src="/titre/des_foil.js"></script><script src="/titre/bannieres.js"></script>
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
+<script>
+/* S1638 - note 474 (1) (docs/NOTE_ECRAN_INTRO_VIDEO.md, Croze 03/11) : le TRAILER d'intro, avant que
+   le HOME n'apparaisse. Une fois par lancement (onglet neuf) ; le retour d'une partie au HOME ne la
+   rejoue pas. OPTIONS > INTRO (ON par defaut, `ll.options.intro`) l'eteint. Skip : Echap, Espace,
+   clic gauche, ignores les 400 premieres ms ; l'evenement ne traverse pas, et 250 ms d'entrees
+   avalees quand le HOME parait. La musique du HOME attend la fin (window.LLIntroEnCours). */
+(function(){
+  var on = true, vue = false;
+  try { on = localStorage.getItem('ll.options.intro') !== 'OFF'; } catch (e) {}
+  try { vue = sessionStorage.getItem('ll.intro.vue') === '1'; } catch (e) {}
+  if (!on || vue || /[?&](vue|etat)=/.test(location.search)) return;
+  window.LLIntroEnCours = true;
+  var t0 = performance.now(), fini = false, attenteSon = false;
+  var v = document.createElement('div'); v.id = 'll-intro';
+  v.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:#000;transition:opacity .2s;cursor:none';
+  var vid = document.createElement('video');
+  vid.src = '/art/intro/intro_lick_floor.mp4'; vid.playsInline = true; vid.preload = 'auto';
+  vid.controls = false; vid.loop = false;
+  vid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000';
+  var aide = document.createElement('div');
+  aide.textContent = 'ESC / SPACE / CLICK — SKIP';
+  aide.style.cssText = 'position:absolute;right:2.2vw;bottom:2.2vh;font:400 15px/1 "Alegreya",Georgia,serif;letter-spacing:.12em;color:#e9e4d8;opacity:0;transition:opacity .8s';
+  var son = document.createElement('div');
+  son.textContent = 'CLICK FOR SOUND';
+  son.style.cssText = 'position:absolute;left:50%;bottom:6vh;transform:translateX(-50%);font:700 17px/1 "Alegreya",Georgia,serif;letter-spacing:.14em;color:#e9e4d8;opacity:.75;display:none';
+  v.appendChild(vid); v.appendChild(aide); v.appendChild(son);
+  function volume(){
+    var m = 0.5;
+    try { var r = JSON.parse(localStorage.getItem('ll.options.son') || 'null'); if (r && typeof r.volMaster === 'number' && isFinite(r.volMaster)) m = Math.min(1, Math.max(0, r.volMaster)); } catch (e) {}
+    return Math.min(1, Math.max(0, m * 0.5)); /* le maitre divise par deux, comme le jeu (469 (3)) */
+  }
+  function avale(e){ e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); }
+  function termine(fondu){
+    if (fini) return; fini = true;
+    try { sessionStorage.setItem('ll.intro.vue', '1'); } catch (e) {}
+    try { vid.pause(); } catch (e) {}
+    var part = function(){
+      v.remove();
+      window.removeEventListener('keydown', clavier, true);
+      window.removeEventListener('pointerdown', souris, true);
+      window.removeEventListener('click', avale, true);
+      var jusqua = performance.now() + 250;
+      var garde = function(e){ if (performance.now() < jusqua) avale(e); };
+      ['keydown','keyup','pointerdown','pointerup','click','mousedown','mouseup'].forEach(function(k){ window.addEventListener(k, garde, true); });
+      setTimeout(function(){ ['keydown','keyup','pointerdown','pointerup','click','mousedown','mouseup'].forEach(function(k){ window.removeEventListener(k, garde, true); }); }, 300);
+      window.LLIntroEnCours = false;
+      if (typeof window.__musiqueApresIntro === 'function') { var f = window.__musiqueApresIntro; window.__musiqueApresIntro = null; f(); }
+    };
+    if (fondu) { v.style.opacity = '0'; setTimeout(part, 200); } else { part(); }
+  }
+  function sauter(e){
+    avale(e);
+    if (performance.now() - t0 < 400) return;
+    if (attenteSon) { attenteSon = false; son.style.display = 'none'; vid.muted = false; vid.volume = volume(); return; }
+    termine(true);
+  }
+  function clavier(e){
+    if (e.key === 'Escape' || e.key === ' ' || e.code === 'Space') { if (e.repeat) { avale(e); return; } sauter(e); }
+  }
+  function souris(e){ if (e.button === 0) sauter(e); }
+  window.addEventListener('keydown', clavier, true);
+  window.addEventListener('pointerdown', souris, true);
+  window.addEventListener('click', avale, true);
+  vid.addEventListener('ended', function(){ termine(false); });
+  vid.addEventListener('error', function(){ termine(false); });
+  setTimeout(function(){ if (!fini) aide.style.opacity = '.45'; }, 1000);
+  var pose = function(){
+    (document.body || document.documentElement).appendChild(v);
+    vid.volume = volume();
+    var p = vid.play();
+    if (p && p.catch) p.catch(function(){
+      vid.muted = true; attenteSon = true; son.style.display = 'block';
+      var q = vid.play(); if (q && q.catch) q.catch(function(){ termine(false); });
+    });
+  };
+  if (document.body) pose(); else document.addEventListener('DOMContentLoaded', pose);
+  /* sonde du palier */
+  window.__intro = function(){ return { fini: fini, attenteSon: attenteSon, t: vid.currentTime, muted: vid.muted, volume: vid.volume, paused: vid.paused }; };
+}());
+</script>
+
 
 <p class="hint">click a menu entry &middot; esc goes back &middot; backgrounds cycle on their own</p>
 
@@ -2312,6 +2393,15 @@ function peinsLaLangue(){
     b.className='langue-btn'+(vfx===x[0]?' on':'');
     b.textContent=(vfx===x[0]?'\u25cf  ':'\u25cb  ')+x[1];
     b.addEventListener('click',function(){ P.modifie(function(p){ if(typeof p.options!=='object'||p.options===null) p.options={}; p.options.vfx=x[0]; }); peinsLaLangue(); });
+    box.appendChild(b);
+  });
+  /* S1638 - note 474 (1) : INTRO ON / OFF (ON par defaut, `ll.options.intro`) - OFF = le HOME parait sans le trailer. */
+  var introOn=true; try{ introOn=localStorage.getItem('ll.options.intro')!=='OFF'; }catch(e){}
+  var tI=document.createElement('div'); tI.className='langue-titre'; tI.textContent='INTRO'; tI.style.marginTop='2.4cqh'; box.appendChild(tI);
+  [['ON','ON'],['OFF','OFF']].forEach(function(x){
+    var b=document.createElement('button'); b.type='button'; var sel=(introOn?'ON':'OFF')===x[0];
+    b.className='langue-btn'+(sel?' on':''); b.textContent=(sel?'\u25cf  ':'\u25cb  ')+x[1];
+    b.addEventListener('click',function(){ try{ localStorage.setItem('ll.options.intro',x[0]); }catch(e){} peinsLaLangue(); });
     box.appendChild(b);
   });
   /* S1435 - note 281 (12) : « OPTIONS du HOME : le volume du SON (master au minimum) ».
@@ -4587,6 +4677,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   };
 
   function lance(i){
+    if (window.LLIntroEnCours) { window.__musiqueApresIntro = function(){ lance(i); }; return; } /* S1638 - 474 (1) : muette pendant l intro */
     var a = els[i];
     var t = pistes[rang % pistes.length];
     if (a.__chemin !== t.chemin) { a.src = t.chemin; a.__chemin = t.chemin; }
@@ -6373,7 +6464,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         if (typeof r.volMaster === 'number' && isFinite(r.volMaster)) v *= Math.min(1, Math.max(0, r.volMaster));
       }
     } catch (e) {}
-    return allume ? gain * v : 0;
+    return allume ? gain * v * 0.5 : 0; /* S1638 - note 474 (2) : le son des cartes dans les menus, deux fois moins fort */
   }
   var CIBLE = '.mi, button, .cell, .rt, [role="tab"], .tab';
   document.addEventListener('click', function(e){
