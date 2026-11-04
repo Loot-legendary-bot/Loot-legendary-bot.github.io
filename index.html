@@ -5888,6 +5888,16 @@
       .creneau.cr-mange > :not(video) { position: relative; z-index: 1; }
       /* S1576 · note 412 ③ — l'arme de fiche : la formule d'abord, entière ; le nom tronqué après. */
       .creneau-carte.arme-socle { display: flex; gap: 4px; align-items: baseline; min-width: 0; max-width: 100%; overflow: hidden; }
+      /* S1640 · 478 ① — l'arme de base DESSINÉE dans la case vide : la carte au-dessus, formule et nom dessous. */
+      .creneau-carte.arme-socle:has(> .cz) { flex-wrap: wrap; overflow: visible; }
+      .creneau-carte.arme-socle > .cz { flex: 0 0 100%; }
+      .creneau-carte.arme-socle > .cz > .cz-vignette { width: 64px; height: auto; display: block; border-radius: 4px; }
+      /* S1640 · 478 ① — la ligne Weapon Attack de la fiche de combat : la carte de l'arme qui frappe, au bord gauche. */
+      .fc-calque > .fcz-arme, .nouvelle-table .bj-fiche .fc-calque > img.fcz-arme { position: absolute; right: 5%; left: auto;
+        width: 10%; height: auto; aspect-ratio: 1; transform: translateY(-50%); border-radius: 50%; object-fit: cover;
+        object-position: 50% 50%; border: 2px solid #d9c9a0; box-shadow: 0 0 0 2px rgba(0,0,0,.7), 0 2px 8px rgba(0,0,0,.6);
+        background: #111; pointer-events: auto; z-index: 4; }
+      .nouvelle-table .bj-fiche .fc-calque > img.fcz-arme-portee { object-position: 50% 30%; }
       .creneau-carte.arme-socle > .arme-formule { flex: none; font-weight: 700; white-space: nowrap; }
       .creneau-carte.arme-socle > .arme-nom { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .ll-menu-piece { position: fixed; z-index: 100000; display: flex; gap: 6px; padding: 6px;
@@ -10820,6 +10830,12 @@
       @media (prefers-reduced-motion: reduce) {
         .scene-mort-anim > .ry { animation: none; transform: translateY(-83.333%); }
         .scene-mort-anim .rx { animation: none; transform: translateX(-87.5%); } }
+      /* S1640 · 476 ② — le badge STEALTH du Rogue caché, sur son médaillon, chez tous. */
+      .nt-rond > .nt-furtif { position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%); z-index: 3;
+        padding: 1px 6px; border-radius: 4px; background: rgba(12,12,16,.92); border: 1px solid #9aa6ff;
+        color: #dfe3ff; font: 700 10px/1.3 inherit; letter-spacing: .12em; white-space: nowrap;
+        box-shadow: 0 0 8px rgba(120,130,255,.6); pointer-events: auto; }
+      .nt-presence.nt-est-furtif .nt-rond > .nt-portrait, .nt-presence.nt-est-furtif .nt-rond > .nt-vp { opacity: .55; }
       .nouvelle-table .nt-rond > .nt-portail { position: absolute; left: 50%; top: -14px; transform: translateX(-50%);
         width: 30px; height: 30px; z-index: 2; filter: drop-shadow(0 0 6px rgba(120,200,255,.9)); }
       /* Le titre rouge (`--rouge-vif`) posé sur la peinture SANG ne se lit pas
@@ -15394,7 +15410,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BEGIbunh.js"></script>
+    <script type="module" crossorigin src="./assets/index-DpJ3xV-P.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
