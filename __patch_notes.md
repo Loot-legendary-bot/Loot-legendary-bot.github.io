@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 04 Nov 2026
+- **18:00** — Tile actions get their icons: Move, Explore, Interact, Trade, Loot the body, Fight and Extract each show their painted icon next to the name, in the title font, with no more numbers; the line you hover is framed in red.
 - **17:30** — Character select: a character someone takes now shows only a frame with their name on it, no animation (no more TAKEN veil); once everyone has chosen, every portrait fades to black and white (EVERYONE HAS CHOSEN), then the logo and the descent into the dungeon.
 - **16:30** — The big Rock-Paper-Scissors window (The Turd's Shitty Slope, Mind Game…): each sign is now a clean button, icon above its word, nothing overlaps, and "throw nothing" sits on its own line.
 - **15:45** — When a bot plays first, it now waits until your start-of-turn screens are over (who starts, the card you draw, the Collapse) before it moves — it used to play its whole turn behind them.

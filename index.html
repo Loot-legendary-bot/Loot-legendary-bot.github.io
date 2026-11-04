@@ -12815,6 +12815,17 @@
         70% { transform: scale(1.04, .95) rotate(-1deg); opacity: .85; } 100% { transform: scale(.97, 1.04) rotate(1.5deg); opacity: 1; } }
       /* S1469 · 357 ⑤ — « les options plus grosses » : 24 → 28 px, le texte 17 → 20 px */
       .nouvelle-table .tv2-verbe { font-size: calc(28px * var(--lisible, 1)); font-weight: 700; letter-spacing: .03em; white-space: nowrap; }
+      /* S1646 · notes 465 / 470 ⑧ — l'icône (40 px) à gauche du nom, la police des titres (`--display`) en petites capitales,
+         plus de numéro ; la ligne survolée ou choisie s'encadre de rouge. */
+      .nouvelle-table .tv2-ligne { align-items: center; }
+      .nouvelle-table .tv2-verbe { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display);
+        font-variant: small-caps; letter-spacing: .05em; }
+      .nouvelle-table .tv2-ico { width: calc(40px * var(--lisible, 1)); height: calc(40px * var(--lisible, 1)); object-fit: contain;
+        flex: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.9)); }
+      .nouvelle-table .tv2-ligne:disabled .tv2-ico { filter: grayscale(1) brightness(.55); }
+      .nouvelle-table .tv2-ligne:not(:disabled):hover, .nouvelle-table .tv2-ligne:not(:disabled):focus-visible,
+      .nouvelle-table .tv2-ligne.choisie { box-shadow: 0 0 0 2px #B23A31 !important; border-radius: 4px; }
+      .nouvelle-table .tv2-ligne > .tv2-chevron { top: 50%; transform: translateY(-50%); }
       /* S1525 · note 375 ⑧ — The Cell : une ligne, deux boutons côte à côte, une phrase. */
       .nouvelle-table .tv2-ligne-boutons { cursor: default; }
       .nouvelle-table .tv2-ligne-boutons .tv2-boutons { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
@@ -15441,7 +15452,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CGLwPwAQ.js"></script>
+    <script type="module" crossorigin src="./assets/index-BB1ewt_G.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

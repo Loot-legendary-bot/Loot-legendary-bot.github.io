@@ -1643,6 +1643,9 @@
   EN_FR_MOTIFS = [
     [/^(\d+)\. (Move|Explore \(1d6\)|Interaction :|Extract|Trade|Fight|Loot the body|Break the lock)$/,
       function (m, n, g) { return n + '. ' + GESTE_FR[g]; }],
+    /* S1646 - notes 465 / 470 (8) : les actions de tuile sans numero (l'icone le remplace) */
+    [/^(Move|Explore \(1d6\)|Interaction :|Extract|Trade|Fight|Loot the body|Break the lock)$/,
+      function (m, g) { return GESTE_FR[g]; }],
     [/^TURN (\d+)$/, 'TOUR $1'], [/^collapse 1d(\d+)$/, 'Collapse 1d$1'], [/^portal (\d+) %$/, 'portail $1 %'],
     /* S1608 - note 450 (5) : la ligne de la banniere d'equipement, ecrite sur unplayableCost */
     [/^needs (\d+) cards? to discard — your hand is empty$/, 'il faut défausser $1 carte(s) — ta main est vide'],
