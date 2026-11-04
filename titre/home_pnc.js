@@ -71,6 +71,8 @@
       '.screen.pnc-on #v-title .logo,.screen.pnc-on #v-title .menu,.screen.pnc-on #v-title #fr{display:none}',
       '.screen.pnc-on #v-title .foot{pointer-events:auto}',
       '.screen.pnc-on .bgw,.screen.pnc-on .scrim,.screen.pnc-on #bboard,.screen.pnc-on #gdenbtn{display:none!important}',
+      /* S1646 — l'aide de l'ancien HOME (« esc goes back · backgrounds cycle ») ment sur la scène : Échap y ouvre le panneau */
+      'body:has(.screen.pnc-on) .hint{visibility:hidden}',
       '#pnc .pnc-poster,#pnc video{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}',
       '#pnc video{opacity:0;transition:opacity .3s ease}',
       '#pnc video.pret{opacity:1}',
