@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 04 Nov 2026
+- **16:30** — The big Rock-Paper-Scissors window (The Turd's Shitty Slope, Mind Game…): each sign is now a clean button, icon above its word, nothing overlaps, and "throw nothing" sits on its own line.
 - **15:45** — When a bot plays first, it now waits until your start-of-turn screens are over (who starts, the card you draw, the Collapse) before it moves — it used to play its whole turn behind them.
 - **15:00** — Watching a bot: click its view (or FOLLOW) during its turn and its dice, checks and hits now play one after the other in the middle of its view, at the pace of a scene — the bots wait for each scene before their next move. With its view closed, other players' dice still never take your screen.
 - **14:25** — HOME: the old help line ("click a menu entry · esc goes back · backgrounds cycle on their own") no longer shows over the night scene, where it was wrong (Esc opens OPTIONS · CLASSIC MENU · QUIT there); it stays in the classic menu.

@@ -14752,6 +14752,12 @@
         box-shadow: 0 4px 12px rgba(0,0,0,.55); }
       .offre-texte { font-size: max(14px, calc(13px * var(--lisible, 1))); color: #cfc6b4; margin: 0 0 10px; font-style: italic; }
       .decision.rps-gros button.rps-choix svg, .decision.rps-gros button.rps-choix img { width: 64px; height: 64px; }
+      /* S1646 · note 473 ③ — l'icône de 64 px vivait dans une boîte de 30 px (`.rps-choix .rps-glyphe`) : elle débordait sur
+         le libellé et sur la rangée du dessous (« THROW NOTHING »). La boîte prend la taille de l'icône, l'icône passe AU-DESSUS
+         du mot, et la réponse « ne rien jeter » se pose seule sur sa ligne. Même rangée pour tous les RPS agrandis. */
+      .decision.rps-gros button.rps-choix { flex-direction: column; gap: 6px; vertical-align: top; margin: 0 8px 8px 0; }
+      .decision.rps-gros button.rps-choix .rps-glyphe { width: 64px; height: 64px; }
+      .decision.rps-gros button.rps-choix + button:not(.rps-choix) { display: block; margin-top: 10px; }
       /* S1472 · 360 ⑤ — « Who do you invite » : les portraits à cocher, VALIDATE ✓ en gros, « invite nobody » en second. */
       .invites-portraits { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 12px; }
       .invite-portrait { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 104px;
@@ -15429,7 +15435,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CzZLWkJq.js"></script>
+    <script type="module" crossorigin src="./assets/index-C0vT4JEb.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
