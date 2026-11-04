@@ -11700,6 +11700,12 @@
                         animation: draft-choisit 1s ease-in-out infinite alternate; }
       .cell.cell-attente { filter: grayscale(.55) brightness(.75); cursor: wait; }
       .cell.cell-vient-de-prendre { animation: draft-prise .7s ease-out; z-index: 2; }
+      /* S1646 · note 470 ⑤ (a) — « juste un cadre avec son pseudo, aucune animation » : les coins or de ma case ne pulsent plus. */
+      .cell-mien::after { animation: none !important; }
+      /* S1646 · note 470 ⑤ (b) — tout le monde a choisi : tous les persos virent au noir et blanc, et y restent. */
+      .roster-tous-choisis .cell .vp, .roster-tous-choisis .cell:hover .vp { filter: grayscale(1) brightness(.8) !important;
+        transition: filter 1s ease; }
+      .roster-tous-choisis .cell { pointer-events: none; }
       @keyframes draft-prise { 0% { transform: scale(1.14); box-shadow: 0 0 28px 6px var(--siege, #f3d27a); }
                                100% { transform: scale(1); box-shadow: none; } }
       /* S1586 - note 431 (2) : mon tablier de grade et mon pseudo a cote de YOU. */
@@ -15435,7 +15441,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-C0vT4JEb.js"></script>
+    <script type="module" crossorigin src="./assets/index-CGLwPwAQ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BcTE2P7Y.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
