@@ -684,6 +684,17 @@
   /* S1418 - note 239 (3) : le rayon BLOOD, meme gabarit que LUCK */
   /* S1431 - note 272 (5) : l'INVENTAIRE, des cases de RPG (dix de front, carrees). */
   .grid.inv{grid-template-columns:repeat(12,1fr);gap:.7cqw}
+  /* S1644 - 479 (1) : MY LOADOUT, cinq cases sur une rangee, sans defilement */
+  .grid.loadout{grid-template-columns:repeat(5,1fr);gap:1.2cqw;align-content:start}
+  .grid.loadout .lo-case{display:flex;flex-direction:column;align-items:center;gap:.8cqh;padding:1.2cqh .8cqw;border:2px solid rgba(214,180,110,.55);border-radius:8px;background:rgba(10,8,6,.72);cursor:pointer;text-align:center}
+  .grid.loadout .lo-case:hover,.grid.loadout .lo-case:focus{border-color:#f0cf7a;box-shadow:0 0 14px rgba(240,207,122,.45);outline:none}
+  .grid.loadout .lo-case.lo-soon{cursor:default;opacity:.5;border-style:dashed}
+  .grid.loadout .lo-cat{font:900 max(14px,1.6cqh)/1.1 "Big Shoulders Display","Arial Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#f0cf7a}
+  .grid.loadout .lo-art{width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:6px;background:rgba(0,0,0,.35)}
+  .grid.loadout .lo-art img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+  .grid.loadout .lo-art img.lo-cur{width:40%;height:auto;image-rendering:auto}
+  .grid.loadout .lo-eq{padding:2px 10px;border:2px solid #7fd17f;border-radius:4px;color:#9fe79f;font:800 max(12px,1.2cqh)/1.2 monospace;letter-spacing:.14em;transform:rotate(-4deg)}
+  .grid.loadout .lo-nom{font:700 max(14px,1.5cqh)/1.2 inherit;color:#efe6d2}
   .grid.inv .inv-ecole{align-self:center;justify-self:end;font:900 max(14px, 1.35cqh)/1.1 "Big Shoulders Display","Arial Black",Impact,sans-serif;text-transform:uppercase;letter-spacing:.06em;text-align:right}
   .grid.inv .slot.zero{opacity:.35}
   /* note 277 - le BETA VERSION GIFT PACK : l'icone qui appelle, puis la revelation */
@@ -2310,6 +2321,8 @@ function set(v,arg){
   if(v==='league') pickNode(NODES.findIndex(n=>n.s==='open'));
   if(v==='match'){ tireLesSieges(); paintMatch(arg||matchCtx); }
   if(v==='profil') peinsLeProfil();
+  /* S1644 - note 479 (1) : « on doit tomber en premier lieu sur une fiche d'inventaire » - chaque entree au Vault ouvre MY LOADOUT. */
+  if(v==='collection' && typeof tabsEl!=='undefined'){ const t=tabsEl.querySelector('.tab[data-key="loadout"]'); if(t) t.click(); }
   if(v==='rules') peinsLesRegles();
   if(v==='board') peinsLeBoardgame();
   if(v==='codex' && window.LLCodex) window.LLCodex.peins();
@@ -3478,7 +3491,7 @@ function inventaire(){
 /* S1431 - note 272 (5) : l'onglet INVENTORY, a part, en cases de RPG : ce que j'ai (consommables, possedes). */
 /* note 328 ② (Croze, 19/10) : le premier rayon est l'inventaire, et il s'appelle MY VAULT ; le reste = la boutique. */
 /* S1461 - note 341 (3) (Croze, 23/10 : « OK pour le Sang ») : l'onglet BLOOD se REVEILLE, en dernier. */
-const TABS=[['MY VAULT','inv'],['Characters','chars'],['Dice sets','dice'],['Dice trays','trays'],['Card backs','backs'],['Cursors','curs'],['Supplies','tick'],['Blood','blood'],['Grade','grade']];   /* S1540 - note 385 (2c) : le rayon GRADE */
+const TABS=[['MY LOADOUT','loadout'],['MY VAULT','inv'],['Characters','chars'],['Dice sets','dice'],['Dice trays','trays'],['Card backs','backs'],['Cursors','curs'],['Supplies','tick'],['Blood','blood'],['Grade','grade']];   /* S1540 - note 385 (2c) : le rayon GRADE */
 /* S1418 - note 239 (3), MONNAIE.md 10 - LE RAYON BLOOD : les quatre rayons du Sang et
    leurs prix. Le Sang se COMPTE, rien ne se vend tant que Steam n'est pas la : la
    vitrine se lit, aucun bouton n'achete. [nom, icone, prix, ce que c'est]. */
@@ -3509,7 +3522,7 @@ TABS.forEach(([label,key],i)=>{
   b.className='tab'+(i===0?' on':'')+(RAYONS_COSMETIQUES.indexOf(key)>=0?' sub':''); b.dataset.key=key;
   /* S1408 - IC-1 : chaque rayon porte son icone */
   /* note 449 (4) : CHARMS -> SUPPLIES (tout ce qu'on achete pour son donjon) : un sac, pas un bocal. */
-  const ICO_RAYON={chars:'perso',dice:'des',trays:'tapis',curs:'curseur',backs:'dos',tick:'sac',blood:'fiole',inv:'coffre',grade:'medaille'};
+  const ICO_RAYON={loadout:'perso',chars:'perso',dice:'des',trays:'tapis',curs:'curseur',backs:'dos',tick:'sac',blood:'fiole',inv:'coffre',grade:'medaille'};
   b.innerHTML='<svg class="besace-sil tab-ic" viewBox="0 0 48 48" aria-hidden="true">'+(ICONES[ICO_RAYON[key]]||'')/* S1552 : le rayon GRADE n'a pas d'icone - rien, jamais « undefined » */+'</svg>'+
     label+'<i></i><span class="rule"></span>';
   b.querySelector('.rule').style.backgroundImage='url('+A.bar+')';
@@ -3803,6 +3816,25 @@ function fillGrid(key){
       });
     }
     apres.forEach(c=>grid.appendChild(c));
+  } else if(key==='loadout'){
+    /* S1644 - note 479 (1) (Croze, 04/11, capture LOBBY LOADOUT) : « chaque categorie des trucs equipables
+       rassemblee et visible sur une meme fenetre, sans scroll » - une case par categorie, la vignette de ce qui
+       est porte, le sceau EQUIPPED ; le clic ouvre le rayon. Lu sur `equipped` (le profil), rien d'invente.
+       Les cadres de fiche n'ont pas encore de rayon (BLOOD, « new ») : leur case le dit et n'ouvre rien. */
+    const ouvre=k=>{ const t=tabsEl.querySelector('.tab[data-key="'+k+'"]'); if(t) t.click(); };
+    const de=DICE[equipped.dice], tp=TRAYS[equipped.trays], dos=BACKS[equipped.backs], cu=CURSORS[equipped.curs];
+    [['Dice set',de?de[0]:'\u2014',de?'<img alt="" src="'+IMG_PEAU(de[1])[0]+'">':'','dice'],
+     ['Dice tray',tp?tp[0]:'\u2014',tp?'<img alt="" src="'+tapisImg(tp[1])+'">':'','trays'],
+     ['Cursor',cu?cu[0]:'\u2014',cu?'<img class="lo-cur" alt="" src="'+IMG_CURSEUR(cu[1])+'">':'','curs'],
+     ['Card back',dos?dos[0]:'\u2014',dos?'<img alt="" src="/art/dos/'+dos[1]+'.webp">':'','backs'],
+     ['Character frame','Coming soon','',null]].forEach(([cat,nom,img,k])=>{
+      const c=document.createElement('div');
+      c.className='lo-case'+(k===null?' lo-soon':''); c.tabIndex=k===null?-1:0;
+      c.innerHTML='<div class="lo-cat">'+cat+'</div><div class="lo-art">'+img+'</div>'+
+        (k===null?'':'<div class="lo-eq">EQUIPPED</div>')+'<div class="lo-nom">'+nom+'</div>';
+      if(k!==null){ c.addEventListener('click',()=>ouvre(k)); c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();ouvre(k);}}); }
+      grid.appendChild(c);
+    });
   } else if(key==='inv'){
     /* S1431 - note 272 (5) : des CASES (grille de RPG), une icone, une quantite ; l'equipe
        marque. Une rangee de cases vides prolonge chaque section : un sac, pas une liste. */
@@ -4408,10 +4440,10 @@ document.addEventListener('keydown',e=>{
    de transition à jouer. */
 const ongletDOuverture=(()=>{
   const o=(new URLSearchParams(window.location.search).get('onglet')||'').trim();
-  if(o==='') return 'inv';
+  if(o==='') return 'loadout';   /* S1644 - note 479 (1) : le Vault s'ouvre sur MY LOADOUT */
   if(!TABS.some(([,k])=>k===o)){
     console.log('?onglet='+o+' : inconnu. Les rayons sont '+TABS.map(([,k])=>k).join(', '));
-    return 'inv';
+    return 'loadout';
   }
   return o;
 })();

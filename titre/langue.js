@@ -1426,6 +1426,7 @@
     "See all": "Tout voir",
     "Play with friends": "Jouer entre amis",
     "MY VAULT": "MON VAULT",
+    "MY LOADOUT": "MON ÉQUIPEMENT", "Dice tray": "Tapis de dés", "Cursor": "Curseur", "Card back": "Dos de carte", "Character frame": "Cadre de fiche", "Coming soon": "Bientôt", "EQUIPPED": "ÉQUIPÉ",   /* S1644 - 479 (1) */
     "Dice set": "Set de dés",
     "Dice trays": "Tapis de dés",
     "Dungeon Pro Tour ticket": "Ticket du Dungeon Pro Tour", "The mode": "Le mode", "The ticket": "Le ticket",
