@@ -108,7 +108,22 @@
       /* S1627 - note 468 (1) : `.hud` est en pointer-events:none, l'engrenage le reprenait sans le dire */
       '.hud .hud-gear{pointer-events:auto;background:transparent;border:0;color:#d9c9a3;cursor:inherit;padding:0 .3cqw;display:inline-flex;align-items:center}',
       '.hud .hud-gear svg{width:2.4cqh;height:2.4cqh}',
-      '.hud .hud-gear:hover{color:#fff}'
+      '.hud .hud-gear:hover{color:#fff}',
+      /* S1650 - note 472 (3) : les six bannieres = les six derniers runs */
+      '#pnc .pnc-run{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:1cqh;box-sizing:border-box;pointer-events:auto}',
+      '#pnc .pnc-run.vide{pointer-events:none;background:rgba(0,0,0,.28)}',
+      '#pnc .pnc-run .pnc-med{width:86%;aspect-ratio:1;border-radius:50%;background:#140f0a center/cover no-repeat;border:.25cqh solid #b08a3c;box-shadow:0 0 .8cqh rgba(0,0,0,.9)}',
+      '#pnc .pnc-run.mort .pnc-med{filter:grayscale(.75) brightness(.8)}',
+      '#pnc .pnc-run .pnc-sceau{margin-top:6%;width:62%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font:900 1.5cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;color:#f4efe2;box-shadow:0 0 .5cqh rgba(0,0,0,.9)}',
+      '#pnc .pnc-run.sorti .pnc-sceau{background:radial-gradient(circle at 40% 35%,#6fcf5a,#2b6f22);border:.18cqh solid #c9e7a6}',
+      '#pnc .pnc-run.mort .pnc-sceau{background:radial-gradient(circle at 40% 35%,#d0473a,#6e1610);border:.18cqh solid #f0a99f}',
+      '#pnc .pnc-run.dedans .pnc-sceau{background:radial-gradient(circle at 40% 35%,#8c8577,#3d3a33);border:.18cqh solid #cfc7b5}',
+      '#pnc .pnc-run .pnc-dents{margin-top:6%;font:900 1.6cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;color:#efe6cf;text-shadow:0 0 .4cqh #000,0 0 .8cqh #000;white-space:nowrap}',
+      '#pnc .pnc-run .pnc-bulle{position:absolute;left:50%;top:100%;transform:translate(-50%,.8cqh);z-index:6;opacity:0;pointer-events:none;transition:opacity .12s ease;white-space:nowrap;',
+      '  font:700 1.6cqh/1.35 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.05em;color:#efe6cf;background:rgba(10,8,6,.9);border:1px solid rgba(201,162,39,.6);padding:.8cqh 1cqh;text-align:left}',
+      '#pnc .pnc-run .pnc-bulle b{display:block;font-size:2cqh;letter-spacing:.1em;color:#f4efe2}',
+      '#pnc .pnc-run:hover .pnc-bulle{opacity:1}',
+      '#pnc .pnc-run:hover .pnc-med{border-color:#f2d27a;box-shadow:0 0 1.2cqh rgba(255,196,120,.7)}'
     ].join('\n');
     document.head.appendChild(s);
   }
@@ -169,7 +184,7 @@
       var vo = document.createElement('div'); vo.className = 'pnc-voile'; vo.style.cssText = box;
       racine.appendChild(vo); voiles[k] = vo;
     });
-    /* les zones (§4), dans l'ordre du clavier ; `reserve` n'a ni survol ni clic */
+    /* les zones (§4), dans l'ordre du clavier ; `runs` (les six bannieres, note 472 (3)) n'a pas de clic : `peinsLesRuns` */
     ORDRE.forEach(function (cle) {
       var z = ZONES.zones[cle]; if (!z) return;
       var b = document.createElement('button'); b.type = 'button'; b.className = 'pnc-z';
@@ -291,6 +306,54 @@
       });
     }
     memoire('esprits', ouverts);
+    peinsLesRuns(profil);
+  }
+
+  /* ── S1650 - note 472 (3) : LES SIX DERNIERS RUNS, sur les six bannieres ────────────
+   * Phrase de Croze : « au-dessus de la herse, chaque banniere est une de mes six dernieres parties,
+   * la plus recente a gauche : le medaillon du perso, un sceau vert si je suis sorti, rouge si je suis
+   * mort, et mes dents ; au survol, le mode, ma place, mes points et la date ; vides et ternes tant
+   * que je n'ai pas joue six parties. » La ligne est ecrite par `compteLaPartieAuProfil` (main.ts,
+   * `options.derniersRuns`), lue telle quelle : aucune regle ici. */
+  var MODES = { bots: 'VS BOTS', online: 'ONLINE', daily: "TODAY'S DUNGEON" };
+  var ISSUES = { extracted: ['sorti', '✓', 'EXTRACTED'], dead: ['mort', '✝', 'DIED'], inDungeon: ['dedans', '…', 'STILL IN THE DUNGEON'] };
+  var runsEl = [];
+  function nomDuPerso(id) { return String(id || '').replace(/_/g, ' ').toUpperCase(); }
+  function peinsLesRuns(profil) {
+    var R = ZONES && ZONES.zones && ZONES.zones.runs;
+    if (!R || !Array.isArray(R.bannieres)) return;
+    if (runsEl.length === 0) {
+      R.bannieres.forEach(function (r) {
+        var d = document.createElement('div'); d.className = 'pnc-run vide'; d.style.cssText = pct(r);
+        racine.appendChild(d); runsEl.push(d);
+      });
+    }
+    var liste = [];
+    try { var l = profil && profil.options ? profil.options.derniersRuns : null; if (Array.isArray(l)) liste = l.slice(-6).reverse(); } catch (e) { liste = []; }
+    runsEl.forEach(function (d, i) {
+      var x = liste[i];
+      d.innerHTML = ''; d.className = 'pnc-run';
+      if (!x || typeof x !== 'object') { d.classList.add('vide'); d.removeAttribute('aria-label'); return; }
+      var is = ISSUES[x.issue] || null;
+      if (is) d.classList.add(is[0]);
+      var med = document.createElement('div'); med.className = 'pnc-med';
+      med.style.backgroundImage = "url('/art/personnages/" + String(x.perso || '') + ".webp')";
+      d.appendChild(med);
+      if (is) { var s = document.createElement('div'); s.className = 'pnc-sceau'; s.textContent = is[1]; d.appendChild(s); }
+      if (typeof x.dents === 'number') { var dn = document.createElement('div'); dn.className = 'pnc-dents'; dn.textContent = '+' + x.dents + ' 🦷'; d.appendChild(dn); }
+      var bu = document.createElement('div'); bu.className = 'pnc-bulle';
+      var lignes = [];
+      lignes.push(MODES[x.mode] || String(x.mode || '').toUpperCase());
+      if (is) lignes.push(is[2]);
+      if (typeof x.place === 'number') lignes.push('PLACE ' + x.place + (typeof x.sieges === 'number' ? ' / ' + x.sieges : ''));
+      if (typeof x.points === 'number') lignes.push(x.points + ' PTS');
+      if (typeof x.dents === 'number') lignes.push('+' + x.dents + ' TEETH');
+      if (typeof x.t === 'number') { try { lignes.push(new Date(x.t).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })); } catch (e) { /* */ } }
+      var t = document.createElement('b'); t.textContent = nomDuPerso(x.perso); bu.appendChild(t);
+      lignes.forEach(function (s) { var r = document.createElement('div'); r.textContent = s; bu.appendChild(r); });
+      d.appendChild(bu);
+      d.setAttribute('aria-label', nomDuPerso(x.perso) + ' · ' + lignes.join(' · '));
+    });
   }
 
   /* ── l'arrivee : les noms 2 s, puis le fondu (§5) ─────────────────────────────── */

@@ -101,15 +101,23 @@
     "h": 7.28
    }
   },
-  "reserve": {
-   "label": "(réservé)",
-   "objet": "les 5 bannières au-dessus de la herse — aucune action pour l'instant",
+  "runs": {
+   "label": "LAST RUNS",
+   "objet": "les 6 bannières au-dessus de la herse = les six derniers runs (note 472 ③), la plus récente à gauche ; ni clic, survol = le résumé",
    "rect": {
     "x": 36.68,
     "y": 23.67,
     "w": 20.04,
     "h": 12.74
-   }
+   },
+   "bannieres": [
+    { "x": 37.32, "y": 24.4, "w": 2.47, "h": 11.5 },
+    { "x": 40.96, "y": 24.4, "w": 2.86, "h": 11.5 },
+    { "x": 44.54, "y": 24.4, "w": 2.78, "h": 11.5 },
+    { "x": 47.97, "y": 24.4, "w": 2.39, "h": 11.5 },
+    { "x": 51.22, "y": 24.4, "w": 2.47, "h": 11.5 },
+    { "x": 54.73, "y": 24.4, "w": 2.47, "h": 11.5 }
+   ]
   }
  },
  "medaillons_esprits": {
