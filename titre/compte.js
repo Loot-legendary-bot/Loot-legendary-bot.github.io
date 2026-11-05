@@ -132,9 +132,11 @@
     var s = document.createElement('style');
     s.id = 'cpt-style';
     s.textContent =
-      '#compte{position:absolute;inset:0;z-index:80;display:grid;place-items:center;' +
+      '#compte{position:absolute;inset:0;z-index:80;display:grid;place-items:center;align-content:center;gap:2.4cqh;' +
       'background:radial-gradient(90% 80% at 50% 40%,rgba(23,18,15,.97) 0%,rgba(7,6,5,.98) 80%)}' +
-      '#compte .cb{width:46cqw;max-height:92cqh;overflow:hidden;padding:4cqh 3.2cqw;background:#0e0c0a;' +
+      /* S1648 · note 469 ⑤ — le nouveau logo au-dessus de la boîte, avant le HOME */
+      '#compte .lg{display:block;width:30cqw;max-height:20cqh;object-fit:contain;pointer-events:none;user-select:none}' +
+      '#compte .cb{width:46cqw;max-height:70cqh;overflow:hidden;padding:4cqh 3.2cqw;background:#0e0c0a;' +
       'border:.25cqh solid rgba(233,228,216,.22);text-align:left}' +
       '#compte h2{margin:0 0 .8cqh;font:900 4.2cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.06em;' +
       'text-transform:uppercase;color:#e9e4d8}' +
@@ -173,8 +175,8 @@
       voile.addEventListener('keydown', function (e) { e.stopPropagation(); });
       ecran.appendChild(voile);
     }
-    voile.innerHTML = '<div class="cb"></div>';
-    return voile.firstChild;
+    voile.innerHTML = '<img class="lg" src="/art/titre/ui/logo.webp" alt="LICK FLOOR" draggable="false"><div class="cb"></div>';
+    return voile.querySelector('.cb');
   }
   function el(tag, cls, txt) {
     var e = document.createElement(tag);

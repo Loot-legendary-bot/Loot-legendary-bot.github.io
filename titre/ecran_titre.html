@@ -1262,6 +1262,71 @@
   window.__intro = function(){ return { fini: fini, attenteSon: attenteSon, t: vid.currentTime, muted: vid.muted, volume: vid.volume, paused: vid.paused }; };
 }());
 </script>
+<script>
+/* S1648 - note 469 (6) (Croze 03/11) : l'INTRO DU HOME. Le logo LICK FLOOR pop en gros sur fond noir
+   (0,6 s), le noir fond sur le HOME qui est deja la derriere (0,8 s), puis le logo se reduit vers le
+   centre et disparait (0,6 s). Une fois par lancement (onglet neuf), APRES le trailer (474 (1)) et
+   apres la porte du compte ; pas au retour d'une partie ni d'un sous-menu, ni sur ?vue= / ?etat=.
+   Sautable au clic / Echap / Espace (l'evenement ne traverse pas). */
+(function(){
+  var vue = false;
+  try { vue = sessionStorage.getItem('ll.intro.logo.vue') === '1'; } catch (e) {}
+  if (vue || /[?&](vue|etat)=/.test(location.search)) return;
+  var POP = 600, FONDU = 800, SORTIE = 600, fini = false, posee = false;
+  var v = document.createElement('div'); v.id = 'll-intro-logo';
+  v.style.cssText = 'position:fixed;inset:0;z-index:2147482990;background:#000;transition:background-color ' + FONDU + 'ms ease;cursor:none;display:grid;place-items:center;pointer-events:auto';
+  var img = document.createElement('img');
+  img.src = '/art/titre/ui/logo.webp'; img.alt = 'LICK FLOOR'; img.draggable = false;
+  img.style.cssText = 'width:min(72vw,128vh);max-height:60vh;object-fit:contain;transform:scale(.55);opacity:0;transition:transform ' + POP + 'ms cubic-bezier(.2,1.6,.4,1),opacity ' + POP + 'ms ease;user-select:none';
+  v.appendChild(img);
+  function avale(e){ e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); }
+  function termine(){
+    if (fini) return; fini = true;
+    window.removeEventListener('keydown', clavier, true);
+    window.removeEventListener('pointerdown', souris, true);
+    window.removeEventListener('click', avale, true);
+    v.remove();
+    /* le click qui suit un pointerdown de saut ne traverse pas jusqu'au HOME */
+    var jusqua = performance.now() + 250;
+    var garde = function(e){ if (performance.now() < jusqua) avale(e); };
+    ['pointerup','click','mouseup','keyup'].forEach(function(k){ window.addEventListener(k, garde, true); });
+    setTimeout(function(){ ['pointerup','click','mouseup','keyup'].forEach(function(k){ window.removeEventListener(k, garde, true); }); }, 300);
+  }
+  function clavier(e){ if (e.key === 'Escape' || e.key === ' ' || e.code === 'Space') { avale(e); termine(); } }
+  function souris(e){ avale(e); termine(); }
+  function joue(){
+    if (posee) return; posee = true;
+    try { sessionStorage.setItem('ll.intro.logo.vue', '1'); } catch (e) {}
+    (document.body || document.documentElement).appendChild(v);
+    window.addEventListener('keydown', clavier, true);
+    window.addEventListener('pointerdown', souris, true);
+    window.addEventListener('click', avale, true);
+    void img.offsetWidth; /* le depart pose avant la transition (pas de rAF : un onglet en arriere-plan ne le tire pas) */
+    setTimeout(termine, POP + FONDU + SORTIE + 900); /* filet : jamais un noir qui reste */
+    setTimeout(function(){
+      img.style.transform = 'scale(1)'; img.style.opacity = '1';
+      setTimeout(function(){ if (!fini) v.style.backgroundColor = 'rgba(0,0,0,0)'; }, POP);
+      setTimeout(function(){
+        if (fini) return;
+        img.style.transition = 'transform ' + SORTIE + 'ms cubic-bezier(.6,0,.8,.4),opacity ' + SORTIE + 'ms ease-in';
+        img.style.transform = 'scale(0)'; img.style.opacity = '0';
+        v.style.pointerEvents = 'none';
+      }, POP + FONDU);
+      setTimeout(termine, POP + FONDU + SORTIE + 50);
+    }, 30);
+  }
+  /* attend la fin du trailer et la fermeture de la porte du compte (compte.js, #compte) */
+  function pret(){ return !window.LLIntroEnCours && !document.getElementById('compte') && document.getElementById('screen'); }
+  function guette(){
+    if (pret()) { joue(); return; }
+    var n = 0, t = setInterval(function(){ n++; if (pret()) { clearInterval(t); joue(); } else if (n > 1200) { clearInterval(t); } }, 100);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(guette, 50); });
+  else setTimeout(guette, 50);
+  /* sonde du palier */
+  window.__introLogo = function(){ return { posee: posee, fini: fini }; };
+}());
+</script>
 
 
 <p class="hint">click a menu entry &middot; esc goes back &middot; backgrounds cycle on their own</p>
