@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 05 Nov 2026
+- **00:50** — A button you just clicked no longer stays greyed out for good when the same window comes back (the Collapse window waiting on a Dice-Eating Goose, for instance): OK · CONTINUE is clickable again as soon as the window is shown again.
+
 ## 04 Nov 2026
 - **18:00** — Tile actions get their icons: Move, Explore, Interact, Trade, Loot the body, Fight and Extract each show their painted icon next to the name, in the title font, with no more numbers; the line you hover is framed in red.
 - **17:30** — Character select: a character someone takes now shows only a frame with their name on it, no animation (no more TAKEN veil); once everyone has chosen, every portrait fades to black and white (EVERYONE HAS CHOSEN), then the logo and the descent into the dungeon.
