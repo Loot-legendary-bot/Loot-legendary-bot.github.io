@@ -1810,7 +1810,47 @@
     [/^Click a school$/, 'Clique une école'], [/^\(recommended\)$/, '(recommandé)'],
     [/^Your school: (.+)$/, function (m, e) { var F = { FIRE: 'FEU', FROST: 'GIVRE', LIGHTNING: 'FOUDRE', POISON: 'POISON', ARCANE: 'ARCANE', CHAOS: 'CHAOS' }; return 'Ton école : ' + (F[e] || e); }],
     [/^Run 2 is about to start\. Ready\?$/, 'Le run 2 va commencer. Prêt ?'],
-    [/^(\d+) \/ (\d+) READY — the run starts when everyone is$/, '$1 / $2 PRÊTS — le run démarre quand tout le monde l’est']
+    [/^(\d+) \/ (\d+) READY — the run starts when everyone is$/, '$1 / $2 PRÊTS — le run démarre quand tout le monde l’est'],
+    /* S1647 - note 482 (3) : les conditions des bounties en phrase complete (`LLBountyWall.phrase`) */
+    [/^Deal ([\d,]+) damage$/, 'Inflige $1 dégâts'],
+    [/^Deal ([\d,]+) (Fire|Frost|Lightning|Poison|Arcane|Chaos) damage$/, function (m, n, e) {
+      var F = { Fire: 'de Feu', Frost: 'de Givre', Lightning: 'de Foudre', Poison: 'de Poison', Arcane: 'd’Arcane', Chaos: 'de Chaos' };
+      return 'Inflige ' + n + ' dégâts ' + F[e]; }],
+    [/^Take ([\d,]+) damage \(all schools\)$/, 'Encaisse $1 dégâts (toutes écoles)'],
+    [/^Deal ([\d,]+) damage with WIS-based attacks$/, 'Inflige $1 dégâts avec des attaques à base de WIS'],
+    [/^Heal ([\d,]+) HP$/, 'Soigne $1 PV'],
+    [/^Kill yourself once$/, 'Tue-toi une fois'], [/^Kill yourself ([\d,]+) times$/, 'Tue-toi $1 fois'],
+    [/^Extract from the dungeon once$/, 'Extrais-toi du donjon une fois'],
+    [/^Extract from the dungeon ([\d,]+) times$/, 'Extrais-toi du donjon $1 fois'],
+    [/^Win ([\d,]+) games$/, 'Gagne $1 parties'], [/^Win ([\d,]+) games in a row$/, 'Gagne $1 parties d’affilée'],
+    [/^Play your Signature ([\d,]+) times in a single game$/, 'Joue ta Signature $1 fois dans une seule partie'],
+    [/^Roll ([\d,]+) natural (20|1)s$/, 'Obtiens $1 fois un $2 naturel'],
+    [/^Use ([\d,]+) consumables$/, 'Utilise $1 consommables'],
+    [/^Kill ([\d,]+) bosses$/, 'Tue $1 boss'], [/^Kill ([\d,]+) mobs$/, 'Tue $1 mobs'], [/^Kill ([\d,]+) players$/, 'Tue $1 joueurs'],
+    [/^Equip ([\d,]+) golden items$/, 'Équipe $1 objets dorés'],
+    [/^Play ([\d,]+) convocations or invitations$/, 'Joue $1 convocations ou invitations'],
+    [/^Open ([\d,]+) chests$/, 'Ouvre $1 coffres'],
+    [/^Flee successfully once$/, 'Réussis une fuite'], [/^Flee successfully ([\d,]+) times$/, 'Réussis $1 fuites'],
+    [/^Open ([\d,]+) locks with a key$/, 'Ouvre $1 serrures avec une clé'],
+    [/^Play ([\d,]+) Dice-Eating Geese$/, 'Joue $1 Dice-Eating Geese'],
+    [/^Pull off ([\d,]+) fake co-ops$/, 'Réussis $1 fake co-ops'],
+    [/^Fell ([\d,]+) bosses as a pair$/, 'Abats $1 boss à deux'],
+    [/^Make ([\d,]+) trades$/, 'Fais $1 trocs'],
+    [/^Trade with players once$/, 'Troque une fois avec un joueur'], [/^Trade with players ([\d,]+) times$/, 'Troque $1 fois avec des joueurs'],
+    [/^Enter ([\d,]+) RUINS tiles$/, 'Entre sur $1 tuiles RUINS'],
+    [/^Play ([\d,]+) Dungeon Pro Tour games$/, 'Joue $1 parties du Dungeon Pro Tour'],
+    [/^Win ([\d,]+) Dungeon Pro Tour games$/, 'Gagne $1 parties du Dungeon Pro Tour'],
+    [/^Reach the (Gold|Diamond) rank in the Dungeon Pro Tour$/, function (m, r) { return 'Atteins le rang ' + (r === 'Gold' ? 'Or' : 'Diamant') + ' au Dungeon Pro Tour'; }],
+    [/^Complete ([\d,]+) spirit trees$/, 'Termine $1 arbres d’esprit'],
+    [/^Complete ([\d,]+) card challenges$/, 'Réussis $1 défis de carte'],
+    [/^Claim all ([\d,]+) bounties of this branch$/, 'Prends les $1 bounties de cette branche'],
+    [/^Discover (\d+ %) of the tiles$/, 'Découvre $1 des tuiles'],
+    [/^Discover (\d+ %) of the loot cards$/, 'Découvre $1 des cartes de loot'],
+    [/^Discover (\d+ %) of the whole Codex$/, 'Découvre $1 de tout le Codex'],
+    [/^Discover every trap, chest and quest$/, 'Découvre tous les pièges, coffres et quêtes'],
+    [/^Discover every sub-boss$/, 'Découvre tous les sous-boss'],
+    [/^Discover the whole Codex, the 3 bosses included$/, 'Découvre tout le Codex, les 3 boss compris'],
+    [/^best game$/, 'meilleure partie'], [/^best streak$/, 'meilleure série']
   ];
   /* 339 (2) — l'ecran double ses blancs autour de « · » et de « — » (mesure : « ”  ·  card ») : chaque
      espace d'un motif vaut UN OU PLUSIEURS blancs. */

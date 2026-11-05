@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 05 Nov 2026
+- **01:10** — Character select: while the others are still choosing, the screen no longer flickers — the grid, the portraits and your sheet stay in place and only what changes is repainted (every portrait used to be reloaded at each pick). Bounty Wall: every condition is now a full sentence, on the bounty and on hover — "Play your Signature 8 times in a single game" (best game), "Win 5 games in a row" (best streak), "Deal 350 Poison damage"…
 - **00:50** — A button you just clicked no longer stays greyed out for good when the same window comes back (the Collapse window waiting on a Dice-Eating Goose, for instance): OK · CONTINUE is clickable again as soon as the window is shown again.
 
 ## 04 Nov 2026

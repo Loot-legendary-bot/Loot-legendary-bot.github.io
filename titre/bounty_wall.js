@@ -734,7 +734,53 @@
   }
 
   /* S1405 - note 221 (1c) : l'Epic n'est pas forgee ; sa ligne reste cachee au mur. */
-  window.LLBountyWall = { EPIC_FORGEE: false, refus: refus, verrouVictoire: verrouVictoire, aGagne: aGagne, PRIX_PERSO: PRIX_PERSO, FOIS: FOIS, TRONCS: TRONCS, FILTRES: FILTRES, SERVIS: SERVIS, etat: etat,
+  /* S1647 · note 482 ③ — « pas clair, précise » (Croze, ManBearPig : « 8 / 8 · Signatures in a single game ») :
+     chaque condition s'écrit en PHRASE COMPLÈTE, ce qu'il faut faire, le seuil dedans ; les records (meilleure
+     partie, meilleure série) le disent. Anglais à la source (note 241 ①), le français par `langue.js`. */
+  var ECOLES = { degats_fire: 'Fire', degats_frost: 'Frost', degats_lightning: 'Lightning', degats_poison: 'Poison',
+    degats_arcane: 'Arcane', degats_chaos: 'Chaos' };
+  var PHRASES = {
+    degats_infliges: 'Deal {n} damage', degats_pris: 'Take {n} damage (all schools)',
+    degats_wis: 'Deal {n} damage with WIS-based attacks', pv_soignes: 'Heal {n} HP',
+    suicides: 'Kill yourself {fois}', extractions: 'Extract from the dungeon {fois}', victoires: 'Win {n} games',
+    serie_victoires_max: 'Win {n} games in a row', signatures_max_partie: 'Play your Signature {n} times in a single game',
+    d20_nat20: 'Roll {n} natural 20s', d20_nat1: 'Roll {n} natural 1s', consommables: 'Use {n} consumables',
+    boss_tues: 'Kill {n} bosses', mobs_tues: 'Kill {n} mobs', kills_joueurs: 'Kill {n} players',
+    golden_equipes: 'Equip {n} golden items', invitations: 'Play {n} convocations or invitations',
+    coffres: 'Open {n} chests', fuites_reussies: 'Flee successfully {fois}', serrures_cle: 'Open {n} locks with a key',
+    oies_jouees: 'Play {n} Dice-Eating Geese', fake_coop: 'Pull off {n} fake co-ops', boss_a_deux: 'Fell {n} bosses as a pair',
+    trades: 'Make {n} trades', trades_joueurs: 'Trade with players {fois}', ruines_entrees: 'Enter {n} RUINS tiles',
+    parties_dpl: 'Play {n} Dungeon Pro Tour games', victoires_dpl: 'Win {n} Dungeon Pro Tour games',
+    '@arbres': 'Complete {n} spirit trees', defis_carte: 'Complete {n} card challenges',
+    '@servis': 'Claim all {n} bounties of this branch'
+  };
+  var PHRASES_CODEX = {
+    'Tiles discovered': 'Discover {p} of the tiles', 'Loot cards discovered': 'Discover {p} of the loot cards',
+    'The whole Codex': 'Discover {p} of the whole Codex'
+  };
+  /* le record (pas un cumul) : le compteur montré est celui de la meilleure partie / série */
+  var RECORDS = { signatures_max_partie: 'best game', serie_victoires_max: 'best streak' };
+  function phrase(g, a) {
+    var n = Number(a || 0).toLocaleString('en-US');
+    if (g.c === CODEX) {
+      if (/^Traps, chests and quests/.test(g.l)) { return 'Discover every trap, chest and quest'; }
+      if (/^Sub-bosses/.test(g.l)) { return 'Discover every sub-boss'; }
+      if (/the 3 bosses included/.test(g.l)) { return 'Discover the whole Codex, the 3 bosses included'; }
+      var m = /^(.+?) (\d+ %)$/.exec(g.l);
+      if (m && PHRASES_CODEX[m[1]]) { return PHRASES_CODEX[m[1]].replace('{p}', m[2]); }
+      return g.l;
+    }
+    if (g.c === 'rang_dpl') {
+      var r = /\((\w+)\)/.exec(g.l);
+      return r ? 'Reach the ' + r[1] + ' rank in the Dungeon Pro Tour' : g.l;
+    }
+    if (ECOLES[g.c]) { return 'Deal ' + n + ' ' + ECOLES[g.c] + ' damage'; }
+    var f = PHRASES[g.c];
+    if (!f) { return g.l; }
+    return f.replace('{n}', n).replace('{fois}', a === 1 ? 'once' : n + ' times');
+  }
+  function record(g) { return RECORDS[g.c] || null; }
+  window.LLBountyWall = { phrase: phrase, record: record, EPIC_FORGEE: false, refus: refus, verrouVictoire: verrouVictoire, aGagne: aGagne, PRIX_PERSO: PRIX_PERSO, FOIS: FOIS, TRONCS: TRONCS, FILTRES: FILTRES, SERVIS: SERVIS, etat: etat,
     compteur: compteur, compteurBranche: compteurBranche, actifs: actifs, PACTE: PACTE, ROMPRE: ROMPRE, pacte: pacte, prixDuPacte: prixDuPacte,
     passeLePacte: passeLePacte, romps: romps, prends1: prends1, dptOuvert: dptOuvert, CODEX: CODEX, ARBRES: ARBRES, DEFIS: DEFIS, ligueOuverte: ligueOuverte, surLeTicket: surLeTicket, offreSurLeTicket: offreSurLeTicket,
     CHANCES: CHANCES, SORTES_CHANCE: SORTES_CHANCE, chance: chance, acheteLaChance: acheteLaChance, utiliseLeCharme: utiliseLeCharme, stockDesCharmes: stockDesCharmes,

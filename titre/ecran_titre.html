@@ -5345,6 +5345,9 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     '.bw-n .ct{grid-column:1 / -1;min-width:0;font:400 max(14px, 1.05cqh)/1.1 "Alegreya",Georgia,serif;' +
     'color:#8d8578;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
     '.bw-n .ct em{font-style:normal;color:#e9e4d8}' +
+    /* S1647 · note 482 ③ — la phrase de la condition sur sa ligne, le compteur dessous, le record entre parenthèses */
+    '.rg .ct .ph{display:block;color:#e9e4d8;overflow:hidden;text-overflow:ellipsis}' +
+    '.rg .ct .rec::before{content:"("}.rg .ct .rec::after{content:")"}' +
     '.bw-n .epic-fin{display:flex;align-items:center;gap:.4cqw;padding:.4cqh .3cqw;border:.12cqh dashed #6e6558;' +
     'font:400 max(14px, 1.0cqh)/1.15 "Alegreya",Georgia,serif;color:#8d8578}' +
     '.bw-n .epic-fin b{font:900 max(14px, 1.2cqh)/1 "Big Shoulders Display","Arial Black",sans-serif;color:#cfc6b4;letter-spacing:.06em}' +
@@ -6182,13 +6185,16 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     d.className = 'rg ' + x.s;
     d.dataset.c = g.c;
     if (x.d) { d.dataset.de = '1'; }
-    d.title = x.nom + ' — ' + g.l + ' ' + fmt(x.a)
-      + (x.s === 'a_toi' ? ' · yours' : x.s === 'pret' ? ' · unlocked' : '');
+    /* S1647 · note 482 ③ — la condition en phrase complète, sur la carte et au survol (`BW.phrase`). */
+    var ph = BW.phrase ? BW.phrase(g, x.a) : g.l;
+    var rec = BW.record ? BW.record(g) : null;
+    d.title = ph;
     d.innerHTML = '<div class="fin ' + x.s + '"></div><div class="lb">' + x.nom + '</div>' +
       '<div class="br"><img src="' + HB + 'fill_damage_white_stacked.png" alt="" style="opacity:.18">' +
       '<img class="sang" src="' + HB + 'fill_blood_stacked.png" alt="" style="clip-path:inset(0 ' +
       (100 - bord(g.n / x.a)).toFixed(2) + '% 0 0)"><img src="' + HB + 'frame.png" alt=""></div>' +
-      '<div class="ct"><em>' + fmt(Math.min(g.n, x.a)) + '</em> / ' + fmt(x.a) + ' · ' + g.l + '</div>';
+      '<div class="ct"><span class="ph">' + ph + '</span> <span class="nb"><em>' + fmt(Math.min(g.n, x.a)) + '</em> / ' + fmt(x.a) +
+      '</span>' + (rec ? ' <span class="rec">' + rec + '</span>' : '') + '</div>';
     var f = d.querySelector('.fin');
     if (x.e) {
       f.innerHTML = '<span class="vide" title="' + x.nom + ' — to be forged">✦</span>';
