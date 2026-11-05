@@ -2556,6 +2556,11 @@ function peinsLeDev(box){
     bb.addEventListener('click',function(){ window.location.href='/?banc=1'; });
     d.appendChild(bb);
   }
+  /* S1649 - note 469 (1) : la DEMO VFX - l'effet actuel et ma proposition cote a cote, un clic par ligne. */
+  var bv=document.createElement('button'); bv.type='button'; bv.className='langue-btn'; bv.textContent='VFX';
+  bv.title='Today’s effect and the proposed one, side by side: keep, refuse or ask another try, one click per line.';
+  bv.addEventListener('click',function(){ window.location.href='/vfx_demo.html'; });
+  d.appendChild(bv);
   var fin=function(msg){ if(typeof paintHUD==='function') paintHUD(true); var m=document.getElementById('dev-msg'); if(m) m.textContent=msg; };
   [['RESET OFFERINGS','Every essence you own and every offering burning goes back to zero.',function(){
       P.modifie(function(p){ p.offrandes=[]; if(p.mur&&typeof p.mur==='object') p.mur.offertes=[]; }); return 'Offerings reset.'; }],
