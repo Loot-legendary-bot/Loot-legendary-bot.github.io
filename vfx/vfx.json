@@ -106,5 +106,95 @@
   "images": 15,
   "source": "Wind VFX Spritesheets/Burst_Dust_White_v1_spritesheet.png",
   "cellule_source": 512
+ },
+ "dash_vent": {
+  "fichier": "dash_vent.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 16,
+  "source": "Wind VFX Spritesheets/Dash_Wind_White_v1_spritesheet.png",
+  "cellule_source": 512
+ },
+ "poussiere_2": {
+  "fichier": "poussiere_2.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 15,
+  "source": "Wind VFX Spritesheets/Burst_Dust_White_v2_spritesheet.png",
+  "cellule_source": 512
+ },
+ "fumee_burst": {
+  "fichier": "fumee_burst.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 64,
+  "source": "Wind VFX Spritesheets/Smoke_Burst_White_v1_A_spritesheet.png",
+  "cellule_source": 512
+ },
+ "sang_burst": {
+  "fichier": "sang_burst.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 58,
+  "source": "Water VFX Spritesheets/Blood_Burst_v1_spritesheet.png",
+  "cellule_source": 512
+ },
+ "sang_eclabousse": {
+  "fichier": "sang_eclabousse.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 62,
+  "source": "Water VFX Spritesheets/Blood_Splash_Burst_v1_A_Drops_spritesheet.png",
+  "cellule_source": 512
+ },
+ "sang_goutte": {
+  "fichier": "sang_goutte.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 63,
+  "source": "Water VFX Spritesheets/Blood_Drip_v1_A_spritesheet.png",
+  "cellule_source": 512
+ },
+ "sang_sol": {
+  "fichier": "sang_sol.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 15,
+  "source": "Water VFX Spritesheets/Blood_Ground_Splash_v1_spritesheet.png",
+  "cellule_source": 512
+ },
+ "eau_impact": {
+  "fichier": "eau_impact.png",
+  "colonnes": 8,
+  "lignes": 8,
+  "cellule": 256,
+  "images": 63,
+  "source": "Water VFX Spritesheets/Water_Impact_Burst_v1_A_spritesheet.png",
+  "cellule_source": 512
+ },
+ "impact_coupe": {
+  "fichier": "impact_coupe.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 14,
+  "source": "Sword Slash VFX Spritesheets/Impact_Cut_V1_spritesheet.png",
+  "cellule_source": 512
+ },
+ "estoc": {
+  "fichier": "estoc.png",
+  "colonnes": 4,
+  "lignes": 4,
+  "cellule": 256,
+  "images": 9,
+  "source": "Sword Slash VFX Spritesheets/Stab_V1_spritesheet.png",
+  "cellule_source": 512
  }
 }
