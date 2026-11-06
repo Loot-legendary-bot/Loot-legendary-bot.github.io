@@ -68,6 +68,10 @@
       '.cx-carte:not(.vu) .cx-nom{opacity:.6}' +
       '.cx-tirage{font-size:1.1cqh;letter-spacing:.06em;color:#c9a227;margin-top:.3cqh}' +
       '.cx-notice .cx-tirage{font-size:1.5cqh;margin-top:1cqh}' +
+      '.cx-section{grid-column:1/-1;display:flex;align-items:baseline;gap:1.2cqw;margin-top:2.2cqh;padding:.8cqh 0;' +
+      'border-top:1px solid rgba(233,226,212,.3);font:900 2.1cqh/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.16em;color:#d9b35a}' +
+      '.cx-section-dit{font:400 1.4cqh/1.2 var(--mono,monospace);letter-spacing:.04em;color:rgba(233,226,212,.6)}' +
+      '.cx-porteur{font-size:1.2cqh;line-height:1.25;color:#d9b35a;letter-spacing:.06em;text-align:center;margin-top:.3cqh}' +
       '.cx-vide{grid-column:1/-1;opacity:.6;font-size:1.6cqh;padding:2cqh 0}' +
       '.cx-boite{display:block;width:100%;text-align:left;background:rgba(0,0,0,.42);color:inherit;' +
         'border:1px solid rgba(255,255,255,.2);padding:1.1cqh .9cqw;font:inherit;cursor:pointer}' +
@@ -535,6 +539,11 @@
     }
     c.appendChild(cadre);
     c.appendChild(el('div', 'cx-nom', it.nom));
+    /* S1654 · note 485 ③ — une arme de base dit qu'elle l'est, et qui la porte */
+    if (it.base) {
+      c.classList.add('base');
+      c.appendChild(el('div', 'cx-porteur', 'BASE WEAPON' + (it.porteurs && it.porteurs.length ? ' · ' + it.porteurs.join(', ') : '')));
+    }
     /* S1536 · note 384 ⑦ — le poids de tirage (v158) : « 10 % » sous le nom d'une tuile spéciale */
     if (typeof it.tirage === 'number') c.appendChild(el('div', 'cx-tirage', 'draw chance ' + Math.round(it.tirage * 100) + ' %'));
     if (vu) c.addEventListener('click', function () { agrandis(it); });
@@ -694,9 +703,17 @@
         return;
       }
       boites.forEach(function (bb) {
+        var titreBase = false;
         bb.items.forEach(function (it) {
           if (!passe(it, bb, V)) return;
-          grille.appendChild(carte(it, V[bb.famille].has(it.id)));
+          /* S1654 · note 485 ③ — les armes de base, à part (codex.py les range en fin, marquées `base`) */
+          if (it.base && !titreBase) {
+            titreBase = true;
+            var tb = el('div', 'cx-section', 'BASE WEAPONS');
+            tb.appendChild(el('span', 'cx-section-dit', 'each character starts with one — not in the decks'));
+            grille.appendChild(tb);
+          }
+          grille.appendChild(carte(it, V[bb.famille].has(it.id) || it.base === true));   /* une arme de base n'est tirée d'aucun deck : toujours montrée */
           n += 1;
         });
       });
