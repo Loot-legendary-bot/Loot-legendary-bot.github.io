@@ -1492,6 +1492,9 @@
     'Alone · 20 turns': 'Seul · 20 tours', 'Alone against the dungeon for twenty turns. Score as much as you can.':
       'Seul contre le donjon pendant vingt tours. Marque le plus de points possible.',
     'CHOOSE THE DIE': 'CHOISIS LE DÉ', 'PASS': 'PASSER', 'USE IT NOW': 'L’UTILISER MAINTENANT', 'EQUIP IT NOW': 'L’ÉQUIPER MAINTENANT', 'KEEP IT IN HAND': 'LA GARDER EN MAIN',
+    /* S1663 - 487 (3) l'option du Casino qui nomme le barreau vise */
+    'ROLL FOR UNCOMMON': 'TENTE LE PEU COMMUN', 'ROLL FOR RARE': 'TENTE LE RARE', 'ROLL FOR EPIC': 'TENTE L’ÉPIQUE',
+    'ROLL FOR LEGENDARY': 'TENTE LE LÉGENDAIRE',
     'COMMON': 'COMMUN', 'UNCOMMON': 'PEU COMMUN', 'EPIC': 'ÉPIQUE', 'LEGENDARY': 'LÉGENDAIRE',
     'Common': 'Commun', 'Uncommon': 'Peu commun', 'Epic': 'Épique', 'Legendary': 'Légendaire',
     /* S1557 - 389 (2) : la serrure de The Cell */

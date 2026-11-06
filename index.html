@@ -14779,6 +14779,16 @@
       .casino-table-de { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px;
         border-radius: 10px; background: #f2ede4; color: #1a120a; font-family: var(--display); font-weight: 800; font-size: 28px; }
       .casino-table-rang { font-family: var(--display); font-weight: 800; font-size: 20px; color: #f2ede4; }
+      /* S1663 - note 487 (3) : l'echelle des raretes du Casino (Legendary en haut), l'acquis allume, le vise en surbrillance. */
+      .casino-echelle { display: flex; flex-direction: column; gap: 4px; margin: 8px auto 2px; width: 220px; }
+      .casino-barreau { font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .12em; text-align: center;
+        padding: 4px 10px; border: 2px solid var(--teinte); border-radius: 6px; color: var(--teinte); opacity: .38;
+        background: rgba(10, 8, 4, .6); }
+      .casino-barreau.acquis { opacity: 1; background: var(--teinte); color: #14100a; }
+      .casino-barreau.vise { opacity: 1; box-shadow: 0 0 14px 2px var(--teinte); animation: casino-vise 1s ease-in-out infinite alternate; }
+      @keyframes casino-vise { from { transform: scale(1); } to { transform: scale(1.06); } }
+      .tv2-ligne.casino-option .tv2-texte { color: var(--teinte); font-weight: 800; }
+      .tv2-ligne.casino-option { border-color: var(--teinte); }
       .casino-table-boutons { display: flex; gap: 12px; }
       .casino-table-boutons button:disabled { opacity: .45; cursor: not-allowed; }
       .casino-table-attente { color: #cfc6b4; font-style: italic; }
@@ -15482,7 +15492,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BlWqX2Ya.js"></script>
+    <script type="module" crossorigin src="./assets/index-CoswTEpX.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
