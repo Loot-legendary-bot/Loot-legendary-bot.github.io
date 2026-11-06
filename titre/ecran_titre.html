@@ -2482,6 +2482,25 @@ function peinsLaLangue(){
     b.addEventListener('click',function(){ try{ localStorage.setItem('ll.options.intro',x[0]); }catch(e){} peinsLaLangue(); });
     box.appendChild(b);
   });
+  /* S1660 - note 464 (1)(c) : le panneau recompose - les reglages de la TABLE ici aussi, sur les cles
+     que la partie lit deja (`ll.options.explore`, TEXT par defaut ; `ll.options.fondSombre`, DARK par defaut). */
+  var tT=document.createElement('div'); tT.className='langue-titre'; tT.textContent='EXPLORE'; tT.style.marginTop='2.4cqh'; box.appendChild(tT);
+  var expl='TEXT'; try{ var ve=localStorage.getItem('ll.options.explore'); if(ve==='FACES'||ve==='PERCENT') expl=ve; }catch(e){}
+  [['TEXT','TEXT'],['FACES','DICE FACES'],['PERCENT','PERCENT']].forEach(function(x){
+    var b=document.createElement('button'); b.type='button'; var sel=expl===x[0];
+    b.className='langue-btn'+(sel?' on':''); b.textContent=(sel?'●  ':'○  ')+x[1];
+    b.addEventListener('click',function(){ try{ localStorage.setItem('ll.options.explore',x[0]); }catch(e){} peinsLaLangue(); });
+    box.appendChild(b);
+  });
+  var tD=document.createElement('div'); tD.className='langue-titre'; tD.textContent='DARKER BACKGROUND'; tD.style.marginTop='2.4cqh'; box.appendChild(tD);
+  var cran='1'; try{ var vc=localStorage.getItem('ll.options.fondSombre'); if(vc==='0'||vc==='2') cran=vc; }catch(e){}
+  [['0','NORMAL'],['1','DARK'],['2','VERY DARK']].forEach(function(x){
+    var b=document.createElement('button'); b.type='button'; var sel=cran===x[0];
+    b.className='langue-btn'+(sel?' on':''); b.textContent=(sel?'●  ':'○  ')+x[1];
+    b.addEventListener('click',function(){ try{ localStorage.setItem('ll.options.fondSombre',x[0]); }catch(e){} peinsLaLangue(); });
+    box.appendChild(b);
+  });
+  var tP=document.createElement('div'); tP.className='son-maitre-val'; tP.textContent='PAUSE: in a game, against bots only'; box.appendChild(tP);
   /* S1435 - note 281 (12) : « OPTIONS du HOME : le volume du SON (master au minimum) ».
      Un seul curseur, le MAITRE : il multiplie la musique, l'ambiance et les effets du jeu
      (`volMaster` dans `ll.options.son`, la cle que le jeu lit deja), sans toucher a leurs
