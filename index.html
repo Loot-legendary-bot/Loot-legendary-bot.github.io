@@ -14121,6 +14121,10 @@
       .nouvelle-table .ntt-table:not(.ntt-en-combat) .ntt-axe .tuile-art,
       .nouvelle-table .ntt-table:not(.ntt-en-combat) .ntt-axe.avec-question .tuile-art { height: 504px; }
       .nouvelle-table .ntt-question-cadre { position: relative; flex: 0 1 820px; min-width: 0; }
+      /* S1664 · note 489 ① — un panneau du seuil (z 4) ne passe JAMAIS au-dessus d'un troc ni d'une
+         question qui m'est posée : mesuré sur `etat-troc`, la figure « BOT · 2 » couvrait le bas de
+         « THE TURD GIVES » et la réserve. Le cadre qui les porte monte au-dessus du seuil. */
+      .nouvelle-table .ntt-axe > .ntt-question-cadre:has(.troc, .les-choix.a-toi) { z-index: 5; }
       /* S1460 · note 338 ⑩ — TABLE v2 : le panneau du joueur suivi, plus grand ; ses ACTIONS en gros avec leur
          image, le fil en sous-lignes ; il s'efface quand on le voit choisir lui-même. */
       .nouvelle-table .ntt-pov-gestes.tv2-suivi { font-size: 1.15em; }
@@ -15492,7 +15496,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CoswTEpX.js"></script>
+    <script type="module" crossorigin src="./assets/index-5uCXmfhf.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
