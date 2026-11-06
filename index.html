@@ -13334,6 +13334,17 @@
       .nouvelle-table .nt-entete-tour.deplie .nt-et-detail { display: flex; }
       .nouvelle-table .nt-entete-tour .nt-et-detail .bt-tour { display: none; }
       .nouvelle-table > .nt-memoire.nt-tour-seul:has(.nt-entete-tour) { max-width: 580px; }
+      /* S1656 · note 485 ④ — au changement de tour de donjon (or) et au Collapse (braise) : la ligne grossit et
+         s'illumine ~1,2 s, puis revient discrète. */
+      .nouvelle-table .nt-entete-tour .nt-et-ligne { transform-origin: right center; }
+      .nouvelle-table .nt-entete-tour.nt-et-frappe .nt-et-ligne { animation: ntEtFrappe 1.3s ease-out; --et-lueur: #FFD866; }
+      .nouvelle-table .nt-entete-tour.nt-et-frappe-collapse .nt-et-ligne { animation: ntEtFrappe 1.3s ease-out; --et-lueur: #FF7A2E; }
+      @keyframes ntEtFrappe {
+        0%   { transform: scale(1); text-shadow: none; }
+        18%  { transform: scale(1.45); text-shadow: 0 0 14px var(--et-lueur), 0 0 30px var(--et-lueur); filter: brightness(1.5); }
+        70%  { transform: scale(1.3); text-shadow: 0 0 10px var(--et-lueur); filter: brightness(1.25); }
+        100% { transform: scale(1); text-shadow: none; filter: none; }
+      }
       /* S1460 · note 338 ④ — TABLE v2 : la barre RUN tient sur UNE ligne (libellés courts, jamais de retour) */
       html.table-v2 .nouvelle-table .nt-entete-tour .nt-et-ligne { white-space: nowrap; font-size: calc(17px * var(--lisible, 1) * var(--et-serre, 1)); }
       html.table-v2 .nouvelle-table .nt-entete-tour .nt-et-texte { white-space: nowrap; }
@@ -15462,7 +15473,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BKfmCmVl.js"></script>
+    <script type="module" crossorigin src="./assets/index-iUohz6x5.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
