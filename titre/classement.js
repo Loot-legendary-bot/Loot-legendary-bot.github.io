@@ -43,6 +43,9 @@
     /* S1637 - note 472 (2) + mot de Croze (03/11) : le TABLIER du grade devant son nom */
     '.rk-l .rk-ps{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
     '.rk-l{align-items:center}.rk-l .rk-gr{display:flex;align-items:center;justify-content:flex-end;gap:.8cqw}' +
+    /* S1654 - note 485 (2) : la plaque du pseudo sur chaque ligne (GRADES 12, `banniere` servi par /ranking) */
+    '.rk-l .rk-ps.llb-plaque{padding:.55cqh 1.4cqw .6cqh;justify-self:start;max-width:100%}' +
+    '.rk-vide{color:rgba(233,226,212,.4);cursor:help;border-bottom:1px dotted rgba(233,226,212,.35)}' +
     '.rk-tab{height:4.2cqh;width:auto;filter:drop-shadow(0 .3cqh .6cqh rgba(0,0,0,.6))}' +
     '.rk-dit{font-size:1.7cqh;line-height:1.5;color:rgba(233,226,212,.75);padding:1.4cqh .8cqw}' +
     '.rk-dit b{color:#f4eddc}' +
@@ -176,6 +179,9 @@
     if (!Array.isArray(l)) { return null; }
     return l.map(function (x) {
       return { pseudo: String(x.pseudo || x.name || '?'), points: x.points !== undefined ? x.points : x.pts,
+               /* S1654 - note 485 (2) : l'enveloppe dit si le serveur SERT ces champs (un « — » doit dire pourquoi) */
+               sertGrade: Object.prototype.hasOwnProperty.call(x, 'grade') && (x.grade === null || typeof x.grade === 'number'),
+               sertWins: typeof x.wins === 'number' || typeof x.victoires === 'number',
                gradeNum: typeof x.grade === 'number' ? x.grade : (typeof x.grade_num === 'number' ? x.grade_num : null),
                grade: nomDuGrade(typeof x.grade === 'number' ? x.grade : x.grade_num) || '',
                /* S1637 - note 472 (2) : les parties gagnees et la plaque, quand le serveur les porte (M-S1636) */
@@ -222,15 +228,30 @@
   function ligne(x, pos, estMoi) {
     var l = el('div', 'rk-l' + (estMoi ? ' moi' : '')); l.tabIndex = 0;
     l.appendChild(el('span', 'rk-pos', pos));
-    l.appendChild(el('span', 'rk-ps', x.pseudo));
-    var gNum = estMoi ? monGrade() : x.gradeNum, gr = el('span', 'rk-gr');
+    var ps = el('span', 'rk-ps', x.pseudo);
+    /* S1654 - note 485 (2) : sa plaque (la mienne = celle de ce PC) ; sans plaque servie, l'originale */
+    if (window.LLBannieres) { window.LLBannieres.pose(ps, x.banniere || (estMoi ? window.LLBannieres.choisie() : 'originale')); }
+    l.appendChild(ps);
+    /* S1654 - note 485 (2) : le SERVEUR prime (c'est lui qui trie) ; ce PC ne sert qu'en repli, sur ma ligne */
+    var gNum = typeof x.gradeNum === 'number' ? x.gradeNum : (estMoi ? monGrade() : null), gr = el('span', 'rk-gr');
     if (typeof gNum === 'number' && gNum >= 1) {
       var tab = el('img', 'rk-tab'); tab.alt = ''; tab.src = '/art/grades/tablier_' + (gNum < 10 ? '0' : '') + Math.round(gNum) + '.webp';
       tab.onerror = function () { tab.remove(); }; gr.appendChild(tab);
     }
-    gr.appendChild(el('span', null, (estMoi ? nomDuGrade(monGrade()) : x.grade) || '—'));
+    var nomGr = (typeof gNum === 'number' ? nomDuGrade(gNum) : '') || x.grade || '';
+    if (nomGr) { gr.appendChild(el('span', null, nomGr)); }
+    else {
+      /* S1654 - note 485 (2) : jamais un « — » muet */
+      var vg = el('span', 'rk-vide', '—');
+      vg.title = x.sertGrade ? 'No grade yet: a grade is written to the profile when the player finishes a game.'
+        : 'The server does not send grades yet.';
+      gr.appendChild(vg);
+    }
     l.appendChild(gr);
-    l.appendChild(el('span', 'rk-pts', fmt(estMoi ? mesVictoires() : x.wins)));
+    var w = typeof x.wins === 'number' ? x.wins : (estMoi ? mesVictoires() : null);
+    var pw = el('span', 'rk-pts', fmt(w));
+    if (w === null || w === undefined) { pw.classList.add('rk-vide'); pw.title = 'The server does not send wins yet.'; }
+    l.appendChild(pw);
     l.addEventListener('click', function () { inspecte(x.pseudo); });
     l.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); inspecte(x.pseudo); } });
     return l;
