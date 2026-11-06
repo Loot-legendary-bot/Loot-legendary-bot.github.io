@@ -3566,6 +3566,10 @@
       .scene-cadre .scene-nom { font-size: 30px; }
       /* Le lanceur porte les N faces : son cadre est le premier, et il se voit. */
       .scene-cadre.lanceur { border-color: var(--slate); }
+      /* S1659 · note 464 ④ — Fear : un fuyard s'encadre en rouge et porte FLEES */
+      .scene-cadre.fuit { border-color: #c0392b; box-shadow: 0 0 0 3px #c0392b, 0 0 22px rgba(192,57,43,.65); }
+      .scene-fuit { font: 800 26px/1 "Big Shoulders Display","Arial Black",sans-serif; letter-spacing: .1em;
+        color: #fff; background: #c0392b; padding: 4px 12px; border-radius: 4px; }
       /* S1439 · note 287 ② (capture 06) — LE GAGNANT D'UN JET À PLUSIEURS S'ENTOURE : les coins
          arcade animés du character select (283 ①), même langage, au lieu du seul petit « WIN » perdu
          en bas. Et la séquence canonique (288) : ni les coins ni le libellé avant que le dé soit
@@ -15473,7 +15477,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-0h2opjiu.js"></script>
+    <script type="module" crossorigin src="./assets/index-B8KLWqj-.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
