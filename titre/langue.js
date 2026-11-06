@@ -1283,7 +1283,7 @@
        d'un siege) ; les noms de cartons composes (Large Chest, Marvelous Chest…) restent anglais. */
     'Chest': 'Coffre', 'opening a chest': 'ouvre un coffre', 'a chest': 'un coffre',
     /* S1477 - note 358 bis : l'oeil des cartes de de, et son reglage dans OPTIONS. */
-    'ASK ME': 'DEMANDE-MOI', 'MUTED': 'MUETTE', 'DICE CARDS': 'CARTES DE DÉ',
+    'ASK ME': 'DEMANDE-MOI', 'MUTED': 'MUETTE', 'MUTED ALL': 'MUETTE À JAMAIS', 'MUTE ALL': 'COUPER À JAMAIS', 'MUTE': 'COUPER', 'DICE CARDS': 'CARTES DE DÉ',
     '▼ PLAY A LIT CARD FROM YOUR HAND': '▼ JOUE UNE CARTE ALLUMÉE DE TA MAIN',
     /* S1481 - note 364 (6) : la fenetre de reaction, une pause */
     'You have time to play reactions — lit cards, Signature, gear':

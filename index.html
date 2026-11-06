@@ -6307,6 +6307,14 @@
       .handslot > .oeil:hover { width: auto; padding: 2px 7px 2px 5px; border-radius: 14px; }
       .handslot > .oeil:hover .oeil-mot { display: inline; }
       .eps-tete > .oeil { margin-left: 8px; vertical-align: middle; }
+      /* S1664 · note 485 ⑤ — MUTE / MUTE ALL : l'état en badge, les deux autres gestes soulignés à côté (leur
+         phrase au survol) ; MUTED ALL cerclé de rouge, MUTED en gris. */
+      .oeil.sourdine .oeil-geste { color: #e9e4d8; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+        padding-left: 6px; border-left: 1px solid rgba(233, 228, 216, .3); }
+      .oeil.sourdine .oeil-geste:hover { color: #f2c14e; }
+      .oeil.sourdine { white-space: nowrap; }
+      .handslot > .oeil.sourdine:hover { z-index: 40; }
+      .oeil.sourdine.tout { color: #e05a4e; border-color: #a3231d; box-shadow: 0 0 0 1px #a3231d; }
       /* S1450 — le GAME LOG ne se recentre pas quand une ligne arrive : sa boîte a une hauteur fixe. */
       .plein-boite:has(.journal-en-grand) { height: calc(var(--uvh) * 88); }
       @keyframes monte { from { transform: translateY(14px) scale(.985); opacity: 0 }
@@ -15496,7 +15504,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-5uCXmfhf.js"></script>
+    <script type="module" crossorigin src="./assets/index-C9pC9Qxd.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
