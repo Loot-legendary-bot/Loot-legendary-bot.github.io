@@ -11694,6 +11694,9 @@
       /* S1489 - note 368 (5) : les des du draft (un d20 par siege, dans l'ordre), avant le premier choix. */
       .ouv-deux-blocs > .ouv-draft { position: absolute; top: 16.6%; left: 2.4%; width: 45%; z-index: 6;
         display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 6px 16px; }
+      /* S1662 - note 466 (2) : « merge en bandeau en haut » -- l'ordre de pick tient sur UNE ligne (il
+         passait a la ligne et le 4e siege mordait la fiche). */
+      .ouv-deux-blocs > .ouv-draft { flex-wrap: nowrap; white-space: nowrap; width: auto; max-width: 95%; }
       .ouv-draft-titre { font: 700 14px/1 var(--mono); letter-spacing: .2em; color: var(--stock-dim); }
       .ouv-draft-siege { display: inline-flex; align-items: baseline; gap: 6px; color: var(--stock); }
       .ouv-draft-siege.moi { color: #e8d9a8; }
@@ -12051,9 +12054,11 @@
        */
       /* ⑤ CE QUE LA MAQUETTE NE MONTRE PAS, ET QUI NE MEURT PAS POUR AUTANT :
          le pied de la porte et sa notice, sous la fiche, colonne gauche. */
-      .ouv-deux-blocs > .ouv-pied { position: absolute; left: 2.4%; bottom: 6.5%;
+      /* S1662 - note 466 (2) : le pied descend sous la ligne NIVEAU (« 1 seat to confirm » la chevauchait),
+         la notice -- un refus seulement, en peau joueur -- tout en bas. */
+      .ouv-deux-blocs > .ouv-pied { position: absolute; left: 2.4%; bottom: 3.2%;
                                     width: 45%; margin: 0; justify-content: flex-start; }
-      .ouv-deux-blocs > .err { position: absolute; left: 2.4%; bottom: 2.6%;
+      .ouv-deux-blocs > .err { position: absolute; left: 2.4%; bottom: 0.6%;
                                width: 45%; text-align: left; }
       /*
        * ═══ ⚑⚑ S577 · LE PRÉ-GAME COMPLET — note 68, ordre de Croze ═════════
@@ -15477,7 +15482,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-ChL1wxUd.js"></script>
+    <script type="module" crossorigin src="./assets/index-BlWqX2Ya.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
