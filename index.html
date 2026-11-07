@@ -6142,6 +6142,12 @@
       .dicelayer .scene-coffre-carte { display: block; margin: 0 auto 2vh; height: clamp(220px, 38vh, 460px);
                                        width: auto; border-radius: 12px; box-shadow: 0 14px 40px rgba(0,0,0,.7); }
       .dicelayer .dgroup.coffre-rangee { gap: 34px; margin-bottom: 5vh; }
+      /* S1674 · note 494 ① — la tuile d'entrée et son texte, lus AVANT le dé */
+      .dicelayer.tuile-entree .borne-bloc { display: flex; flex-direction: column; align-items: center; }
+      .dicelayer.tuile-entree .tuile-entree-texte { max-width: min(760px, 86vw); margin: 14px auto 0; line-height: 1.4;
+                                       font-family: var(--serif, Georgia, serif); font-style: italic;
+                                       font-size: calc(22px * var(--lisible, 1)); letter-spacing: normal;
+                                       text-transform: none; color: #EDE6D4; opacity: 1; text-align: center; }
       /* S1447 · note 306 ⑬ — « remonte carte + jet + verdict pour que la main ne les masque jamais » :
          mesuré (fenêtre 1222 px), raretés sous les dés jusqu'à ~954 px, la main dès 975 px au repos et
          plus haut au survol. La scène du coffre s'ancre en HAUT et la carte rétrécit d'un cran : tout
@@ -15473,7 +15479,12 @@
       .tuto-couche { position: fixed; inset: 0; z-index: 99000; pointer-events: none; }   /* au-dessus de toute scène */
       .tuto-volet { position: fixed; background: rgba(0,0,0,.3); pointer-events: auto; }   /* 392 ① : 30 %, pas 70 */
       .tuto-voile { position: fixed; inset: 0; background: rgba(0,0,0,.3); pointer-events: auto; }
-      .tuto-voile.sans-verrou { pointer-events: none; }   /* 392 ① : sans élément à allumer, la table reste jouable */
+      .tuto-voile.sans-verrou { pointer-events: none; }
+      /* S1675 · 494 ② (b) — le verrou entre deux pas : tout est muet, sauf la fenêtre qui m'interroge (le trou) */
+      .tuto-verrou { position: fixed; inset: 0; background: rgba(0,0,0,.18); pointer-events: auto; cursor: not-allowed; }
+      .tuto-quitter { position: fixed; left: 16px; bottom: 16px; pointer-events: auto; font-size: 12px; padding: 4px 10px;
+        background: rgba(20,16,12,.85); color: #c8b896; border: 1px solid #6a5a42; border-radius: 4px; cursor: pointer; }
+      .tuto-quitter:hover { color: #f0e2c0; }   /* 392 ① : sans élément à allumer, la table reste jouable */
       .tuto-cadre { position: fixed; border: 3px solid #e8c872; border-radius: 6px; pointer-events: none;
         box-shadow: 0 0 18px rgba(232,200,114,.55); animation: tuto-pulse 1.1s ease-in-out infinite; }
       @keyframes tuto-pulse { 0%, 100% { box-shadow: 0 0 10px 1px rgba(232,200,114,.45); border-color: #e8c872; }
@@ -15568,7 +15579,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B39gH5gU.js"></script>
+    <script type="module" crossorigin src="./assets/index-CHoTMHHN.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

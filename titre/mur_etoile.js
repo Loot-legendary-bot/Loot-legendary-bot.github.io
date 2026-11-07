@@ -34,16 +34,32 @@
   var R_SAT_NEUTRE = [175, 290];
   var ARC = 200;          /* l'éventail des bounties autour d'un esprit, en degrés, tourné vers l'extérieur */
   var M_ESPRIT = 62, M_NEUTRE = 78, M_SAT = 25;
-  var ENCRE = '#2b1d10', ENCRE_PALE = 'rgba(43,29,16,.38)', OR = '#b8862b';
+  /* S1675 · note 498 ② (c) — « il faut mettre sur fond sombre » : le parchemin devient une nuit d'encre, et
+     l'ENCRE devient l'os (le trait et le texte clairs sur le fond sombre). */
+  var ENCRE = '#e9dcbd', ENCRE_PALE = 'rgba(233,220,189,.32)', OR = '#d9a441';
+  var FOND_NOEUD = '#231b14', TEXTE_DOUX = '#b9a684', PANNEAU = 'rgba(22,17,12,.96)';
 
   var images = {};
-  function image(id) {
-    if (images[id]) { return images[id]; }
+  function charge(src) {
+    if (images[src]) { return images[src]; }
     var im = new Image();
     im.onload = function () { demande(); };
-    im.src = '/art/mur/pp_' + id + '.webp';
-    images[id] = im;
+    im.src = src;
+    images[src] = im;
     return im;
+  }
+  function image(id) { return charge('/art/mur/pp_' + id + '.webp'); }
+
+  /* S1675 · note 498 ② (a) — l'image de CE QU'ON DÉBLOQUE, les chemins de la page du mur (`ecran_titre.html`
+     `medaillon`) : le portrait du perso, la vitrine de la peau de dés, le curseur, le dos. Des dents, un accès ou
+     l'Epic n'ont pas d'image : `null` (le nœud écrit alors sa récompense). `grand` = l'asset en grand (ESPACE). */
+  function assetDe(x, grand) {
+    if (!x) { return null; }
+    if (x.p) { return grand ? '/art/personnages/grand/' + x.p + '.webp' : '/art/personnages/all_ico_webp_CORRECTED_ALL/200px/' + x.p + '_200px.webp'; }
+    if (x.u) { return '/art/curseurs/' + x.u + '.png'; }
+    if (x.k) { return '/art/dos/' + x.k + '.webp'; }
+    if (x.d) { return (x.d === 'bones' || x.d === 'pierre') ? '/dice/' + x.d + '/d20_face_20.webp' : '/dice/' + x.d + '/vitrine.webp'; }
+    return null;
   }
 
   function angleDe(pointe) { return (-90 + 60 * pointe) * Math.PI / 180; }
@@ -95,7 +111,7 @@
         var prochain = g.noeuds.filter(function (x) { return x.s !== 'a_toi'; })[0] || g.noeuds[g.noeuds.length - 1];
         return {
           g: g, x: x + Math.cos(b) * r, y: y + Math.sin(b) * r, angle: dedans ? b + Math.PI : b, neutre: neutre,
-          etat: etatDeLaBounty(g, dort), nom: prochain.nom, seuil: prochain.a,
+          etat: etatDeLaBounty(g, dort), nom: prochain.nom, seuil: prochain.a, noeud: prochain,
           condition: BW.phrase(g, prochain.a), record: BW.record ? BW.record(g) : null
         };
       });
@@ -154,7 +170,7 @@
   function medaillon(x, y, r, id, teinte, etat) {
     ctx.save();
     ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.closePath();
-    ctx.fillStyle = '#efe2c4'; ctx.fill();
+    ctx.fillStyle = FOND_NOEUD; ctx.fill();
     var im = image(id);
     if (im.complete && im.naturalWidth > 0) {
       ctx.save(); ctx.clip();
@@ -195,7 +211,7 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     /* le parchemin */
     var fond = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.7);
-    fond.addColorStop(0, '#efe3c6'); fond.addColorStop(0.6, '#dcc79c'); fond.addColorStop(1, '#a88e62');
+    fond.addColorStop(0, '#2a2018'); fond.addColorStop(0.6, '#15100b'); fond.addColorStop(1, '#060403');
     ctx.fillStyle = fond; ctx.fillRect(0, 0, w, h);
 
     ctx.translate(vue.ox, vue.oy); ctx.scale(vue.k, vue.k);
@@ -237,26 +253,56 @@
         ctx.save();
         if (s.etat === 'allumee' || choisie) { ctx.shadowColor = choisie ? OR : e.t.teinte; ctx.shadowBlur = 22; }
         ctx.beginPath(); ctx.arc(s.x, s.y, M_SAT, 0, 2 * Math.PI);
-        ctx.fillStyle = s.etat === 'allumee' ? e.t.teinte : s.etat === 'ternie' ? 'rgba(120,104,80,.35)' : '#f4ead2';
+        ctx.fillStyle = s.etat === 'allumee' ? e.t.teinte : s.etat === 'ternie' ? 'rgba(120,104,80,.35)' : FOND_NOEUD;
         ctx.fill();
         ctx.restore();
+        /* 498 ② (a) — l'image de la récompense DANS le cercle (ternie si l'esprit dort, à peine voilée en cours) */
+        var src = assetDe(s.noeud, false);
+        var im = src === null ? null : charge(src);
+        var aImage = im !== null && im.complete && im.naturalWidth > 0;
+        if (aImage) {
+          ctx.save();
+          ctx.beginPath(); ctx.arc(s.x, s.y, M_SAT - 1.5, 0, 2 * Math.PI); ctx.clip();
+          if (s.etat === 'ternie') { ctx.filter = 'grayscale(1) brightness(.6)'; ctx.globalAlpha = .6; }
+          else if (s.etat === 'en_cours') { ctx.globalAlpha = .85; }
+          var cote = 2 * (M_SAT - 1.5);
+          var rap = im.naturalWidth / im.naturalHeight;
+          /* un curseur ou un dé : contenu entier ; un portrait ou un dos : couvre le cercle */
+          var couvre = !!(s.noeud.p || s.noeud.k);
+          var lw = couvre ? (rap >= 1 ? cote * rap : cote) : (rap >= 1 ? cote : cote * rap);
+          var lh = couvre ? (rap >= 1 ? cote : cote / rap) : (rap >= 1 ? cote / rap : cote);
+          if (!couvre) { lw *= 0.86; lh *= 0.86; }
+          ctx.drawImage(im, s.x - lw / 2, s.y - lh / 2, lw, lh);
+          ctx.restore();
+        }
         ctx.beginPath(); ctx.arc(s.x, s.y, M_SAT, 0, 2 * Math.PI);
-        ctx.lineWidth = choisie ? 4 : 2.2; ctx.strokeStyle = choisie ? OR : s.etat === 'ternie' ? ENCRE_PALE : ENCRE; ctx.stroke();
+        ctx.lineWidth = choisie ? 4 : 2.2; ctx.strokeStyle = choisie ? OR : s.etat === 'ternie' ? ENCRE_PALE : (s.etat === 'allumee' ? e.t.teinte : ENCRE); ctx.stroke();
+        /* l'état en surimpression : avec une image, une pastille au bas du cercle ; sans image, au centre */
+        var py = aImage ? s.y + M_SAT - 2 : s.y;
+        function pastille(txt, taille, couleur) {
+          if (aImage) {
+            ctx.font = '800 ' + taille + 'px "Big Shoulders Display","Alegreya",serif';
+            var lp = ctx.measureText(txt).width + 8;
+            ctx.fillStyle = 'rgba(10,7,5,.88)';
+            ctx.beginPath(); ctx.rect(s.x - lp / 2, py - taille * 0.65, lp, taille * 1.3); ctx.fill();
+          }
+          texte(txt, s.x, py, taille, couleur, 800);
+        }
         if (s.etat === 'prete') {
           ctx.beginPath(); ctx.arc(s.x, s.y, M_SAT + 5, 0, 2 * Math.PI);
           ctx.lineWidth = 5; ctx.strokeStyle = OR; ctx.stroke();
-          texte('READY', s.x, s.y, 11, OR, 900);
+          pastille('READY', 11, OR);
         } else if (s.etat === 'en_cours') {
           var part = Math.max(0, Math.min(1, s.g.n / Math.max(1, s.seuil)));
           if (part > 0) {
             ctx.beginPath(); ctx.arc(s.x, s.y, M_SAT + 5, -Math.PI / 2, -Math.PI / 2 + part * 2 * Math.PI);
             ctx.lineWidth = 5; ctx.strokeStyle = e.neutre ? OR : e.t.teinte; ctx.stroke();
           }
-          texte(court(s.g.n) + '/' + court(s.seuil), s.x, s.y, 13, ENCRE, 800);
+          pastille(court(s.g.n) + '/' + court(s.seuil), aImage ? 11 : 13, ENCRE);
         } else if (s.etat === 'allumee') {
-          texte('✓', s.x, s.y + 1, 24, '#fff8e6', 900);
+          if (aImage) { pastille('✓', 13, '#fff8e6'); } else { texte('✓', s.x, s.y + 1, 24, '#fff8e6', 900); }
         } else {
-          texte('🔒', s.x, s.y + 1, 16, ENCRE_PALE, 400);
+          if (aImage) { pastille('🔒', 10, TEXTE_DOUX); } else { texte('🔒', s.x, s.y + 1, 16, ENCRE_PALE, 400); }
         }
         var ux = Math.cos(s.angle), uy = Math.sin(s.angle);
         var lx = s.x + ux * (M_SAT + 34), ly = s.y + uy * (M_SAT + 26);
@@ -264,7 +310,7 @@
         texte(s.nom, lx, ly, s.neutre ? 12 : 14, pale, 700);
         if (conditions) {
           /* la condition sous la récompense, dans le sens de lecture (toujours en dessous à l'écran) */
-          phrase(s.condition, lx, ly + 11, 7, s.etat === 'ternie' ? ENCRE_PALE : '#5a4228', 64);
+          phrase(s.condition, lx, ly + 11, 7, s.etat === 'ternie' ? ENCRE_PALE : TEXTE_DOUX, 64);
         }
       });
     });
@@ -308,8 +354,8 @@
     if (panneau === null) {
       panneau = document.createElement('div');
       panneau.style.cssText = 'position:absolute;right:18px;bottom:18px;width:min(360px,calc(100% - 36px));box-sizing:border-box;' +
-        'padding:14px 16px 16px;background:rgba(244,234,210,.96);border:2px solid ' + ENCRE + ';border-radius:6px;' +
-        'box-shadow:0 8px 28px rgba(43,29,16,.35);color:' + ENCRE + ';font:600 16px/1.3 "Alegreya",serif';
+        'padding:14px 16px 16px;background:' + PANNEAU + ';border:2px solid ' + ENCRE_PALE + ';border-radius:6px;' +
+        'box-shadow:0 8px 28px rgba(0,0,0,.6);color:' + ENCRE + ';font:600 16px/1.3 "Alegreya",serif';
       couche.appendChild(panneau);
     }
     var etat = s.etat === 'allumee' ? 'DONE' : s.etat === 'ternie' ? 'LOCKED — the spirit sleeps'
@@ -322,7 +368,7 @@
     ligne(s.nom, 'font:900 24px/1.05 "Big Shoulders Display",sans-serif;letter-spacing:.04em;margin-bottom:8px');
     ligne(s.condition + '.', 'font:600 17px/1.3 "Alegreya",serif;margin-bottom:8px');
     ligne('Progress: ' + Number(s.g.n || 0).toLocaleString('en-US') + ' / ' + Number(s.seuil || 0).toLocaleString('en-US') + rec,
-      'font:700 15px/1.2 "Alegreya",serif;color:#5a4228');
+      'font:700 15px/1.2 "Alegreya",serif;color:' + TEXTE_DOUX);
     var x = document.createElement('button');
     x.type = 'button'; x.textContent = '✕'; x.title = 'Close (Esc)';
     x.style.cssText = 'position:absolute;right:8px;top:6px;cursor:pointer;border:0;background:none;font:900 18px/1 sans-serif;color:' + ENCRE;
@@ -332,7 +378,7 @@
       var va = document.createElement('button');
       va.type = 'button'; va.textContent = 'CLAIM IT ON THE WALL ▸';
       va.style.cssText = 'margin-top:10px;cursor:pointer;padding:6px 12px;font:900 16px/1 "Big Shoulders Display",sans-serif;' +
-        'letter-spacing:.08em;color:#fff8e6;background:' + OR + ';border:2px solid ' + ENCRE + ';border-radius:4px';
+        'letter-spacing:.08em;color:#1a120a;background:' + OR + ';border:2px solid ' + OR + ';border-radius:4px';
       va.addEventListener('click', function () { options.page(e.t.id); });
       panneau.appendChild(va);
     }
@@ -425,8 +471,49 @@
     couche.remove(); couche = null; toile = null; ctx = null; cible = null;
     window.removeEventListener('resize', auRedimensionnement);
     document.removeEventListener('keydown', touche, true);
+    document.removeEventListener('keyup', toucheRelâchée, true);
+    window.removeEventListener('blur', cacheLAsset);
+    loupe = null; survol = null;
   }
+  /* S1675 · note 498 ② (b) — « une touche enfoncée où l'on voit l'asset » : ESPACE maintenu montre en grand, au
+     centre, la récompense de la bounty SURVOLÉE (sinon celle de la fiche ouverte) ; relâché, il se referme. */
+  var survol = null, loupe = null;
+  function surSurvol(ev) { if (toile) { var p = pos(ev); var h = sous(p.x, p.y); survol = h !== null && h.s !== null ? h : null; } }
+  function montreLAsset() {
+    var h = survol || fiche;
+    if (!h || !couche || loupe !== null) { return; }
+    var s = h.s, src = assetDe(s.noeud, true);
+    loupe = document.createElement('div');
+    loupe.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;' +
+      'gap:14px;background:rgba(5,3,2,.82);pointer-events:none;z-index:2';
+    if (src !== null) {
+      var im = document.createElement('img');
+      im.src = src; im.alt = s.nom;
+      im.style.cssText = 'max-width:min(62vw,720px);max-height:66vh;object-fit:contain;filter:drop-shadow(0 12px 40px rgba(0,0,0,.8))' +
+        (s.etat === 'ternie' ? ';filter:grayscale(1) brightness(.7)' : '');
+      /* le grand portrait manque : le 200 px, plutôt qu'une image cassée */
+      im.addEventListener('error', function () { var p = assetDe(s.noeud, false); if (p !== null && im.src.indexOf(p) < 0) { im.src = p; } });
+      loupe.appendChild(im);
+    } else {
+      var v = document.createElement('div');
+      v.textContent = s.noeud && s.noeud.t ? court(s.noeud.t) + ' 🦷' : (s.noeud && s.noeud.x ? 'DPT' : '?');
+      v.style.cssText = 'font:900 120px/1 "Big Shoulders Display",sans-serif;color:' + OR;
+      loupe.appendChild(v);
+    }
+    var n = document.createElement('div');
+    n.textContent = s.nom;
+    n.style.cssText = 'font:900 32px/1 "Big Shoulders Display",sans-serif;letter-spacing:.08em;color:' + ENCRE;
+    loupe.appendChild(n);
+    couche.appendChild(loupe);
+  }
+  function cacheLAsset() { if (loupe !== null) { loupe.remove(); loupe = null; } }
+  function toucheRelâchée(ev) { if (ev.key === ' ' || ev.code === 'Space') { cacheLAsset(); } }
   function touche(ev) {
+    if (ev.key === ' ' || ev.code === 'Space') {
+      ev.stopPropagation(); ev.preventDefault();
+      if (!ev.repeat) { montreLAsset(); }
+      return;
+    }
     if (ev.key === 'Escape') {
       ev.stopPropagation(); ev.preventDefault();
       if (fiche !== null) { fermeLaFiche(); } else { retour(); }
@@ -441,7 +528,7 @@
     b.type = 'button'; b.textContent = txt; b.title = titre;
     b.style.cssText = 'position:absolute;top:14px;' + (gauche ? 'left' : 'right') + ':18px;cursor:pointer;padding:6px 14px;' +
       'font:900 18px/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.1em;color:' + ENCRE + ';' +
-      'background:rgba(239,227,198,.85);border:2px solid ' + ENCRE + ';border-radius:4px;' + (css || '');
+      'background:rgba(22,17,12,.85);border:2px solid ' + ENCRE_PALE + ';border-radius:4px;' + (css || '');
     couche.appendChild(b);
     return b;
   }
@@ -458,7 +545,7 @@
     couche.id = 'mur-etoile';
     couche.setAttribute('role', 'dialog');
     couche.setAttribute('aria-label', 'Bounty Wall — the star');
-    couche.style.cssText = 'position:fixed;inset:0;z-index:9000;background:#a88e62';
+    couche.style.cssText = 'position:fixed;inset:0;z-index:9000;background:#0b0806';
     toile = document.createElement('canvas');
     toile.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab';
     couche.appendChild(toile);
@@ -468,7 +555,7 @@
       'font:900 34px/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.14em;color:' + ENCRE;
     couche.appendChild(titre);
     var aide = document.createElement('div');
-    aide.textContent = 'Scroll or pinch to zoom · drag to move · click a bounty to read it · double-click to focus';
+    aide.textContent = 'Scroll or pinch to zoom · drag to move · click a bounty to read it · double-click to focus · hold SPACE to see the reward';
     aide.style.cssText = 'position:absolute;left:18px;bottom:14px;pointer-events:none;font:600 14px/1.2 "Alegreya",serif;color:' + ENCRE_PALE;
     couche.appendChild(aide);
     bouton('⟵ BACK', 'Back (Esc)', true).addEventListener('click', retour);
@@ -489,6 +576,10 @@
     toile.addEventListener('dblclick', surDoubleClic);
     window.addEventListener('resize', auRedimensionnement);
     document.addEventListener('keydown', touche, true);
+    document.addEventListener('keyup', toucheRelâchée, true);
+    window.addEventListener('blur', cacheLAsset);
+    toile.addEventListener('pointermove', surSurvol);
+    toile.addEventListener('pointerleave', function () { survol = null; });
     dessine();
     if (espritId) { vise(espritId); }
   }
