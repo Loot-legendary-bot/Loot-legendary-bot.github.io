@@ -1179,7 +1179,7 @@
 .pf-compte .pf-btn{padding:4px 8px;font-size:max(14px, 11px);letter-spacing:.04em}
 .pf-btn:hover{border-color:#fff;background:rgba(255,255,255,.07)}
 .pf-dit{margin-top:8px;font-size:max(14px, 12px);opacity:.75;min-height:1em}
-</style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). S1614 - note 457 (3) ALERTE ROUGE : ni la porte d'une AUTRE partie - le retour au menu apres un Today's Dungeon gardait ?daily=<graine>, et CLASSIC (qui repasse la chaine telle quelle) relancait le Daily : plus de quetes ni de points. Meme famille pour ?hiscore=, ?tuto=, ?equipe=. */(function(){try{var q=new URLSearchParams(location.search);var K=['salon','daily','hiscore','tuto','equipe'];if(K.some(function(k){return q.has(k);})){K.forEach(function(k){q.delete(k);});var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/bugbox.js"></script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/mur_etoile.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/borne.js"></script><script src="/titre/foils.js"></script><script src="/titre/des_foil.js"></script><script src="/titre/bannieres.js"></script>
+</style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). S1614 - note 457 (3) ALERTE ROUGE : ni la porte d'une AUTRE partie - le retour au menu apres un Today's Dungeon gardait ?daily=<graine>, et CLASSIC (qui repasse la chaine telle quelle) relancait le Daily : plus de quetes ni de points. Meme famille pour ?hiscore=, ?tuto=, ?equipe=. */(function(){try{var q=new URLSearchParams(location.search);var K=['salon','daily','hiscore','tuto','equipe'];if(K.some(function(k){return q.has(k);})){K.forEach(function(k){q.delete(k);});var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/bugbox.js"></script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/mur_etoile.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/protour.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/borne.js"></script><script src="/titre/foils.js"></script><script src="/titre/des_foil.js"></script><script src="/titre/bannieres.js"></script>
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 <script>
@@ -3196,7 +3196,8 @@ fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json(
    se GRISE partout - la porte PLAY, le ticket du Vault, l'onglet PRO TOUR du mur. Visible,
    indisponible : « The Pro Tour opens soon. » Rien ne se vend, rien ne se lance. Un seul
    interrupteur : LL_DPT_ENDORMI = false le rouvre. */
-window.LL_DPT_ENDORMI = true;
+/* S1676 - note 495 (1) + 496 (Croze, 07/11 : « faut ouvrir le Dungeon Pro Tour now ») : le cadenas tombe. */
+window.LL_DPT_ENDORMI = false;
 window.LL_DPT_DORT = 'The Pro Tour opens soon.';
 /* S1625 - note 466 (1) (Croze, 02/11 : « on va le lock comme le mode Dungeon Pro Tour, ferme le temps
    qu'on rework les defis ») : TODAY'S DUNGEON se GRISE comme le Pro Tour - la porte, l'enveloppe du
@@ -3429,7 +3430,7 @@ function paintMatch(ctx){
     : '<i>Payout</i><b>~110 teeth a game</b>';   /* S1302 - B-1 : MONNAIE 1, « une partie ordinaire ≈ 110 dents » */
   mchips.innerHTML='';
   MODES.forEach(([k,title])=>{
-    if(ctx==='daily') return;   /* S1414 - DD-2 bis : aucun choix, la table est celle du defi */
+    if(ctx==='daily'||ctx==='ranked') return;   /* S1414 - DD-2 bis : aucun choix, la table est celle du defi ; S1676 - 495 (1) : en Pro Tour, la table est celle de la file */
     if(MODES_DU_CTX[ctx] && !MODES_DU_CTX[ctx].includes(k)) return;   /* S1471 - note 359 (3) */
     /* S1621 - 463 (5) : sous CLASSIC, les formats en test vont dans leur groupe, sous leur etiquette. */
     let parent=mchips;
@@ -3459,6 +3460,8 @@ function paintMatch(ctx){
     + (matchMode==='ffa' && !choixSieges
        ? ' Seats are drawn at random \u2014 3 to 5.'
        : '');
+  /* S1676 - 495 (1) : la table du Pro Tour se fait dans la file (serveur, `protour.ts`). */
+  if(ctx==='ranked'){ matchMode='ffa'; document.getElementById('mline').textContent='Free-for-all, 2 to 6 players from the queue — never a bot. A full table starts at once, otherwise after 2 minutes. Your ticket ('+(window.LLTickets?window.LLTickets.PRIX.dpl:500)+' teeth) is used only when the game starts.'; }
   if(ctx==='daily' && window.LLTickets){
     const T=window.LLTickets, sc=T.duJour(), p=window.LLProfil.lis();
     const poche=T.enPoche(p).daily;
@@ -4637,6 +4640,11 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
         qd.delete('joueurs'); qd.delete('seed'); qd.set('daily', sc.seed);
         window.location.href = '/?' + qd.toString();
       };
+      return;
+    }
+    /* S1676 - note 495 (1) : FIND MATCH entre dans la file du serveur (`protour.js`). */
+    if (e.ctx === 'ranked' && window.LLProTour && !window.LL_DPT_ENDORMI) {
+      window.LLProTour.cherche();
       return;
     }
     if (e.ctx !== 'bots' && e.ctx !== 'exp') {

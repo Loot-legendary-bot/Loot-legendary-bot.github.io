@@ -197,10 +197,15 @@
   /* ② le salon : le code, les sièges, PRÊT, et LANCER pour l'hôte */
   /* note 275 (3) : l'idle-timer choisi a la creation (l'hote seul le connait avant le depart) */
   var idleVoulu = true;
-  function entre(code, mode) {
+  /* S1676 - note 495 (1) : la table du DUNGEON PRO TOUR (`protour.js`, MATCH_FOUND). Le serveur a créé
+     le salon : pas de code à donner, PRÊT part tout seul, et l'hôte que le serveur a désigné lance dès
+     que tous les sièges sont assis et prêts. `null` = un salon d'amis, inchangé. */
+  var auto = null, autoLance = false;
+  function entre(code, mode, opts) {
     var s = session();
     if (!s) { ouvre(); return; }
     if (ws) { try { ws.close(); } catch (e) { /* idem */ } }
+    auto = opts && opts.protour === true ? opts : null; autoLance = false;
     codeOuvert = code; etat = null; moi = null; fermeVoulue = false;
     peintLeSalon(code, mode, 'Connecting...');
     var url = base().replace(/^http/, 'ws') + '/room/' + code;
@@ -211,7 +216,7 @@
     w.onmessage = function (ev) {
       var m; try { m = JSON.parse(ev.data); } catch (e) { return; }
       if (m.t === 'welcome') { moi = m; peintLeSalon(code, mode, ''); return; }
-      if (m.t === 'room') { etat = m; peintLeSalon(code, mode, ''); return; }
+      if (m.t === 'room') { etat = m; peintLeSalon(code, mode, ''); if (auto) { avanceSeul(w); } return; }
       if (m.t === 'start') { lance(code, m.setup); return; }
       if (m.t === 'error') { peintLeSalon(code, mode, phrase(m.code)); }
     };
@@ -223,12 +228,29 @@
     w.onerror = function () { /* la fermeture suit et le dit */ };
   }
 
+  /* S1676 - 495 (1) : en Pro Tour, PRÊT tout seul ; l'hôte lance quand la table entière est assise et prête. */
+  function avanceSeul(w) {
+    if (!etat || !moi || etat.started || ws !== w) { return; }
+    var jeSuis = moi.seat !== null ? etat.seats[moi.seat] : null;
+    if (jeSuis && !jeSuis.ready) { w.send(JSON.stringify({ t: 'ready', ready: true })); return; }
+    if (moi.host !== true || autoLance) { return; }
+    var pleins = etat.seats.every(function (x) { return x.pseudo !== null && x.ready && x.connected !== false; });
+    if (!pleins) { return; }
+    autoLance = true;
+    w.send(JSON.stringify({ t: 'start', setup: { mode: 'FFA', idleTimer: true, protour: true, timer: auto.timer } }));
+  }
+
   function peintLeSalon(code, mode, message) {
     if (codeOuvert !== code) { return; }
     var b = cadre();
-    b.appendChild(el('h2', '', 'Room'));
-    b.appendChild(el('div', 'code', code));
-    var rc = el('div', 'row'); b.appendChild(rc);
+    if (auto) {
+      b.appendChild(el('h2', '', 'Dungeon Pro Tour'));
+      b.appendChild(el('p', '', 'Table found — waiting for everyone to sit down. The game starts on its own.'));
+    } else {
+      b.appendChild(el('h2', '', 'Room'));
+      b.appendChild(el('div', 'code', code));
+    }
+    var rc = el('div', 'row'); if (!auto) { b.appendChild(rc); }
     var copie = bouton(rc, 'Copy the code', '', function () {
       try { navigator.clipboard.writeText(code).then(function () { copie.textContent = 'Copied'; }, function () { copie.textContent = 'Select it'; }); }
       catch (e) { copie.textContent = 'Select it'; }
@@ -279,14 +301,14 @@
     }
     var err = el('p', 'err', message || ''); b.appendChild(err);
     var row = el('div', 'row'); b.appendChild(row);
-    if (moi && moi.seat !== null && etat && !etat.started) {
+    if (!auto && moi && moi.seat !== null && etat && !etat.started) {
       var jeSuis = etat.seats[moi.seat];
       var pret = jeSuis && jeSuis.ready;
       bouton(row, pret ? 'Not ready' : 'Ready', pret ? '' : 'oui', function () {
         if (ws) { ws.send(JSON.stringify({ t: 'ready', ready: !pret })); }
       });
     }
-    if (hote && etat && !etat.started) {
+    if (!auto && hote && etat && !etat.started) {
       var go = bouton(row, 'Start', 'oui', function () {
         if (!ws) { return; }
         go.disabled = true;
@@ -309,6 +331,9 @@
       mode: setup.mode === '2V2' ? '2V2' : 'FFA',
       /* note 275 (3) : l'option choisie par l'hote, relayee a tous par le setup */
       idleTimer: setup.idleTimer !== false,
+      /* S1676 - 495 (1) : la partie sait qu'elle est une table du Pro Tour (bandeau, chrono : passes suivantes) */
+      protour: setup.protour === true,
+      timer: typeof setup.timer === 'number' ? setup.timer : null,
       players: setup.players,
       /* note 306 F / 297 ② : les cosmetiques EQUIPES de chaque siege (le relais les publie dans
          `seats[].equipped`, moteur 895) - la partie rend ceux du PROPRIETAIRE, jamais les miens. */
