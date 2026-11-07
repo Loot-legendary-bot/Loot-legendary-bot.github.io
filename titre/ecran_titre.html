@@ -1179,7 +1179,7 @@
 .pf-compte .pf-btn{padding:4px 8px;font-size:max(14px, 11px);letter-spacing:.04em}
 .pf-btn:hover{border-color:#fff;background:rgba(255,255,255,.07)}
 .pf-dit{margin-top:8px;font-size:max(14px, 12px);opacity:.75;min-height:1em}
-</style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). S1614 - note 457 (3) ALERTE ROUGE : ni la porte d'une AUTRE partie - le retour au menu apres un Today's Dungeon gardait ?daily=<graine>, et CLASSIC (qui repasse la chaine telle quelle) relancait le Daily : plus de quetes ni de points. Meme famille pour ?hiscore=, ?tuto=, ?equipe=. */(function(){try{var q=new URLSearchParams(location.search);var K=['salon','daily','hiscore','tuto','equipe'];if(K.some(function(k){return q.has(k);})){K.forEach(function(k){q.delete(k);});var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/bugbox.js"></script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/borne.js"></script><script src="/titre/foils.js"></script><script src="/titre/des_foil.js"></script><script src="/titre/bannieres.js"></script>
+</style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). S1614 - note 457 (3) ALERTE ROUGE : ni la porte d'une AUTRE partie - le retour au menu apres un Today's Dungeon gardait ?daily=<graine>, et CLASSIC (qui repasse la chaine telle quelle) relancait le Daily : plus de quetes ni de points. Meme famille pour ?hiscore=, ?tuto=, ?equipe=. */(function(){try{var q=new URLSearchParams(location.search);var K=['salon','daily','hiscore','tuto','equipe'];if(K.some(function(k){return q.has(k);})){K.forEach(function(k){q.delete(k);});var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/bugbox.js"></script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/mur_etoile.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/borne.js"></script><script src="/titre/foils.js"></script><script src="/titre/des_foil.js"></script><script src="/titre/bannieres.js"></script>
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 <script>
@@ -2406,8 +2406,19 @@ function set(v,arg){
   /* S1626 - note 467 : le HOME point & click se pose sur le titre (home_pnc.js) */
   if(window.LLHomePnc) window.LLHomePnc.surLaVue(v);
   /* S1627 - note 467 : l'esprit demande par le HOME, lu une fois */
+  /* S1672 - note 490 (3) : LA CARTE EN ETOILE EST LE BOUNTY WALL. Elle s'ouvre par-dessus la page, sur l'esprit
+     clique au HOME (sinon l'etoile entiere) ; BACK / Echap ramenent au HOME ; la page reste dessous pour ce que
+     seule elle sait faire (pacte, offrandes, reclamer, charmes, contrats : bouton PACTS & OFFERINGS de la carte). */
+  var espritDuHome = v==='league' && window.LLHomePnc ? window.LLHomePnc.espritDemande : null;
+  if(v!=='league' && window.LLMurEtoile) window.LLMurEtoile.ferme();
   if(v==='league' && window.LLHomePnc && window.LLHomePnc.espritDemande && window.LLMurOuvre){
     window.LLMurOuvre(window.LLHomePnc.espritDemande); window.LLHomePnc.espritDemande=null;
+  }
+  if(v==='league' && window.LLMurEtoile && !window.LLMurEtoile.ouverte()){
+    window.LLMurEtoile.ouvre(espritDuHome, {
+      retour:function(){ window.LLMurEtoile.ferme(); go('title'); },
+      page:function(id){ window.LLMurEtoile.ferme(); if(id && window.LLMurOuvre) window.LLMurOuvre(id); }
+    });
   }
 }
 var FOND_DU_MUR = null;
@@ -5543,6 +5554,11 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     'padding:.6cqh 1cqw;border:.12cqh solid rgba(233,228,216,.4);background:rgba(10,9,8,.62);' +
     'font:900 max(14px, 1.25cqh)/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#cfc6b4}' +
     '#v-league.bw-on #bw-bascule{display:block}#bw-bascule:hover{border-color:#e9e4d8;color:#e9e4d8}' +
+    /* S1672 · note 490 (1) — l'entrée de la carte en étoile, sous « See all » */
+    '#bw-etoile{all:unset;display:none;position:absolute;z-index:3;right:3.6cqw;top:23.6cqh;cursor:pointer;' +
+    'padding:.6cqh 1cqw;border:.12cqh solid rgba(233,200,120,.6);background:rgba(10,9,8,.62);' +
+    'font:900 max(14px, 1.25cqh)/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#e8cf8a}' +
+    '#v-league.bw-on #bw-etoile{display:block}#bw-etoile:hover{border-color:#f2e2b0;color:#f2e2b0}' +
     /* S1370 · note 206 (1) — un esprit qui DORT : visage éteint, pas de barre, pas de serment */
     '#sceau-bw .fumee.dort img{filter:grayscale(1) brightness(.42)}' +
     '#sceau-bw .fumee.dort:hover img{filter:grayscale(1) brightness(.6)}' +
@@ -5802,6 +5818,22 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   }
   bascule.addEventListener('click', function () { page.classList.toggle('bw-tout'); peinsLaBascule(); });
   peinsLaBascule();
+  /* S1672 · note 490 (1) — LA CARTE EN ÉTOILE (`mur_etoile.js`) : son entrée, à côté de « See all », jusqu'à la passe
+     (3) qui la met à la place de cette page. Même style que la bascule, une ligne plus bas. */
+  if (window.LLMurEtoile) {
+    var versLEtoile = document.createElement('button');
+    versLEtoile.type = 'button';
+    versLEtoile.id = 'bw-etoile';
+    versLEtoile.textContent = '✶ The star';
+    versLEtoile.title = 'The whole Bounty Wall as one star: every spirit and every bounty.';
+    versLEtoile.addEventListener('click', function () {
+      window.LLMurEtoile.ouvre(ouvert, {
+        retour: function () { window.LLMurEtoile.ferme(); go('title'); },
+        page: function (id) { window.LLMurEtoile.ferme(); if (id && window.LLMurOuvre) { window.LLMurOuvre(id); } }
+      });
+    });
+    page.appendChild(versLEtoile);
+  }
   var ouvert = null;
   var R = 31.5, RI = R / Math.sqrt(3), RV = 38;
   function pt(r, deg) { var a = deg * Math.PI / 180; return [50 + r * Math.cos(a), 50 + r * Math.sin(a)]; }

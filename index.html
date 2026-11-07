@@ -20,7 +20,7 @@
     <title>Loot Legendary</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&family=MedievalSharp&family=Uncial+Antiqua&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&family=MedievalSharp&family=Uncial+Antiqua&family=Alegreya:ital,wght@0,400;0,700;1,400&family=VT323&display=swap" rel="stylesheet" />
     <style>
       /* S1434 · note 280 ⑥ — « LE texte overall est petit » : toute taille de corps <= 15 px
          passe par ce SEUL reglage (+15 %, la reco du classeur). Les titres > 15 px ne bougent pas.
@@ -4692,6 +4692,26 @@
         15%  { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
         70%  { opacity: 1; transform: translate(-50%, -80%) scale(1); }
         100% { opacity: 0; transform: translate(-50%, -110%) scale(1); }
+      }
+      /* S1672 · note 486 ④ — LE GROS COUP (≥ 20) : le montant plein écran une seconde, couleur de l'école, secousse légère */
+      .gros-coup { position: fixed; inset: 0; z-index: 94; pointer-events: none; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; --gros-coup-c: var(--stock);
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, .55) 0%, rgba(0, 0, 0, .15) 55%, transparent 75%);
+        animation: gros-coup-voile var(--gros-coup-t, 1000ms) ease-out forwards; }
+      .gros-coup .gros-coup-n { font-family: var(--display); font-weight: 800; line-height: .9; font-size: 460px;
+        color: var(--gros-coup-c); text-shadow: 0 6px 0 var(--ink), 0 0 40px var(--gros-coup-c), 0 18px 50px rgba(0, 0, 0, .9);
+        animation: gros-coup-n var(--gros-coup-t, 1000ms) cubic-bezier(.2, 1.4, .4, 1) forwards; }
+      .gros-coup .gros-coup-qui { font-family: var(--display); font-weight: 800; font-size: 60px; letter-spacing: .14em;
+        text-transform: uppercase; color: #efe6cf; text-shadow: 0 3px 0 var(--ink), 0 8px 20px rgba(0, 0, 0, .9); }
+      @keyframes gros-coup-voile { 0% { opacity: 0; } 10%, 75% { opacity: 1; } 100% { opacity: 0; } }
+      @keyframes gros-coup-n { 0% { transform: scale(.4); } 18% { transform: scale(1.12); } 30%, 100% { transform: scale(1); } }
+      body.gros-coup-secousse #app { animation: gros-coup-secousse 360ms linear 1; }
+      @keyframes gros-coup-secousse {
+        0%, 100% { transform: translate(0, 0); } 20% { transform: translate(-5px, 3px); } 40% { transform: translate(5px, -3px); }
+        60% { transform: translate(-3px, 2px); } 80% { transform: translate(3px, -1px); } }
+      @media (prefers-reduced-motion: reduce) {
+        body.gros-coup-secousse #app { animation: none; }
+        .gros-coup .gros-coup-n { animation: none; }
       }
       .vf4-lance { animation: vf4-pulse 600ms ease-in-out 2; }
       @keyframes vf4-pulse {
@@ -13135,6 +13155,26 @@
         font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: .04em; color: #efe6cf; }
       .boite-des .bd-resultat > span { white-space: nowrap; }
       .boite-des .bd-cause { flex: none; }
+      /* S1672 · note 492 ④ — LE BANDEAU DE BORNE : afficheur à LEDs, le jet en fixe puis un défilé lent, en boucle */
+      .boite-des .bd-bandeau { position: relative; align-self: stretch; overflow: hidden; height: 30px;
+        font-family: "VT323", monospace; font-weight: 400; font-size: 24px; letter-spacing: .08em; line-height: 30px;
+        color: #ffb347; text-shadow: 0 0 4px rgba(255, 150, 40, .85), 0 0 10px rgba(255, 110, 20, .45);
+        background: radial-gradient(circle, rgba(255, 140, 30, .10) 1px, transparent 1.4px) 0 0 / 4px 4px, #120b06;
+        border: 1px solid #3a2a16; border-radius: 3px; box-shadow: inset 0 0 8px rgba(0, 0, 0, .9); }
+      .boite-des .bd-bandeau > span { position: absolute; top: 0; white-space: nowrap; }
+      .boite-des .bd-bandeau .bd-fixe { left: 0; right: 0; text-align: center; overflow: hidden; text-overflow: ellipsis;
+        animation: bd-borne-fixe 34s linear infinite both; animation-delay: var(--bd-cycle-delai, 4s); }
+      .boite-des .bd-bandeau .bd-defile { left: 100%; animation: bd-borne-defile 34s linear infinite both;
+        animation-delay: var(--bd-cycle-delai, 4s); }
+      .boite-des.bd-roule .bd-bandeau .bd-fixe { animation: none; opacity: 1; }
+      .boite-des.bd-roule .bd-bandeau .bd-defile { animation: none; visibility: hidden; }
+      .boite-des.bd-jet-de-portail .bd-bandeau { color: #8fd8ff; text-shadow: 0 0 4px rgba(90, 190, 255, .85), 0 0 10px rgba(60, 150, 255, .45); }
+      @keyframes bd-borne-fixe { 0%, 30% { opacity: 1; } 32%, 98% { opacity: 0; } 100% { opacity: 1; } }
+      @keyframes bd-borne-defile { 0%, 31% { left: 100%; transform: translateX(0); } 99%, 100% { left: 0; transform: translateX(-100%); } }
+      @media (prefers-reduced-motion: reduce) {
+        .boite-des .bd-bandeau .bd-fixe { animation: none; opacity: 1; }
+        .boite-des .bd-bandeau .bd-defile { animation: none; visibility: hidden; }
+      }
       .boite-des .bd-resultat .bd-total { font-size: 22px; }
       .boite-des .bd-rar[data-rar="common"] { color: #c9ced3; }
       .boite-des .bd-rar[data-rar="uncommon"] { color: var(--rar-vif-uncommon); }
@@ -14498,6 +14538,19 @@
         column-gap: 16px; align-items: start;
       }
       .nouvelle-table .ntt-cb2-action > .ndr-pile { margin: 8px auto 0; }
+      /* S1672 · note 491 ② — LE CENTRE DU SPECTATEUR : les bacs des combattants en grand, puis les cartes jouées */
+      .nouvelle-table .spect-centre { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 10px 0 12px; }
+      .nouvelle-table .spect-bacs { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; width: 100%; }
+      .nouvelle-table .spect-bacs > .boite-des { width: 340px; height: 300px; margin: 0; border-color: var(--siege, #e9e1cf); }
+      .nouvelle-table .spect-bacs .spect-bac-qui { flex: none; font-family: var(--display); font-weight: 800; font-size: 13px;
+        letter-spacing: .12em; text-transform: uppercase; color: var(--siege, #efe6cf); }
+      .nouvelle-table .spect-cartes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 100%; }
+      .nouvelle-table .spect-cartes .spect-carte { width: 92px; display: flex; flex-direction: column; align-items: center; gap: 3px;
+        border-bottom: 3px solid var(--siege, #8a6d3b); padding-bottom: 3px; }
+      .nouvelle-table .spect-cartes .spect-carte img { width: 92px; height: auto; border-radius: 5px; display: block; }
+      .nouvelle-table .spect-cartes .spect-carte-nom { font-size: 11px; line-height: 1.15; text-align: center; color: #efe6cf; }
+      .nouvelle-table .spect-cartes.vide .rien { font-size: 12px; opacity: .6; }
+      .nouvelle-table .ntt-cb2-action.spect-action { grid-template-columns: minmax(0, 1fr); }
       .nouvelle-table .ntt-cb2-action > .col-journal {
         min-height: 0; max-height: 620px; overflow: hidden; width: auto; margin: 0;
       }
@@ -15515,7 +15568,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BGTPjkTW.js"></script>
+    <script type="module" crossorigin src="./assets/index-B39gH5gU.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
