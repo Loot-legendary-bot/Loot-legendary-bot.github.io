@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 07 Nov 2026
+- **00:58** — Dice tray: when a card changes one die of a roll (Dungeon Clover on the Offering Pit, "which die?"), the tray now shows the new face — the changed die is ringed in gold with its old face above it ("3 →"); before, the tray kept the dice as first rolled. Rogue's Shortcut and Bone: once played, a compass badge "+1" on your sheet (under your HP) shows the charge waiting for your next Exploration; when you explore, the tray writes the bonus under the die ("3 +1 = 4") — the die shows what you rolled, the Tile reads the total. Rules engine merged (The Mosquito now counts a Banana Flee).
+
 ## 06 Nov 2026
 - **23:55** — Dice cards on a roll of several dice (the Offering Pit's xd6): after you play the card, every die of the roll is shown and you click the one to change. The log no longer announces "the first die changed" before you have picked one. Rules engine merged.
 - **23:25** — Muting a card now has two levels. On a card that can answer (hover its eye): MUTE — it won't ask you anything any more, except when you take damage, kill or die; MUTE ALL — it never asks you again. The muted card keeps a badge (MUTED, or MUTED ALL in red); click ASK ME to bring it back.
