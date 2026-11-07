@@ -1507,6 +1507,7 @@
     'GAME OVER': 'FIN DE PARTIE', 'GAME': 'PARTIE', 'REWARDS': 'GAINS', '⤢ DETAILS': '⤢ DÉTAILS',
     'NEW GAME': 'NOUVELLE PARTIE', '⚔ FINAL DUEL': '⚔ DUEL FINAL',
     'TEETH EARNED': 'DENTS GAGNÉES', 'Table bonus': 'Prime de table', 'Speed': 'Vitesse', 'Slacker': 'Traînard',
+    'Extract bonus': 'Prime d’extraction', 'Stay rent': 'Loyer du séjour', 'Bets': 'Paris', 'took the portal': 'a pris le portail',
     /* le troc (364 (5), protocole du moteur 956) */
     'YOUR CARDS — click to put on the table': 'TES CARTES — clique pour la poser sur la table', 'WORN': 'PORTÉE',
     'VALIDATE': 'VALIDER', 'CANCEL': 'ANNULER', '✓ VALIDATED': '✓ VALIDÉ', '✓ VALIDATED — waiting': '✓ VALIDÉ — on attend',
