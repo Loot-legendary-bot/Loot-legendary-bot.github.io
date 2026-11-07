@@ -1853,7 +1853,9 @@
     [/^Discover every trap, chest and quest$/, 'Découvre tous les pièges, coffres et quêtes'],
     [/^Discover every sub-boss$/, 'Découvre tous les sous-boss'],
     [/^Discover the whole Codex, the 3 bosses included$/, 'Découvre tout le Codex, les 3 boss compris'],
-    [/^best game$/, 'meilleure partie'], [/^best streak$/, 'meilleure série']
+    [/^best game$/, 'meilleure partie'], [/^best streak$/, 'meilleure série'],
+    /* S1678 - note 498 (1) : la fenetre du Collapse nomme ce que le moteur offre */
+    [/^You can play: (.+) — or press OK CONTINUE$/, 'Tu peux jouer : $1 — ou OK · CONTINUER']
   ];
   /* 339 (2) — l'ecran double ses blancs autour de « · » et de « — » (mesure : « ”  ·  card ») : chaque
      espace d'un motif vaut UN OU PLUSIEURS blancs. */
