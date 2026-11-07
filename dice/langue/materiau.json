@@ -1,0 +1,71 @@
+{
+ "famille": "uni",
+ "couleurs": {
+  "corps": [
+   "#e8687a"
+  ],
+  "veines": null,
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#5c0a14"
+ },
+ "fini": {
+  "rugosite": 0.65,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.4,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.0,
+  "densite": 0.0,
+  "densite_paillettes": 0.0,
+  "rugosite_inclusions": 0.0
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.05,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.6,
+  "paroi": "distance"
+ },
+ "forme": {
+  "biseau": 0.5,
+  "arrondi": 0.0
+ },
+ "papilles": {
+  "taille": 0.07,
+  "relief": 0.6,
+  "pointes": "#f0b9b4",
+  "pale": 0.4,
+  "couleur": "#b8283a",
+  "rouges": 0.5
+ },
+ "bave": {
+  "couverture": 0.95,
+  "rugosite": 0.04,
+  "coulure": 0.3,
+  "morsure": 0.0,
+  "creux": 0.0,
+  "ronge": 0.0,
+  "gouttes": 0.6,
+  "flaque": 0.6
+ },
+ "poincon": {
+  "dessin": "langue",
+  "de": "tous",
+  "face": 1,
+  "remplace": true,
+  "taille": 0.5,
+  "marge": 0.06,
+  "profondeur": 0.05,
+  "couleur": "#5c0a14",
+  "rugosite": 0.6,
+  "metallique": 0.0
+ },
+ "graine": 6,
+ "notes": "LANGUE : rose chair a papilles (cle papilles), reflet humide (bave), chiffres Archivo creuses rouge sombre ; la langue de LICK FLOOR a la place du 1 de chaque de. Aucune photo."
+}

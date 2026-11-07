@@ -1,0 +1,50 @@
+{
+ "famille": "marbre",
+ "couleurs": {
+  "corps": [
+   "#efede8",
+   "#e3e1dc"
+  ],
+  "veines": "#8c8d8f",
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#b8892a"
+ },
+ "fini": {
+  "rugosite": 0.3,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.45,
+  "densite": 0.6,
+  "densite_paillettes": 0.08,
+  "rugosite_inclusions": 0.3
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 1.0,
+  "rugosite": 0.12,
+  "paroi": "distance"
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "Marbre blanc veine de gris (cle veinage : isolignes d'un bruit tordu, coeur sombre et halo), nuages gris discrets, chiffres en or poli graves. Aucune photo.",
+ "veinage": {
+  "couleur": "#6c6e72",
+  "nombre": 2.2,
+  "epaisseur": 0.3,
+  "sinuosite": 0.85,
+  "ramifications": 0.7,
+  "intensite": 0.95
+ }
+}
