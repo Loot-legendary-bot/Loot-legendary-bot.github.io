@@ -1506,6 +1506,8 @@
     'scroll up': 'remonter', 'more below': 'la suite plus bas',
     'GAME OVER': 'FIN DE PARTIE', 'GAME': 'PARTIE', 'REWARDS': 'GAINS', '⤢ DETAILS': '⤢ DÉTAILS',
     'NEW GAME': 'NOUVELLE PARTIE', '⚔ FINAL DUEL': '⚔ DUEL FINAL',
+    /* S1680 - 486 (5) : l'ecran de victoire */
+    'NEXT GAME': 'PARTIE SUIVANTE', 'VICTORY': 'VICTOIRE', 'KILL': 'ÉLIMINATION', 'KILLS': 'ÉLIMINATIONS', 'EXTRACTION': 'EXTRACTION', 'EXTRACTIONS': 'EXTRACTIONS',
     'TEETH EARNED': 'DENTS GAGNÉES', 'Table bonus': 'Prime de table', 'Speed': 'Vitesse', 'Slacker': 'Traînard',
     'Extract bonus': 'Prime d’extraction', 'Stay rent': 'Loyer du séjour', 'Bets': 'Paris', 'took the portal': 'a pris le portail',
     /* le troc (364 (5), protocole du moteur 956) */
