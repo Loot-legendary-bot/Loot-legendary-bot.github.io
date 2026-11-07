@@ -6755,6 +6755,18 @@
        * C'est la forme de `.mc-img`, reprise telle quelle — largeur pleine,
        * hauteur libre.
        */
+      /* S1681 - note 499 (1) : la lecture du coup (YOU TAKE n DMG — a → b HP / THIS WOULD KILL YOU) */
+      .fen-lecture { margin: 6px 0 4px; padding: 8px 12px; border-left: 4px solid var(--stock-2, #c9a74a);
+        background: rgba(0,0,0,.35); }
+      .fen-lecture-titre { font-family: var(--display); font-weight: 900; letter-spacing: .04em;
+        font-size: max(20px, calc(20px * var(--lisible, 1))); line-height: 1.15; }
+      .fen-lecture-tue { border-left-color: #b3121b; background: rgba(120,0,8,.45); }
+      .fen-lecture-tue .fen-lecture-titre { color: #ff3b3b; text-shadow: 0 0 8px rgba(255,0,0,.45); }
+      .fen-lecture-sous { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 3px;
+        font-size: max(14px, calc(13px * var(--lisible, 1))); color: var(--dim); letter-spacing: .03em; }
+      .fen-lecture-rang { color: #ffb84a; font-weight: 800; }
+      .fen-recois-col { display: flex; flex-direction: column; min-width: 0; }
+      .fen-recois-col .fen-lecture { margin: 4px 0 0; }
       .fen-mob { display: flex; gap: 12px; align-items: flex-start;
                  border-left: 3px solid var(--rule); padding: 4px 0 4px 8px;
                  margin: 0 0 8px; }
@@ -15588,7 +15600,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-dNtuDxY4.js"></script>
+    <script type="module" crossorigin src="./assets/index-Ccg1JUtM.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

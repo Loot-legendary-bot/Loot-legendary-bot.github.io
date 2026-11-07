@@ -1861,7 +1861,15 @@
     [/^Discover the whole Codex, the 3 bosses included$/, 'Découvre tout le Codex, les 3 boss compris'],
     [/^best game$/, 'meilleure partie'], [/^best streak$/, 'meilleure série'],
     /* S1678 - note 498 (1) : la fenetre du Collapse nomme ce que le moteur offre */
-    [/^You can play: (.+) — or press OK CONTINUE$/, 'Tu peux jouer : $1 — ou OK · CONTINUER']
+    [/^You can play: (.+) — or press OK CONTINUE$/, 'Tu peux jouer : $1 — ou OK · CONTINUER'],
+    /* S1681 - note 499 (1) : la lecture du coup */
+    [/^YOU TAKE (\d+) DMG — (\d+) → (\d+) HP$/, 'TU PRENDS $1 DMG — $2 → $3 PV'],
+    [/^THIS WOULD KILL YOU — (\d+) HP → DEAD$/, 'ÇA TE TUE — $1 PV → MORT'],
+    [/^THIS WOULD KILL (.+) — (\d+) HP → DEAD$/, 'ÇA TUE $1 — $2 PV → MORT'],
+    [/^(.+) TAKES (\d+) DMG — (\d+) → (\d+) HP$/, '$1 PREND $2 DMG — $3 → $4 PV'],
+    [/^HIT (\d+) OF THIS SEQUENCE$/, 'COUP $1 DE CETTE SÉQUENCE'],
+    [/^(\d+) → (\d+) HP$/, '$1 → $2 PV'],
+    [/^previous hit: (.+)$/, 'coup précédent : $1']
   ];
   /* 339 (2) — l'ecran double ses blancs autour de « · » et de « — » (mesure : « ”  ·  card ») : chaque
      espace d'un motif vaut UN OU PLUSIEURS blancs. */
