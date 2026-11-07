@@ -1506,7 +1506,7 @@
     'scroll up': 'remonter', 'more below': 'la suite plus bas',
     'GAME OVER': 'FIN DE PARTIE', 'GAME': 'PARTIE', 'REWARDS': 'GAINS', '⤢ DETAILS': '⤢ DÉTAILS',
     'NEW GAME': 'NOUVELLE PARTIE', '⚔ FINAL DUEL': '⚔ DUEL FINAL',
-    'TEETH EARNED': 'DENTS GAGNÉES', 'Table bonus': 'Prime de table',
+    'TEETH EARNED': 'DENTS GAGNÉES', 'Table bonus': 'Prime de table', 'Speed': 'Vitesse', 'Slacker': 'Traînard',
     /* le troc (364 (5), protocole du moteur 956) */
     'YOUR CARDS — click to put on the table': 'TES CARTES — clique pour la poser sur la table', 'WORN': 'PORTÉE',
     'VALIDATE': 'VALIDER', 'CANCEL': 'ANNULER', '✓ VALIDATED': '✓ VALIDÉ', '✓ VALIDATED — waiting': '✓ VALIDÉ — on attend',
@@ -1780,6 +1780,9 @@
     [/^you kill (.+)$/, 'tu tues $1'], [/^YOUR TEETH (.+)$/, 'TES DENTS $1'],
     [/^\+(\d+) XP → (.+) level (\d+)$/, '+$1 XP → $2 niveau $3'],
     [/^Mob kills (\d+)$/, 'Mobs tués $1'], [/^Table bonus (\d+)$/, 'Prime de table $1'],
+    /* S1679 · 497 ② — les lignes du Pro Tour (moteur 1205) */
+    [/^Speed — turn ended with (\d+) s left$/, 'Vitesse — tour fini avec $1 s d’avance'],
+    [/^Slacker — the turn timer ran out$/, 'Traînard — le chrono du tour est tombé à zéro'],
     [/^arcane (\d+) · chaos (\d+) · fire (\d+) · frost (\d+) · lightning (\d+) · poison (\d+)$/, 'arcane $1 · chaos $2 · feu $3 · givre $4 · foudre $5 · poison $6'],
     [/^(.+) — your target: your attack goes at them$/, '$1 — ta cible : ton attaque va sur lui'],
     [/^target (.+)$/, 'cibler $1'],
