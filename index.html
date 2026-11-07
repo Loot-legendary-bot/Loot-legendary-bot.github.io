@@ -13054,6 +13054,9 @@
       .boite-des .bd-des.triangle .die { width: 72px; height: 72px; }
       .boite-des .bd-des.triangle .die:first-child { grid-column: 1 / span 2; justify-self: center; }
       .boite-des .bd-total { font-family: var(--display); font-weight: 800; font-size: 20px; color: #f0c44c; }
+      /* S1671 · note 493 ① — le portail ouvert par le dé de Collapse, dans la police du bac, bien visible */
+      .boite-des .bd-portail { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: .06em;
+        color: #9fe7ff; text-shadow: 0 0 10px rgba(80,200,255,.85), 0 1px 2px #000; }
       /* S1666 · note 489 ② — le dé retouché (« quel dé ? ») : cerclé d'or, sa face d'avant au-dessus */
       .boite-des .die.bd-touche { box-shadow: 0 0 0 3px #f0c44c, 0 0 14px rgba(240,196,76,.75); border-radius: 10px; }
       .boite-des .die .bd-avant { position: absolute; left: 50%; top: -20px; transform: translateX(-50%) rotate(calc(-1 * var(--bd-r, 0deg)));
@@ -14503,6 +14506,9 @@
          barre d'onglets et en AVALAIT les clics. La colonne commence sous lui. */
       .nouvelle-table .ntt-cb2-onglets > .ntt-cb2-mobs { padding-top: 72px; box-sizing: border-box; }
       .nouvelle-table .ntt-cb2-onglets .ntt-onglets-cible { align-items: stretch; }
+      /* S1668 · note 492 ② — un combat à 6 : chaque participant a son onglet, la rangée passe à la ligne au lieu de couper. */
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglets-cible { flex-wrap: wrap; }
+      .nouvelle-table .ntt-cb2-onglets .ntt-onglets-cible > .ntt-onglet-cible { flex: 1 1 210px; }
       .nouvelle-table .ntt-cb2-onglets .ntt-onglet-cible {
         position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr);
         grid-template-rows: auto auto auto; column-gap: 7px; row-gap: 3px; align-items: center;
@@ -15509,7 +15515,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-pwrhsdMU.js"></script>
+    <script type="module" crossorigin src="./assets/index-B2VSurHp.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

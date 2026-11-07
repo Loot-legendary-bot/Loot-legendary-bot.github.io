@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 07 Nov 2026
+- **11:33** — Dice tray: when your Collapse die opens the portal on your Tile, the tray writes **PORTAL OPEN ON THIS TILE** under the die once it lands (also in another player's tray). Exploration: the d6 plays the recorded dice roll again, and the chest sound only plays on a chest, when the die lands. The game opens again after today's Daily calendar data arrived (it stopped on a black screen in the local build).
 - **01:12** — Character select: The Boltwright's square shows his portrait again (it was an empty dashed frame, his animated selection art doesn't exist yet).
 - **00:54** — Dice tray: when a card changes one die of a roll (Dungeon Clover on the Offering Pit, "which die?"), the tray now shows the new face — the changed die is ringed in gold with its old face above it ("3 →"); before, the tray kept the dice as first rolled. Rogue's Shortcut and Bone: once played, a compass badge "+1" on your sheet (under your HP) shows the charge waiting for your next Exploration; when you explore, the tray writes the bonus under the die ("3 +1 = 4") — the die shows what you rolled, the Tile reads the total. Rules engine merged (The Mosquito now counts a Banana Flee).
 
