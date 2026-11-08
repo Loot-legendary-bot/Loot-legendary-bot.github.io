@@ -1146,6 +1146,7 @@
     'Provisions': 'Les Vivres',
     'Tutorial': 'Tutoriel',
     'a game with a dungeon master': 'une partie avec un maître de jeu',
+    'the nine circles · chapter 1: first steps': 'les neuf cercles · chapitre 1 : premiers pas',
     'never played': 'jamais fait',
     'The notebook': 'Le carnet',
     'Options': 'Options',

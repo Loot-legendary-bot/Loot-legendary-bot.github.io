@@ -1179,7 +1179,7 @@
 .pf-compte .pf-btn{padding:4px 8px;font-size:max(14px, 11px);letter-spacing:.04em}
 .pf-btn:hover{border-color:#fff;background:rgba(255,255,255,.07)}
 .pf-dit{margin-top:8px;font-size:max(14px, 12px);opacity:.75;min-height:1em}
-</style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). S1614 - note 457 (3) ALERTE ROUGE : ni la porte d'une AUTRE partie - le retour au menu apres un Today's Dungeon gardait ?daily=<graine>, et CLASSIC (qui repasse la chaine telle quelle) relancait le Daily : plus de quetes ni de points. Meme famille pour ?hiscore=, ?tuto=, ?equipe=. */(function(){try{var q=new URLSearchParams(location.search);var K=['salon','daily','hiscore','tuto','equipe'];if(K.some(function(k){return q.has(k);})){K.forEach(function(k){q.delete(k);});var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/bugbox.js"></script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/mur_etoile.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/protour.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/borne.js"></script><script src="/titre/foils.js"></script><script src="/titre/des_foil.js"></script><script src="/titre/bannieres.js"></script>
+</style><script>/* S1466 - note 347 (2) : le HOME ne porte jamais un id de salon (il se recopiait dans la NEW GAME suivante). S1614 - note 457 (3) ALERTE ROUGE : ni la porte d'une AUTRE partie - le retour au menu apres un Today's Dungeon gardait ?daily=<graine>, et CLASSIC (qui repasse la chaine telle quelle) relancait le Daily : plus de quetes ni de points. Meme famille pour ?hiscore=, ?tuto=, ?equipe=. */(function(){try{var q=new URLSearchParams(location.search);var K=['salon','daily','hiscore','tuto','equipe'];if(K.some(function(k){return q.has(k);})){K.forEach(function(k){q.delete(k);});var s=q.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);}}catch(e){}})();</script><script src="/titre/curseur.js"></script><script src="/titre/profil.js"></script><script src="/titre/compte.js"></script><script src="/titre/langue.js"></script><script>window.LLLangue.installe('EN');</script><script src="/titre/bugbox.js"></script><script src="/titre/primes.js"></script><script src="/titre/bounty_wall.js"></script><script src="/titre/mur_etoile.js"></script><script src="/titre/fonds_modes.js"></script><script src="/titre/tickets.js"></script><script type="module" src="/titre/defi.js"></script><script src="/titre/salon.js"></script><script src="/titre/protour.js"></script><script src="/titre/blood_shop.js"></script><script src="/titre/goblin_den.js"></script><script src="/titre/deux_fiches.js"></script><script src="/titre/codex.js"></script><script src="/titre/classement.js"></script><script src="/titre/borne.js"></script><script src="/titre/foils.js"></script><script src="/titre/des_foil.js"></script><script src="/titre/bannieres.js"></script><script src="/titre/aventure.js"></script>
 <style>.dnote .dbar{display:block;height:.6cqh;margin:.8cqh 0;background:rgba(233,228,216,.15)}
 .dnote .dbar i{display:block;height:100%;background:#a3231d}</style><link rel="stylesheet" href="/titre/da_fonds.css"></head><body>
 <script>
@@ -1794,6 +1794,15 @@ const DICE=[
      brossee, une arete trempee dans le sang. `titre_contre_registre.py` : AU REGISTRE ET PAS AU TITRE. Nom descriptif
      (aucune note ne le donne), prix : le defaut du rayon, comme Silver Hallmark. */
   ["White Paint dice","peinture_blanche",0],
+  /* 08/11 - note 500 (3) : trois peaux au registre et PAS au rayon (`titre_contre_registre.py` :
+     AU REGISTRE ET PAS AU TITRE). Posees par la FORGE sur le mot de Croze ("Oui, pose-les").
+     marbre_blanc_or (forge 8830185, fusion 967b82f) : Uncommon 2 000, MONNAIE 7.2 (marbre).
+     langue (forge 17b17ae, fusion 7134bde) : Rare 5 000, dans PALIER_DES depuis le 07/11.
+     corail_translucide (forge b547f10, fusion 597e879 du 14/10) : prix non fixe, le defaut du rayon.
+     Noms descriptifs (aucune note ne les donne) : Croze les corrige d un mot. */
+  ["Gilded Marble dice","marbre_blanc_or",0],
+  ["Tongue dice","langue",0],
+  ["Coral resin dice","corail_translucide",0],
   ["Bones dice","bones",1]];
 /* note 275 (4) - les peaux DE DEPART : a toi sans achat, sous leur propre titre. */
 const PEAUX_DE_DEPART=['bones'];
@@ -1812,7 +1821,9 @@ const PALIER_DES={rose_opaque:'Common',jaune_opaque:'Common',noir_vert_acide:'Co
   galaxie_vert_violet:'Rare',bleu_givre:'Rare',rouge_translucide:'Rare',eclaboussures_sang:'Rare',
   nacre_turquoise_violet:'Rare',nacre_vert_or:'Rare',nacre_bleu_acier:'Rare',nacre_orange_argent:'Rare',
   plastique_machouille:'Rare',potion_jaune_rose:'Rare',   /* note 317 (3) : 5 000 */
-  langue:'Rare'};   /* 07/11 - mot de Croze a la forge : Rare 5 000 (MONNAIE 30, les plus travailles) */
+  langue:'Rare',   /* 07/11 - mot de Croze a la forge : Rare 5 000 (MONNAIE 30, les plus travailles) */
+  peinture_blanche:'Rare',   /* 08/11 - reco forge du 02/11 ("fais au mieux" de Croze), posee sur son "Oui, pose-les" : MONNAIE 30, empatement + arete trempee */
+  marbre_blanc_or:'Uncommon'};   /* 08/11 - MONNAIE 7.2 : marbre = Uncommon, l or est dans la gravure (le prix du defaut, mais ECRIT) */
 /* S1487 · note 367 ② (MONNAIE §31, verdict Croze) — ≈ 1 sur 10 du DICE SET et des CARD BACKS ne s'achète
    qu'en SANG. Désignés par l'écran (reco, Croze corrige par nom) : dans le pool de vente hors mur et hors
    saison, le dé le plus travaillé (Blue resin) + un plastique (White plastic), et le dos le plus travaillé hors
@@ -5218,7 +5229,9 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   /* S1453 - note 325 ter (1) (nom tranche par Croze le 21/10) : la carte du tuto s'appelle
      FIRST STEPS. Grisee comme avant ; les quatre runs nommes et « 160 teeth each » viennent
      avec la v2 (moteur 241). */
-  b.innerHTML = '<b>FIRST STEPS</b><i>' + (TUTO_ENDORMI ? DORT : 'a game with a dungeon master') + '</i>' +
+  /* S1682 - notes 501 (1) + 503 (4) : « TUTORIAL devient le chapitre 1 d'AVENTURE » - la carte s'appelle LA DESCENTE
+     (nom provisoire) et ouvre l'entonnoir des neuf cercles (aventure.js) ; FIRST STEPS est son premier chapitre. */
+  b.innerHTML = '<b>LA DESCENTE</b><i>' + (TUTO_ENDORMI ? DORT : 'the nine circles · chapter 1: first steps') + '</i>' +
     (fini || TUTO_ENDORMI ? '' : '<span class="pastille">never played</span>');
   if (TUTO_ENDORMI) {
     b.setAttribute('aria-disabled', 'true');
@@ -5226,6 +5239,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
   }
   b.addEventListener('click', function () {
     if (TUTO_ENDORMI) { return; }
+    if (window.LLAventure) { window.LLAventure.ouvre(); return; }
     var q = new URLSearchParams(window.location.search);
     /* S1541 - note 387 (1) : la porte ouvre TUTO 1 du depot (tuto.json, the_mailman impose par le scenario). */
     q.set('tuto', 'tuto_1_the_run');

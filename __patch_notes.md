@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 08 Nov 2026
+- **10:30** — PLAY: the tutorial card is now **LA DESCENTE**, the first map of the adventure. It opens the nine circles of the dungeon, top to bottom; the first circle (Limbo) holds two chapters: **First steps** (the tutorial you know — click it, read its card, PLAY) and **Second steps** (coming). Deeper circles stay dark until they have chapters. Scroll or drag to go down, + / − (or Ctrl + wheel) to zoom. The painted map arrives with the next update. Rules engine merged: Today's Dungeon reads more of its calendar (Ruins days, starting hands by school, Frail, 6-player tables, AGGRO / DOCILE bots, LAST SURVIVOR) — the mode itself stays locked for now.
+
 ## 07 Nov 2026
 - **22:11** — Every damage window now tells you whether the hit kills you. When you are hit, under "YOU TAKE 6 DMG — …" you read your HP before and after ("12 → 6 HP"); if the hit would kill you, a red bar says **THIS WOULD KILL YOU — 4 HP → DEAD** while you can still react. When a second hit follows the first before it is written, the window says **HIT 2 OF THIS SEQUENCE** and names the previous hit. A hit on another player reads the same way ("THE GURU TAKES 10 DMG — 13 → 3 HP"). Rules engine merged (a cancelled Surgical Kit no longer heals; every damage announcement says if it is lethal).
 - **20:17** — END OF GAME: when you win, the screen now says **VICTORY** at the top. Every player shows the teeth they earned, counted up under their points ("+4214"), and a line with their kills and extractions. The button to play again is now called **NEXT GAME**.

@@ -1,0 +1,161 @@
+{
+  "_notes": "AVENTURE « LA DESCENTE » (nom provisoire, Croze : « ok pour tes recos », 08/11/2026) — l'Enfer de Dante en neuf cercles, chaque cercle un lieu du jeu ; les chapitres sont des scénarios (format tuto). Ancres en fractions de l'image (x, y du centre de l'anneau, largeur utile de la terrasse) mesurées par le CLASSEUR sur les vignettes : l'écran ajuste de quelques pour cent si besoin et me renvoie ses valeurs. Spec : docs/AVENTURE.md.",
+  "nom": "LA DESCENTE",
+  "nom_provisoire": true,
+  "carte": {
+    "image": "art/aventure/carte_enfer.png",
+    "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_084843_9e00c88c-c93f-47fe-a166-6c0a5ddbdc47.png",
+    "largeur": 1536,
+    "hauteur": 2736,
+    "defilement": "vertical, zoom comme le Bounty Wall, le cercle courant centré"
+  },
+  "virgile": {
+    "nom": "Le Grand Lécheur",
+    "titre": "Souverain Grand Lécheur émérite (grade 33 retiré)",
+    "role": "le guide qui tient le bras du joueur : une ligne à l'entrée de chaque cercle et de chaque chapitre, le script bob dans les scénarios",
+    "voix": "à venir (Croze)"
+  },
+  "etats_du_medaillon": [
+    "VERROUILLE (chaîne, assombri)",
+    "COURANT (lueur, cliquable)",
+    "REUSSI_1_3_ETOILES",
+    "A_VENIR (COMING, pas d'image)"
+  ],
+  "cercles": [
+    {
+      "numero": 1,
+      "nom": "Limbes",
+      "nom_en": "Limbo",
+      "lieu": "Le vestibule du donjon",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.135,
+        "largeur": 0.62
+      },
+      "chapitres": [
+        {
+          "id": "tuto_1",
+          "titre": "First steps",
+          "scenario": "tuto",
+          "etat": "JOUABLE"
+        },
+        {
+          "id": "tuto_2",
+          "titre": "Second steps",
+          "scenario": "tuto_2",
+          "etat": "A_ECRIRE"
+        }
+      ],
+      "ligne_de_virgile": null
+    },
+    {
+      "numero": 2,
+      "nom": "Luxure",
+      "nom_en": "Lust",
+      "lieu": "Le Squire Spa",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.24,
+        "largeur": 0.58
+      },
+      "chapitres": [],
+      "ligne_de_virgile": null
+    },
+    {
+      "numero": 3,
+      "nom": "Gourmandise",
+      "nom_en": "Gluttony",
+      "lieu": "La Dining Room",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.345,
+        "largeur": 0.56
+      },
+      "chapitres": [],
+      "ligne_de_virgile": null
+    },
+    {
+      "numero": 4,
+      "nom": "Avarice",
+      "nom_en": "Greed",
+      "lieu": "Le Goblin Casino",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.45,
+        "largeur": 0.52
+      },
+      "chapitres": [],
+      "ligne_de_virgile": null
+    },
+    {
+      "numero": 5,
+      "nom": "Colère",
+      "nom_en": "Anger",
+      "lieu": "L'Arène",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.535,
+        "largeur": 0.5
+      },
+      "chapitres": [],
+      "ligne_de_virgile": null
+    },
+    {
+      "numero": 6,
+      "nom": "Hérésie",
+      "nom_en": "Heresy",
+      "lieu": "Le Blood Altar",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.635,
+        "largeur": 0.47
+      },
+      "chapitres": [],
+      "ligne_de_virgile": null
+    },
+    {
+      "numero": 7,
+      "nom": "Violence",
+      "nom_en": "Violence",
+      "lieu": "Les couloirs à pièges et les Ruines",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.71,
+        "largeur": 0.42
+      },
+      "chapitres": [],
+      "ligne_de_virgile": null
+    },
+    {
+      "numero": 8,
+      "nom": "Fraude",
+      "nom_en": "Fraud",
+      "lieu": "Le Coffin Lounge et le Dungeon Party Mask",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.8,
+        "largeur": 0.38
+      },
+      "chapitres": [],
+      "ligne_de_virgile": null
+    },
+    {
+      "numero": 9,
+      "nom": "Trahison",
+      "nom_en": "Treachery",
+      "lieu": "L'abîme gelé, la fosse du Duel Final, le sceau",
+      "ancre": {
+        "x": 0.5,
+        "y": 0.93,
+        "largeur": 0.3
+      },
+      "chapitres": [],
+      "ligne_de_virgile": null
+    }
+  ],
+  "apres_le_neuvieme": {
+    "purgatoire": "7 terrasses en montant — une seconde peinture, même recette, après la démo",
+    "sortie_au_jour": "la troisième, plus courte"
+  },
+  "progression": "au profil, serveur comme le grade : { chapitre_atteint, etoiles: { tuto_1: 0-3, … } }"
+}
