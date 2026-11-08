@@ -6760,6 +6760,21 @@
         background: rgba(0,0,0,.35); }
       .fen-lecture-titre { font-family: var(--display); font-weight: 900; letter-spacing: .04em;
         font-size: max(20px, calc(20px * var(--lisible, 1))); line-height: 1.15; }
+      /* S1690 · note 512 ① — la fenêtre de ma mort : seule à l'écran, ses cartes en grand, ACCEPT DEATH. */
+      .decision.fen-mort { position: relative; z-index: 9000; border-color: #b3121b !important;
+        box-shadow: 0 0 28px rgba(255,0,0,.45) !important; }
+      .decision.fen-mort::before { content: ''; position: fixed; inset: -50vmax; background: rgba(0,0,0,.86);
+        z-index: -1; pointer-events: none; }
+      .nouvelle-table .ntt-axe > .ntt-question-cadre:has(.decision.fen-mort) { z-index: 9000 !important; }
+      .fen-mort .fen-mort-titre { color: #ff3b3b; text-shadow: 0 0 8px rgba(255,0,0,.45); }
+      .fen-mort .fen-mort-pv { color: #ff3b3b; }
+      .fen-mort .fen-mort-source { font-size: 13px; opacity: .8; margin-top: 2px; }
+      .fen-mort .opt-cartes.fen-mort-cartes { justify-content: center; gap: 18px; margin: 12px 0; }
+      .fen-mort .opt-cartes.fen-mort-cartes > * { transform: scale(1.35); transform-origin: top center; margin: 0 22px 70px; }
+      .fen-mort .fen-mort-accepter { background: #5a0006 !important; color: #fff !important; border-color: #b3121b !important; }
+      /* S1690 · note 512 ④ — « 5 / 6 SELECTED » en gros, vert quand le compte y est. */
+      .compte-selection { font-size: 22px; font-weight: 700; letter-spacing: .04em; color: #ffcf6b; margin: 8px 0 6px; }
+      .compte-selection.juste { color: #6be38a; }
       .fen-lecture-tue { border-left-color: #b3121b; background: rgba(120,0,8,.45); }
       .fen-lecture-tue .fen-lecture-titre { color: #ff3b3b; text-shadow: 0 0 8px rgba(255,0,0,.45); }
       .fen-lecture-sous { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 3px;
@@ -15614,7 +15629,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BOZq-vLN.js"></script>
+    <script type="module" crossorigin src="./assets/index-BWSgio9r.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
