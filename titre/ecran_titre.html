@@ -485,6 +485,17 @@
   .pt-barre i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#8a6a2a,#e2bf6e)}
   .pt-bornes{display:flex;justify-content:space-between;font:400 max(14px, 1.4cqh)/1 "Alegreya",Georgia,serif;color:rgba(239,230,207,.7)}
   .pt-manque{font:700 max(14px, 1.6cqh)/1.2 "Alegreya",Georgia,serif;color:var(--bone)}
+  /* S1685 - note 500 (1) : la courbe = les 10 dernieres tables Pro Tour (historiqueProTour du serveur) */
+  .pt-histo{display:flex;flex-direction:column;gap:.6cqh;align-self:center;width:24cqh;margin-left:1.4cqh;padding-left:1.8cqh;border-left:1px solid rgba(239,230,207,.18)}
+  .pt-histo>i{font:400 max(12px, 1.2cqh)/1 "Alegreya",Georgia,serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(239,230,207,.6)}
+  .pt-cols{display:flex;gap:4px;height:9cqh;min-height:50px;position:relative}
+  .pt-cols::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(239,230,207,.3)}
+  .pt-cols>span{flex:1;max-width:22px;position:relative}
+  .pt-cols>span>b{position:absolute;left:0;right:0;min-height:2px}
+  .pt-cols>span.up>b{bottom:50%;background:#5fae5a}
+  .pt-cols>span.dn>b{top:50%;background:#b8463c}
+  .pt-cols>span.mont>b{box-shadow:0 0 6px #e2bf6e}
+  .pt-histo>span{font:400 max(12px, 1.3cqh)/1.1 "Alegreya",Georgia,serif;color:rgba(239,230,207,.75)}
   /* S1409 - note 226 (2) : le nombre de joueurs se CHOISIT (3 - 4 - 5), il
      n'est plus tire. Meme plaque que les chips de mode, plus petite ; a la
      place de l'invitation (qui n'existe qu'en 2v2). */
@@ -3443,6 +3454,7 @@ const GRAINE_DU_JOUR=(()=>{const d=new Date();return d.getUTCFullYear()+'-'+Stri
    dans grades.json (CLASSEUR, servi a /titre/grades.json par vite.config.ts) - « Grade N » + le titre
    (grades.json.affichage). L'historique des dernieres parties attend sa publication (moteur 389 (1)). */
 let GRADES_DU_HOME=null;
+let HISTO_PROTOUR=null;   /* S1685 - lu une fois au serveur ; null = pas (encore) lu */
 function rangProTour(){
   const box=document.getElementById('grank'); if(!box) return;
   const peins=(gj)=>{
@@ -3467,8 +3479,36 @@ function rangProTour(){
     } else {
       col.appendChild(mk('span','pt-manque',fmt(gp)+' GP'+(haut===null&&bas!==null?' — top grade':'')));
     }
+    /* S1685 - note 500 (1) : la courbe = historiqueProTour du GET /profile (serveur, palier 1218, du plus
+       ancien au plus recent). Une barre par table : verte si gagne, rouge si perdu, dorée si le grade a
+       monte. Sans compte (hors ligne) : rien - aucune courbe inventee. */
+    if(Array.isArray(HISTO_PROTOUR)){
+      const h=mk('div','pt-histo');
+      h.appendChild(mk('i',null,'Last Pro Tour tables'));
+      if(HISTO_PROTOUR.length===0){
+        h.appendChild(mk('span',null,'No Pro Tour table yet'));
+      } else {
+        const max=Math.max(1,...HISTO_PROTOUR.map(c=>Math.abs(c.delta)));
+        const cols=mk('div','pt-cols');
+        HISTO_PROTOUR.forEach(c=>{
+          const s=mk('span',(c.delta>=0?'up':'dn')+(c.gradeApres>c.gradeAvant?' mont':''));
+          s.title=(c.delta>=0?'+':'')+fmt(c.delta)+' GP'+(c.gradeApres!==c.gradeAvant?' · GRADE '+c.gradeAvant+' → '+c.gradeApres:'');
+          const b=mk('b'); b.style.height=(Math.abs(c.delta)/max*50).toFixed(1)+'%'; s.appendChild(b); cols.appendChild(s);
+        });
+        h.appendChild(cols);
+        const der=HISTO_PROTOUR[HISTO_PROTOUR.length-1];
+        h.appendChild(mk('span',null,'Last table: '+(der.delta>=0?'+':'')+fmt(der.delta)+' GP'));
+      }
+      box.appendChild(col); box.appendChild(h); return;
+    }
     box.appendChild(col);
   };
+  if(HISTO_PROTOUR===null && window.LLCompte && window.LLCompte.session && window.LLCompte.session()){
+    window.LLCompte.appel('GET','/profile').then(r=>{
+      const hp=r&&r.ok&&r.corps?r.corps.historiqueProTour:undefined;
+      if(Array.isArray(hp)){ HISTO_PROTOUR=hp.filter(c=>c&&typeof c.delta==='number'); peins(GRADES_DU_HOME); }
+    },()=>{});
+  }
   if(GRADES_DU_HOME!==null){ peins(GRADES_DU_HOME); return; }
   peins(null);
   fetch('/titre/grades.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(gj=>{ if(gj){ GRADES_DU_HOME=gj; peins(gj); } }).catch(()=>{});
