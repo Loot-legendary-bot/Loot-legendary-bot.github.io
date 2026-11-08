@@ -1240,6 +1240,9 @@
     'FEET': 'PIEDS', 'RING 1': 'ANNEAU 1', 'RING 2': 'ANNEAU 2', 'EMPTY': 'LIBRE',
     'HIDE': 'MASQUER', 'READY': 'PRÊT', 'WIN': 'VICTOIRE', 'ROLL FOR FIRST PLAYER': 'JET DU PREMIER JOUEUR',
     'ACTS NOW': 'AGIT', 'YOU ARE DEAD — YOU WATCH': 'TU ES MORT — TU REGARDES', 'mort — for good': 'mort — pour de bon',
+    /* S1684 · note 505 */
+    'YOU WILL RISE AGAIN': 'TU REVIENDRAS', 'back on your feet at the start of your next turn': 'debout au début de ton prochain tour',
+    'YOU TAKE DAMAGE': 'TU PRENDS DES DÉGÂTS',
     'Draw a tile and go there.': 'Pioche une tuile et vas-y.',
     'this tile cannot be explored': 'cette tuile ne s’explore pas',
     'this tile has no interaction': 'cette tuile n’a pas d’interaction',
@@ -1782,6 +1785,8 @@
     }],
     [/^killed by (.+)$/, function (m, b) { return 'tué par ' + (b === 'the Collapse' ? 'le Collapse' : b); }],
     [/^you kill (.+)$/, 'tu tues $1'], [/^YOUR TEETH (.+)$/, 'TES DENTS $1'],
+    /* S1684 · note 505 — la scène du coup reçu, l'écran de retour */
+    [/^(.+) HITS YOU$/, '$1 TE FRAPPE'], [/^dungeon turn (\d+)$/, 'tour de donjon $1'],
     [/^\+(\d+) XP → (.+) level (\d+)$/, '+$1 XP → $2 niveau $3'],
     [/^Mob kills (\d+)$/, 'Mobs tués $1'], [/^Table bonus (\d+)$/, 'Prime de table $1'],
     /* S1679 · 497 ② — les lignes du Pro Tour (moteur 1205) */

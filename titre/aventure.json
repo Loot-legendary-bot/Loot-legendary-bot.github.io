@@ -46,7 +46,8 @@
           "etat": "A_ECRIRE"
         }
       ],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 11
     },
     {
       "numero": 2,
@@ -59,7 +60,8 @@
         "largeur": 0.58
       },
       "chapitres": [],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 11
     },
     {
       "numero": 3,
@@ -72,7 +74,8 @@
         "largeur": 0.56
       },
       "chapitres": [],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 11
     },
     {
       "numero": 4,
@@ -85,7 +88,8 @@
         "largeur": 0.52
       },
       "chapitres": [],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 11
     },
     {
       "numero": 5,
@@ -98,7 +102,8 @@
         "largeur": 0.5
       },
       "chapitres": [],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 11
     },
     {
       "numero": 6,
@@ -111,7 +116,8 @@
         "largeur": 0.47
       },
       "chapitres": [],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 11
     },
     {
       "numero": 7,
@@ -124,7 +130,8 @@
         "largeur": 0.42
       },
       "chapitres": [],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 11
     },
     {
       "numero": 8,
@@ -137,7 +144,8 @@
         "largeur": 0.38
       },
       "chapitres": [],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 11
     },
     {
       "numero": 9,
@@ -150,12 +158,27 @@
         "largeur": 0.3
       },
       "chapitres": [],
-      "ligne_de_virgile": null
+      "ligne_de_virgile": null,
+      "niveaux_vises": 12
     }
   ],
   "apres_le_neuvieme": {
     "purgatoire": "7 terrasses en montant — une seconde peinture, même recette, après la démo",
     "sortie_au_jour": "la troisième, plus courte"
   },
-  "progression": "au profil, serveur comme le grade : { chapitre_atteint, etoiles: { tuto_1: 0-3, … } }"
+  "progression": "au profil, serveur comme le grade : { chapitre_atteint, etoiles: { tuto_1: 0-3, … } }",
+  "structure": {
+    "niveaux_vises": 100,
+    "niveaux_par_cercle": 11,
+    "regle": "Croze 08/11 : « le but c'est de mettre plus proche de 100 levels » — 9 cercles × 11 niveaux = 99 + le sceau (niveau 100) ; chaque cercle s'ouvre en sous-carte (son anneau en bande horizontale, les 11 médaillons sur la traînée de dents) ; l'entonnoir reste la carte du monde",
+    "brouillard": {
+      "regle": "l'étage en dessous du cercle courant est caché (brume + un grand « ? » posé sur l'anneau) tant que le cercle courant n'est pas fini ; les étages plus bas sont noirs ; en post-prod : un calque « ? » par anneau (asset), la brume est un dégradé de l'écran",
+      "asset_point_d_interrogation": "à générer plus tard (GPT Image 2.5, fond transparent)"
+    },
+    "suite_de_la_comedie": {
+      "purgatoire": "7 terrasses en montant (+ l'Antépurgatoire au pied, le Paradis terrestre au sommet) — add-on après la démo ; Virgile s'arrête au sommet : le Grand Lécheur passe la main",
+      "sortie_au_jour": "la remontée hors de l'Enfer « pour revoir les étoiles », transition entre l'Enfer et le Purgatoire",
+      "paradis": "9 cieux — le dernier add-on, avec un nouveau guide"
+    }
+  }
 }
