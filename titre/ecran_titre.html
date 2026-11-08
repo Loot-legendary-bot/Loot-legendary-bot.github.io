@@ -2643,6 +2643,31 @@ function peinsLeDev(box){
     });
     lab.appendChild(cb); lab.appendChild(document.createTextNode(x[1])); d.appendChild(lab);
   });
+  /* S1689 - note 511 (1) : TODAY'S DUNGEON -> DAY N (1-30). Les jours que le moteur sait jouer en clair, les autres
+     grises « NOT YET ». Le HOME se recharge : l'entree et PLAY prennent la graine de CE jour, bandeau DEV — DAY N. */
+  if(window.LLTickets && window.LLTickets.dateDuJour && window.LLDefi){
+    var labj=document.createElement('label'); labj.className='langue-btn dev-jour'; labj.style.cssText='display:inline-flex;align-items:center;gap:.8cqh';
+    labj.appendChild(document.createTextNode('TODAY’S DUNGEON → '));
+    var sel=document.createElement('select'); sel.dataset.devJour='1';
+    var o0=document.createElement('option'); o0.value='0'; o0.textContent='TODAY (real date)'; sel.appendChild(o0);
+    for(var k=1;k<=30;k++){
+      var dk=window.LLTickets.dateDuJour(k), jk=null;
+      try{ jk=dk?window.LLDefi.duJour(dk):null; }catch(e){ jk=null; }
+      var ok=!!(jk&&jk.calendrier&&jk.calendrier.jouable);
+      var o=document.createElement('option'); o.value=String(k);
+      o.textContent='DAY '+k+(jk?' · '+jk.nom:'')+(ok?'':' — NOT YET');
+      if(!ok){ o.style.color='#777'; }
+      sel.appendChild(o);
+    }
+    sel.value=String(window.LLTickets.jourDev());
+    sel.addEventListener('change',function(){
+      try{ if(sel.value==='0') localStorage.removeItem('ll.dev.daily.day'); else localStorage.setItem('ll.dev.daily.day',sel.value); }
+      catch(e){ var m0=document.getElementById('dev-msg'); if(m0) m0.textContent='This browser refuses to store it.'; return; }
+      var m=document.getElementById('dev-msg'); if(m) m.textContent=(sel.value==='0'?'Today’s Dungeon back to the real date':'Today’s Dungeon set to DAY '+sel.value)+' — reloading…';
+      setTimeout(function(){ window.location.reload(); },400);
+    });
+    labj.appendChild(sel); d.appendChild(labj);
+  }
   var fin=function(msg){ if(typeof paintHUD==='function') paintHUD(true); var m=document.getElementById('dev-msg'); if(m) m.textContent=msg; };
   [['RESET OFFERINGS','Every essence you own and every offering burning goes back to zero.',function(){
       P.modifie(function(p){ p.offrandes=[]; if(p.mur&&typeof p.mur==='object') p.mur.offertes=[]; }); return 'Offerings reset.'; }],
@@ -3633,6 +3658,8 @@ function paintMatch(ctx){
         h+='Reward: ×2 the teeth · +'+sc.prime+' if the objective is met<br>'
           +'Every try burns one invitation · your best try counts · '+(poche>0?'you have '+poche+' invitation'+(poche>1?'s':''):'no invitation in your pocket');
       }
+      /* S1689 - note 511 (1) : le jour force au menu DEV se dit en tete. */
+      if(sc.devJour) h='<b class="daily-dev">DEV — DAY '+sc.devJour+'</b><br>'+h;
       document.getElementById('mline').innerHTML=h;
       if(!c.jouable) document.getElementById('golaunch').textContent = c.hier ? 'Play yesterday’s' : 'Not yet';
     }

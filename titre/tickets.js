@@ -122,7 +122,25 @@
   function graineUTC(date) {
     return String(date.getUTCFullYear()) + deux(date.getUTCMonth() + 1) + deux(date.getUTCDate());
   }
+  /* S1689 - note 511 (1) : OPTIONS -> DEV -> TODAY'S DUNGEON -> DAY N. Le jour N du calendrier (1-30) se joue comme si
+     la date y etait (sa graine = epoch + N - 1) ; 0 / absent = la vraie date. Garde sur la machine, jamais au profil. */
+  function jourDev() {
+    try { var n = parseInt(localStorage.getItem('ll.dev.daily.day') || '0', 10); return n >= 1 && n <= 30 ? n : 0; }
+    catch (e) { return 0; }
+  }
+  function dateDuJour(n) {
+    var e = window.LLDefi && window.LLDefi.epoch;
+    if (typeof e !== 'number') return null;
+    return new Date(Date.UTC(Math.floor(e / 10000), Math.floor(e / 100) % 100 - 1, e % 100 + n - 1));
+  }
   function duJour(date) {
+    var dev = 0;
+    if (!date) { dev = jourDev(); if (dev > 0) date = dateDuJour(dev) || undefined; if (!date) dev = 0; }
+    var r = duJourBrut(date);
+    if (r && dev > 0) r.devJour = dev;
+    return r;
+  }
+  function duJourBrut(date) {
     /* S1425 · DD-2 bis (note 251 ②) — à partir du premier jour tiré (`daily.json`
        `debut`), le défi est celui du GÉNÉRATEUR DU MOTEUR (`src/defi_du_jour.ts`,
        `window.LLDefi`). Avant, la semaine écrite à la main ci-dessus. */
@@ -160,5 +178,5 @@
      (un seul esprit, ×3) les remplace, et il vit au mur (`bounty_wall.js`). */
 
   window.LLTickets = { PRIX: PRIX, SCENARIOS: SCENARIOS, SEMAINE: SEMAINE,
-    duJour: duJour, deLaSemaine: deLaSemaine, enPoche: enPoche, achete: achete };
+    duJour: duJour, jourDev: jourDev, dateDuJour: dateDuJour, deLaSemaine: deLaSemaine, enPoche: enPoche, achete: achete };
 })();
