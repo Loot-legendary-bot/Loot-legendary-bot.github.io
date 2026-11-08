@@ -13878,6 +13878,17 @@
         font-size: 26px; font-weight: 900; letter-spacing: .04em; color: #ff6a55; text-align: center;
         text-shadow: 0 2px 8px rgb(0 0 0 / .85); transition: opacity .25s ease, transform .25s ease; }
       .dicelayer.jet-partage.t3 .scene-cadre .jp-coup { opacity: 1; transform: none; }
+      /* S1688 · note 510 ① — « plus impactant » : le reste de l'écran à 85 %, le titre en très gros, la barre de PV qui descend. */
+      .dicelayer.jet-partage { background: rgb(0 0 0 / .85); }
+      .dicelayer.jet-partage .jp-titres .rollcap { font-size: 64px; line-height: 1; letter-spacing: .06em; }
+      .dicelayer.jet-partage .jp-explication { font-size: 22px; color: #e9dfc8; }
+      .dicelayer.jet-partage .scene-cadre .jp-pv { position: relative; margin: 8px auto 0; width: 150px; height: 18px;
+        border-radius: 9px; background: rgb(255 255 255 / .12); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .25); overflow: hidden; }
+      .dicelayer.jet-partage .scene-cadre .jp-pv-plein { position: absolute; inset: 0 auto 0 0; width: var(--avant);
+        background: linear-gradient(#e5533f, #a8261a); transition: width .4s ease-out; }
+      .dicelayer.jet-partage.t3 .scene-cadre .jp-pv-plein { width: var(--apres); }
+      .dicelayer.jet-partage .scene-cadre .jp-pv-chiffre { position: relative; font-size: 13px; font-weight: 800; line-height: 18px;
+        text-align: center; color: #fff; text-shadow: 0 1px 3px #000; }
       /* S1447 · note 306 ⑧ — les pastilles dues brillent ; END TURN autonome à côté d'elles. */
       .ep-boules.dues .boule.pleine:not(.boule-s) { animation: pip-brille 1.6s ease-in-out infinite;
         box-shadow: 0 0 8px 2px rgb(255 210 63 / .75); }
@@ -15600,7 +15611,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CWqWZZcG.js"></script>
+    <script type="module" crossorigin src="./assets/index-COEtJecM.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

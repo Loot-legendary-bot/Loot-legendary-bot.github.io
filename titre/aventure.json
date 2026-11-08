@@ -44,7 +44,10 @@
           "titre": "First Steps",
           "brief": "solo · le tuto qui existe : bouger, explorer, looter, END TURN · paquet de tuiles : 3 couloirs, aucune carte en main",
           "scenario": "tuto",
-          "etat": "JOUABLE"
+          "etat": "JOUABLE",
+          "etoiles": {
+            "tours_max_3_etoiles": 6
+          }
         },
         {
           "id": "tuto_2",
@@ -52,7 +55,10 @@
           "titre": "Second Steps",
           "brief": "2 sièges · Bob scripté : échanger, se faire voler, premier combat, fuir (les trois formes du 1216)",
           "scenario": "tuto_2",
-          "etat": "A_ECRIRE"
+          "etat": "A_ECRIRE",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "limbo_3",
@@ -60,7 +66,10 @@
           "titre": "Bones & Teeth",
           "brief": "solo · squelettes seulement (2 skeleton_warrior) · Weapon Attack et les dés · main verrouillée : l'arme seule · 0 Ruines",
           "scenario": "limbo_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "limbo_4",
@@ -68,7 +77,10 @@
           "titre": "The Potion Cabinet",
           "brief": "solo · consommables seulement (Potion, French White Bread) · la fenêtre de dégâts, le soin avant le coup mortel · skeleton_duellist",
           "scenario": "limbo_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "limbo_5",
@@ -76,7 +88,10 @@
           "titre": "The Collapse",
           "brief": "solo · le dé de Collapse = le dé de portail · sortir par le portail avant le tour 6 · squelettes",
           "scenario": "limbo_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "limbo_6",
@@ -84,7 +99,10 @@
           "titre": "Loadout",
           "brief": "solo · équiper torse / mains / pieds, le gear score · skeleton_archer (le premier RANGED)",
           "scenario": "limbo_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "limbo_7",
@@ -92,7 +110,10 @@
           "titre": "Signature",
           "brief": "solo · ta Signature une fois · perso prêté : The Mailman · skeleton_elite",
           "scenario": "limbo_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "limbo_8",
@@ -100,7 +121,10 @@
           "titre": "Two at the Table",
           "brief": "2 sièges + bot DOCILE · jet d'ordre, Priority Window, pas de PvP",
           "scenario": "limbo_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "limbo_9",
@@ -108,7 +132,10 @@
           "titre": "One Quest",
           "brief": "solo · une carte de quête, la finir avant le tour 8",
           "scenario": "limbo_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "limbo_10",
@@ -116,7 +143,10 @@
           "titre": "The Vestibule Door",
           "brief": "3 sièges (2 bots DOCILE) · squelettes + skeleton_elite en sub-boss · sortir vivant par le portail = les Limbes finis",
           "scenario": "limbo_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -139,7 +169,10 @@
           "titre": "Steam",
           "brief": "intro de The Squire Spa : y entrer, lire son effet · solo · 0 Ruines",
           "scenario": "lust_1",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_2",
@@ -147,7 +180,10 @@
           "titre": "Hot Water",
           "brief": "solo · n'être soigné que par le Spa, survivre 10 tours",
           "scenario": "lust_2",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_3",
@@ -155,7 +191,10 @@
           "titre": "Towel Thief",
           "brief": "2 sièges + bot DOCILE · prendre la place du bot au Spa (premier vol de tuile)",
           "scenario": "lust_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_4",
@@ -163,7 +202,10 @@
           "titre": "Bath & Blade",
           "brief": "solo · skeleton_warrior ×2 puis le Spa entre deux combats",
           "scenario": "lust_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_5",
@@ -171,7 +213,10 @@
           "titre": "First Blood",
           "brief": "2 sièges + bot AGGRO · première vraie bagarre, fuir ou gagner",
           "scenario": "lust_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_6",
@@ -179,7 +224,10 @@
           "titre": "Rare Water",
           "brief": "solo · première carte RARE donnée à la porte, l'équiper",
           "scenario": "lust_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_7",
@@ -187,7 +235,10 @@
           "titre": "Pressure",
           "brief": "solo · Collapse ×2 dés (fast timer), le Spa pour tenir",
           "scenario": "lust_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_8",
@@ -195,7 +246,10 @@
           "titre": "Three Bathers",
           "brief": "3 sièges (bots DOCILE) · finir une quête avant eux",
           "scenario": "lust_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_9",
@@ -203,7 +257,10 @@
           "titre": "Spa Sub-Boss",
           "brief": "solo · un sub-boss posé sur le Spa, le tuer",
           "scenario": "lust_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_10",
@@ -211,7 +268,10 @@
           "titre": "Second Run",
           "brief": "solo · deux runs pour la première fois, le run 2 et son Collapse",
           "scenario": "lust_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "lust_11",
@@ -219,7 +279,10 @@
           "titre": "The Bath House Exam",
           "brief": "4 sièges (3 bots) · 12 tours, seul soin = le Spa, le plus de PV à la fin = RÉUSSI",
           "scenario": "lust_11",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -242,7 +305,10 @@
           "titre": "The Table Is Set",
           "brief": "intro de The Dining Room · solo · Bread à la porte",
           "scenario": "glut_1",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_2",
@@ -250,7 +316,10 @@
           "titre": "White Bread",
           "brief": "solo · French White Bread (+7) : manger pour tenir contre un sub-boss",
           "scenario": "glut_2",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_3",
@@ -258,7 +327,10 @@
           "titre": "Ostrich Egg",
           "brief": "solo · Ostrich Egg (+12) · arriver au portail à 20+ PV",
           "scenario": "glut_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_4",
@@ -266,7 +338,10 @@
           "titre": "Fromage des Alpes",
           "brief": "solo · +18 PV +1 STR : tuer un sub-boss en deux Weapon Attacks",
           "scenario": "glut_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_5",
@@ -274,7 +349,10 @@
           "titre": "Feast",
           "brief": "solo · manger 3 consommables dans la partie",
           "scenario": "glut_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_6",
@@ -282,7 +360,10 @@
           "titre": "Hungry Mobs",
           "brief": "solo · les mobs du Dining Room, la Dining Room ×2 dans le paquet",
           "scenario": "glut_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_7",
@@ -290,7 +371,10 @@
           "titre": "Banquet Brawl",
           "brief": "4 sièges (bots AGGRO) · FFA dans la Dining Room",
           "scenario": "glut_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_8",
@@ -298,7 +382,10 @@
           "titre": "The Cook",
           "brief": "solo · perso prêté : The Cook, sa Signature",
           "scenario": "glut_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_9",
@@ -306,7 +393,10 @@
           "titre": "Burrata di Troll",
           "brief": "solo · la Burrata à la porte : +50 sur une attaque, tuer le boss d'un coup",
           "scenario": "glut_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_10",
@@ -314,7 +404,10 @@
           "titre": "Poison on the Plate",
           "brief": "solo · The Poisoner prêté · dégâts de poison contre nourriture",
           "scenario": "glut_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "glut_11",
@@ -322,7 +415,10 @@
           "titre": "The Feast Exam",
           "brief": "3 sièges · finir avec 30 PV ou plus = RÉUSSI",
           "scenario": "glut_11",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -345,7 +441,10 @@
           "titre": "Green Felt",
           "brief": "intro de The Goblin Casino : y entrer, jouer une fois · solo",
           "scenario": "greed_1",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_2",
@@ -353,7 +452,10 @@
           "titre": "Getting There",
           "brief": "solo · les cartes de main qui t'y emmènent (déplacement / téléport vers une tuile nommée)",
           "scenario": "greed_2",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_3",
@@ -361,7 +463,10 @@
           "titre": "Lucky Three",
           "brief": "solo · gagner trois fois au Casino",
           "scenario": "greed_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_4",
@@ -369,7 +474,10 @@
           "titre": "Lose Big",
           "brief": "solo · perdre 2 cartes au Casino et finir quand même le run",
           "scenario": "greed_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_5",
@@ -377,7 +485,10 @@
           "titre": "Chest Hunter",
           "brief": "solo · ouvrir 3 coffres",
           "scenario": "greed_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_6",
@@ -385,7 +496,10 @@
           "titre": "Gear Score 12",
           "brief": "solo · sortir avec un gear score ≥ 12 (TREASURE_HUNTER)",
           "scenario": "greed_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_7",
@@ -393,7 +507,10 @@
           "titre": "Casino Night",
           "brief": "4 sièges (bots) · le Casino dans un FFA",
           "scenario": "greed_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_8",
@@ -401,7 +518,10 @@
           "titre": "Pickpocket",
           "brief": "solo · perso prêté : The Rogue, voler un bot",
           "scenario": "greed_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_9",
@@ -409,7 +529,10 @@
           "titre": "Double Loot",
           "brief": "solo · CHEST_LOOT_X2 à la porte",
           "scenario": "greed_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_10",
@@ -417,7 +540,10 @@
           "titre": "Legendary at the Door",
           "brief": "solo · une Legendary donnée, la garder jusqu'au portail",
           "scenario": "greed_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "greed_11",
@@ -425,7 +551,10 @@
           "titre": "The Vault Exam",
           "brief": "3 sièges · le plus de dents à la fin = RÉUSSI",
           "scenario": "greed_11",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -448,7 +577,10 @@
           "titre": "Sand & Stands",
           "brief": "intro de The Arena : y entrer, un combat · solo",
           "scenario": "anger_1",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_2",
@@ -456,7 +588,10 @@
           "titre": "Three in a Row",
           "brief": "solo · trois combats de suite dans l'Arène",
           "scenario": "anger_2",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_3",
@@ -464,7 +599,10 @@
           "titre": "Duel",
           "brief": "2 sièges + bot AGGRO · PvP dans l'Arène",
           "scenario": "anger_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_4",
@@ -472,7 +610,10 @@
           "titre": "Crowd Favourite",
           "brief": "solo · tuer 4 mobs dans l'Arène",
           "scenario": "anger_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_5",
@@ -480,7 +621,10 @@
           "titre": "Rage",
           "brief": "solo · perso prêté : The ManBearPig, Unstable Rampage",
           "scenario": "anger_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_6",
@@ -488,7 +632,10 @@
           "titre": "Iron Skin",
           "brief": "solo · The Guard prêté, Plate ≥ 3, encaisser",
           "scenario": "anger_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_7",
@@ -496,7 +643,10 @@
           "titre": "Arena Sub-Boss",
           "brief": "solo · sub-boss dans l'Arène",
           "scenario": "anger_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_8",
@@ -504,7 +654,10 @@
           "titre": "Free-for-All",
           "brief": "5 sièges (bots AGGRO) · Arène, dernier debout (LAST_SURVIVOR)",
           "scenario": "anger_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_9",
@@ -512,7 +665,10 @@
           "titre": "No Mercy",
           "brief": "solo · 2 player kills contre bots AGGRO",
           "scenario": "anger_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_10",
@@ -520,7 +676,10 @@
           "titre": "Warm-Up",
           "brief": "solo · l'Arène Ruins, un sub-boss",
           "scenario": "anger_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "anger_11",
@@ -528,7 +687,10 @@
           "titre": "THE GLADIATOR",
           "brief": "solo · le boss Gladiator dans l'Arène, le tuer = la Colère finie",
           "scenario": "anger_11",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -551,7 +713,10 @@
           "titre": "The Altar",
           "brief": "intro du Blood Altar : y entrer, lire son prix · solo",
           "scenario": "her_1",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_2",
@@ -559,7 +724,10 @@
           "titre": "Blood Price",
           "brief": "solo · payer l'Autel une fois, en tirer avantage",
           "scenario": "her_2",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_3",
@@ -567,7 +735,10 @@
           "titre": "Undead Rising",
           "brief": "solo · UNDEAD_ONLY, 3 morts-vivants à tuer",
           "scenario": "her_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_4",
@@ -575,7 +746,10 @@
           "titre": "The Necromancer",
           "brief": "solo · perso prêté : The Necromancer, le givre",
           "scenario": "her_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_5",
@@ -583,7 +757,10 @@
           "titre": "Vampire Night",
           "brief": "solo · The Vampire prêté, se nourrir",
           "scenario": "her_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_6",
@@ -591,7 +768,10 @@
           "titre": "Candles",
           "brief": "solo · survivre 15 tours, Autel comme seul soin",
           "scenario": "her_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_7",
@@ -599,7 +779,10 @@
           "titre": "Heretics",
           "brief": "3 sièges (bots AGGRO) · UNDEAD_ONLY",
           "scenario": "her_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_8",
@@ -607,7 +790,10 @@
           "titre": "Mummy",
           "brief": "solo · la momie en sub-boss",
           "scenario": "her_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_9",
@@ -615,7 +801,10 @@
           "titre": "Grave Step",
           "brief": "solo · The Cleric prêté contre les morts-vivants",
           "scenario": "her_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_10",
@@ -623,7 +812,10 @@
           "titre": "Altar Ruins",
           "brief": "solo · Blood Altar Ruins (première tuile Ruins vue, sans le paquet)",
           "scenario": "her_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "her_11",
@@ -631,7 +823,10 @@
           "titre": "The Heresy Exam",
           "brief": "4 sièges · UNDEAD_ONLY, dernier debout",
           "scenario": "her_11",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -654,7 +849,10 @@
           "titre": "Trigger Hall",
           "brief": "intro de The Trigger Hall : le texte avant le dé, le piège · solo",
           "scenario": "vio_1",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_2",
@@ -662,7 +860,10 @@
           "titre": "Traps",
           "brief": "solo · 3 pièges tirés, survivre",
           "scenario": "vio_2",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_3",
@@ -670,7 +871,10 @@
           "titre": "Nimble",
           "brief": "solo · The Rogue prêté, AGI contre les pièges",
           "scenario": "vio_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_4",
@@ -678,7 +882,10 @@
           "titre": "The Ruins",
           "brief": "intro des Ruines : TILE_DECK:RUINS dès le tour 1 · solo",
           "scenario": "vio_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_5",
@@ -686,7 +893,10 @@
           "titre": "Ruins Run",
           "brief": "solo · un run complet en Ruines",
           "scenario": "vio_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_6",
@@ -694,7 +904,10 @@
           "titre": "Short Fuse",
           "brief": "solo · Ruines + fast timer",
           "scenario": "vio_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_7",
@@ -702,7 +915,10 @@
           "titre": "Ambush",
           "brief": "3 sièges (bots AGGRO) · Ruines",
           "scenario": "vio_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_8",
@@ -710,7 +926,10 @@
           "titre": "Dangerous Looting",
           "brief": "solo · le Trigger Hall Ruins, piocher 3 Epic",
           "scenario": "vio_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_9",
@@ -718,7 +937,10 @@
           "titre": "Boltwright",
           "brief": "solo · The Boltwright prêté, la foudre",
           "scenario": "vio_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_10",
@@ -726,7 +948,10 @@
           "titre": "Collapse Immune",
           "brief": "solo · The Tamarin prêté (Tiny), les Ruines sans Collapse",
           "scenario": "vio_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "vio_11",
@@ -734,7 +959,10 @@
           "titre": "The Violence Exam",
           "brief": "4 sièges · Ruines + fast timer, extraction vivante",
           "scenario": "vio_11",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -757,7 +985,10 @@
           "titre": "The Onion",
           "brief": "intro de l'Onion : l'écraser en plein échange, First Strike · 2 sièges + bot scripté qui propose l'échange",
           "scenario": "fraud_1",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_2",
@@ -765,7 +996,10 @@
           "titre": "Party Hard",
           "brief": "intro du Dungeon Party Mask : l'équiper, tout le monde au Coffin Lounge en FFA · 3 sièges",
           "scenario": "fraud_2",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_3",
@@ -773,7 +1007,10 @@
           "titre": "Magpie",
           "brief": "intro de Magpie : looter ta cible vivante · solo",
           "scenario": "fraud_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_4",
@@ -781,7 +1018,10 @@
           "titre": "All Sub-Bosses",
           "brief": "solo · SUBBOSS_ALL, survivre 10 tours",
           "scenario": "fraud_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_5",
@@ -789,7 +1029,10 @@
           "titre": "The Trade Trap",
           "brief": "3 sièges · gagner un combat ouvert par un Onion",
           "scenario": "fraud_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_6",
@@ -797,7 +1040,10 @@
           "titre": "Masked Ball",
           "brief": "4 sièges · Party Mask, dernier debout au Coffin Lounge",
           "scenario": "fraud_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_7",
@@ -805,7 +1051,10 @@
           "titre": "Thief",
           "brief": "solo · The Rogue prêté, Pickpocket ×3",
           "scenario": "fraud_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_8",
@@ -813,7 +1062,10 @@
           "titre": "Sub-Boss Hunt",
           "brief": "solo · SUBBOSS_ALL, 3 kills",
           "scenario": "fraud_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_9",
@@ -821,7 +1073,10 @@
           "titre": "False Friend",
           "brief": "3 sièges · finir une quête avec un bot puis le tuer (BETRAYAL)",
           "scenario": "fraud_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_10",
@@ -829,7 +1084,10 @@
           "titre": "Coffin Lounge",
           "brief": "solo · le Coffin Lounge Ruins, un sub-boss",
           "scenario": "fraud_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "fraud_11",
@@ -837,7 +1095,10 @@
           "titre": "The Fraud Exam",
           "brief": "4 sièges · Onion + Party Mask fournis, 2 player kills",
           "scenario": "fraud_11",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -860,7 +1121,10 @@
           "titre": "Cold Welcome",
           "brief": "solo · l'abîme gelé : Collapse fort dès le tour 1",
           "scenario": "tre_1",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_2",
@@ -868,7 +1132,10 @@
           "titre": "The Onion Again",
           "brief": "3 sièges · un échange, un Onion, un combat gagné",
           "scenario": "tre_2",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_3",
@@ -876,7 +1143,10 @@
           "titre": "Fake Coop",
           "brief": "3 sièges · tuer un boss À DEUX avec un bot, puis le trahir (BETRAYAL)",
           "scenario": "tre_3",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_4",
@@ -884,7 +1154,10 @@
           "titre": "Vampire Hunt",
           "brief": "solo · The Vampire en boss, l'Onion jeté (1d20)",
           "scenario": "tre_4",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_5",
@@ -892,7 +1165,10 @@
           "titre": "Kill Them All",
           "brief": "4 sièges · 3 player kills (bots AGGRO)",
           "scenario": "tre_5",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_6",
@@ -900,7 +1176,10 @@
           "titre": "Two Bosses",
           "brief": "3 sièges · deux boss, les tuer à plusieurs puis dernier debout",
           "scenario": "tre_6",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_7",
@@ -908,7 +1187,10 @@
           "titre": "Trust Nobody",
           "brief": "4 sièges · fake coop ×2 (BETRAYAL ×2)",
           "scenario": "tre_7",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_8",
@@ -916,7 +1198,10 @@
           "titre": "Astragor",
           "brief": "solo · le boss Astragor",
           "scenario": "tre_8",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_9",
@@ -924,7 +1209,10 @@
           "titre": "The Fairies",
           "brief": "3 sièges · Bad Fairy et Good Fairy",
           "scenario": "tre_9",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_10",
@@ -932,7 +1220,10 @@
           "titre": "Frozen Duel",
           "brief": "2 sièges · un Duel Final direct contre un bot AGGRO",
           "scenario": "tre_10",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_11",
@@ -940,7 +1231,10 @@
           "titre": "Betrayer's Crown",
           "brief": "4 sièges · tuer le boss avec les autres, les trahir tous, sortir seul",
           "scenario": "tre_11",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_12",
@@ -948,7 +1242,10 @@
           "titre": "Ninth Circle",
           "brief": "6 sièges · deux boss + fake coop, dernier debout",
           "scenario": "tre_12",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         },
         {
           "id": "tre_13",
@@ -956,7 +1253,10 @@
           "titre": "THE SEAL",
           "brief": "6 sièges · le niveau 100 : deux runs, Duel Final, gagner = le sceau — Virgile te laisse au seuil",
           "scenario": "tre_13",
-          "etat": "PLAN"
+          "etat": "PLAN",
+          "etoiles": {
+            "tours_max_3_etoiles": 12
+          }
         }
       ],
       "ligne_de_virgile": null,
@@ -991,7 +1291,7 @@
     "carte(s) données à la porte (existe : main de départ / LEGENDARY_AT_DOOR)",
     "rencontre forcée : un boss nommé à la fin (Gladiator, Astragor, Vampire, Fairies)",
     "objectifs : KILL_MOB(id), KILL_N_MOBS, REACH_HP(n), EAT_N, CASINO_WINS(n), CHESTS(n), PLAYER_KILLS (existe), LAST_SURVIVOR (existe), TREASURE_HUNTER (existe), ALIVE_AT_TURN (existe), EXTRACT_ALIVE, BETRAYAL (finir un boss / une quête avec un allié désigné puis le tuer), MOST_TEETH, MOST_HP",
-    "étoiles : 3 seuils par niveau (tours, PV, dents) — règle CLASSEUR à écrire",
+    "étoiles : règle écrite (`regle_etoiles`, `etoiles.tours_max_3_etoiles` par chapitre) — le moteur publie SCENARIO_ENDED (400 ③)",
     "Virgile : une ligne par cercle et par niveau"
   ],
   "libelles": {
@@ -1013,7 +1313,37 @@
       "dents": 10000,
       "skin": "un cosmétique par cercle (dos de carte ou peau de dés, à nommer par Croze cercle par cercle)",
       "codex": "la page du cercle",
-      "grade_xp": "à régler"
+      "grade_xp": "à régler",
+      "skins_proposes": {
+        "regle": "proposition du CLASSEUR (08/11, note écran 511 ③) : 9 des 21 skins sans bounty réservés aux examens de cercle, un par cercle ; les 12 autres vont au Bounty Wall (500 ④) — veto de Croze d'un mot (« tout au mur » = les 21 au mur)",
+        "1_Limbo": {
+          "dos": "alt"
+        },
+        "2_Lust": {
+          "des": "corail_translucide"
+        },
+        "3_Gluttony": {
+          "dos": "gold_and_red"
+        },
+        "4_Greed": {
+          "dos": "goblin_casino"
+        },
+        "5_Anger": {
+          "des": "plastique_rouge"
+        },
+        "6_Heresy": {
+          "dos": "tapisserie_sombre"
+        },
+        "7_Violence": {
+          "dos": "cousu"
+        },
+        "8_Fraud": {
+          "des": "argent_poinconne"
+        },
+        "9_Treachery": {
+          "des": "bleu_translucide"
+        }
+      }
     },
     "livre": {
       "NIGREDO": "le sceau : un titre + un tablier spécial ? (à décider)"
@@ -1022,5 +1352,14 @@
   "verrou_public": {
     "regle": "Croze 08/11 : Today's Dungeon et la Campagne sont FERMÉS au public ; ouverts / fermés par OPTIONS → DEV → UNLOCK (un interrupteur par mode) ; le cadenas sur DIVE reste pour tout le monde tant que l'interrupteur est fermé",
     "defaut": "LOCKED"
+  },
+  "regle_etoiles": {
+    "source": "Q-ECR503-ETOILES (écran S1682) — règle écrite par le CLASSEUR le 08/11/2026, veto de Croze d'un mot",
+    "1": "objectif du chapitre atteint (le scénario dit RÉUSSI)",
+    "2": "… et le siège du joueur n'est pas mort pendant le scénario (aucun PLAYER_KILLED sur son siège, retour avant le tour 4 compris)",
+    "3": "… et le scénario est fini au plus tard au tour de donjon `tours_max_3_etoiles` du chapitre (défaut 12 ; tuto_1 : 6)",
+    "fait_moteur": "SCENARIO_ENDED { chapitre, reussi, mortsDuSiege, tourDeFin, dentsDuRun } — publié par le moteur à la fin d'un scénario de campagne (note moteur 400 ③, derrière 392 / 396)",
+    "ecran": "dessine 1-3 étoiles sur le médaillon et la carte de chapitre à partir de ce fait ; « ✓ » tant qu'il n'est pas publié (note écran 511 ②)",
+    "cumul": "le profil garde le max d'étoiles par chapitre ; les étoiles n'achètent rien (cosmétique) ; le total du cercle compte pour l'examen du cercle (règle à venir)"
   }
 }
