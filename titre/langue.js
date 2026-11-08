@@ -1419,6 +1419,17 @@
     "Today’s Dungeon is coming back soon.": "Le défi du jour revient bientôt.",   /* S1625 - 466 (1) */
     "Locked — comes back with the new challenges": "Fermé — revient avec les nouveaux défis",   /* S1636 - 471 (1) */
     "Locked — opens with the Pro Tour season": "Fermé — ouvre avec la saison du Pro Tour",
+    /* S1686 - notes 506 (1), 507, 508 (2) (3) : les quatre portes de DIVE, sans mix FR / EN */
+    "Seats drawn at random, no invite. Your rank moves on every run.": "Places tirées au hasard, sans invitation. Ton rang bouge à chaque partie.",
+    "Today’s Dungeon is coming soon.": "Le défi du jour arrive bientôt.",
+    "The Great Work is coming soon.": "The Great Work arrive bientôt.",
+    "Locked — coming soon": "Fermé — bientôt",
+    "Book I · Nigredo": "Livre I · Nigredo",
+    "Campaign": "Campagne",
+    "The Great Work — nine circles down, one chapter at a time. Chapter 1: First Steps.": "The Great Work — neuf cercles à descendre, un chapitre à la fois. Chapitre 1 : First Steps.",
+    "Play yesterday’s": "Jouer celui d’hier",
+    "Not yet": "Pas encore",
+    "Two runs": "Deux runs",
     "Not ranked": "Non classé",
     "2v2, 2v2v2 and a six-player free-for-all against bots. Being tested — no ranking.": "2v2, 2v2v2 et un chacun pour soi à six contre des bots. En test — pas de classement.",
     "Fire": "Feu",

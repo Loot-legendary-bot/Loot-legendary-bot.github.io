@@ -280,7 +280,11 @@
      transform/opacity only). L'image est en plus mise à l'échelle 1,16 pour
      qu'aucun coin ne découvre le fond. */
   .doors{position:absolute;left:5cqw;right:5cqw;top:37.5cqh;bottom:9cqh;
-    display:grid;grid-template-columns:repeat(3,1fr);gap:1.6cqw}   /* S1621 - 463 (5) : trois portes */
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1.6cqw}   /* S1621 - 463 (5) : trois portes ; S1686 - 508 (2) : QUATRE, meme poids */
+  /* S1686 - 508 (2) : CAMPAIGN - L'OR du Grand Oeuvre, un liseré plein en haut. */
+  .d-campaign .cap-top{left:0;right:0;top:0;height:.5cqh;background:#c9a24a}
+  .d-campaign .k{color:#c9a24a}
+  .doors .door h3{font-size:max(14px, 4cqh)}
   .door{position:relative;overflow:hidden;border:0;background:#0a0a0d;
     cursor:pointer;transform:skewX(-5deg);
     transition:border-color .16s,transform .16s,box-shadow .16s}
@@ -2627,6 +2631,18 @@ function peinsLeDev(box){
   bv.title='Today’s effect and the proposed one, side by side: keep, refuse or ask another try, one click per line.';
   bv.addEventListener('click',function(){ window.location.href='/vfx_demo.html'; });
   d.appendChild(bv);
+  /* S1686 - note 508 (1) : UNLOCK TODAY'S DUNGEON / UNLOCK CAMPAIGN - une case par mode, fermee par defaut,
+     memorisee sur la machine. Le changement s'applique au rechargement du HOME (les portes se peignent au depart). */
+  [['daily','UNLOCK TODAY’S DUNGEON'],['campaign','UNLOCK CAMPAIGN']].forEach(function(x){
+    var lab=document.createElement('label'); lab.className='langue-btn dev-unlock'; lab.style.cssText='display:inline-flex;align-items:center;gap:.8cqh;cursor:pointer';
+    var cb=document.createElement('input'); cb.type='checkbox'; cb.checked=window.LLDevUnlock.lit(x[0]); cb.dataset.unlock=x[0];
+    cb.addEventListener('change',function(){
+      if(!window.LLDevUnlock.pose(x[0],cb.checked)){ cb.checked=!cb.checked; var m0=document.getElementById('dev-msg'); if(m0) m0.textContent='This browser refuses to store it.'; return; }
+      var m=document.getElementById('dev-msg'); if(m) m.textContent=x[1].replace('UNLOCK ','')+(cb.checked?' unlocked':' locked')+' — reloading…';
+      setTimeout(function(){ window.location.reload(); },400);
+    });
+    lab.appendChild(cb); lab.appendChild(document.createTextNode(x[1])); d.appendChild(lab);
+  });
   var fin=function(msg){ if(typeof paintHUD==='function') paintHUD(true); var m=document.getElementById('dev-msg'); if(m) m.textContent=msg; };
   [['RESET OFFERINGS','Every essence you own and every offering burning goes back to zero.',function(){
       P.modifie(function(p){ p.offrandes=[]; if(p.mur&&typeof p.mur==='object') p.mur.offertes=[]; }); return 'Offerings reset.'; }],
@@ -3238,15 +3254,28 @@ window.LL_DPT_DORT = 'The Pro Tour opens soon.';
    qu'on rework les defis ») : TODAY'S DUNGEON se GRISE comme le Pro Tour - la porte, l'enveloppe du
    Vault, le tiroir. Visible, fermee : rien ne se lance, aucune invitation ne se brule. Un seul
    interrupteur : LL_DAILY_ENDORMI = false le rouvre. */
-window.LL_DAILY_ENDORMI = true;
-window.LL_DAILY_DORT = 'Today’s Dungeon is coming back soon.';
+/* S1686 - note 508 (1) (Croze, 08/11 : « fermes au public, ouverts / fermes via OPTIONS > DEV > unlock, un pour
+   Today's Dungeon ET un pour la Campagne ») : deux interrupteurs memorises sur la machine, FERMES par defaut
+   (aventure.json.verrou_public.defaut = LOCKED). Coche = le cadenas tombe (remplace « pour tous » de 506 (1)). */
+window.LLDevUnlock = {
+  lit: function(k){ try{ return localStorage.getItem('ll.dev.unlock.'+k)==='1'; }catch(e){ return false; } },
+  pose: function(k,v){ try{ if(v) localStorage.setItem('ll.dev.unlock.'+k,'1'); else localStorage.removeItem('ll.dev.unlock.'+k); return true; }catch(e){ return false; } }
+};
+window.LL_DAILY_ENDORMI = !window.LLDevUnlock.lit('daily');
+window.LL_DAILY_DORT = 'Today’s Dungeon is coming soon.';
+window.LL_CAMPAIGN_ENDORMI = !window.LLDevUnlock.lit('campaign');
+window.LL_CAMPAIGN_DORT = 'The Great Work is coming soon.';
 const DOORS=[
   /* S1471 - note 359 (3) : VS BOTS devient CLASSIC (reco du classeur), le chacun-pour-soi a 3, 4 ou 5 ;
      2V2, 2V2V2 et le FFA a six passent dans la porte EXPERIMENTAL (moteur 252 ter), sans classement. */
   /* S1489 - note 368 (6) : « AGAINST BOTS AND/OR PLAYERS » (Croze, capture 4). */
   ["Against bots and/or players","Classic","Free-for-all against bots and/or players, 3 to 5 players, alone or with friends. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
   ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
-  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked',null]];   /* S1682 - note 500 (1) : « Bronze III n'existe pas » - la pastille tombe */
+  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked',null],
+  /* S1686 - note 508 (2) (Croze : « ces 4 categories dans DIVE, pas seulement un petit truc ») + 507 : la QUATRIEME
+     porte, meme taille et meme poids. Le bouton dit CAMPAIGN, l'interieur THE GREAT WORK, le livre I NIGREDO
+     (aventure.json.libelles) ; fond = la carte de l'entonnoir validee par Croze (ASSETS\campagne, en bandeau). */
+  ["Book I · Nigredo","Campaign","The Great Work — nine circles down, one chapter at a time. Chapter 1: First Steps.",9,()=>setTimeout(()=>{ if(window.LLAventure) window.LLAventure.ouvre(); },300),'d-campaign',null]];   /* S1682 - note 500 (1) : « Bronze III n'existe pas » - la pastille tombe */
   /* S1621 - note 463 (5) = 445 (4) : DIVE a TROIS portes. La porte EXPERIMENTAL est fondue dans CLASSIC
      (ses trois formats y sont, sous \u00ab being tested - no ranking \u00bb, voir MODES_DU_CTX) ; la porte HI-SCORE
      est retiree (la borne, borne.js, et la porte ?hiscore= de main.ts restent, sans entree au menu). */
@@ -3258,16 +3287,18 @@ DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
      (`play_bots` 10 la mêlée · `play_daily` 13 le couloir rouge ·
      `play_ranked` 05 l'arène). Le numéro de la colonne 4 reste le
      REPLI : index absent, l'écran s'ouvre comme avant. */
-  const fond = typeof PANNEAU[ident.replace('d-','play_')] === 'string'
+  const fond = ident==='d-campaign' ? '/art/campagne/porte_campagne.jpg'
+    : typeof PANNEAU[ident.replace('d-','play_')] === 'string'
     ? PANNEAU[ident.replace('d-','play_')] : BGS[bg];
   d.innerHTML='<img src="'+fond+'" alt="">'+
     '<div class="veil"></div><span class="cap-top"></span><div class="k">'+k+'</div>'+
     (chip?'<span class="chip">'+chip+'</span>':'')+
     '<div class="body"><h3>'+title+'</h3><p>'+line+'</p></div><span class="rule"></span>';
   d.querySelector('.rule').style.backgroundImage='url('+A.bar+')';
-  const dort = (ident==='d-ranked' && window.LL_DPT_ENDORMI) || (ident==='d-daily' && window.LL_DAILY_ENDORMI);
+  const dort = (ident==='d-ranked' && window.LL_DPT_ENDORMI) || (ident==='d-daily' && window.LL_DAILY_ENDORMI)
+    || (ident==='d-campaign' && window.LL_CAMPAIGN_ENDORMI);   /* S1686 - 508 (1) */
   if(dort){
-    const dit = ident==='d-daily' ? window.LL_DAILY_DORT : window.LL_DPT_DORT;
+    const dit = ident==='d-daily' ? window.LL_DAILY_DORT : ident==='d-campaign' ? window.LL_CAMPAIGN_DORT : window.LL_DPT_DORT;
     d.title=dit; d.style.cursor='not-allowed';
     d.querySelector('img').style.filter='grayscale(1) brightness(.4)';
     d.querySelector('.body p').textContent=dit;
@@ -3278,7 +3309,7 @@ DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
     d.classList.add('door-ferme');
     const cad=document.createElement('span'); cad.className='door-cadenas'; d.appendChild(cad);
     const cond=document.createElement('div'); cond.className='door-cond';
-    cond.textContent = ident==='d-daily' ? 'Locked — comes back with the new challenges' : 'Locked — opens with the Pro Tour season';
+    cond.textContent = ident==='d-ranked' ? 'Locked — opens with the Pro Tour season' : 'Locked — coming soon';
     d.querySelector('.body').appendChild(cond);
   }
   const fire=()=>{ if(busy||dort)return; d.classList.add('hit');
@@ -3435,7 +3466,8 @@ function drawArena(){
       + seat(...pts[2],cols[2],foe) + seat(...pts[3],cols[3],foe);
   /* S1413 - DD-2 : le Daily est UN run, sans Duel Final (DAILY_DUNGEON 0 (1)). */
   const hub = matchCtx==='daily'
-    ? '<div class="hub">One run<i>'+(ffa?'best score':'two teams')+'</i></div>'
+    /* S1686 - 506 (1) : le nombre de runs est celui du jour du calendrier (FROSTBITE : deux). */
+    ? '<div class="hub">'+((window.LLTickets&&window.LLTickets.duJour().runs===2)?'Two runs':'One run')+'<i>'+(ffa?'best score':'two teams')+'</i></div>'
     : ffa
     ? '<div class="hub">Final Duel<i>one winner</i></div>'
     : '<div class="hub">VS<i>'+(trois?'three teams':'two teams')+'</i></div>';
@@ -3464,7 +3496,10 @@ function rangProTour(){
     const gp=p!==null&&typeof p.gp==='number'?p.gp:0;
     const seuil=n=>{ const x=gj&&Array.isArray(gj.seuils)?gj.seuils.find(s=>s.grade===n):null; return x?x.gp:null; };
     const bas=seuil(g), haut=seuil(g+1);
-    const nom=gj&&gj.noms?gj.noms[String(g)]:null;
+    /* S1686 - note 506 (2) (Croze : « MAITRE MOLAIRE malgre le mode anglais ») : en anglais, grades.json.noms_en
+       (MASTER MOLAR) ; le titre francais seulement en mode francais. */
+    let fr=false; try{ fr=window.LLLangue&&window.LLLangue.lis()==='FR'; }catch(e){ fr=false; }
+    const nom=gj&&(fr?gj.noms:(gj.noms_en||null))?(fr?gj.noms:gj.noms_en)[String(g)]:null;
     const mk=(t,c,x)=>{ const n=document.createElement(t); if(c) n.className=c; if(x!=null) n.textContent=x; return n; };
     box.innerHTML='';
     const img=mk('img','pt-tab'); img.alt=''; img.src='/art/grades/tablier_'+String(g).padStart(2,'0')+'.webp'; img.onerror=()=>img.remove(); box.appendChild(img);
@@ -3577,6 +3612,30 @@ function paintMatch(ctx){
       +'Every try burns one invitation \u00b7 your best try counts \u00b7 seed '+sc.seed+' \u00b7 '+(poche>0?'you have '+poche+' invitation'+(poche>1?'s':''):'no invitation in your pocket');
     /* S1427 - note 257 (1), DAILY_DUNGEON 10 : le Daily se rejoue sans limite, une invitation par tentative. */
     document.getElementById('golaunch').textContent = poche>0 ? 'Burn one invitation' : 'No invitation';
+    /* S1686 - note 506 (1) : le jour du CALENDRIER (daily.json.calendrier, lu par le moteur). Tout vient du jour :
+       nom, etoiles, table, format, perso prete, objectif, twists, boons, main de depart. Un jour que le moteur ne
+       sait pas encore jouer s'affiche quand meme : NOT YET, et PLAY YESTERDAY'S vers le dernier jour jouable. */
+    const c=sc.calendrier;
+    if(c){
+      const etoiles='★'.repeat(c.étoiles)+'☆'.repeat(Math.max(0,5-c.étoiles));
+      let h='<b>Day '+c.jour+' · '+sc.nom+'</b> <span class="daily-etoiles" title="'+c.étoiles+' stars">'+etoiles+'</span><br>'
+        +'Table: '+sc.tableEnClair+'<br>'
+        +'Format: '+c.format+'<br>'
+        +'Character: '+(sc.perso?sc.perso+(c.prêté?' — lent for the run':' — imposed'):'free — bring any character you own')+'<br>'
+        +'Objective: '+sc.objectif+'<br>'
+        +(c.twists.length?'Twists: '+c.twists.join(' · ')+'<br>':'')
+        +(c.boons.length?'Boons: '+c.boons.join(' · ')+'<br>':'')
+        +(c.main?c.main+'<br>':'');
+      if(!c.jouable){
+        h+='<b class="daily-pas-pret">NOT YET — comes with the next update</b>'
+          +(c.hier?'<br>Yesterday’s dungeon is open: '+c.hier.nom:'');
+      } else {
+        h+='Reward: ×2 the teeth · +'+sc.prime+' if the objective is met<br>'
+          +'Every try burns one invitation · your best try counts · '+(poche>0?'you have '+poche+' invitation'+(poche>1?'s':''):'no invitation in your pocket');
+      }
+      document.getElementById('mline').innerHTML=h;
+      if(!c.jouable) document.getElementById('golaunch').textContent = c.hier ? 'Play yesterday’s' : 'Not yet';
+    }
   }
   const msieges=document.getElementById('msieges');
   msieges.innerHTML='';
@@ -4710,6 +4769,12 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
       var T = window.LLTickets, P = window.LLProfil;
       if (!T || !P) { refuse("Today's Dungeon can't be read \u2014 nothing was launched."); return; }
       var sc = T.duJour(), p = P.lis(), poche = T.enPoche(p).daily;
+      /* S1686 - 506 (1) : un jour pas pret se joue par la veille jouable (« PLAY YESTERDAY'S ») ; sans veille, rien. */
+      if (sc.calendrier && !sc.calendrier.jouable) {
+        if (!sc.calendrier.hier) { refuse('Not yet — this day comes with the next update.'); return; }
+        var veille = sc.calendrier.hier.seed;
+        sc = T.duJour(new Date(Date.UTC(+veille.slice(0, 4), +veille.slice(4, 6) - 1, +veille.slice(6, 8))));
+      }
       /* S1427 - note 257 (1) : plus de « Come back tomorrow » — chaque tentative brule une invitation. */
       /* S1414 - DD-2 bis (note 235 (5), DAILY_DUNGEON 0 (2)) : il faut une
          INVITATION pour entrer ; Start ne paie plus en dents. Sans invitation,
@@ -5336,7 +5401,9 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     q.delete('perso');
     window.location.href = '/?' + q.toString();
   });
-  page.appendChild(b);
+  /* S1686 - note 508 (2) : « plus de petit lien LA DESCENTE » - l'entree est la porte CAMPAIGN de DIVE. La carte
+     n'est plus posee (FIRST STEPS reste son chapitre 1, dans THE GREAT WORK). */
+  void page; void b;
 }());
 
 /*
