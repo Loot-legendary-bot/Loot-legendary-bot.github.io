@@ -472,6 +472,19 @@
      defi (sept lignes) prend leur place ; la graine est dans le defi. */
   #v-match.daily .mline{top:34cqh}
   #v-match.daily .grank{display:none}
+  /* S1682 - note 500 (2) : la page Pro Tour sur la salle aux braseros (DA Dungeon Pro Tour, 14/10) */
+  #v-match.ranked::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(90deg,rgba(8,6,5,.82) 0%,rgba(8,6,5,.45) 48%,rgba(8,6,5,.2) 100%),url(/art/da/fonds/protour/salle_aux_braseros.webp) center/cover no-repeat}
+  /* S1682 - note 500 (1) : le RANK = le tablier, son numero, son nom, et la barre vers le grade suivant */
+  #v-match.ranked .grank{top:56cqh;display:flex;align-items:center;gap:1.6cqh}
+  .pt-tab{height:13cqh;width:auto;filter:drop-shadow(0 .6cqh 1cqh rgba(0,0,0,.8))}
+  .pt-col{display:flex;flex-direction:column;gap:.7cqh;min-width:30cqh}
+  .pt-col b.pt-g{font:800 max(14px, 3.2cqh)/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.08em;color:var(--bone)}
+  .pt-col .pt-nom{font:italic 400 max(14px, 2cqh)/1.1 "Alegreya",Georgia,serif;color:#d9b36a}
+  .pt-barre{position:relative;height:1.3cqh;min-height:8px;background:rgba(0,0,0,.6);border:1px solid #6a5642}
+  .pt-barre i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#8a6a2a,#e2bf6e)}
+  .pt-bornes{display:flex;justify-content:space-between;font:400 max(14px, 1.4cqh)/1 "Alegreya",Georgia,serif;color:rgba(239,230,207,.7)}
+  .pt-manque{font:700 max(14px, 1.6cqh)/1.2 "Alegreya",Georgia,serif;color:var(--bone)}
   /* S1409 - note 226 (2) : le nombre de joueurs se CHOISIT (3 - 4 - 5), il
      n'est plus tire. Meme plaque que les chips de mode, plus petite ; a la
      place de l'invitation (qui n'existe qu'en 2v2). */
@@ -3222,7 +3235,7 @@ const DOORS=[
   /* S1489 - note 368 (6) : « AGAINST BOTS AND/OR PLAYERS » (Croze, capture 4). */
   ["Against bots and/or players","Classic","Free-for-all against bots and/or players, 3 to 5 players, alone or with friends. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
   ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
-  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked','Bronze III']];
+  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked',null]];   /* S1682 - note 500 (1) : « Bronze III n'existe pas » - la pastille tombe */
   /* S1621 - note 463 (5) = 445 (4) : DIVE a TROIS portes. La porte EXPERIMENTAL est fondue dans CLASSIC
      (ses trois formats y sont, sous \u00ab being tested - no ranking \u00bb, voir MODES_DU_CTX) ; la porte HI-SCORE
      est retiree (la borne, borne.js, et la porte ?hiscore= de main.ts restent, sans entree au menu). */
@@ -3425,20 +3438,57 @@ const TITRE_DU_MATCH={bots:'Classic',exp:'Experimental',daily:'Today\u2019s Dung
 /* La graine du jour est DERIVEE de la date (UTC), jamais tiree : une seule
    graine pour tous. L'ecran l'AFFICHE ; il ne decide aucune regle avec. */
 const GRAINE_DU_JOUR=(()=>{const d=new Date();return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');})();
+/* S1682 - note 500 (1) (Croze, 07/11 : « le rank c'est le nom de mon tablier + mon tablier + ma courbe d'XP »).
+   Tout est LU : le grade et les GP au profil (poses par le jeu depuis GAME_ENDED.grades), le nom et les seuils
+   dans grades.json (CLASSEUR, servi a /titre/grades.json par vite.config.ts) - « Grade N » + le titre
+   (grades.json.affichage). L'historique des dernieres parties attend sa publication (moteur 389 (1)). */
+let GRADES_DU_HOME=null;
+function rangProTour(){
+  const box=document.getElementById('grank'); if(!box) return;
+  const peins=(gj)=>{
+    if(matchCtx!=='ranked') return;
+    let p=null; try{ p=window.LLProfil.lis(); }catch(e){ p=null; }
+    const g=p!==null&&typeof p.grade==='number'&&p.grade>=1&&p.grade<=33?Math.round(p.grade):1;
+    const gp=p!==null&&typeof p.gp==='number'?p.gp:0;
+    const seuil=n=>{ const x=gj&&Array.isArray(gj.seuils)?gj.seuils.find(s=>s.grade===n):null; return x?x.gp:null; };
+    const bas=seuil(g), haut=seuil(g+1);
+    const nom=gj&&gj.noms?gj.noms[String(g)]:null;
+    const mk=(t,c,x)=>{ const n=document.createElement(t); if(c) n.className=c; if(x!=null) n.textContent=x; return n; };
+    box.innerHTML='';
+    const img=mk('img','pt-tab'); img.alt=''; img.src='/art/grades/tablier_'+String(g).padStart(2,'0')+'.webp'; img.onerror=()=>img.remove(); box.appendChild(img);
+    const col=mk('div','pt-col');
+    col.appendChild(mk('i',null,'Rank'));
+    col.appendChild(mk('b','pt-g','GRADE '+g));
+    if(typeof nom==='string'&&nom!=='') col.appendChild(mk('span','pt-nom',nom));
+    if(bas!==null&&haut!==null&&haut>bas){
+      const b=mk('div','pt-barre'); const pl=mk('i'); pl.style.width=Math.max(0,Math.min(100,(gp-bas)/(haut-bas)*100)).toFixed(1)+'%'; b.appendChild(pl); col.appendChild(b);
+      const bo=mk('div','pt-bornes'); bo.appendChild(mk('span',null,fmt(bas)+' GP')); bo.appendChild(mk('span',null,fmt(gp)+' GP')); bo.appendChild(mk('span',null,fmt(haut)+' GP')); col.appendChild(bo);
+      col.appendChild(mk('span','pt-manque',fmt(Math.max(0,haut-gp))+' GP to GRADE '+(g+1)));
+    } else {
+      col.appendChild(mk('span','pt-manque',fmt(gp)+' GP'+(haut===null&&bas!==null?' — top grade':'')));
+    }
+    box.appendChild(col);
+  };
+  if(GRADES_DU_HOME!==null){ peins(GRADES_DU_HOME); return; }
+  peins(null);
+  fetch('/titre/grades.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(gj=>{ if(gj){ GRADES_DU_HOME=gj; peins(gj); } }).catch(()=>{});
+}
 function paintMatch(ctx){
   matchCtx=ctx;
   if(MODES_DU_CTX[ctx] && !MODES_DU_CTX[ctx].includes(matchMode)) matchMode = MODES_DU_CTX[ctx][0];
   document.getElementById('v-match').classList.toggle('daily', ctx==='daily');
+  document.getElementById('v-match').classList.toggle('ranked', ctx==='ranked');   /* S1682 - note 500 (2) : le fond */
   document.getElementById('mkick').textContent = KICK[ctx];
   const t=document.getElementById('mtitle');
   t.textContent = TITRE_DU_MATCH[ctx];
   t.classList.toggle('serif', ctx==='ranked');
   document.getElementById('golaunch').textContent = ctx==='ranked' ? 'Find match' : 'Start';
   document.getElementById('grank').innerHTML = ctx==='ranked'
-    ? '<i>Rank</i><b class="serif">'+PROFILE.rank+'</b>'
+    ? '<i>Rank</i>'   /* S1682 - note 500 (1) : plus de « Bronze III » - le tablier, peint par rangProTour() */
     : ctx==='daily'
     ? '<i>Today</i><b class="serif">'+GRAINE_DU_JOUR+'</b>'
     : '<i>Payout</i><b>~110 teeth a game</b>';   /* S1302 - B-1 : MONNAIE 1, « une partie ordinaire ≈ 110 dents » */
+  if(ctx==='ranked') rangProTour();
   mchips.innerHTML='';
   MODES.forEach(([k,title])=>{
     if(ctx==='daily'||ctx==='ranked') return;   /* S1414 - DD-2 bis : aucun choix, la table est celle du defi ; S1676 - 495 (1) : en Pro Tour, la table est celle de la file */

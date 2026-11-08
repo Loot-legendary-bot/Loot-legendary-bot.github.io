@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 08 Nov 2026
+- **10:46** — DUNGEON PRO TOUR page: your RANK is now your **apron** — its picture, "GRADE 3" and its title ("Maître Molaire"), with a bar from this grade to the next and how many points you still need ("40 GP to GRADE 4"). "Bronze III" is gone, from the page and from the PLAY door. The page now stands in the **brazier hall** instead of the brick wall.
 - **10:30** — PLAY: the tutorial card is now **LA DESCENTE**, the first map of the adventure. It opens the nine circles of the dungeon, top to bottom; the first circle (Limbo) holds two chapters: **First steps** (the tutorial you know — click it, read its card, PLAY) and **Second steps** (coming). Deeper circles stay dark until they have chapters. Scroll or drag to go down, + / − (or Ctrl + wheel) to zoom. The painted map arrives with the next update. Rules engine merged: Today's Dungeon reads more of its calendar (Ruins days, starting hands by school, Frail, 6-player tables, AGGRO / DOCILE bots, LAST SURVIVOR) — the mode itself stays locked for now.
 
 ## 07 Nov 2026

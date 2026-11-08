@@ -1,0 +1,239 @@
+{
+  "_source": "docs/GRADES.md §11 (verdict Croze 14/10) — forme nommée par le moteur Q-GRD1 (23/10) ; écrit par le classeur le 24/10 ; un seul lecteur moteur, l'écran lit le même fichier",
+  "gain_base": 100,
+  "facteur": "f = (N - 2*rang + 1)/(N - 1) ; 2V2 : gagnants +1, perdants -1 ; abandon = dernière place",
+  "seuils": [
+    {
+      "grade": 1,
+      "gp": 0
+    },
+    {
+      "grade": 2,
+      "gp": 300
+    },
+    {
+      "grade": 3,
+      "gp": 600
+    },
+    {
+      "grade": 4,
+      "gp": 1000
+    },
+    {
+      "grade": 5,
+      "gp": 1400
+    },
+    {
+      "grade": 6,
+      "gp": 1800
+    },
+    {
+      "grade": 7,
+      "gp": 2200
+    },
+    {
+      "grade": 8,
+      "gp": 2600
+    },
+    {
+      "grade": 9,
+      "gp": 3000
+    },
+    {
+      "grade": 10,
+      "gp": 3400
+    },
+    {
+      "grade": 11,
+      "gp": 3800
+    },
+    {
+      "grade": 12,
+      "gp": 4200
+    },
+    {
+      "grade": 13,
+      "gp": 4600
+    },
+    {
+      "grade": 14,
+      "gp": 5000
+    },
+    {
+      "grade": 15,
+      "gp": 5800
+    },
+    {
+      "grade": 16,
+      "gp": 6600
+    },
+    {
+      "grade": 17,
+      "gp": 7400
+    },
+    {
+      "grade": 18,
+      "gp": 8200
+    },
+    {
+      "grade": 19,
+      "gp": 9400
+    },
+    {
+      "grade": 20,
+      "gp": 10600
+    },
+    {
+      "grade": 21,
+      "gp": 11800
+    },
+    {
+      "grade": 22,
+      "gp": 13000
+    },
+    {
+      "grade": 23,
+      "gp": 14200
+    },
+    {
+      "grade": 24,
+      "gp": 15400
+    },
+    {
+      "grade": 25,
+      "gp": 16600
+    },
+    {
+      "grade": 26,
+      "gp": 17800
+    },
+    {
+      "grade": 27,
+      "gp": 19000
+    },
+    {
+      "grade": 28,
+      "gp": 20200
+    },
+    {
+      "grade": 29,
+      "gp": 21400
+    },
+    {
+      "grade": 30,
+      "gp": 23400
+    },
+    {
+      "grade": 31,
+      "gp": 25400
+    },
+    {
+      "grade": 32,
+      "gp": 27400
+    }
+  ],
+  "grade_33": "top 10 de la saison parmi les 32 — pas un seuil",
+  "pertes": [
+    {
+      "de": 1,
+      "a": 3,
+      "mult": 0
+    },
+    {
+      "de": 4,
+      "a": 14,
+      "mult": 0.5
+    },
+    {
+      "de": 15,
+      "a": 18,
+      "mult": 0.75
+    },
+    {
+      "de": 19,
+      "a": 29,
+      "mult": 1
+    },
+    {
+      "de": 30,
+      "a": 32,
+      "mult": 1.25
+    }
+  ],
+  "table": {
+    "par_grade": 10,
+    "borne": 40
+  },
+  "serie": {
+    "par_premiere": 0.2,
+    "plafond": 0.6,
+    "jusqu_au_grade": 14
+  },
+  "plancher": "les GP ne descendent jamais sous le seuil du grade acquis",
+  "plafond_hors_pro_tour": 4,
+  "ligues": {
+    "NORMAL": [
+      1,
+      3
+    ],
+    "PRO_TOUR": [
+      4,
+      29
+    ],
+    "VIP": [
+      30,
+      33
+    ]
+  },
+  "hors_grade": [
+    "TODAYS_DUNGEON",
+    "TUTO"
+  ],
+  "paliers_de_saison": [
+    3,
+    14,
+    18,
+    30
+  ],
+  "calcul": {
+    "ordre": "delta = gain_base * f ; si f > 0 : * (1 + serie) ; si f < 0 : * mult de la tranche ; puis + ecart de table borne ; puis en grades 1-3 jamais sous 0 ; puis le plancher du grade",
+    "arrondi": "entier le plus proche (FFA 4 : 100 / 33 / -33 / -100)"
+  },
+  "publie": "GAME_ENDED.grades[siege] = { gpAvant, gpApres, gradeAvant, gradeApres, detail: { place, f, table, serie, mult } } — une entrée par siège humain, aucune pour un bot",
+  "noms": {
+    "1": "Apprenti Lèche-Dalle",
+    "2": "Compagnon Mâcheur",
+    "3": "Maître Molaire",
+    "4": "Maître Œil-de-Serrure",
+    "5": "Maître Pas-Encore-Mort",
+    "6": "Secrétaire Indiscret",
+    "7": "Prévôt du Trousseau",
+    "8": "Intendant de la Herse",
+    "9": "Élu du Coup Bas",
+    "10": "Élu des Trois Crânes",
+    "11": "Sublime Porte-Torche",
+    "12": "Grand Maître du Dé",
+    "13": "Royal Coffre-Fort",
+    "14": "Grand Élu de la Carie",
+    "15": "Chevalier de la Fontaine",
+    "16": "Prince des Deux Chats",
+    "17": "Chevalier du Grimoire",
+    "18": "Rose-Saignée",
+    "19": "Grand Pontife Bicéphale",
+    "20": "Maître ad D20",
+    "21": "Noctambule",
+    "22": "Prince de l'Oignon",
+    "23": "Chef des Pies",
+    "24": "Prince des Crabes",
+    "25": "Chevalier de la Langue d'Airain",
+    "26": "Prince de la Pomme",
+    "27": "Commandeur du Fléau",
+    "28": "Chevalier de l'Étoile Grise",
+    "29": "Saint-Os",
+    "30": "Kadosh à la Fourchette",
+    "31": "Grand Inquisiteur Dentaire",
+    "32": "Prince du Secret d'Arlequin",
+    "33": "Souverain Grand Lécheur"
+  },
+  "affichage": "« Grade N » partout + le titre parodique (profil, codex, page Pro Tour) — GRADES.md A, verdict Croze 14/10/2026 ; écrit par le classeur le 08/11 (389 ①)"
+}
