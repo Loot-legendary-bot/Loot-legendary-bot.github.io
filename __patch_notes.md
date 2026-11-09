@@ -2,6 +2,10 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 09 Nov 2026
+- **19:37** — LOG: when The Coffin Lounge has nowhere left to send you, the log now says "The Coffin Lounge: nothing happens — no other tile left to teleport to" instead of "MISS — no other Tile in play…".
+- **19:24** — TODAY'S DUNGEON, end screen (teeth earned): the buttons can no longer fall off the bottom of the screen. CONTINUE and a new BACK TO MENU stay pinned at the bottom, the list scrolls if it is long, and Esc works as CONTINUE.
+- **17:46** — LOOT: when you keep a card (The Table Ronde and the like), it now flies into your hand BEFORE the bots start taking their turns.
+- **17:46** — 2V2, end of run: the podium first shows the two TEAMS (both players side by side, team points, "YOUR TEAM" on yours), then each player. "HOW IT ENDED" now fits in one line per player; the full story is under SHOW ALL.
 - **14:45** — PLAY: the four cards are now in this order — CAMPAIGN, TODAY'S DUNGEON, CLASSIC, DUNGEON PRO TOUR. The "CHOOSE YOUR RUN" line, the big "PLAY" title and the bar under it are gone; the cards move up into the space. Campaign and Today's Dungeon now say they are SOLO ("BOOK I · NIGREDO — SOLO", "ONE A DAY — SOLO").
 - **10:30** — COMBAT: when a weapon attack is rolled in the middle of the screen, its title now says who attacks whom: "THE GREEN → THE COOK · WEAPON ATTACK · IRON SWORD" — the bots' attacks too.
 - **10:30** — COMBAT: the combat log in the middle no longer sits under the dice. It now lives at the bottom of the centre, three lines (newest on top, scroll for more), and it steps aside while a roll or a hit is on screen.
