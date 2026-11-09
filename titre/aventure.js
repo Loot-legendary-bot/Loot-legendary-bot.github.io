@@ -140,7 +140,42 @@
     '#aventure .av-anneau .av-med{width:clamp(70px,7vw,110px)}' +
     '#aventure .av-anneau .av-med .av-niv{position:absolute;top:calc(100% + 1.2vh);left:50%;transform:translateX(-50%);white-space:nowrap;' +
     'font:700 clamp(11px,1vw,15px)/1.2 "Alegreya",Georgia,serif;letter-spacing:.06em;color:#d9b36a;text-shadow:0 0 6px #000}' +
-    '#aventure .av-anneau .av-trainee{border-top-width:.8vh}';
+    '#aventure .av-anneau .av-trainee{border-top-width:.8vh}' +
+    /* S1691 · 513 ① — la carte du monde dans le noir, sauf l'étage courant (la torche) ; le zoom vers la sous-carte */
+    '#aventure .av-nuit-monde{position:absolute;inset:0;pointer-events:none}' +
+    '#aventure .av-sous-carte.zoome{animation:avZoom .55s cubic-bezier(.2,.7,.2,1)}' +
+    '@keyframes avZoom{from{transform:scale(.18);opacity:0}to{transform:none;opacity:1}}' +
+    /* S1691 · 513 ② ③ + 515 ① + 516 — la sous-carte des Limbes : la bande D, la torche, le Turd, la case de BD */
+    '#aventure .av-scene{position:relative;height:100%;background-size:100% 100%;background-repeat:no-repeat}' +
+    '#aventure .av-scene canvas.av-nuit{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}' +
+    '#aventure .av-pin{position:absolute;transform:translate(-50%,-50%);width:clamp(48px,4.6vw,74px);aspect-ratio:1;border-radius:50%;padding:0;cursor:pointer;' +
+    'border:3px solid #f2f2f2;background:#0b0b0b center/cover no-repeat;box-shadow:0 0 0 2px #0b0b0b,0 .8vh 1.6vh rgba(0,0,0,.9)}' +
+    '#aventure .av-pin.COURANT{border-color:#ffd77a;animation:avLueur 1.6s ease-in-out infinite}' +
+    '#aventure .av-pin.REUSSI{border-color:#d9b36a}' +
+    '#aventure .av-pin.NON_ATTEINT{filter:brightness(.13) grayscale(1);cursor:default;border-color:#555}' +
+    '#aventure .av-pin .av-niv{position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);white-space:nowrap;pointer-events:none;' +
+    'font:800 clamp(11px,1vw,15px)/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.1em;color:#f2f2f2;text-shadow:0 0 4px #000,0 0 10px #000,0 0 14px #000}' +
+    '#aventure .av-pin .av-niv b{color:#ee4b4b}' +
+    '#aventure .av-pin.secoue{animation:avSecoue .35s}' +
+    '#aventure .av-turd{position:absolute;transform:translate(-50%,-88%);width:clamp(56px,5.2vw,86px);aspect-ratio:1;pointer-events:none;z-index:3;' +
+    'transition:left 1s ease-in-out,top 1s ease-in-out;filter:drop-shadow(0 6px 6px rgba(0,0,0,.9))}' +
+    '#aventure .av-turd img{width:100%;height:100%;border-radius:50%;border:3px solid #f2f2f2;box-sizing:border-box;background:#0b0b0b}' +
+    '#aventure .av-turd.marche img{animation:avPas .25s ease-in-out infinite alternate}' +
+    '@keyframes avPas{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-6px) rotate(4deg)}}' +
+    '#aventure .av-bd{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:9;width:min(860px,94vw);cursor:pointer;' +
+    'display:flex;gap:18px;align-items:center;padding:18px 26px 18px 18px;background:#0b0b0b;color:#f2f2f2;' +
+    'clip-path:polygon(0 6%,3% 0,9% 4%,17% 1%,26% 5%,34% 0,43% 3%,52% 0,61% 4%,70% 1%,79% 5%,88% 0,96% 3%,100% 0,99% 34%,100% 66%,98% 100%,90% 96%,81% 100%,72% 97%,63% 100%,54% 96%,45% 100%,36% 97%,27% 100%,18% 96%,9% 100%,2% 97%,0 64%,1% 32%);' +
+    'box-shadow:inset 0 0 0 3px #f2f2f2}' +
+    '#aventure .av-bd .av-bd-tete{flex:0 0 auto;width:clamp(76px,9vw,120px);aspect-ratio:1;border-radius:50%;border:3px solid #f2f2f2;background:#151515 center/cover}' +
+    '#aventure .av-bd .av-bulle{position:relative;flex:1;padding:14px 18px;background:#f2f2f2;color:#0b0b0b;border-radius:18px;' +
+    'font:700 clamp(15px,1.45vw,20px)/1.35 "Alegreya",Georgia,serif}' +
+    '#aventure .av-bd .av-bulle:before{content:"";position:absolute;left:-14px;top:50%;margin-top:-10px;border:10px solid transparent;border-right:16px solid #f2f2f2;border-left:0}' +
+    '#aventure .av-bd .av-bulle b{display:block;font:800 13px/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.16em;color:#a3231d;margin-bottom:6px}' +
+    '#aventure .av-bd .av-suite{position:absolute;right:16px;bottom:8px;font:800 12px/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.14em;color:#a1a1a1}' +
+    '#aventure .av-fiche .av-obj{font-weight:700}' +
+    '#aventure .av-fiche .av-etoiles{font:800 22px/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.2em;color:#a3231d}' +
+    '#aventure .av-fiche .av-regle{font-size:14px;opacity:.75}' +
+    '#aventure .av-fiche button:disabled{opacity:.45;cursor:not-allowed}';
 
   var CHAINE = '<svg class="av-chaine" viewBox="0 0 100 100"><g fill="none" stroke="#9a9a9a" stroke-width="6">' +
     '<ellipse cx="22" cy="78" rx="10" ry="6" transform="rotate(-45 22 78)"/><ellipse cx="38" cy="62" rx="10" ry="6" transform="rotate(-45 38 62)"/>' +
@@ -212,7 +247,255 @@
     return out;
   }
 
-  function sousCarte(d, c, liste) {
+  /*
+   * ═══ S1691 · notes 513 ② ③ ④ + 515 ① + 516 — LA SOUS-CARTE DES LIMBES ═══════════════════════════
+   * Phrase de Croze (513 ④) : « DIVE → CAMPAIGN : je vois l'entonnoir dans le noir avec les Limbes éclairées,
+   * je clique, je vois dix points, le Turd me parle en BD, je lance le niveau 1. »
+   * Le fond = la bande D (`public/art/campagne/limbo_bande.webp`, téléchargée en S1691 depuis
+   * `structure.sous_carte_limbes.bande.D.url`) ; les médaillons v2 = `public/art/campagne/medaillons/<id>.webp`.
+   * Chaque asset se remplace par un fichier du même nom (515 ③) : rien ici ne dépend d'une image hors des ancres.
+   */
+  var BANDE_LIMBES = '/art/campagne/limbo_bande.webp', BANDE_RATIO = 3136 / 1344;
+  var TURD = '/art/personnages/all_ico_webp_CORRECTED_ALL/200px/the_turd_200px.webp';
+  /* les ancres MESURÉES sur la bande D (S1691 : la base de chaque bâtiment, en fractions de l'image), renvoyées au
+     CLASSEUR (516 ②) ; `chapitres[].ancre` les remplace dès qu'il les écrit. */
+  var ANCRES_D = {
+    tuto_1: { x: 0.064, y: 0.476 }, tuto_2: { x: 0.156, y: 0.193 }, limbo_3: { x: 0.309, y: 0.275 },
+    limbo_4: { x: 0.446, y: 0.246 }, limbo_5: { x: 0.577, y: 0.253 }, limbo_6: { x: 0.708, y: 0.231 },
+    limbo_7: { x: 0.507, y: 0.714 }, limbo_8: { x: 0.660, y: 0.655 }, limbo_9: { x: 0.835, y: 0.692 },
+    limbo_10: { x: 0.932, y: 0.469 },
+  };
+  var PIN_DY = -0.15, TURD_DY = 0.09;   /* le médaillon flotte au-dessus du toit, le Turd se tient devant, sur la route */
+  function ancreDe(ch) {
+    var a = ch && ch.ancre;
+    if (a && typeof a.x === 'number' && typeof a.y === 'number') return a;
+    return ANCRES_D[ch.id] || null;
+  }
+  function lisTurd() { try { return localStorage.getItem('ll_aventure_turd'); } catch (e) { return null; } }
+  function poseTurd(id) { try { localStorage.setItem('ll_aventure_turd', id); } catch (e) { /* */ } }
+
+  /* l'état de chaque point des Limbes : réussi, puis LE courant (le premier pas réussi), puis le noir.
+     `jouable` = le scénario existe (PLAY) ; sinon la fiche dit NOT YET (513 ④). */
+  function etatsLimbes(c) {
+    var out = [], courant = false;
+    c.chapitres.forEach(function (ch) {
+      var reussi = ch.scenario === 'tuto' && tutoFini();
+      var e = reussi ? 'REUSSI' : courant ? 'NON_ATTEINT' : 'COURANT';
+      if (!reussi) courant = true;
+      out.push({ cercle: c, chapitre: ch, etat: e, jouable: ch.etat === 'JOUABLE' && LANCEURS[ch.scenario] !== undefined });
+    });
+    return out;
+  }
+
+  /* l'objectif du niveau en anglais, lu sur `spec_v2.objectif` (jetons de la donnée) ; un jeton inconnu = rien d'écrit */
+  function objectifEn(s) {
+    if (typeof s !== 'string') return null;
+    var parts = s.replace(/\(.*?\)/g, '').trim().split(/\s+puis\s+/).map(function (p) {
+      var m, base = null, fin = '';
+      if (/sans mourir/.test(p)) fin += ' without dying';
+      if (/et vivant/.test(p)) fin += ' and stay alive';
+      if ((m = /avant (?:la fin du |le )?tour (\d+)/.exec(p))) fin += ' before turn ' + m[1];
+      var t = p.split(/\s+/)[0];
+      if ((m = /^KILL_N_MOBS:(\d+)$/.exec(t))) base = 'Kill ' + m[1] + (m[1] === '1' ? ' monster' : ' monsters');
+      else if ((m = /^KILL_MOB:(\w+)$/.exec(t))) base = 'Kill the ' + m[1].replace(/_/g, ' ');
+      else if ((m = /^EQUIP_N:(\d+)$/.exec(t))) base = 'Equip ' + m[1] + ' pieces of gear';
+      else if ((m = /^CHESTS:(\d+)$/.exec(t))) base = 'Open ' + m[1] + ' chests';
+      else if ((m = /^ALIVE_AT_TURN:(\d+)$/.exec(t))) base = 'Be alive at turn ' + m[1];
+      else if (t === 'EXTRACT') base = 'Get out through a portal';
+      else if (t === 'EXTRACT_ALIVE') base = 'Get out alive through a portal';
+      else if (t === 'SIGNATURE_USED') base = 'Use your Signature';
+      return base === null ? null : base + fin;
+    });
+    return parts.some(function (p) { return p === null; }) ? null : parts.join(', then ');
+  }
+
+  function ficheDuNiveau(d, x, rang) {
+    var vieille = racine.querySelector('.av-fiche-voile'); if (vieille) vieille.remove();
+    var voile = el('div', 'av-fiche-voile'), f = el('div', 'av-fiche');
+    var c = x.cercle, ch = x.chapitre;
+    f.appendChild(el('div', 'av-cercle', romain(c.numero) + ' · ' + mot(c.nom_en, c.nom) + ' · ' + mot('level ', 'niveau ') + rang));
+    f.appendChild(el('h3', null, ch.titre));
+    var obj = objectifEn(ch.spec_v2 && ch.spec_v2.objectif);
+    if (obj) f.appendChild(el('p', 'av-obj', mot('Objective: ', 'Objectif : ') + obj));
+    /* les étoiles : « ✓ » tant que le moteur ne publie pas `SCENARIO_ENDED` (511 ②) */
+    f.appendChild(el('div', 'av-etoiles', x.etat === 'REUSSI' ? '✓' : '☆ ☆ ☆'));
+    var t3 = ch.etoiles && typeof ch.etoiles.tours_max_3_etoiles === 'number' ? ch.etoiles.tours_max_3_etoiles : 12;
+    f.appendChild(el('p', 'av-regle', mot('★ objective · ★★ without dying · ★★★ done by turn ' + t3,
+      '★ objectif · ★★ sans mourir · ★★★ fini au tour ' + t3)));
+    var pied = el('div', 'av-pied');
+    var retour = el('button', null, mot('BACK', 'RETOUR')); retour.type = 'button';
+    retour.addEventListener('click', function () { voile.remove(); });
+    pied.appendChild(retour);
+    var jouer = el('button', 'av-jouer', x.jouable ? mot('PLAY', 'JOUER') : 'NOT YET'); jouer.type = 'button';
+    if (x.jouable) {
+      jouer.addEventListener('click', function () {
+        var q = new URLSearchParams(window.location.search);
+        q.set('tuto', LANCEURS[ch.scenario]); q.delete('perso');
+        window.location.href = '/?' + q.toString();
+      });
+    } else {
+      jouer.disabled = true;
+      f.appendChild(el('p', 'av-regle', mot('Comes with a next update.', 'Arrive avec une prochaine mise à jour.')));
+    }
+    pied.appendChild(jouer);
+    f.appendChild(pied);
+    voile.appendChild(f);
+    voile.addEventListener('click', function (e) { if (e.target === voile) voile.remove(); });
+    racine.appendChild(voile);
+  }
+
+  /* 513 ③ — la case de BD : le Turd à gauche, sa bulle à droite ; arrivée → conseil → la fiche du niveau */
+  function caseDeBD(d, x, rang) {
+    var vieille = racine.querySelector('.av-bd'); if (vieille) vieille.remove();
+    var v = x.chapitre.virgile || {};
+    var lignes = [v.arrivee, v.conseil].filter(function (s) { return typeof s === 'string' && s.trim() !== ''; });
+    if (lignes.length === 0) { ficheDuNiveau(d, x, rang); return; }
+    var bd = el('div', 'av-bd'), tete = el('div', 'av-bd-tete'), bulle = el('div', 'av-bulle'), suite = el('span', 'av-suite');
+    tete.style.backgroundImage = "url('" + TURD + "')";
+    bd.appendChild(tete); bd.appendChild(bulle); bd.appendChild(suite);
+    var i = 0;
+    function montre() {
+      bulle.innerHTML = '';
+      bulle.appendChild(el('b', null, (d.virgile && d.virgile.nom) || 'THE TURD'));
+      bulle.appendChild(document.createTextNode(lignes[i]));
+      suite.textContent = i < lignes.length - 1 ? mot('CLICK ▸', 'CLIC ▸') : mot('THE LEVEL ▸', 'LE NIVEAU ▸');
+    }
+    bd.addEventListener('click', function () {
+      i += 1;
+      if (i < lignes.length) { montre(); return; }
+      bd.remove(); ficheDuNiveau(d, x, rang);
+    });
+    montre();
+    racine.querySelector('.av-sous-carte').appendChild(bd);
+  }
+
+  function sousCarteLimbes(d, c, origine) {
+    var vieille = racine.querySelector('.av-sous-carte'); if (vieille) vieille.remove();
+    var points = etatsLimbes(c).filter(function (x) { return ancreDe(x.chapitre) !== null; });
+    var page = el('div', 'av-sous-carte' + (origine ? ' zoome' : ''));
+    if (origine) page.style.transformOrigin = origine.x + 'px ' + origine.y + 'px';
+    var tete = el('div', 'av-tete');
+    var retour = el('button', 'av-b', mot('◀ THE NINE CIRCLES', '◀ LES NEUF CERCLES')); retour.type = 'button';
+    retour.addEventListener('click', function () { page.remove(); });
+    tete.appendChild(retour);
+    tete.appendChild(el('h2', null, romain(c.numero) + ' · ' + mot(c.nom_en, c.nom).toUpperCase()));
+    var faits = points.filter(function (x) { return x.etat === 'REUSSI'; }).length;
+    tete.appendChild(el('span', 'av-sous', faits + ' / ' + points.length + mot(' levels', ' niveaux')));
+    page.appendChild(tete);
+    var bandeau = el('div', 'av-bandeau'), scene = el('div', 'av-scene');
+    scene.style.backgroundImage = "url('" + BANDE_LIMBES + "'),radial-gradient(ellipse at 50% 45%,#2a1e16 0%,#0d0907 80%)";
+    var nuit = el('canvas', 'av-nuit');
+    scene.appendChild(nuit);
+
+    var atteints = points.filter(function (x) { return x.etat !== 'NON_ATTEINT'; });
+    var courant = points.filter(function (x) { return x.etat === 'COURANT'; })[0] || atteints[atteints.length - 1] || points[0];
+    var ici = lisTurd();
+    var pointDuTurd = atteints.filter(function (x) { return x.chapitre.id === ici; })[0] || courant;
+
+    var turd = el('div', 'av-turd'), timg = el('img'); timg.src = TURD; timg.alt = 'The Turd'; turd.appendChild(timg);
+    function placeTurd(x) { var a = ancreDe(x.chapitre); turd.style.left = (a.x * 100) + '%'; turd.style.top = ((a.y + TURD_DY) * 100) + '%'; }
+    placeTurd(pointDuTurd);
+
+    /* la torche : le noir partout, éteint là où on est passé (les points atteints, le chemin entre eux) et autour du Turd */
+    function peinsLaNuit() {
+      var W = scene.clientWidth, H = scene.clientHeight;
+      if (W === 0 || H === 0) return;
+      if (nuit.width !== W || nuit.height !== H) { nuit.width = W; nuit.height = H; }
+      var g = nuit.getContext('2d');
+      g.globalCompositeOperation = 'source-over';
+      g.clearRect(0, 0, W, H);
+      g.fillStyle = 'rgba(3,2,2,0.94)';
+      g.fillRect(0, 0, W, H);
+      g.globalCompositeOperation = 'destination-out';
+      function trou(px, py, r) {
+        var gr = g.createRadialGradient(px, py, 0, px, py, r);
+        gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(0.55, 'rgba(0,0,0,0.92)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+        g.fillStyle = gr; g.beginPath(); g.arc(px, py, r, 0, Math.PI * 2); g.fill();
+      }
+      var prec = null;
+      atteints.forEach(function (x) {
+        var a = ancreDe(x.chapitre), px = a.x * W, py = a.y * H;
+        trou(px, py, H * (x === courant ? 0.3 : 0.24));
+        if (prec) {
+          g.save(); g.lineCap = 'round'; g.strokeStyle = 'rgba(0,0,0,0.75)'; g.lineWidth = H * 0.1;
+          g.filter = 'blur(' + Math.round(H * 0.03) + 'px)';
+          g.beginPath(); g.moveTo(prec.x, prec.y); g.lineTo(px, py); g.stroke(); g.restore();
+        }
+        prec = { x: px, y: py };
+      });
+      /* la lueur suit le Turd, même pendant qu'il marche */
+      var cs = window.getComputedStyle(turd);
+      trou(parseFloat(cs.left) || 0, (parseFloat(cs.top) || 0) - H * 0.04, H * 0.22);
+    }
+
+    var enMarche = false;
+    function marcheVers(x, puis) {
+      if (x === pointDuTurd) { puis(); return; }
+      enMarche = true;
+      turd.classList.add('marche');
+      placeTurd(x);
+      var fin = Date.now() + 1050;
+      (function boucle() {
+        peinsLaNuit();
+        if (Date.now() < fin) { requestAnimationFrame(boucle); return; }
+        turd.classList.remove('marche');
+        enMarche = false;
+        pointDuTurd = x; poseTurd(x.chapitre.id);
+        peinsLaNuit();
+        puis();
+      }());
+    }
+
+    points.forEach(function (x, i) {
+      var a = ancreDe(x.chapitre), rang = i + 1;
+      var m = el('button', 'av-pin ' + x.etat); m.type = 'button';
+      m.dataset.chapitre = x.chapitre.id;
+      m.style.left = (a.x * 100) + '%'; m.style.top = (Math.max(0.07, a.y + PIN_DY) * 100) + '%';
+      m.style.backgroundImage = "url('/art/campagne/medaillons/" + x.chapitre.id + ".webp')";
+      if (x.etat !== 'NON_ATTEINT') {
+        var lib = el('span', 'av-niv'); lib.innerHTML = '<b>' + rang + '</b> · ';
+        lib.appendChild(document.createTextNode(String(x.chapitre.titre).toUpperCase() + (x.etat === 'REUSSI' ? ' ✓' : '')));
+        m.appendChild(lib);
+        m.title = x.chapitre.titre;
+      }
+      m.addEventListener('click', function () {
+        if (enMarche) return;
+        if (x.etat === 'NON_ATTEINT') { m.classList.remove('secoue'); void m.offsetWidth; m.classList.add('secoue'); return; }
+        var bd = racine.querySelector('.av-bd'); if (bd) bd.remove();
+        marcheVers(x, function () { caseDeBD(d, x, rang); });
+      });
+      scene.appendChild(m);
+    });
+    scene.appendChild(turd);
+    bandeau.appendChild(scene);
+    page.appendChild(bandeau);
+
+    function taille() {
+      var H = bandeau.clientHeight || Math.max(300, window.innerHeight - 64);
+      scene.style.width = Math.max(bandeau.clientWidth, Math.round(H * BANDE_RATIO)) + 'px';
+      peinsLaNuit();
+    }
+    bandeau.addEventListener('wheel', function (e) {
+      if (e.ctrlKey) return;
+      e.preventDefault(); bandeau.scrollLeft += (Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX);
+    }, { passive: false });
+    var tire = null;
+    bandeau.addEventListener('pointerdown', function (e) { if (e.target.closest('button')) return; tire = { x: e.clientX, l: bandeau.scrollLeft }; });
+    window.addEventListener('pointermove', function (e) { if (tire) bandeau.scrollLeft = tire.l - (e.clientX - tire.x); });
+    window.addEventListener('pointerup', function () { tire = null; });
+    window.addEventListener('resize', function () { if (page.isConnected) taille(); });
+    racine.appendChild(page);
+    requestAnimationFrame(function () {
+      taille();
+      var a = ancreDe(pointDuTurd.chapitre);
+      bandeau.scrollLeft = Math.max(0, a.x * scene.clientWidth - bandeau.clientWidth / 2);
+      /* l'arrivée : le Turd parle tout de suite au point où il se tient */
+      caseDeBD(d, pointDuTurd, points.indexOf(pointDuTurd) + 1);
+    });
+  }
+
+  function sousCarte(d, c, liste, origine) {
+    if (c.numero === 1 && d.structure && d.structure.sous_carte_limbes) { sousCarteLimbes(d, c, origine); return; }
     var vieille = racine.querySelector('.av-sous-carte'); if (vieille) vieille.remove();
     var page = el('div', 'av-sous-carte');
     var tete = el('div', 'av-tete');
@@ -314,12 +597,23 @@
     var cAtteint = d.cercles.filter(function (c) { return c.numero === atteint; })[0];
     var fini = cAtteint ? niveauxDuCercle(d, cAtteint, liste).every(function (v) { return v.x && v.x.etat === 'REUSSI'; }) : false;
     var voile = fini ? atteint + 1 : atteint;   /* le dernier cercle dévoilé */
-    var ancreDe = function (num) { return d.cercles.filter(function (c) { return c.numero === num; })[0]; };
-    var a1 = ancreDe(voile), a2 = ancreDe(voile + 1), a3 = ancreDe(voile + 2);
+    var ancreDe2 = function (num) { return d.cercles.filter(function (c) { return c.numero === num; })[0]; };
+    var a1 = ancreDe2(voile), a2 = ancreDe2(voile + 1), a3 = ancreDe2(voile + 2);
     if (a1 && a2) {
       var yHaut = (a1.ancre.y + a2.ancre.y) / 2, yBas = a3 ? (a2.ancre.y + a3.ancre.y) / 2 : 1;
       var b = el('div', 'av-brume'); b.style.top = (yHaut * 100) + '%'; b.style.height = ((yBas - yHaut) * 100) + '%'; carte.appendChild(b);
       if (a3) { var nr = el('div', 'av-noir'); nr.style.top = (yBas * 100) + '%'; carte.appendChild(nr); }
+    }
+
+    /* S1691 · 513 ① — tous les anneaux dans le noir sauf l'étage courant : un trou de torche chaud sur lui seul */
+    var cT = ancreDe2(atteint);
+    if (cT) {
+      var nuitM = el('div', 'av-nuit-monde');
+      var rx = Math.round(cT.ancre.largeur * 62), X = cT.ancre.x * 100, Y = cT.ancre.y * 100;
+      nuitM.style.background =
+        'radial-gradient(ellipse ' + rx + '% 7% at ' + X + '% ' + Y + '%,rgba(255,170,80,.16) 0%,rgba(255,150,60,.06) 45%,rgba(0,0,0,0) 62%),' +
+        'radial-gradient(ellipse ' + rx + '% 8% at ' + X + '% ' + Y + '%,rgba(3,1,1,0) 0%,rgba(3,1,1,0) 48%,rgba(3,1,1,.93) 100%)';
+      carte.appendChild(nuitM);
     }
 
     /* 505 ③ — sur la carte du monde, chaque cercle est UNE plaque : dévoilé = son nom et « n / 11 », cliquable
@@ -333,7 +627,7 @@
       if (etage === 'ouvert') {
         p.appendChild(document.createTextNode(romain(c.numero) + ' · ' + mot(c.nom_en, c.nom).toUpperCase()));
         p.appendChild(el('small', null, niv.filter(function (v) { return v.x && v.x.etat === 'REUSSI'; }).length + ' / ' + niv.length));
-        p.addEventListener('click', function () { sousCarte(d, c, liste); });
+        p.addEventListener('click', function (e) { sousCarte(d, c, liste, { x: e.clientX, y: e.clientY }); });
       } else if (etage === 'voile') {
         p.appendChild(document.createTextNode('?'));
         p.appendChild(el('small', null, mot('finish the circle above', 'finis le cercle du dessus')));
@@ -371,7 +665,8 @@
       document.addEventListener('keydown', function (e) {
         if (!racine.classList.contains('on') || e.key !== 'Escape') return;
         var v = racine.querySelector('.av-fiche-voile'); var sc = racine.querySelector('.av-sous-carte');
-        if (v) v.remove(); else if (sc) sc.remove(); else ferme();
+        var bd = racine.querySelector('.av-bd');
+        if (v) v.remove(); else if (bd) bd.remove(); else if (sc) sc.remove(); else ferme();
       });
       window.addEventListener('resize', function () { if (racine.classList.contains('on')) poseLaTaille(); });
     }

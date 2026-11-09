@@ -1,6 +1,11 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 09 Nov 2026
+- **08:42** — CAMPAIGN (still behind the DEV unlock): the nine circles now sit in the dark, only Limbo is lit by a torch, and a "?" hides the circle below. Click Limbo and the map zooms into a retro world map of the floor: ten landmarks along one road, each with its own painted medallion. The Turd is your guide: he walks the road to the point you click, the torch lights the way you've been, everything ahead stays dark. At each point he talks to you in a comic-book box (two lines, click to go on), then the level sheet opens: objective, stars, PLAY. Level 1 (First Steps) plays the tutorial; the other nine say NOT YET for now.
+- **08:42** — First Steps no longer talks about quests (no quest panel, no quest sound, no quest step) — the Campaign has none.
+- **08:42** — 2V2 online: at the end of run 1, both teammates now get the "Run 2 is about to start. Ready?" box, and run 2 starts once both are ready (or when the timer runs out).
+
 ## 08 Nov 2026
 - **19:51** — HOTFIX: your character sheet no longer flickers while the others play. Open it (hover your portrait, or click it to pin it) during the bots' turns: the picture, the frames and the text stay perfectly still; only a number that really changes (HP, a stat, a line that becomes castable) updates in place.
 - **19:51** — DIVE now has four doors of the same size: CLASSIC · TODAY'S DUNGEON · DUNGEON PRO TOUR · CAMPAIGN. Today's Dungeon and the Campaign are still closed to the public (padlock) while they are being finished. TODAY'S DUNGEON now follows the real 30-day calendar (day 1: FROSTBITE); a day that is not ready yet says "NOT YET" and offers to play yesterday's. In English mode, your apron title is in English too (MASTER MOLAR).

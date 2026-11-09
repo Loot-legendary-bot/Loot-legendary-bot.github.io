@@ -15,10 +15,12 @@
     "note": "carte C (sans cordes) validée par Croze le 08/11 ; la 4K (upscale ByteDance, 2 crédits) pour le zoom"
   },
   "virgile": {
-    "nom": "Le Grand Lécheur",
-    "titre": "Souverain Grand Lécheur émérite (grade 33 retiré)",
-    "role": "le guide qui tient le bras du joueur : une ligne à l'entrée de chaque cercle et de chaque chapitre, le script bob dans les scénarios",
-    "voix": "à venir (Croze)"
+    "nom": "THE TURD",
+    "personnage": "the_turd",
+    "role": "Virgile : le guide qui tient le bras du joueur de point de passage en point de passage, en bulles de BD ; Croze 08/11 : « Virgile qui ici est le Turd »",
+    "voix": "pipi-caca assume : tout est de la merde, tout pue — v1 des bulles par chapitre dans cercles[].chapitres[].virgile",
+    "portee": "Croze 08/11 (soir), Q1 « ta reco » : le Turd est Virgile sur les neuf cercles de NIGREDO (une seule voix porte la BD)",
+    "le_grand_lecheur": "ma reco du 08/11 matin, remplacee par le Turd pour tout NIGREDO"
   },
   "etats_du_medaillon": [
     "VERROUILLE (chaîne, assombri)",
@@ -42,115 +44,454 @@
           "id": "tuto_1",
           "numero": 1,
           "titre": "First Steps",
-          "brief": "solo · le tuto qui existe : bouger, explorer, looter, END TURN · paquet de tuiles : 3 couloirs, aucune carte en main",
+          "brief": "solo · le tuto qui existe : bouger, explorer, looter, END TURN · paquet de tuiles : 3 couloirs, aucune carte en main · plus de pas « quete » (Croze 08/11)",
           "scenario": "tuto",
           "etat": "JOUABLE",
           "etoiles": {
             "tours_max_3_etoiles": 6
+          },
+          "spec_v2": {
+            "table": "SOLO",
+            "objectif": "EXTRACT (le portail du script)",
+            "tours_max": 6,
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "Welcome to the Vestibule. Smells like a thousand goblins skipped the Spa. Move your feet, meat.",
+            "conseil": "Explore the tile, loot the chest, END TURN. Three buttons. Even I can count to three on a good day."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223230_4c78aa64-5d09-4d5c-ba95-3dccc8966aef.png",
+              "job_id": "4c78aa64-5d09-4d5c-ba95-3dccc8966aef",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\tuto_1.png"
+            }
           }
         },
         {
           "id": "tuto_2",
           "numero": 2,
           "titre": "Second Steps",
-          "brief": "2 sièges · Bob scripté : échanger, se faire voler, premier combat, fuir (les trois formes du 1216)",
+          "brief": "2 sieges · Bob scripte : echanger, se faire voler, premier combat, fuir (les trois formes du 1216) · sans quete",
           "scenario": "tuto_2",
           "etat": "A_ECRIRE",
           "etoiles": {
             "tours_max_3_etoiles": 12
+          },
+          "spec_v2": {
+            "table": "2 sieges, Bob scripte",
+            "objectif": "le script de Bob joue jusqu'au bout",
+            "tours_max": 12,
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "Oh look, company. That's Bob. Bob steals. Bob also stinks, which, coming from me, is a review.",
+            "conseil": "Trade when it helps, fight when you must, and when the dice turn brown — FLEE."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223229_2396aa41-8aa0-4eb7-bc19-aba66df7f115.png",
+              "job_id": "2396aa41-8aa0-4eb7-bc19-aba66df7f115",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\tuto_2.png"
+            }
           }
         },
         {
           "id": "limbo_3",
           "numero": 3,
           "titre": "Bones & Teeth",
-          "brief": "solo · squelettes seulement (2 skeleton_warrior) · Weapon Attack et les dés · main verrouillée : l'arme seule · 0 Ruines",
+          "brief": "solo · Weapon Attack et les des · main verrouillee : l'arme seule · mobs forces : skeleton_duellist ×2 (le skeleton_warrior a du loot Rare : hors etage)",
           "scenario": "limbo_3",
           "etat": "PLAN",
           "etoiles": {
-            "tours_max_3_etoiles": 12
+            "tours_max_3_etoiles": 10
+          },
+          "spec_v2": {
+            "table": "SOLO",
+            "objectif": "KILL_N_MOBS:2",
+            "tours_max": 10,
+            "mobs_forces": [
+              "skeleton_duellist",
+              "skeleton_duellist"
+            ],
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "Bones. Teeth. The decor here is 90 % skeleton, 10 % damp. I feel at home.",
+            "conseil": "One weapon, one die, one swing. The d20 decides who becomes furniture."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223150_7bdc0ca3-bfb1-4e2c-b502-43378a7df933.png",
+              "job_id": "7bdc0ca3-bfb1-4e2c-b502-43378a7df933",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_3.png"
+            }
           }
         },
         {
           "id": "limbo_4",
           "numero": 4,
           "titre": "The Potion Cabinet",
-          "brief": "solo · consommables seulement (Potion, French White Bread) · la fenêtre de dégâts, le soin avant le coup mortel · skeleton_duellist",
+          "brief": "solo · consommables seulement (Heal Potion, French White Bread) · la fenetre de degats, le soin avant le coup mortel · mobs forces : zombie, goblin_thug",
           "scenario": "limbo_4",
           "etat": "PLAN",
           "etoiles": {
-            "tours_max_3_etoiles": 12
+            "tours_max_3_etoiles": 10
+          },
+          "spec_v2": {
+            "table": "SOLO",
+            "objectif": "KILL_N_MOBS:2 sans mourir",
+            "tours_max": 10,
+            "mobs_forces": [
+              "zombie",
+              "goblin_thug"
+            ],
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "A cabinet full of potions. Half of them taste like me. Drink before you drop, not after.",
+            "conseil": "When the damage window opens, that's your last call. Heal first, cry later."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223149_9a752e2c-572e-45b1-9773-0cc24445fabe.png",
+              "job_id": "9a752e2c-572e-45b1-9773-0cc24445fabe",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_4.png"
+            }
           }
         },
         {
           "id": "limbo_5",
           "numero": 5,
           "titre": "The Collapse",
-          "brief": "solo · le dé de Collapse = le dé de portail · sortir par le portail avant le tour 6 · squelettes",
+          "brief": "solo · le de de Collapse = le de de portail · sortir par un portail avant le tour 6 · mobs : wall_snake, eyebat",
           "scenario": "limbo_5",
           "etat": "PLAN",
           "etoiles": {
-            "tours_max_3_etoiles": 12
+            "tours_max_3_etoiles": 6
+          },
+          "spec_v2": {
+            "table": "SOLO",
+            "objectif": "EXTRACT_ALIVE avant le tour 6",
+            "tours_max": 6,
+            "mobs_forces": [
+              "wall_snake",
+              "eyebat"
+            ],
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "Feel that rumble? The dungeon is digesting us. Find a portal before you end up in the sewers with my cousins.",
+            "conseil": "The Collapse die can open a portal. Out before turn 6 or you get flushed."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223149_b0480de2-d694-4274-ae2d-5887f04f2f6f.png",
+              "job_id": "b0480de2-d694-4274-ae2d-5887f04f2f6f",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_5.png"
+            }
           }
         },
         {
           "id": "limbo_6",
           "numero": 6,
           "titre": "Loadout",
-          "brief": "solo · équiper torse / mains / pieds, le gear score · skeleton_archer (le premier RANGED)",
+          "brief": "solo · equiper torse / mains / pieds, le gear score · le premier RANGED : skeleton_archer",
           "scenario": "limbo_6",
           "etat": "PLAN",
           "etoiles": {
-            "tours_max_3_etoiles": 12
+            "tours_max_3_etoiles": 10
+          },
+          "spec_v2": {
+            "table": "SOLO",
+            "objectif": "EQUIP_N:3 puis KILL_MOB:skeleton_archer",
+            "tours_max": 10,
+            "mobs_forces": [
+              "skeleton_archer"
+            ],
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "Chest, hands, feet. Dress up, hero. Yes, that cloak was last worn by a dead guy. Everything down here was.",
+            "conseil": "Three pieces on, gear score up. Then that archer learns what a wall feels like."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223229_94ac41fb-58e6-4c78-92a9-9f457ba27c31.png",
+              "job_id": "94ac41fb-58e6-4c78-92a9-9f457ba27c31",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_6.png"
+            }
           }
         },
         {
           "id": "limbo_7",
           "numero": 7,
           "titre": "Signature",
-          "brief": "solo · ta Signature une fois · perso prêté : The Mailman · skeleton_elite",
+          "brief": "solo · perso prete : The Mailman · ta Signature une fois · mob : coin_flip_demon",
           "scenario": "limbo_7",
           "etat": "PLAN",
           "etoiles": {
-            "tours_max_3_etoiles": 12
+            "tours_max_3_etoiles": 10
+          },
+          "spec_v2": {
+            "table": "SOLO · perso prete the_mailman",
+            "objectif": "SIGNATURE_USED puis KILL_N_MOBS:1",
+            "tours_max": 10,
+            "mobs_forces": [
+              "coin_flip_demon"
+            ],
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "You borrow the Mailman today. He delivers. Mostly pain. Occasionally bills.",
+            "conseil": "Your Signature is one shot per dungeon turn. Don't waste it on a rat. Waste it on a big rat."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223149_58de98ac-f470-401c-9490-f2dcaed0917d.png",
+              "job_id": "58de98ac-f470-401c-9490-f2dcaed0917d",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_7.png"
+            }
           }
         },
         {
           "id": "limbo_8",
           "numero": 8,
           "titre": "Two at the Table",
-          "brief": "2 sièges + bot DOCILE · jet d'ordre, Priority Window, pas de PvP",
+          "brief": "2 sieges + bot DOCILE · jet d'ordre, Priority Window, pas de PvP · pool de l'etage",
           "scenario": "limbo_8",
           "etat": "PLAN",
           "etoiles": {
-            "tours_max_3_etoiles": 12
+            "tours_max_3_etoiles": 10
+          },
+          "spec_v2": {
+            "table": "2 sieges, bot DOCILE",
+            "objectif": "KILL_N_MOBS:2 avant la fin du tour 10",
+            "tours_max": 10,
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "Two at the table. The other one is a bot, so if it beats you, that's on you, not on the smell.",
+            "conseil": "Roll for order, mind the Priority Window, and nobody stabs anybody. Yet."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223230_f8ac4183-bbcd-4a53-a6d2-42d48a12228d.png",
+              "job_id": "f8ac4183-bbcd-4a53-a6d2-42d48a12228d",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_8.png"
+            }
           }
         },
         {
           "id": "limbo_9",
           "numero": 9,
-          "titre": "One Quest",
-          "brief": "solo · une carte de quête, la finir avant le tour 8",
+          "titre": "Traps & Treasure",
+          "brief": "solo · (remplace « One Quest » : plus de quetes en campagne) · un coffre et un piege : le de de coffre, le de de piege, la rarete du Dungeon Timer · tuiles forcees : the_trigger_hall, the_lost_vault",
           "scenario": "limbo_9",
           "etat": "PLAN",
           "etoiles": {
-            "tours_max_3_etoiles": 12
+            "tours_max_3_etoiles": 10
+          },
+          "spec_v2": {
+            "table": "SOLO",
+            "objectif": "CHESTS:2 et vivant",
+            "tours_max": 10,
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "Treasure! Also traps. Down here they come in the same box, like a surprise in a diaper.",
+            "conseil": "The chest die gives, the trap die takes. Open two, survive both, keep your boots dry."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223148_24a97a94-ccec-41be-adf8-d86f66bfa8b7.png",
+              "job_id": "24a97a94-ccec-41be-adf8-d86f66bfa8b7",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_9.png"
+            }
           }
         },
         {
           "id": "limbo_10",
           "numero": 10,
           "titre": "The Vestibule Door",
-          "brief": "3 sièges (2 bots DOCILE) · squelettes + skeleton_elite en sub-boss · sortir vivant par le portail = les Limbes finis",
+          "brief": "3 sieges (2 bots DOCILE) · tout le pool de l'etage, aucun sub-boss · le Collapse jusqu'au tour 9 puis plus rien · la Porte du Vestibule s'ouvre au tour 12",
           "scenario": "limbo_10",
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 12
+          },
+          "spec_v2": {
+            "table": "3 sieges, 2 bots DOCILE",
+            "objectif": "ALIVE_AT_TURN:12 (la porte s'ouvre, GAME_END)",
+            "tours_max": 12,
+            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+          },
+          "virgile": {
+            "arrivee": "The Vestibule Door. Beyond it: Lust. I've seen it. Lots of velvet, zero soap.",
+            "conseil": "The Collapse stops at turn 9. Then it's just you, the bots and the stink until turn 12. Stay alive, and the door opens."
+          },
+          "medaillon": {
+            "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
+            "v2": {
+              "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223150_58dc67d8-7074-482c-9da8-dadcf5ce1e3d.png",
+              "job_id": "58dc67d8-7074-482c-9da8-dadcf5ce1e3d",
+              "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
+              "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_10.png"
+            }
           }
         }
       ],
       "ligne_de_virgile": null,
-      "niveaux_vises": 10
+      "niveaux_vises": 10,
+      "virgile_du_cercle": {
+        "personnage": "the_turd",
+        "nom": "THE TURD",
+        "voix": "Croze 08/11 : « il n'arrete pas de dire que c'est de la merde ici, que ca pue la merde, plein de trucs tres pipi-caca ; il nous accompagne dans cette epopee comme une BD qu'on lirait » — bulles en anglais, 2-3 par point de passage, ecrites par le CLASSEUR (v1 ci-dessous, Croze relit)"
+      },
+      "regles_etage": {
+        "source": "Croze 08/11 (soir) — « pour le 1er floor, 10 niveaux »",
+        "mobs": {
+          "regle": "que des mobs dont le loot va jusqu'a UNCOMMON max",
+          "pool": [
+            "wall_snake",
+            "yoda",
+            "coin_flip_demon",
+            "lizards",
+            "pinky",
+            "magicrap",
+            "gutter_ratlord",
+            "skeleton_duellist",
+            "skeleton_archer",
+            "goblin_thug",
+            "longleg_skeleton",
+            "zombie",
+            "tripwire_gnome",
+            "trapdoor_creeper",
+            "eyebat"
+          ],
+          "mesure": "15 des 32 NORMAL (mobs.json, loot.entries.rarity <= UNCOMMON) ; les 17 autres (Rare+) et tous les SUBBOSS / BOSS sont hors etage"
+        },
+        "sous_boss": {
+          "regle": "aucune tuile ou on peut avoir des sub-boss (ni boss) ; aucun Craps, Bad Fairy, Good Fairy, Frost Wyvern",
+          "mesure": "tiles.json : toute tuile dont la table d'exploration ou l'interaction cite SUBBOSS / BOSS / Astragor / Gladiator / Fairy / Frost Wyvern est exclue"
+        },
+        "tuiles": {
+          "autorisees": [
+            "the_cell",
+            "x_road",
+            "corner_tower",
+            "cosy_studio",
+            "fountain_of_grace",
+            "secret_indoor_garden",
+            "the_black_velvet",
+            "the_coffin_lounge",
+            "the_dining_room",
+            "the_forgotten_cell",
+            "the_fumoir",
+            "the_lost_vault",
+            "the_maze",
+            "the_offrande_pit",
+            "the_razor_bridge",
+            "the_sealed_vault",
+            "the_squire_spa",
+            "the_sunken_core",
+            "the_time_chamber",
+            "the_trigger_hall",
+            "the_whispering_room",
+            "umbral_guest_room",
+            "unstables_pillars"
+          ],
+          "exclues": {
+            "nommees_par_croze": [
+              "blood_altar",
+              "fairy_garden",
+              "the_goblin_casino",
+              "the_arena",
+              "*_ruins (toutes les tuiles Ruines)",
+              "the_duel_bells_tower (« faut enlever Duel Bell Tower au 1er étage », 08/11 soir)"
+            ],
+            "sous_boss_ou_boss (regle « pas de tuile ou on peut avoir des sub-boss »)": [
+              "the_doom_compass",
+              "the_red_library",
+              "hidden_swamp",
+              "the_dusty_hoard",
+              "the_table_ronde",
+              "the_nexus_gate"
+            ],
+            "mortes_en_solo (reco CLASSEUR, veto)": [
+              "messenger_s_alcove",
+              "the_moonlit_chapel"
+            ]
+          }
+        },
+        "cartes": {
+          "exclues": {
+            "nommees_par_croze (familles, toutes raretes)": [
+              "dungeon_party_mask",
+              "dice_eating_goose",
+              "confused_parrot",
+              "devouring_moths",
+              "seal_of_solomon",
+              "goblin_pocket_roulette (« goblin pocket casino »)",
+              "magpie",
+              "cold_invitation (« frost wyvern invitation »)",
+              "le_croissant",
+              "shadow_tax",
+              "magic_leeches",
+              "astragor_poo",
+              "copy_cat",
+              "antimonium",
+              "salmon_cloak",
+              "ring_of_fisdeputry",
+              "ring_of_the_snake",
+              "elixir_of_luck",
+              "echo_flask (« refresh tile potion »)",
+              "onion",
+              "first_strike_potion",
+              "ring_of_jealousy",
+              "cheater_s_gloves"
+            ],
+            "ajouts_CLASSEUR (« et autres trucs que j'aurais zappes », veto)": [
+              "dissimulation_bush",
+              "mirror_of_reversal",
+              "arena_invitation",
+              "astragor_invitation",
+              "party_invitation",
+              "squire_spa_convocation"
+            ],
+            "regle_solo": "dans un niveau SOLO, toute carte qui vise un autre joueur (targetMode PLAYER hors SELF) est retiree du paquet : elle serait morte"
+          },
+          "note": "le plafond UNCOMMON vaut pour le loot des MOBS ; coffres et tuiles suivent le Dungeon Timer (jusqu'a EPIC) — d'ou la liste d'exclusion toutes raretes",
+          "regle_solo": "Croze 08/11 (soir) : « faut aussi enlever toutes les cartes qui pourraient viser uniquement des joueurs, vu qu'il n'y en aura pas pendant quelques niveaux au moins » — dans un niveau SOLO, toute carte dont la cible ne peut etre qu'un autre joueur (targetMode PLAYER hors SELF) sort du paquet ; dans les niveaux a sieges (tuto_2, limbo_8, limbo_10) elles restent (les bots sont des cibles)"
+        },
+        "collapse": {
+          "regle": "le Collapse s'arrete au tour 9 ; la partie continue 10, 11, 12… sans Collapse ; le palier de rarete du Dungeon Timer reste EPIC pour toujours a partir de la",
+          "forme_moteur": "COLLAPSE_JUSQU_AU_TOUR:9 + TIMER_RARETE_GELEE:EPIC (a nommer, note moteur 402)"
+        },
+        "quetes": {
+          "regle": "aucune quete en campagne (Croze : « en campagne y'en aura pas ») ; le tuto n'apprend plus les quetes (tuto.json : le pas « quest.reveal » retire)",
+          "forme_moteur": "QUETES:AUCUNE (a nommer, 402)"
+        },
+        "fin_de_niveau": "l'objectif du chapitre decide (pas les points) ; les etoiles selon regle_etoiles"
+      }
     },
     {
       "numero": 2,
@@ -1281,7 +1622,50 @@
       "sortie_au_jour": "la remontée hors de l'Enfer « pour revoir les étoiles », transition entre l'Enfer et le Purgatoire",
       "paradis": "9 cieux — le dernier add-on, avec un nouveau guide"
     },
-    "plan_v1": "08/11 : plan des 100 niveaux écrit par le CLASSEUR sur les idées de Croze (A tutos à cartes verrouillées · B Spa · C Dining Room + Bread / Ostrich Egg / Fromage des Alpes · D Casino + cartes pour y aller · E Arène, le Gladiator en fin · F Blood Altar · G pièges + Ruines · H Onion, Party Mask, sub-boss, Magpie · I Onion, fake coop à trahir, boss à plusieurs, tuer les autres) ; états : JOUABLE / A_ECRIRE / PLAN (brief seul, scénario à écrire quand les formes existent)"
+    "plan_v1": "08/11 : plan des 100 niveaux écrit par le CLASSEUR sur les idées de Croze (A tutos à cartes verrouillées · B Spa · C Dining Room + Bread / Ostrich Egg / Fromage des Alpes · D Casino + cartes pour y aller · E Arène, le Gladiator en fin · F Blood Altar · G pièges + Ruines · H Onion, Party Mask, sub-boss, Magpie · I Onion, fake coop à trahir, boss à plusieurs, tuer les autres) ; états : JOUABLE / A_ECRIRE / PLAN (brief seul, scénario à écrire quand les formes existent)",
+    "sous_carte_limbes": {
+      "regle": "Croze 08/11 (soir) : une carte guidee par le Turd, facon carte de monde des jeux de plateforme — on va de point en point ; les etages non reveles sont obscurcis, l'etage courant eclaire, les 10 points de passage s'allument a mesure, une torche eclaire la ou on est ; le Turd accompagne en bulles de BD",
+      "ecran": "note ecran 513",
+      "assets": "v1 : carte C (anneau des Limbes), vignettes de tuiles, portrait du Turd (fiches / grand), torche en CSS ; v2 : bande des Limbes + 10 vignettes generees (sur le GO de Croze, cout annonce)",
+      "bande": {
+        "statut": "VALIDÉE : D (Croze, « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; Croze pourra la remplacer plus tard par un fichier du même nom dans ASSETS\\campagne\\",
+        "depot_croze": "ll-ecran\\ASSETS\\campagne\\limbo_bande.png (la variante choisie)",
+        "v1_refusee": {
+          "verdict_croze": "08/11 (soir) : « le 1 ou le 2, je dirais le 2, mais ça ne va pas : on ne voit pas de parcours clair entre deux étapes, on a l'impression d'une grande pièce avec des centres d'intérêt ; il faut que ça ait l'air d'une grande map, genre les RPG rétro quand tu sors de la zone et que t'es sur la grande map, à une taille clairement démesurée »",
+          "A": {
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223230_dcde0d99-7803-4f23-955b-cee504258a6d.png",
+            "job_id": "dcde0d99-7803-4f23-955b-cee504258a6d"
+          },
+          "B": {
+            "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_223149_6a27e665-f056-4bf4-a50a-3eb82027c444.png",
+            "job_id": "6a27e665-f056-4bf4-a50a-3eb82027c444"
+          }
+        },
+        "C": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_234442_fcd1c802-df75-490c-82c9-efdabbf78611.png",
+          "job_id": "fcd1c802-df75-490c-82c9-efdabbf78611"
+        },
+        "D": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261108_234442_d295d16e-9748-47c5-a23f-3f1ca7935e02.png",
+          "job_id": "d295d16e-9748-47c5-a23f-3f1ca7935e02"
+        },
+        "style": "carte de monde (overworld) de JRPG rétro : la route est l'objet principal, les repères sont des bâtiments démesurés par rapport au terrain, chaque repère dans sa flaque de torche, le noir entre eux ; le Turd marche sur la route (513 ②)",
+        "ancres": "les dix repères sont dans l'ordre de lecture de gauche à droite ; l'écran mesure leurs ancres (x, y en fractions) sur le fichier déposé et me renvoie ses valeurs (comme pour la carte C)",
+        "beta": "Croze 08/11 : « ce sera une bêta, je ferai aussi des ajustements et je régénère via Midjourney après, au besoin, certains assets » — les assets du lot sont des v1 remplaçables fichier par fichier, mêmes noms",
+        "choix_croze": {
+          "variante": "D",
+          "date": "08/11 (soir)",
+          "mot": "« D, go »",
+          "fichier": "limbo_bande.png = D (job d295d16e)"
+        }
+      },
+      "lot_08_11": {
+        "credits": "11 images FLUX 3 (2 x 2K + 10 x 1K), 1 relance apres un faux drapeau de contenu (la table de Bob) : voir le solde Higgsfield",
+        "regle": "Croze : « ok for all » sur les dix briefs v2 = GO du lot (08/11 soir)",
+        "complement": "+ 2 images FLUX 3 2K (bande v2 C / D) après le verdict de Croze sur la v1"
+      },
+      "telechargement_ecran": "note écran 516 : l'écran télécharge la bande D et les dix médaillons depuis les URL ci-dessus vers public/art/campagne/ (webp), mesure les ancres sur D, monte la sous-carte ; le dépôt de Croze dans ASSETS\\campagne\\ est optionnel et prioritaire s'il existe"
+    }
   },
   "formes_de_scenario_requises": [
     "verrou de paquet : main (liste d'ids ou familles) et tuiles (liste), ruines: false",
@@ -1361,5 +1745,18 @@
     "fait_moteur": "SCENARIO_ENDED { chapitre, reussi, mortsDuSiege, tourDeFin, dentsDuRun } — publié par le moteur à la fin d'un scénario de campagne (note moteur 400 ③, derrière 392 / 396)",
     "ecran": "dessine 1-3 étoiles sur le médaillon et la carte de chapitre à partir de ce fait ; « ✓ » tant qu'il n'est pas publié (note écran 511 ②)",
     "cumul": "le profil garde le max d'étoiles par chapitre ; les étoiles n'achètent rien (cosmétique) ; le total du cercle compte pour l'examen du cercle (règle à venir)"
+  },
+  "regle_campagne": {
+    "quetes": false,
+    "points": false,
+    "source": "Croze 08/11 (soir)",
+    "note": "les niveaux se gagnent a l'objectif ; les quetes et les points de partie classique n'existent pas en campagne"
+  },
+  "regle_fin_de_niveau": {
+    "source": "Croze 08/11 (soir) : « quand on finit l'objectif, faut soit faire OK fin de game gagné, ou continuer, un peu comme Command & Conquer ou Warcraft 3 : t'as gagné, tu restes — sauf que là tu peux mourir, donc faut un disclaimer : c'est dangereux et inutile, sauf qu'il y a quand même des extra gains de dents ; mais si on meurt, la mission n'est pas validée »",
+    "regle": "à l'instant où l'objectif du chapitre est atteint, le moteur publie OBJECTIVE_REACHED et pose UNE décision au joueur : END (la mission est validée, GAME_END, les étoiles se comptent) ou KEEP PLAYING (la partie continue ; les dents ramassées ensuite comptent ; si le joueur meurt avant la fin, la mission n'est PAS validée : 0 étoile, retour au point de passage)",
+    "disclaimer_ecran": "« MISSION ACCOMPLISHED — Leave now (validated) · or Keep playing: dangerous and pointless, except for the extra teeth. Die down there and the mission is NOT validated. »",
+    "si_keep_playing": "la fin arrive par tours_max du chapitre ou par une sortie volontaire (bouton LEAVE toujours visible dans le HUD) ; les étoiles se calculent sur l'ensemble de la partie (★★ = sans mourir tient toujours)",
+    "formes_moteur": "OBJECTIVE_REACHED + décision MISSION_DONE { END | KEEP_PLAYING } + LEAVE à tout moment après l'objectif (note moteur 403) ; écran : la fenêtre et le bouton LEAVE (note écran 514)"
   }
 }
