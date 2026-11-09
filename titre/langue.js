@@ -928,6 +928,7 @@
     "AGI décroissante — aucun dé": "AGI descending — no die",
     "PLUS AUCUN COMBATTANT EN LICE": "NO FIGHTER LEFT IN THE RING",
     "plus aucun adversaire debout": "no opponent left standing",
+    "rien ne se passe — plus aucune autre tuile où se téléporter": "nothing happens — no other tile left to teleport to",
     "plus aucun joueur debout — personne ne l'emporte": "no player left standing — nobody wins",
   };
   for (var km in FR_EN_MOTEUR) {
