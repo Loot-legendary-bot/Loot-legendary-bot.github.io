@@ -10716,6 +10716,22 @@
        * lirait comme un podium cassé.
        */
       .fr-podium { display: flex; flex-direction: column; }
+      /* S1695 · note 509 ⑤ — le podium par équipe : une case par camp, à sa couleur, les deux bustes côte à côte */
+      .fr-equipes { display: flex; justify-content: center; align-items: flex-end; gap: 22px; margin: 0 auto 14px; }
+      .fr-equipe { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 12px 12px;
+                   border: 2px solid var(--camp, var(--rule)); background: var(--ink-2); width: 340px; }
+      .fr-equipe-1 { width: 380px; box-shadow: 0 0 18px color-mix(in srgb, var(--camp, #efece3) 45%, transparent); }
+      .fr-equipe-rang { font-family: var(--display); font-weight: 800; font-size: calc(16px * var(--lisible, 1));
+                        letter-spacing: .24em; color: var(--camp, var(--stock-dim)); }
+      .fr-equipe-tienne { font: 700 11px/1 var(--mono); letter-spacing: .28em; color: var(--stock-dim); }
+      .fr-equipe-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
+      .fr-equipe-duo .fr-pod-qui { margin-bottom: 0; }
+      .fr-equipe-duo .fr-pod-joueur { font-size: 17px; }
+      .fr-equipe .fr-pod-pts { color: var(--camp, var(--stock)); }
+      .fr-equipes-detail { text-align: center; font: 700 13px/1 var(--mono); letter-spacing: .3em;
+                           color: var(--stock-dim); margin: 4px 0 10px; }
+      .how-it-ended-tout { display: block; margin: 6px auto 0; padding: 4px 14px; font: 700 12px/1 var(--mono);
+                           letter-spacing: .2em; }
       /*
        * ⛑⛑ **PREMIER JET FAUX, ET IL S'EST TU : LA MARCHE VALAIT `0`.** Vu à
        * l'écran, graine 7 — `.fr-fosse` mesurait **0 px** de haut pendant que
@@ -15650,7 +15666,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DdzyWXKY.js"></script>
+    <script type="module" crossorigin src="./assets/index-D18lwEtA.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

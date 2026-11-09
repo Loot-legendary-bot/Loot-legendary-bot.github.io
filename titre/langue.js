@@ -1818,6 +1818,10 @@
     [/^server started (.+)$/, 'serveur démarré $1'],
     [/^END TURN — (\d+) to discard$/, 'FIN DU TOUR — $1 à défausser'],
     /* S1489 - note 368 (10) et (5) : HOW IT ENDED et les des du draft, en francais. */
+    /* S1695 - note 509 (5) : HOW IT ENDED reduit, et le podium par equipe */
+    [/^(.+) was killed by (.+) — stays dead$/, function (m, a, b) { return a + ' a été tué par ' + (b === 'the Collapse' ? 'le Collapse' : b) + ' — reste mort'; }],
+    [/^SHOW ALL \((\d+)\)$/, 'TOUT VOIR ($1)'], [/^SHOW LESS$/, 'MOINS'], [/^EACH PLAYER$/, 'CHAQUE JOUEUR'],
+    [/^YOUR TEAM$/, 'TON ÉQUIPE'], [/^team points$/, 'points d’équipe'],
     [/^(.+) was killed by (.+)$/, function (m, a, b) { return a + ' a été tué par ' + (b === 'the Collapse' ? 'le Collapse' : b); }],
     [/^(.+) stays dead — no return this run$/, '$1 reste mort — pas de retour ce run'],
     [/^(.+) extracted through a portal$/, '$1 est sorti par un portail'],
