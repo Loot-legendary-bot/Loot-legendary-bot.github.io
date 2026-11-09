@@ -4698,6 +4698,12 @@
         70%  { opacity: 1; transform: translate(-50%, -80%) scale(1); }
         100% { opacity: 0; transform: translate(-50%, -110%) scale(1); }
       }
+      /* S1697 · note 530 ⑥ — le coup réduit à 0 sur un mob : « 12 → 0 » et sa raison (FIRE IMMUNE · BLOCKED) */
+      .vf4-chiffre-nul { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 44px;
+        color: var(--stock); }
+      .vf4-chiffre-nul .vf4-nul-montant { text-decoration: none; }
+      .vf4-chiffre-nul .vf4-nul-pourquoi { font-size: 20px; letter-spacing: .08em; padding: 2px 10px; border-radius: 6px;
+        background: rgba(0,0,0,.72); color: var(--vf4-nul-c, #fff); text-shadow: none; }
       /* S1672 · note 486 ④ — LE GROS COUP (≥ 20) : le montant plein écran une seconde, couleur de l'école, secousse légère */
       .gros-coup { position: fixed; inset: 0; z-index: 94; pointer-events: none; display: flex; flex-direction: column;
         align-items: center; justify-content: center; --gros-coup-c: var(--stock);
@@ -15671,7 +15677,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-C7s7bhzW.js"></script>
+    <script type="module" crossorigin src="./assets/index-DqNt6sm3.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

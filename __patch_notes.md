@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 09 Nov 2026
+- **20:18** — COMBAT: when your hit does nothing to a monster (the Frost Wyvern against fire, the Good Fairy against everything), the monster's card now shows it: "8 → 0" with the reason underneath — "FIRE IMMUNE", "IMMUNE", or "BLOCKED" when its defence stopped it.
 - **19:37** — LOG: when The Coffin Lounge has nowhere left to send you, the log now says "The Coffin Lounge: nothing happens — no other tile left to teleport to" instead of "MISS — no other Tile in play…".
 - **19:24** — TODAY'S DUNGEON, end screen (teeth earned): the buttons can no longer fall off the bottom of the screen. CONTINUE and a new BACK TO MENU stay pinned at the bottom, the list scrolls if it is long, and Esc works as CONTINUE.
 - **17:46** — LOOT: when you keep a card (The Table Ronde and the like), it now flies into your hand BEFORE the bots start taking their turns.
