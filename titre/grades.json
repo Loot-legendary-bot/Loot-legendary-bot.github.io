@@ -270,5 +270,151 @@
     "31": "Grand Dental Inquisitor",
     "32": "Prince of Harlequin's Secret",
     "33": "Sovereign Grand Licker"
+  },
+  "cadres": {
+    "source": "Croze 08/11 (nuit) : « les grades : faire des frames basées sur le motif ou les couleurs du grade en question ; ça doit suivre les titres maçonniques, certains grades qu'on skip ; typiquement le grade 4 c'est un cadre » — les bons chiffres : 4, 14, 18, 30, 32, 33",
+    "regle": "un cadre de portrait ROND (les médaillons du jeu sont des cercles — Croze 09/11) (cosmétique équipable, catégorie cadre du Vault) est DONNÉ quand le grade est atteint ; il reste acquis si le grade redescend ; le dessin suit le motif et les couleurs du degré écossais correspondant — rien n'est écrit en clair maçonnique sur le cadre (le jeu parodie, il ne cite pas)",
+    "liste": [
+      {
+        "grade": 4,
+        "degre": "Maître Secret (entrée en Loge de Perfection)",
+        "titre_jeu": "Secret Keyhole Master",
+        "motif": "noir et blanc, clef d'ivoire, branche de laurier et d'olivier, un œil dans un trou de serrure, bordure sobre",
+        "couleurs": [
+          "#0B0B0B",
+          "#F2EEE6",
+          "#C9A24D"
+        ],
+        "id": "cadre_g04",
+        "image": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_bc6f432d-8873-4d97-bb2b-360c019b095f.png",
+          "job_id": "bc6f432d-8873-4d97-bb2b-360c019b095f",
+          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+        },
+        "image_carree_refusee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003921_3251dc71-4a15-4b0e-a70d-fc2171b5208b.png",
+          "job_id": "3251dc71-4a15-4b0e-a70d-fc2171b5208b",
+          "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        }
+      },
+      {
+        "grade": 14,
+        "degre": "Grand Élu Parfait et Sublime Maçon (sortie de la Loge de Perfection)",
+        "titre_jeu": "Grand Elect of the Cavity",
+        "motif": "anneau d'or gravé, triangle rayonnant, voûte de pierres, une dent cariée en clef de voûte",
+        "couleurs": [
+          "#C9A24D",
+          "#2B1B0E",
+          "#F2EEE6"
+        ],
+        "id": "cadre_g14",
+        "image": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_7b746e6a-3cf5-497d-b29f-65097d552e02.png",
+          "job_id": "7b746e6a-3cf5-497d-b29f-65097d552e02",
+          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+        },
+        "image_carree_refusee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003920_6fa96bff-3c19-49fe-b47f-adfc0a128bd1.png",
+          "job_id": "6fa96bff-3c19-49fe-b47f-adfc0a128bd1",
+          "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        }
+      },
+      {
+        "grade": 18,
+        "degre": "Souverain Prince Rose-Croix (sommet du Chapitre)",
+        "titre_jeu": "Knight Rose-Bleed",
+        "motif": "rose rouge saignante sur une croix, pélican, rubans rouges, or ancien",
+        "couleurs": [
+          "#8E1B1B",
+          "#C9A24D",
+          "#1A1A1A"
+        ],
+        "id": "cadre_g18",
+        "image": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_b9cf315c-c40e-4d97-a4ad-9f2c0a8896c8.png",
+          "job_id": "b9cf315c-c40e-4d97-a4ad-9f2c0a8896c8",
+          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+        },
+        "image_carree_refusee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003919_5ebfe53e-8881-4173-b02d-e644a0fb5a28.png",
+          "job_id": "5ebfe53e-8881-4173-b02d-e644a0fb5a28",
+          "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        }
+      },
+      {
+        "grade": 30,
+        "degre": "Chevalier Kadosh (sommet de l'Aréopage)",
+        "titre_jeu": "(grade 30, nom du jeu)",
+        "motif": "noir et blanc tranchés, échelle à deux montants, aigle, crâne couronné de lauriers, croix teutonique rouge",
+        "couleurs": [
+          "#0B0B0B",
+          "#F2EEE6",
+          "#A31212"
+        ],
+        "id": "cadre_g30",
+        "image": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_d84e9a0c-c203-4081-8b78-1c90ada8ab22.png",
+          "job_id": "d84e9a0c-c203-4081-8b78-1c90ada8ab22",
+          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+        },
+        "image_carree_refusee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003919_214bdd05-0ed4-4434-92bd-ef0aff8352e8.png",
+          "job_id": "214bdd05-0ed4-4434-92bd-ef0aff8352e8",
+          "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        }
+      },
+      {
+        "grade": 32,
+        "degre": "Sublime Prince du Royal Secret (Consistoire)",
+        "titre_jeu": "(grade 32, nom du jeu)",
+        "motif": "camp à neuf côtés, tentes et bannières, aigle bicéphale argent, bordure noire et argent",
+        "couleurs": [
+          "#0B0B0B",
+          "#C0C0C0",
+          "#F2EEE6"
+        ],
+        "id": "cadre_g32",
+        "image": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_ffab2288-94b3-4ab9-a203-6553448283c6.png",
+          "job_id": "ffab2288-94b3-4ab9-a203-6553448283c6",
+          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+        },
+        "image_carree_refusee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003920_ccacf2a0-2df9-48cf-ab15-d5186a7fa82f.png",
+          "job_id": "ccacf2a0-2df9-48cf-ab15-d5186a7fa82f",
+          "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        }
+      },
+      {
+        "grade": 33,
+        "degre": "Souverain Grand Inspecteur Général (Suprême Conseil)",
+        "titre_jeu": "(grade 33 : top 10 de saison)",
+        "motif": "aigle bicéphale couronné, or sur pourpre et blanc, feuillage d'or, le plus chargé des six",
+        "couleurs": [
+          "#4B1F6B",
+          "#C9A24D",
+          "#F2EEE6"
+        ],
+        "id": "cadre_g33",
+        "image": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_7d41bbf9-fb7f-45a2-80b2-d952e5847c54.png",
+          "job_id": "7d41bbf9-fb7f-45a2-80b2-d952e5847c54",
+          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+        },
+        "image_carree_refusee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003920_07b3d8d0-43eb-438e-b093-f7e8ddbdacbe.png",
+          "job_id": "07b3d8d0-43eb-438e-b093-f7e8ddbdacbe",
+          "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        }
+      }
+    ],
+    "generation": "lot généré le 09/11 (6 × FLUX 3 2K, référence = tablier_NN.webp) — URL dans liste[].image ; l'écran détoure le magenta (note 518)",
+    "ecran": "catégorie « cadre » du Vault (fiche d'équipement 04/11) ; le cadre du grade s'affiche sur le portrait de la fiche, du podium et du bandeau de fin"
   }
 }

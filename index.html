@@ -14610,6 +14610,27 @@
       .nouvelle-table .ntt-cb2-action > .col-journal {
         min-height: 0; max-height: 620px; overflow: hidden; width: auto; margin: 0;
       }
+      /* S1692 · note 509 ② (Croze : « au milieu ça overlap trop la log, faudrait réduire la log pour afficher
+         le dé ») — mesuré au banc d'essai, 1280 × 800 : la scène du dé (x 353-927, y 273-528, fond
+         transparent) passait PAR-DESSUS le journal du centre (x 798-963, y 101-514). En combat, le
+         journal central tombe EN BAS de la colonne, réduit à trois lignes qui défilent (le plus récent
+         en haut, sans barre), et il s'efface tant qu'une scène est à l'écran : le dé a la priorité. */
+      .nouvelle-table .ntt-en-combat > .ntt-axe.nt-combat:has(> .ntt-cb2-action:not(.spect-action)) { align-self: stretch; }
+      .nouvelle-table .ntt-axe.nt-combat > .ntt-cb2-action:not(.spect-action) {
+        flex: 1 1 auto; grid-template-rows: minmax(0, 1fr);
+      }
+      .nouvelle-table .ntt-axe.nt-combat > .ntt-cb2-action:not(.spect-action) > .col-journal {
+        align-self: end; height: auto; max-height: none; transition: opacity .2s ease;
+      }
+      .nouvelle-table .ntt-axe.nt-combat > .ntt-cb2-action:not(.spect-action) > .col-journal > .fil.fil-siege {
+        /* trois lignes : une ligne v3 = 2em (28 px à 14 px), l'écart du fil 9 px, ses marges 2 × 4 px, + 2 px
+           (mesuré : trois lignes = 109 px de contenu) */
+        max-height: calc(3 * 2em + 2 * 9px + 10px); overflow-y: auto; scrollbar-width: none; overscroll-behavior: contain;
+      }
+      .nouvelle-table .ntt-axe.nt-combat > .ntt-cb2-action:not(.spect-action) > .col-journal > .fil.fil-siege::-webkit-scrollbar { display: none; }
+      :root:has(.dicelayer) .nouvelle-table .ntt-axe.nt-combat > .ntt-cb2-action:not(.spect-action) > .col-journal {
+        opacity: 0; visibility: hidden;
+      }
       /* le badge du Tour de donjon (`nt-memoire`, absolu, top 50 → 108) reste en
          haut à droite quand le combat gobe le bandeau : mesuré, il recouvrait la
          barre d'onglets et en AVALAIT les clics. La colonne commence sous lui. */
@@ -15629,7 +15650,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-T0yHma-x.js"></script>
+    <script type="module" crossorigin src="./assets/index-CQyQJvZ5.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

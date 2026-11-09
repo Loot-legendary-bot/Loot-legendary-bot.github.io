@@ -1710,7 +1710,8 @@
           "dos": "gold_and_red"
         },
         "4_Greed": {
-          "dos": "goblin_casino"
+          "dos": "nylon_wallet",
+          "note": "goblin_casino retiré du jeu par Croze (09/11) — nylon_wallet (le portefeuille) prend Greed ; il quitte le mur (511 ③ CHAOS extractions 10 supprimé)"
         },
         "5_Anger": {
           "des": "plastique_rouge"
