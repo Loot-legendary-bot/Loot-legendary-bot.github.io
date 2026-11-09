@@ -491,7 +491,89 @@
           "forme_moteur": "QUETES:AUCUNE (a nommer, 402)"
         },
         "fin_de_niveau": "l'objectif du chapitre decide (pas les points) ; les etoiles selon regle_etoiles"
-      }
+      },
+      "progression": {
+        "source": "CLASSEUR 09/11, sur la demande de Croze (« comment c'est intriqué : tel niveau permet d'aller vers X ou Y ») — reco, veto d'un mot",
+        "regle": "chaîne : un niveau se déverrouille quand le précédent est RÉUSSI (objectif atteint, mission validée) ; un niveau réussi se rejoue à volonté (le max d'étoiles reste) ; rater un niveau ne coûte rien (retour au point de passage, le Turd commente) ; la Porte du Vestibule (limbo_10) ouvre le cercle 2",
+        "graphe": [
+          {
+            "de": "tuto_1",
+            "vers": [
+              "tuto_2"
+            ],
+            "porte": "RÉUSSI"
+          },
+          {
+            "de": "tuto_2",
+            "vers": [
+              "limbo_3"
+            ],
+            "porte": "RÉUSSI"
+          },
+          {
+            "de": "limbo_3",
+            "vers": [
+              "limbo_4"
+            ],
+            "porte": "RÉUSSI"
+          },
+          {
+            "de": "limbo_4",
+            "vers": [
+              "limbo_5"
+            ],
+            "porte": "RÉUSSI"
+          },
+          {
+            "de": "limbo_5",
+            "vers": [
+              "limbo_6",
+              "limbo_7"
+            ],
+            "porte": "RÉUSSI — fourche (reco) : Loadout et Signature se font dans l'ordre qu'on veut"
+          },
+          {
+            "de": "limbo_6",
+            "vers": [
+              "limbo_8"
+            ],
+            "porte": "RÉUSSI, et limbo_7 RÉUSSI aussi (les deux branches se rejoignent)"
+          },
+          {
+            "de": "limbo_7",
+            "vers": [
+              "limbo_8"
+            ],
+            "porte": "RÉUSSI, et limbo_6 RÉUSSI aussi"
+          },
+          {
+            "de": "limbo_8",
+            "vers": [
+              "limbo_9"
+            ],
+            "porte": "RÉUSSI"
+          },
+          {
+            "de": "limbo_9",
+            "vers": [
+              "limbo_10"
+            ],
+            "porte": "RÉUSSI"
+          },
+          {
+            "de": "limbo_10",
+            "vers": [
+              "cercle 2 — Lust"
+            ],
+            "porte": "RÉUSSI = la Porte du Vestibule s'ouvre ; l'examen du cercle (10K dents + le skin du cercle) tombe ici"
+          }
+        ],
+        "ecran": "la carte dessine le chemin entre les ancres des chapitres (chapitres[].ancre, données modifiables : Croze retouchera la carte D, les positions bougeront) ; un point se déverrouille selon ce graphe ; la fourche se dessine comme deux chemins qui se séparent après le point 5 et se rejoignent au point 8",
+        "statut": "VALIDÉE par Croze le 09/11 (« fourche c'est très bien, c'est ce qu'on veut ») — la fourche après le point 5 est la règle"
+      },
+      "remarques_croze": [
+        "09/11 : « j'aime bien les numéros et les reviews ; j'ai juste peur que chaque niveau soit vraiment court, mais ok, on va voir, je review en test dès que je peux » → levier si c'est court : tours_max et objectifs par chapitre (spec_v2), à ajuster après ses tests"
+      ]
     },
     {
       "numero": 2,
@@ -1664,7 +1746,8 @@
         "regle": "Croze : « ok for all » sur les dix briefs v2 = GO du lot (08/11 soir)",
         "complement": "+ 2 images FLUX 3 2K (bande v2 C / D) après le verdict de Croze sur la v1"
       },
-      "telechargement_ecran": "note écran 516 : l'écran télécharge la bande D et les dix médaillons depuis les URL ci-dessus vers public/art/campagne/ (webp), mesure les ancres sur D, monte la sous-carte ; le dépôt de Croze dans ASSETS\\campagne\\ est optionnel et prioritaire s'il existe"
+      "telechargement_ecran": "note écran 516 : l'écran télécharge la bande D et les dix médaillons depuis les URL ci-dessus vers public/art/campagne/ (webp), mesure les ancres sur D, monte la sous-carte ; le dépôt de Croze dans ASSETS\\campagne\\ est optionnel et prioritaire s'il existe",
+      "ancres_modifiables": "Croze 09/11 : la carte D a des incohérences (le portail d'arrivée, un chemin derrière, un chemin devant) qu'il retouchera plus tard, les positions bougeront légèrement → les ancres des dix points et le tracé du chemin sont des DONNÉES (chapitres[].ancre, x / y en fractions) lues par l'écran, jamais codées en dur ; changer une ancre déplace le point, le segment de chemin et l'arrêt du Turd sans toucher au code"
     }
   },
   "formes_de_scenario_requises": [
@@ -1727,7 +1810,8 @@
         },
         "9_Treachery": {
           "des": "bleu_translucide"
-        }
+        },
+        "statut": "Croze 09/11 : « OK » sur le partage 9 campagne / 12 mur (Q6)"
       }
     },
     "livre": {

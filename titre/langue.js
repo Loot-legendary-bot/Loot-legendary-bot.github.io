@@ -1425,6 +1425,8 @@
     "The Great Work is coming soon.": "The Great Work arrive bientôt.",
     "Locked — coming soon": "Fermé — bientôt",
     "Book I · Nigredo": "Livre I · Nigredo",
+    "Book I · Nigredo — Solo": "Livre I · Nigredo — Solo",   /* S1694 - 528 (2) */
+    "One a day — Solo": "Un par jour — Solo",
     "Campaign": "Campagne",
     "The Great Work — nine circles down, one chapter at a time. Chapter 1: First Steps.": "The Great Work — neuf cercles à descendre, un chapitre à la fois. Chapitre 1 : First Steps.",
     "Play yesterday’s": "Jouer celui d’hier",

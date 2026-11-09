@@ -279,7 +279,7 @@
      TRANSFORM, donc elle ne coûte aucun re-flow (référence gravée :
      transform/opacity only). L'image est en plus mise à l'échelle 1,16 pour
      qu'aucun coin ne découvre le fond. */
-  .doors{position:absolute;left:5cqw;right:5cqw;top:37.5cqh;bottom:9cqh;
+  .doors{position:absolute;left:5cqw;right:5cqw;top:19cqh;bottom:9cqh;   /* S1694 - 528 (1) : plus de titre au-dessus, les cartes remontent */
     display:grid;grid-template-columns:repeat(4,1fr);gap:1.6cqw}   /* S1621 - 463 (5) : trois portes ; S1686 - 508 (2) : QUATRE, meme poids */
   /* S1686 - 508 (2) : CAMPAIGN - L'OR du Grand Oeuvre, un liseré plein en haut. */
   .d-campaign .cap-top{left:0;right:0;top:0;height:.5cqh;background:#c9a24a}
@@ -1374,9 +1374,7 @@
 
   <section class="view" id="v-pve">
     <button class="back" data-back><span>&#9664;</span><span>Back to menu</span></button>
-    <div class="eyebrow">Choose your run</div>
-    <h2 class="htitle">Play</h2>
-    <div class="hsep sepimg"></div>
+    <!-- S1694 - note 528 (1) (Croze : « le CHOOSE YOUR RUN, le PLAY et la barre moche sous le PLAY -> tu peux virer ») -->
     <div class="doors" id="doors"></div>
   </section>
 
@@ -3290,17 +3288,21 @@ window.LL_DAILY_ENDORMI = !window.LLDevUnlock.lit('daily');
 window.LL_DAILY_DORT = 'Today’s Dungeon is coming soon.';
 window.LL_CAMPAIGN_ENDORMI = !window.LLDevUnlock.lit('campaign');
 window.LL_CAMPAIGN_DORT = 'The Great Work is coming soon.';
+/* S1694 - note 528 (1) (2) (Croze, 09/11) : l'ordre CAMPAIGN · TODAY'S DUNGEON · CLASSIC · DUNGEON PRO TOUR ;
+   « Campagne et Today precisent que c'est solo » - SOLO en fin de sur-titre. */
+const DOORS_528=[
+  ["Book I · Nigredo — Solo","Campaign","The Great Work — nine circles down, one chapter at a time. Chapter 1: First Steps.",9,()=>setTimeout(()=>{ if(window.LLAventure) window.LLAventure.ouvre(); },300),'d-campaign',null],
+  ["One a day — Solo","Today’s Dungeon","One seed for everyone — try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null]];
 const DOORS=[
   /* S1471 - note 359 (3) : VS BOTS devient CLASSIC (reco du classeur), le chacun-pour-soi a 3, 4 ou 5 ;
      2V2, 2V2V2 et le FFA a six passent dans la porte EXPERIMENTAL (moteur 252 ter), sans classement. */
   /* S1489 - note 368 (6) : « AGAINST BOTS AND/OR PLAYERS » (Croze, capture 4). */
   ["Against bots and/or players","Classic","Free-for-all against bots and/or players, 3 to 5 players, alone or with friends. Pays out in teeth.",9,()=>setTimeout(()=>{matchCtx='bots';go('match','bots');},300),'d-bots',null],
-  ["One a day","Today\u2019s Dungeon","One seed for everyone \u2014 try as often as you like, your best try counts.",4,()=>setTimeout(()=>{matchCtx='daily';go('match','daily');},300),'d-daily',null],
-  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked',null],
+  ["Ranked ladder","Dungeon Pro Tour","Seats drawn at random, no invite. Your rank moves on every run.",1,()=>setTimeout(()=>{matchCtx='ranked';go('match','ranked');},300),'d-ranked',null]];
   /* S1686 - note 508 (2) (Croze : « ces 4 categories dans DIVE, pas seulement un petit truc ») + 507 : la QUATRIEME
      porte, meme taille et meme poids. Le bouton dit CAMPAIGN, l'interieur THE GREAT WORK, le livre I NIGREDO
      (aventure.json.libelles) ; fond = la carte de l'entonnoir validee par Croze (ASSETS\campagne, en bandeau). */
-  ["Book I · Nigredo","Campaign","The Great Work — nine circles down, one chapter at a time. Chapter 1: First Steps.",9,()=>setTimeout(()=>{ if(window.LLAventure) window.LLAventure.ouvre(); },300),'d-campaign',null]];   /* S1682 - note 500 (1) : « Bronze III n'existe pas » - la pastille tombe */
+DOORS.unshift(...DOORS_528);   /* S1694 - 528 (1) : CAMPAIGN et TODAY'S DUNGEON en tete (DOORS_528), puis CLASSIC, puis PRO TOUR. S1682 - 500 (1) : la pastille Bronze III tombe */
   /* S1621 - note 463 (5) = 445 (4) : DIVE a TROIS portes. La porte EXPERIMENTAL est fondue dans CLASSIC
      (ses trois formats y sont, sous \u00ab being tested - no ranking \u00bb, voir MODES_DU_CTX) ; la porte HI-SCORE
      est retiree (la borne, borne.js, et la porte ?hiscore= de main.ts restent, sans entree au menu). */

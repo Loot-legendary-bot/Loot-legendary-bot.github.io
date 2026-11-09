@@ -273,13 +273,13 @@
   },
   "cadres": {
     "source": "Croze 08/11 (nuit) : « les grades : faire des frames basées sur le motif ou les couleurs du grade en question ; ça doit suivre les titres maçonniques, certains grades qu'on skip ; typiquement le grade 4 c'est un cadre » — les bons chiffres : 4, 14, 18, 30, 32, 33",
-    "regle": "un cadre de portrait ROND (les médaillons du jeu sont des cercles — Croze 09/11) (cosmétique équipable, catégorie cadre du Vault) est DONNÉ quand le grade est atteint ; il reste acquis si le grade redescend ; le dessin suit le motif et les couleurs du degré écossais correspondant — rien n'est écrit en clair maçonnique sur le cadre (le jeu parodie, il ne cite pas)",
+    "regle": "un cadre de portrait ROND (les médaillons du jeu sont des cercles — Croze 09/11) (cosmétique équipable, catégorie cadre du Vault) est DONNÉ quand le grade est atteint ; il reste acquis si le grade redescend ; le dessin suit le motif et les couleurs du degré écossais correspondant — rien n'est écrit en clair maçonnique sur le cadre (le jeu parodie, il ne cite pas) ; v4 (09/11) : la richesse de la v2 moins un peu de fioriture ; un emblème principal par cadre (clé seule au 4, coulures seules au 18, fourchette seule au 30)",
     "liste": [
       {
         "grade": 4,
         "degre": "Maître Secret (entrée en Loge de Perfection)",
         "titre_jeu": "Secret Keyhole Master",
-        "motif": "noir et blanc, clef d'ivoire, branche de laurier et d'olivier, un œil dans un trou de serrure, bordure sobre",
+        "motif": "l'œil bleu du tablier en médaillon unique, cuir bleu et noir cousu, aucun laurier",
         "couleurs": [
           "#0B0B0B",
           "#F2EEE6",
@@ -287,15 +287,31 @@
         ],
         "id": "cadre_g04",
         "image": {
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_bc6f432d-8873-4d97-bb2b-360c019b095f.png",
-          "job_id": "bc6f432d-8873-4d97-bb2b-360c019b095f",
-          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
-          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_100505_8fe7d535-b0d1-470a-a304-49e6974555cd.png",
+          "job_id": "8fe7d535-b0d1-470a-a304-49e6974555cd",
+          "forme": "ROND (anneau), richesse de la v4, l'œil du tablier seul, intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v5 générée le 09/11 (FLUX 3, 2K, référence = la v4 + le tablier) — à valider"
         },
         "image_carree_refusee": {
           "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003921_3251dc71-4a15-4b0e-a70d-fc2171b5208b.png",
           "job_id": "3251dc71-4a15-4b0e-a70d-fc2171b5208b",
           "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        },
+        "image_v2_trop_detaillee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_bc6f432d-8873-4d97-bb2b-360c019b095f.png",
+          "job_id": "bc6f432d-8873-4d97-bb2b-360c019b095f",
+          "verdict": "Croze 09/11 : « trop de détails, ils sont petits »"
+        },
+        "motif_v3": "l'œil seul (le tablier), pas de laurier",
+        "image_v3_trop_simple": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_094556_93a7ffa9-d873-48e4-9965-7067a3c3274d.png",
+          "job_id": "93a7ffa9-d873-48e4-9965-7067a3c3274d",
+          "verdict": "Croze 09/11 : « non, trop simple, reviens comme avant, juste tu enlèves un peu de fioriture »"
+        },
+        "image_v4_cle": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_095547_5a5c0cac-e9d8-40fc-9363-93a671a35d06.png",
+          "job_id": "5a5c0cac-e9d8-40fc-9363-93a671a35d06",
+          "verdict": "Croze 09/11 : « le premier : tu mets qu'un œil et pas de laurier »"
         }
       },
       {
@@ -310,38 +326,74 @@
         ],
         "id": "cadre_g14",
         "image": {
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_7b746e6a-3cf5-497d-b29f-65097d552e02.png",
-          "job_id": "7b746e6a-3cf5-497d-b29f-65097d552e02",
-          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
-          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_095547_b5c93657-2fa2-4dd4-9075-4ad21883d9eb.png",
+          "job_id": "b5c93657-2fa2-4dd4-9075-4ad21883d9eb",
+          "forme": "ROND (anneau), richesse de la v2 moins un peu de fioriture, l'emblème unique de Croze (clé seule / coulures seules / fourchette seule), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v4 générée le 09/11 (FLUX 3, 2K, référence = la v2 du même cadre) — à valider"
         },
         "image_carree_refusee": {
           "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003920_6fa96bff-3c19-49fe-b47f-adfc0a128bd1.png",
           "job_id": "6fa96bff-3c19-49fe-b47f-adfc0a128bd1",
           "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        },
+        "image_v2_trop_detaillee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_7b746e6a-3cf5-497d-b29f-65097d552e02.png",
+          "job_id": "7b746e6a-3cf5-497d-b29f-65097d552e02",
+          "verdict": "Croze 09/11 : « trop de détails, ils sont petits »"
+        },
+        "motif_v3": "la molaire noire seule",
+        "image_v3_trop_simple": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_094555_b6aab0a2-ba30-4d16-beea-369912089ba5.png",
+          "job_id": "b6aab0a2-ba30-4d16-beea-369912089ba5",
+          "verdict": "Croze 09/11 : « non, trop simple, reviens comme avant, juste tu enlèves un peu de fioriture »"
         }
       },
       {
         "grade": 18,
         "degre": "Souverain Prince Rose-Croix (sommet du Chapitre)",
         "titre_jeu": "Knight Rose-Bleed",
-        "motif": "rose rouge saignante sur une croix, pélican, rubans rouges, or ancien",
+        "motif": "anneau entier rouge cramoisi très saturé (le cuir du tablier), festons blancs, AUCUN or, UNE goutte de sang brillante en haut",
         "couleurs": [
-          "#8E1B1B",
-          "#C9A24D",
-          "#1A1A1A"
+          "#A8101E",
+          "#F2EEE6"
         ],
         "id": "cadre_g18",
         "image": {
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_b9cf315c-c40e-4d97-a4ad-9f2c0a8896c8.png",
-          "job_id": "b9cf315c-c40e-4d97-a4ad-9f2c0a8896c8",
-          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
-          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_103021_bc132f9c-0e2b-486c-ac8f-4d691763cb1c.png",
+          "job_id": "bc132f9c-0e2b-486c-ac8f-4d691763cb1c",
+          "forme": "ROND (anneau), rouge saturé uni sans or, une goutte en haut, intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v7 générée le 09/11 (FLUX 3, 2K, références = la v6 + le tablier) — à valider"
         },
         "image_carree_refusee": {
           "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003919_5ebfe53e-8881-4173-b02d-e644a0fb5a28.png",
           "job_id": "5ebfe53e-8881-4173-b02d-e644a0fb5a28",
           "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        },
+        "image_v2_trop_detaillee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_b9cf315c-c40e-4d97-a4ad-9f2c0a8896c8.png",
+          "job_id": "b9cf315c-c40e-4d97-a4ad-9f2c0a8896c8",
+          "verdict": "Croze 09/11 : « trop de détails, ils sont petits »"
+        },
+        "motif_v3": "que du sang (coulures), ni pélican ni croix",
+        "image_v3_trop_simple": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_094629_cc4417db-41c1-432e-8920-02d4042a86f9.png",
+          "job_id": "cc4417db-41c1-432e-8920-02d4042a86f9",
+          "verdict": "Croze 09/11 : « non, trop simple, reviens comme avant, juste tu enlèves un peu de fioriture »"
+        },
+        "image_v4_coulis": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_095547_ab71e63f-f3bc-4a8f-897c-346ff70b2a9b.png",
+          "job_id": "ab71e63f-f3bc-4a8f-897c-346ff70b2a9b",
+          "verdict": "Croze 09/11 : « sang partout ; là ça fait marron et on dirait du coulis de fruit visqueux »"
+        },
+        "image_v5_coulures": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_101035_68223653-4c25-41b3-b49f-9ae52553b606.png",
+          "job_id": "68223653-4c25-41b3-b49f-9ae52553b606",
+          "verdict": "Croze 09/11 : « oublie, c'est naze »"
+        },
+        "image_v6_avec_or": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_101539_37a34a0d-75bd-4fa2-830c-6ce451a1bb1f.png",
+          "job_id": "37a34a0d-75bd-4fa2-830c-6ce451a1bb1f",
+          "verdict": "Croze 09/11 : « non, plus saturé et surtout sans OR »"
         }
       },
       {
@@ -356,15 +408,26 @@
         ],
         "id": "cadre_g30",
         "image": {
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_d84e9a0c-c203-4081-8b78-1c90ada8ab22.png",
-          "job_id": "d84e9a0c-c203-4081-8b78-1c90ada8ab22",
-          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
-          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_095548_b600835f-fc03-4019-b630-6393294a6a3d.png",
+          "job_id": "b600835f-fc03-4019-b630-6393294a6a3d",
+          "forme": "ROND (anneau), richesse de la v2 moins un peu de fioriture, l'emblème unique de Croze (clé seule / coulures seules / fourchette seule), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v4 générée le 09/11 (FLUX 3, 2K, référence = la v2 du même cadre) — à valider"
         },
         "image_carree_refusee": {
           "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003919_214bdd05-0ed4-4434-92bd-ef0aff8352e8.png",
           "job_id": "214bdd05-0ed4-4434-92bd-ef0aff8352e8",
           "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        },
+        "image_v2_trop_detaillee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085950_d84e9a0c-c203-4081-8b78-1c90ada8ab22.png",
+          "job_id": "d84e9a0c-c203-4081-8b78-1c90ada8ab22",
+          "verdict": "Croze 09/11 : « trop de détails, ils sont petits »"
+        },
+        "motif_v3": "que la fourchette",
+        "image_v3_trop_simple": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_094556_813dad09-b583-4ba1-9a42-c726149d1f9e.png",
+          "job_id": "813dad09-b583-4ba1-9a42-c726149d1f9e",
+          "verdict": "Croze 09/11 : « non, trop simple, reviens comme avant, juste tu enlèves un peu de fioriture »"
         }
       },
       {
@@ -379,15 +442,26 @@
         ],
         "id": "cadre_g32",
         "image": {
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_ffab2288-94b3-4ab9-a203-6553448283c6.png",
-          "job_id": "ffab2288-94b3-4ab9-a203-6553448283c6",
-          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
-          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_095547_c8cd5c11-098e-41d0-aba1-adf897953046.png",
+          "job_id": "c8cd5c11-098e-41d0-aba1-adf897953046",
+          "forme": "ROND (anneau), richesse de la v2 moins un peu de fioriture, l'emblème unique de Croze (clé seule / coulures seules / fourchette seule), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v4 générée le 09/11 (FLUX 3, 2K, référence = la v2 du même cadre) — à valider"
         },
         "image_carree_refusee": {
           "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003920_ccacf2a0-2df9-48cf-ab15-d5186a7fa82f.png",
           "job_id": "ccacf2a0-2df9-48cf-ab15-d5186a7fa82f",
           "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        },
+        "image_v2_trop_detaillee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_ffab2288-94b3-4ab9-a203-6553448283c6.png",
+          "job_id": "ffab2288-94b3-4ab9-a203-6553448283c6",
+          "verdict": "Croze 09/11 : « trop de détails, ils sont petits »"
+        },
+        "motif_v3": "gros losanges d'arlequin + le masque seul",
+        "image_v3_trop_simple": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_094557_dd054105-e113-48ee-874a-d497bce9432e.png",
+          "job_id": "dd054105-e113-48ee-874a-d497bce9432e",
+          "verdict": "Croze 09/11 : « non, trop simple, reviens comme avant, juste tu enlèves un peu de fioriture »"
         }
       },
       {
@@ -402,15 +476,26 @@
         ],
         "id": "cadre_g33",
         "image": {
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_7d41bbf9-fb7f-45a2-80b2-d952e5847c54.png",
-          "job_id": "7d41bbf9-fb7f-45a2-80b2-d952e5847c54",
-          "forme": "ROND (anneau), intérieur et extérieur magenta #FF00FF à détourer",
-          "statut": "v2 générée le 09/11 (FLUX 3, 1:1, 2K, référence = le tablier du grade) — à valider par Croze"
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_095546_fb61b29b-f405-47e2-a255-18caeced1e8d.png",
+          "job_id": "fb61b29b-f405-47e2-a255-18caeced1e8d",
+          "forme": "ROND (anneau), richesse de la v2 moins un peu de fioriture, l'emblème unique de Croze (clé seule / coulures seules / fourchette seule), intérieur et extérieur magenta #FF00FF à détourer",
+          "statut": "v4 générée le 09/11 (FLUX 3, 2K, référence = la v2 du même cadre) — à valider"
         },
         "image_carree_refusee": {
           "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_003920_07b3d8d0-43eb-438e-b093-f7e8ddbdacbe.png",
           "job_id": "07b3d8d0-43eb-438e-b093-f7e8ddbdacbe",
           "verdict": "Croze 09/11 : « les cadres doivent être ronds »"
+        },
+        "image_v2_trop_detaillee": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_085949_7d41bbf9-fb7f-45a2-80b2-d952e5847c54.png",
+          "job_id": "7d41bbf9-fb7f-45a2-80b2-d952e5847c54",
+          "verdict": "Croze 09/11 : « trop de détails, ils sont petits »"
+        },
+        "motif_v3": "l'hexagramme à la dent seul",
+        "image_v3_trop_simple": {
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_37QpaXKmPRxenHCUVLRpz4bVqlX/hf_20261109_094556_451dcf03-158e-4e79-9a53-e02c4740e56b.png",
+          "job_id": "451dcf03-158e-4e79-9a53-e02c4740e56b",
+          "verdict": "Croze 09/11 : « non, trop simple, reviens comme avant, juste tu enlèves un peu de fioriture »"
         }
       }
     ],
