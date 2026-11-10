@@ -13127,6 +13127,8 @@
       .boite-des.bd-roule .bd-resultat { visibility: hidden; }
       .dicelayer.bac-roule { background: none; pointer-events: none; }
       .dicelayer.bac-roule::before, .dicelayer.bac-roule::after, .dicelayer.bac-roule .hide-btn { display: none; }
+      /* S1699 · 533 ② — la carte du piège / du coffre reste affichée pendant que son dé roule dans le bac */
+      .dicelayer.bac-roule.avec-sa-carte .borne-bloc { opacity: 1; transform: none; }
       .boite-des.bd-roule .die.die-roulant { color: transparent; }
       .boite-des .bd-total { font-size: 28px; }
       /* S1579 · 414 ⑦ — contre un mob, l'initiative en une petite ligne discrète */
@@ -15680,7 +15682,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-9YzpCGQ5.js"></script>
+    <script type="module" crossorigin src="./assets/index-BABmaLhk.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

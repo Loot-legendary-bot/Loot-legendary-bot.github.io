@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 10 Nov 2026
+- **09:12** — TRAPS and CHESTS: the card now stays on screen while its dice roll in your tray, and a moment longer once they stop, so you read the result next to the card before it goes. Before, the trap card vanished as soon as the dice started.
 - **08:58** — PAY WITH CARDS: the selection now starts empty at every new payment (two Blue Blood in a row no longer carry the first choice into the second) and can never go past what you must pay: "7 / 1 SELECTED" is gone. When you pay 1 card, clicking another card swaps your choice; when you pay several, an extra card is refused and the counter shakes. If CANCEL is ever refused, it says so in plain English ("cannot cancel now — the cost is already paid") instead of an internal message.
 
 ## 09 Nov 2026
