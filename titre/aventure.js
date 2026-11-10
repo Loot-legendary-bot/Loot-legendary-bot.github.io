@@ -30,7 +30,27 @@
 
   /* le lanceur du scénario d'un chapitre : `scenario: "tuto"` = le tuto d'aujourd'hui (503 ③),
      la même porte que FIRST STEPS (`?tuto=tuto_1_the_run`) */
-  var LANCEURS = { tuto: 'tuto_1_the_run' };
+  var LANCEURS = { tuto: 'tuto_1_the_run', tuto_1: 'tuto_1_the_run' };
+  /* S1703 · note 536 ① — le lanceur d'un chapitre : une CHAÎNE = un tuto de `tuto.json` (s'il existe) ;
+     un OBJET = un scénario de campagne, lu par le moteur (`lireLaCampagne`) à la porte `?campagne=<id>`. */
+  function lanceurDe(ch) {
+    if (ch.scenario !== null && typeof ch.scenario === 'object') return { cle: 'campagne', val: ch.id };
+    var t = LANCEURS[ch.scenario];
+    return t ? { cle: 'tuto', val: t } : null;
+  }
+  function estLeTuto(ch) { return ch.scenario === 'tuto' || ch.scenario === 'tuto_1'; }
+  /* la progression (526 ②) : `ll_campagne[<id>].reussi`, écrit par la partie sur `SCENARIO_ENDED { reussi }` */
+  function reussiDe(ch) {
+    if (estLeTuto(ch)) return tutoFini();
+    try { var p = JSON.parse(localStorage.getItem('ll_campagne') || '{}'); return !!(p[ch.id] && p[ch.id].reussi === true); }
+    catch (e) { return false; }
+  }
+  function lance(l) {
+    var q = new URLSearchParams(window.location.search);
+    q.delete('tuto'); q.delete('campagne'); q.delete('perso');
+    q.set(l.cle, l.val);
+    window.location.href = '/?' + q.toString();
+  }
 
   var donnee = null, chargement = null;
   function charge() {
@@ -56,9 +76,9 @@
     d.cercles.forEach(function (c) {
       c.chapitres.forEach(function (ch) {
         var e;
-        if (ch.etat !== 'JOUABLE') e = 'A_VENIR';
+        if (lanceurDe(ch) === null) e = 'A_VENIR';
         else if (bloque) e = 'VERROUILLE';
-        else if (ch.scenario === 'tuto' && tutoFini()) e = 'REUSSI';
+        else if (reussiDe(ch)) e = 'REUSSI';
         else if (!courantPris) { e = 'COURANT'; courantPris = true; bloque = true; }
         else e = 'VERROUILLE';
         liste.push({ cercle: c, chapitre: ch, etat: e });
@@ -209,7 +229,7 @@
     }
     var corps;
     if (x.etat === 'A_VENIR') corps = mot('Coming — the scribe is still writing this chapter.', 'Bientôt — le scribe écrit encore ce chapitre.');
-    else if (ch.scenario === 'tuto') corps = mot('A real game as the Mailman, run by a dungeon master: he stops you on cards and walks you through every move.',
+    else if (estLeTuto(ch)) corps = mot('A real game as the Mailman, run by a dungeon master: he stops you on cards and walks you through every move.',
       'Une vraie partie avec The Mailman, menée par un maître de jeu : il t’arrête sur les cartes et te guide à chaque geste.');
     else corps = '';
     if (corps) f.appendChild(el('p', null, corps));
@@ -218,14 +238,10 @@
     var retour = el('button', null, mot('BACK', 'RETOUR')); retour.type = 'button';
     retour.addEventListener('click', function () { voile.remove(); });
     pied.appendChild(retour);
-    var lanceur = LANCEURS[ch.scenario];
+    var lanceur = lanceurDe(ch);
     if ((x.etat === 'COURANT' || x.etat === 'REUSSI') && lanceur) {
       var jouer = el('button', 'av-jouer', mot('PLAY', 'JOUER')); jouer.type = 'button';
-      jouer.addEventListener('click', function () {
-        var q = new URLSearchParams(window.location.search);
-        q.set('tuto', lanceur); q.delete('perso');
-        window.location.href = '/?' + q.toString();
-      });
+      jouer.addEventListener('click', function () { lance(lanceur); });
       pied.appendChild(jouer);
     }
     f.appendChild(pied);
@@ -279,10 +295,13 @@
   function etatsLimbes(c) {
     var out = [], courant = false;
     c.chapitres.forEach(function (ch) {
-      var reussi = ch.scenario === 'tuto' && tutoFini();
-      var e = reussi ? 'REUSSI' : courant ? 'NON_ATTEINT' : 'COURANT';
-      if (!reussi) courant = true;
-      out.push({ cercle: c, chapitre: ch, etat: e, jouable: ch.etat === 'JOUABLE' && LANCEURS[ch.scenario] !== undefined });
+      var reussi = reussiDe(ch);
+      /* S1703 · note 536 ① — un point sans scénario jouable (tuto_2 : son script n'existe pas encore)
+         dit NOT YET sans barrer la route : on le passe, le Turd attend au suivant. */
+      var passant = lanceurDe(ch) === null;
+      var e = reussi ? 'REUSSI' : courant ? 'NON_ATTEINT' : passant ? 'A_VENIR' : 'COURANT';
+      if (!reussi && !passant) courant = true;
+      out.push({ cercle: c, chapitre: ch, etat: e, jouable: lanceurDe(ch) !== null });
     });
     return out;
   }
@@ -328,11 +347,7 @@
     pied.appendChild(retour);
     var jouer = el('button', 'av-jouer', x.jouable ? mot('PLAY', 'JOUER') : 'NOT YET'); jouer.type = 'button';
     if (x.jouable) {
-      jouer.addEventListener('click', function () {
-        var q = new URLSearchParams(window.location.search);
-        q.set('tuto', LANCEURS[ch.scenario]); q.delete('perso');
-        window.location.href = '/?' + q.toString();
-      });
+      jouer.addEventListener('click', function () { lance(lanceurDe(ch)); });
     } else {
       jouer.disabled = true;
       f.appendChild(el('p', 'av-regle', mot('Comes with a next update.', 'Arrive avec une prochaine mise à jour.')));

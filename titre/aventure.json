@@ -45,7 +45,7 @@
           "numero": 1,
           "titre": "First Steps",
           "brief": "solo · le tuto qui existe : bouger, explorer, looter, END TURN · paquet de tuiles : 3 couloirs, aucune carte en main · plus de pas « quete » (Croze 08/11)",
-          "scenario": "tuto",
+          "scenario": "tuto_1",
           "etat": "JOUABLE",
           "etoiles": {
             "tours_max_3_etoiles": 6
@@ -104,8 +104,31 @@
           "id": "limbo_3",
           "numero": 3,
           "titre": "Bones & Teeth",
-          "brief": "solo · Weapon Attack et les des · main verrouillee : l'arme seule · mobs forces : skeleton_duellist ×2 (le skeleton_warrior a du loot Rare : hors etage)",
-          "scenario": "limbo_3",
+          "brief": "solo · Weapon Attack et les dés · main verrouillée : l'arme seule · mobs forcés : skeleton_duellist puis longleg_skeleton (le moteur refuse deux fois le même id en tête de paquet)",
+          "scenario": {
+            "id": "limbo_3",
+            "graine": 20261103,
+            "runs": 1,
+            "personnage": null,
+            "table": null,
+            "conditions": [
+              "SOLO",
+              "SOLO_DECK"
+            ],
+            "objectif": {
+              "kind": "KILLS",
+              "mobs": [
+                "skeleton_duellist",
+                "longleg_skeleton"
+              ],
+              "n": 2
+            },
+            "tours_max": 10,
+            "mobs_forces": [
+              "skeleton_duellist",
+              "longleg_skeleton"
+            ]
+          },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 10
@@ -116,7 +139,7 @@
             "tours_max": 10,
             "mobs_forces": [
               "skeleton_duellist",
-              "skeleton_duellist"
+              "longleg_skeleton"
             ],
             "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
           },
@@ -139,7 +162,31 @@
           "numero": 4,
           "titre": "The Potion Cabinet",
           "brief": "solo · consommables seulement (Heal Potion, French White Bread) · la fenetre de degats, le soin avant le coup mortel · mobs forces : zombie, goblin_thug",
-          "scenario": "limbo_4",
+          "scenario": {
+            "id": "limbo_4",
+            "graine": 20261104,
+            "runs": 1,
+            "personnage": null,
+            "table": null,
+            "conditions": [
+              "SOLO",
+              "SOLO_DECK"
+            ],
+            "objectif": {
+              "kind": "KILLS",
+              "mobs": [
+                "zombie",
+                "goblin_thug"
+              ],
+              "n": 2,
+              "sans_mourir": true
+            },
+            "tours_max": 10,
+            "mobs_forces": [
+              "zombie",
+              "goblin_thug"
+            ]
+          },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 10
@@ -173,7 +220,26 @@
           "numero": 5,
           "titre": "The Collapse",
           "brief": "solo · le de de Collapse = le de de portail · sortir par un portail avant le tour 6 · mobs : wall_snake, eyebat",
-          "scenario": "limbo_5",
+          "scenario": {
+            "id": "limbo_5",
+            "graine": 20261105,
+            "runs": 1,
+            "personnage": null,
+            "table": null,
+            "conditions": [
+              "SOLO",
+              "SOLO_DECK"
+            ],
+            "objectif": {
+              "kind": "EXTRACT",
+              "avant_tour": 6
+            },
+            "tours_max": 6,
+            "mobs_forces": [
+              "wall_snake",
+              "eyebat"
+            ]
+          },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 6
@@ -207,7 +273,32 @@
           "numero": 6,
           "titre": "Loadout",
           "brief": "solo · equiper torse / mains / pieds, le gear score · le premier RANGED : skeleton_archer",
-          "scenario": "limbo_6",
+          "scenario": {
+            "id": "limbo_6",
+            "graine": 20261106,
+            "runs": 1,
+            "personnage": null,
+            "table": null,
+            "conditions": [
+              "SOLO",
+              "SOLO_DECK"
+            ],
+            "objectif": {
+              "kind": "EQUIP_N",
+              "n": 3,
+              "ensuite": {
+                "kind": "KILLS",
+                "mobs": [
+                  "skeleton_archer"
+                ],
+                "n": 1
+              }
+            },
+            "tours_max": 10,
+            "mobs_forces": [
+              "skeleton_archer"
+            ]
+          },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 10
@@ -240,7 +331,32 @@
           "numero": 7,
           "titre": "Signature",
           "brief": "solo · perso prete : The Mailman · ta Signature une fois · mob : coin_flip_demon",
-          "scenario": "limbo_7",
+          "scenario": {
+            "id": "limbo_7",
+            "graine": 20261107,
+            "runs": 1,
+            "personnage": "the_mailman",
+            "table": null,
+            "conditions": [
+              "SOLO",
+              "SOLO_DECK"
+            ],
+            "objectif": {
+              "kind": "SIGNATURE_USED",
+              "n": 1,
+              "ensuite": {
+                "kind": "KILLS",
+                "mobs": [
+                  "coin_flip_demon"
+                ],
+                "n": 1
+              }
+            },
+            "tours_max": 10,
+            "mobs_forces": [
+              "coin_flip_demon"
+            ]
+          },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 10
@@ -273,7 +389,41 @@
           "numero": 8,
           "titre": "Two at the Table",
           "brief": "2 sieges + bot DOCILE · jet d'ordre, Priority Window, pas de PvP · pool de l'etage",
-          "scenario": "limbo_8",
+          "scenario": {
+            "id": "limbo_8",
+            "graine": 20261108,
+            "runs": 1,
+            "personnage": null,
+            "table": {
+              "sieges": 2,
+              "mode": "FFA"
+            },
+            "conditions": [
+              "BOTS:DOCILE"
+            ],
+            "objectif": {
+              "kind": "KILLS",
+              "mobs": [
+                "wall_snake",
+                "yoda",
+                "coin_flip_demon",
+                "lizards",
+                "pinky",
+                "magicrap",
+                "gutter_ratlord",
+                "skeleton_duellist",
+                "skeleton_archer",
+                "goblin_thug",
+                "longleg_skeleton",
+                "zombie",
+                "tripwire_gnome",
+                "trapdoor_creeper",
+                "eyebat"
+              ],
+              "n": 2
+            },
+            "tours_max": 10
+          },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 10
@@ -303,7 +453,23 @@
           "numero": 9,
           "titre": "Traps & Treasure",
           "brief": "solo · (remplace « One Quest » : plus de quetes en campagne) · un coffre et un piege : le de de coffre, le de de piege, la rarete du Dungeon Timer · tuiles forcees : the_trigger_hall, the_lost_vault",
-          "scenario": "limbo_9",
+          "scenario": {
+            "id": "limbo_9",
+            "graine": 20261109,
+            "runs": 1,
+            "personnage": null,
+            "table": null,
+            "conditions": [
+              "SOLO",
+              "SOLO_DECK"
+            ],
+            "objectif": {
+              "kind": "CHESTS",
+              "n": 2,
+              "sans_mourir": true
+            },
+            "tours_max": 10
+          },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 10
@@ -333,7 +499,24 @@
           "numero": 10,
           "titre": "The Vestibule Door",
           "brief": "3 sieges (2 bots DOCILE) · tout le pool de l'etage, aucun sub-boss · le Collapse jusqu'au tour 9 puis plus rien · la Porte du Vestibule s'ouvre au tour 12",
-          "scenario": "limbo_10",
+          "scenario": {
+            "id": "limbo_10",
+            "graine": 20261110,
+            "runs": 1,
+            "personnage": null,
+            "table": {
+              "sieges": 3,
+              "mode": "FFA"
+            },
+            "conditions": [
+              "BOTS:DOCILE"
+            ],
+            "objectif": {
+              "kind": "ALIVE_AT_TURN",
+              "n": 12
+            },
+            "tours_max": 12
+          },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 12
@@ -405,7 +588,6 @@
             "the_coffin_lounge",
             "the_dining_room",
             "the_forgotten_cell",
-            "the_fumoir",
             "the_lost_vault",
             "the_maze",
             "the_offrande_pit",
@@ -491,7 +673,15 @@
           "regle": "aucune quete en campagne (Croze : « en campagne y'en aura pas ») ; le tuto n'apprend plus les quetes (tuto.json : le pas « quest.reveal » retire)",
           "forme_moteur": "QUETES:AUCUNE (a nommer, 402)"
         },
-        "fin_de_niveau": "l'objectif du chapitre decide (pas les points) ; les etoiles selon regle_etoiles"
+        "fin_de_niveau": "l'objectif du chapitre decide (pas les points) ; les etoiles selon regle_etoiles",
+        "conditions": [
+          "MOB_POOL(wall_snake,yoda,coin_flip_demon,lizards,pinky,magicrap,gutter_ratlord,skeleton_duellist,skeleton_archer,goblin_thug,longleg_skeleton,zombie,tripwire_gnome,trapdoor_creeper,eyebat)",
+          "TILE_POOL(the_cell,x_road,corner_tower,cosy_studio,fountain_of_grace,secret_indoor_garden,the_black_velvet,the_coffin_lounge,the_dining_room,the_forgotten_cell,the_lost_vault,the_maze,the_offrande_pit,the_razor_bridge,the_sealed_vault,the_squire_spa,the_sunken_core,the_time_chamber,the_trigger_hall,the_whispering_room,umbral_guest_room,unstables_pillars)",
+          "CARDS_EXCLUDED(dungeon_party_mask,dice_eating_goose,confused_parrot,devouring_moths,seal_of_solomon,goblin_pocket_roulette,magpie,cold_invitation,le_croissant,shadow_tax,magic_leeches,astragor_poo,copy_cat,antimonium,salmon_cloak,ring_of_fisdeputry,ring_of_the_snake,elixir_of_luck,echo_flask,onion,first_strike_potion,ring_of_jealousy,cheater_s_gloves,dissimulation_bush,mirror_of_reversal,arena_invitation,astragor_invitation,party_invitation,squire_spa_convocation,listener_scarab,smoke_stick,flying_crabs_swarm,shackles,powder_of_perlinpinpin,mead_horn,wine,watering_can)",
+          "COLLAPSE_UNTIL:9",
+          "TIMER_FROZEN:EPIC"
+        ],
+        "conditions_note": "lues par le moteur (scenario.ts::lireLaCampagne, palier 1227) et posées DEVANT celles de chaque chapitre ; the_fumoir retiré du pool (n'existe qu'en Ruines : jamais sur un étage gelé EPIC) ; les 8 familles ajoutées au bout (smoke_stick → watering_can) = les cartes « un joueur » mortes en solo, sur la règle de Croze (veto d'un mot) — Croze 10/11 : « OK pour tes recos, pas de veto » (les 7 cartes restent exclues de tout l'étage)"
       },
       "progression": {
         "source": "CLASSEUR 09/11, sur la demande de Croze (« comment c'est intriqué : tel niveau permet d'aller vers X ou Y ») — reco, veto d'un mot",
@@ -574,7 +764,8 @@
       },
       "remarques_croze": [
         "09/11 : « j'aime bien les numéros et les reviews ; j'ai juste peur que chaque niveau soit vraiment court, mais ok, on va voir, je review en test dès que je peux » → levier si c'est court : tours_max et objectifs par chapitre (spec_v2), à ajuster après ses tests"
-      ]
+      ],
+      "scenarios_note": "forme du moteur (palier 1227) : chaîne = un tuto de tuto.json ; objet = scénario de campagne, clés exactes id/graine/runs/personnage/table/conditions/objectif/tours_max (+ mobs_forces) ; SOLO + table null = un siège ; SOLO_DECK exige un siège ; les conditions de l'étage (regles_etage.conditions) sont posées devant"
     },
     {
       "numero": 2,
