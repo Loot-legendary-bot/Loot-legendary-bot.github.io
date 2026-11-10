@@ -6786,6 +6786,9 @@
       /* S1690 · note 512 ④ — « 5 / 6 SELECTED » en gros, vert quand le compte y est. */
       .compte-selection { font-size: 22px; font-weight: 700; letter-spacing: .04em; color: #ffcf6b; margin: 8px 0 6px; }
       .compte-selection.juste { color: #6be38a; }
+      /* S1699 · 534 ① — la (N+1)ᵉ carte est refusée : le compte secoue */
+      .compte-selection.secoue { animation: compte-secoue .35s ease-in-out 1; color: #ff6b6b; }
+      @keyframes compte-secoue { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
       .fen-lecture-tue { border-left-color: #b3121b; background: rgba(120,0,8,.45); }
       .fen-lecture-tue .fen-lecture-titre { color: #ff3b3b; text-shadow: 0 0 8px rgba(255,0,0,.45); }
       .fen-lecture-sous { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 3px;
@@ -15677,7 +15680,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DvEM3YpT.js"></script>
+    <script type="module" crossorigin src="./assets/index-9YzpCGQ5.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
