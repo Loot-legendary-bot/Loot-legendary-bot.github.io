@@ -27,11 +27,14 @@
   if (!BW) { return; }
 
   /* La géométrie, en unités du monde ; la vue la cadre entière à l'ouverture. */
-  var R_ESPRIT = 500;     /* centre → esprit d'école */
+  /* S1711 · note 539 ② (a) — Croze : « the star doit être plus grande pour donner plus de place aux achievements du
+     milieu DUNGEON'S SPIRIT » : les deux anneaux du Donjon +40 % de rayon (175 → 245, 290 → 406), et les six esprits
+     repoussés d'autant (+116 : 500 → 616) — la distance entre l'anneau extérieur et les branches ne bouge pas. */
+  var R_ESPRIT = 616;     /* centre → esprit d'école */
   var R_SAT = 175;        /* esprit → ses bounties */
   /* centre → les bounties du Donjon : DEUX anneaux en quinconce (il en porte 29 — mesuré au premier rendu, un seul
      anneau les entassait) ; l'intérieur écrit sa récompense vers le centre, l'extérieur vers les esprits */
-  var R_SAT_NEUTRE = [175, 290];
+  var R_SAT_NEUTRE = [245, 406];
   var ARC = 200;          /* l'éventail des bounties autour d'un esprit, en degrés, tourné vers l'extérieur */
   var M_ESPRIT = 62, M_NEUTRE = 78, M_SAT = 25;
   /* S1675 · note 498 ② (c) — « il faut mettre sur fond sombre » : le parchemin devient une nuit d'encre, et
@@ -533,6 +536,62 @@
     return b;
   }
 
+  /* S1711 · note 539 ② (b) — Croze : « il faut aussi un encadré sur le côté offrande qu'on peut déplier pour voir
+     toutes les offrandes possibles disponibles + pacte ». Replié par défaut ; un clic le déplie. Il LIT le module
+     (`sac`, `brulent`, `pacte`, `essencesDe`, `OFFRANDES`) : rien n'est recalculé ici, rien ne s'offre ici (le geste
+     reste sur la page, PACTS & OFFERINGS). */
+  function poseLEncadréDesOffrandes() {
+    var profil = window.LLProfil ? window.LLProfil.lis() : {};
+    var boite = document.createElement('div');
+    boite.id = 'mur-offrandes';
+    boite.style.cssText = 'position:absolute;right:18px;top:102px;width:330px;max-height:calc(100% - 150px);overflow:auto;' +
+      'background:' + PANNEAU + ';border:2px solid ' + ENCRE_PALE + ';border-radius:4px;color:' + ENCRE + ';' +
+      'font:600 14px/1.3 "Alegreya",serif';
+    var tete = document.createElement('button');
+    tete.type = 'button';
+    tete.style.cssText = 'display:block;width:100%;text-align:left;cursor:pointer;padding:6px 12px;background:none;border:none;' +
+      'font:900 18px/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.1em;color:' + ENCRE;
+    var corps = document.createElement('div');
+    corps.style.cssText = 'display:none;padding:0 12px 10px';
+    var déplié = false;
+    function peinsLaTête() { tete.textContent = (déplié ? '▾ ' : '▸ ') + 'OFFERINGS'; }
+    tete.title = 'Every offering you can make, and your pact';
+    tete.addEventListener('click', function () { déplié = !déplié; corps.style.display = déplié ? 'block' : 'none'; peinsLaTête(); });
+    peinsLaTête();
+    var idPacte = BW.pacte(profil);
+    var lignePacte = document.createElement('div');
+    lignePacte.style.cssText = 'margin:4px 0 8px;color:' + OR;
+    lignePacte.textContent = idPacte === null ? 'PACT: no pact' : 'PACT: ' + BW.nomDe(idPacte) + ' (' + BW.affiche(BW.PACTE) + ')';
+    corps.appendChild(lignePacte);
+    var sac = BW.sac(profil);
+    BW.TRONCS.forEach(function (t) {
+      var sortes = BW.essencesDe(t.id);
+      if (sortes.length === 0) { return; }
+      var titre = document.createElement('div');
+      titre.textContent = t.t;
+      titre.style.cssText = 'margin-top:6px;font-weight:800;color:' + (t.teinte || ENCRE);
+      corps.appendChild(titre);
+      var feu = BW.brulent(profil, t.id);
+      sortes.forEach(function (s) {
+        var o = BW.OFFRANDES[s];
+        var n = sac[s] || 0;
+        var brûle = feu.filter(function (f) { return f.sorte === s; });
+        var l = document.createElement('div');
+        l.style.cssText = 'display:flex;justify-content:space-between;gap:8px;color:' + (n > 0 ? ENCRE : TEXTE_DOUX);
+        var nom = document.createElement('span');
+        nom.textContent = o.nom + ' ' + BW.affiche(o.x) + ' · ' + String(o.duree) + ' games';
+        var qte = document.createElement('span');
+        qte.textContent = (n > 0 ? '×' + String(n) + ' owned' : 'missing') +
+          (brûle.length > 0 ? ' · burning ' + String(brûle[0].restant) + ' left' : '');
+        l.appendChild(nom); l.appendChild(qte);
+        corps.appendChild(l);
+      });
+    });
+    boite.appendChild(tete);
+    boite.appendChild(corps);
+    couche.appendChild(boite);
+  }
+
   var options = {};
   /* `ouvre(espritId, { retour, page })` — S1672 · 490 (3) : la carte EST le Bounty Wall. `espritId` = l'esprit
      cliqué au HOME (la carte part de l'étoile entière et glisse sur sa branche) ; `retour()` = BACK / Échap ;
@@ -565,6 +624,7 @@
       bouton('PACTS & OFFERINGS ▸', 'Pacts, offerings, rewards to claim and contracts — on the wall', false, 'top:58px')
         .addEventListener('click', function () { options.page(fiche !== null ? fiche.e.t.id : null); });
     }
+    poseLEncadréDesOffrandes();
     document.body.appendChild(couche);
     ctx = toile.getContext('2d');
     vue = ensemble(); cible = null;

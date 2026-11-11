@@ -2,8 +2,9 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 11 Nov 2026
-- **23:10** — GOBLIN CASINO: when someone else starts a game and you are asked to sit, a DECLINE button now stands next to the bet. Before, on the big tile view, you could only bet or wait for the timer.
-- **23:10** — CAMPAIGN, Limbo level 2 (the fight tutorial): three short hints now appear on turn 1 (one Action: move, then END TURN), when you hold 8 cards (discard one), and when the bot runs away (propose a trade). They never block the table.
+- **23:25** — BOUNTY WALL: the star is bigger at its heart — the Spirit of the Dungeon's bounties no longer overlap, and the six spirits sit further out. A new OFFERINGS box on the right (closed by default, click to open) lists your pact and every essence of every spirit: owned or missing, how many, and the ones burning now.
+- **23:00** — GOBLIN CASINO: when someone else starts a game and you are asked to sit, a DECLINE button now stands next to the bet. Before, on the big tile view, you could only bet or wait for the timer.
+- **23:00** — CAMPAIGN, Limbo level 2 (the fight tutorial): three short hints now appear on turn 1 (one Action: move, then END TURN), when you hold 8 cards (discard one), and when the bot runs away (propose a trade). They never block the table.
 - **22:13** — BETS on a duel: ACCEPT now opens a WHO WINS? window — the two fighters' portraits, your stake (− / +), and you click the one you back. Before, ACCEPT closed the question without a bet.
 - **22:13** — HOME, your last six games (the banners above the gate): every character now shows its portrait (the Necromancer's medallion was empty). A game you left before it ended reads UNFINISHED, greyed, with no teeth shown; a campaign level reads "CAMPAIGN · LIMBO 3" instead of "VS BOTS · PLACE 1 / 1".
 - **22:13** — LISTENER SCARAB: when someone uses it on you, you now see it — "THE X REVEALS YOUR HAND", then "…and steals <card>" as the card flies to their portrait. Your log says the same.
