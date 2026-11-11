@@ -99,7 +99,7 @@
               "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\tuto_2.png"
             }
           },
-          "note_script": "tuto.json.tutos[1] = tuto_2_the_fight (CLASSEUR 11/11) : le Guard prêté, bob = the_wizard scripté (rejoint 10, engage 1, fuit, troc TOUT), 13 pas, lu par lireLesTutos ; le moteur le joue au banc du tuto et règle graine / dés (note 412), l'écran l'ouvre à sa ligne verte (note 538)"
+          "note_script": "tuto.json.tutos[1] = tuto_2_the_fight (CLASSEUR 11/11) : le Guard prêté, bob = the_wizard scripté (rejoint 10, engage 1, fuit, troc TOUT), 13 pas, lu par lireLesTutos ; le moteur le joue au banc du tuto et règle graine / dés (note 412), l'écran l'ouvre à sa ligne verte (note 538) — 11/11 soir : le pas 7 devient « équipe le Plate Gauntlet » (EQUIPPED), plate_gauntlet_common dans STARTING_HAND (Bulwark v198 exige une plate ; moteur Q-TUTO2-1245 : 13 / 13)"
         },
         {
           "id": "limbo_3",
@@ -664,10 +664,17 @@
               "party_invitation",
               "squire_spa_convocation"
             ],
-            "regle_solo": "dans un niveau SOLO, toute carte qui vise un autre joueur (targetMode PLAYER hors SELF) est retiree du paquet : elle serait morte"
+            "regle_solo": "dans un niveau SOLO, toute carte qui vise un autre joueur (targetMode PLAYER hors SELF) est retiree du paquet : elle serait morte",
+            "casino_et_hors_etage (Croze 11/11)": [
+              "fool_s_oracle_box (téléporte au Goblin Casino, absent de l'étage : la carte partait sans effet — Croze l'a reçue au niveau 3)",
+              "gambler_s_gloves (loot Legendary sur 20 naturel)",
+              "the_holey_stone (ne sert qu'à un RPS)",
+              "lucky_thief_s_gloves (vole un joueur)"
+            ]
           },
           "note": "le plafond UNCOMMON vaut pour le loot des MOBS ; coffres et tuiles suivent le Dungeon Timer (jusqu'a EPIC) — d'ou la liste d'exclusion toutes raretes",
-          "regle_solo": "Croze 08/11 (soir) : « faut aussi enlever toutes les cartes qui pourraient viser uniquement des joueurs, vu qu'il n'y en aura pas pendant quelques niveaux au moins » — dans un niveau SOLO, toute carte dont la cible ne peut etre qu'un autre joueur (targetMode PLAYER hors SELF) sort du paquet ; dans les niveaux a sieges (tuto_2, limbo_8, limbo_10) elles restent (les bots sont des cibles)"
+          "regle_solo": "Croze 08/11 (soir) : « faut aussi enlever toutes les cartes qui pourraient viser uniquement des joueurs, vu qu'il n'y en aura pas pendant quelques niveaux au moins » — dans un niveau SOLO, toute carte dont la cible ne peut etre qu'un autre joueur (targetMode PLAYER hors SELF) sort du paquet ; dans les niveaux a sieges (tuto_2, limbo_8, limbo_10) elles restent (les bots sont des cibles)",
+          "regle_casino": "Croze 11/11 : « toute carte casino related doit être enlevée des niveaux 1-x » — et, mesuré, toute carte qui vise un lieu hors du TILE_POOL de l'étage (arena_invitation, astragor_invitation, fool_s_oracle_box, goblin_pocket_roulette : les quatre sont exclues)"
         },
         "collapse": {
           "regle": "le Collapse s'arrete au tour 9 ; la partie continue 10, 11, 12… sans Collapse ; le palier de rarete du Dungeon Timer reste EPIC pour toujours a partir de la",
@@ -681,7 +688,7 @@
         "conditions": [
           "MOB_POOL(wall_snake,yoda,coin_flip_demon,lizards,pinky,magicrap,gutter_ratlord,skeleton_duellist,skeleton_archer,goblin_thug,longleg_skeleton,zombie,tripwire_gnome,trapdoor_creeper,eyebat)",
           "TILE_POOL(the_cell,x_road,corner_tower,cosy_studio,fountain_of_grace,secret_indoor_garden,the_black_velvet,the_coffin_lounge,the_dining_room,the_forgotten_cell,the_lost_vault,the_maze,the_offrande_pit,the_razor_bridge,the_sealed_vault,the_squire_spa,the_sunken_core,the_trigger_hall,the_whispering_room,umbral_guest_room,unstables_pillars)",
-          "CARDS_EXCLUDED(dungeon_party_mask,dice_eating_goose,confused_parrot,devouring_moths,seal_of_solomon,goblin_pocket_roulette,magpie,cold_invitation,le_croissant,shadow_tax,magic_leeches,astragor_poo,copy_cat,antimonium,salmon_cloak,ring_of_fisdeputry,ring_of_the_snake,elixir_of_luck,echo_flask,onion,first_strike_potion,ring_of_jealousy,cheater_s_gloves,dissimulation_bush,mirror_of_reversal,arena_invitation,astragor_invitation,party_invitation,squire_spa_convocation,listener_scarab,smoke_stick,flying_crabs_swarm,shackles,powder_of_perlinpinpin,mead_horn,wine,watering_can)",
+          "CARDS_EXCLUDED(dungeon_party_mask,dice_eating_goose,confused_parrot,devouring_moths,seal_of_solomon,goblin_pocket_roulette,magpie,cold_invitation,le_croissant,shadow_tax,magic_leeches,astragor_poo,copy_cat,antimonium,salmon_cloak,ring_of_fisdeputry,ring_of_the_snake,elixir_of_luck,echo_flask,onion,first_strike_potion,ring_of_jealousy,cheater_s_gloves,dissimulation_bush,mirror_of_reversal,arena_invitation,astragor_invitation,party_invitation,squire_spa_convocation,listener_scarab,smoke_stick,flying_crabs_swarm,shackles,powder_of_perlinpinpin,mead_horn,wine,watering_can,fool_s_oracle_box,gambler_s_gloves,the_holey_stone,lucky_thief_s_gloves)",
           "COLLAPSE_UNTIL:9",
           "TIMER_FROZEN:EPIC"
         ],

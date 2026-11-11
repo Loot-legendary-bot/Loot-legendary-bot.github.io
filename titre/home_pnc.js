@@ -114,6 +114,7 @@
       '#pnc .pnc-run.vide{pointer-events:none;background:rgba(0,0,0,.28)}',
       '#pnc .pnc-run .pnc-med{width:86%;aspect-ratio:1;border-radius:50%;background:#140f0a center/cover no-repeat;border:.25cqh solid #b08a3c;box-shadow:0 0 .8cqh rgba(0,0,0,.9)}',
       '#pnc .pnc-run.mort .pnc-med{filter:grayscale(.75) brightness(.8)}',
+      '#pnc .pnc-run.dedans .pnc-med{filter:grayscale(.5) brightness(.6)}',   /* S1710 · 541 ② — UNFINISHED, terne */
       '#pnc .pnc-run .pnc-sceau{margin-top:6%;width:62%;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font:900 1.5cqh/1 "Big Shoulders Display","Arial Black",Impact,sans-serif;color:#f4efe2;box-shadow:0 0 .5cqh rgba(0,0,0,.9)}',
       '#pnc .pnc-run.sorti .pnc-sceau{background:radial-gradient(circle at 40% 35%,#6fcf5a,#2b6f22);border:.18cqh solid #c9e7a6}',
       '#pnc .pnc-run.mort .pnc-sceau{background:radial-gradient(circle at 40% 35%,#d0473a,#6e1610);border:.18cqh solid #f0a99f}',
@@ -316,7 +317,10 @@
    * que je n'ai pas joue six parties. » La ligne est ecrite par `compteLaPartieAuProfil` (main.ts,
    * `options.derniersRuns`), lue telle quelle : aucune regle ici. */
   var MODES = { bots: 'VS BOTS', online: 'ONLINE', daily: "TODAY'S DUNGEON" };
-  var ISSUES = { extracted: ['sorti', '✓', 'EXTRACTED'], dead: ['mort', '✝', 'DIED'], inDungeon: ['dedans', '…', 'STILL IN THE DUNGEON'] };
+  /* S1710 · note 541 ② — « une partie encore en cours ou quittée n'a rien à faire dans l'historique des parties jouées
+     (ou alors sous « unfinished », sans dents) » : `inDungeon` se lit UNFINISHED, terne, et ses dents ne s'écrivent pas. */
+  var ISSUES = { extracted: ['sorti', '✓', 'EXTRACTED'], dead: ['mort', '✝', 'DIED'], inDungeon: ['dedans', '…', 'UNFINISHED'] };
+  function nomDuNiveau(ch) { return String(ch || '').replace(/_/g, ' ').toUpperCase(); }
   var runsEl = [];
   function nomDuPerso(id) { return String(id || '').replace(/_/g, ' ').toUpperCase(); }
   function peinsLesRuns(profil) {
@@ -337,17 +341,21 @@
       var is = ISSUES[x.issue] || null;
       if (is) d.classList.add(is[0]);
       var med = document.createElement('div'); med.className = 'pnc-med';
-      med.style.backgroundImage = "url('/art/personnages/" + String(x.perso || '') + ".webp')";
+      /* S1710 · note 541 ② — le médaillon était VIDE : `art/personnages/<perso>.webp` manque pour le Necromancer (et tout
+         perso neuf) ; `grand/` porte les vingt. L'ancien chemin reste dessous, en second calque. */
+      med.style.backgroundImage = "url('/art/personnages/grand/" + String(x.perso || '') + ".webp'), url('/art/personnages/" + String(x.perso || '') + ".webp')";
       d.appendChild(med);
       if (is) { var s = document.createElement('div'); s.className = 'pnc-sceau'; s.textContent = is[1]; d.appendChild(s); }
-      if (typeof x.dents === 'number') { var dn = document.createElement('div'); dn.className = 'pnc-dents'; dn.textContent = '+' + x.dents + ' 🦷'; d.appendChild(dn); }
+      var finie = x.issue !== 'inDungeon';
+      if (finie && typeof x.dents === 'number') { var dn = document.createElement('div'); dn.className = 'pnc-dents'; dn.textContent = '+' + x.dents + ' 🦷'; d.appendChild(dn); }
       var bu = document.createElement('div'); bu.className = 'pnc-bulle';
       var lignes = [];
-      lignes.push(MODES[x.mode] || String(x.mode || '').toUpperCase());
+      var campagne = typeof x.campagne === 'string' && x.campagne !== '';
+      lignes.push(campagne ? 'CAMPAIGN · ' + nomDuNiveau(x.campagne) : (MODES[x.mode] || String(x.mode || '').toUpperCase()));
       if (is) lignes.push(is[2]);
-      if (typeof x.place === 'number') lignes.push('PLACE ' + x.place + (typeof x.sieges === 'number' ? ' / ' + x.sieges : ''));
-      if (typeof x.points === 'number') lignes.push(x.points + ' PTS');
-      if (typeof x.dents === 'number') lignes.push('+' + x.dents + ' TEETH');
+      if (finie && typeof x.place === 'number' && !(campagne && x.sieges === 1)) lignes.push('PLACE ' + x.place + (typeof x.sieges === 'number' ? ' / ' + x.sieges : ''));
+      if (finie && typeof x.points === 'number') lignes.push(x.points + ' PTS');
+      if (finie && typeof x.dents === 'number') lignes.push('+' + x.dents + ' TEETH');
       if (typeof x.t === 'number') { try { lignes.push(new Date(x.t).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })); } catch (e) { /* */ } }
       var t = document.createElement('b'); t.textContent = nomDuPerso(x.perso); bu.appendChild(t);
       lignes.forEach(function (s) { var r = document.createElement('div'); r.textContent = s; bu.appendChild(r); });
