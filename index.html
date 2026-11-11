@@ -2418,6 +2418,10 @@
       /* S1489 - note 368 (0) : l'initiative entre en SECOND temps, apres la carte lue (classe t2). */
       .dicelayer.combat-ouvre .co-temps2 { opacity: 0; transition: opacity .25s ease; }
       .dicelayer.combat-ouvre.t2 .co-temps2, .dicelayer.combat-ouvre.fini .co-temps2 { opacity: 1; }
+      /* S1704 · note 538 ② — la borne du tour d'un autre : son portrait au-dessus de « <NAME>'S TURN ». */
+      .borne-portrait { display: block; margin: 0 auto .4em; width: clamp(90px, calc(9 * var(--uvw)), 170px);
+                        aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 3px solid var(--stock);
+                        box-shadow: 0 0 0 6px rgba(0, 0, 0, .55); }
       .borne-bloc { text-align: center; opacity: 0; transform: scale(.86);
                     transition: opacity .18s ease, transform .22s var(--pop); }
       .dicelayer.borne.t1 .borne-bloc, .dicelayer.borne.fini .borne-bloc {
@@ -15710,7 +15714,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DiXx-N8u.js"></script>
+    <script type="module" crossorigin src="./assets/index-DFJsZzQF.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

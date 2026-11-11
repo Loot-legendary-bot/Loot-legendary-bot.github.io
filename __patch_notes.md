@@ -2,6 +2,10 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 11 Nov 2026
+- **20:10** — FIGHT PLAYER: you now choose WHO you attack. The tile card has one "Fight" line per player standing there (with their HP), like TRADE; clicking a name starts the fight against that player only. The FIGHT zone of the room attacks the other player directly when only one is there.
+- **20:10** — OPTIONS: the darker room background now starts on VERY DARK the first time you play. If you already picked a level, you keep yours.
+- **20:10** — CAMPAIGN: Limbo level 2 is open — PLAY starts the fight tutorial, and leaving through the portal marks the level as cleared.
+- **20:10** — CHARACTER SHEETS: new sheets for the Mailman, the Necromancer, the Dredger, the Aristocrat, the Tamarin and the Guard, with their clickable lines re-measured. Game data v198 (Bzzurtle, Emergency OnCall, Hot & Cold, Bulwark).
 - **10:35** — TODAY'S DUNGEON and CAMPAIGN: the quest tabs at the top left are replaced by your OBJECTIVE box — the name of the day (or of the level), the goal in one line, where you stand ("turn 3 / 20", "2 / 2 kills", step 1 / 2), a progress bar, the turn against the level's limit in the campaign ("turn 8 / 10"), "don't die" in red when dying fails the level, and OBJECTIVE MET / MISSION ACCOMPLISHED / FAILED when it's decided. Classic games keep their quests.
 
 ## 10 Nov 2026

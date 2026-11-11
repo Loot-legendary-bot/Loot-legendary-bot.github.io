@@ -30,7 +30,8 @@
 
   /* le lanceur du scénario d'un chapitre : `scenario: "tuto"` = le tuto d'aujourd'hui (503 ③),
      la même porte que FIRST STEPS (`?tuto=tuto_1_the_run`) */
-  var LANCEURS = { tuto: 'tuto_1_the_run', tuto_1: 'tuto_1_the_run' };
+  /* S1705 · note 540 ④ — le tuto 2 a sa donnée verte au banc du moteur (13 / 13) : le niveau 2 s'ouvre. */
+  var LANCEURS = { tuto: 'tuto_1_the_run', tuto_1: 'tuto_1_the_run', tuto_2: 'tuto_2_the_fight' };
   /* S1703 · note 536 ① — le lanceur d'un chapitre : une CHAÎNE = un tuto de `tuto.json` (s'il existe) ;
      un OBJET = un scénario de campagne, lu par le moteur (`lireLaCampagne`) à la porte `?campagne=<id>`. */
   function lanceurDe(ch) {
@@ -177,6 +178,10 @@
     'font:800 clamp(11px,1vw,15px)/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.1em;color:#f2f2f2;text-shadow:0 0 4px #000,0 0 10px #000,0 0 14px #000}' +
     '#aventure .av-pin .av-niv b{color:#ee4b4b}' +
     '#aventure .av-pin.secoue{animation:avSecoue .35s}' +
+    '#aventure .av-pourquoi{position:absolute;transform:translate(-50%,-150%);z-index:6;pointer-events:none;white-space:nowrap;' +
+      'background:rgba(8,6,5,.92);border:1px solid #8a7660;color:#e8dcc4;font:700 13px/1.2 var(--display,serif);' +
+      'letter-spacing:.06em;padding:.45em .8em}' +
+    '#aventure .av-dev{margin-left:1em;color:#ff7a3a;font-weight:800;letter-spacing:.12em}' +
     '#aventure .av-turd{position:absolute;transform:translate(-50%,-88%);width:clamp(56px,5.2vw,86px);aspect-ratio:1;pointer-events:none;z-index:3;' +
     'transition:left 1s ease-in-out,top 1s ease-in-out;filter:drop-shadow(0 6px 6px rgba(0,0,0,.9))}' +
     '#aventure .av-turd img{width:100%;height:100%;border-radius:50%;border:3px solid #f2f2f2;box-sizing:border-box;background:#0b0b0b}' +
@@ -292,14 +297,18 @@
 
   /* l'état de chaque point des Limbes : réussi, puis LE courant (le premier pas réussi), puis le noir.
      `jouable` = le scénario existe (PLAY) ; sinon la fiche dit NOT YET (513 ④). */
+  /* S1704 · note 538 ④ (b) — OPTIONS → DEV → UNLOCK CAMPAIGN ouvre les dix points, sans condition. */
+  function campagneOuverteEnDev() {
+    try { return !!(window.LLDevUnlock && window.LLDevUnlock.lit('campaign')); } catch (e) { return false; }
+  }
   function etatsLimbes(c) {
-    var out = [], courant = false;
+    var out = [], courant = false, dev = campagneOuverteEnDev();
     c.chapitres.forEach(function (ch) {
       var reussi = reussiDe(ch);
       /* S1703 · note 536 ① — un point sans scénario jouable (tuto_2 : son script n'existe pas encore)
          dit NOT YET sans barrer la route : on le passe, le Turd attend au suivant. */
       var passant = lanceurDe(ch) === null;
-      var e = reussi ? 'REUSSI' : courant ? 'NON_ATTEINT' : passant ? 'A_VENIR' : 'COURANT';
+      var e = reussi ? 'REUSSI' : passant ? 'A_VENIR' : dev ? 'COURANT' : courant ? 'NON_ATTEINT' : 'COURANT';
       if (!reussi && !passant) courant = true;
       out.push({ cercle: c, chapitre: ch, etat: e, jouable: lanceurDe(ch) !== null });
     });
@@ -396,6 +405,7 @@
     tete.appendChild(el('h2', null, romain(c.numero) + ' · ' + mot(c.nom_en, c.nom).toUpperCase()));
     var faits = points.filter(function (x) { return x.etat === 'REUSSI'; }).length;
     tete.appendChild(el('span', 'av-sous', faits + ' / ' + points.length + mot(' levels', ' niveaux')));
+    if (campagneOuverteEnDev()) tete.appendChild(el('span', 'av-dev', 'DEV — all levels open'));
     page.appendChild(tete);
     var bandeau = el('div', 'av-bandeau'), scene = el('div', 'av-scene');
     scene.style.backgroundImage = "url('" + BANDE_LIMBES + "'),radial-gradient(ellipse at 50% 45%,#2a1e16 0%,#0d0907 80%)";
@@ -475,7 +485,20 @@
       }
       m.addEventListener('click', function () {
         if (enMarche) return;
-        if (x.etat === 'NON_ATTEINT') { m.classList.remove('secoue'); void m.offsetWidth; m.classList.add('secoue'); return; }
+        if (x.etat === 'NON_ATTEINT') {
+          m.classList.remove('secoue'); void m.offsetWidth; m.classList.add('secoue');
+          /* S1704 · note 538 ④ (b) — un point fermé dit pourquoi : le niveau où le Turd attend se finit d'abord. */
+          var avant = points.filter(function (y) { return y.etat === 'COURANT'; })[0];
+          var n = avant ? points.indexOf(avant) + 1 : null;
+          var vieux = scene.querySelector('.av-pourquoi'); if (vieux) vieux.remove();
+          var pq = el('div', 'av-pourquoi', n !== null
+            ? mot('Locked — finish level ' + n + ' first', 'Fermé — finis d’abord le niveau ' + n)
+            : mot('Locked — finish the levels before it first', 'Fermé — finis d’abord les niveaux d’avant'));
+          pq.style.left = m.style.left; pq.style.top = m.style.top;
+          scene.appendChild(pq);
+          window.setTimeout(function () { pq.remove(); }, 2600);
+          return;
+        }
         var bd = racine.querySelector('.av-bd'); if (bd) bd.remove();
         marcheVers(x, function () { caseDeBD(d, x, rang); });
       });
