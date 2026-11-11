@@ -15648,6 +15648,10 @@
       .tuto-passer { display: block; margin: .5em 0 0 auto; font-size: .62em; background: none; border: none; color: #8a7a62;
         text-decoration: underline dotted; cursor: pointer; padding: 0; font-weight: 400; letter-spacing: 0; }   /* 392 ② : lien secondaire */
       .tuto-passer:hover { color: #5a4a36; }
+      /* S1711 · note 540 ④ — les trois bulles du tuto 2 : une étiquette de papier, JAMAIS un verrou (aucun clic pris) */
+      .tuto2-bulle { position: fixed; left: 50%; bottom: 24%; transform: translate(-50%, 0) rotate(-1.2deg); z-index: 9000;
+        max-width: 340px; box-sizing: border-box; padding: .7em .9em; background: #efe6cf; color: #2b2218; border-radius: 3px;
+        pointer-events: none; box-shadow: 0 6px 18px rgba(0,0,0,.55); font: 400 16px/1.3 "Alegreya", Georgia, serif; }
       .tuto-carton { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-.6deg);
         width: min(520px, 90vw); padding: 1.4em 1.6em; background: #efe6cf; color: #2b2218; pointer-events: auto;
         box-shadow: 0 10px 30px rgba(0,0,0,.7); font: 400 18px/1.35 "Alegreya", Georgia, serif; text-align: center; }
@@ -15726,7 +15730,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-Dw9f27gf.js"></script>
+    <script type="module" crossorigin src="./assets/index-WAkmtMhV.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

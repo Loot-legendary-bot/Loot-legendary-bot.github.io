@@ -2,9 +2,11 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 11 Nov 2026
-- **22:20** — BETS on a duel: ACCEPT now opens a WHO WINS? window — the two fighters' portraits, your stake (− / +), and you click the one you back. Before, ACCEPT closed the question without a bet.
-- **22:20** — HOME, your last six games (the banners above the gate): every character now shows its portrait (the Necromancer's medallion was empty). A game you left before it ended reads UNFINISHED, greyed, with no teeth shown; a campaign level reads "CAMPAIGN · LIMBO 3" instead of "VS BOTS · PLACE 1 / 1".
-- **22:20** — LISTENER SCARAB: when someone uses it on you, you now see it — "THE X REVEALS YOUR HAND", then "…and steals <card>" as the card flies to their portrait. Your log says the same.
+- **23:10** — GOBLIN CASINO: when someone else starts a game and you are asked to sit, a DECLINE button now stands next to the bet. Before, on the big tile view, you could only bet or wait for the timer.
+- **23:10** — CAMPAIGN, Limbo level 2 (the fight tutorial): three short hints now appear on turn 1 (one Action: move, then END TURN), when you hold 8 cards (discard one), and when the bot runs away (propose a trade). They never block the table.
+- **22:13** — BETS on a duel: ACCEPT now opens a WHO WINS? window — the two fighters' portraits, your stake (− / +), and you click the one you back. Before, ACCEPT closed the question without a bet.
+- **22:13** — HOME, your last six games (the banners above the gate): every character now shows its portrait (the Necromancer's medallion was empty). A game you left before it ended reads UNFINISHED, greyed, with no teeth shown; a campaign level reads "CAMPAIGN · LIMBO 3" instead of "VS BOTS · PLACE 1 / 1".
+- **22:13** — LISTENER SCARAB: when someone uses it on you, you now see it — "THE X REVEALS YOUR HAND", then "…and steals <card>" as the card flies to their portrait. Your log says the same.
 - **20:10** — FIGHT PLAYER: you now choose WHO you attack. The tile card has one "Fight" line per player standing there (with their HP), like TRADE; clicking a name starts the fight against that player only. The FIGHT zone of the room attacks the other player directly when only one is there.
 - **20:10** — OPTIONS: the darker room background now starts on VERY DARK the first time you play. If you already picked a level, you keep yours.
 - **20:10** — CAMPAIGN: Limbo level 2 is open — PLAY starts the fight tutorial, and leaving through the portal marks the level as cleared.
