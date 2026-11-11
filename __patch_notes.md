@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 11 Nov 2026
+- **10:35** — TODAY'S DUNGEON and CAMPAIGN: the quest tabs at the top left are replaced by your OBJECTIVE box — the name of the day (or of the level), the goal in one line, where you stand ("turn 3 / 20", "2 / 2 kills", step 1 / 2), a progress bar, the turn against the level's limit in the campaign ("turn 8 / 10"), "don't die" in red when dying fails the level, and OBJECTIVE MET / MISSION ACCOMPLISHED / FAILED when it's decided. Classic games keep their quests.
+
 ## 10 Nov 2026
 - **23:39** — CAMPAIGN: the Limbo levels 3 to 10 are open. PLAY on a level starts its own game (its seed, its table, its objective; level 7 gives you the Mailman). Level 2 still says NOT YET but no longer blocks the road: the Turd waits at level 3. A level you clear is saved and lights up the next one. When you complete the objective, a MISSION ACCOMPLISHED window asks: LEAVE NOW (mission validated) or KEEP PLAYING — with the warning that dying afterwards fails the mission.
 - **14:28** — PAY WITH CARDS: when the game refuses a payment because the number of cards is wrong, the window now says how many to pick ("REFUSED — select 3 cards"). Before, with the latest engine, it could show an empty "REFUSED — is no longer in your hand".

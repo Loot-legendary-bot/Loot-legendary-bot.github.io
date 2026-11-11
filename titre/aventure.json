@@ -76,7 +76,7 @@
           "titre": "Second Steps",
           "brief": "2 sieges · Bob scripte : echanger, se faire voler, premier combat, fuir (les trois formes du 1216) · sans quete",
           "scenario": "tuto_2",
-          "etat": "A_ECRIRE",
+          "etat": "SCRIPT_ECRIT",
           "etoiles": {
             "tours_max_3_etoiles": 12
           },
@@ -98,7 +98,8 @@
               "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
               "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\tuto_2.png"
             }
-          }
+          },
+          "note_script": "tuto.json.tutos[1] = tuto_2_the_fight (CLASSEUR 11/11) : le Guard prêté, bob = the_wizard scripté (rejoint 10, engage 1, fuit, troc TOUT), 13 pas, lu par lireLesTutos ; le moteur le joue au banc du tuto et règle graine / dés (note 412), l'écran l'ouvre à sa ligne verte (note 538)"
         },
         {
           "id": "limbo_3",
@@ -219,7 +220,7 @@
           "id": "limbo_5",
           "numero": 5,
           "titre": "The Collapse",
-          "brief": "solo · le de de Collapse = le de de portail · sortir par un portail avant le tour 6 · mobs : wall_snake, eyebat",
+          "brief": "solo · le dé de Collapse = le dé de portail · sortir par un portail avant le tour 8 (moteur 1243 : sur la graine le premier portail sort au tour 6 — « avant le tour 6 » était intenable)",
           "scenario": {
             "id": "limbo_5",
             "graine": 20261105,
@@ -232,9 +233,9 @@
             ],
             "objectif": {
               "kind": "EXTRACT",
-              "avant_tour": 6
+              "avant_tour": 8
             },
-            "tours_max": 6,
+            "tours_max": 8,
             "mobs_forces": [
               "wall_snake",
               "eyebat"
@@ -242,12 +243,12 @@
           },
           "etat": "PLAN",
           "etoiles": {
-            "tours_max_3_etoiles": 6
+            "tours_max_3_etoiles": 7
           },
           "spec_v2": {
             "table": "SOLO",
-            "objectif": "EXTRACT_ALIVE avant le tour 6",
-            "tours_max": 6,
+            "objectif": "EXTRACT_ALIVE avant le tour 8",
+            "tours_max": 8,
             "mobs_forces": [
               "wall_snake",
               "eyebat"
@@ -256,7 +257,7 @@
           },
           "virgile": {
             "arrivee": "Feel that rumble? The dungeon is digesting us. Find a portal before you end up in the sewers with my cousins.",
-            "conseil": "The Collapse die can open a portal. Out before turn 6 or you get flushed."
+            "conseil": "The Collapse die can open a portal. Out before turn 8 or you get flushed."
           },
           "medaillon": {
             "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
@@ -595,7 +596,6 @@
             "the_sealed_vault",
             "the_squire_spa",
             "the_sunken_core",
-            "the_time_chamber",
             "the_trigger_hall",
             "the_whispering_room",
             "umbral_guest_room",
@@ -621,6 +621,10 @@
             "mortes_en_solo (reco CLASSEUR, veto)": [
               "messenger_s_alcove",
               "the_moonlit_chapel"
+            ],
+            "retirees_au_banc (moteur 1243)": [
+              "the_time_chamber (avance le Timer : saute le tour 12 du niveau 10)",
+              "the_fumoir (n'existe qu'en Ruines)"
             ]
           }
         },
@@ -676,7 +680,7 @@
         "fin_de_niveau": "l'objectif du chapitre decide (pas les points) ; les etoiles selon regle_etoiles",
         "conditions": [
           "MOB_POOL(wall_snake,yoda,coin_flip_demon,lizards,pinky,magicrap,gutter_ratlord,skeleton_duellist,skeleton_archer,goblin_thug,longleg_skeleton,zombie,tripwire_gnome,trapdoor_creeper,eyebat)",
-          "TILE_POOL(the_cell,x_road,corner_tower,cosy_studio,fountain_of_grace,secret_indoor_garden,the_black_velvet,the_coffin_lounge,the_dining_room,the_forgotten_cell,the_lost_vault,the_maze,the_offrande_pit,the_razor_bridge,the_sealed_vault,the_squire_spa,the_sunken_core,the_time_chamber,the_trigger_hall,the_whispering_room,umbral_guest_room,unstables_pillars)",
+          "TILE_POOL(the_cell,x_road,corner_tower,cosy_studio,fountain_of_grace,secret_indoor_garden,the_black_velvet,the_coffin_lounge,the_dining_room,the_forgotten_cell,the_lost_vault,the_maze,the_offrande_pit,the_razor_bridge,the_sealed_vault,the_squire_spa,the_sunken_core,the_trigger_hall,the_whispering_room,umbral_guest_room,unstables_pillars)",
           "CARDS_EXCLUDED(dungeon_party_mask,dice_eating_goose,confused_parrot,devouring_moths,seal_of_solomon,goblin_pocket_roulette,magpie,cold_invitation,le_croissant,shadow_tax,magic_leeches,astragor_poo,copy_cat,antimonium,salmon_cloak,ring_of_fisdeputry,ring_of_the_snake,elixir_of_luck,echo_flask,onion,first_strike_potion,ring_of_jealousy,cheater_s_gloves,dissimulation_bush,mirror_of_reversal,arena_invitation,astragor_invitation,party_invitation,squire_spa_convocation,listener_scarab,smoke_stick,flying_crabs_swarm,shackles,powder_of_perlinpinpin,mead_horn,wine,watering_can)",
           "COLLAPSE_UNTIL:9",
           "TIMER_FROZEN:EPIC"

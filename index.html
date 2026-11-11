@@ -12330,6 +12330,31 @@
       .qcoin { position: fixed; left: calc(6.4 * var(--uvw)); top: 6px; z-index: var(--z-quetes);
                display: flex; gap: calc(.6 * var(--uvw)); pointer-events: none; }
       .qcoin > .qt { pointer-events: auto; }
+      /* S1704 · note 538 ① — l'encadré de l'objectif (Daily, campagne), au coin des quêtes, dans leur cadre. */
+      .qobj { pointer-events: auto; border: 2px solid var(--rule); background: rgba(0, 0, 0, .78);
+              padding: .3em .8em .35em; width: calc(17.5 * var(--uvw)); box-sizing: border-box;
+              font-family: var(--display); color: var(--stock-dim); }
+      .qobj-consigne { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .qobj-droite { display: flex; flex-wrap: wrap; align-items: center; column-gap: .8em; margin-top: .2em; }
+      .qobj-droite > .qobj-ligne { margin-top: 0; }
+      .qobj-droite > .qobj-barre { margin-top: 0; flex: 1 1 calc(4 * var(--uvw)); }
+      .qobj-droite > .qobj-etat { flex: 1 1 100%; margin-top: .15em; }
+      .qobj-ligne:first-child, .qobj-barre:first-child { margin-top: 0; }
+      .qcoin-entre .qobj { animation: qt-in .55s cubic-bezier(.2, 1.3, .3, 1) both; }
+      .qobj-titre { font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--stock);
+                    font-size: clamp(8px, calc(.78 * var(--uvw)), 12px); }
+      .qobj-consigne { margin-top: .2em; font-size: clamp(8px, calc(.74 * var(--uvw)), 12px); color: var(--stock-dim); }
+      .qobj-sans-mourir { margin-top: .15em; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+                          color: #c0392b; font-size: clamp(7px, calc(.62 * var(--uvw)), 10px); }
+      .qobj-ligne { display: flex; gap: .9em; margin-top: .3em; font-weight: 800; letter-spacing: .1em;
+                    font-size: clamp(7px, calc(.66 * var(--uvw)), 11px); }
+      .qobj-jauge { color: var(--stock); }
+      .qobj-barre { margin-top: .3em; height: 5px; background: rgba(255, 255, 255, .12); border: 1px solid var(--rule); }
+      .qobj-plein { height: 100%; background: var(--activable); transition: width .3s; }
+      .qobj-etat { margin-top: .3em; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+                   font-size: clamp(7px, calc(.66 * var(--uvw)), 11px); }
+      .qobj-fait { color: var(--activable); }
+      .qobj-rate { color: #c0392b; }
       /*
        * ⛑⛑ **S661 — NOTE 80 ①, PRIORITÉ DE CROZE, VERBATIM** : *« CARTE QUÊTES
        * sont pas sur le dernier layer visible du coup ça passe derrière quand on
@@ -15685,7 +15710,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DY23_oIl.js"></script>
+    <script type="module" crossorigin src="./assets/index-DiXx-N8u.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
