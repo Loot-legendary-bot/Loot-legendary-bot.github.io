@@ -122,7 +122,7 @@
             "ensuite": {
               "kind": "EXTRACT"
             },
-            "note": "forme à nommer par le moteur (note 416) : un juge des dents gagnées dans la partie (kills, coffres… sans la participation) avec son degré publié pour l'encadré ; dès sa ligne, `scenario.objectif` prend cette valeur"
+            "note": "VALIDÉ par Croze le 12/11 (« ok ») : 50 dents gagnées DANS le donjon (la participation de fin de partie ne compte pas), puis sortir, 12 tours — le moteur nomme le juge TEETH (notes 416 ②, 417 ①), puis `scenario.objectif` prend cette valeur"
           },
           "verdict_croze_12_11": "« A-2 : on n'a pas de mission affichée ; on nous dit move et end turn mais je peux aussi bien explorer ; le but de cette mission c'est : faites ce que vous voulez, il faut juste un minimum, donc on ne peut pas spammer end turn → faire x dents (50 par exemple) et sortir ; l'explication du début : il y a plein de façons de faire de l'argent (dents) dans le donjon, tu dois le découvrir, récupérer des dents et sortir ; tu as mis un mage, je sais pas pourquoi on n'est pas solo ; on me donne THE GUARD, je sais pas pourquoi non plus »"
         },
@@ -408,7 +408,8 @@
               "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
               "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_7.png"
             }
-          }
+          },
+          "personnage_note": "Croze 12/11 « OK » : le Mailman reste PRÊTÉ à ce niveau (la leçon est sa Signature ; certaines Signatures ne servent à rien en solo) — annoncé sur la fiche du niveau"
         },
         {
           "id": "limbo_8",
@@ -472,7 +473,8 @@
               "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
               "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_8.png"
             }
-          }
+          },
+          "lecon_croze_12_11": "Croze « ok » : la leçon de l'ancien niveau 2 vient ici — se faire attaquer une fois par un joueur, le voir fuir, lui proposer un troc ; il faut un bot SCRIPTÉ (attaque une fois, fuit, accepte tout troc) dans un chapitre de campagne : forme à nommer par le moteur (note 417 ②) ; en attendant BOTS:DOCILE"
         },
         {
           "id": "limbo_9",

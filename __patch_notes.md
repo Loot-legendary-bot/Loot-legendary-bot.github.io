@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 12 Nov 2026
+- **22:55** — REACTION TIMER: when a window reopens on you (your blow is still lethal after a card was played, or the stack resolved and the table is asked again), its countdown now starts over from its full time. Before, it kept the seconds left from the window before, and could pass for you within a few seconds.
+- **22:55** — YOUR COLLAPSE / YOUR BLOW: when your Signature is not offered in the window, a greyed line now says why (e.g. "on a Collapse hit, only a card that absorbs it can be played").
 - **21:05** — FAIRIES: when another player meets the Bad Fairy or the Good Fairy, everyone now sees the fairy's card ("COMBAT · THE X vs BAD FAIRY") before it acts — before you are asked to roll 1d12 for its Corrosive Smoke, or before its gifts reach your hand. Before, you saw its clip, then its effect, and never the card.
 - **21:05** — ENTRY TILES (The Trigger Hall, The Coffin Lounge…): your pawn now lands on the new tile first; only then do the tile, its entry text and its die appear. Before, the effect played while your pawn was still on the tile you came from.
 - **11:26** — TURNS: when another player's turn begins, the table now pauses on a full-screen card — their portrait and "THE COOK'S TURN" in their colour — before any of their moves. Nothing of the previous turn mixes into theirs.
