@@ -74,21 +74,37 @@
           "id": "tuto_2",
           "numero": 2,
           "titre": "Second Steps",
-          "brief": "2 sieges · Bob scripte : echanger, se faire voler, premier combat, fuir (les trois formes du 1216) · sans quete",
-          "scenario": "tuto_2",
-          "etat": "SCRIPT_ECRIT",
+          "brief": "solo · ton personnage · partie libre : « il y a plein de façons de faire des dents dans le donjon : découvre-les, ramasse 50 dents et sors » — objectif VISÉ : 50 dents gagnées dans le donjon (hors participation) puis extraction ; objectif écrit en attendant le juge du moteur : sortir vivant (EXTRACT), 12 tours",
+          "scenario": {
+            "id": "limbo_2",
+            "graine": 20261102,
+            "runs": 1,
+            "personnage": null,
+            "table": null,
+            "conditions": [
+              "SOLO",
+              "SOLO_DECK"
+            ],
+            "objectif": {
+              "kind": "EXTRACT"
+            },
+            "tours_max": 12
+          },
+          "etat": "REFAIT (Croze 12/11)",
           "etoiles": {
             "tours_max_3_etoiles": 12
           },
           "spec_v2": {
-            "table": "2 sieges, Bob scripte",
-            "objectif": "le script de Bob joue jusqu'au bout",
+            "table": "solo",
+            "personnage": "le tien (au choix)",
+            "objectif": "50 dents gagnées dans le donjon puis sortir (en attendant le juge : sortir vivant)",
             "tours_max": 12,
-            "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
+            "bots": "aucun",
+            "enseigne": "les sources de dents : tuer un mob, ouvrir un coffre, explorer ; sortir par un portail"
           },
           "virgile": {
-            "arrivee": "Oh look, company. That's Bob. Bob steals. Bob also stinks, which, coming from me, is a review.",
-            "conseil": "Trade when it helps, fight when you must, and when the dice turn brown — FLEE."
+            "arrivee": "Plenty of ways to make teeth down here. Kills, chests, dirty little deals. Find them.",
+            "conseil": "Fifty teeth, then get out through a portal. Spamming END TURN pays nothing, I checked."
           },
           "medaillon": {
             "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
@@ -99,7 +115,16 @@
               "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\tuto_2.png"
             }
           },
-          "note_script": "tuto.json.tutos[1] = tuto_2_the_fight (CLASSEUR 11/11) : le Guard prêté, bob = the_wizard scripté (rejoint 10, engage 1, fuit, troc TOUT), 13 pas, lu par lireLesTutos ; le moteur le joue au banc du tuto et règle graine / dés (note 412), l'écran l'ouvre à sa ligne verte (note 538) — 11/11 soir : le pas 7 devient « équipe le Plate Gauntlet » (EQUIPPED), plate_gauntlet_common dans STARTING_HAND (Bulwark v198 exige une plate ; moteur Q-TUTO2-1245 : 13 / 13)"
+          "note_script": "l'ancien script « The Fight » (tuto.json.tutos[1], le Guard prêté + bob) n'est plus le niveau 2 : il reste dans tuto.json, non branché ; sa leçon de troc et de PvP ira au niveau 8 (premier bot) si Croze le confirme",
+          "objectif_vise": {
+            "kind": "TEETH",
+            "n": 50,
+            "ensuite": {
+              "kind": "EXTRACT"
+            },
+            "note": "forme à nommer par le moteur (note 416) : un juge des dents gagnées dans la partie (kills, coffres… sans la participation) avec son degré publié pour l'encadré ; dès sa ligne, `scenario.objectif` prend cette valeur"
+          },
+          "verdict_croze_12_11": "« A-2 : on n'a pas de mission affichée ; on nous dit move et end turn mais je peux aussi bien explorer ; le but de cette mission c'est : faites ce que vous voulez, il faut juste un minimum, donc on ne peut pas spammer end turn → faire x dents (50 par exemple) et sortir ; l'explication du début : il y a plein de façons de faire de l'argent (dents) dans le donjon, tu dois le découvrir, récupérer des dents et sortir ; tu as mis un mage, je sais pas pourquoi on n'est pas solo ; on me donne THE GUARD, je sais pas pourquoi non plus »"
         },
         {
           "id": "limbo_3",
@@ -776,7 +801,15 @@
       "remarques_croze": [
         "09/11 : « j'aime bien les numéros et les reviews ; j'ai juste peur que chaque niveau soit vraiment court, mais ok, on va voir, je review en test dès que je peux » → levier si c'est court : tours_max et objectifs par chapitre (spec_v2), à ajuster après ses tests"
       ],
-      "scenarios_note": "forme du moteur (palier 1227) : chaîne = un tuto de tuto.json ; objet = scénario de campagne, clés exactes id/graine/runs/personnage/table/conditions/objectif/tours_max (+ mobs_forces) ; SOLO + table null = un siège ; SOLO_DECK exige un siège ; les conditions de l'étage (regles_etage.conditions) sont posées devant"
+      "scenarios_note": "forme du moteur (palier 1227) : chaîne = un tuto de tuto.json ; objet = scénario de campagne, clés exactes id/graine/runs/personnage/table/conditions/objectif/tours_max (+ mobs_forces) ; SOLO + table null = un siège ; SOLO_DECK exige un siège ; les conditions de l'étage (regles_etage.conditions) sont posées devant",
+      "regles_campagne_croze_12_11": {
+        "acces": "un niveau n'est accessible que si le niveau précédent (relié sur la carte) est RÉUSSI — la progression (fourche comprise) est la règle, plus aucun point ouvert d'avance ; DEV → UNLOCK CAMPAIGN reste pour tester",
+        "fin_de_niveau": "un seul bouton : BACK TO THE CAMPAIGN MAP (ni NEXT GAME ni BACK TO MENU) ; l'écran de fin dit MISSION ACCOMPLISHED ou MISSION FAILED, jamais « NO WINNER »",
+        "graines": "le niveau 1 (tuto_1) garde sa graine et son script ; tous les autres niveaux tirent une graine NEUVE à chaque tentative (Croze : « c'est même nécessaire de ne pas mettre de seed ») — le champ `graine` du scénario n'est plus qu'une valeur par défaut que l'écran remplace au lancement",
+        "bots": "aucun bot avant la fin de l'étage, sauf dans les derniers niveaux (8, 9, 10)",
+        "personnage": "par défaut : n'importe lequel des personnages du joueur (il le choisit avant de lancer) ; un niveau qui impose un personnage le dit sur sa fiche, avec la raison",
+        "fiche_de_niveau": "au clic sur un point : le titre, l'objectif en clair, le personnage (« any of your characters » ou « lent: THE X — pourquoi »), solo ou avec bots, le nombre de tours, les étoiles déjà gagnées"
+      }
     },
     {
       "numero": 2,
