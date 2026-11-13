@@ -12379,6 +12379,35 @@
                    font-size: clamp(7px, calc(.66 * var(--uvw)), 11px); }
       .qobj-fait { color: var(--activable); }
       .qobj-rate { color: #c0392b; }
+      /* S1718 · note 542 ⑦ — l'encadré plus clair : OBJECTIVE en titre, la phrase en gros, la barre large avec le chiffre
+         dedans, l'étape en cours surlignée, DON'T DIE en rouge, un flash quand la barre avance. */
+      .qobj.qobj-v2 { width: calc(21 * var(--uvw)); padding: .45em .9em .55em; border-color: #8a6d2b; }
+      .qobj-v2 .qobj-tete { display: flex; align-items: baseline; gap: .7em; }
+      .qobj-v2 .qobj-mot { font-weight: 900; letter-spacing: .2em; color: #e8c46a; font-size: clamp(9px, calc(.9 * var(--uvw)), 15px); }
+      .qobj-v2 .qobj-titre { color: var(--stock-dim); font-weight: 700; font-size: clamp(7px, calc(.62 * var(--uvw)), 10px); }
+      .qobj-v2 .qobj-consigne { margin-top: .25em; white-space: normal; color: var(--stock); font-weight: 800;
+                                font-size: clamp(10px, calc(1.02 * var(--uvw)), 17px); line-height: 1.15; }
+      .qobj-v2 .qobj-etapes { margin-top: .25em; display: flex; flex-wrap: wrap; align-items: baseline; gap: .1em .45em;
+                              font-size: clamp(9px, calc(.86 * var(--uvw)), 14px); font-weight: 800; line-height: 1.2; }
+      .qobj-v2 .qobj-pas { color: var(--stock-dim); }
+      .qobj-v2 .qobj-pas-fait { color: #8fc04a; }
+      .qobj-v2 .qobj-fait { color: #e8c46a; }
+      .qobj-v2 .qobj-pas-courant { color: #fff; background: rgb(232 196 106 / .22); box-shadow: inset 0 -2px 0 #e8c46a; padding: 0 .25em; }
+      .qobj-v2 .qobj-fleche { color: #e8c46a; }
+      .qobj-v2 .qobj-sans-mourir { display: inline-block; margin-top: .3em; padding: .05em .45em; background: #8e1d14; color: #fff;
+                                   letter-spacing: .18em; font-size: clamp(8px, calc(.74 * var(--uvw)), 12px); }
+      .qobj-v2 .qobj-droite { margin-top: .4em; }
+      .qobj-v2 .qobj-droite > .qobj-barre { flex: 1 1 100%; }
+      .qobj-v2 .qobj-barre { position: relative; height: clamp(14px, calc(1.25 * var(--uvw)), 22px); margin-top: 0;
+                             background: rgba(255, 255, 255, .08); border: 1px solid #8a6d2b; overflow: hidden; }
+      .qobj-v2 .qobj-plein { background: linear-gradient(90deg, #4f7a1e, #8fc04a); transition: width .5s cubic-bezier(.2, 1.2, .3, 1); }
+      .qobj-v2 .qobj-jauge { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                             font-weight: 900; letter-spacing: .1em; color: #fff; text-shadow: 0 1px 2px #000, 0 0 4px #000;
+                             font-size: clamp(8px, calc(.78 * var(--uvw)), 13px); }
+      .qobj-v2 .qobj-ligne { margin-top: .25em; }
+      .qobj-v2 .qobj-barre.qobj-flash { animation: qobj-flash .9s ease-out 1; }
+      @keyframes qobj-flash { 0% { box-shadow: 0 0 0 0 rgb(232 196 106 / .9); filter: brightness(1.9); }
+                              100% { box-shadow: 0 0 0 10px rgb(232 196 106 / 0); filter: brightness(1); } }
       /*
        * ⛑⛑ **S661 — NOTE 80 ①, PRIORITÉ DE CROZE, VERBATIM** : *« CARTE QUÊTES
        * sont pas sur le dernier layer visible du coup ça passe derrière quand on
@@ -15743,7 +15772,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BwizhRD1.js"></script>
+    <script type="module" crossorigin src="./assets/index-tIC9ExEz.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
