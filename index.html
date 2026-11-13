@@ -13033,6 +13033,67 @@
       .nouvelle-table .tv2-ligne:disabled { color: #B23A31; text-shadow: 0 1px 3px rgba(0,0,0,.95); cursor: default; opacity: 1; }
       .nouvelle-table .tv2-ligne:disabled .tv2-faces { filter: grayscale(1) brightness(.6); }
       /* 335 ③ — le texte riche : la rareté à la couleur de son cadre, le boss en rouge, l'école en glyphe */
+      /* S1724 · notes 548 + 549 — la fenêtre de tuile v4 (maquette `docs/maquettes/tile_panel_v4_lines.dc.html`) :
+         les tailles de la maquette sur 1600 px, à l'échelle de l'écran (`--u`). Libellé discret (20 px, #B9AF9A),
+         phrase en serif devant (22 px, #F2EAD6), aucun cadre, un voile radial. */
+      .nouvelle-table .tv2-liste.tv4 { --u: calc(100vw / 1600); align-self: center; width: min(100%, calc(820 * var(--u)));
+        padding: calc(10 * var(--u)) calc(30 * var(--u)) calc(18 * var(--u)); margin-left: auto; margin-right: auto;
+        background: radial-gradient(ellipse 62% 64% at 50% 46%, rgba(11,10,9,.66) 0%, rgba(11,10,9,.42) 60%, rgba(11,10,9,0) 100%);
+        color: #F2EAD6; max-height: 58vh; }
+      .nouvelle-table .ntt-axe.avec-seuil > .tv2-liste.tv4 { width: min(calc(100% - var(--seuil-l, 30vh)), calc(820 * var(--u))); }
+      .nouvelle-table .tv4-tete { display: flex; flex-direction: column; align-items: center; gap: calc(10 * var(--u));
+        border: 0; border-image: none; padding: 0; margin: 0 0 calc(14 * var(--u)); }
+      .nouvelle-table .tv4-titre { font-size: max(24px, calc(46 * var(--u))); font-weight: 500; line-height: 1; letter-spacing: .01em;
+        color: #F2EAD6; text-shadow: 0 2px 16px rgba(0,0,0,.85); text-align: center; }
+      .nouvelle-table .tv4-regle { display: flex; align-items: center; gap: 12px; color: #D8B45A; }
+      .nouvelle-table .tv4-regle-fil { width: calc(84 * var(--u)); height: 1px; background: #D8B45A; opacity: .7; }
+      .nouvelle-table .tv4-regle-losange { font-size: 12px; line-height: 1; }
+      .nouvelle-table .tv4-lignes { gap: calc(6 * var(--u)); }
+      .nouvelle-table .tv4-lignes.entre > .tv4-bloc { animation: tv2-ligne-entre 320ms ease-out both; animation-delay: calc(var(--k, 0) * 60ms); }
+      .nouvelle-table .tv4-bloc { position: relative; border-radius: 5px; background: rgba(242,234,214,.05); }
+      .nouvelle-table .tv4-bloc.epuisee { background: rgba(242,234,214,.03); }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne { display: grid; grid-template-columns: calc(32 * var(--u)) calc(96 * var(--u)) minmax(0, 1fr);
+        column-gap: calc(16 * var(--u)); align-items: center; min-height: max(36px, calc(50 * var(--u)));
+        padding: 4px calc(44 * var(--u)) 4px calc(18 * var(--u)); width: 100%; color: #F2EAD6; cursor: pointer; }
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="44"] .tv4-ligne { min-height: max(32px, calc(44 * var(--u))); }
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="38"] .tv4-ligne { min-height: max(28px, calc(38 * var(--u))); }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne-pastilles { cursor: default; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne-pastilles.tv4-une-cible { cursor: pointer; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ico { width: calc(32 * var(--u)); height: calc(32 * var(--u)); min-width: 20px; min-height: 20px; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ico.eteinte { opacity: .6; filter: grayscale(1) brightness(.7); }
+      .nouvelle-table .tv2-liste.tv4 .tv4-lib { font-family: var(--display); font-variant: normal; font-weight: 500;
+        font-size: max(13px, calc(20 * var(--u))); line-height: 1; letter-spacing: .1em; color: #B9AF9A; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-bloc.epuisee .tv4-lib { color: #9C9382; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-corps { display: flex; align-items: center; gap: calc(12 * var(--u)); flex-wrap: nowrap;
+        white-space: nowrap; overflow: hidden; font-size: max(15px, calc(22 * var(--u))); line-height: 1.2; color: #F2EAD6; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-bloc.epuisee .tv4-corps { color: #CFC6B2; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-motif { font-size: max(13px, calc(19 * var(--u))); color: #E0867E; overflow: hidden; text-overflow: ellipsis; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-avant { font-size: max(13px, calc(19 * var(--u))); color: #B9AF9A; }
+      .nouvelle-table .tv4-issues { display: flex; align-items: baseline; gap: calc(16 * var(--u)); }
+      .nouvelle-table .tv4-issue strong { font-weight: 700; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-pastille { min-height: max(26px, calc(38 * var(--u))); padding: 0 calc(16 * var(--u));
+        border-radius: 999px; border: 0; background: rgba(242,234,214,.1); color: #F2EAD6; font: inherit; cursor: pointer; white-space: nowrap; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-pastille:not(:disabled):hover, .nouvelle-table .tv2-liste.tv4 .tv4-pastille:focus-visible,
+      .nouvelle-table .tv2-liste.tv4 .tv4-pastille.choisie { background: rgba(242,234,214,.2); box-shadow: 0 0 0 1px #D8B45A; outline: none; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-pastille.choisie { animation: tv2-clignote 120ms steps(1, end) 2; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-pastille:disabled { opacity: .45; cursor: default; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-pastille-plus { font-size: .82em; color: #B9AF9A; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne:not(:disabled):not(.tv4-ligne-pastilles):hover,
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne:not(:disabled):not(.tv4-ligne-pastilles):focus-visible,
+      .nouvelle-table .tv2-liste.tv4 .tv4-une-cible:hover { background: rgba(242,234,214,.08) !important; box-shadow: none !important; border-radius: 5px; color: #FFFFFF; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne.choisie { box-shadow: none !important; background: rgba(242,234,214,.12) !important; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne:disabled { color: #CFC6B2; cursor: default; }
+      .nouvelle-table .tv4-chevron { position: absolute; right: calc(14 * var(--u)); top: max(18px, calc(25 * var(--u))); transform: translateY(-50%);
+        width: 26px; height: 26px; display: grid; place-items: center; border: 0; background: none; color: #B9AF9A; cursor: pointer; padding: 0; }
+      .nouvelle-table .tv4-chevron:hover { color: #F2EAD6; }
+      .nouvelle-table .tv4-bloc.depliee .tv4-chevron svg { transform: rotate(180deg); }
+      .nouvelle-table .tv4-detail { padding: 0 calc(18 * var(--u)) calc(10 * var(--u)) calc(162 * var(--u));
+        font-size: max(13px, calc(19 * var(--u))); line-height: 1.3; color: #B9AF9A; white-space: normal;
+        display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+      .nouvelle-table .tv4-bloc:not(.depliee) > .tv4-detail { display: none; }
+      .nouvelle-table .tv4-detail-refus { color: #E0867E; margin-right: .6em; }
+      .nouvelle-table .tv4-filet { height: 1px; margin: calc(4 * var(--u)) calc(40 * var(--u));
+        background: linear-gradient(90deg, transparent, rgba(216,180,90,.45), transparent); }
       .nouvelle-table .tv2-rarete { font-weight: 700; }
       .nouvelle-table .tv2-boss { color: #E0342A; font-weight: 700; }
       .nouvelle-table .tv2-sousboss { color: #FF7F66; font-weight: 700; }   /* 338 ⑥ — corail */
@@ -15772,7 +15833,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-KBnV1bmK.js"></script>
+    <script type="module" crossorigin src="./assets/index-xHcDRkdj.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
