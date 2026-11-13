@@ -365,6 +365,29 @@
     f.appendChild(el('h3', null, ch.titre));
     var obj = objectifEn(ch.spec_v2 && ch.spec_v2.objectif);
     if (obj) f.appendChild(el('p', 'av-obj', mot('Objective: ', 'Objectif : ') + obj));
+    /* S1717 · note 542 ④ — qui je joue, seul ou avec combien de bots, en combien de tours : lu sur `chapitres[].scenario`
+       (`personnage`, `table.sieges`, `tours_max`) ; un champ absent n'écrit rien. */
+    var sc = ch.scenario !== null && typeof ch.scenario === 'object' ? ch.scenario : null;
+    if (sc) {
+      var qui = el('p', 'av-regle av-qui');
+      if (typeof sc.personnage === 'string' && sc.personnage !== '') {
+        var nom = sc.personnage.replace(/_/g, ' ').toUpperCase();
+        var por = el('img'); por.alt = nom; por.width = 28; por.height = 28;
+        por.style.cssText = 'vertical-align:middle;border-radius:50%;margin-right:6px';
+        por.src = '/art/personnages/all_ico_webp_CORRECTED_ALL/200px/' + sc.personnage + '_200px.webp';
+        qui.appendChild(por);
+        qui.appendChild(document.createTextNode(mot('LENT: ' + nom + ' — you learn his Signature',
+          'PRÊTÉ : ' + nom + ' — tu apprends sa Signature')));
+      } else {
+        qui.appendChild(document.createTextNode(mot('ANY OF YOUR CHARACTERS', 'N’IMPORTE LEQUEL DE TES PERSONNAGES')));
+      }
+      f.appendChild(qui);
+      var sieges = sc.table && typeof sc.table.sieges === 'number' ? sc.table.sieges : 1;
+      var bots = Math.max(0, sieges - 1);
+      var ligne = bots === 0 ? 'SOLO' : bots + (bots === 1 ? ' BOT' : ' BOTS');
+      if (typeof sc.tours_max === 'number') ligne += mot(' · ' + sc.tours_max + ' turns', ' · ' + sc.tours_max + ' tours');
+      f.appendChild(el('p', 'av-regle av-table', ligne));
+    }
     /* les étoiles : « ✓ » tant que le moteur ne publie pas `SCENARIO_ENDED` (511 ②) */
     f.appendChild(el('div', 'av-etoiles', x.etat === 'REUSSI' ? '✓' : '☆ ☆ ☆'));
     var t3 = ch.etoiles && typeof ch.etoiles.tours_max_3_etoiles === 'number' ? ch.etoiles.tours_max_3_etoiles : 12;
