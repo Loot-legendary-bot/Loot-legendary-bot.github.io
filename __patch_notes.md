@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 13 Nov 2026
+- **00:30** — CARDS THAT WAIT FOR A TRIGGER (Flying Crabs Swarm, Umbrella…): outside their window, they stay greyed with their reason ("awaits a hit to be taken"). Before, a card stayed lit and clickable for a few seconds after its window had closed, and clicking it did nothing.
+- **00:30** — TEST SHORTCUTS (VOIR-…): they now open in English when you have not picked a language.
 - **00:12** — RELOADED GAMES (test shortcuts like VOIR-CRABES): answering the first question no longer replays the whole game from its start ("ROLL FOR FIRST PLAYER", then every past turn). The game simply goes on from where it was loaded.
 
 ## 12 Nov 2026

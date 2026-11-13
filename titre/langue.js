@@ -1934,6 +1934,10 @@
   /* S1552 - note 390 (5) : au PREMIER lancement (aucun reglage au profil), la langue du navigateur ; ensuite celle
      du profil, qui ne change jamais toute seule (GLOSSAIRE 1 bis). */
   function duNavigateur() {
+    /* S1715 - note 543 (4) : un etat depose (`?etat=`, les raccourcis VOIR-*.bat) s'ouvre sur un port a lui, donc
+       SANS profil : il prenait la langue du navigateur, et Croze lisait « ON TE DEMANDE », « JET DU PREMIER JOUEUR ».
+       Regle du 08/11 : tout ce que Croze ouvre, etats deposes compris, est en anglais. Le profil, s'il dit FR, gagne. */
+    try { if (/[?&]etat=/.test(String(location.search || ''))) return 'EN'; } catch (e) { /* */ }
     try { return /^fr\b/i.test(String(navigator.language || '')) ? 'FR' : 'EN'; } catch (e) { return 'EN'; }
   }
   function cible() { return lis() || duNavigateur(); }
