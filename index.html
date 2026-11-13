@@ -1293,6 +1293,31 @@
       .nouvelle-table .nt-rond > .nt-vp img { width: 100%; height: 100%; object-fit: fill; display: block; }
       .nouvelle-table .nt-presence:not(.nt-actif):not(.nt-parti):not(.nt-sorti) .nt-vp { filter: brightness(.82); }
       .nouvelle-table .nt-presence.nt-parti .nt-vp { filter: none; }
+      /* S1726 · 537 ① a — celui qui désigne une cible : anneau qui respire, libellé discret sous le rond */
+      .nouvelle-table .nt-presence.nt-choisit .nt-rond { border-radius: 50%; animation: nt-choisit 1.1s ease-in-out infinite alternate; }
+      @keyframes nt-choisit { from { box-shadow: 0 0 0 2px rgba(255,255,255,.55), 0 0 6px rgba(255,255,255,.25); } to { box-shadow: 0 0 0 4px #fff, 0 0 22px rgba(255,255,255,.7); } }
+      .nouvelle-table .nt-presence .nt-choisit-lib { position: absolute; left: 50%; bottom: -1.4em; transform: translateX(-50%); white-space: nowrap;
+        font: 600 11px/1 var(--display); letter-spacing: .08em; color: #E8E2D6; text-shadow: 0 1px 2px #000; pointer-events: none; }
+      /* S1726 · 537 ① b — le téléport au portrait : il se dissout en violet arcane, puis réapparaît sous le nom de sa tuile */
+      .nouvelle-table .nt-presence.nt-tp-joue .nt-rond > :not(.nt-tp-ou) { animation: nt-tp-rond 1.6s ease-in-out 1 both; animation-delay: var(--tp-age, 0ms); }
+      @keyframes nt-tp-rond {
+        0%   { opacity: 1; transform: scale(1); filter: none; }
+        30%  { opacity: 0; transform: scale(.55); filter: blur(6px) brightness(2.2) drop-shadow(0 0 14px #B57BFF); }
+        55%  { opacity: 0; transform: scale(1.2); filter: blur(4px) drop-shadow(0 0 14px #B57BFF); }
+        80%  { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 10px #B57BFF); }
+        100% { opacity: 1; transform: scale(1); filter: none; }
+      }
+      .nouvelle-table .nt-presence .nt-tp-ou { position: absolute; left: 50%; bottom: -1.4em; transform: translateX(-50%);
+        white-space: nowrap; font: 600 12px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: #D9C2FF;
+        text-shadow: 0 0 6px #6B3FB5, 0 1px 2px #000; pointer-events: none;
+        animation: nt-tp-ou 1.6s ease-out 1 both; animation-delay: var(--tp-age, 0ms); }
+      @keyframes nt-tp-ou { 0%, 50% { opacity: 0; } 65%, 85% { opacity: 1; } 100% { opacity: 0; } }
+      .nt-tp-bandeau { position: fixed; left: 50%; top: 21%; transform: translateX(-50%); z-index: 9000; cursor: pointer;
+        display: flex; gap: .7em; align-items: baseline; padding: .55em 1.2em; border: 1px solid #B57BFF;
+        background: rgba(20, 10, 34, .92); box-shadow: 0 0 24px rgba(181, 123, 255, .45); animation: nt-tp-bandeau 3.2s ease-out 1 both; }
+      .nt-tp-bandeau-lib { font: 600 12px/1 var(--display); letter-spacing: .12em; color: #B57BFF; }
+      .nt-tp-bandeau-texte { font: 400 20px/1.2 'Alegreya', Georgia, serif; color: #F1E6FF; }
+      @keyframes nt-tp-bandeau { 0% { opacity: 0; transform: translate(-50%, -8px); } 10%, 85% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
       .nouvelle-table .nt-presence.nt-mort-joue .nt-vp > .ry { animation: nt-sy-mort 1s steps(6, jump-none) 1 both; animation-delay: var(--fondu-age, 0ms); }
       .nouvelle-table .nt-presence.nt-mort-joue .nt-vp .rx { animation: nt-sx-mort calc(1s / 6) steps(8, jump-none) 6 both; animation-delay: var(--fondu-age, 0ms); }
       .nouvelle-table .nt-presence.nt-mort-fige .nt-vp > .ry { transform: translateY(-83.333%); }
@@ -13956,23 +13981,6 @@
       .ndr-381 .ndr-actif { color: var(--siege, var(--stock)); }
       .ndr-381 .ndr-actif.ndr-etat { color: #e8b04a; }
       .ndr-381 .ndr-tuile { width: 100%; min-height: 0; overflow: hidden; }
-      .ndr-pari { border: 2px solid var(--rule); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
-      .ndr-pari-mot { font-family: var(--display); font-weight: 800; letter-spacing: .08em; color: var(--stock); font-size: calc(15px * var(--lisible, 1)); }
-      .ndr-pari-mot.clos { opacity: .7; }
-      .ndr-pari-fait { font-size: calc(18px * var(--lisible, 1)); font-weight: 700; }
-      .ndr-pari-regle { font-size: max(14px, calc(12px * var(--lisible, 1))); opacity: .75; }
-      .ndr-pari-mise { display: flex; align-items: center; gap: 10px; }
-      .ndr-pari-mise button { width: 34px; height: 30px; font-weight: 800; }
-      .ndr-pari-n { min-width: 80px; text-align: center; font-weight: 800; font-size: calc(18px * var(--lisible, 1)); }
-      .ndr-pari-sur { display: flex; gap: 8px; flex-wrap: wrap; }
-      .ndr-pari-b { flex: 1 1 0; border: 2px solid var(--siege, var(--stock)); font-weight: 800; letter-spacing: .05em; padding: 6px 8px; }
-      /* S1710 · 541 ⑥ — WHO WINS? : deux portraits cliquables */
-      .pari-qui-titre { font-size: calc(22px * var(--lisible, 1)); text-align: center; }
-      .pari-qui-b { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px; }
-      .pari-qui-portrait { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 3px solid var(--siege, var(--stock)); }
-      .pari-qui-nom { font-family: var(--display); font-weight: 800; letter-spacing: .06em; }
-      .ndr-pari-fait.gagne { color: #5BE36B; }
-      .ndr-pari-fait.perd { color: var(--rouge-vif, #e0303a); }
       .ndr-vainqueur {
         font-family: var(--display); font-weight: 800; font-size: calc(40px * var(--lisible, 1)); line-height: 1.05;
         text-align: center; text-transform: uppercase; color: var(--stock); text-shadow: 0 2px 0 #000, 0 0 18px rgba(232,176,74,.55);
@@ -15833,7 +15841,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-xHcDRkdj.js"></script>
+    <script type="module" crossorigin src="./assets/index-ZME5MElR.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
@@ -15845,6 +15853,6 @@
     -->
     <div id="composition">
       <div id="app"></div>
-    </div>
+    </div>
   </body>
 </html>
