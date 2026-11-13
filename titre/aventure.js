@@ -301,16 +301,36 @@
   function campagneOuverteEnDev() {
     try { return !!(window.LLDevUnlock && window.LLDevUnlock.lit('campaign')); } catch (e) { return false; }
   }
+  /* S1717 · note 542 ② — les portes viennent du GRAPHE de `cercles[].progression.graphe` (CLASSEUR, validé par
+     Croze le 09/11) : un point s'ouvre quand TOUS ceux qui y mènent sont réussis — la fourche 5 → 6 / 7 ouvre
+     les deux, et 8 attend 6 ET 7. Sans graphe lisible, la chaîne d'avant (le premier non réussi est le courant). */
+  function predecesseurs(c) {
+    var g = c && c.progression && Array.isArray(c.progression.graphe) ? c.progression.graphe : null;
+    if (!g) return null;
+    var p = {};
+    g.forEach(function (arc) {
+      (Array.isArray(arc.vers) ? arc.vers : []).forEach(function (v) { (p[v] = p[v] || []).push(arc.de); });
+    });
+    return p;
+  }
   function etatsLimbes(c) {
-    var out = [], courant = false, dev = campagneOuverteEnDev();
+    var out = [], courant = false, dev = campagneOuverteEnDev(), pred = predecesseurs(c), parId = {};
+    c.chapitres.forEach(function (ch) { parId[ch.id] = ch; });
+    function franchi(id) { var ch = parId[id]; return !ch || reussiDe(ch) || lanceurDe(ch) === null; }
     c.chapitres.forEach(function (ch) {
       var reussi = reussiDe(ch);
       /* S1703 · note 536 ① — un point sans scénario jouable (tuto_2 : son script n'existe pas encore)
          dit NOT YET sans barrer la route : on le passe, le Turd attend au suivant. */
       var passant = lanceurDe(ch) === null;
-      var e = reussi ? 'REUSSI' : passant ? 'A_VENIR' : dev ? 'COURANT' : courant ? 'NON_ATTEINT' : 'COURANT';
-      if (!reussi && !passant) courant = true;
-      out.push({ cercle: c, chapitre: ch, etat: e, jouable: lanceurDe(ch) !== null });
+      var manque = [], e;
+      if (pred) {
+        manque = (pred[ch.id] || []).filter(function (id) { return !franchi(id); });
+        e = reussi ? 'REUSSI' : passant ? 'A_VENIR' : (dev || manque.length === 0) ? 'COURANT' : 'NON_ATTEINT';
+      } else {
+        e = reussi ? 'REUSSI' : passant ? 'A_VENIR' : dev ? 'COURANT' : courant ? 'NON_ATTEINT' : 'COURANT';
+        if (!reussi && !passant) courant = true;
+      }
+      out.push({ cercle: c, chapitre: ch, etat: e, jouable: lanceurDe(ch) !== null, manque: manque });
     });
     return out;
   }
@@ -488,11 +508,18 @@
         if (x.etat === 'NON_ATTEINT') {
           m.classList.remove('secoue'); void m.offsetWidth; m.classList.add('secoue');
           /* S1704 · note 538 ④ (b) — un point fermé dit pourquoi : le niveau où le Turd attend se finit d'abord. */
+          /* S1717 · 542 ② — les niveaux qui y mènent et qui ne sont pas réussis, nommés par leur rang */
+          var rangs = (x.manque || []).map(function (id) {
+            var y = points.filter(function (z) { return z.chapitre.id === id; })[0];
+            return y ? points.indexOf(y) + 1 : null;
+          }).filter(function (r) { return r !== null; });
           var avant = points.filter(function (y) { return y.etat === 'COURANT'; })[0];
-          var n = avant ? points.indexOf(avant) + 1 : null;
+          var n = rangs.length > 0 ? rangs.join(' & ') : avant ? points.indexOf(avant) + 1 : null;
           var vieux = scene.querySelector('.av-pourquoi'); if (vieux) vieux.remove();
           var pq = el('div', 'av-pourquoi', n !== null
-            ? mot('Locked — finish level ' + n + ' first', 'Fermé — finis d’abord le niveau ' + n)
+            ? (rangs.length > 1
+              ? mot('Locked — finish levels ' + n + ' first', 'Fermé — finis d’abord les niveaux ' + n)
+              : mot('Locked — finish level ' + n + ' first', 'Fermé — finis d’abord le niveau ' + n))
             : mot('Locked — finish the levels before it first', 'Fermé — finis d’abord les niveaux d’avant'));
           pq.style.left = m.style.left; pq.style.top = m.style.top;
           scene.appendChild(pq);
