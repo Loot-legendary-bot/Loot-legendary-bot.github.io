@@ -59,6 +59,12 @@ html.da-salle-voile-lourd #ll-salle .ll-salle-couche::after { background: rgba(8
 html.da-salle-voile-tres #ll-salle .ll-salle-couche::after { background: rgba(0,0,0,.74); }
 #ll-salle .ll-salle-couche.sang::before { content: ''; position: absolute; inset: 0; background: rgba(120,8,8,.42); mix-blend-mode: multiply; }
 #ll-salle .ll-salle-couche.sort { animation: ll-salle-sort 400ms ease-in both; }
+/* S1723 · note 545 ③ — le fond de tuile « posé » : pleine couleur à l'arrivée (~1,5 s), puis assombri et désaturé au
+   même niveau partout (--fond-pose-lum, posé par main.ts), un cran plus sombre au combat ; un voile radial au centre. */
+html.da-fond-pose #ll-salle .ll-salle-couche { transition: filter 900ms ease; }
+html.da-fond-pose #ll-salle .ll-salle-couche.posee { filter: brightness(var(--fond-pose-lum, .36)) saturate(.55); }
+html.da-fond-pose.da-fond-combat #ll-salle .ll-salle-couche.posee { filter: brightness(var(--fond-pose-combat, .26)) saturate(.55); }
+html.da-fond-pose #ll-salle .ll-salle-couche::after { background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.38) 0%, rgba(0,0,0,.12) 55%, rgba(0,0,0,0) 80%); }
 @keyframes ll-salle-entre { from { opacity: 0; } to { opacity: 1; } }
 @keyframes ll-salle-sort { from { opacity: 1; } to { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { #ll-salle .ll-salle-couche, #ll-salle .ll-salle-couche.sort { animation: none; } }

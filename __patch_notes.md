@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 13 Nov 2026
+- **14:20** — TILE BACKGROUND: when you arrive on a tile, its art shows in full colour for a moment, then settles — darkened and desaturated the same on every tile, so the cards stand out alike everywhere, and a notch darker while you fight. It stays your tile during the others' turns. OPTIONS → DEVELOPER → TILE BACKDROP: FULL / SETTLED (default) / OFF (one stone wall); DARKER BACKGROUND now sets how dark the settled tile is.
 - **14:00** — DICE TRAYS: all 24 trays redrawn to the shape of the felt you roll on in game (the 15 old ones replaced, 9 new variants added to the Vault). The Goblin Casino and Green Black Hype card backs are retired from the Vault.
 - **14:00** — CAMPAIGN: a level's card now shows your characters as portraits under ANY OF YOUR CHARACTERS, the last one you played already picked — PLAY starts the level with them, no character screen. A level with a lent character (levels 1 and 7, THE MAILMAN) shows his portrait locked, with the reason.
 - **14:00** — Engine updates up to step 1262 (Tuffies Spray, reactions on opposed rolls, Antimonium).
