@@ -1939,11 +1939,10 @@ const BACKS=[["Lick Floor","lick_floor",1,0],
   ["Stained Glass","stained_glass",0,null],
   /* S1607 - notes 408 (4), 432 (2), 445 (5), 449 (1) : les cinq dos que Croze a poses dans ASSETS/cardback
      (goblin casino du 30/10, les quatre du 29/10), au prix de l'etage standard (MONNAIE 22 : 500) - un mot les corrige. */
-  ["Goblin Casino","goblin_casino",0,500],
+  /* S1720 - notes 517 (2) / 545 (2) : goblin_casino et greenblack_hype RETIRES (Croze, 08/11) ; un joueur qui les avait garde le defaut. */
   ["Stitched","cousu",0,500],
   ["Nylon Wallet","nylon_wallet",0,500],
-  ["Dark Tapestry","tapisserie_sombre",0,500],
-  ["Green Black Hype","greenblack_hype",0,500]];
+  ["Dark Tapestry","tapisserie_sombre",0,500]];
 /* note 271 (6) - le pool season_reward : remis en fin de saison, jamais vendu. Les 2 des 9
    *backcards qui y passent sont designes par le classeur (ajouter l'id ici, prix -> null). */
 const DOS_SAISON=new Set(["alt","alt_legendary"]);
@@ -1969,7 +1968,10 @@ const TRAYS=[["Green felt","vert",1,0],["Red felt","rouge",0,10000],["Blue felt"
   ["Framed rust","cadre_rouille",0,10000],["Framed black","cadre_noir",0,10000],["Framed purple","cadre_violet",0,10000],
   ["Beautiful stones","pierres",0,10000],["Brand new leather","cuir_neuf",0,10000],["Brown croco leather","croco",0,10000],
   ["Chiasse cuir","chiasse_cuir",0,10000],["Deep blue","bleu_profond",0,10000],["Elegant green leather","cuir_vert",0,10000],
-  ["Green & damaged","vert_abime",0,10000],["Herm-style","herm",0,10000],["Red & damaged","rouge_abime",0,10000]];
+  ["Green & damaged","vert_abime",0,10000],["Herm-style","herm",0,10000],["Red & damaged","rouge_abime",0,10000]],
+  /* S1720 - notes 517 (1) / 545 (2) : les 24 tapis de assets/tray/ (classeur, 09/11) a la geometrie des feutres (640 x 440) remplacent
+     les quinze ; + 9 variantes `_v2` (la texture dans un autre cadre), meme prix que la base. */
+  ["Brown croco leather (iron)","croco_v2",0,10000],["Brand new leather (iron)","cuir_neuf_v2",0,10000],["Chiasse cuir (rust)","chiasse_cuir_v2",0,10000],["Herm-style (studded)","herm_v2",0,10000],["Beautiful stones (slate)","pierres_v2",0,10000],["Deep blue (slate)","bleu_profond_v2",0,10000],["Elegant green leather (green)","cuir_vert_v2",0,10000],["Red & damaged (red)","rouge_abime_v2",0,10000],["Green & damaged (green)","vert_abime_v2",0,10000]];
 function gardeLesTapis(){
   try{window.LLProfil.modifie(p=>{p.possede.tapis=TRAYS.filter(t=>t[2]&&t[1]!=='vert').map(t=>t[1]);});}catch(e){}
 }

@@ -2,6 +2,9 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 13 Nov 2026
+- **14:00** — DICE TRAYS: all 24 trays redrawn to the shape of the felt you roll on in game (the 15 old ones replaced, 9 new variants added to the Vault). The Goblin Casino and Green Black Hype card backs are retired from the Vault.
+- **14:00** — CAMPAIGN: a level's card now shows your characters as portraits under ANY OF YOUR CHARACTERS, the last one you played already picked — PLAY starts the level with them, no character screen. A level with a lent character (levels 1 and 7, THE MAILMAN) shows his portrait locked, with the reason.
+- **14:00** — Engine updates up to step 1262 (Tuffies Spray, reactions on opposed rolls, Antimonium).
 - **05:30** — OBJECTIVE BOX (campaign and Today's Dungeon): clearer — OBJECTIVE as its title, the goal in big letters, a wide progress bar with the count inside, the current step highlighted when there are two ("① equip 3 items ✓ → ② kill the archer"), DON'T DIE in red, and a flash when the bar moves up.
 - **05:15** — CAMPAIGN: finishing a level now ends on MISSION ACCOMPLISHED or MISSION FAILED — the objective, your turn count, the teeth you earned — with a single button, BACK TO THE CAMPAIGN MAP, that reopens the campaign map. No more podium, "NO WINNER", NEXT GAME or BACK TO MENU after a level, and no tutorial bubble left on the end screen.
 - **03:20** — CAMPAIGN: a level's card now says who you play (any of your characters, or the lent one with his portrait), whether you are alone or with bots, and in how many turns.

@@ -298,16 +298,18 @@
           "id": "limbo_6",
           "numero": 6,
           "titre": "Loadout",
-          "brief": "solo · equiper torse / mains / pieds, le gear score · le premier RANGED : skeleton_archer",
+          "brief": "toi + 1 bot docile MUET (il joue son tour, n'attaque jamais) · équiper torse / mains / pieds : 3 pièces puis tuer l'archer — et, en passant, l'ordre des tours : un autre joue aussi (Croze 13/11 : « bot au 6 »)",
           "scenario": {
             "id": "limbo_6",
             "graine": 20261106,
             "runs": 1,
             "personnage": null,
-            "table": null,
+            "table": {
+              "sieges": 2,
+              "mode": "FFA"
+            },
             "conditions": [
-              "SOLO",
-              "SOLO_DECK"
+              "BOTS:DOCILE"
             ],
             "objectif": {
               "kind": "EQUIP_N",
@@ -350,7 +352,8 @@
               "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
               "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_6.png"
             }
-          }
+          },
+          "lecon_croze_13_11": "l'ordre des tours avec un autre joueur à la table, sans interaction (pas d'attaque, pas de troc demandé)"
         },
         {
           "id": "limbo_7",
@@ -480,16 +483,18 @@
           "id": "limbo_9",
           "numero": 9,
           "titre": "Traps & Treasure",
-          "brief": "solo · (remplace « One Quest » : plus de quetes en campagne) · un coffre et un piege : le de de coffre, le de de piege, la rarete du Dungeon Timer · tuiles forcees : the_trigger_hall, the_lost_vault",
+          "brief": "toi + 1 bot docile · le dé de coffre, le dé de piège · ouvrir 2 coffres et survivre — ET la leçon du troc : le bot accepte ce que tu lui proposes (Croze 13/11 : les trois leçons à bot étalées sur 8 / 9 / 10)",
           "scenario": {
             "id": "limbo_9",
             "graine": 20261109,
             "runs": 1,
             "personnage": null,
-            "table": null,
+            "table": {
+              "sieges": 2,
+              "mode": "FFA"
+            },
             "conditions": [
-              "SOLO",
-              "SOLO_DECK"
+              "BOTS:DOCILE"
             ],
             "objectif": {
               "kind": "CHESTS",
@@ -509,8 +514,8 @@
             "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
           },
           "virgile": {
-            "arrivee": "Treasure! Also traps. Down here they come in the same box, like a surprise in a diaper.",
-            "conseil": "The chest die gives, the trap die takes. Open two, survive both, keep your boots dry."
+            "arrivee": "Traps and treasure. And company — the quiet kind.",
+            "conseil": "Two chests, stay alive. And trade with him while he's on your tile: he takes anything."
           },
           "medaillon": {
             "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
@@ -520,7 +525,8 @@
               "statut": "VALIDÉE avec le lot (Croze « ok for all » puis « D, go », 08/11 soir) — l'écran la télécharge depuis l'URL (note 516) ; remplaçable par un fichier du même nom",
               "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_9.png"
             }
-          }
+          },
+          "lecon_croze_13_11": "le troc avec un autre joueur (bulle du Turd : « He's on your tile. Offer him something — he'll take anything. »)"
         },
         {
           "id": "limbo_10",
@@ -808,7 +814,7 @@
         "acces": "un niveau n'est accessible que si le niveau précédent (relié sur la carte) est RÉUSSI — la progression (fourche comprise) est la règle, plus aucun point ouvert d'avance ; DEV → UNLOCK CAMPAIGN reste pour tester",
         "fin_de_niveau": "un seul bouton : BACK TO THE CAMPAIGN MAP (ni NEXT GAME ni BACK TO MENU) ; l'écran de fin dit MISSION ACCOMPLISHED ou MISSION FAILED, jamais « NO WINNER »",
         "graines": "le niveau 1 (tuto_1) garde sa graine et son script ; tous les autres niveaux tirent une graine NEUVE à chaque tentative (Croze : « c'est même nécessaire de ne pas mettre de seed ») — le champ `graine` du scénario n'est plus qu'une valeur par défaut que l'écran remplace au lancement",
-        "bots": "aucun bot avant la fin de l'étage, sauf dans les derniers niveaux (8, 9, 10)",
+        "bots": "Croze 13/11 : « bot au 6 » — niveaux 2 à 5 et 7 en solo ; **6** un bot docile muet (l'ordre des tours) ; **8** un joueur t'attaque une fois puis fuit (bot scripté, forme du moteur attendue) ; **9** le troc (un bot docile) ; **10** deux bots dociles",
         "personnage": "par défaut : n'importe lequel des personnages du joueur (il le choisit avant de lancer) ; un niveau qui impose un personnage le dit sur sa fiche, avec la raison",
         "fiche_de_niveau": "au clic sur un point : le titre, l'objectif en clair, le personnage (« any of your characters » ou « lent: THE X — pourquoi »), solo ou avec bots, le nombre de tours, les étoiles déjà gagnées"
       }

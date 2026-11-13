@@ -46,10 +46,12 @@
     try { var p = JSON.parse(localStorage.getItem('ll_campagne') || '{}'); return !!(p[ch.id] && p[ch.id].reussi === true); }
     catch (e) { return false; }
   }
-  function lance(l) {
+  var PORTRAIT = '/art/personnages/all_ico_webp_CORRECTED_ALL/200px/';
+  function lance(l, perso) {
     var q = new URLSearchParams(window.location.search);
     q.delete('tuto'); q.delete('campagne'); q.delete('perso');
     q.set(l.cle, l.val);
+    if (perso && l.cle === 'campagne') q.set('perso', perso);   /* S1720 · 545 ① — le portrait choisi dans la fiche */
     window.location.href = '/?' + q.toString();
   }
 
@@ -200,7 +202,16 @@
     '#aventure .av-fiche .av-obj{font-weight:700}' +
     '#aventure .av-fiche .av-etoiles{font:800 22px/1 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.2em;color:#a3231d}' +
     '#aventure .av-fiche .av-regle{font-size:14px;opacity:.75}' +
-    '#aventure .av-fiche button:disabled{opacity:.45;cursor:not-allowed}';
+    '#aventure .av-fiche button:disabled{opacity:.45;cursor:not-allowed}' +
+    /* S1720 · 545 ① — la rangée de portraits de la fiche, le choisi cerclé d'or ; le prêté, verrouillé */
+    '#aventure .av-fiche .av-rangee{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 2px}' +
+    '#aventure .av-fiche .av-perso{position:relative;display:inline-block;padding:0;border:3px solid transparent;border-radius:50%;background:none;cursor:pointer;opacity:.55;line-height:0}' +
+    '#aventure .av-fiche .av-perso img{border-radius:50%;display:block}' +
+    '#aventure .av-fiche .av-perso:hover{opacity:.85}' +
+    '#aventure .av-fiche .av-perso-choisi{border-color:#d6a93a;opacity:1}' +
+    '#aventure .av-fiche .av-perso-fige{opacity:1;cursor:default;vertical-align:middle;margin-right:8px;border-color:#6d6d6d}' +
+    '#aventure .av-fiche .av-cadenas{position:absolute;right:-4px;bottom:-4px;font-size:16px;line-height:1}' +
+    '#aventure .av-fiche .av-nom-choisi{font-weight:700;letter-spacing:.08em;opacity:.9}';
 
   var CHAINE = '<svg class="av-chaine" viewBox="0 0 100 100"><g fill="none" stroke="#9a9a9a" stroke-width="6">' +
     '<ellipse cx="22" cy="78" rx="10" ry="6" transform="rotate(-45 22 78)"/><ellipse cx="38" cy="62" rx="10" ry="6" transform="rotate(-45 38 62)"/>' +
@@ -368,20 +379,44 @@
     /* S1717 · note 542 ④ — qui je joue, seul ou avec combien de bots, en combien de tours : lu sur `chapitres[].scenario`
        (`personnage`, `table.sieges`, `tours_max`) ; un champ absent n'écrit rien. */
     var sc = ch.scenario !== null && typeof ch.scenario === 'object' ? ch.scenario : null;
+    var choisi = null;   /* S1720 · note 545 ① — le personnage de la rangée, porté en `?perso=` par PLAY */
     if (sc) {
       var qui = el('p', 'av-regle av-qui');
       if (typeof sc.personnage === 'string' && sc.personnage !== '') {
+        /* 545 ① — un niveau à personnage prêté : son portrait VERROUILLÉ, et la raison */
         var nom = sc.personnage.replace(/_/g, ' ').toUpperCase();
-        var por = el('img'); por.alt = nom; por.width = 28; por.height = 28;
-        por.style.cssText = 'vertical-align:middle;border-radius:50%;margin-right:6px';
-        por.src = '/art/personnages/all_ico_webp_CORRECTED_ALL/200px/' + sc.personnage + '_200px.webp';
-        qui.appendChild(por);
-        qui.appendChild(document.createTextNode(mot('LENT: ' + nom + ' — you learn his Signature',
-          'PRÊTÉ : ' + nom + ' — tu apprends sa Signature')));
+        var fige = el('span', 'av-perso av-perso-fige');
+        var por = el('img'); por.alt = nom; por.width = 52; por.height = 52;
+        por.src = PORTRAIT + sc.personnage + '_200px.webp';
+        fige.appendChild(por); fige.appendChild(el('span', 'av-cadenas', '🔒'));
+        qui.appendChild(fige);
+        qui.appendChild(document.createTextNode(mot('LENT: ' + nom + ' — this level lends him to you; you learn his Signature',
+          'PRÊTÉ : ' + nom + ' — ce niveau te le prête ; tu apprends sa Signature')));
+        f.appendChild(qui);
       } else {
         qui.appendChild(document.createTextNode(mot('ANY OF YOUR CHARACTERS', 'N’IMPORTE LEQUEL DE TES PERSONNAGES')));
+        f.appendChild(qui);
+        /* 545 ① (`Q-ECR542-PERSO` = oui) — la rangée des personnages POSSÉDÉS (`possede.persos`), le dernier joué
+           (`options.dernierPerso`, écrit par la partie) présélectionné ; la partie l'accepte avec `?campagne=`. */
+        var pro = null; try { pro = window.LLProfil.lis(); } catch (e) { pro = null; }
+        var miens = pro && pro.possede && Array.isArray(pro.possede.persos) ? pro.possede.persos.slice() : [];
+        var dern = pro && pro.options ? pro.options.dernierPerso : null;
+        choisi = miens.indexOf(dern) >= 0 ? dern : (miens[0] || null);
+        var rangee = el('div', 'av-rangee'), nomChoisi = el('p', 'av-regle av-nom-choisi');
+        var peint = function () {
+          Array.prototype.forEach.call(rangee.children, function (b) { b.classList.toggle('av-perso-choisi', b.dataset.perso === choisi); });
+          nomChoisi.textContent = choisi ? choisi.replace(/_/g, ' ').toUpperCase() : '';
+        };
+        miens.forEach(function (id) {
+          var b = el('button', 'av-perso'); b.type = 'button'; b.dataset.perso = id;
+          b.title = id.replace(/_/g, ' ').toUpperCase();
+          var im = el('img'); im.alt = b.title; im.width = 52; im.height = 52; im.src = PORTRAIT + id + '_200px.webp';
+          b.appendChild(im);
+          b.addEventListener('click', function () { choisi = id; peint(); });
+          rangee.appendChild(b);
+        });
+        if (miens.length > 0) { f.appendChild(rangee); f.appendChild(nomChoisi); peint(); }
       }
-      f.appendChild(qui);
       var sieges = sc.table && typeof sc.table.sieges === 'number' ? sc.table.sieges : 1;
       var bots = Math.max(0, sieges - 1);
       var ligne = bots === 0 ? 'SOLO' : bots + (bots === 1 ? ' BOT' : ' BOTS');
@@ -399,7 +434,7 @@
     pied.appendChild(retour);
     var jouer = el('button', 'av-jouer', x.jouable ? mot('PLAY', 'JOUER') : 'NOT YET'); jouer.type = 'button';
     if (x.jouable) {
-      jouer.addEventListener('click', function () { lance(lanceurDe(ch)); });
+      jouer.addEventListener('click', function () { lance(lanceurDe(ch), choisi); });
     } else {
       jouer.disabled = true;
       f.appendChild(el('p', 'av-regle', mot('Comes with a next update.', 'Arrive avec une prochaine mise à jour.')));
