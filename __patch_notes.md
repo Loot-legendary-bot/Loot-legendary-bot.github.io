@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 13 Nov 2026
+- **00:12** — RELOADED GAMES (test shortcuts like VOIR-CRABES): answering the first question no longer replays the whole game from its start ("ROLL FOR FIRST PLAYER", then every past turn). The game simply goes on from where it was loaded.
+
 ## 12 Nov 2026
 - **22:55** — REACTION TIMER: when a window reopens on you (your blow is still lethal after a card was played, or the stack resolved and the table is asked again), its countdown now starts over from its full time. Before, it kept the seconds left from the window before, and could pass for you within a few seconds.
 - **22:55** — YOUR COLLAPSE / YOUR BLOW: when your Signature is not offered in the window, a greyed line now says why (e.g. "on a Collapse hit, only a card that absorbs it can be played").
