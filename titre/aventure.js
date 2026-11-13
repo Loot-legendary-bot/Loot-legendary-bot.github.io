@@ -772,4 +772,15 @@
   }
 
   window.LLAventure = { ouvre: ouvre, ferme: ferme, charge: charge, etats: etats, niveauxDuCercle: niveauxDuCercle };
+  /* S1718 · note 542 ③ — BACK TO THE CAMPAIGN MAP (l'écran de fin d'un niveau) revient au HOME avec `?carte=campagne` :
+     la carte se rouvre d'elle-même, et le paramètre s'efface (un rechargement du HOME ne la rouvre pas). */
+  try {
+    var qc = new URLSearchParams(window.location.search);
+    if (qc.get('carte') === 'campagne') {
+      qc.delete('carte');
+      var sc = qc.toString();
+      history.replaceState(null, '', window.location.pathname + (sc ? '?' + sc : '') + window.location.hash);
+      setTimeout(function () { ouvre(); }, 300);
+    }
+  } catch (e) { /* adresse illisible : le HOME s'ouvre comme d'habitude */ }
 }());

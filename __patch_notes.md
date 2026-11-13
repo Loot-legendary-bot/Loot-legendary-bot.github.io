@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 13 Nov 2026
+- **05:15** — CAMPAIGN: finishing a level now ends on MISSION ACCOMPLISHED or MISSION FAILED — the objective, your turn count, the teeth you earned — with a single button, BACK TO THE CAMPAIGN MAP, that reopens the campaign map. No more podium, "NO WINNER", NEXT GAME or BACK TO MENU after a level, and no tutorial bubble left on the end screen.
 - **03:20** — CAMPAIGN: a level's card now says who you play (any of your characters, or the lent one with his portrait), whether you are alone or with bots, and in how many turns.
 - **03:05** — CAMPAIGN: after level 5, levels 6 and 7 both open — play them in the order you like; level 8 opens once both are done. A locked level now tells you which levels to finish first.
 - **01:10** — ONLINE, when a friend's connection drops for a second: the host no longer answers their reaction window (their Collapse, their death) at once. A dropped seat is now passed only after the window's full time, counted from the moment it dropped — and as soon as they are back, the count is forgotten.

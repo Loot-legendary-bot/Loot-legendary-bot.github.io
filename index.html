@@ -1424,6 +1424,17 @@
       .ready-titre { font-family: var(--titre, inherit); font-size: 34px; letter-spacing: .08em; color: var(--gold); margin: 6px 0 2px; }
       /* S1703 · 514 ① — MISSION ACCOMPLISHED : le titre du READY, le disclaimer en rouge tampon */
       .mission-titre { font-family: var(--titre, inherit); font-size: 38px; letter-spacing: .08em; color: var(--gold); margin: 6px 0 8px; }
+      /* S1718 · note 542 ③ — la fin d'un niveau de campagne : MISSION ACCOMPLISHED / FAILED, un seul bouton. */
+      .fp1.fp1-mission, .nouvelle-table .ntt-axe > .fp1.fp1-mission.ntt-fin { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding-bottom: 90px; }
+      .fp1-mission-mot { font-size: 84px; }
+      .fp1-mission-reussie .fp1-mission-mot { color: #e8c46a; text-shadow: 0 4px 0 #000, 0 0 26px rgb(232 196 106 / .45); }
+      .fp1-mission-ratee .fp1-mission-mot { color: #e0483c; text-shadow: 0 4px 0 #000, 0 0 26px rgb(224 72 60 / .4); }
+      .fp1-mission-objectif { font-family: var(--mono); font-size: 20px; letter-spacing: .06em; color: var(--stock); max-width: 760px; }
+      .fp1-mission-etoiles { font-family: var(--display); font-weight: 800; font-size: 34px; letter-spacing: .2em; color: #e8c46a; }
+      .fp1-mission-lignes { display: flex; gap: 26px; align-items: center; font-family: var(--mono); font-size: 18px; letter-spacing: .1em; color: var(--stock-dim); }
+      .fp1-mission-mort { color: #e0483c; }
+      .fp1-mission-dents { display: inline-flex; align-items: center; gap: 6px; font-family: var(--display); font-weight: 800; font-size: 30px; color: var(--stock); }
+      .fp1-mission-dents .dent-ico { width: 28px; height: 28px; }
       .mission-avertissement { color: var(--alert); font-size: 15px; margin-top: 6px; max-width: 44ch; }
       .ready-compte { font-size: 15px; letter-spacing: .04em; color: var(--slate, #b8b0a0); margin-bottom: 8px; }
       .ready-bouton { font-size: 22px; padding: 10px 34px; letter-spacing: .12em; }
@@ -15732,7 +15743,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DbBtrTJ-.js"></script>
+    <script type="module" crossorigin src="./assets/index-BwizhRD1.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
