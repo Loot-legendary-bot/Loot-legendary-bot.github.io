@@ -1038,6 +1038,9 @@
       .ee-fermer:hover { color: var(--stock); }
       .mb-milieu, .hand { pointer-events: none; }
       .handslot { pointer-events: auto; }
+      /* S1733 · 555 ③ — la carte jouée dans une fenêtre quitte la main d'emblée (elle monte et s'efface) */
+      .handslot.partie { pointer-events: none; opacity: 0; transform: translateY(-60px) scale(.9);
+        transition: opacity .3s ease, transform .3s ease; }
       /*
        * ⚑ **LE CRÉNEAU A LA LARGEUR DE SA CARTE, ET C'EST UNE MESURE.** Sans
        * `width`, il prenait celle de son contenu le plus large — le bouton
@@ -3383,6 +3386,13 @@
       .dicelayer .aj-apres { opacity: 0; }
       .dicelayer.t2 .aj-avant, .dicelayer.fini .aj-avant { opacity: 0; }
       .dicelayer.t2 .aj-apres, .dicelayer.fini .aj-apres { opacity: 1; }
+      /* S1733 · 555 ③ — le bonus posé avant le jet s'ajoute (aj-b) : « +2 · GORMA JUICE », puis « … = 5 » */
+      .dicelayer .aj-apres-bonus, .dicelayer .aj-bonus { opacity: 0; }
+      .dicelayer.aj-b .aj-apres, .dicelayer.aj-avec-bonus.fini .aj-apres { opacity: 0; }
+      .dicelayer.aj-b .aj-apres-bonus, .dicelayer.fini .aj-apres-bonus { opacity: 1; }
+      .dicelayer .aj-bonus { margin-top: 10px; font-family: var(--display); font-weight: 800; font-size: 44px;
+        letter-spacing: .05em; color: #ffd479; transform: scale(1.25); transition: opacity .25s ease, transform .35s ease; }
+      .dicelayer.aj-b .aj-bonus, .dicelayer.fini .aj-bonus { opacity: 1; transform: scale(1); }
       .dicelayer .aj-degats { display: flex; align-items: baseline; justify-content: center; gap: 18px;
         margin-top: 18px; opacity: 0; }
       .dicelayer.t3 .aj-degats, .dicelayer.fini .aj-degats {
@@ -15970,7 +15980,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DgmS_U2-.js"></script>
+    <script type="module" crossorigin src="./assets/index-DPYxxSxB.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
