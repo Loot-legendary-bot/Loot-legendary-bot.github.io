@@ -375,6 +375,13 @@
     f.appendChild(el('div', 'av-cercle', romain(c.numero) + ' · ' + mot(c.nom_en, c.nom) + ' · ' + mot('level ', 'niveau ') + rang));
     f.appendChild(el('h3', null, ch.titre));
     var obj = objectifEn(ch.spec_v2 && ch.spec_v2.objectif);
+    /* S1729 · note 552 ⑥ — `spec_v2.objectif` du niveau 2 est de la prose : l'objectif se lit alors sur le scénario
+       structuré (`scenario.objectif`, `kind: 'TEETH'`, `n` LU dans la donnée — il peut changer). */
+    if (!obj && ch.scenario && typeof ch.scenario === 'object' && ch.scenario.objectif
+        && ch.scenario.objectif.kind === 'TEETH' && typeof ch.scenario.objectif.n === 'number') {
+      obj = 'Earn ' + ch.scenario.objectif.n + ' teeth'
+        + (ch.scenario.objectif.ensuite && ch.scenario.objectif.ensuite.kind === 'EXTRACT' ? ', then get out through a portal' : '');
+    }
     if (obj) f.appendChild(el('p', 'av-obj', mot('Objective: ', 'Objectif : ') + obj));
     /* S1717 · note 542 ④ — qui je joue, seul ou avec combien de bots, en combien de tours : lu sur `chapitres[].scenario`
        (`personnage`, `table.sieges`, `tours_max`) ; un champ absent n'écrit rien. */

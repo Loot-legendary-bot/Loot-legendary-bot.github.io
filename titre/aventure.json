@@ -74,7 +74,7 @@
           "id": "tuto_2",
           "numero": 2,
           "titre": "Second Steps",
-          "brief": "solo · ton personnage · partie libre : « il y a plein de façons de faire des dents dans le donjon : découvre-les, ramasse 50 dents et sors » — objectif VISÉ : 50 dents gagnées dans le donjon (hors participation) puis extraction ; objectif écrit en attendant le juge du moteur : sortir vivant (EXTRACT), 12 tours",
+          "brief": "solo · ton personnage · partie libre : « il y a plein de façons de faire des dents dans le donjon : découvre-les, ramasse 50 dents et sors » — objectif : 50 dents gagnées dans le donjon (hors participation) puis extraction, 12 tours (juge TEETH du moteur, palier 1260 ; écrit le 14/11)",
           "scenario": {
             "id": "limbo_2",
             "graine": 20261102,
@@ -86,7 +86,11 @@
               "SOLO_DECK"
             ],
             "objectif": {
-              "kind": "EXTRACT"
+              "kind": "TEETH",
+              "n": 50,
+              "ensuite": {
+                "kind": "EXTRACT"
+              }
             },
             "tours_max": 12
           },
@@ -97,7 +101,7 @@
           "spec_v2": {
             "table": "solo",
             "personnage": "le tien (au choix)",
-            "objectif": "50 dents gagnées dans le donjon puis sortir (en attendant le juge : sortir vivant)",
+            "objectif": "50 dents gagnées dans le donjon puis sortir",
             "tours_max": 12,
             "bots": "aucun",
             "enseigne": "les sources de dents : tuer un mob, ouvrir un coffre, explorer ; sortir par un portail"
@@ -122,9 +126,10 @@
             "ensuite": {
               "kind": "EXTRACT"
             },
-            "note": "VALIDÉ par Croze le 12/11 (« ok ») : 50 dents gagnées DANS le donjon (la participation de fin de partie ne compte pas), puis sortir, 12 tours — le moteur nomme le juge TEETH (notes 416 ②, 417 ①), puis `scenario.objectif` prend cette valeur"
+            "note": "VALIDÉ par Croze le 12/11 (« ok ») : 50 dents gagnées DANS le donjon (la participation de fin de partie ne compte pas), puis sortir, 12 tours — ÉCRIT dans `scenario.objectif` le 14/11 (juge TEETH, moteur 1260 ; un point compterait ×6, `Q-TEETH420`)"
           },
-          "verdict_croze_12_11": "« A-2 : on n'a pas de mission affichée ; on nous dit move et end turn mais je peux aussi bien explorer ; le but de cette mission c'est : faites ce que vous voulez, il faut juste un minimum, donc on ne peut pas spammer end turn → faire x dents (50 par exemple) et sortir ; l'explication du début : il y a plein de façons de faire de l'argent (dents) dans le donjon, tu dois le découvrir, récupérer des dents et sortir ; tu as mis un mage, je sais pas pourquoi on n'est pas solo ; on me donne THE GUARD, je sais pas pourquoi non plus »"
+          "verdict_croze_12_11": "« A-2 : on n'a pas de mission affichée ; on nous dit move et end turn mais je peux aussi bien explorer ; le but de cette mission c'est : faites ce que vous voulez, il faut juste un minimum, donc on ne peut pas spammer end turn → faire x dents (50 par exemple) et sortir ; l'explication du début : il y a plein de façons de faire de l'argent (dents) dans le donjon, tu dois le découvrir, récupérer des dents et sortir ; tu as mis un mage, je sais pas pourquoi on n'est pas solo ; on me donne THE GUARD, je sais pas pourquoi non plus »",
+          "mesure_moteur_13_11": "palier 1260, `_teeth420` : en campagne `regle_campagne.points = false`, donc seuls les kills paient des dents dans le donjon (12 par mob, 24 par sub-boss, 48 par boss) — ni coffre ni exploration ; 50 = cinq mobs en 12 tours (quatre mobs = 48) ; bras BOT_NORMAL 0 / 8. Le nombre `n` est redemandé à Croze le 14/11 (reco du CLASSEUR : 24, deux mobs) ; il se change ici, nulle part ailleurs."
         },
         {
           "id": "limbo_3",
@@ -418,7 +423,7 @@
           "id": "limbo_8",
           "numero": 8,
           "titre": "Two at the Table",
-          "brief": "2 sieges + bot DOCILE · jet d'ordre, Priority Window, pas de PvP · pool de l'etage",
+          "brief": "toi + 1 bot SCRIPTÉ : il t'attaque une fois, fuit, et accepte tout troc s'il revient sur ta tuile (Croze 12/11 « ok », 13/11 : « 8 = un joueur t'attaque une fois puis fuit ») · jet d'ordre, Priority Window · tuer 2 mobs avant la fin du tour 10 · pool de l'étage",
           "scenario": {
             "id": "limbo_8",
             "graine": 20261108,
@@ -452,21 +457,28 @@
               ],
               "n": 2
             },
-            "tours_max": 10
+            "tours_max": 10,
+            "bots": {
+              "script": {
+                "engage": 1,
+                "fuit": true,
+                "troc": "TOUT"
+              }
+            }
           },
           "etat": "PLAN",
           "etoiles": {
             "tours_max_3_etoiles": 10
           },
           "spec_v2": {
-            "table": "2 sieges, bot DOCILE",
+            "table": "2 sièges, bot SCRIPTÉ (engage 1, fuit, troc TOUT) — `scenario.bots.script`, forme du moteur (palier 1260)",
             "objectif": "KILL_N_MOBS:2 avant la fin du tour 10",
             "tours_max": 10,
             "regles_etage": "cercles[0].regles_etage (pool mobs, tuiles, cartes exclues, Collapse 9, Timer EPIC gele, pas de quete)"
           },
           "virgile": {
             "arrivee": "Two at the table. The other one is a bot, so if it beats you, that's on you, not on the smell.",
-            "conseil": "Roll for order, mind the Priority Window, and nobody stabs anybody. Yet."
+            "conseil": "Roll for order, mind the Priority Window. He'll stab you once, then run. Don't take it personally — he's scripted."
           },
           "medaillon": {
             "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
@@ -477,7 +489,7 @@
               "depot_croze": "ll-ecran\\ASSETS\\campagne\\medaillons\\limbo_8.png"
             }
           },
-          "lecon_croze_12_11": "Croze « ok » : la leçon de l'ancien niveau 2 vient ici — se faire attaquer une fois par un joueur, le voir fuir, lui proposer un troc ; il faut un bot SCRIPTÉ (attaque une fois, fuit, accepte tout troc) dans un chapitre de campagne : forme à nommer par le moteur (note 417 ②) ; en attendant BOTS:DOCILE"
+          "lecon_croze_12_11": "Croze « ok » : la leçon de l'ancien niveau 2 vient ici — se faire attaquer une fois par un joueur, le voir fuir (et, s'il revient, lui proposer un troc : il accepte tout) ; forme nommée par le moteur au palier 1260 (`scenario.bots.script { engage, fuit, troc }`, table à deux sièges, banc `_botscript420` 10 / 10) et ÉCRITE le 14/11 ; `BOTS:DOCILE` gardé comme au banc"
         },
         {
           "id": "limbo_9",

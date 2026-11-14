@@ -1298,6 +1298,13 @@
       @keyframes nt-choisit { from { box-shadow: 0 0 0 2px rgba(255,255,255,.55), 0 0 6px rgba(255,255,255,.25); } to { box-shadow: 0 0 0 4px #fff, 0 0 22px rgba(255,255,255,.7); } }
       .nouvelle-table .nt-presence .nt-choisit-lib { position: absolute; left: 50%; bottom: -1.4em; transform: translateX(-50%); white-space: nowrap;
         font: 600 11px/1 var(--display); letter-spacing: .08em; color: #E8E2D6; text-shadow: 0 1px 2px #000; pointer-events: none; }
+      /* S1729 · M-S1726 — la carte qui attend sa cible, en petit, à droite du rond de celui qui désigne */
+      .nouvelle-table .nt-presence .nt-choisit-carte { position: absolute; top: 4px; right: -18px; width: 34px; z-index: 3; pointer-events: none;
+        transform: rotate(8deg); filter: drop-shadow(0 2px 4px rgba(0,0,0,.8)); animation: nt-choisit-carte .35s ease-out 1 both; }
+      .nouvelle-table .nt-presence .nt-choisit-carte img { display: block; width: 100%; height: auto; border-radius: 3px; border: 1px solid rgba(255,255,255,.6); }
+      .nouvelle-table .nt-presence .nt-choisit-carte-nom { display: block; width: 72px; padding: 2px 4px; background: rgba(12,10,8,.92);
+        border: 1px solid rgba(255,255,255,.5); border-radius: 3px; font: 600 9px/1.15 var(--display); color: #E8E2D6; white-space: normal; }
+      @keyframes nt-choisit-carte { from { opacity: 0; transform: rotate(8deg) translateY(-6px) scale(.8); } to { opacity: 1; transform: rotate(8deg); } }
       /* S1726 · 537 ① b — le téléport au portrait : il se dissout en violet arcane, puis réapparaît sous le nom de sa tuile */
       .nouvelle-table .nt-presence.nt-tp-joue .nt-rond > :not(.nt-tp-ou) { animation: nt-tp-rond 1.6s ease-in-out 1 both; animation-delay: var(--tp-age, 0ms); }
       @keyframes nt-tp-rond {
@@ -13058,46 +13065,75 @@
       .nouvelle-table .tv2-ligne:disabled { color: #B23A31; text-shadow: 0 1px 3px rgba(0,0,0,.95); cursor: default; opacity: 1; }
       .nouvelle-table .tv2-ligne:disabled .tv2-faces { filter: grayscale(1) brightness(.6); }
       /* 335 ③ — le texte riche : la rareté à la couleur de son cadre, le boss en rouge, l'école en glyphe */
-      /* S1724 · notes 548 + 549 — la fenêtre de tuile v4 (maquette `docs/maquettes/tile_panel_v4_lines.dc.html`) :
-         les tailles de la maquette sur 1600 px, à l'échelle de l'écran (`--u`). Libellé discret (20 px, #B9AF9A),
-         phrase en serif devant (22 px, #F2EAD6), aucun cadre, un voile radial. */
-      .nouvelle-table .tv2-liste.tv4 { --u: calc(100vw / 1600); align-self: center; width: min(100%, calc(820 * var(--u)));
-        padding: calc(10 * var(--u)) calc(30 * var(--u)) calc(18 * var(--u)); margin-left: auto; margin-right: auto;
-        background: radial-gradient(ellipse 62% 64% at 50% 46%, rgba(11,10,9,.66) 0%, rgba(11,10,9,.42) 60%, rgba(11,10,9,0) 100%);
-        color: #F2EAD6; max-height: 58vh; }
-      .nouvelle-table .ntt-axe.avec-seuil > .tv2-liste.tv4 { width: min(calc(100% - var(--seuil-l, 30vh)), calc(820 * var(--u))); }
-      .nouvelle-table .tv4-tete { display: flex; flex-direction: column; align-items: center; gap: calc(10 * var(--u));
-        border: 0; border-image: none; padding: 0; margin: 0 0 calc(14 * var(--u)); }
-      .nouvelle-table .tv4-titre { font-size: max(24px, calc(46 * var(--u))); font-weight: 500; line-height: 1; letter-spacing: .01em;
+      /* S1724 · notes 548 + 549 — la fenêtre de tuile ; REVUE LE 14/11 (note 552, « v5 », sur le mot de Croze : « il tombe
+         en bas, il coupe le texte d'interaction des tiles »). Quatre fautes de la v4, réparées ici en CSS seul :
+         (1) `--u` valait `100vw / 1600` : or `#composition` est en 1920 × 1080 LOGIQUES, mise à l'échelle par `transform`
+             (note 129 ⑤) — sur un écran de 2235 px la fenêtre sortait 16 % plus grosse que tout le reste, le double en 4K.
+             `--u` est une CONSTANTE (1,2 px = 1920 / 1600). Aucun `vw` dans ce bloc.
+         (2) `align-self: center` la centrait dans la hauteur de l'axe : elle « tombait en bas », jusque sous la main.
+             Elle s'ANCRE EN HAUT de la zone libre et descend.
+         (3) le texte de l'interaction était replié (chevron, survol) et rogné à deux lignes : il est TOUJOURS là, EN ENTIER,
+             sous son nom. Rien n'est coupé : ce qui ne tient pas sur la ligne passe à la ligne.
+         (4) la colonne du libellé (96u) était plus étroite que « INTERACT » : le libellé mordait sur la phrase.
+         Deux voix (549 ②) : le libellé en « moderne », petit et éteint ; la phrase en serif, devant. */
+      .nouvelle-table .tv2-liste.tv4 { --u: 1.2px; align-self: flex-start; width: min(100%, calc(700 * var(--u)));
+        margin: calc(2 * var(--u)) auto 0; padding: calc(8 * var(--u)) calc(22 * var(--u)) calc(14 * var(--u));
+        background: radial-gradient(ellipse 72% 62% at 50% 42%, rgba(8,7,6,.74) 0%, rgba(8,7,6,.48) 62%, rgba(8,7,6,0) 100%);
+        color: #F2EAD6; }
+      /* des joueurs sur ma tuile (le seuil, en bas à droite de l'axe) : la liste se centre dans la place qui reste à leur
+         gauche, jamais sous leurs portraits */
+      .nouvelle-table .ntt-axe.avec-seuil > .tv2-liste.tv4 { width: min(calc(100% - var(--seuil-l, 30vh)), calc(700 * var(--u)));
+        margin-left: auto; margin-right: auto; translate: calc(var(--seuil-l, 30vh) / -2) 0; }
+      /* trois joueurs et plus sur ma tuile : la place se resserre, toute la fenêtre réduit d'un cran (tout s'y mesure en `--u`) */
+      .nouvelle-table .ntt-axe.avec-seuil:has(> .tv2-seuil > .tv2-seuil-bloc:nth-child(3)) > .tv2-liste.tv4 { --u: 1.08px; }
+      .nouvelle-table .ntt-axe.avec-seuil:has(> .tv2-seuil > .tv2-seuil-bloc:nth-child(4)) > .tv2-liste.tv4 { --u: 1px; }
+      .nouvelle-table .tv4-tete { display: flex; flex-direction: column; align-items: center; gap: calc(8 * var(--u));
+        border: 0; border-image: none; padding: 0; margin: 0 0 calc(10 * var(--u)); }
+      .nouvelle-table .tv4-titre { font-size: calc(36 * var(--u)); font-weight: 500; line-height: 1; letter-spacing: .01em;
         color: #F2EAD6; text-shadow: 0 2px 16px rgba(0,0,0,.85); text-align: center; }
       .nouvelle-table .tv4-regle { display: flex; align-items: center; gap: 12px; color: #D8B45A; }
-      .nouvelle-table .tv4-regle-fil { width: calc(84 * var(--u)); height: 1px; background: #D8B45A; opacity: .7; }
+      .nouvelle-table .tv4-regle-fil { width: calc(64 * var(--u)); height: 1px; background: #D8B45A; opacity: .7; }
       .nouvelle-table .tv4-regle-losange { font-size: 12px; line-height: 1; }
-      .nouvelle-table .tv4-lignes { gap: calc(6 * var(--u)); }
+      .nouvelle-table .tv4-lignes { gap: calc(4 * var(--u)); }
       .nouvelle-table .tv4-lignes.entre > .tv4-bloc { animation: tv2-ligne-entre 320ms ease-out both; animation-delay: calc(var(--k, 0) * 60ms); }
-      .nouvelle-table .tv4-bloc { position: relative; border-radius: 5px; background: rgba(242,234,214,.05); }
-      .nouvelle-table .tv4-bloc.epuisee { background: rgba(242,234,214,.03); }
-      .nouvelle-table .tv2-liste.tv4 .tv4-ligne { display: grid; grid-template-columns: calc(32 * var(--u)) calc(96 * var(--u)) minmax(0, 1fr);
-        column-gap: calc(16 * var(--u)); align-items: center; min-height: max(36px, calc(50 * var(--u)));
-        padding: 4px calc(44 * var(--u)) 4px calc(18 * var(--u)); width: 100%; color: #F2EAD6; cursor: pointer; }
-      .nouvelle-table .tv2-liste.tv4[data-hauteur="44"] .tv4-ligne { min-height: max(32px, calc(44 * var(--u))); }
-      .nouvelle-table .tv2-liste.tv4[data-hauteur="38"] .tv4-ligne { min-height: max(28px, calc(38 * var(--u))); }
+      .nouvelle-table .tv4-bloc { position: relative; border-radius: 5px; background: rgba(242,234,214,.045); }
+      .nouvelle-table .tv4-bloc.epuisee { background: rgba(242,234,214,.025); }
+      /* une tuile sans interaction n'a pas de ligne INTERACT (la ligne « This tile has no interaction » ne porte aucun détail) */
+      .nouvelle-table .tv4-bloc[data-cle="INTERACT"]:not(:has(> .tv4-detail)) { display: none; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne { display: grid;
+        grid-template-columns: calc(28 * var(--u)) calc(92 * var(--u)) minmax(0, 1fr); column-gap: calc(12 * var(--u));
+        align-items: center; min-height: calc(40 * var(--u)); padding: calc(5 * var(--u)) calc(14 * var(--u));
+        width: 100%; color: #F2EAD6; cursor: pointer; }
+      /* 7 lignes et plus (`data-hauteur` 44 / 38, posé par `listeDesActionsV4`) : le même dessin, un cran plus serré */
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="44"] .tv4-ligne { min-height: calc(36 * var(--u)); padding-top: calc(3 * var(--u)); padding-bottom: calc(3 * var(--u)); }
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="38"] .tv4-ligne { min-height: calc(32 * var(--u)); padding-top: calc(2 * var(--u)); padding-bottom: calc(2 * var(--u)); }
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="44"] .tv4-lignes, .nouvelle-table .tv2-liste.tv4[data-hauteur="38"] .tv4-lignes { gap: calc(3 * var(--u)); }
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="44"] .tv4-titre, .nouvelle-table .tv2-liste.tv4[data-hauteur="38"] .tv4-titre { font-size: calc(32 * var(--u)); }
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="44"] .tv4-tete, .nouvelle-table .tv2-liste.tv4[data-hauteur="38"] .tv4-tete { margin-bottom: calc(7 * var(--u)); gap: calc(6 * var(--u)); }
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="38"] .tv4-corps { font-size: calc(16.5 * var(--u)); }
+      .nouvelle-table .tv2-liste.tv4[data-hauteur="38"] .tv4-detail { font-size: calc(15 * var(--u)); }
       .nouvelle-table .tv2-liste.tv4 .tv4-ligne-pastilles { cursor: default; }
       .nouvelle-table .tv2-liste.tv4 .tv4-ligne-pastilles.tv4-une-cible { cursor: pointer; }
-      .nouvelle-table .tv2-liste.tv4 .tv4-ico { width: calc(32 * var(--u)); height: calc(32 * var(--u)); min-width: 20px; min-height: 20px; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ico { width: calc(28 * var(--u)); height: calc(28 * var(--u)); }
       .nouvelle-table .tv2-liste.tv4 .tv4-ico.eteinte { opacity: .6; filter: grayscale(1) brightness(.7); }
-      .nouvelle-table .tv2-liste.tv4 .tv4-lib { font-family: var(--display); font-variant: normal; font-weight: 500;
-        font-size: max(13px, calc(20 * var(--u))); line-height: 1; letter-spacing: .1em; color: #B9AF9A; }
-      .nouvelle-table .tv2-liste.tv4 .tv4-bloc.epuisee .tv4-lib { color: #9C9382; }
-      .nouvelle-table .tv2-liste.tv4 .tv4-corps { display: flex; align-items: center; gap: calc(12 * var(--u)); flex-wrap: nowrap;
-        white-space: nowrap; overflow: hidden; font-size: max(15px, calc(22 * var(--u))); line-height: 1.2; color: #F2EAD6; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-lib { font-family: var(--display); font-variant: normal; font-weight: 600;
+        font-size: calc(15 * var(--u)); line-height: 1; letter-spacing: .12em; color: #A9A08C; white-space: nowrap; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-bloc.epuisee .tv4-lib { color: #8C8474; }
+      /* la phrase : rien n'est coupé — ce qui ne tient pas passe à la ligne (les pastilles aussi) */
+      .nouvelle-table .tv2-liste.tv4 .tv4-corps { display: flex; align-items: center; flex-wrap: wrap;
+        column-gap: calc(10 * var(--u)); row-gap: calc(4 * var(--u)); white-space: normal; overflow: visible;
+        font-size: calc(18 * var(--u)); line-height: 1.25; color: #F2EAD6; }
       .nouvelle-table .tv2-liste.tv4 .tv4-bloc.epuisee .tv4-corps { color: #CFC6B2; }
-      .nouvelle-table .tv2-liste.tv4 .tv4-motif { font-size: max(13px, calc(19 * var(--u))); color: #E0867E; overflow: hidden; text-overflow: ellipsis; }
-      .nouvelle-table .tv2-liste.tv4 .tv4-avant { font-size: max(13px, calc(19 * var(--u))); color: #B9AF9A; }
-      .nouvelle-table .tv4-issues { display: flex; align-items: baseline; gap: calc(16 * var(--u)); }
+      .nouvelle-table .tv2-liste.tv4 .tv4-bloc.epuisee .tv4-issues { opacity: .5; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-motif { font-size: .9em; font-style: italic; color: #E0867E; }
+      /* la raison d'une interaction indisponible se lit une fois, dans son détail */
+      .nouvelle-table .tv4-bloc:has(> .tv4-detail > .tv4-detail-refus) .tv4-motif { display: none; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-avant { font-size: .9em; color: #B9AF9A; }
+      .nouvelle-table .tv4-issues { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: calc(14 * var(--u)); row-gap: 0; }
       .nouvelle-table .tv4-issue strong { font-weight: 700; }
-      .nouvelle-table .tv2-liste.tv4 .tv4-pastille { min-height: max(26px, calc(38 * var(--u))); padding: 0 calc(16 * var(--u));
-        border-radius: 999px; border: 0; background: rgba(242,234,214,.1); color: #F2EAD6; font: inherit; cursor: pointer; white-space: nowrap; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-pastille { min-height: calc(30 * var(--u)); padding: 0 calc(12 * var(--u));
+        border-radius: 999px; border: 0; background: rgba(242,234,214,.1); color: #F2EAD6; font: inherit;
+        text-transform: none; letter-spacing: normal; cursor: pointer; white-space: nowrap; }
       .nouvelle-table .tv2-liste.tv4 .tv4-pastille:not(:disabled):hover, .nouvelle-table .tv2-liste.tv4 .tv4-pastille:focus-visible,
       .nouvelle-table .tv2-liste.tv4 .tv4-pastille.choisie { background: rgba(242,234,214,.2); box-shadow: 0 0 0 1px #D8B45A; outline: none; }
       .nouvelle-table .tv2-liste.tv4 .tv4-pastille.choisie { animation: tv2-clignote 120ms steps(1, end) 2; }
@@ -13105,19 +13141,20 @@
       .nouvelle-table .tv2-liste.tv4 .tv4-pastille-plus { font-size: .82em; color: #B9AF9A; }
       .nouvelle-table .tv2-liste.tv4 .tv4-ligne:not(:disabled):not(.tv4-ligne-pastilles):hover,
       .nouvelle-table .tv2-liste.tv4 .tv4-ligne:not(:disabled):not(.tv4-ligne-pastilles):focus-visible,
-      .nouvelle-table .tv2-liste.tv4 .tv4-une-cible:hover { background: rgba(242,234,214,.08) !important; box-shadow: none !important; border-radius: 5px; color: #FFFFFF; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-une-cible:hover { background: rgba(242,234,214,.09) !important; box-shadow: none !important; border-radius: 5px; color: #FFFFFF; }
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne:not(:disabled):not(.tv4-ligne-pastilles):hover .tv4-lib,
+      .nouvelle-table .tv2-liste.tv4 .tv4-une-cible:hover .tv4-lib { color: #D8B45A; }
+      /* une ligne à pastilles (TRADE, FIGHT, LOOT, THE LOCK) ne reçoit pas le cadre rouge de survol de l'ancienne liste */
+      .nouvelle-table .tv2-liste.tv4 .tv4-ligne-pastilles:hover, .nouvelle-table .tv2-liste.tv4 .tv4-ligne-pastilles:focus-visible { box-shadow: none !important; }
       .nouvelle-table .tv2-liste.tv4 .tv4-ligne.choisie { box-shadow: none !important; background: rgba(242,234,214,.12) !important; }
       .nouvelle-table .tv2-liste.tv4 .tv4-ligne:disabled { color: #CFC6B2; cursor: default; }
-      .nouvelle-table .tv4-chevron { position: absolute; right: calc(14 * var(--u)); top: max(18px, calc(25 * var(--u))); transform: translateY(-50%);
-        width: 26px; height: 26px; display: grid; place-items: center; border: 0; background: none; color: #B9AF9A; cursor: pointer; padding: 0; }
-      .nouvelle-table .tv4-chevron:hover { color: #F2EAD6; }
-      .nouvelle-table .tv4-bloc.depliee .tv4-chevron svg { transform: rotate(180deg); }
-      .nouvelle-table .tv4-detail { padding: 0 calc(18 * var(--u)) calc(10 * var(--u)) calc(162 * var(--u));
-        font-size: max(13px, calc(19 * var(--u))); line-height: 1.3; color: #B9AF9A; white-space: normal;
-        display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
-      .nouvelle-table .tv4-bloc:not(.depliee) > .tv4-detail { display: none; }
-      .nouvelle-table .tv4-detail-refus { color: #E0867E; margin-right: .6em; }
-      .nouvelle-table .tv4-filet { height: 1px; margin: calc(4 * var(--u)) calc(40 * var(--u));
+      /* le détail (le texte de l'interaction, la note de la serrure) : toujours visible, aligné sous la phrase ; plus de chevron */
+      .nouvelle-table .tv4-chevron { display: none; }
+      .nouvelle-table .tv4-bloc > .tv4-detail { display: block; white-space: normal; overflow: visible;
+        padding: 0 calc(14 * var(--u)) calc(7 * var(--u)) calc(158 * var(--u)); margin-top: calc(-3 * var(--u));
+        font-size: calc(16 * var(--u)); line-height: 1.3; color: #BDB4A0; }
+      .nouvelle-table .tv4-detail-refus { display: block; margin: 0 0 1px; font-style: italic; color: #E0867E; }
+      .nouvelle-table .tv4-filet { height: 1px; margin: calc(3 * var(--u)) calc(30 * var(--u));
         background: linear-gradient(90deg, transparent, rgba(216,180,90,.45), transparent); }
       .nouvelle-table .tv2-rarete { font-weight: 700; }
       .nouvelle-table .tv2-boss { color: #E0342A; font-weight: 700; }
@@ -15841,7 +15878,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-ZME5MElR.js"></script>
+    <script type="module" crossorigin src="./assets/index-B_Omy6TJ.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
