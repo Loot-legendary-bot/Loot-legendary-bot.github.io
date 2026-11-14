@@ -1,6 +1,13 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 14 Nov 2026
+- **15:20** — TRADE: the cards of a trade are now large (names readable at a glance) — what you give and what they give side by side, the cards you can still add in a column on the right; hover any card to see it full size. If the other player cancels, a line says so ("THE GUARD cancelled the trade") instead of the window just vanishing.
+- **10:16** — TILE MENU: smaller and anchored under the turn banner — it never reaches your hand; a tile's interaction text is always shown in full; nothing is cut off, even with other players on your tile.
+- **10:16** — ONLINE: a player who QUITS the game no longer holds the table — their moments pass at once (a dropped connection still gets its full time).
+- **10:16** — CAMPAIGN, level 2: the objective box counts your teeth ("12 / 50 teeth"), then "get out"; the level card says "Earn 50 teeth, then get out through a portal".
+- **10:16** — JOURNAL: a successful flight reads "flees to"; a player carried off by a card names that card and who played it, read from the game itself. While another player chooses a target, the card they are playing shows small on their portrait.
+
 ## 13 Nov 2026
 - **22:00** — DUELS: betting on a duel between two other players is removed (it could hold the duel waiting for players who had left). The duel now starts at once; WHO WINS?, YOUR BET and the Bets line of the end screen are gone. The Goblin Casino bets are unchanged.
 - **18:00** — TILE MENU: one line per action — its icon, a small grey label, then the sentence in a large serif; TRADE and FIGHT on one line each, with a button per player present; PORTAL then MOVE at the bottom; INTERACT unfolds to tell you what you are missing. JOURNAL: a player carried off by a card now reads "is sent to The Coffin Lounge (Party Invitation, THE GURU)", no longer "moves to".

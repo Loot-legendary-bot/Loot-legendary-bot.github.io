@@ -15763,6 +15763,38 @@
       .troc-regle { font-size: .75em; opacity: .7; }
       .troc-dos { display: flex; gap: .25em; }
       .troc-dos img { width: 2.6em; aspect-ratio: 5 / 7; object-fit: cover; }
+      /* S1730 · note 553 ① — « je lis ses cartes et les miennes sans plisser les yeux ; je passe la souris sur une carte,
+         elle s'affiche en grand ». Le troc où je suis partie prend l'AXE entier (la tuile comprise, comme L-3) sur trois
+         colonnes : YOU GIVE | X GIVES | ma réserve, qui défile seule. Les deux colonnes tiennent le pire cas (six cartes
+         de 150 px, deux rangées de trois) sans jamais défiler ; la réserve, 120 px. */
+      .nouvelle-table .ntt-axe:has(.troc.a-toi) { position: relative; }
+      .nouvelle-table .ntt-axe > .ntt-question-cadre:has(.troc.a-toi) {
+        position: absolute; left: 0; right: 0; top: 0; z-index: 30; flex: none; }
+      .troc.a-toi { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 140px;
+        column-gap: 10px; row-gap: 8px; align-items: start; }
+      .troc.a-toi > .choix-titre { grid-column: 1 / -1; grid-row: 1; }
+      .troc.a-toi > .troc-cotes { display: contents; }
+      .troc.a-toi .troc-cote { gap: 4px; padding: 6px; min-height: 486px; box-sizing: border-box; }
+      .troc.a-toi .troc-cote.moi { grid-column: 1; grid-row: 2; }
+      .troc.a-toi .troc-cote.lui { grid-column: 2; grid-row: 2; }
+      .troc.a-toi > .troc-reserve { grid-column: 3; grid-row: 2 / span 3; align-self: stretch; contain: size;
+        flex-direction: column; flex-wrap: nowrap; align-items: center; gap: 6px; overflow-y: auto; overflow-x: hidden;
+        scrollbar-width: thin; border: 1px solid rgba(232,200,114,.2); padding: 4px 0; }
+      .troc.a-toi > .troc-reserve > .troc-sous-titre { width: auto; padding: 0 6px; text-align: center; }
+      .troc.a-toi > .troc-gestes { grid-column: 1 / 3; grid-row: 3; }
+      .troc.a-toi > .troc-regle { grid-column: 1 / 3; grid-row: 4; }
+      .troc.a-toi .troc-sous-titre { font-size: 14px; }
+      .troc.a-toi .troc-carte { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 4px;
+        width: 150px; padding: 3px; flex: none; box-sizing: border-box; }
+      .troc.a-toi .troc-carte > img { grid-column: 1 / -1; }
+      .troc.a-toi > .troc-reserve .troc-carte { width: 120px; }
+      .troc.a-toi .troc-nom { grid-row: 2; grid-column: 2; font-size: 14px; margin: 0; text-align: left;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .troc.a-toi .troc-carte:not(:has(> .troc-origine)) > .troc-nom { grid-column: 1 / -1; text-align: center; }
+      .troc.a-toi .troc-origine { grid-row: 2; grid-column: 1; margin: 0; font-size: 11px; letter-spacing: .06em; }
+      .troc-carte > .troc-zoom { display: none; }
+      #zoom-coin > .troc-zoom.zc-ouvert { display: flex; pointer-events: none; }
+      .troc.troc-annule .choix-titre { font-size: 18px; letter-spacing: .08em; }
       /* S1513 · note 377 ③ / 267 — LE TUTORIEL V2 : l'étiquette ancrée, la lumière, le verrou, les cartons */
       /* S1551 · notes 388 ② / 390 ⑥ — la raison d'un Skill refusé, au centre du combat : une ligne pleine, lisible */
       .ntt-signal.etourdi-signal { color: #ffe08a !important; background: rgba(120,80,0,.6) !important; border-color: #e0b84a !important; }
@@ -15878,7 +15910,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B_Omy6TJ.js"></script>
+    <script type="module" crossorigin src="./assets/index-Bw1IKUQ9.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

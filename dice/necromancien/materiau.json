@@ -1,0 +1,44 @@
+{
+ "famille": "translucide",
+ "couleurs": {
+  "corps": [
+   "#ffffff",
+   "#4a4854"
+  ],
+  "veines": "#d6d0f0",
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#f048d0",
+  "chiffres_bas": "#46b4ff"
+ },
+ "fini": {
+  "rugosite": 0.22,
+  "metallique": 0.0,
+  "transmission": 1.0,
+  "ior": 1.5,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.0,
+  "densite": 0.0,
+  "densite_paillettes": 0.0,
+  "rugosite_inclusions": 0.0
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.5,
+  "lueur": 0.5,
+  "fondu": 0.6
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "Set signature du Necromancer, Epic. Resine fumee : volume blanc, surface fumee. Chiffres qui LUISENT, violet-rose (chaos) en haut, bleu glace (ice) au pied. Mot de Croze 12/11."
+}

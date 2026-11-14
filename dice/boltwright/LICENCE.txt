@@ -1,0 +1,28 @@
+boltwright — licences et provenance
+===================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+SOURCE      AUCUNE PHOTOGRAPHIE. Le set signature du Boltwright (MONNAIE
+            7.3 : un set par personnage, debloque en le jouant), au palier
+            Epic (MONNAIE 7.2 : « effets (lueur, fumee, animes — a forger) »).
+            Choisi par Croze le 13/11 parmi trois propositions de la forge :
+            « cuivre brosse, chiffres qui luisent bleu electrique ». Le cuivre
+            est un albedo CHOISI (la reflectance du cuivre poli), pas mesure ;
+            le bleu est choisi et soumis a son oeil.
+
+NOM         Le personnage dont c'est le set : The Boltwright.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. La famille metal y ajoute le studio de la forge
+            (poser_le_studio) : des panneaux vus des seuls reflets.

@@ -74,7 +74,7 @@
           "id": "tuto_2",
           "numero": 2,
           "titre": "Second Steps",
-          "brief": "solo · ton personnage · partie libre : « il y a plein de façons de faire des dents dans le donjon : découvre-les, ramasse 50 dents et sors » — objectif : 50 dents gagnées dans le donjon (hors participation) puis extraction, 12 tours (juge TEETH du moteur, palier 1260 ; écrit le 14/11)",
+          "brief": "solo · ton personnage · partie libre — objectif : 24 dents gagnées dans le donjon (deux mobs tués ; hors participation) puis extraction, 12 tours (juge TEETH du moteur, palier 1260 ; Croze 14/11 : « ta reco » = 24, au lieu des 50 du 12/11)",
           "scenario": {
             "id": "limbo_2",
             "graine": 20261102,
@@ -87,7 +87,7 @@
             ],
             "objectif": {
               "kind": "TEETH",
-              "n": 50,
+              "n": 24,
               "ensuite": {
                 "kind": "EXTRACT"
               }
@@ -101,14 +101,14 @@
           "spec_v2": {
             "table": "solo",
             "personnage": "le tien (au choix)",
-            "objectif": "50 dents gagnées dans le donjon puis sortir",
+            "objectif": "24 dents gagnées dans le donjon (deux mobs) puis sortir",
             "tours_max": 12,
             "bots": "aucun",
-            "enseigne": "les sources de dents : tuer un mob, ouvrir un coffre, explorer ; sortir par un portail"
+            "enseigne": "un mob tué paie des dents (12 ; 24 pour un sub-boss, 48 pour un boss) ; sortir par un portail"
           },
           "virgile": {
-            "arrivee": "Plenty of ways to make teeth down here. Kills, chests, dirty little deals. Find them.",
-            "conseil": "Fifty teeth, then get out through a portal. Spamming END TURN pays nothing, I checked."
+            "arrivee": "Teeth, hero. Down here they come out of mobs: twelve a head, more for the big ones.",
+            "conseil": "Twenty-four teeth — two kills — then get out through a portal. Spamming END TURN pays nothing, I checked."
           },
           "medaillon": {
             "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
@@ -122,14 +122,14 @@
           "note_script": "l'ancien script « The Fight » (tuto.json.tutos[1], le Guard prêté + bob) n'est plus le niveau 2 : il reste dans tuto.json, non branché ; sa leçon de troc et de PvP ira au niveau 8 (premier bot) si Croze le confirme",
           "objectif_vise": {
             "kind": "TEETH",
-            "n": 50,
+            "n": 24,
             "ensuite": {
               "kind": "EXTRACT"
             },
-            "note": "VALIDÉ par Croze le 12/11 (« ok ») : 50 dents gagnées DANS le donjon (la participation de fin de partie ne compte pas), puis sortir, 12 tours — ÉCRIT dans `scenario.objectif` le 14/11 (juge TEETH, moteur 1260 ; un point compterait ×6, `Q-TEETH420`)"
+            "note": "Croze 12/11 (« ok ») : des dents gagnées DANS le donjon (la participation de fin de partie ne compte pas), puis sortir, 12 tours — 50 « par exemple » ; Croze 14/11 (« ta reco ») : **24**, deux mobs — en campagne seuls les kills paient (`regle_campagne.points = false`). Écrit dans `scenario.objectif` (juge TEETH, moteur 1260, un point compterait ×6)."
           },
           "verdict_croze_12_11": "« A-2 : on n'a pas de mission affichée ; on nous dit move et end turn mais je peux aussi bien explorer ; le but de cette mission c'est : faites ce que vous voulez, il faut juste un minimum, donc on ne peut pas spammer end turn → faire x dents (50 par exemple) et sortir ; l'explication du début : il y a plein de façons de faire de l'argent (dents) dans le donjon, tu dois le découvrir, récupérer des dents et sortir ; tu as mis un mage, je sais pas pourquoi on n'est pas solo ; on me donne THE GUARD, je sais pas pourquoi non plus »",
-          "mesure_moteur_13_11": "palier 1260, `_teeth420` : en campagne `regle_campagne.points = false`, donc seuls les kills paient des dents dans le donjon (12 par mob, 24 par sub-boss, 48 par boss) — ni coffre ni exploration ; 50 = cinq mobs en 12 tours (quatre mobs = 48) ; bras BOT_NORMAL 0 / 8. Le nombre `n` est redemandé à Croze le 14/11 (reco du CLASSEUR : 24, deux mobs) ; il se change ici, nulle part ailleurs."
+          "mesure_moteur_13_11": "palier 1260, `_teeth420` : en campagne seuls les kills paient des dents dans le donjon (12 par mob, 24 par sub-boss, 48 par boss) — ni coffre ni exploration ; à 50 (cinq mobs en 12 tours) le bras BOT_NORMAL faisait 0 / 8. Tranché à 24 par Croze le 14/11 ; le nombre se change ici, nulle part ailleurs."
         },
         {
           "id": "limbo_3",

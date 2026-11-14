@@ -1,0 +1,29 @@
+necromancien — licences et provenance
+=====================================
+
+GEOMETRIE   Procedurale. Les six solides sont construits par
+            packages/debug-ui/tools/forge_des/forge_blender.py (voie A du brief,
+            section 4). Aucun modele achete n'entre dans cette peau.
+
+POLICE      Archivo Bold, SIL Open Font License 1.1.
+            Copyright 2020 The Archivo Project Authors
+            (https://github.com/Omnibus-Type/Archivo)
+            Le texte de la licence et ce qui a ete fait au fichier :
+            polices/OFL-Archivo.txt et
+            polices/PROVENANCE-Archivo.txt.
+
+SOURCE      AUCUNE PHOTOGRAPHIE. Le set signature du Necromancer (MONNAIE
+            7.3 : un set par personnage, debloque en le jouant), premier de du
+            palier Epic (MONNAIE 7.2 : « effets (lueur, fumee, animes — a
+            forger) »). MONNAIE 7.3 l'ecrivait « en noir aux chiffres verts » ;
+            mot de Croze du 12/11 : « chiffre vert non plutot violet-rose et
+            bleu (pour son cote chaos et ice ». Les couleurs sont CHOISIES par
+            la forge et soumises a son oeil ; aucune n'a de cote reference.
+
+NOM         Le personnage dont c'est le set : The Necromancer.
+
+CADRAGE     Camera, lampes et echelle sont lues dans
+            polices/../rig/export_dice.py, le script qui a produit les peaux
+            bones et pierre. Deux lampes sont echangees par la forge et le
+            rapport les nomme : la cle, neutre depuis l'addendum 21, et le Rim,
+            blanc froid depuis la decision #24 C de Croze.
