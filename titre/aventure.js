@@ -383,6 +383,9 @@
         + (ch.scenario.objectif.ensuite && ch.scenario.objectif.ensuite.kind === 'EXTRACT' ? ', then get out through a portal' : '');
     }
     if (obj) f.appendChild(el('p', 'av-obj', mot('Objective: ', 'Objectif : ') + obj));
+    /* S1732 · note 555 ⑤ — « sous l'objectif, la fiche me dit comment on gagne des dents » : `chapitres[].fiche_indice`
+       (anglais, dans la donnée) ; un champ absent n'écrit rien. */
+    if (typeof ch.fiche_indice === 'string' && ch.fiche_indice.trim() !== '') f.appendChild(el('p', 'av-regle av-indice', ch.fiche_indice));
     /* S1717 · note 542 ④ — qui je joue, seul ou avec combien de bots, en combien de tours : lu sur `chapitres[].scenario`
        (`personnage`, `table.sieges`, `tours_max`) ; un champ absent n'écrit rien. */
     var sc = ch.scenario !== null && typeof ch.scenario === 'object' ? ch.scenario : null;

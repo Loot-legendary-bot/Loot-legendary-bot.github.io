@@ -1457,16 +1457,72 @@
       /* S1703 · 514 ① — MISSION ACCOMPLISHED : le titre du READY, le disclaimer en rouge tampon */
       .mission-titre { font-family: var(--titre, inherit); font-size: 38px; letter-spacing: .08em; color: var(--gold); margin: 6px 0 8px; }
       /* S1718 · note 542 ③ — la fin d'un niveau de campagne : MISSION ACCOMPLISHED / FAILED, un seul bouton. */
-      .fp1.fp1-mission, .nouvelle-table .ntt-axe > .fp1.fp1-mission.ntt-fin { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding-bottom: 90px; }
-      .fp1-mission-mot { font-size: 84px; }
-      .fp1-mission-reussie .fp1-mission-mot { color: #e8c46a; text-shadow: 0 4px 0 #000, 0 0 26px rgb(232 196 106 / .45); }
-      .fp1-mission-ratee .fp1-mission-mot { color: #e0483c; text-shadow: 0 4px 0 #000, 0 0 26px rgb(224 72 60 / .4); }
-      .fp1-mission-objectif { font-family: var(--mono); font-size: 20px; letter-spacing: .06em; color: var(--stock); max-width: 760px; }
-      .fp1-mission-etoiles { font-family: var(--display); font-weight: 800; font-size: 34px; letter-spacing: .2em; color: #e8c46a; }
-      .fp1-mission-lignes { display: flex; gap: 26px; align-items: center; font-family: var(--mono); font-size: 18px; letter-spacing: .1em; color: var(--stock-dim); }
-      .fp1-mission-mort { color: #e0483c; }
-      .fp1-mission-dents { display: inline-flex; align-items: center; gap: 6px; font-family: var(--display); font-weight: 800; font-size: 30px; color: var(--stock); }
-      .fp1-mission-dents .dent-ico { width: 28px; height: 28px; }
+      /* S1732 · note 555 ② a c d + 556 ① — l'écran de fin de mission, d'après la maquette validée par Croze
+         (`docs/maquettes/mission_end_v1.html`, « ok ») : la colonne au centre, le bouton DANS le flux, et rien du jeu
+         derrière (`body.fin-de-mission` cache la main, le HUD et l'encadré OBJECTIVE). */
+      .fp1.fp1-mission, .nouvelle-table .ntt-axe > .fp1.fp1-mission.ntt-fin {
+        position: fixed; inset: 0; z-index: 2147482000; border: 0; padding: 0; overflow: auto;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+        background:
+          radial-gradient(ellipse 20% 72% at 0% 55%, rgb(126 26 21 / .55), transparent 70%),
+          radial-gradient(ellipse 20% 72% at 100% 55%, rgb(126 26 21 / .55), transparent 70%),
+          radial-gradient(ellipse 70% 62% at 50% 44%, #1b1817 0%, #0d0c0c 60%, #060606 100%);
+        color: var(--stock); }
+      .fp1-mission.fp1-mission-reussie { background:
+          radial-gradient(ellipse 20% 72% at 0% 55%, rgb(126 26 21 / .40), transparent 70%),
+          radial-gradient(ellipse 20% 72% at 100% 55%, rgb(126 26 21 / .40), transparent 70%),
+          radial-gradient(ellipse 46% 34% at 50% 26%, rgb(232 196 106 / .10), transparent 72%),
+          radial-gradient(ellipse 70% 62% at 50% 44%, #1b1817 0%, #0d0c0c 60%, #060606 100%); }
+      body.fin-de-mission .main-basse, body.fin-de-mission #quetes-coin, body.fin-de-mission .tv2-vues,
+      body.fin-de-mission .bande-timer, body.fin-de-mission .cv-resultat, body.fin-de-mission .nt-tp-bandeau,
+      body.fin-de-mission .etoile-bulle { visibility: hidden !important; }
+      .fm-col { width: 1060px; max-width: calc(100vw - 48px); display: flex; flex-direction: column; align-items: center; }
+      .fm-ou { font-size: 17px; letter-spacing: .42em; text-transform: uppercase; color: var(--stock-dim); white-space: nowrap; }
+      .fm-titre { margin-top: 8px; font-family: var(--display); font-weight: 700; font-size: 34px; letter-spacing: .14em; text-transform: uppercase; }
+      .fp1-mission .fp1-mission-mot { margin-top: 12px; font-family: var(--display); font-weight: 800; line-height: .94; letter-spacing: .035em; white-space: nowrap; }
+      .fp1-mission-ratee .fp1-mission-mot { font-size: 148px; color: #e0483c; text-shadow: 0 5px 0 #000, 0 0 34px rgb(224 72 60 / .35); }
+      .fp1-mission-reussie .fp1-mission-mot { font-size: 116px; color: #e8c46a; text-shadow: 0 5px 0 #000, 0 0 34px rgb(232 196 106 / .32); }
+      .fm-trait { display: block; width: 760px; height: 34px; margin-top: 4px; object-fit: fill; opacity: .92; }
+      .fm-raison { margin: 14px 0 0; font-size: 30px; line-height: 1.3; font-style: italic; }
+      .fm-raison b { font-style: normal; font-weight: 700; }
+      .fm-etapes { margin-top: 30px; width: 100%; border-top: 1px solid rgb(242 242 242 / .16); }
+      .fm-etape { display: grid; grid-template-columns: 46px 1fr 300px 160px 44px; align-items: center; column-gap: 18px;
+        padding: 16px 8px; border-bottom: 1px solid rgb(242 242 242 / .16); text-align: left; }
+      .fm-etape-n { width: 40px; height: 40px; border-radius: 50%; border: 2px solid currentColor; display: grid; place-items: center;
+        font-family: var(--display); font-weight: 800; font-size: 22px; }
+      .fm-etape-quoi { font-size: 28px; }
+      .fm-etape-jauge { height: 12px; background: rgb(242 242 242 / .10); overflow: hidden; }
+      .fm-etape-jauge i { display: block; height: 100%; background: #86b84a; }
+      .fm-etape-compte { font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: .06em; text-align: right; white-space: nowrap; }
+      .fm-etape-etat { font-family: var(--display); font-weight: 800; font-size: 34px; text-align: center; }
+      .fm-etape-faite .fm-etape-n, .fm-etape-faite .fm-etape-etat { color: #86b84a; }
+      .fm-etape-ratee .fm-etape-n, .fm-etape-ratee .fm-etape-etat, .fm-etape-ratee .fm-etape-compte { color: #e0483c; }
+      .fm-bilan { margin-top: 26px; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); }
+      .fm-case { padding: 6px 14px 4px; }
+      .fm-case + .fm-case { border-left: 1px solid rgb(242 242 242 / .16); }
+      .fm-case-v { height: 56px; font-family: var(--display); font-weight: 800; font-size: 54px; line-height: 1; letter-spacing: .04em;
+        display: flex; align-items: center; justify-content: center; gap: 10px; }
+      .fm-case-v small { font-size: 30px; font-weight: 700; color: var(--stock-dim); align-self: flex-end; padding-bottom: 5px; }
+      .fm-case-v .dent-ico { width: 34px; height: 38px; }
+      .fm-case-l { margin-top: 10px; font-size: 15px; line-height: 1.45; letter-spacing: .24em; text-transform: uppercase; color: var(--stock-dim); }
+      .fm-case-rien .fm-case-v { color: #5f5a56; }
+      .fm-case-rien .fm-case-v .dent-ico path { fill: #5f5a56; stroke: none; }
+      .fm-etoiles { letter-spacing: .14em; font-size: 50px; }
+      .fm-etoiles .on { color: #e8c46a; text-shadow: 0 0 18px rgb(232 196 106 / .35); }
+      .fm-etoiles .off { color: #5f5a56; }
+      .fm-turd { margin-top: 30px; width: 100%; display: flex; align-items: center; gap: 14px; text-align: left; }
+      .fm-turd-portrait { flex: none; width: 72px; height: 72px; border-radius: 50%; border: 3px solid #efe9df; background: #0b0b0b; object-fit: cover; }
+      .fm-turd-nom { flex: none; font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: .16em;
+        color: #efe9df; border: 2px solid #efe9df; padding: 9px 14px 7px; }
+      .fm-turd-bulle { position: relative; flex: 1; margin: 0 0 0 10px; background: #efe9df; color: #141110; font-size: 24px; line-height: 1.32;
+        padding: 14px 22px 13px; border-radius: 4px; }
+      .fm-turd-bulle::before { content: ''; position: absolute; left: -11px; top: 50%; transform: translateY(-50%);
+        border: 11px solid transparent; border-right-color: #efe9df; border-left-width: 0; }
+      .fm-boutons { margin-top: 36px; }
+      .fp1-mission .fm-bouton { font-family: var(--display); font-weight: 800; font-size: 30px; letter-spacing: .14em; text-transform: uppercase;
+        height: 76px; padding: 0 52px; cursor: pointer; border: 0; background: #efe9df; color: #141110;
+        box-shadow: 0 5px 0 #000, 0 0 0 1px #000, 0 0 40px rgb(239 233 223 / .10); }
+      .fp1-mission .fm-bouton:hover { background: #fff; }
       .mission-avertissement { color: var(--alert); font-size: 15px; margin-top: 6px; max-width: 44ch; }
       .ready-compte { font-size: 15px; letter-spacing: .04em; color: var(--slate, #b8b0a0); margin-bottom: 8px; }
       .ready-bouton { font-size: 22px; padding: 10px 34px; letter-spacing: .12em; }
@@ -15914,7 +15970,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B2K1myYH.js"></script>
+    <script type="module" crossorigin src="./assets/index-DgmS_U2-.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

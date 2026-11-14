@@ -110,6 +110,8 @@
             "arrivee": "Teeth, hero. Down here they come out of mobs: twelve a head, more for the big ones.",
             "conseil": "Twenty-four teeth — two kills — then get out through a portal. Spamming END TURN pays nothing, I checked."
           },
+          "fiche_indice": "How: teeth come from kills — every mob you kill pays 12. Two kills make 24.",
+          "verdict_croze_14_11": "« Aussi pour le A-2 j'aimerais avoir une indication sur le comment on trouve des dents lors du descriptif du niveau. Sinon 50 c'est beaucoup on va mettre 25 pour le monde A-2. » — sa capture montrait encore « Earn 50 teeth » (une partie lancée avant la publication de 15 h 18 UTC) ; la donnée porte 24 depuis le 14/11 à 10 h 43 UTC (« ta reco » : deux mobs à 12) : GARDÉ À 24 et dit à Croze — 25 demanderait un troisième mob (veto d'un mot : « 25 »). `fiche_indice` = la ligne que la fiche du niveau imprime sous l'objectif (écran 555 ③) ; le moteur ne la lit pas (`lireLaCampagne` ne lit que `id` et `scenario` d'un chapitre).",
           "medaillon": {
             "v1": "generique : la vignette de la tuile dominante du niveau (public/art/tuiles), le Turd en marqueur",
             "v2": {
