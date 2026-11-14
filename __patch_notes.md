@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 14 Nov 2026
+- **16:00** — TYPE: two voices everywhere — a serif for what you read, the modern face for what you glance at (titles, the dice tray's banner, the Codex titles); the typewriter and the odd one-off fonts are gone. OPTIONS → DEVELOPER → TYPE → CURRENT brings the old fonts back to compare.
 - **15:20** — TRADE: the cards of a trade are now large (names readable at a glance) — what you give and what they give side by side, the cards you can still add in a column on the right; hover any card to see it full size. If the other player cancels, a line says so ("THE GUARD cancelled the trade") instead of the window just vanishing.
 - **10:16** — TILE MENU: smaller and anchored under the turn banner — it never reaches your hand; a tile's interaction text is always shown in full; nothing is cut off, even with other players on your tile.
 - **10:16** — ONLINE: a player who QUITS the game no longer holds the table — their moments pass at once (a dropped connection still gets its full time).

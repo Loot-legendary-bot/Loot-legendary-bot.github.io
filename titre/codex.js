@@ -27,10 +27,15 @@
 
   function style() {
     if (document.getElementById('cx-style')) return;
+    /* S1726 · note 546 ② — la page du HOME lit la même clé que l'option TYPE du jeu */
+    try { if (window.localStorage.getItem('ll.options.voix') !== 'CURRENT') document.documentElement.setAttribute('data-voix', 'deux'); else document.documentElement.removeAttribute('data-voix'); } catch (e) { /* défaut : deux voix */ document.documentElement.setAttribute('data-voix', 'deux'); }
     var s = document.createElement('style');
     s.id = 'cx-style';
     s.textContent =
       '#v-codex .htitle,#v-codex .hsep{display:none}' +
+      /* S1726 · note 546 ② — DEUX VOIX : les titres et chiffres du Codex prennent le moderne (Big Shoulders) */
+      'html[data-voix="deux"] .cx-titre,html[data-voix="deux"] .cx-q,html[data-voix="deux"] .cx-bnom,html[data-voix="deux"] .cx-notice b,html[data-voix="deux"] .cx-ecu-n' +
+        '{font-family:"Big Shoulders Display",Impact,sans-serif!important;font-weight:800!important}' +
       '.cx{position:absolute;left:3cqw;right:3cqw;top:17cqh;bottom:4cqh;display:grid;' +
         'grid-template-columns:19cqw minmax(0,1fr) 19cqw;gap:1.6cqw;font-family:"Alegreya",Georgia,serif;color:#e9e2d4}' +
       '.cx-col{min-height:0;display:flex;flex-direction:column;gap:1.1cqh}' +

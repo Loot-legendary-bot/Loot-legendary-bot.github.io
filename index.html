@@ -13165,6 +13165,10 @@
          table mesurés en Courier) disparaît : `--mono` devient Alegreya sous TABLE v2. Les étiquettes
          (STR, WEAPON, RING 1) en petites capitales d'Alegreya. */
       html.table-v2 { --mono: "Alegreya", "Palatino Linotype", Georgia, serif; }
+      /* S1726 · note 546 ② — DEUX VOIX (défaut) : `--mono` est le serif partout, la LED du bac prend le moderne */
+      html[data-voix="deux"] { --mono: "Alegreya", "Palatino Linotype", Georgia, serif; }
+      html[data-voix="deux"] .boite-des .bd-bandeau { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: .1em; }
+      html[data-voix="deux"] #tuto-canson .tc-titre { font-family: "Alegreya", "Palatino Linotype", Georgia, serif !important; font-weight: 700 !important; }
       /* S1469 · note 357 ④ — « une seule famille de polices » : le verdict 338 ⑬ PARTOUT. Audit : huit déclarations
          en dur (Georgia, system-ui, Courier Prime ×3, Arial Black ×3) ramenées sur `--display` (titres, boutons,
          gros chiffres) ou `--mono` (= Alegreya sous TABLE v2 : ce qui se lit). Hors champ : le bandeau ADMIN
@@ -15910,7 +15914,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-Bw1IKUQ9.js"></script>
+    <script type="module" crossorigin src="./assets/index-B2K1myYH.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
