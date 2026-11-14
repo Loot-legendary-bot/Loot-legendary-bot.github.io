@@ -2,7 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 14 Nov 2026
-- **20:30** — DICE CARDS (Gorma Juice…): a card you play on a roll leaves your hand at once. On the roll you first see the die, then "+2 · GORMA JUICE" added to the result in gold — a beat — and only then the damage.
+- **21:00** — CHARACTER SELECT: one click on the Wizard opens the school choice at once (no more "Play The Wizard?" step first). OK confirms, BACK closes.
+- **20:06** — DICE CARDS (Gorma Juice…): a card you play on a roll leaves your hand at once. On the roll you first see the die, then "+2 · GORMA JUICE" added to the result in gold — a beat — and only then the damage.
 - **18:01** — END OF A CAMPAIGN LEVEL: a new screen. Under the level's name, MISSION FAILED in red (or MISSION ACCOMPLISHED in gold), why in one sentence, each step of the objective with its count, three columns (turns, the teeth you really earned — a failed mission pays nothing —, the stars), the Turd's advice when you fail, and one big BACK TO THE CAMPAIGN MAP button — your hand and the HUD no longer cover it.
 - **18:01** — CAMPAIGN: after a level, a CLASSIC game (started or joined) is a normal game again — it no longer replayed the level and ended on MISSION FAILED. The level 2 card says how you earn teeth.
 - **18:01** — DEAL (Messenger's Alcove): picking a player opens the trade for both of you at once. If the trade can't open, the LOG says why.
