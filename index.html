@@ -11053,6 +11053,10 @@
         font-family: var(--display); font-weight: 800; letter-spacing: .06em; background: rgba(0,0,0,.6); }
       .dicelayer.vol-vu.t1 .vol-carte { animation: vol-carte-part 1.1s ease-in forwards; }
       @keyframes vol-carte-part { to { transform: translateY(-260px) scale(.3); opacity: 0; } }
+      /* S1736 · 559 ④ — Wing Dust : la pièce ne monte pas vers un voleur, elle TOMBE vers la main (en bas). */
+      .dicelayer.poussiere-vue.t1 .vol-carte { animation: poussiere-tombe 1.2s ease-in forwards; }
+      @keyframes poussiere-tombe { 30% { transform: translateY(-8px) rotate(-4deg); }
+        to { transform: translateY(300px) rotate(8deg) scale(.45); opacity: 0; } }
       /* S1582 · note 414 ⑤ — la mort jouée : l'atlas du character select (8 × 6 images 16:9), une fois, puis la dernière. */
       .scene-mort-anim { position: relative; overflow: hidden; margin: 0 auto 14px; width: clamp(260px, 36vh, 460px);
         aspect-ratio: 16 / 9; border-radius: 10px; border: 3px solid #F2F2F2; box-shadow: 0 6px 28px rgba(0,0,0,.8); }
@@ -15991,7 +15995,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BD5baMyk.js"></script>
+    <script type="module" crossorigin src="./assets/index-ncAaL5j_.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

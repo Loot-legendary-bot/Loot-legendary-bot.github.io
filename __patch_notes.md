@@ -2,7 +2,9 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 15 Nov 2026
-- **00:55** — TABLE on a large screen: the portraits of the players on your tile keep the same size as on a 1080p screen (they grew bigger above 1080p and took room from the tile's menu).
+- **02:20** — MOTH BARON: when Wing Dust knocks one of your pieces off, a short scene shows it — the Moth Baron, "MOTH BARON — WING DUST", the name of the piece that falls, "back in your hand" — before its slot empties.
+- **02:20** — CAMPAIGN, MISSION ACCOMPLISHED: the stars you earned are shown (gold, the others dimmed) instead of a ✓.
+- **00:28** — TABLE on a large screen: the portraits of the players on your tile keep the same size as on a 1080p screen (they grew bigger above 1080p and took room from the tile's menu).
 - **00:10** — REACTIONS (Cunha Cloak): when your missed Reaction comes back on the same hit, its card stands up again and can be clicked — it no longer stayed pressed on "PLAYED…". The LOG says "◈ Cunha Cloak — your Reaction (Rage) comes back".
 - **00:10** — The Moth Baron has its art. Vault, DICE: the Epic dice (Necromancer, Boltwright, Vampire) are on the shelf, locked until 25 wins with that character, then 10,000 teeth. Targets you can pick now blink. The LOG names a mob's passive when it fires (Flex, Panic, Wing Dust), the piece Wing Dust knocks off back to your hand, and the mob that stuns you.
 - **00:10** — Card data v200.
