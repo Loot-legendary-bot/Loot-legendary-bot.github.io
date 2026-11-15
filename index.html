@@ -14069,7 +14069,7 @@
       .ndr-actif { font-size: max(14px, calc(12px * var(--lisible, 1))); font-weight: 700; letter-spacing: .08em; color: var(--stock); }
       .ndr-duelliste .fiche-imprimee { width: 100%; }
       .ndr-duelliste .fiche-imprimee .cz-vignette {
-        display: block; width: auto; height: min(600px, calc(100vh - 460px)); max-width: 100%;
+        display: block; width: auto; height: min(600px, calc(100 * var(--uvh) - 460px)); max-width: 100%;
         margin: 0 auto; object-fit: contain;
       }
       .ndr-vs {
@@ -14267,9 +14267,9 @@
         object-fit: cover; border-radius: 3px; box-shadow: 0 2px 6px rgb(0 0 0 / .6);
       }
       .ndr-compte { font-family: var(--mono); font-size: calc(14px * var(--lisible, 1)); color: var(--stock); white-space: nowrap; }
-      .arene-spec .nt-duel-regarde { height: calc(100vh - 220px); }
+      .arene-spec .nt-duel-regarde { height: calc(100 * var(--uvh) - 220px); }
       /* S1588 · note 435 ① — à 4+ combattants, l'arène prend la vue du combattant suivi (la grille de la table) */
-      .arene-spec .nouvelle-table.ndr-435-hote { min-height: 0; height: calc(100vh - 220px); padding: 0; }
+      .arene-spec .nouvelle-table.ndr-435-hote { min-height: 0; height: calc(100 * var(--uvh) - 220px); padding: 0; }
       .plein-boite:has(.ndr-435-hote) { max-width: 1760px; width: 1760px; }
       .plein-boite:has(.nt-duel-regarde) { max-width: 1760px; width: 1760px; }
       /*
@@ -15995,7 +15995,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D_1xMFuL.js"></script>
+    <script type="module" crossorigin src="./assets/index-DPUEN2L8.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
