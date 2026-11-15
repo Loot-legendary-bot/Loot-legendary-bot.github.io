@@ -1829,6 +1829,11 @@ const DICE=[
   ["Gilded Marble dice","marbre_blanc_or",0],
   ["Tongue dice","langue",0],
   ["Coral resin dice","corail_translucide",0],
+  /* note 555 (4) - les trois sets SIGNATURE (forge 051584f, fusion du CLASSEUR, note 554 (3)) : EPIC, 10 000 dents,
+     verrouilles par 25 victoires avec leur personnage (VERROU_PERSO_DES). Noms : Croze, « ok ». */
+  ["Necromancer dice","necromancien",0],
+  ["Boltwright dice","boltwright",0],
+  ["Vampire dice","vampire",0],
   ["Bones dice","bones",1]];
 /* note 275 (4) - les peaux DE DEPART : a toi sans achat, sous leur propre titre. */
 const PEAUX_DE_DEPART=['bones'];
@@ -1841,7 +1846,11 @@ const PEAUX_VENTE_LIBRE={plastique_rouge:200,plastique_bleu:200,plastique_vert:2
 /* note 269 ② - MONNAIE §21 gravé : le prix d'une peau du mur est celui de son PALIER (7.2, la matiere),
    Common 1 000 / Uncommon 2 000 / Rare 5 000, sans le x5 d'hier. Les peaux absentes du tableau 7.2
    sont classees par leur matiere (Q-269-PALIERS) : nacre = Rare (reflet), cristal = Uncommon (translucide). */
-const PRIX_DU_PALIER={Common:1000,Uncommon:2000,Rare:5000};
+const PRIX_DU_PALIER={Common:1000,Uncommon:2000,Rare:5000,Epic:10000};   /* Epic : note 555 (4), reco du CLASSEUR (deux fois le Rare), Croze corrige d'un mot */
+/* note 555 (4) + 555 bis (3) : la condition d'achat d'un set signature, lue sur le compteur du personnage. */
+const VERROU_PERSO_DES={necromancien:{perso:'the_necromancer',nom:'The Necromancer',seuil:25},
+  boltwright:{perso:'the_boltwright',nom:'The Boltwright',seuil:25},
+  vampire:{perso:'the_vampire',nom:'The Vampire',seuil:25}};
 const PALIER_DES={rose_opaque:'Common',jaune_opaque:'Common',noir_vert_acide:'Common',
   jaune_translucide:'Uncommon',vert_clair_marbre:'Uncommon',granite_bleu:'Uncommon',cristal_mauve:'Uncommon',
   galaxie_vert_violet:'Rare',bleu_givre:'Rare',rouge_translucide:'Rare',eclaboussures_sang:'Rare',
@@ -1849,7 +1858,8 @@ const PALIER_DES={rose_opaque:'Common',jaune_opaque:'Common',noir_vert_acide:'Co
   plastique_machouille:'Rare',potion_jaune_rose:'Rare',   /* note 317 (3) : 5 000 */
   langue:'Rare',   /* 07/11 - mot de Croze a la forge : Rare 5 000 (MONNAIE 30, les plus travailles) */
   peinture_blanche:'Rare',   /* 08/11 - reco forge du 02/11 ("fais au mieux" de Croze), posee sur son "Oui, pose-les" : MONNAIE 30, empatement + arete trempee */
-  marbre_blanc_or:'Uncommon'};   /* 08/11 - MONNAIE 7.2 : marbre = Uncommon, l or est dans la gravure (le prix du defaut, mais ECRIT) */
+  marbre_blanc_or:'Uncommon',
+  necromancien:'Epic',boltwright:'Epic',vampire:'Epic'};   /* note 555 (4) : 10 000 */   /* 08/11 - MONNAIE 7.2 : marbre = Uncommon, l or est dans la gravure (le prix du defaut, mais ECRIT) */
 /* S1487 · note 367 ② (MONNAIE §31, verdict Croze) — ≈ 1 sur 10 du DICE SET et des CARD BACKS ne s'achète
    qu'en SANG. Désignés par l'écran (reco, Croze corrige par nom) : dans le pool de vente hors mur et hors
    saison, le dé le plus travaillé (Blue resin) + un plastique (White plastic), et le dos le plus travaillé hors
@@ -4457,10 +4467,10 @@ function openSheet(kind,i){
     else if(kind==='backs' && prix===null){ cta='<button class="cta" id="dbtn" disabled>Locked · Bounty Wall</button>'; note='Earned in the Bounty Wall, at the end of its spirit’s branch.'; warn=false; }
     const ex = kind==='dice' ? exploitDeLaPeau(DICE[i][1]) : null;
     if(ex!==null && !ex.ouverte){
-      cta='<button class="cta" id="dbtn" disabled>Locked \u00b7 Bounty Wall \u00b7 '+fmt(prix)+' teeth</button>';
-      note='In the Bounty Wall: '+ex.l+' \u2014 '+fmt(Math.min(ex.n,ex.a))+' / '+fmt(ex.a)+'.'+
+      cta='<button class="cta" id="dbtn" disabled>Locked \u00b7 '+(ex.perso?'Epic':'Bounty Wall')+' \u00b7 '+fmt(prix)+' teeth</button>';
+      note=(ex.perso?'':'In the Bounty Wall: ')+ex.l+' \u2014 '+fmt(Math.min(ex.n,ex.a))+' / '+fmt(ex.a)+'.'+
         '<span class="dbar"><i style="width:'+Math.round(100*Math.min(1,ex.n/ex.a))+'%"></i></span>'+
-        'Reach it, then unlock it here or on the wall.';
+        (ex.perso?'Reach it, then unlock it here.':'Reach it, then unlock it here or on the wall.');
       warn=false;
     }
     /* note 274 (4) : les charms sont EMPILABLES - l'achat n'est jamais bloque ; un seul court a la fois. */
@@ -4583,6 +4593,11 @@ function resteADebloquer(){ return DICE.filter(d=>!d[2]&&PEAUX_HORS_VENTE.indexO
 /* S1347 \u00b7 note 200 (c) - l'exploit d'une peau, LU sur la table du mur
    (bounty_wall.js), jamais recopie ici. `null` : la peau n'a pas d'exploit. */
 function exploitDeLaPeau(id){
+  /* note 555 (4) + 555 bis (3) - les trois sets SIGNATURE (Epic) : l'exploit est un compteur de PERSONNAGE,
+     `personnages[<id>].victoires` lu TEL QUEL (le nombre que le profil montre). `perso:true` change les mots du cadenas. */
+  const vp=VERROU_PERSO_DES[id];
+  if(vp){ let n=0; try{ const pp=window.LLProfil.lis().personnages; n=(pp&&pp[vp.perso]&&pp[vp.perso].victoires)||0; }catch(e){}
+    return {l:'Win '+vp.seuil+' games as '+vp.nom, a:vp.seuil, n:n, ouverte:n>=vp.seuil, perso:true}; }
   const BW=window.LLBountyWall; if(!BW) return null;
   const profil=window.LLProfil.lis();
   for(const t of BW.TRONCS) for(const g of t.rangs) for(const x of g.noeuds){

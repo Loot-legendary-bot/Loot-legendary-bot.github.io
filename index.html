@@ -14855,6 +14855,14 @@
       }
       @keyframes nt-eclat { 0% { opacity: 0; transform: scale(.6); } 15% { opacity: 1; transform: scale(1.08); } 80% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
       @media (prefers-reduced-motion: reduce) { .nouvelle-table .nt-presence .nt-eclat-glyphe { animation: none; } }
+      /* S1734 · note 537 ① a — la cible désignée : son rond clignote trois fois (rouge), « TARGET » dessous. */
+      .nouvelle-table .nt-presence.nt-cible .nt-rond { border-radius: 50%; animation: nt-cible .6s ease-in-out 3; }
+      @keyframes nt-cible { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,70,60,0); } 50% { box-shadow: 0 0 0 4px #ff463c, 0 0 22px rgba(255,70,60,.8); } }
+      .nouvelle-table .nt-presence .nt-cible-lib {
+        position: absolute; left: 50%; bottom: -16px; transform: translateX(-50%); z-index: 4; white-space: nowrap;
+        font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: #ff8a80; text-shadow: 0 1px 2px #000;
+      }
+      @media (prefers-reduced-motion: reduce) { .nouvelle-table .nt-presence.nt-cible .nt-rond { animation: none; box-shadow: 0 0 0 4px #ff463c; } }
       .nouvelle-table .nt-presence .nt-agit-mot {
         display: block; font-family: var(--mono); font-size: max(14px, calc(10px * var(--lisible, 1)));
         letter-spacing: .2em; color: #fff; text-align: center; white-space: nowrap;
@@ -15980,7 +15988,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B29CitEN.js"></script>
+    <script type="module" crossorigin src="./assets/index-CslOUo0y.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
