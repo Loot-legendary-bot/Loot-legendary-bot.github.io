@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 15 Nov 2026
+- **19:40** — EFFECTS: a charge on your next roll shows as a 🎲 pip in your sheet's effects band (hover: the card and what it does), and leaves when the roll is spent.
+- **18:47** — CARDS: new art for Bzzurtle (HP 130, Zapspit 3d8, triple damage from Lightning — the card now prints what the game does), Patak Philope (choose the die just rolled: your own, or one in your fight) and the Sneakers Addict quest.
 - **15:58** — REACTIONS: a Seal of Unbinding can no longer cancel your Reaction.
 - **15:58** — CLERIC: Divine Intervention, answered from your tile when a player would die, is no longer lost in the death window — the player does not die.
 - **15:58** — PANIC ROSARY: offered only on the roll of your own Reaction, and it rerolls it.
