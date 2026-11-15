@@ -13148,8 +13148,8 @@
         color: #F2EAD6; }
       /* des joueurs sur ma tuile (le seuil, en bas à droite de l'axe) : la liste se centre dans la place qui reste à leur
          gauche, jamais sous leurs portraits */
-      .nouvelle-table .ntt-axe.avec-seuil > .tv2-liste.tv4 { width: min(calc(100% - var(--seuil-l, 30vh)), calc(700 * var(--u)));
-        margin-left: auto; margin-right: auto; translate: calc(var(--seuil-l, 30vh) / -2) 0; }
+      .nouvelle-table .ntt-axe.avec-seuil > .tv2-liste.tv4 { width: min(calc(100% - var(--seuil-l, 324px)), calc(700 * var(--u)));
+        margin-left: auto; margin-right: auto; translate: calc(var(--seuil-l, 324px) / -2) 0; }
       /* trois joueurs et plus sur ma tuile : la place se resserre, toute la fenêtre réduit d'un cran (tout s'y mesure en `--u`) */
       .nouvelle-table .ntt-axe.avec-seuil:has(> .tv2-seuil > .tv2-seuil-bloc:nth-child(3)) > .tv2-liste.tv4 { --u: 1.08px; }
       .nouvelle-table .ntt-axe.avec-seuil:has(> .tv2-seuil > .tv2-seuil-bloc:nth-child(4)) > .tv2-liste.tv4 { --u: 1px; }
@@ -13368,17 +13368,20 @@
          tout), à droite de la scène. 1 autre : bloc ≤ 30 % de la hauteur ; 2 à 4 : rangée de blocs
          égaux, celui dont c'est le tour avance (+20 %, plus clair) ; plaque courte, ses dos au survol. */
       .nouvelle-table .ntt-table.tv2 .ntt-axe { position: relative; align-self: stretch; }
-      .nouvelle-table .ntt-axe.avec-seuil > .tv2-liste { width: min(calc(100% - var(--seuil-l, 30vh)), 900px); margin-right: auto; }
+      .nouvelle-table .ntt-axe.avec-seuil > .tv2-liste { width: min(calc(100% - var(--seuil-l, 324px)), 900px); margin-right: auto; }
+      /* S1735 · 553 ⑤ (i) — le seuil en px LOGIQUES (les valeurs de 1080p) : `#composition` est un plan de 1920 × 1080
+         mis à l'échelle ; un `vh` y lit la VRAIE fenêtre et grossissait le seuil au-delà de 1080p. 11vh → 118.8px,
+         14vh → 151.2px, 25vh → 270px, 30vh → 324px. */
       .nouvelle-table .tv2-seuil {
-        position: absolute; right: 8px; bottom: calc(25vh + 10px); z-index: 4;
+        position: absolute; right: 8px; bottom: calc(270px + 10px); z-index: 4;
         display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 14px;
       }
       .nouvelle-table .tv2-seuil-bloc {
-        --seuil-w: 11vh; width: var(--seuil-w); display: flex; flex-direction: column;
+        --seuil-w: 118.8px; width: var(--seuil-w); display: flex; flex-direction: column;
         background: #0b0a09; border: 3px solid #000; box-shadow: 0 12px 30px rgba(0,0,0,.85);
         transform-origin: 50% 100%; transition: transform .2s ease-out, filter .2s; filter: brightness(.82);
       }
-      .nouvelle-table .tv2-seuil.n1 .tv2-seuil-bloc { --seuil-w: 14vh; filter: none; }
+      .nouvelle-table .tv2-seuil.n1 .tv2-seuil-bloc { --seuil-w: 151.2px; filter: none; }
       .nouvelle-table .tv2-seuil-bloc.agit { transform: scale(1.2); filter: brightness(1.08); z-index: 1; }
       .nouvelle-table .tv2-seuil-bloc.mort { filter: grayscale(1) brightness(.7); }
       /* S1575 · note 394 ③ — LA BOÎTE À DÉS : fond et bordure en variables (les peaux viendront, MONNAIE §34) */
@@ -15988,7 +15991,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CslOUo0y.js"></script>
+    <script type="module" crossorigin src="./assets/index-BD5baMyk.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
