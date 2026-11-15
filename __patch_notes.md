@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 15 Nov 2026
+- **10:12** — TABLE on a large screen: hovering your tile's small card shows it in big at the same size as on a 1080p screen (above 1080p it filled the whole height). The card of the tile that asks you a question keeps its 1080p size too.
+- **10:12** — Loading: the game no longer asks the server again and again for a portrait strip (the Boltwright) and a character back (the ManBearPig) that don't exist.
 - **02:20** — MOTH BARON: when Wing Dust knocks one of your pieces off, a short scene shows it — the Moth Baron, "MOTH BARON — WING DUST", the name of the piece that falls, "back in your hand" — before its slot empties.
 - **02:20** — CAMPAIGN, MISSION ACCOMPLISHED: the stars you earned are shown (gold, the others dimmed) instead of a ✓.
 - **00:28** — TABLE on a large screen: the portraits of the players on your tile keep the same size as on a 1080p screen (they grew bigger above 1080p and took room from the tile's menu).

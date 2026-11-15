@@ -13291,7 +13291,7 @@
       .nouvelle-table .tv2-vignette-nom { font-family: var(--mono); font-size: max(14px, calc(11px * var(--lisible, 1))); letter-spacing: .1em; color: var(--stock); }
       /* S1457 · note 336 ② — au survol, la carte SEULE en grand au centre (le geste de la fiche de perso). */
       .nouvelle-table .tv2-vignette .tv2-vignette-grand {
-        position: fixed; left: 50%; top: 50%; z-index: var(--z-portes, 930); width: auto; max-width: 46vw; height: 86vh; max-height: 86vh;
+        position: fixed; left: 50%; top: 50%; z-index: var(--z-portes, 930); width: auto; max-width: calc(46 * var(--uvw)); height: calc(86 * var(--uvh)); max-height: calc(86 * var(--uvh));
         object-fit: contain; transform: translate(-50%, -50%); pointer-events: none;
         visibility: hidden; opacity: 0; transition: opacity .12s;
         box-shadow: 0 0 0 4000px rgb(0 0 0 / .72), 0 24px 60px rgb(0 0 0 / .8);
@@ -13534,12 +13534,12 @@
         font-size: 40px; line-height: 1; color: #efe6cf; text-shadow: 0 0 10px #000, 0 0 3px #000; pointer-events: none; }
       .nouvelle-table .tv2-seuil-bloc.avance { translate: -12px 0; filter: brightness(1.15); }
       /* S1453 · note 330 ⑤ (P3) — « ça te vise » : la carte de la tuile de l'autre en grand, la question en sang. */
-      .nouvelle-table .tv2-liste.tv2-vise { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 16px; text-align: center; padding-top: 2vh; }
-      .nouvelle-table .tv2-vise-carte { flex: none; width: min(240px, 72%, 24vh); filter: drop-shadow(0 12px 24px rgba(0,0,0,.8)); }
+      .nouvelle-table .tv2-liste.tv2-vise { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 16px; text-align: center; padding-top: calc(2 * var(--uvh)); }
+      .nouvelle-table .tv2-vise-carte { flex: none; width: min(240px, 72%, calc(24 * var(--uvh))); filter: drop-shadow(0 12px 24px rgba(0,0,0,.8)); }
       .nouvelle-table .tv2-vise-carte img.cz-vignette { display: block; width: 100%; height: auto; }
       .nouvelle-table .tv2-vise-carte .cz-zoom { display: none; }
       /* S1472 · note 361 ② — côté consulté : la tuile EN GRAND, le médaillon du joueur actif sur son coin. */
-      .nouvelle-table .tv2-vise-cadre { position: relative; flex: none; width: min(400px, 88%, 50vh); }
+      .nouvelle-table .tv2-vise-cadre { position: relative; flex: none; width: min(400px, 88%, calc(50 * var(--uvh))); }
       .nouvelle-table .tv2-vise-cadre > .tv2-vise-carte { width: 100%; }
       .nouvelle-table .tv2-vise-medaillon { position: absolute; top: -18px; left: -22px; width: 30%; aspect-ratio: 1;
         border-radius: 50%; object-fit: cover; object-position: 50% 18%; border: 3px solid var(--siege, #EDE3CC);
@@ -15995,7 +15995,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-ncAaL5j_.js"></script>
+    <script type="module" crossorigin src="./assets/index-D_1xMFuL.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
