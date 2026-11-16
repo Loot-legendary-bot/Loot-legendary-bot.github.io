@@ -1241,6 +1241,8 @@
     'FEET': 'PIEDS', 'RING 1': 'ANNEAU 1', 'RING 2': 'ANNEAU 2', 'EMPTY': 'LIBRE',
     'HIDE': 'MASQUER', 'READY': 'PRÊT', 'WIN': 'VICTOIRE', 'ROLL FOR FIRST PLAYER': 'JET DU PREMIER JOUEUR',
     'ACTS NOW': 'AGIT', 'YOU ARE DEAD — YOU WATCH': 'TU ES MORT — TU REGARDES', 'mort — for good': 'mort — pour de bon',
+    /* S1746 · note 564 ④ / 561 ② — le 1 naturel (moteur 1279) : `verdict()` écrit l'issue en anglais, le français ici. */
+    '⚠ CRITICAL FAILURE': '⚠ ÉCHEC CRITIQUE', '⚠ CRITICAL SUCCESS': '⚠ RÉUSSITE CRITIQUE',
     /* S1684 · note 505 */
     'YOU WILL RISE AGAIN': 'TU REVIENDRAS', 'back on your feet at the start of your next turn': 'debout au début de ton prochain tour',
     'YOU TAKE DAMAGE': 'TU PRENDS DES DÉGÂTS',

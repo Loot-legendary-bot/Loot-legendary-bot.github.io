@@ -1038,6 +1038,18 @@
       .ee-fermer:hover { color: var(--stock); }
       .mb-milieu, .hand { pointer-events: none; }
       .handslot { pointer-events: auto; }
+      /* S1744 · note 567 ① — le ticket CALL YOUR PARTNER à côté de la Signature, toute la partie en 2V2. */
+      .handslot-sig { position: relative; }
+      /* S1745 · note 568 ① — HORS de la carte, juste AU-DESSUS de son bord haut (son bas à 8 px), la largeur de la
+         carte : il ne couvre ni le nom de la Signature, ni la main, ni le bac. */
+      .handslot-sig > .appel-pres-sig { position: absolute; left: 0; bottom: calc(100% + 8px); width: 100%;
+        box-sizing: border-box;
+        display: flex; flex-direction: column; gap: 4px; z-index: 5; }
+      .appel-pres-sig .appel-partenaire { white-space: normal; font-size: 13px; line-height: 1.2; padding: 6px 8px; }
+      .appel-pres-sig .appel-partenaire:disabled { opacity: .55; filter: grayscale(1); cursor: help; pointer-events: auto; }
+      .appel-pres-sig.pret .appel-partenaire { box-shadow: 0 0 10px rgb(242 196 107 / .7); }
+      .appel-pres-sig .appel-raison { font-size: 12px; line-height: 1.25; color: var(--stock-dim, #aaa);
+        text-shadow: 0 0 2px #000, 0 0 3px #000; }
       /* S1733 · 555 ③ — la carte jouée dans une fenêtre quitte la main d'emblée (elle monte et s'efface) */
       .handslot.partie { pointer-events: none; opacity: 0; transform: translateY(-60px) scale(.9);
         transition: opacity .3s ease, transform .3s ease; }
@@ -13341,6 +13353,21 @@
         margin-top: 10px; white-space: nowrap; }
       .nouvelle-table .nt-compteurs .nt-pastille { position: static; transform: none; }
       .nouvelle-table .nt-compteurs-sep { color: var(--stock-dim); font-size: max(14px, calc(10px * var(--lisible, 1))); }
+      /* S1744 · note 567 ④ — la charge du prochain jet sous le portrait (🎲 +1, 🎲 = 6), chez tous les sièges. */
+      .nouvelle-table .nt-pa-jet .nt-pa-nb { color: #8FE38F; font-weight: 800; }
+      .nouvelle-table .nt-pa-jet.nt-pa-malus .nt-pa-nb { color: #E36A6A; }
+      .nouvelle-table .nt-gear .nt-pa-jet { position: static; transform: none; }
+      /* S1745 · note 569 ⑥ — la main du coéquipier, repliée sous son portrait du bandeau, lecture seule. */
+      .nouvelle-table .nt-main-pote { position: relative; display: flex; flex-direction: column; align-items: center;
+        pointer-events: auto; z-index: 30; }
+      .nouvelle-table .nt-main-pote-tete { font-size: 11px; letter-spacing: .06em; padding: 2px 8px; margin-top: 2px;
+        white-space: nowrap; }
+      .nouvelle-table .nt-main-pote-cartes { display: none; position: absolute; top: calc(100% + 4px); left: 50%;
+        transform: translateX(-50%); gap: 6px; padding: 6px; background: rgb(12 9 7 / .92);
+        border: 1px solid rgb(232 200 114 / .45); border-radius: 6px; }
+      .nouvelle-table .nt-main-pote.ouverte .nt-main-pote-cartes { display: flex; }
+      .nouvelle-table .nt-main-pote .troc-carte { width: 74px; font-size: 10px; }
+      .nouvelle-table .nt-main-pote-vide { font-size: 12px; white-space: nowrap; opacity: .8; }
       html.table-v2 .nouvelle-table .nt-presence > .nt-compteurs + .nt-qui { margin-top: 1px; }
       /* S1453 · note 330 ⑤ (P3) — le TP en éventail : les cartes de tuile en grand, au centre, ma salle derrière. */
       .nouvelle-table .tv2-eventail {
@@ -15545,6 +15572,49 @@
       .nouvelle-table .bj-autre .bj-inv .creneau { height: 17px; justify-content: center; }
       .nouvelle-table .bj-autre .bj-inv .creneau-carte { font-size: max(14px, calc(9px * var(--lisible, 1))); }
       .nouvelle-table .bj-autre .bj-inv .corps-libre { gap: 2px; padding: 2px 0; }
+      /* S1745 · note 569 ① — « mon inventaire est toujours la même grille de 3 × 3 : chaque emplacement à sa place, vide
+         ou plein, en combat comme hors combat, déplié ou replié. » MA grille (`.bj-moi`) : neuf cases de la MÊME taille,
+         toujours là — la case vide dit son nom, l'emplacement refusé garde son ⊘, la pleine porte sa carte. Replié : neuf
+         cases basses ; déplié : neuf cases à la taille d'une carte. La position porte le sens (GRILLE_CROZE, main.ts). */
+      .nouvelle-table .bj-moi .bj-inv .corps-libre.corps-libre { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-rows: 40px; gap: 4px; padding: 4px 0; }
+      .nouvelle-table .bj-moi .bj-inv .corps-libre > .creneau.creneau { display: flex; flex-direction: column; align-items: center;
+        justify-content: center; gap: 2px; width: auto; height: auto; min-height: 0; flex: none; padding: 2px 4px;
+        overflow: hidden; box-sizing: border-box; border: 1px dashed rgb(232 200 114 / .28); border-radius: 3px; }
+      .nouvelle-table .bj-moi .bj-inv .corps-libre > .creneau.porte { border-style: solid; border-color: rgb(232 200 114 / .5); }
+      .nouvelle-table .bj-moi .bj-inv .corps-libre > .creneau > .creneau-nom { display: block; font-size: 11px; letter-spacing: .12em;
+        line-height: 1; opacity: .75; }
+      .nouvelle-table .bj-moi .bj-inv .corps-libre > .creneau .creneau-carte { max-width: 100%; text-align: center; }
+      .nouvelle-table .bj-moi .bj-inv .corps-libre > .creneau .inv-art { display: none; }
+      .nouvelle-table .bj-moi .bj-inv.inv-deploye .corps-libre.corps-libre { grid-auto-rows: auto; }
+      .nouvelle-table .bj-moi .bj-inv.inv-deploye .corps-libre > .creneau.creneau { aspect-ratio: 5 / 7; justify-content: flex-start; }
+      .nouvelle-table .bj-moi .bj-inv.inv-deploye .corps-libre > .creneau.libre,
+      .nouvelle-table .bj-moi .bj-inv.inv-deploye .corps-libre > .creneau.refuse { justify-content: center; }
+      .nouvelle-table .bj-moi .bj-inv.inv-deploye .corps-libre > .creneau .inv-art { display: block; width: 100%; height: auto;
+        max-height: calc(100% - 14px); object-fit: contain; max-width: none; }
+      /* S1746 · note 569 ① — LA MÊME GRILLE EN COMBAT : la colonne y est `.ntt-cb2-fiche` (pas `.bj-moi`), et S1571 y
+         cachait les cases vides et rétrécissait les pleines à 64 / 120 px. Vu en S1746 (capture moth-baron) : deux
+         vignettes seules. Les neuf cases reviennent, mêmes tailles qu'hors combat. */
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv .corps-libre.corps-libre { display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 40px; gap: 4px; padding: 4px 0; }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv .corps-libre > .creneau.creneau { display: flex; flex-direction: column;
+        align-items: center; justify-content: center; gap: 2px; width: auto; height: auto; min-height: 0; flex: none;
+        padding: 2px 4px; overflow: hidden; box-sizing: border-box; border: 1px dashed rgb(232 200 114 / .28); border-radius: 3px; }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv .corps-libre > .creneau.porte { border-style: solid;
+        border-color: rgb(232 200 114 / .5); }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv .corps-libre > .creneau > .creneau-nom { display: block; font-size: 11px;
+        letter-spacing: .12em; line-height: 1; opacity: .75; }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv .corps-libre > .creneau .creneau-carte { width: auto; max-width: 100%;
+        text-align: center; }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv .corps-libre > .creneau .inv-art,
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv:not(.inv-deploye) .corps-libre > .creneau .cz-vignette { display: none; }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv.inv-deploye .corps-libre.corps-libre { grid-auto-rows: auto; }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv.inv-deploye .corps-libre > .creneau.creneau { aspect-ratio: 5 / 7;
+        justify-content: flex-start; }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv.inv-deploye .corps-libre > .creneau.libre,
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv.inv-deploye .corps-libre > .creneau.refuse { justify-content: center; }
+      .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv.inv-deploye .corps-libre > .creneau .inv-art { display: block;
+        width: 100%; height: auto; max-height: calc(100% - 14px); object-fit: contain; max-width: none; }
       .nouvelle-table .bj-main { display: flex; align-items: center; gap: 2px; margin-top: 2px; }
       .nouvelle-table .bj-main .bj-lbl { margin-right: 4px; }
       .nouvelle-table .ntt-toi.bj-moi.allume > .bj-bandeau { box-shadow: 0 0 0 2px var(--stock); }
@@ -15974,6 +16044,85 @@
       .cv-res-titre { font: 800 14px var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .18em; color: #aef08a; }
       .cv-res-l1 { font: 900 26px/1.15 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .03em; margin-top: 6px; }
       .cv-res-l2 { font: 700 20px/1.2 var(--display, "Big Shoulders Display"), sans-serif; color: #ff9a8a; }
+      /* S1746 · note 568 ⑥ — l'ouverture du run 2 : trois cartes par siège, la rareté dessous. */
+      .dotation-cartes { display: flex; gap: 6px; justify-content: center; margin-top: 6px; }
+      .dotation-carte { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 104px; }
+      .dotation-carte .cz, .dotation-carte .cz .cz-vignette, .dotation-carte .pioche-dos { width: 104px; height: auto; display: block; }
+      .dotation-rarete { font: 700 11px var(--display), sans-serif; letter-spacing: .14em; color: #b8b0a2; }
+      .dotation-carte.rar-uncommon .dotation-rarete { color: #7fd47f; }
+      .dotation-carte.rar-rare .dotation-rarete { color: #7fb2ff; }
+      /* S1746 · note 569 ② — LA LISTE DE SORTS DU COMBAT (maquette docs/maquettes/combat_spell_list_v1.html). */
+      .sl-liste { display: flex; flex-direction: column; gap: 8px; color: #e9e4d8; }
+      .sl-haut { display: flex; align-items: center; gap: 14px; }
+      .sl-portrait { position: relative; width: 96px; height: 96px; flex: 0 0 96px; padding: 0; border-radius: 50%;
+        overflow: hidden; border: 3px solid #d8c9a8; background: #1c1814; cursor: zoom-in; box-shadow: 0 0 0 2px rgba(0,0,0,.6); }
+      .sl-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; display: block; }
+      .sl-portrait-loupe { position: absolute; right: 6px; bottom: 6px; width: 24px; height: 24px; border-radius: 50%;
+        background: #e9e4d8; color: #1c1814; font: 700 14px/24px sans-serif; text-align: center; }
+      .sl-portrait:hover { border-color: #f3dc9a; }
+      .sl-stats { display: flex; gap: 18px; }
+      .sl-stat { display: flex; flex-direction: column; align-items: center; }
+      .sl-stat-v { font: 800 28px/1 var(--display), sans-serif; }
+      .sl-stat-v.zero { color: #8a8478; }
+      .sl-stat-l { font: 600 11px/1.4 var(--display), sans-serif; letter-spacing: .14em; color: #a9a194; }
+      .sl-titre { display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px;
+        font: 600 12px var(--serif, Georgia), serif; letter-spacing: .3em; color: #b8b0a2; }
+      .sl-titre-aide { font-style: italic; letter-spacing: 0; color: #8a8478; }
+      .sl-boutons { display: flex; flex-direction: column; gap: 6px; }
+      .sl-sort { display: flex; align-items: center; gap: 12px; width: 100%; padding: 8px 12px 8px 8px; text-align: left;
+        color: inherit; background: rgba(28,24,20,.92); border: 1px solid rgba(233,228,216,.22); cursor: pointer;
+        transition: border-color .15s ease, background .15s ease; }
+      .sl-sort.ok:hover, .sl-sort.en-cours { border-color: #e9e4d8; background: rgba(48,40,32,.95); box-shadow: inset 4px 0 0 #a3231d; }
+      .sl-sort.no { opacity: .5; cursor: not-allowed; filter: grayscale(.8); }
+      .sl-ico { position: relative; flex: 0 0 56px; width: 56px; height: 56px; display: flex; align-items: center;
+        justify-content: center; background: #0e0c0a; border: 1px solid rgba(233,228,216,.3); }
+      .sl-glyphe { font-size: 30px; line-height: 1; }
+      .sl-corps { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+      .sl-nom { display: flex; align-items: baseline; gap: 8px; font: 800 24px/1 var(--display), sans-serif; letter-spacing: .04em;
+        text-transform: uppercase; }
+      .sl-nom .sl-touche { font: 600 13px var(--serif, Georgia), serif; color: #a9a194; }
+      .sl-sous { font: 14px/1.2 var(--serif, Georgia), serif; color: #c9c1b2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .sl-sous.refus { color: #ff9a8a; white-space: normal; }
+      .sl-chiffre { display: flex; flex-direction: column; align-items: flex-end; flex: 0 0 auto; }
+      .sl-chiffre-grand { font: 800 30px/1 var(--display), sans-serif; }
+      .sl-chiffre-petit { font: 600 10px/1.6 var(--display), sans-serif; letter-spacing: .14em; color: #a9a194; }
+      .sl-tuiles .sl-boutons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .sl-tuiles .sl-sort { flex-direction: column; gap: 6px; padding: 0; background: none; border: none; box-shadow: none; }
+      .sl-tuiles .sl-sort .sl-ico { width: 100%; height: auto; aspect-ratio: 1; flex: none; border: 1px solid rgba(233,228,216,.35); }
+      .sl-tuiles .sl-sort.ok:hover .sl-ico, .sl-tuiles .sl-sort.en-cours .sl-ico { border: 2px solid #e9e4d8; }
+      .sl-tuiles .sl-glyphe { font-size: 40px; }
+      .sl-tuiles .sl-touche { position: absolute; left: 5px; top: 3px; font: 600 13px var(--serif, Georgia), serif; color: #a9a194; }
+      .sl-coin { position: absolute; right: 3px; bottom: 3px; padding: 1px 5px; background: rgba(0,0,0,.85);
+        font: 800 16px/1.2 var(--display), sans-serif; }
+      .sl-nom-petit { font: 700 12px var(--display), sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #c9c1b2;
+        text-align: center; }
+      .sl-infos { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+      .sl-tuiles .sl-infos { flex-direction: row; }
+      .sl-tuiles .sl-info-ligne { flex: 1; }
+      .sl-info-ligne { display: flex; align-items: flex-start; gap: 6px; }
+      .sl-info-ligne > .sl-info { flex: 1; }
+      .sl-oeil { flex: 0 0 auto; }
+      .sl-info { display: flex; align-items: flex-start; gap: 10px; padding: 4px 6px; text-align: left; color: inherit;
+        background: none; border: 1px solid transparent; }
+      button.sl-info.ok { cursor: pointer; border-color: rgba(216,178,90,.5); }
+      .sl-info-ico { flex: 0 0 26px; font-size: 20px; color: #a9a194; text-align: center; }
+      .sl-info-corps { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+      .sl-info-tete { display: flex; gap: 8px; align-items: baseline; }
+      .sl-info-nature { font: 700 11px var(--display), sans-serif; letter-spacing: .14em; color: #d8b25a; }
+      .sl-info-nom { font: 800 16px var(--display), sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+      .sl-info-texte { font: 13px/1.25 var(--serif, Georgia), serif; color: #b8b0a2; }
+      .sl-bulle { position: fixed; z-index: 9500; width: 420px; padding: 18px 22px; pointer-events: none;
+        background: rgba(18,15,12,.98); border: 1px solid rgba(233,228,216,.55); box-shadow: 0 10px 40px rgba(0,0,0,.7); color: #e9e4d8; }
+      .sl-bulle-tete { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+      .sl-bulle-nom { font: 800 30px/1 var(--display), sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+      .sl-bulle-nature { padding: 3px 8px; border: 1px solid rgba(233,228,216,.4); font: 600 11px var(--display), sans-serif;
+        letter-spacing: .14em; color: #b8b0a2; }
+      .sl-bulle-texte { font: 18px/1.35 var(--serif, Georgia), serif; white-space: pre-line;
+        padding-bottom: 12px; border-bottom: 1px solid rgba(233,228,216,.2); }
+      .sl-bulle-titre { margin-top: 12px; font: 700 12px var(--display), sans-serif; letter-spacing: .2em; color: #d8b25a; }
+      .sl-bulle-chiffre { margin-top: 4px; font: 800 26px/1.15 var(--display), sans-serif; }
+      .sl-bulle-note { margin-top: 4px; font: italic 14px var(--serif, Georgia), serif; color: #a9a194; }
+      .sl-bulle-refus { margin-top: 10px; font: 15px var(--serif, Georgia), serif; color: #ff9a8a; }
     </style>
     <!-- S1289 · CU-T1 (note 178) : le curseur équipé, lu dans le profil local — le même fichier que l'écran titre. -->
     <script src="/titre/curseur.js"></script>
@@ -15995,7 +16144,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-uTIev4T8.js"></script>
+    <script type="module" crossorigin src="./assets/index-C-wc6hyW.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

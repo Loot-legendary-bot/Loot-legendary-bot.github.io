@@ -1,6 +1,13 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 16 Nov 2026
+- **06:15** — DICE: a natural 1 on a d20 success roll always fails. The roll says "⚠ CRITICAL FAILURE" (in French: "ÉCHEC CRITIQUE") before its consequence — on each player's frame of a shared roll too.
+- **06:15** — CARDS: new art for Gorma Juice (Uncommon, Rare, Epic: +1 / +2 / +3 to your next roll) and Dead Man's Coin. A bonus on your next roll shows as a 🎲 pip under your portrait in the top band — everyone sees it. Card data v202.
+- **06:15** — 2V2: the CALL YOUR PARTNER ticket sits next to your Signature for the whole game (greyed, it tells you why). Your teammate's hand shows under their portrait.
+- **06:15** — RUN 2 opens with three cards (1 Common, 1 Uncommon, 1 Rare) in your hand. When you come back to life, your HP show your return value at once.
+- **06:15** — INVENTORY: always the same 3 × 3 grid, every slot in its place, in and out of combat.
+
 ## 15 Nov 2026
 - **19:40** — EFFECTS: a charge on your next roll shows as a 🎲 pip in your sheet's effects band (hover: the card and what it does), and leaves when the roll is spent.
 - **18:47** — CARDS: new art for Bzzurtle (HP 130, Zapspit 3d8, triple damage from Lightning — the card now prints what the game does), Patak Philope (choose the die just rolled: your own, or one in your fight) and the Sneakers Addict quest.
