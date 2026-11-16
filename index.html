@@ -15824,6 +15824,13 @@
           rgb(10 10 10 / .92) 100%); }
       .carte-sig .cs-nom { margin-bottom: auto; }
       .carte-sig .cs-texte { flex: 0 0 auto; }
+      /* S1750 · note 562 ⑥ — « dans ma main, ma Signature se reconnaît tout de suite : elle est un peu plus large que
+         les autres cartes. » +15 % en LARGEUR, la même hauteur que ses voisines (1004 × 1,15 = 1155 sur 1516) ; le
+         fond est en `cover`, il se recadre sans se déformer. La Réaction (`carte-rea`, même créneau) ne change pas. */
+      .handslot.handslot-sig:has(> .card.carte-sig:not(.carte-rea)) {
+        flex: 0 0 calc(var(--carte-l, 300px) * 1.15); width: calc(var(--carte-l, 300px) * 1.15); }
+      .handslot.handslot-sig > .card.carte-sig:not(.carte-rea) {
+        flex: 0 0 100%; width: 100%; aspect-ratio: 1155 / 1516; }
       .carte-sig .cs-titre, .carte-sig .cs-nom, .carte-sig .cs-texte {
         text-shadow: 0 1px 3px rgb(0 0 0 / .95), 0 0 8px rgb(0 0 0 / .8); }
       /* S1527 · note 376 — la pièce indéboulonnable porte sa marque. */
@@ -16162,7 +16169,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-l8EBNJM5.js"></script>
+    <script type="module" crossorigin src="./assets/index--mwMgTXr.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
