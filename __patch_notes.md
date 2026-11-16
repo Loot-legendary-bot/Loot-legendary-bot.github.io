@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 16 Nov 2026
+- **10:02** — COMBAT: your attacks are now a list under your portrait (ROWS) by default — click to cast, hover to read, click your portrait for your sheet in big. The printed sheet is one click away: OPTIONS → DEVELOPER → COMBAT SKILLS → CLASSIC SHEET.
 - **09:30** — DICE: against the Skeleton Duellist with a sword, the roll shows your real stat, then "+2 · sword vs the Duellist" on its own, then the total. When you're asked which die takes your card, the die taken if you don't answer is marked.
 - **09:30** — OPTIONS → DEVELOPER → RUN 2 STARTING CARDS: OFF by default; SCENE shows the three cards each player gets when run 2 opens.
 - **08:00** — DICE-EATING GOOSE: "HONK!" — your next roll is made twice (Rare: three times), keep the highest; or HONK a rival in your fight: their next roll is made twice (three times), keep the lowest. If several rivals are in your fight, you choose which one. The 🎲 pip shows "×2 ↑" or "×2 ↓" under the portrait of the player who carries it — under the rival's when you HONK them. The dice box shows every face rolled, then the one kept.
