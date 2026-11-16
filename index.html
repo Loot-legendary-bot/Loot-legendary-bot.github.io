@@ -15615,6 +15615,21 @@
       .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv.inv-deploye .corps-libre > .creneau.refuse { justify-content: center; }
       .nouvelle-table .ntt-cb2-fiche .bj-inv.ntt-cb2-inv.inv-deploye .corps-libre > .creneau .inv-art { display: block;
         width: 100%; height: auto; max-height: calc(100% - 14px); object-fit: contain; max-width: none; }
+      /* S1748 · note 570 ⑤ — LA GRILLE DANS LA PEAU LISTE (ROWS / TILES) : vue en ROWS, la troisième rangée passait
+         sous le bord à 1920 × 1080. La grille prend la hauteur qui reste dans la colonne (flex), trois rangées égales ;
+         la case garde la carte entière (object-fit) ou se compacte si la place manque. */
+      .nouvelle-table .ntt-cb2-fiche.peau-liste > .bj-inv.ntt-cb2-inv { flex: 1 1 0; min-height: 0; display: flex;
+        flex-direction: column; }
+      .nouvelle-table .ntt-cb2-fiche.peau-liste > .bj-inv.ntt-cb2-inv > div:has(> .corps-libre) { flex: 1 1 0; min-height: 0;
+        display: flex; flex-direction: column; }
+      .nouvelle-table .ntt-cb2-fiche.peau-liste .bj-inv.ntt-cb2-inv .corps-libre.corps-libre { flex: 1 1 0; min-height: 0;
+        grid-template-rows: repeat(3, minmax(52px, 1fr)); grid-auto-rows: minmax(52px, 1fr); }
+      .nouvelle-table .ntt-cb2-fiche.peau-liste > .bj-inv.ntt-cb2-inv { flex-basis: 172px; flex-shrink: 0; }
+      .nouvelle-table .ntt-cb2-fiche.peau-liste > .ntt-cb2-ecoles { flex: 0 1 auto; min-height: 0; overflow: hidden; }
+      .nouvelle-table .ntt-cb2-fiche.peau-liste > .sl-liste,
+      .nouvelle-table .ntt-cb2-fiche.peau-liste > .mes-vitales { flex-shrink: 0; }
+      .nouvelle-table .ntt-cb2-fiche.peau-liste .bj-inv.ntt-cb2-inv.inv-deploye .corps-libre > .creneau.creneau {
+        aspect-ratio: auto; min-height: 0; }
       .nouvelle-table .bj-main { display: flex; align-items: center; gap: 2px; margin-top: 2px; }
       .nouvelle-table .bj-main .bj-lbl { margin-right: 4px; }
       .nouvelle-table .ntt-toi.bj-moi.allume > .bj-bandeau { box-shadow: 0 0 0 2px var(--stock); }
@@ -16144,7 +16159,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-C-wc6hyW.js"></script>
+    <script type="module" crossorigin src="./assets/index-BOyZTfVL.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
