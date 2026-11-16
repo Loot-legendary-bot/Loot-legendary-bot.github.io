@@ -2,8 +2,10 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 16 Nov 2026
-- **06:45** — 2V2: CALL YOUR PARTNER is also back in your combat-turn buttons (same call as the ticket above your Signature).
-- **06:45** — COMBAT SKILLS as ROWS or TILES (OPTIONS → DEVELOPER): your 3 × 3 inventory grid fits under the list on a 1080p screen — all nine slots, compact when room is short.
+- **08:00** — DICE-EATING GOOSE: "HONK!" — your next roll is made twice (Rare: three times), keep the highest; or HONK a rival in your fight: their next roll is made twice (three times), keep the lowest. If several rivals are in your fight, you choose which one. The 🎲 pip shows "×2 ↑" or "×2 ↓" under the portrait of the player who carries it — under the rival's when you HONK them. The dice box shows every face rolled, then the one kept.
+- **08:00** — THE POISONER: new sheet. Luck Bloom — Discard 1 → your next roll is made twice, keep the higher result (the Signature card in your hand says the same). Echo Flask (Epic): your Interaction rolls are made twice until the end of the turn. Bone Call only triggers on the death of a mob. New art for both Geese and the Epic Echo Flask. Card data v204.
+- **06:35** — 2V2: CALL YOUR PARTNER is also back in your combat-turn buttons (same call as the ticket above your Signature).
+- **06:35** — COMBAT SKILLS as ROWS or TILES (OPTIONS → DEVELOPER): your 3 × 3 inventory grid fits under the list on a 1080p screen — all nine slots, compact when room is short.
 - **06:05** — DICE: a natural 1 on a d20 success roll always fails. The roll says "⚠ CRITICAL FAILURE" (in French: "ÉCHEC CRITIQUE") before its consequence — on each player's frame of a shared roll too.
 - **06:05** — CARDS: new art for Gorma Juice (Uncommon, Rare, Epic: +1 / +2 / +3 to your next roll) and Dead Man's Coin. A bonus on your next roll shows as a 🎲 pip under your portrait in the top band — everyone sees it. Card data v202.
 - **06:05** — 2V2: the CALL YOUR PARTNER ticket sits next to your Signature for the whole game (greyed, it tells you why). Your teammate's hand shows under their portrait.
