@@ -7074,6 +7074,10 @@
         font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .08em;
         color: #f0d09e; text-shadow: 0 1px 3px #000; }
       .nt-qui-agit .nqa-reagit { color: #e0a84a; }
+      /* S1754 · note 572 ⑦ (b) — « pendant la borne « THE TURD'S TURN », rien à l'écran ne dit plus « YOUR TURN » » :
+         la vue présentée suit la file des scènes, la borne du suivant passe avant elle ; tant qu'elle est posée, elle
+         seule dit à qui c'est. */
+      body:has(.borne.tour-autre) .nt-qui-agit { visibility: hidden; }
       /* S1468 · note 355 ④ — « chaque question tient en une ligne » : l'aide longue d'une question (TABLE v2)
          se replie sur UNE ligne, entière au survol ; le titre, les cartes et le temps restant ne bougent pas. */
       html.table-v2 .les-choix .rien { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
@@ -15135,6 +15139,17 @@
       .fiche-en-grand { width: min(634px, calc((var(--uvh) * 88 - 80px) * 1414 / 2000)); margin: 0 auto; padding: 0 16px 16px; }
       .fiche-en-grand .fc-boite { max-width: none; }
       .fiche-en-grand .fc-art { border: 2px solid var(--stock); border-radius: 4px; }
+      /* S1755 · note 573 ② (c) — la fiche du portrait : PLEIN ÉCRAN, par-dessus tout ; un clic la referme. */
+      .plein:has(.fiche-plein-ecran) { padding: 0; }
+      .plein-boite:has(.fiche-plein-ecran) { max-height: calc(var(--uvh) * 100); height: calc(var(--uvh) * 100);
+        border: 0; background: rgba(10, 8, 6, .96); display: flex; flex-direction: column; }
+      .fiche-plein-ecran { width: auto; cursor: zoom-out; }
+      .fge-image { display: block; height: calc(var(--uvh) * 88 - 150px); width: auto; max-width: 100%; margin: 0 auto;
+        border: 2px solid var(--stock); border-radius: 4px; }
+      .fge-reaction { display: flex; align-items: center; gap: 12px; margin-top: 10px; padding: 8px 12px;
+        border: 1px solid var(--rule); background: var(--ink-2); cursor: default; }
+      .fge-reaction-nature { font-family: var(--display); font-weight: 800; letter-spacing: .12em; font-size: 13px; color: var(--stock); }
+      .fge-reaction-nom { flex: 1; font-weight: 700; }
       .nouvelle-table { position: relative; }
       .nouvelle-table .nt-retour { position: absolute; top: 12px; right: 48px; }
       /* ⛑ S1291 · LA-6 — SUIVRE L'ACTION, à gauche du lien de table, même ligne. */
@@ -16111,6 +16126,15 @@
       .sl-chiffre { display: flex; flex-direction: column; align-items: flex-end; flex: 0 0 auto; }
       .sl-chiffre-grand { font: 800 30px/1 var(--display), sans-serif; }
       .sl-chiffre-petit { font: 600 10px/1.6 var(--display), sans-serif; letter-spacing: .14em; color: #a9a194; }
+      /* S1755 · note 573 ② (b) — sous le nombre : école, type, puis DAMAGE (ou le mot de la ligne). */
+      .sl-icones { display: inline-flex; align-items: center; gap: 3px; font: 600 10px/1.6 var(--display), sans-serif;
+        letter-spacing: .14em; color: #a9a194; white-space: nowrap; }
+      .sl-icone { font-family: 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif; font-size: 16px; letter-spacing: 0; }
+      .sl-icone-mot { font-size: 11px; margin-left: 2px; }
+      .sl-tuiles .sl-sort > .sl-icones { justify-content: center; margin-top: 2px; }
+      /* S1755 · 573 ⑤ — la colonne d'un autre : la même peau, rien ne se clique. */
+      .sl-lecture .sl-sort.sl-lu { cursor: default; }
+      .sl-lecture .sl-sort.sl-lu:hover { border-color: rgba(233,228,216,.22); background: rgba(28,24,20,.92); box-shadow: none; }
       .sl-tuiles .sl-boutons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
       .sl-tuiles .sl-sort { flex-direction: column; gap: 6px; padding: 0; background: none; border: none; box-shadow: none; }
       .sl-tuiles .sl-sort .sl-ico { width: 100%; height: auto; aspect-ratio: 1; flex: none; border: 1px solid rgba(233,228,216,.35); }
@@ -16169,7 +16193,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index--mwMgTXr.js"></script>
+    <script type="module" crossorigin src="./assets/index-BGDYjbES.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
