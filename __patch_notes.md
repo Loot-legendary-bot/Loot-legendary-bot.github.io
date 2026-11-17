@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 17 Nov 2026
+- **11:50** — ONLINE: the online alpha is closed — THANKS FOR PLAYING THE ALPHA TEST 1, SEE YOU IN DECEMBER. (Shift+Ctrl+D on that page still brings back the password field.)
 - **10:20** — WATCHING A FIGHT: when two other players fight, your screen shows their combat the way the player you follow sees it — no more full-screen frame; ← THE TABLE takes you back to the board, and → COMBAT brings you back to the fight.
 - **09:15** — COMBAT: your column shows only your attacks — each with its number, then its school and type icons, then DAMAGE. Your Reaction comes into your hand, lit, when you can play it. Click your portrait: your sheet opens full screen (your Reaction's ASK ME · MUTE · MUTE ALL is there); click again or Esc to close.
 - **09:15** — When you're asked whether you answer, the button says PLAY NOTHING. Watching someone else's fight, you see their attack column too (read-only).
