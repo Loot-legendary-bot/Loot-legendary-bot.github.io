@@ -15611,6 +15611,9 @@
         font-family: var(--mono); font-size: max(14px, calc(10px * var(--lisible, 1))); color: var(--stock);
       }
       .nouvelle-table .bj-sig.use { color: var(--stock-dim); text-decoration: line-through; }
+      /* S1784 · 593 ③ — la marque du pacte de Messenger's Alcove, en haut à gauche du médaillon */
+      .nt-pacte { position: absolute; left: -4px; top: -4px; z-index: 3; font-size: 18px; line-height: 1;
+        filter: drop-shadow(0 0 3px rgb(0 0 0 / .9)); pointer-events: auto; }
       .nouvelle-table .bj-coin {
         position: absolute; right: 6px; top: 4px; z-index: 1;
         font-family: var(--mono); font-size: max(14px, calc(10px * var(--lisible, 1))); letter-spacing: .1em; color: var(--stock);
@@ -16283,7 +16286,7 @@
       /* S1783 · note 592 ④ — les PV à côté de la barre (« 23 / 49 ») : à droite, la barre reste centrée sous le nom. */
       .pit-barre-ligne { position: relative; }
       .pit-pv { position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: 8px; white-space: nowrap;
-        font: 600 14px/1 'Oswald', sans-serif; color: rgba(244, 239, 226, .7); letter-spacing: .04em; }
+        font: 600 14px/1 var(--display); color: rgba(244, 239, 226, .7); letter-spacing: .04em; }
       .pit-pv > b { font-size: 22px; color: #f4efe2; font-weight: 700; }
       .pit-barre .pit-sang, .pit-barre .pit-cadre { position: absolute; inset: 0; background-size: 100% 100%; }
       .pit-barre .pit-sang { background-image: url('/art/hud/healthbar/fill_blood_stacked.png'); clip-path: inset(0 var(--rogne, 0%) 0 0); }
@@ -16328,11 +16331,11 @@
       .pit-regard-tete { display: flex; align-items: center; justify-content: space-between; }
       .pit-regard-titre { font: 600 13px "Cinzel", serif; letter-spacing: .22em; color: rgba(233,228,216,.75); }
       .pit-regard-fermer { background: none; border: 1px solid rgba(233,228,216,.4); color: #e9e4d8; cursor: pointer; padding: 0 8px; }
-      .pit-regard-nom { display: flex; align-items: baseline; gap: 10px; font: 400 26px "Bebas Neue", sans-serif; letter-spacing: .04em; }
+      .pit-regard-nom { display: flex; align-items: baseline; gap: 10px; font: 400 26px var(--display); letter-spacing: .04em; }
       .pit-regard-rang { font-size: 15px; color: #ffcf5a; }
       .pit-regard-pv { margin-left: auto; font-size: 20px; color: #ff6a5a; }
       .pit-regard-stats { display: flex; gap: 18px; }
-      .pit-regard-stat { display: flex; flex-direction: column; align-items: center; font: 400 12px "Bebas Neue", sans-serif; letter-spacing: .08em; }
+      .pit-regard-stat { display: flex; flex-direction: column; align-items: center; font: 400 12px var(--display); letter-spacing: .08em; }
       .pit-regard-stat b { font-size: 26px; font-weight: 400; }
       .pit-regard-lbl { font: 600 12px "Cinzel", serif; letter-spacing: .2em; color: rgba(233,228,216,.7); margin-top: 4px; }
       /* S1783 · note 592 ④ — le panneau d'un joueur dans la fosse : le haut fixe, trois onglets (`pit_v4_duel.jpg`) */
@@ -16341,41 +16344,41 @@
         border: 3px solid #e9e1cf; background: #14100c; cursor: zoom-in; }
       .pit-regard-medaillon > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; display: block; }
       .pit-regard-id { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-      .pit-regard-joueur .pit-regard-nom { font: 400 30px/1 "Bebas Neue", sans-serif; letter-spacing: .04em; }
+      .pit-regard-joueur .pit-regard-nom { font: 400 30px/1 var(--display); letter-spacing: .04em; }
       .pit-regard-pvmain { display: flex; align-items: center; gap: 14px; }
-      .pit-regard-joueur .pit-regard-pv { font: 600 15px/1 'Oswald', sans-serif; color: rgba(233,228,216,.7);
+      .pit-regard-joueur .pit-regard-pv { font: 600 15px/1 var(--display); color: rgba(233,228,216,.7);
         border: 2px solid #8a1b14; border-radius: 18px; padding: 4px 12px; }
       .pit-regard-joueur .pit-regard-pv > b { font-size: 26px; color: #f4efe2; }
-      .pit-regard-main1 { display: inline-flex; align-items: center; gap: 6px; font: 600 18px 'Oswald', sans-serif; }
+      .pit-regard-main1 { display: inline-flex; align-items: center; gap: 6px; font: 600 18px var(--display); }
       .pit-regard-main1 > .nt-dos { width: 14px; height: 20px; }
       .pit-regard-joueur .pit-regard-stats { justify-content: space-around; }
       .pit-regard-ecoles { align-self: flex-start; }
       .pit-regard-onglets { display: flex; gap: 6px; border-bottom: 1px solid rgba(233,228,216,.25); margin-top: 6px; }
       .pit-regard-onglet { flex: 1; background: none; border: none; color: rgba(233,228,216,.6); cursor: pointer;
-        font: 400 20px "Bebas Neue", sans-serif; letter-spacing: .14em; padding: 6px 0; }
+        font: 400 20px var(--display); letter-spacing: .14em; padding: 6px 0; }
       .pit-regard-onglet.actif { color: #14100c; background: #e9e1cf; }
       .pit-regard-feuille { display: flex; flex-direction: column; gap: 6px; font: 400 15px/1.35 "Alegreya", serif; }
       .pit-regard-capa > b { font-weight: 700; color: #f4efe2; }
       .pit-regard-ligne { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border: 1px solid rgba(233,228,216,.25); background: rgba(255,255,255,.03); }
-      .pit-regard-ligne .pit-faces { min-width: 34px; font: 400 20px "Bebas Neue", sans-serif; }
+      .pit-regard-ligne .pit-faces { min-width: 34px; font: 400 20px var(--display); }
       .pit-regard-corps { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-      .pit-regard-atk { font: 400 19px "Bebas Neue", sans-serif; letter-spacing: .04em; }
+      .pit-regard-atk { font: 400 19px var(--display); letter-spacing: .04em; }
       .pit-regard-texte { font: italic 13px "EB Garamond", serif; opacity: .8; }
       .pit-regard-moi { font: 400 18px "VT323", monospace; color: #ffb347; }
       .pit-regard-chiffre { display: flex; flex-direction: column; align-items: flex-end; }
-      .pit-regard-grand { font: 400 30px "Bebas Neue", sans-serif; }
+      .pit-regard-grand { font: 400 30px var(--display); }
       .pit-regard-passif { display: flex; flex-direction: column; gap: 2px; font: 14px "EB Garamond", serif; }
-      .pit-regard-passif b { font: 400 17px "Bebas Neue", sans-serif; letter-spacing: .05em; }
+      .pit-regard-passif b { font: 400 17px var(--display); letter-spacing: .05em; }
       .pit-regard-butin { font: 15px "EB Garamond", serif; }
       .pit-regard-pastilles { display: flex; flex-wrap: wrap; gap: 6px; }
       .pit-regard-dos { display: flex; gap: 4px; flex-wrap: wrap; }
-      .pit-regard-ouvrir { align-self: flex-start; margin-top: 6px; padding: 6px 14px; font: 400 18px "Bebas Neue", sans-serif; letter-spacing: .08em;
+      .pit-regard-ouvrir { align-self: flex-start; margin-top: 6px; padding: 6px 14px; font: 400 18px var(--display); letter-spacing: .08em;
         background: none; color: #e9e4d8; border: 1px solid #e9e4d8; cursor: pointer; }
       .pit-regard-ouvrir:hover { background: rgba(233,228,216,.12); }
       /* S1777 · note 585 ③ — THE PIT P7 : le LOG à droite, et la dernière ligne en bas à droite */
       .pit-log { min-height: 0; }
       .pit-log-lignes { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; min-height: 0; flex: 1; max-height: 62vh; }
-      .pit-log-tour { font: 400 16px "Bebas Neue", sans-serif; letter-spacing: .1em; color: rgba(233,228,216,.6); margin-top: 6px; }
+      .pit-log-tour { font: 400 16px var(--display); letter-spacing: .1em; color: rgba(233,228,216,.6); margin-top: 6px; }
       .pit-log-ligne { display: flex; flex-direction: column; gap: 2px; padding: 4px 6px; font: 15px "EB Garamond", serif; cursor: pointer; border-left: 2px solid transparent; }
       .pit-log-ligne:hover { background: rgba(255,255,255,.05); }
       .pit-log-ligne.on { border-left-color: #e9c46a; background: rgba(233,196,106,.08); }
@@ -16386,7 +16389,7 @@
       .pit-log-last { position: fixed; right: 170px; bottom: 30px; z-index: 47; width: 340px; display: flex; flex-direction: column; gap: 2px;
         padding: 6px 10px; text-align: left; cursor: pointer; color: #e9e4d8; background: rgba(10,10,10,.78); border: 1px solid rgba(233,228,216,.45); }
       .pit-log-last:hover { border-color: #e9e4d8; }
-      .pit-log-last-mot { font: 400 13px "Bebas Neue", sans-serif; letter-spacing: .14em; color: rgba(233,228,216,.6); }
+      .pit-log-last-mot { font: 400 13px var(--display); letter-spacing: .14em; color: rgba(233,228,216,.6); }
       .pit-log-last-texte { text-transform: none; font: 14px "EB Garamond", serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .pit-carte-grande { display: flex; justify-content: center; }
       .pit-carte-grande img { max-height: 86vh; max-width: 90vw; }
@@ -16412,7 +16415,7 @@
       /* S1764 · THE PIT P2 — la part blanche : ce que le coup qui m'arrive emporterait, avant qu'il tombe. */
       .pit-barre .pit-blanc { position: absolute; top: 27%; bottom: 27%; left: var(--gauche); right: var(--droite);
         background: #f4efe2; box-shadow: 0 0 6px rgba(244, 239, 226, .8); }
-      .pit-menace { font: 700 15px/1.2 'Oswald', sans-serif; letter-spacing: .06em; color: #f4efe2; margin-top: 2px; }
+      .pit-menace { font: 700 15px/1.2 var(--display); letter-spacing: .06em; color: #f4efe2; margin-top: 2px; }
       .pit-menace.letale { color: #ff4a3d; text-shadow: 0 0 8px rgba(255, 74, 61, .6); }
       /* S1763 · note 579 ③ — la géométrie : la fosse grandit, le bac reste ENTRE les deux sièges
          (mob en haut ~160 px, moi en bas ~160 px), et le dé d'un coup joue sur le rectangle du bac. */
@@ -16536,6 +16539,8 @@
         border: 1px solid rgba(233,228,216,.3); background: rgba(14,12,10,.7); font: 800 13px var(--display), sans-serif; }
       .sl-ecole.choisie { border-color: #e9c46a; box-shadow: 0 0 0 1px #e9c46a inset; }
       .sl-ecole-ico { font-size: 14px; }
+      /* S1784 · 593 ④ (c) — YOUR MOVE dans le bandeau du bac */
+      .pit-coup.pit-ton-tour { color: #e9c46a; letter-spacing: .12em; }
       .sl-bande .fx-nom { font: 700 11px var(--display), sans-serif; letter-spacing: .06em; }
       /* S1755 · note 573 ② (b) — sous le nombre : école, type, puis DAMAGE (ou le mot de la ligne). */
       .sl-icones { display: inline-flex; align-items: center; gap: 3px; font: 600 10px/1.6 var(--display), sans-serif;
@@ -16604,7 +16609,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BiDcvPW4.js"></script>
+    <script type="module" crossorigin src="./assets/index-BSq0Wln7.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
