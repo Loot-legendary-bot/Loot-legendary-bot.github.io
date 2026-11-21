@@ -2643,7 +2643,9 @@ function peinsLeDev(box){
   d.appendChild(bv);
   /* S1686 - note 508 (1) : UNLOCK TODAY'S DUNGEON / UNLOCK CAMPAIGN - une case par mode, fermee par defaut,
      memorisee sur la machine. Le changement s'applique au rechargement du HOME (les portes se peignent au depart). */
-  [['daily','UNLOCK TODAY’S DUNGEON'],['campaign','UNLOCK CAMPAIGN']].forEach(function(x){
+  /* S1768 - note 582 (5) (Q-ECR561-CARTE, Croze : « OK YES ») : UNLOCK CAMPAIGN reveille la porte, rien d'autre ;
+     ALL LEVELS OPEN ouvre les dix niveaux de la carte. */
+  [['daily','UNLOCK TODAY’S DUNGEON'],['campaign','UNLOCK CAMPAIGN'],['levels','ALL LEVELS OPEN']].forEach(function(x){
     var lab=document.createElement('label'); lab.className='langue-btn dev-unlock'; lab.style.cssText='display:inline-flex;align-items:center;gap:.8cqh;cursor:pointer';
     var cb=document.createElement('input'); cb.type='checkbox'; cb.checked=window.LLDevUnlock.lit(x[0]); cb.dataset.unlock=x[0];
     cb.addEventListener('change',function(){

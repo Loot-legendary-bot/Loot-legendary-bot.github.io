@@ -6797,6 +6797,27 @@
       .fen-recois-titre { margin: 0; font-size: 26px; }
       .fen-recois-n { font-size: 56px; color: var(--rouge-vif); vertical-align: -6px;
                       padding: 0 2px; }
+      /* S1779 · note 588 ④ (a) — le coup me tue : UN mot rouge au titre ; 589 ① : sur sa traînée de sang */
+      .fen-recois-letal { color: #f4ecda; margin-left: 14px; letter-spacing: .08em; padding: 2px 16px;
+                          background: url(/art/hud/decals/blood_smear.png) center / 100% 100% no-repeat; }
+      /* S1779 · note 589 ① — YOU ARE ASKED, LE BAC NOIR : le cadre noir du bac à dés en 9 tranches, plus de
+         fond gris ni de filet rouge ; l'étiquette rouge peinte posée de travers sur le cadre. */
+      .nouvelle-table .les-choix.est-question, .les-choix.est-question {
+        position: relative; background: none; padding: 52px 26px 14px; margin-top: 6px;
+        border: 40px solid transparent; border-image: url(/art/ui/dicebox/tapis_cadre_noir.webp) 44 fill / 40px stretch;
+        box-shadow: 0 12px 30px rgb(0 0 0 / .55);
+      }
+      .les-choix.est-question > .choix-titre, .les-choix.a-toi.est-question > .choix-titre {
+        position: absolute; left: -4px; top: 2px; z-index: 2; isolation: isolate;
+        padding: 8px 26px 6px; color: #f4ecda; font-size: 24px; letter-spacing: .18em;
+        transform: rotate(-2.5deg); text-shadow: 0 1px 2px rgb(0 0 0 / .6);
+      }
+      .les-choix.est-question > .choix-titre::before {
+        content: ""; position: absolute; inset: 0; z-index: -1; background: #9e1b16;
+        -webkit-mask: url(/art/hud/controls/button_solid.png) center / 100% 100% no-repeat;
+                mask: url(/art/hud/controls/button_solid.png) center / 100% 100% no-repeat;
+      }
+      .les-choix.est-question .decision { background: none; border: 0; }
       .fen-recois-visuel.die { flex: 0 0 auto; }
       .fen-recois-visuel.fen-mob-art { width: 96px; }
       .fen-reagir { font-family: var(--display); font-weight: 800; font-size: 18px;
@@ -15463,6 +15484,23 @@
         background: var(--ink); outline: none;
       }
       .nouvelle-table .bj-moi > .bj-bandeau { height: 110px; border-left: 3px solid var(--siege, var(--gold)); }
+      /* S1779 · note 588 ⑤ (c) — mes torches d'action, deux grandes de part et d'autre de mon bandeau */
+      .nouvelle-table .bj-torches { position: absolute; top: 4px; bottom: 22px; z-index: 2; display: flex; gap: 2px;
+                                    align-items: stretch; pointer-events: none; }
+      .nouvelle-table .bj-torches-g { left: 4px; }
+      .nouvelle-table .bj-torches-d { right: 4px; flex-direction: row-reverse; }
+      .nouvelle-table .bj-torche { width: 62px; background: center / contain no-repeat;
+                                   filter: drop-shadow(0 2px 4px rgb(0 0 0 / .8)); }
+      .nouvelle-table .bj-torche.eteinte { background-image: url(/art/hud/torche_eteinte.webp); filter: brightness(.75) drop-shadow(0 2px 4px rgb(0 0 0 / .8)); }
+      .nouvelle-table .bj-torche.allumee { background-image: url(/art/hud/torche_allumee.webp); }
+      .nouvelle-table .bj-torche.allumee:has(> canvas.peinte) { background-image: none; }
+      .nouvelle-table .bj-torche > canvas.torche-vivante { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .nouvelle-table .bj-moi .bj-bandeau:has(.bj-torches) .bj-nom { left: 70px; right: 70px; text-align: center; }
+      /* 588 ⑤ (b) — mes écoles à droite de la pastille des PV, mes stats dessous */
+      .nouvelle-table .mes-vitales.vit-ecoles-en-haut > .ecoles-a-cote-des-pv { margin-left: auto; flex: 0 1 auto; }
+      .nouvelle-table .mes-vitales.vit-ecoles-en-haut > .stats { flex: 1 1 100%; }
+      /* 588 ⑤ (d) — le chevron de l'inventaire, sans mot */
+      .bj-inv .inv-bascule.inv-chevron { width: 30px; height: 30px; padding: 0; border-radius: 50%; font-size: 18px; line-height: 1; }
       .nouvelle-table .bj-art {
         position: absolute; inset: 0; width: 100%; height: 100%;
         object-fit: cover; object-position: center 22%; display: block;
@@ -16117,6 +16155,8 @@
       .sl-ico { position: relative; flex: 0 0 56px; width: 56px; height: 56px; display: flex; align-items: center;
         justify-content: center; background: #0e0c0a; border: 1px solid rgba(233,228,216,.3); }
       .sl-glyphe { font-size: 30px; line-height: 1; }
+      /* S1759 · note 578 ③ — l'icône de Croze remplit la case, sans cadre. */
+      .sl-icone-sort { width: 100%; height: 100%; object-fit: contain; display: block; }
       .sl-corps { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
       .sl-nom { display: flex; align-items: baseline; gap: 8px; font: 800 24px/1 var(--display), sans-serif; letter-spacing: .04em;
         text-transform: uppercase; }
@@ -16126,6 +16166,231 @@
       .sl-chiffre { display: flex; flex-direction: column; align-items: flex-end; flex: 0 0 auto; }
       .sl-chiffre-grand { font: 800 30px/1 var(--display), sans-serif; }
       .sl-chiffre-petit { font: 600 10px/1.6 var(--display), sans-serif; letter-spacing: .14em; color: #a9a194; }
+      /* S1759 · note 576 ① — THE PIT, P0 : l'anneau blanc, les médaillons, le bac ardoise au centre. */
+      .ntt-cb2.pit .pit-arene { position: relative; height: 430px; margin: 6px 0 10px; flex: 0 0 auto;
+        background: radial-gradient(ellipse at 50% 55%, rgba(0,0,0,.35), rgba(0,0,0,.72) 70%); border-radius: 18px; }
+      .pit-anneau { position: absolute; left: 8%; right: 8%; top: 18%; bottom: 14%; border-radius: 50%;
+        border: 3px solid rgba(240,236,226,.88); box-shadow: 0 0 18px rgba(240,236,226,.25), inset 0 0 22px rgba(0,0,0,.5); }
+      .pit-bac { position: absolute; left: 50%; top: 52%; width: 300px; height: 150px; transform: translate(-50%, -50%);
+        background: url('/art/ui/dicebox/tapis_cadre_ardoise.webp') center / 100% 100% no-repeat; border-radius: 10px; }
+      /* S1760 · THE PIT P1 (en partie) — dans le bac : qui la fosse attend, la table du mob et ce que je prendrais. */
+      .pit-bac { min-height: 150px; height: auto; width: 340px; padding: 12px 16px; box-sizing: border-box;
+        display: flex; flex-direction: column; gap: 3px; color: #f0ece2; font: 700 12px var(--display), sans-serif; }
+      .pit-attend { text-align: center; letter-spacing: .14em; color: #e9c46a; font-weight: 800; }
+      .pit-table-nom { text-align: center; letter-spacing: .1em; text-transform: uppercase; color: #c9c1b2; font-size: 11px; }
+      .pit-ligne { display: grid; grid-template-columns: 34px 1fr auto auto; gap: 8px; align-items: baseline; }
+      .pit-faces { color: #a9a194; } .pit-atk { text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .pit-n { font-size: 15px; font-weight: 800; } .pit-moi-n { color: #e07a5f; font-size: 11px; }
+      .pit-face { position: absolute; left: 0; right: 0; top: 4px; display: flex; justify-content: center; gap: 36px; }
+      .pit-siege { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 190px; }
+      .pit-moi { position: absolute; left: 50%; bottom: 4px; transform: translateX(-50%); }
+      .pit-medaillon { width: 92px; height: 92px; border-radius: 50%; overflow: hidden; background: #0e0c0a;
+        border: 3px solid rgba(240,236,226,.9); box-shadow: 0 4px 14px rgba(0,0,0,.6); }
+      .pit-medaillon img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block; }
+      .pit-moi .pit-medaillon img { object-position: 50% 15%; }
+      .pit-nom { font: 800 15px var(--display), sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #f0ece2;
+        text-shadow: 0 1px 3px #000; }
+      .pit-barre { position: relative; width: 180px; aspect-ratio: 2860 / 293; }
+      .pit-barre .pit-sang, .pit-barre .pit-cadre { position: absolute; inset: 0; background-size: 100% 100%; }
+      .pit-barre .pit-sang { background-image: url('/art/hud/healthbar/fill_blood_stacked.png'); clip-path: inset(0 var(--rogne, 0%) 0 0); }
+      .pit-barre .pit-cadre { background-image: url('/art/hud/healthbar/frame.png'); }
+      .pit-pv { font: 700 12px var(--display), sans-serif; color: #c9c1b2; }
+      .pit-siege.eligible { cursor: pointer; }
+      /* S1775 · 584 ④ — THE PIT P5 : je survole une cible, elle se cadre ; sous elle, ce que mon attaque lui ferait */
+      .pit-siege.eligible:hover .pit-medaillon { border-color: #fff3c4; box-shadow: 0 0 0 4px #e9c46a, 0 0 18px rgba(233,196,106,.8); }
+      .pit-vise { font: 400 22px "VT323", monospace; letter-spacing: .06em; color: #ffb347; text-shadow: 0 0 4px rgba(255,150,40,.8); white-space: nowrap; }
+      .pit-peut-tuer { color: #ff5a4a; text-shadow: 0 0 5px rgba(255,60,40,.9); }
+      /* S1776 · note 585 ② — THE PIT P6 : YOU ARE LOOKING AT, à droite, au clic sur un siège */
+      .pit-regardable { cursor: pointer; }
+      .pit-regarde .pit-medaillon { outline: 3px solid #e9e4d8; outline-offset: 2px; }
+      .pit-regard { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; color: #e9e4d8;
+        background: rgba(14,12,10,.86); border: 1px solid rgba(233,228,216,.35); max-height: 100%; overflow-y: auto; }
+      .pit-regard-tete { display: flex; align-items: center; justify-content: space-between; }
+      .pit-regard-titre { font: 600 13px "Cinzel", serif; letter-spacing: .22em; color: rgba(233,228,216,.75); }
+      .pit-regard-fermer { background: none; border: 1px solid rgba(233,228,216,.4); color: #e9e4d8; cursor: pointer; padding: 0 8px; }
+      .pit-regard-nom { display: flex; align-items: baseline; gap: 10px; font: 400 26px "Bebas Neue", sans-serif; letter-spacing: .04em; }
+      .pit-regard-rang { font-size: 15px; color: #ffcf5a; }
+      .pit-regard-pv { margin-left: auto; font-size: 20px; color: #ff6a5a; }
+      .pit-regard-stats { display: flex; gap: 18px; }
+      .pit-regard-stat { display: flex; flex-direction: column; align-items: center; font: 400 12px "Bebas Neue", sans-serif; letter-spacing: .08em; }
+      .pit-regard-stat b { font-size: 26px; font-weight: 400; }
+      .pit-regard-lbl { font: 600 12px "Cinzel", serif; letter-spacing: .2em; color: rgba(233,228,216,.7); margin-top: 4px; }
+      .pit-regard-ligne { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border: 1px solid rgba(233,228,216,.25); background: rgba(255,255,255,.03); }
+      .pit-regard-ligne .pit-faces { min-width: 34px; font: 400 20px "Bebas Neue", sans-serif; }
+      .pit-regard-corps { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+      .pit-regard-atk { font: 400 19px "Bebas Neue", sans-serif; letter-spacing: .04em; }
+      .pit-regard-texte { font: italic 13px "EB Garamond", serif; opacity: .8; }
+      .pit-regard-moi { font: 400 18px "VT323", monospace; color: #ffb347; }
+      .pit-regard-chiffre { display: flex; flex-direction: column; align-items: flex-end; }
+      .pit-regard-grand { font: 400 30px "Bebas Neue", sans-serif; }
+      .pit-regard-passif { display: flex; flex-direction: column; gap: 2px; font: 14px "EB Garamond", serif; }
+      .pit-regard-passif b { font: 400 17px "Bebas Neue", sans-serif; letter-spacing: .05em; }
+      .pit-regard-butin { font: 15px "EB Garamond", serif; }
+      .pit-regard-pastilles { display: flex; flex-wrap: wrap; gap: 6px; }
+      .pit-regard-dos { display: flex; gap: 4px; flex-wrap: wrap; }
+      .pit-regard-ouvrir { align-self: flex-start; margin-top: 6px; padding: 6px 14px; font: 400 18px "Bebas Neue", sans-serif; letter-spacing: .08em;
+        background: none; color: #e9e4d8; border: 1px solid #e9e4d8; cursor: pointer; }
+      .pit-regard-ouvrir:hover { background: rgba(233,228,216,.12); }
+      /* S1777 · note 585 ③ — THE PIT P7 : le LOG à droite, et la dernière ligne en bas à droite */
+      .pit-log { min-height: 0; }
+      .pit-log-lignes { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; min-height: 0; flex: 1; max-height: 62vh; }
+      .pit-log-tour { font: 400 16px "Bebas Neue", sans-serif; letter-spacing: .1em; color: rgba(233,228,216,.6); margin-top: 6px; }
+      .pit-log-ligne { display: flex; flex-direction: column; gap: 2px; padding: 4px 6px; font: 15px "EB Garamond", serif; cursor: pointer; border-left: 2px solid transparent; }
+      .pit-log-ligne:hover { background: rgba(255,255,255,.05); }
+      .pit-log-ligne.on { border-left-color: #e9c46a; background: rgba(233,196,106,.08); }
+      .pit-log-calcul { font: 400 17px "VT323", monospace; color: #ffb347; }
+      .pit-log-rappel { display: flex; gap: 8px; align-items: center; padding: 6px 0; }
+      .pit-log-rappel img { width: 120px; cursor: zoom-in; }
+      .pit-log-pied { font: italic 12px "EB Garamond", serif; opacity: .65; }
+      .pit-log-last { position: fixed; right: 170px; bottom: 30px; z-index: 47; width: 340px; display: flex; flex-direction: column; gap: 2px;
+        padding: 6px 10px; text-align: left; cursor: pointer; color: #e9e4d8; background: rgba(10,10,10,.78); border: 1px solid rgba(233,228,216,.45); }
+      .pit-log-last:hover { border-color: #e9e4d8; }
+      .pit-log-last-mot { font: 400 13px "Bebas Neue", sans-serif; letter-spacing: .14em; color: rgba(233,228,216,.6); }
+      .pit-log-last-texte { text-transform: none; font: 14px "EB Garamond", serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pit-carte-grande { display: flex; justify-content: center; }
+      .pit-carte-grande img { max-height: 86vh; max-width: 90vw; }
+      /* S1775 · 584 ③ — THE PIT P4 : sans siège, un clic sur un joueur le suit (sa colonne à gauche) */
+      .pit-sans-siege .pit-bas .pit-siege { cursor: pointer; }
+      .pit-sans-siege .pit-bas.serre .pit-siege { width: 150px; }
+      .pit-siege.pit-suivi .pit-medaillon { border-color: #e9c46a; box-shadow: 0 0 0 3px rgba(233,196,106,.35), 0 4px 14px rgba(0,0,0,.6); }
+      .pit-siege.eligible .pit-medaillon { border-color: #e9c46a; box-shadow: 0 0 0 3px rgba(233,196,106,.45), 0 4px 14px rgba(0,0,0,.6); }
+      .pit-siege.mort { opacity: .45; filter: grayscale(1); }
+      /* S1761 · THE PIT P1 — la ligne du coup en cours, la flèche, la ligne de la table qui joue */
+      .pit-coup { text-align: center; font: 800 14px var(--display), sans-serif; letter-spacing: .08em; color: #f0ece2; min-height: 18px; }
+      .pit-coup.vide { display: none; }
+      .pit-calcul { text-align: center; font: 700 13px var(--display), sans-serif; letter-spacing: .06em; color: #f3c969; }
+      .pit-calcul.vide { display: none; }
+      .pit-ligne.en-cours { background: rgba(233,196,106,.18); outline: 1px solid rgba(233,196,106,.6); border-radius: 3px; }
+      .pit-fleche { position: absolute; left: calc(50% - 210px); top: 22%; bottom: 22%; width: 6px; border-radius: 3px; pointer-events: none;
+        background: linear-gradient(var(--de, #c0392b), var(--vers, #c0392b)); z-index: 3; box-shadow: 0 0 10px rgba(0,0,0,.7); }
+      .pit-fleche::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); border: 11px solid transparent; }
+      .pit-fleche.vers-bas::after { bottom: -16px; border-top-color: #c0392b; border-bottom-width: 0; }
+      .pit-fleche.vers-haut { --de: #e9c46a; --vers: #e9c46a; }
+      .pit-fleche.vers-haut::after { top: -16px; border-bottom-color: #e9c46a; border-top-width: 0; }
+      .pit-fleche.vide { display: none; }
+      /* S1764 · THE PIT P2 — la part blanche : ce que le coup qui m'arrive emporterait, avant qu'il tombe. */
+      .pit-barre .pit-blanc { position: absolute; top: 27%; bottom: 27%; left: var(--gauche); right: var(--droite);
+        background: #f4efe2; box-shadow: 0 0 6px rgba(244, 239, 226, .8); }
+      .pit-menace { font: 700 15px/1.2 'Oswald', sans-serif; letter-spacing: .06em; color: #f4efe2; margin-top: 2px; }
+      .pit-menace.letale { color: #ff4a3d; text-shadow: 0 0 8px rgba(255, 74, 61, .6); }
+      /* S1763 · note 579 ③ — la géométrie : la fosse grandit, le bac reste ENTRE les deux sièges
+         (mob en haut ~160 px, moi en bas ~160 px), et le dé d'un coup joue sur le rectangle du bac. */
+      .ntt-cb2.pit .pit-arene { height: 560px; }
+      .pit-bac { top: 50%; min-height: 210px; max-height: 224px; overflow: hidden; }
+      /* S1767 · notes 580 ① / 581 — LE BAC DE THE PIT : l'ardoise et le bac à dés ne font qu'UN objet, 508 × 349 à 1920,
+         au milieu de l'anneau, TROIS rangées : le bandeau (afficheur de borne, comme le bac de CLASSIC) · le tapis du
+         joueur (son tapis peint, en border-image comme `.bd-tapis-peint`) où le dé roule, et à droite ce que chaque face
+         me ferait · UN nombre ou UN mot. La couche du dé se pose sur le tapis SANS fond : il n'en reste que le dé. */
+      .pit-bac { top: 50%; width: 508px; height: 349px; min-height: 0; max-height: none; padding: 8px 10px; gap: 6px;
+        background: #14100c; border: 4px solid #e9e1cf; border-radius: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.75);
+        overflow: hidden; z-index: 2; }
+      /* S1772 · note 583 ② — « dans THE PIT, la flèche du coup passe à côté du bac, jamais dessus » : le bac a grandi
+         (508 px), la flèche était restée à 210 px du centre et traversait son bord gauche. Elle court à 28 px de ce bord. */
+      .pit-fleche { left: calc(50% - 254px - 28px); }
+      /* S1772 · note 583 ⑤ — THE PIT P3 : plusieurs combattants. En bas, moi et mon coéquipier ; en face, les autres ;
+         sous chaque siège sa barre et ses pastilles ; la frise ORDER en haut ; la flèche à la couleur de qui frappe. */
+      .pit-bas { position: absolute; left: 0; right: 0; bottom: 4px; display: flex; justify-content: center; gap: 36px; }
+      .pit-bas .pit-moi { position: static; transform: none; }
+      .pit-face.serre { gap: 14px; }
+      .pit-face.serre .pit-siege { width: 150px; }
+      .pit-face.serre .pit-medaillon { width: 76px; height: 76px; }
+      .pit-face.serre .pit-barre { width: 140px; }
+      .pit-face.serre .pit-nom { font-size: 13px; }
+      .pit-arene.pit-a-ordre .pit-face { top: 30px; }
+      .pit-ordre { position: absolute; left: 0; right: 0; top: 6px; display: flex; justify-content: center; align-items: baseline;
+        gap: 14px; font: 700 12px var(--display), sans-serif; letter-spacing: .1em; color: #a9a194; white-space: nowrap; z-index: 3; }
+      .pit-ordre-tete { color: #bdb6ac; letter-spacing: .24em; }
+      .pit-ordre-qui.maintenant { color: #f0ece2; text-shadow: 0 0 8px rgba(233,196,106,.7); }
+      .pit-ordre-qui.ensuite { color: #d9d2c4; }
+      .pit-ordre-mot { font-weight: 800; color: #e9c46a; margin-right: 5px; font-size: 10px; letter-spacing: .14em; }
+      .pit-ordre-qui.ensuite .pit-ordre-mot { color: #a9a194; }
+      .pit-pastilles { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 190px; }
+      .pit-pastille { font: 700 10px var(--display), sans-serif; letter-spacing: .08em; padding: 1px 6px; border-radius: 3px;
+        background: rgba(233,196,106,.16); border: 1px solid rgba(233,196,106,.55); color: #f3c969; }
+      .pit-pastille.mal { background: rgba(192,57,43,.18); border-color: rgba(224,72,60,.6); color: #ff8a7a; }
+      .pit-equipier .pit-medaillon { border-color: #7fb3d5; }
+      .pit-fleche.de-mob { --de: #c0392b; --vers: #c0392b; }
+      .pit-fleche.de-moi { --de: #e9c46a; --vers: #e9c46a; }
+      .pit-fleche.de-equipier { --de: #7fb3d5; --vers: #7fb3d5; }
+      .pit-fleche.de-joueur { --de: #b388eb; --vers: #b388eb; }
+      .pit-fleche.vers-bas::after { border-top-color: var(--de, #c0392b); }
+      .pit-fleche.vers-haut::after { border-bottom-color: var(--de, #e9c46a); }
+      .pit-bac .pit-coup { flex: none; height: 34px; line-height: 34px; min-height: 0; padding: 0 8px; overflow: hidden;
+        white-space: nowrap; text-overflow: clip; font-family: "VT323", monospace; font-weight: 400; font-size: 26px;
+        letter-spacing: .08em; color: #ffb347; text-shadow: 0 0 4px rgba(255, 150, 40, .85), 0 0 10px rgba(255, 110, 20, .45);
+        background: radial-gradient(circle, rgba(255, 140, 30, .10) 1px, transparent 1.4px) 0 0 / 4px 4px, #120b06;
+        border: 1px solid #3a2a16; border-radius: 3px; box-shadow: inset 0 0 8px rgba(0, 0, 0, .9); }
+      .pit-bac .pit-coup.vide { display: block; }
+      .pit-bac .pit-calcul { display: none; }
+      .pit-tapis { position: relative; flex: 1 1 auto; min-height: 0; box-sizing: border-box;
+        border: 16px solid transparent; border-image: var(--pit-tapis-img) 38 fill / 16px stretch;
+        display: flex; align-items: center; justify-content: flex-end; padding: 0 10px; }
+      .pit-tapis .pit-table { display: flex; flex-direction: column; gap: 6px; min-width: 220px; max-width: 62%;
+        font: 800 20px var(--display), sans-serif; letter-spacing: .06em; color: #f0ece2; text-shadow: 0 2px 3px rgba(0,0,0,.8); }
+      .pit-tapis .pit-table-tete { align-self: flex-end; font-size: 11px; letter-spacing: .16em; color: #c9c1b2; }
+      .pit-tapis .pit-ligne { grid-template-columns: 50px 1fr auto; gap: 10px; }
+      .pit-tapis .pit-faces { color: #e9e1cf; } .pit-tapis .pit-moi-n { color: #f3c969; font-size: 22px; }
+      .pit-pied { flex: none; height: 48px; display: flex; align-items: center; justify-content: flex-end; padding: 0 10px;
+        background: #0d0a07; border-radius: 4px; }
+      .pit-pied .pit-attend { font: 800 15px var(--display), sans-serif; letter-spacing: .14em; color: #e9c46a; }
+      .dicelayer.a-cote.dans-la-fosse { background: none !important; border: 0; overflow: visible; }
+      .dicelayer.a-cote.dans-la-fosse > div > :not(.dgroup) { display: none !important; }
+      .dicelayer.a-cote.dans-la-fosse > div { position: absolute; left: 6%; top: 50%; transform: translateY(-50%);
+        transform-origin: left center; }
+      /* le dé seul de combat du bac de CLASSIC : 112 px (S1609) */
+      .dicelayer.a-cote.dans-la-fosse .dgroup .die { width: 112px; height: 112px; font-size: 56px; }
+      .dicelayer.a-cote.dans-la-fosse .hide-btn { display: none !important; }
+      /* S1768 · note 582 ① — le bac porte son dé : posé à gauche du tapis, 112 px (le dé seul de combat du bac de
+         CLASSIC), il roule une passe de sa bande (`pit-de-roule`), puis montre sa face. */
+      .pit-tapis .pit-des { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); width: 112px; height: 112px; }
+      .pit-tapis .pit-des .die { width: 112px; height: 112px; font-size: 56px;
+        background: transparent; border-color: transparent; box-shadow: none; clip-path: none; color: #efe6cf; }
+      .pit-tapis .pit-des .die.die-rendue::before { content: none; }
+      .pit-bac.pit-de-roule .pit-des .die-roule { opacity: 1; animation-name: de-roule; animation-iteration-count: 1;
+        animation-fill-mode: both; }
+      .pit-bac.pit-de-roule .pit-des .die-rendu { opacity: 0; }
+      .pit-bac.pit-de-roule .pit-des .die.die-roulant { color: transparent; }
+      .pit-bac:not(.pit-de-roule) .pit-des .die-roule, .pit-bac:not(.pit-de-roule) .pit-des .die-fenetre { display: none; }
+      .dicelayer.pit-roule-au-bac { background: none; pointer-events: none; }
+      /* S1768 · 580 ② / 581 — le dé arrêté : sur le tapis il ne reste que le dé ; au pied, UN nombre */
+      .pit-bac.pit-arrete .pit-tapis .pit-table { display: none; }
+      .pit-bac.pit-arrete .pit-tapis .pit-des { left: 50%; transform: translate(-50%, -50%); }
+      .pit-pied { justify-content: space-between; padding-left: 64px; }   /* la flèche passe à ~44 px du bord : le nombre commence après elle */
+      .pit-pied .pit-nombre { font: 800 30px var(--display), sans-serif; letter-spacing: .06em; color: #f3c969;
+        text-shadow: 0 2px 4px rgba(0,0,0,.85); }
+      .pit-pied .pit-nombre:empty { display: none; }
+      .pit-pied .pit-attend { margin-left: auto; }
+      /* S1769 · note 580 ③ / 581 ③ — MON jet : ma carte chargée attend sur le tapis (à droite), le bonus publié se
+         pose sur le dé ; plusieurs dés côte à côte ; au dé arrêté, le tapis ne garde que le dé (et son +N). */
+      .pit-tapis .pit-des { display: flex; gap: 10px; width: auto; min-width: 112px; }
+      .pit-tapis .pit-des .die { flex: none; }
+      .pit-tapis .pit-des .pit-plus { position: absolute; right: -14px; top: -10px; font: 800 26px var(--display), sans-serif;
+        color: #7ee08a; text-shadow: 0 2px 4px rgba(0,0,0,.9); }
+      .pit-tapis .pit-posees { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); display: flex; gap: 8px; }
+      .pit-tapis .pit-posee { width: 96px; height: 134px; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,.6); }
+      .pit-tapis .pit-posee img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .pit-bac.pit-arrete .pit-tapis .pit-posees { display: none; }
+      /* S1769 · note 580 ④ — le jet opposé : deux d20 face à face, au centre du tapis, le total publié sous chacun
+         (caché pendant le roulé) ; au pied, UN mot (ESCAPED / CAUGHT / CRITICAL FAIL). */
+      .pit-tapis .pit-des.pit-oppose { left: 50%; transform: translate(-50%, -50%); gap: 56px; height: auto; }
+      .pit-face-a-face { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+      .pit-face-a-face .pit-total { font: 800 24px var(--display), sans-serif; color: #efe6cf; text-shadow: 0 2px 4px rgba(0,0,0,.85); }
+      .pit-bac.pit-de-roule .pit-face-a-face .pit-total { visibility: hidden; }
+      /* S1768 · note 582 ② — PLAY NOTHING, son temps et PAUSE sur UNE ligne, sous la fosse, au-dessus de ma main */
+      .pit-reponse { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: nowrap; margin-top: 6px; }
+      .pit-reponse .reb { display: flex; align-items: center; gap: 8px; margin: 0; flex-wrap: nowrap; }
+      .pit-reponse .reb .reb-tx { display: none; }
+      /* l'anneau grandit pour que le bac tienne ENTRE le médaillon du mob (en haut) et le mien (en bas) */
+      .ntt-cb2.pit .pit-arene { height: 720px; }
+      /* S1764 · note 579 ⑧ — le mot d'une ligne sans nombre (KILL, STEAL, THEY FLEE…), à la place du nombre */
+      .sl-chiffre-grand.sl-mot { font-size: 62%; letter-spacing: .04em; white-space: nowrap; }
+      /* S1759 · note 578 ② — la bande sous le portrait : écoles portées, puis buffs en cours (nom + chiffre). */
+      .sl-bande { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 6px 0 4px; }
+      .sl-ecole { display: inline-flex; align-items: center; gap: 3px; padding: 1px 7px; border-radius: 10px;
+        border: 1px solid rgba(233,228,216,.3); background: rgba(14,12,10,.7); font: 800 13px var(--display), sans-serif; }
+      .sl-ecole.choisie { border-color: #e9c46a; box-shadow: 0 0 0 1px #e9c46a inset; }
+      .sl-ecole-ico { font-size: 14px; }
+      .sl-bande .fx-nom { font: 700 11px var(--display), sans-serif; letter-spacing: .06em; }
       /* S1755 · note 573 ② (b) — sous le nombre : école, type, puis DAMAGE (ou le mot de la ligne). */
       .sl-icones { display: inline-flex; align-items: center; gap: 3px; font: 600 10px/1.6 var(--display), sans-serif;
         letter-spacing: .14em; color: #a9a194; white-space: nowrap; }
@@ -16193,7 +16458,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DbRMFdMa.js"></script>
+    <script type="module" crossorigin src="./assets/index-B2YjyJnL.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

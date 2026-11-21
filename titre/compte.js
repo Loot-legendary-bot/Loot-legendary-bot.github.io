@@ -471,6 +471,12 @@
         if (!r.ok || !r.corps.profile || !window.LLProfil) { return; }
         var ici = lsGet(window.LLProfil.CLE);
         r.corps.profile.pseudo = s.pseudo;
+        /* S1779 - note 588 (1) : un compte plus VIEUX que la copie du navigateur (une ecriture
+           perdue en route) ne l'efface pas : c'est la copie qui repart vers le compte. */
+        if (ici !== null && window.LLProfil.ecritLe && window.LLProfil.ecritLe(ici) > window.LLProfil.ecritLe(JSON.stringify(r.corps.profile))) {
+          try { window.LLProfil.pose(JSON.parse(ici)); } catch (e) { /* copie illisible : le compte reste */ }
+          return;
+        }
         if (ici !== JSON.stringify(r.corps.profile)) { adopte(r.corps.profile, s.pseudo); window.location.reload(); }
       });
       return;

@@ -309,8 +309,10 @@
   /* l'état de chaque point des Limbes : réussi, puis LE courant (le premier pas réussi), puis le noir.
      `jouable` = le scénario existe (PLAY) ; sinon la fiche dit NOT YET (513 ④). */
   /* S1704 · note 538 ④ (b) — OPTIONS → DEV → UNLOCK CAMPAIGN ouvre les dix points, sans condition. */
+  /* S1768 · note 582 ⑤ (Q-ECR561-CARTE, « OK YES ») — c'est la seconde case, ALL LEVELS OPEN, qui ouvre les dix
+     points ; UNLOCK CAMPAIGN ne fait plus que réveiller la porte (les niveaux 3 à 10 restent dessinés, verrouillés). */
   function campagneOuverteEnDev() {
-    try { return !!(window.LLDevUnlock && window.LLDevUnlock.lit('campaign')); } catch (e) { return false; }
+    try { return !!(window.LLDevUnlock && window.LLDevUnlock.lit('levels')); } catch (e) { return false; }
   }
   /* S1717 · note 542 ② — les portes viennent du GRAPHE de `cercles[].progression.graphe` (CLASSEUR, validé par
      Croze le 09/11) : un point s'ouvre quand TOUS ceux qui y mènent sont réussis — la fourche 5 → 6 / 7 ouvre
@@ -368,7 +370,8 @@
     return parts.some(function (p) { return p === null; }) ? null : parts.join(', then ');
   }
 
-  function ficheDuNiveau(d, x, rang) {
+  /* S1762 · 561 ⑧ — `dans` : la carte en parchemin lit la fiche SOUS la carte (maquette campaign_map_v1), sans voile ni BACK */
+  function ficheDuNiveau(d, x, rang, dans) {
     var vieille = racine.querySelector('.av-fiche-voile'); if (vieille) vieille.remove();
     var voile = el('div', 'av-fiche-voile'), f = el('div', 'av-fiche');
     var c = x.cercle, ch = x.chapitre;
@@ -441,7 +444,7 @@
     var pied = el('div', 'av-pied');
     var retour = el('button', null, mot('BACK', 'RETOUR')); retour.type = 'button';
     retour.addEventListener('click', function () { voile.remove(); });
-    pied.appendChild(retour);
+    if (!dans) pied.appendChild(retour);
     var jouer = el('button', 'av-jouer', x.jouable ? mot('PLAY', 'JOUER') : 'NOT YET'); jouer.type = 'button';
     if (x.jouable) {
       jouer.addEventListener('click', function () { lance(lanceurDe(ch), choisi); });
@@ -451,6 +454,19 @@
     }
     pied.appendChild(jouer);
     f.appendChild(pied);
+    if (dans) {
+      /* S1779 · note 588 ② — la fiche SOUS le parchemin a une boîte fixe (270 px) : sur une colonne, le
+         perso choisi, « SOLO · 12 turns » et PLAY en sortaient. Deux colonnes : ce que le niveau demande
+         à gauche, qui je joue et à quelle table à droite, PLAY en bas à droite. */
+      var gauche = el('div', 'pa-col-g'), droite = el('div', 'pa-col-d');
+      Array.prototype.slice.call(f.children).forEach(function (n) {
+        if (n === pied) return;
+        var cote = /\b(av-qui|av-rangee|av-nom-choisi|av-table)\b/.test(n.className) ? droite : gauche;
+        cote.appendChild(n);
+      });
+      f.insertBefore(gauche, pied); f.insertBefore(droite, pied);
+      dans.innerHTML = ''; dans.appendChild(f); return;
+    }
     voile.appendChild(f);
     voile.addEventListener('click', function (e) { if (e.target === voile) voile.remove(); });
     racine.appendChild(voile);
@@ -627,8 +643,182 @@
     });
   }
 
+  /*
+   * S1762 · note 561 ⑧ — LA CARTE DE LA CAMPAGNE EN PARCHEMIN (« go map mais pas prio du tout », Croze, 15/11), d'après
+   * `docs/maquettes/campaign_map_v1.html` : une planche 1920 × 1080 mise à l'échelle de la fenêtre ; le parchemin, la route,
+   * la porte et l'escalier = `public/art/campagne/parchemin_limbes.svg` (le SVG de la maquette, tel quel) ; les dix
+   * médaillons aux places de la maquette ; trois états lus sur `etatsLimbes` (réussi · YOU ARE HERE · scellé) ; la bulle du
+   * Turd (`virgile.arrivee`) à gauche et la fiche du niveau SOUS la carte, à droite, avec PLAY. Aucun texte inventé :
+   * titres et numéros = `chapitres[]`, le nom du cercle = `nom_en`. Les étoiles ne sont pas au profil (511 ②) : « ✓ ».
+   */
+  var PARCHEMIN = '/art/campagne/parchemin_limbes.svg';
+  var PLACES_PARCHEMIN = [[178, 338], [328, 359.9], [478, 365.3], [628, 350], [778, 325.6], [928, 310.6],
+    [1078, 316.4], [1228, 338.5], [1378, 360.2], [1528, 365.2]];
+  var CADENAS = '<svg width="16" height="18" viewBox="0 0 30 34" aria-hidden="true"><rect x="4" y="14" width="22" height="17" rx="3" fill="#efe9df"></rect>'
+    + '<path d="M9 14 V10 a6 6 0 0 1 12 0 V14" fill="none" stroke="#efe9df" stroke-width="3.5"></path></svg>';
+  var TORCHE = '<svg width="60" height="110" viewBox="0 0 60 110" aria-hidden="true"><path d="M22 104 L34 50" stroke="#3a2614" stroke-width="7" stroke-linecap="round"></path>'
+    + '<path d="M36 4 C 54 24, 52 46, 36 52 C 20 46, 18 24, 36 4 Z" fill="#d9661f"></path><path d="M36 22 C 45 32, 44 44, 36 48 C 28 44, 27 32, 36 22 Z" fill="#f6d36b"></path></svg>';
+  function styleParchemin() {
+    if (document.getElementById('av-parchemin-style')) return;
+    var s = document.createElement('style'); s.id = 'av-parchemin-style';
+    var BS = "'Big Shoulders Display','Arial Narrow',sans-serif";
+    s.textContent =
+      '#aventure .av-parchemin{background:#0b0a0a;overflow:hidden;display:block}' +
+      '#aventure .av-parchemin .pa-planche{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;font-family:Alegreya,Georgia,serif;color:#F2F2F2;' +
+        'background:radial-gradient(ellipse 16% 70% at 0% 60%,rgba(126,26,21,.45),rgba(126,26,21,0) 70%),#0b0a0a}' +
+      '#aventure .av-parchemin .pa-tete{position:absolute;left:70px;top:46px;display:flex;align-items:center;gap:28px}' +
+      '#aventure .av-parchemin .pa-retour{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;height:56px;box-sizing:border-box;padding:0 22px;border:2px solid rgba(232,196,106,.65);color:#e8c46a;font:800 22px/1 ' + BS + ';letter-spacing:.12em}' +
+      '#aventure .av-parchemin .pa-titre{font:800 54px/1 ' + BS + ';letter-spacing:.08em;color:#e8c46a}' +
+      '#aventure .av-parchemin .pa-compte{font-style:italic;font-size:26px;color:#A1A1A1}' +
+      '#aventure .av-parchemin .pa-dev{font:800 18px/1 ' + BS + ';letter-spacing:.14em;color:#e0483c}' +
+      '#aventure .av-parchemin .pa-carte{position:absolute;left:70px;top:142px;width:1780px;height:620px}' +
+      '#aventure .av-parchemin .pa-carte>img.pa-fond{position:absolute;left:0;top:0;width:1780px;height:620px;display:block;filter:drop-shadow(0 18px 28px rgba(0,0,0,.65));user-select:none;-webkit-user-drag:none}' +
+      '#aventure .av-parchemin .pa-cercle{position:absolute;left:0;top:70px;width:1780px;text-align:center;font:800 46px/1 ' + BS + ';letter-spacing:.34em;text-indent:.34em;color:#8f1d18}' +
+      '#aventure .av-parchemin .pa-porte{position:absolute;left:26px;top:237px;width:116px;text-align:center;font:800 16px/1 ' + BS + ';letter-spacing:.2em;color:#2b1c10}' +
+      '#aventure .av-parchemin .pa-med{all:unset;cursor:pointer;position:absolute;box-sizing:border-box;border-radius:50%;overflow:hidden;background:#1a1512;' +
+        'border:5px solid #8f1d18;box-shadow:0 0 0 3px #cdb88c,0 0 0 5px #8f1d18,0 8px 16px rgba(43,28,16,.5)}' +
+      '#aventure .av-parchemin .pa-med img{display:block;width:100%;height:100%;object-fit:cover}' +
+      '#aventure .av-parchemin .pa-med.ici{border-width:6px}' +
+      '#aventure .av-parchemin .pa-med.scelle{border-color:#5b4326;box-shadow:0 0 0 3px #cdb88c,0 0 0 5px #5b4326,0 8px 16px rgba(43,28,16,.5)}' +
+      '#aventure .av-parchemin .pa-med.scelle img{filter:grayscale(1) sepia(.55) brightness(1.25) contrast(.82)}' +
+      '#aventure .av-parchemin .pa-med.scelle::after{content:"";position:absolute;inset:0;background:rgba(205,184,140,.30)}' +
+      '#aventure .av-parchemin .pa-med.choisi{outline:4px solid #e8c46a;outline-offset:6px}' +
+      '#aventure .av-parchemin .pa-med.secoue{animation:paSecoue .35s}' +
+      '@keyframes paSecoue{25%{margin-left:-6px}75%{margin-left:6px}}' +
+      '#aventure .av-parchemin .pa-cad{position:absolute;width:34px;height:34px;box-sizing:border-box;border-radius:50%;background:#2b1c10;border:2px solid #cdb88c;display:grid;place-items:center;pointer-events:none}' +
+      '#aventure .av-parchemin .pa-lab{position:absolute;width:148px;text-align:center;pointer-events:none}' +
+      '#aventure .av-parchemin .pa-lab b{display:block;font:800 26px/1 ' + BS + ';color:#8f1d18}' +
+      '#aventure .av-parchemin .pa-lab i{display:block;margin-top:4px;font-size:21px;line-height:1.15;color:#2b1c10}' +
+      '#aventure .av-parchemin .pa-lab span{display:block;margin-top:4px;font:800 18px/1 ' + BS + ';color:#8f1d18}' +
+      '#aventure .av-parchemin .pa-ici{position:absolute;width:220px;text-align:center;font:800 17px/1 ' + BS + ';letter-spacing:.24em;color:#8f1d18;pointer-events:none}' +
+      '#aventure .av-parchemin .pa-torche{position:absolute;pointer-events:none}' +
+      '#aventure .av-parchemin .pa-legende{position:absolute;left:76px;top:516px;display:flex;align-items:center;gap:28px;font-style:italic;font-size:20px;color:#2b1c10}' +
+      '#aventure .av-parchemin .pa-legende span{display:flex;align-items:center;gap:9px}' +
+      '#aventure .av-parchemin .pa-legende u{display:inline-block;width:18px;height:18px;box-sizing:border-box;border-radius:50%;border:3px solid #8f1d18}' +
+      '#aventure .av-parchemin .pa-bd{position:absolute;left:70px;top:846px;width:940px;display:flex;align-items:center}' +
+      '#aventure .av-parchemin .pa-bd>b{flex:none;font:800 22px/1 ' + BS + ';letter-spacing:.16em;color:#efe9df;border:2px solid #efe9df;padding:10px 16px 8px}' +
+      '#aventure .av-parchemin .pa-bd>u{flex:none;width:0;height:0;margin-left:14px;border-style:solid;border-width:12px 12px 12px 0;border-color:transparent #efe9df transparent transparent}' +
+      '#aventure .av-parchemin .pa-bd>p{margin:0;flex:1;background:#efe9df;color:#141110;font-size:27px;line-height:1.3;padding:18px 26px 17px;border-radius:4px}' +
+      '#aventure .av-parchemin .pa-fiche{position:absolute;left:1050px;top:790px;width:800px;height:270px;box-sizing:border-box;overflow:hidden;' +
+        'border:1px solid rgba(242,242,242,.18);background:rgba(242,242,242,.045)}' +
+      '#aventure .av-parchemin .pa-fiche .av-fiche{position:static;width:auto;max-width:none;max-height:none;margin:0;padding:16px 26px 0;background:none;border:0;box-shadow:none;transform:none;color:#F2F2F2}' +
+      '#aventure .av-parchemin .pa-fiche .av-fiche p{color:#d6cfc2;margin:0 0 6px}' +
+      '#aventure .av-parchemin .pa-fiche .av-fiche h3{margin:4px 0 8px}' +
+      '#aventure .av-parchemin .pa-fiche .av-fiche .av-obj{color:#F2F2F2;font-size:24px}' +
+      '#aventure .av-parchemin .pa-fiche .av-fiche .av-cercle{color:#A1A1A1}' +
+      '#aventure .av-parchemin .pa-fiche .av-pied{position:absolute;right:26px;bottom:20px;margin:0}' +
+      /* S1779 · 588 ② — deux colonnes dans la boîte fixe */
+      '#aventure .av-parchemin .pa-fiche .av-fiche{display:flex;gap:24px;align-items:flex-start}' +
+      '#aventure .av-parchemin .pa-fiche .pa-col-g{flex:1 1 auto;min-width:0}' +
+      '#aventure .av-parchemin .pa-fiche .pa-col-d{flex:0 0 280px;padding-bottom:64px}' +
+      '#aventure .av-parchemin .pa-fiche .pa-col-d .av-rangee{justify-content:flex-start;gap:6px;margin:4px 0 2px}' +
+      '#aventure .av-parchemin .pa-fiche .pa-col-d .av-perso img{width:44px;height:44px}' +
+      '#aventure .av-parchemin .pa-fiche .av-obj{line-height:1.2}' +
+      '#aventure .av-parchemin .pa-fiche .av-regle{margin:0 0 4px}' +
+      '#aventure .av-parchemin .pa-suite{position:absolute;left:1650px;top:445px;width:52px;height:52px;display:grid;place-items:center;font:800 34px/1 ' + BS + ';color:#efe9df}' +
+      '#aventure .av-parchemin .pa-bas{position:absolute;left:1596px;top:505px;width:160px;text-align:center;font-style:italic;font-size:20px;line-height:1.15;color:#2b1c10}';
+    document.head.appendChild(s);
+  }
+  function carteParchemin(d, c, origine) {
+    styleParchemin();
+    var vieille = racine.querySelector('.av-sous-carte'); if (vieille) vieille.remove();
+    var points = etatsLimbes(c);
+    var page = el('div', 'av-sous-carte av-parchemin' + (origine ? ' zoome' : ''));
+    if (origine) page.style.transformOrigin = origine.x + 'px ' + origine.y + 'px';
+    var pl = el('div', 'pa-planche');
+    var tete = el('div', 'pa-tete');
+    var retour = el('button', 'pa-retour', mot('◀ THE NINE CIRCLES', '◀ LES NEUF CERCLES')); retour.type = 'button';
+    retour.addEventListener('click', function () { page.remove(); });
+    tete.appendChild(retour);
+    tete.appendChild(el('div', 'pa-titre', romain(c.numero) + ' · ' + mot(c.nom_en, c.nom).toUpperCase()));
+    var faits = points.filter(function (x) { return x.etat === 'REUSSI'; }).length;
+    tete.appendChild(el('div', 'pa-compte', faits + ' / ' + points.length + mot(' levels cleared', ' niveaux franchis')));
+    if (campagneOuverteEnDev()) tete.appendChild(el('div', 'pa-dev', 'DEV — ALL LEVELS OPEN'));
+    pl.appendChild(tete);
+
+    var carteEl = el('div', 'pa-carte');
+    var fond = el('img', 'pa-fond'); fond.src = PARCHEMIN; fond.alt = ''; fond.draggable = false;
+    carteEl.appendChild(fond);
+    carteEl.appendChild(el('div', 'pa-cercle', mot(c.nom_en, c.nom).toUpperCase()));
+    carteEl.appendChild(el('div', 'pa-porte', mot('THE GATE', 'LA PORTE')));
+    var ouvert = function (x) { return x.etat === 'REUSSI' || x.etat === 'COURANT'; };
+    var ici = lisTurd();
+    var courant = points.filter(function (x) { return ouvert(x) && x.chapitre.id === ici; })[0]
+      || points.filter(function (x) { return x.etat === 'COURANT'; })[0]
+      || points.filter(ouvert).slice(-1)[0] || points[0];
+    var fiche = el('div', 'pa-fiche'), meds = [];
+    function montre(x, m) {
+      meds.forEach(function (b) { b.classList.toggle('choisi', b === m); });
+      ficheDuNiveau(d, x, points.indexOf(x) + 1, fiche);
+    }
+    points.slice(0, PLACES_PARCHEMIN.length).forEach(function (x, i) {
+      var p = PLACES_PARCHEMIN[i], estIci = x === courant, scelle = !ouvert(x);
+      var t = estIci ? 128 : 104;
+      var m = el('button', 'pa-med' + (estIci ? ' ici' : '') + (scelle ? ' scelle' : '')); m.type = 'button';
+      m.dataset.chapitre = x.chapitre.id;
+      m.style.left = (p[0] - t / 2) + 'px'; m.style.top = (p[1] - t / 2) + 'px'; m.style.width = t + 'px'; m.style.height = t + 'px';
+      m.setAttribute('aria-label', 'Level ' + (i + 1) + ', ' + x.chapitre.titre + ' — '
+        + (x.etat === 'REUSSI' ? 'cleared' : estIci ? 'you are here' : scelle ? 'sealed' : 'open'));
+      var im = el('img'); im.alt = ''; im.src = '/art/campagne/medaillons/' + x.chapitre.id + '.webp'; m.appendChild(im);
+      m.addEventListener('click', function () {
+        if (scelle) { m.classList.remove('secoue'); void m.offsetWidth; m.classList.add('secoue'); return; }
+        montre(x, m);
+      });
+      meds.push(m);
+      carteEl.appendChild(m);
+      if (scelle) {
+        var cad = el('span', 'pa-cad'); cad.innerHTML = CADENAS;
+        cad.style.left = (p[0] - 17) + 'px'; cad.style.top = (p[1] + 32) + 'px';
+        carteEl.appendChild(cad);
+      }
+      var lab = el('div', 'pa-lab');
+      lab.style.left = (p[0] - 74) + 'px'; lab.style.top = (p[1] + t / 2 + 20) + 'px';
+      lab.appendChild(el('b', null, String(i + 1)));
+      lab.appendChild(el('i', null, x.chapitre.titre));
+      if (x.etat === 'REUSSI') lab.appendChild(el('span', null, '✓'));
+      carteEl.appendChild(lab);
+      if (estIci) {
+        var h = el('div', 'pa-ici', mot('YOU ARE HERE', 'TU ES ICI'));
+        h.style.left = (p[0] - 110) + 'px'; h.style.top = (p[1] - 104) + 'px';
+        carteEl.appendChild(h);
+        var to = el('div', 'pa-torche'); to.innerHTML = TORCHE;
+        to.style.left = (p[0] + 58) + 'px'; to.style.top = (p[1] - 126) + 'px';
+        carteEl.appendChild(to);
+      }
+    });
+    carteEl.appendChild(el('div', 'pa-suite', '?'));
+    carteEl.appendChild(el('div', 'pa-bas', mot('down to the second circle', 'vers le deuxième cercle')));
+    var leg = el('div', 'pa-legende');
+    [['#8f1d18', mot('cleared', 'franchi')], ['#ffe9b0', mot('you are here', 'tu es ici')],
+      ['#cdb88c', mot('sealed until the level before it is cleared', 'scellé tant que le niveau d’avant n’est pas franchi')]]
+      .forEach(function (l) { var s = el('span'), u = el('u'); u.style.background = l[0]; s.appendChild(u); s.appendChild(document.createTextNode(l[1])); leg.appendChild(s); });
+    carteEl.appendChild(leg);
+    pl.appendChild(carteEl);
+
+    var v = courant.chapitre.virgile || {};
+    var dit = [v.arrivee, v.conseil].filter(function (s) { return typeof s === 'string' && s.trim() !== ''; })[0];
+    if (dit) {
+      var bd = el('div', 'pa-bd');
+      bd.appendChild(el('b', null, (d.virgile && d.virgile.nom) || 'THE TURD'));
+      bd.appendChild(el('u'));
+      bd.appendChild(el('p', null, dit));
+      pl.appendChild(bd);
+    }
+    pl.appendChild(fiche);
+    page.appendChild(pl);
+    function echelle() {
+      var k = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      pl.style.transform = 'translate(-50%,-50%) scale(' + k + ')';
+    }
+    echelle();
+    window.addEventListener('resize', function () { if (page.isConnected) echelle(); });
+    racine.appendChild(page);
+    montre(courant, meds[points.indexOf(courant)] || null);
+  }
+
   function sousCarte(d, c, liste, origine) {
-    if (c.numero === 1 && d.structure && d.structure.sous_carte_limbes) { sousCarteLimbes(d, c, origine); return; }
+    /* S1762 · 561 ⑧ — « go map » (Croze, 15/11) : le cercle I est la carte en parchemin ; la bande d'avant n'est plus appelée */
+    if (c.numero === 1) { carteParchemin(d, c, origine); return; }
     var vieille = racine.querySelector('.av-sous-carte'); if (vieille) vieille.remove();
     var page = el('div', 'av-sous-carte');
     var tete = el('div', 'av-tete');

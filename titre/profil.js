@@ -126,36 +126,105 @@
     try { return complete(JSON.parse(brut)); } catch (e) { return neuf(); }
   }
 
+  /* S1779 - note 588 (1) : UN PERSO DEBLOQUE NE TENAIT PAS. Un achat ecrivait le profil
+     DEUX fois dans le meme tick (`PROFILE.gold -=` puis `gardeLesPossessions()`), et chaque
+     ecriture partait en `fetch keepalive` vers `/__profil` (et vers le serveur, connecte).
+     Chrome plafonne a 64 Kio la somme des corps keepalive EN VOL : la derniere - celle qui
+     porte `possede.persos` - etait rejetee sans bruit ; deux PUT en vol pouvaient aussi
+     arriver dans le desordre. Au chargement suivant le fichier gagnait : les dents etaient
+     parties, le perso revenait sous cadenas. Desormais :
+       - les ecritures d'un meme tick se FONDENT en une (micro-tache) : un achat = une ecriture ;
+       - UNE ecriture en vol par canal (fichier, serveur), la derniere en attente gagne ;
+       - une ecriture rejetee repart SANS keepalive, et une qui echoue est retentee ;
+       - le profil porte `ecrit_le` : au chargement, un fichier (ou un compte) plus VIEUX que
+         la copie du navigateur ne l'efface pas - c'est la copie qui repart vers lui. */
+  var CANAUX = {};
+  var aFondre = null;
+  function horodate(p) {
+    var t = Date.now();
+    var avant = typeof p.ecrit_le === 'number' && isFinite(p.ecrit_le) ? p.ecrit_le : 0;
+    p.ecrit_le = t > avant ? t : avant + 1;
+  }
+  function canal(nom) {
+    if (!CANAUX[nom]) CANAUX[nom] = { enVol: false, attente: null, essais: 0 };
+    return CANAUX[nom];
+  }
+  function part(nom, envoi, sansKeepalive) {
+    var c = canal(nom);
+    c.enVol = true;
+    var garde = !sansKeepalive && envoi.corps.length < 28000;   /* deux canaux en vol < 64 Kio */
+    var fini = function (ok) {
+      c.enVol = false;
+      if (c.attente !== null) { var s = c.attente; c.attente = null; c.essais = 0; part(nom, s, false); return; }
+      if (!ok && c.essais < 3) { c.essais += 1; c.attente = null; setTimeout(function () { if (!c.enVol && c.attente === null) part(nom, envoi, true); }, 400 * c.essais); return; }
+      c.essais = 0;
+    };
+    try {
+      fetch(envoi.url, { method: 'PUT', body: envoi.corps, keepalive: garde, headers: envoi.entetes })
+        .then(function (r) { fini(r.ok || (r.status >= 400 && r.status < 500)); },
+          function () {
+            /* rejete (plafond keepalive, ou hors ligne) : il repart SANS keepalive */
+            if (garde) { c.enVol = false; if (c.attente === null) { part(nom, envoi, true); } else { fini(false); } return; }
+            fini(false);
+          });
+    } catch (e) { c.enVol = false; }
+  }
+  function envoie(nom, envoi) {
+    var c = canal(nom);
+    if (c.enVol) { c.attente = envoi; return; }
+    part(nom, envoi, false);
+  }
+  function expedie(p) {
+    /* S1424 · NET-1 (note 249 ①) — connecté, le profil part au serveur à CHAQUE
+       écriture (le titre comme la page de jeu : la session porte l'adresse). */
+    try {
+      var cpt = JSON.parse(window.localStorage.getItem('ll.compte.v1') || 'null');
+      if (cpt && cpt.pret === true && typeof cpt.token === 'string' && typeof cpt.base === 'string') {
+        envoie('serveur', { url: cpt.base + '/profile', corps: JSON.stringify({ profile: p }),
+          entetes: { 'content-type': 'application/json', authorization: 'Bearer ' + cpt.token } });
+      }
+    } catch (e) { /* pas de session lisible */ }
+    /* S1379 · PK-1 (note 210 ②) — dans le PAQUET PORTABLE, le profil vit aussi
+       dans `profil.json`, à côté du `JOUER.bat`. */
+    if (window.LL_PORTABLE === true || window.LL_FICHIER_PROFIL === true) {
+      envoie('fichier', { url: '/__profil', corps: JSON.stringify(p), entetes: { 'content-type': 'application/json' } });
+    }
+  }
+
   function pose(p) {
+    horodate(p);
     try { window.localStorage.setItem(CLE, JSON.stringify(p)); }
     catch (e) { /* un navigateur peut refuser le stockage : la page vit quand même */ }
     /* L'écran de jeu lit le pseudo sous cette clé depuis S1202 : elle suit. */
     try { window.localStorage.setItem('ll.profil.pseudo', String(p.pseudo || '')); } catch (e) { /* idem */ }
-    /* S1424 · NET-1 (note 249 ①) — connecté, le profil part au serveur à CHAQUE
-       écriture (le titre comme la page de jeu : la session porte l'adresse).
-       Le serveur ne répond pas : la copie locale reste, la suivante repartira. */
-    try {
-      var cpt = JSON.parse(window.localStorage.getItem('ll.compte.v1') || 'null');
-      if (cpt && cpt.pret === true && typeof cpt.token === 'string' && typeof cpt.base === 'string') {
-        var corps = JSON.stringify({ profile: p });
-        fetch(cpt.base + '/profile', { method: 'PUT', body: corps, keepalive: corps.length < 60000,
-          headers: { 'content-type': 'application/json', authorization: 'Bearer ' + cpt.token } })
-          .catch(function () { /* hors ligne : rien de perdu ici */ });
-      }
-    } catch (e) { /* pas de session lisible */ }
-    /* S1379 · PK-1 (note 210 ②) — dans le PAQUET PORTABLE, le profil vit aussi
-       dans `profil.json`, à côté du `JOUER.bat` (le serveur du paquet pose
-       `LL_PORTABLE` en tête de ce fichier). En développement : rien ne change. */
-    if (window.LL_PORTABLE === true || window.LL_FICHIER_PROFIL === true) {
-      try {
-        fetch('/__profil', { method: 'PUT', body: JSON.stringify(p), keepalive: true,
-          headers: { 'content-type': 'application/json' } });
-      } catch (e) { /* le disque refuse : le navigateur garde sa copie */ }
+    /* les ecritures d'un meme tick se fondent : la derniere part, une seule fois */
+    var premier = aFondre === null;
+    aFondre = p;
+    if (premier) {
+      Promise.resolve().then(function () { var q = aFondre; aFondre = null; if (q !== null) expedie(q); });
     }
+  }
+  /* la page s'en va avec une ecriture en attente : elle part en keepalive, une par canal */
+  try {
+    window.addEventListener('pagehide', function () {
+      for (var nom in CANAUX) {
+        var c = CANAUX[nom];
+        if (c.attente !== null && c.attente.corps.length < 28000) {
+          try { fetch(c.attente.url, { method: 'PUT', body: c.attente.corps, keepalive: true, headers: c.attente.entetes }); } catch (e) { /* rien */ }
+          c.attente = null;
+        }
+      }
+    });
+  } catch (e) { /* pas de fenetre */ }
+  function ecritLe(brut) {
+    try { var o = JSON.parse(brut); return o && typeof o.ecrit_le === 'number' && isFinite(o.ecrit_le) ? o.ecrit_le : 0; }
+    catch (e) { return 0; }
   }
 
   /* PK-1 — au chargement, le fichier du dossier fait foi (un autre port, une
-     autre machine : le profil suit le dossier, pas le navigateur). */
+     autre machine : le profil suit le dossier, pas le navigateur) — SAUF s'il est
+     plus VIEUX que la copie du navigateur (S1779 - 588 (1)) : une ecriture perdue
+     en route ne remet plus le cadenas, c'est la copie qui repart vers le fichier. */
   if (window.LL_PORTABLE === true || window.LL_FICHIER_PROFIL === true) {
     try {
       var x = new XMLHttpRequest();
@@ -163,7 +232,13 @@
       x.send(null);
       if (x.status === 200) {
         JSON.parse(x.responseText);
-        window.localStorage.setItem(CLE, x.responseText);
+        var ici = null;
+        try { ici = window.localStorage.getItem(CLE); } catch (e) { ici = null; }
+        if (ici !== null && ecritLe(ici) > ecritLe(x.responseText)) {
+          envoie('fichier', { url: '/__profil', corps: ici, entetes: { 'content-type': 'application/json' } });
+        } else {
+          window.localStorage.setItem(CLE, x.responseText);
+        }
       }
     } catch (e) { /* pas de fichier lisible : on part de la copie du navigateur */ }
   }
@@ -221,5 +296,5 @@
   if (document.body) { bandeauRiche(); }
   else { document.addEventListener('DOMContentLoaded', bandeauRiche); }
 
-  window.LLProfil = { CLE: CLE, SCHEMA: SCHEMA, TRIO_DE_DEPART: TRIO_DE_DEPART, neuf: neuf, lis: lis, pose: pose, modifie: modifie, vueDuTitre: vueDuTitre };
+  window.LLProfil = { CLE: CLE, SCHEMA: SCHEMA, ecritLe: ecritLe, TRIO_DE_DEPART: TRIO_DE_DEPART, neuf: neuf, lis: lis, pose: pose, modifie: modifie, vueDuTitre: vueDuTitre };
 })();
