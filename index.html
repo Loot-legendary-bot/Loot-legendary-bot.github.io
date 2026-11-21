@@ -16291,6 +16291,32 @@
       .pit-regarde .pit-medaillon { outline: 3px solid #e9e4d8; outline-offset: 2px; }
       .pit-regard { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; color: #e9e4d8;
         background: rgba(14,12,10,.86); border: 1px solid rgba(233,228,216,.35); max-height: 100%; overflow-y: auto; }
+      /* S1782 · 591 ② — « au Duel Final dans THE PIT, le panneau de mon rival tient dans l'écran : son inventaire ne
+         passe pas sous DUNGEON / LOG. » Enfant flex sans `min-height: 0`, le panneau ne rétrécissait jamais ; et la
+         colonne descend sous les quatre vues (fixées en bas à droite) et la bande LAST : elle s'arrête au-dessus. */
+      .ntt-cibles.pit-droite { padding-bottom: 150px; box-sizing: border-box; }
+      .ntt-cibles.pit-droite > .pit-regard, .ntt-cibles.pit-droite > * { min-height: 0; flex: 0 1 auto; }
+      /* … et il TIENT sans défiler : le portrait, les lignes et les cases de son inventaire se resserrent, dans ce panneau seul. */
+      .pit-regard { gap: 4px; padding: 8px 12px; }
+      .pit-regard .sl-portrait { width: 52px; height: 52px; flex: 0 0 52px; }
+      .pit-regard .sl-rangs .sl-sort { padding: 3px 10px 3px 4px; }
+      .pit-regard .sl-rangs .sl-ico { flex: 0 0 42px; width: 42px; height: 42px; }
+      .pit-regard .bj-inv .creneau { min-height: 0; height: auto; padding: 2px 4px; }
+      .pit-regard .bj-inv.inv-deploye .creneau .inv-art { max-height: 44px; width: auto; }
+      .pit-regard .pit-regard-ouvrir { margin-top: 0; padding: 4px 12px; }
+      /* S1782 · 591 ③ — « aucune fenêtre du jeu n'a plus de fond gris à filet rouge. » Le relevé : la fenêtre du TROC
+         était la dernière (la désignation d'une cible est déjà une question, donc un bac ; le coffre n'a pas de
+         fenêtre, sa carte et ses dés vont au bac). Même habit que YOU ARE ASKED (589 ①) : le cadre noir du bac en
+         9 tranches, sans fond gris ; ses deux côtés et sa réserve perdent leurs filets rouge et or. */
+      html.table-v2 .les-choix:has(> .troc), .nouvelle-table .les-choix:has(> .troc) {
+        position: relative; background: none; padding: 18px 20px 12px; margin-top: 6px;
+        border: 40px solid transparent; border-image: url(/art/ui/dicebox/tapis_cadre_noir.webp) 44 fill / 40px stretch;
+        box-shadow: 0 12px 30px rgb(0 0 0 / .55);
+      }
+      .les-choix:has(> .troc) .troc-cote, .les-choix:has(> .troc) .troc-cote.lui {
+        border-color: rgba(233,228,216,.18); background: rgba(0,0,0,.22); }
+      .les-choix:has(> .troc) .troc-reserve-col, .les-choix:has(> .troc) [class*="troc-"][class*="reserve"] {
+        border-color: rgba(233,228,216,.18); }
       .pit-regard-tete { display: flex; align-items: center; justify-content: space-between; }
       .pit-regard-titre { font: 600 13px "Cinzel", serif; letter-spacing: .22em; color: rgba(233,228,216,.75); }
       .pit-regard-fermer { background: none; border: 1px solid rgba(233,228,216,.4); color: #e9e4d8; cursor: pointer; padding: 0 8px; }
@@ -16544,7 +16570,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-Aj6Q5MWd.js"></script>
+    <script type="module" crossorigin src="./assets/index-BJ9lqRO1.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
