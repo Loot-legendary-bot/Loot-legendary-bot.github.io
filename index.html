@@ -16253,6 +16253,9 @@
       .sl-glyphe { font-size: 30px; line-height: 1; }
       /* S1759 · note 578 ③ — l'icône de Croze remplit la case, sans cadre. */
       .sl-icone-sort { width: 100%; height: 100%; object-fit: contain; display: block; }
+      /* S1787 · 594 ④ — le cadre d'os autour de l'icône, l'icône à 71 % dedans (la fenêtre du cadre fait 72 %) */
+      .sl-icone-sort.sl-icone-cadree { box-sizing: border-box; padding: 14.5%;
+        background: url(/art/sorts/cadre_os_sort.png) center / 100% 100% no-repeat; }
       .sl-corps { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
       .sl-nom { display: flex; align-items: baseline; gap: 8px; font: 800 24px/1 var(--display), sans-serif; letter-spacing: .04em;
         text-transform: uppercase; }
@@ -16648,7 +16651,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DQsI4goW.js"></script>
+    <script type="module" crossorigin src="./assets/index-A9yzbeQI.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
