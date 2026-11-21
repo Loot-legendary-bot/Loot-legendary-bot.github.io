@@ -3382,6 +3382,10 @@
                                 font-family: var(--display); font-size: 24px; opacity: 0; }
       .dicelayer.t3 .rollverdict, .dicelayer.fini .rollverdict {
         opacity: 1; transition: opacity .22s ease; }
+      /* S1785 · 592 ③ — le téléport du plus haut : APRÈS ses dégâts, jamais avec eux */
+      .dicelayer .rollverdict.verdict-ensuite { margin-top: 6px; font-size: 20px; color: var(--gold, #e8c45a); }
+      .dicelayer.t3 .rollverdict.verdict-ensuite, .dicelayer.fini .rollverdict.verdict-ensuite {
+        transition: opacity .3s ease 1.4s; }
       /*
        * ⛑⛑ S1364 · note 204 ⑥ — L'ANNONCE DE JET. Tailles de la note, à 1080 :
        * titre 40 px, formule 32 px, chiffre 96 px ; rien sous 20 px sur ce
@@ -16609,7 +16613,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BSq0Wln7.js"></script>
+    <script type="module" crossorigin src="./assets/index-gnDdUbP1.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
