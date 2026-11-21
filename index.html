@@ -6818,6 +6818,40 @@
                 mask: url(/art/hud/controls/button_solid.png) center / 100% 100% no-repeat;
       }
       .les-choix.est-question .decision { background: none; border: 0; }
+      /* S1780 · note 590 ② — LE BAC NOIR, LA SUITE : la cause en petit au-dessus, le titre du coup en grand, les
+         réponses en `button_outline`, l'aide derrière sa pastille ASSIST, le dé posé sur le feutre à droite. */
+      .les-choix.est-question .decision { display: flex; flex-wrap: wrap; align-items: center; }
+      .les-choix.est-question .decision > * { flex: 1 0 100%; }
+      .les-choix.est-question .decision > button { flex: 0 0 auto; }
+      .les-choix.est-question .decision > .reb { order: 99; display: flex; justify-content: flex-end; align-items: center;
+        gap: 10px; margin-top: 6px; }
+      .les-choix.est-question .decision > .fen-cause { font-family: var(--display); font-weight: 700; font-size: 15px;
+        letter-spacing: .16em; color: #9a9287; margin: 4px 0 2px; }
+      .les-choix.est-question .decision > h3 { font-family: var(--display); font-weight: 800; font-size: 52px;
+        line-height: 1; letter-spacing: .01em; color: #f4ecda; margin: 0 0 16px; }
+      .les-choix.est-question .fen-recois-titre { font-size: 52px; line-height: 1; color: #f4ecda; }
+      .les-choix.est-question .fen-recois-n { font-size: 88px; font-weight: 900; vertical-align: -10px; }
+      .les-choix.est-question .fen-recois { justify-content: space-between; }
+      .les-choix.est-question .fen-recois-titre .fen-recois-quoi { font-size: 30px; color: #b9b1a5; letter-spacing: .04em;
+        white-space: nowrap; }
+      .les-choix.est-question .fen-mort-tete .fen-recois-titre { font-size: 40px; }
+      .les-choix.est-question .fen-mort-tete .fen-recois-n { font-size: 64px; vertical-align: -6px; }
+      .les-choix.est-question .fen-mort-tete .fen-mort-pv { display: inline-block; white-space: nowrap; font-size: 32px; }
+      .les-choix.est-question .fen-recois-visuel.die:has(> .die-rendu) { background: none; border-color: transparent;
+        box-shadow: none; outline: 0; }
+      .les-choix.est-question .fen-recois-visuel.die { margin-left: auto; transform: rotate(-4deg);
+        filter: drop-shadow(0 8px 10px rgb(0 0 0 / .6)); }
+      .les-choix.est-question .decision > button:not(.plaque), .les-choix.est-question .fen-boutons > button:not(.plaque) {
+        border: 0; border-style: solid; background: none; color: var(--stock); min-width: 122px; height: 44px;
+        padding: 0 22px; margin: 0 8px 8px 0; border-radius: 0;
+        border-image: url(/art/hud/controls/button_outline.png) 0 90 0 100 fill / 0 10.1px 0 11.3px stretch;
+        font-family: var(--display); font-weight: 800; font-size: 17px; letter-spacing: .12em; }
+      .les-choix.est-question .decision > button:not(.plaque):hover:not(:disabled),
+      .les-choix.est-question .fen-boutons > button:not(.plaque):hover:not(:disabled) { background: none; color: var(--rouge-vif); }
+      .les-choix.est-question .fen-reagir-sous { font-size: 19px; margin: 6px 0 14px; }
+      .les-choix.est-question .fen-reagir-sous::before { content: "ASSIST"; display: inline-block; margin-right: 10px;
+        padding: 2px 6px; vertical-align: 2px; border: 1px solid #b98f3e; border-radius: 2px; color: #d9b25f;
+        font: 700 12px/1.2 var(--display); letter-spacing: .14em; }
       .fen-recois-visuel.die { flex: 0 0 auto; }
       .fen-recois-visuel.fen-mob-art { width: 96px; }
       .fen-reagir { font-family: var(--display); font-weight: 800; font-size: 18px;
@@ -12548,6 +12582,51 @@
                              font-size: clamp(8px, calc(.78 * var(--uvw)), 13px); }
       .qobj-v2 .qobj-ligne { margin-top: .25em; }
       .qobj-v2 .qobj-barre.qobj-flash { animation: qobj-flash .9s ease-out 1; }
+      /* S1780 · note 589 ② — OBJECTIVE, LA PLANCHE : le bois de la colonne, deux clous, le kit des pastilles et de la
+         barre de vie teintée or ; plus de boîte noire au filet doré. Cible `hud_v2_objective.jpg` (taille réelle). */
+      .qobj.qobj-planche { position: relative; width: calc(22.4 * var(--uvw)); padding: 13px 18px 14px; border: 0;
+        background: linear-gradient(180deg, rgb(0 0 0 / .28), rgb(0 0 0 / .5)), url(/art/da/planche.webp) center / 520px auto;
+        box-shadow: 0 0 0 1px rgb(0 0 0 / .9), inset 0 1px 0 rgb(255 255 255 / .07), inset 0 -1px 0 rgb(0 0 0 / .6),
+          0 14px 24px rgb(0 0 0 / .65); }
+      .qobj-planche::before, .qobj-planche::after { content: ""; position: absolute; top: 9px; width: 7px; height: 7px;
+        border-radius: 50%; background: radial-gradient(circle at 35% 30%, #8c8478, #2b2723 70%); box-shadow: 0 1px 1px rgb(0 0 0 / .8); }
+      .qobj-planche::before { left: 7px; } .qobj-planche::after { right: 7px; }
+      .qobj-planche .qobj-tete { display: flex; align-items: baseline; gap: 10px; padding: 0 8px; }
+      .qobj-planche .qobj-mot { font: 800 19px/1 var(--display); letter-spacing: .24em; color: #efe9df; }
+      .qobj-planche .qobj-titre { font: italic 400 15px/1 var(--serif, 'Alegreya', serif); letter-spacing: 0;
+        text-transform: none; color: #8d857a; }
+      .qobj-planche .qobj-tour { margin-left: auto; font: 700 13px/1 var(--display); letter-spacing: .16em; color: #8d857a; }
+      .qobj-planche .qobj-tour b { font: 800 19px/1 var(--display); letter-spacing: .04em; color: #efe9df; margin: 0 5px 0 6px; }
+      .qobj-planche .qobj-tour.qobj-tard b { color: #e0483d; }
+      .qobj-planche .qobj-etapes { display: flex; align-items: center; gap: 9px; margin: 13px 4px 0; }
+      .qobj-planche .qobj-pip { width: 19px; height: 19px; flex: none; background: center / contain no-repeat; }
+      .qobj-planche .qobj-pip.on { background-image: url(/art/hud/controls/pip_filled.png); }
+      .qobj-planche .qobj-pip.off { background-image: url(/art/hud/controls/pip_hollow.png); opacity: .55; }
+      .qobj-planche .qobj-pip.done { background: none; font: 900 19px/19px var(--display); color: #8fae7d; text-align: center; }
+      .qobj-planche .qobj-pip.done::before { content: "✓"; }
+      .qobj-planche .qobj-pas { font: 800 20px/1.05 var(--display); letter-spacing: .07em; text-transform: uppercase;
+        color: #efe9df; background: none; box-shadow: none; padding: 0; }
+      .qobj-planche .qobj-pas.attend { color: #756e65; font-weight: 700; white-space: nowrap; }
+      .qobj-planche .qobj-pas.fait { color: #8fae7d; font-weight: 700; }
+      .qobj-planche .qobj-trait { flex: 1; height: 3px; min-width: 14px; border-radius: 2px; transform: rotate(-.6deg);
+        background: linear-gradient(90deg, rgb(239 233 223 / .5), rgb(239 233 223 / .12)); }
+      .qobj-planche .qobj-et { margin: 4px 4px 0 32px; font: 700 14px/1 var(--display); letter-spacing: .12em;
+        text-transform: uppercase; color: #8d857a; }
+      .qobj-planche .qobj-sans-mourir { margin: 8px 0 0 4px; }
+      .qobj-planche .qobj-rangee { display: flex; align-items: center; gap: 12px; margin: 10px 0 0; }
+      .qobj-planche .qobj-barre { position: relative; flex: 1; height: auto; aspect-ratio: 2860 / 293; margin: 0;
+        border: 0; background: none; }
+      .qobj-planche .qobj-barre > img { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .qobj-planche .qobj-barre > .qobj-plein { filter: sepia(1) saturate(4.2) hue-rotate(-24deg) brightness(.78);
+        background: none; transition: clip-path .5s cubic-bezier(.2, 1.2, .3, 1); }
+      .qobj-planche .qobj-nombre { font: 900 28px/1 var(--display); letter-spacing: .02em; color: #efe9df; white-space: nowrap; }
+      .qobj-planche .qobj-nombre small { font: 700 15px/1 var(--display); letter-spacing: .14em; color: #8d857a;
+        margin-left: 6px; text-transform: uppercase; }
+      .qobj-planche .qobj-etat { margin: 12px 6px 0; font: 800 20px/1.2 var(--display); letter-spacing: .12em; }
+      .qobj-planche .qobj-etat.qobj-fait { color: #8fae7d; }
+      .qobj-planche .qobj-etat.qobj-rate { color: #e0483d; }
+      .qobj-planche .qobj-etat small { display: block; margin-top: 3px; font: italic 400 16px/1.2 var(--serif, 'Alegreya', serif);
+        letter-spacing: 0; color: #8d857a; text-transform: none; }
       @keyframes qobj-flash { 0% { box-shadow: 0 0 0 0 rgb(232 196 106 / .9); filter: brightness(1.9); }
                               100% { box-shadow: 0 0 0 10px rgb(232 196 106 / 0); filter: brightness(1); } }
       /*
@@ -15485,14 +15564,21 @@
       }
       .nouvelle-table .bj-moi > .bj-bandeau { height: 110px; border-left: 3px solid var(--siege, var(--gold)); }
       /* S1779 · note 588 ⑤ (c) — mes torches d'action, deux grandes de part et d'autre de mon bandeau */
-      .nouvelle-table .bj-torches { position: absolute; top: 4px; bottom: 22px; z-index: 2; display: flex; gap: 2px;
+      /* S1780 · note 590 ① — EN ÉVIDENCE (cible `hud_v2_column.jpg`) : 128 px, posées sur les bords du bandeau
+         (qui monte à 150 px pour les porter), la vivante avec son halo, l'éteinte ÉCLAIRCIE pour se lire sur le
+         portrait sombre ; celle de droite en miroir. */
+      .nouvelle-table .bj-moi > .bj-bandeau:has(.bj-torches) { height: 150px; }
+      .nouvelle-table .bj-torches { position: absolute; top: 4px; height: 128px; z-index: 2; display: flex; gap: 0;
                                     align-items: stretch; pointer-events: none; }
-      .nouvelle-table .bj-torches-g { left: 4px; }
-      .nouvelle-table .bj-torches-d { right: 4px; flex-direction: row-reverse; }
-      .nouvelle-table .bj-torche { width: 62px; background: center / contain no-repeat;
-                                   filter: drop-shadow(0 2px 4px rgb(0 0 0 / .8)); }
-      .nouvelle-table .bj-torche.eteinte { background-image: url(/art/hud/torche_eteinte.webp); filter: brightness(.75) drop-shadow(0 2px 4px rgb(0 0 0 / .8)); }
-      .nouvelle-table .bj-torche.allumee { background-image: url(/art/hud/torche_allumee.webp); }
+      .nouvelle-table .bj-torches-g { left: -30px; }
+      .nouvelle-table .bj-torches-d { right: -30px; flex-direction: row-reverse; transform: scaleX(-1); }
+      .nouvelle-table .bj-torches > .bj-torche + .bj-torche { margin-left: -64px; }
+      .nouvelle-table .bj-torche { width: 128px; height: 128px; background: center / contain no-repeat;
+                                   filter: drop-shadow(0 6px 8px rgb(0 0 0 / .8)); }
+      .nouvelle-table .bj-torche.eteinte { background-image: url(/art/hud/torche_eteinte.webp);
+                                           filter: brightness(1.9) contrast(.9) drop-shadow(0 6px 8px rgb(0 0 0 / .8)); opacity: .8; }
+      .nouvelle-table .bj-torche.allumee { background-image: url(/art/hud/torche_allumee.webp);
+                                           filter: drop-shadow(0 0 22px rgb(255 150 40 / .7)) drop-shadow(0 6px 8px rgb(0 0 0 / .8)); }
       .nouvelle-table .bj-torche.allumee:has(> canvas.peinte) { background-image: none; }
       .nouvelle-table .bj-torche > canvas.torche-vivante { display: block; width: 100%; height: 100%; object-fit: contain; }
       .nouvelle-table .bj-moi .bj-bandeau:has(.bj-torches) .bj-nom { left: 70px; right: 70px; text-align: center; }
@@ -16458,7 +16544,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B2YjyJnL.js"></script>
+    <script type="module" crossorigin src="./assets/index-DWQIqpX_.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
