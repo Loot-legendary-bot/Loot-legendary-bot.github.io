@@ -6962,8 +6962,11 @@
       /* S1690 · note 512 ① — la fenêtre de ma mort : seule à l'écran, ses cartes en grand, ACCEPT DEATH. */
       .decision.fen-mort { position: relative; z-index: 9000; border-color: #b3121b !important;
         box-shadow: 0 0 28px rgba(255,0,0,.45) !important; }
-      .decision.fen-mort::before { content: ''; position: fixed; inset: -50vmax; background: rgba(0,0,0,.86);
+      /* S1783 · note 592 ② (b) — « l'écran ne passe pas au noir » : le voile baisse les colonnes d'UN ton (jamais sous
+         60 % de lumière), et la main passe AU-DESSUS (jamais assombrie, ce qui est jouable brille). */
+      .decision.fen-mort::before { content: ''; position: fixed; inset: -50vmax; background: rgba(0,0,0,.35);
         z-index: -1; pointer-events: none; }
+      body:has(.decision.fen-mort) .main-basse { z-index: 9001; }
       .nouvelle-table .ntt-axe > .ntt-question-cadre:has(.decision.fen-mort) { z-index: 9000 !important; }
       .fen-mort .fen-mort-titre { color: #ff3b3b; text-shadow: 0 0 8px rgba(255,0,0,.45); }
       .fen-mort .fen-mort-pv { color: #ff3b3b; }
@@ -16277,6 +16280,11 @@
       .pit-nom { font: 800 15px var(--display), sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #f0ece2;
         text-shadow: 0 1px 3px #000; }
       .pit-barre { position: relative; width: 180px; aspect-ratio: 2860 / 293; }
+      /* S1783 · note 592 ④ — les PV à côté de la barre (« 23 / 49 ») : à droite, la barre reste centrée sous le nom. */
+      .pit-barre-ligne { position: relative; }
+      .pit-pv { position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: 8px; white-space: nowrap;
+        font: 600 14px/1 'Oswald', sans-serif; color: rgba(244, 239, 226, .7); letter-spacing: .04em; }
+      .pit-pv > b { font-size: 22px; color: #f4efe2; font-weight: 700; }
       .pit-barre .pit-sang, .pit-barre .pit-cadre { position: absolute; inset: 0; background-size: 100% 100%; }
       .pit-barre .pit-sang { background-image: url('/art/hud/healthbar/fill_blood_stacked.png'); clip-path: inset(0 var(--rogne, 0%) 0 0); }
       .pit-barre .pit-cadre { background-image: url('/art/hud/healthbar/frame.png'); }
@@ -16327,6 +16335,27 @@
       .pit-regard-stat { display: flex; flex-direction: column; align-items: center; font: 400 12px "Bebas Neue", sans-serif; letter-spacing: .08em; }
       .pit-regard-stat b { font-size: 26px; font-weight: 400; }
       .pit-regard-lbl { font: 600 12px "Cinzel", serif; letter-spacing: .2em; color: rgba(233,228,216,.7); margin-top: 4px; }
+      /* S1783 · note 592 ④ — le panneau d'un joueur dans la fosse : le haut fixe, trois onglets (`pit_v4_duel.jpg`) */
+      .pit-regard-haut { display: flex; align-items: center; gap: 14px; }
+      .pit-regard-medaillon { flex: none; width: 96px; height: 96px; border-radius: 50%; overflow: hidden; padding: 0;
+        border: 3px solid #e9e1cf; background: #14100c; cursor: zoom-in; }
+      .pit-regard-medaillon > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; display: block; }
+      .pit-regard-id { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+      .pit-regard-joueur .pit-regard-nom { font: 400 30px/1 "Bebas Neue", sans-serif; letter-spacing: .04em; }
+      .pit-regard-pvmain { display: flex; align-items: center; gap: 14px; }
+      .pit-regard-joueur .pit-regard-pv { font: 600 15px/1 'Oswald', sans-serif; color: rgba(233,228,216,.7);
+        border: 2px solid #8a1b14; border-radius: 18px; padding: 4px 12px; }
+      .pit-regard-joueur .pit-regard-pv > b { font-size: 26px; color: #f4efe2; }
+      .pit-regard-main1 { display: inline-flex; align-items: center; gap: 6px; font: 600 18px 'Oswald', sans-serif; }
+      .pit-regard-main1 > .nt-dos { width: 14px; height: 20px; }
+      .pit-regard-joueur .pit-regard-stats { justify-content: space-around; }
+      .pit-regard-ecoles { align-self: flex-start; }
+      .pit-regard-onglets { display: flex; gap: 6px; border-bottom: 1px solid rgba(233,228,216,.25); margin-top: 6px; }
+      .pit-regard-onglet { flex: 1; background: none; border: none; color: rgba(233,228,216,.6); cursor: pointer;
+        font: 400 20px "Bebas Neue", sans-serif; letter-spacing: .14em; padding: 6px 0; }
+      .pit-regard-onglet.actif { color: #14100c; background: #e9e1cf; }
+      .pit-regard-feuille { display: flex; flex-direction: column; gap: 6px; font: 400 15px/1.35 "Alegreya", serif; }
+      .pit-regard-capa > b { font-weight: 700; color: #f4efe2; }
       .pit-regard-ligne { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border: 1px solid rgba(233,228,216,.25); background: rgba(255,255,255,.03); }
       .pit-regard-ligne .pit-faces { min-width: 34px; font: 400 20px "Bebas Neue", sans-serif; }
       .pit-regard-corps { display: flex; flex-direction: column; flex: 1; min-width: 0; }
@@ -16396,6 +16425,11 @@
       .pit-bac { top: 50%; width: 508px; height: 349px; min-height: 0; max-height: none; padding: 8px 10px; gap: 6px;
         background: #14100c; border: 4px solid #e9e1cf; border-radius: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.75);
         overflow: hidden; z-index: 2; }
+      /* S1783 · note 592 ② (a) — une question dans ma fosse prend la place du bac : au milieu de l'anneau, plus large
+         que lui (le panneau YOU ARE ASKED, son dé, ses réponses), jamais sous la main. */
+      .pit-question { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(820px, 96%);
+        max-height: 100%; overflow: auto; z-index: 3; }
+      .pit-question > .ntt-sous-tuile { margin: 0; }
       /* S1772 · note 583 ② — « dans THE PIT, la flèche du coup passe à côté du bac, jamais dessus » : le bac a grandi
          (508 px), la flèche était restée à 210 px du centre et traversait son bord gauche. Elle court à 28 px de ce bord. */
       .pit-fleche { left: calc(50% - 254px - 28px); }
@@ -16570,7 +16604,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BJ9lqRO1.js"></script>
+    <script type="module" crossorigin src="./assets/index-BiDcvPW4.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
