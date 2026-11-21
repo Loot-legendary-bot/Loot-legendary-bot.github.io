@@ -16319,6 +16319,16 @@
       .pit-regard .bj-inv .creneau { min-height: 0; height: auto; padding: 2px 4px; }
       .pit-regard .bj-inv.inv-deploye .creneau .inv-art { max-height: 44px; width: auto; }
       .pit-regard .pit-regard-ouvrir { margin-top: 0; padding: 4px 12px; }
+      /* S1787 · 594 ③ (b) — la carte du mob sur toute la largeur du panneau ; un onglet par mob s'ils sont plusieurs */
+      .pit-regard .pit-regard-carte { width: 100%; cursor: zoom-in; border-radius: 10px; overflow: hidden;
+        box-shadow: 0 6px 18px rgba(0,0,0,.6); }
+      .pit-regard .pit-regard-carte img { width: 100%; height: auto; display: block; }
+      .pit-regard .pit-regard-detail.cache { display: none; }
+      .pit-onglets-mobs { display: flex; gap: 4px; padding: 0 2px; flex-wrap: wrap; }
+      .pit-onglets-mobs .pit-onglet-mob { flex: 1 1 0; min-width: 0; padding: 6px 8px; border: 1px solid #4a3f33;
+        border-bottom: 0; border-radius: 6px 6px 0 0; background: #15110d; color: #a89d8b; cursor: pointer;
+        font: 800 14px var(--display), sans-serif; letter-spacing: .08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pit-onglets-mobs .pit-onglet-mob.actif { background: #2a2119; color: #f0ece2; border-color: #8a7558; }
       /* S1782 · 591 ③ — « aucune fenêtre du jeu n'a plus de fond gris à filet rouge. » Le relevé : la fenêtre du TROC
          était la dernière (la désignation d'une cible est déjà une question, donc un bac ; le coffre n'a pas de
          fenêtre, sa carte et ses dés vont au bac). Même habit que YOU ARE ASKED (589 ①) : le cadre noir du bac en
@@ -16512,6 +16522,31 @@
       .pit-pied .pit-nombre { font: 800 30px var(--display), sans-serif; letter-spacing: .06em; color: #f3c969;
         text-shadow: 0 2px 4px rgba(0,0,0,.85); }
       .pit-pied .pit-nombre:empty { display: none; }
+      /* S1787 · 594 ③ — THE PIT contre un mob (`pit_v4_mob.jpg`). (c) son attaque se LIT dans le bac : ATTACKS devant le
+         bandeau, le dé à gauche du tapis, le texte imprimé de sa ligne et le nombre en grand ; « → YOU » au pied. */
+      .pit-bac .pit-coup.pit-attaque-mob::before { content: 'ATTACKS'; color: #ff5a4a; margin-right: .6em;
+        text-shadow: 0 0 4px rgba(255, 70, 50, .8); }
+      .pit-bac.pit-avec-resultat .pit-tapis .pit-des { left: 22px; transform: translateY(-50%); }
+      .pit-tapis .pit-resultat { position: absolute; left: 150px; right: 14px; top: 50%; transform: translateY(-50%);
+        display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; pointer-events: none; }
+      .pit-resultat .pit-resultat-texte { font: italic 400 24px Georgia, "Times New Roman", serif; color: #f3ead6;
+        text-shadow: 0 2px 4px rgba(0,0,0,.9); max-width: 100%; }
+      .pit-resultat .pit-resultat-n { display: flex; align-items: baseline; gap: 12px; line-height: .9; }
+      .pit-resultat .pit-resultat-n b { font: 800 112px var(--display), sans-serif; color: #ff6b5a;
+        text-shadow: 0 4px 0 rgba(0,0,0,.7), 0 0 22px rgba(255, 80, 60, .35); }
+      .pit-resultat .pit-resultat-n span { font: 800 40px var(--display), sans-serif; letter-spacing: .06em; color: #f0ece2; }
+      /* (d) le coup tombe sur MON siège : son nombre à droite de mon médaillon, la barre baisse à la fin de la scène */
+      .dicelayer.borne.coup-au-siege { inset: auto; width: auto; height: auto; background: none !important;
+        pointer-events: none; place-content: start; transform: translateY(-50%); }
+      .coup-au-siege .coup-au-siege-n { font: 800 88px var(--display), sans-serif; color: #ff5a4a; line-height: 1;
+        text-shadow: 0 4px 0 rgba(0,0,0,.8), 0 0 18px rgba(255, 70, 50, .55); opacity: 0; transform: translateY(14px);
+        transition: opacity 120ms ease-out, transform 220ms ease-out; }
+      .coup-au-siege.t1 .coup-au-siege-n, .coup-au-siege.fini .coup-au-siege-n { opacity: 1; transform: none; }
+      /* (a) « on doit voir l'image carrée si c'est un mob et ronde uniquement si c'est un joueur » : le carré de
+         l'illustration de sa carte (la carte fait 1024 × 1536 ; l'illustration y tient de 15 % à 60 % de la hauteur). */
+      .pit-mob .pit-medaillon { border-radius: 8px; position: relative; }
+      .pit-mob .pit-medaillon img { position: absolute; width: 150%; height: auto; left: -25%; top: -36%;
+        object-fit: fill; max-width: none; }
       .pit-pied .pit-attend { margin-left: auto; }
       /* S1769 · note 580 ③ / 581 ③ — MON jet : ma carte chargée attend sur le tapis (à droite), le bonus publié se
          pose sur le dé ; plusieurs dés côte à côte ; au dé arrêté, le tapis ne garde que le dé (et son +N). */
@@ -16613,7 +16648,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-Bleb3kRk.js"></script>
+    <script type="module" crossorigin src="./assets/index-DQsI4goW.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
