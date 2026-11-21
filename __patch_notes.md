@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 21 Nov 2026
+- **20:10** — LICK THE FLOOR always draws a Common card, once per turn: after you lick, the line stays, greyed, and says *once per turn*. A mob killed in answer to its attack still lands the hit it had already thrown — the LOG now writes it after the kill, as <MOB>'S LAST BLOW.
+- **19:04** — The Arena: Thumbs Down now says why a player is greyed out — in a fight, or below half HP.
 - **18:44** — Your two torches are sharp again on big screens. Every spell icon now has the same bone frame as WEAPON ATTACK, in your column and in a rival's panel. THE PIT (off by default): a player's panel has two tabs, SKILLS and GEAR — their sheet opens with a click on their portrait.
 - **18:20** — THE PIT (off by default), fighting a mob: its seat shows its picture in a square (round = a player); its card is shown big on the right straight away, one tab per mob when there are several; when it attacks, you read it in the dice tray — ATTACKS <MOB> — <ATTACK>, the card's text, the damage in big, → who takes it — and the hit lands on your seat (−N next to your portrait) instead of a full-screen HITS YOU.
 - **17:05** — Hovering a card now opens it big when the cursor is ON the card — in YOU ARE ASKED enlarged (⤢), and on the table even while the question redraws. THE PIT (off by default): a question that asks for a target goes back above your hand.
