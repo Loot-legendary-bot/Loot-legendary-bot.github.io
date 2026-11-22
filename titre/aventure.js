@@ -428,7 +428,18 @@
           b.addEventListener('click', function () { choisi = id; peint(); });
           rangee.appendChild(b);
         });
-        if (miens.length > 0) { f.appendChild(rangee); f.appendChild(nomChoisi); peint(); }
+        if (miens.length > 0) {
+          f.appendChild(rangee); f.appendChild(nomChoisi); peint();
+          /* S1796 · 603 ② — la rangée défile sur une ligne : la molette la fait glisser, et le choisi se montre. */
+          rangee.addEventListener('wheel', function (e) {
+            if (rangee.scrollWidth <= rangee.clientWidth) return;
+            rangee.scrollLeft += e.deltaY + e.deltaX; e.preventDefault();
+          }, { passive: false });
+          setTimeout(function () {
+            var c = rangee.querySelector('.av-perso-choisi');
+            if (c && rangee.scrollWidth > rangee.clientWidth) rangee.scrollLeft = c.offsetLeft - rangee.offsetLeft - 6;
+          }, 0);
+        }
       }
       var sieges = sc.table && typeof sc.table.sieges === 'number' ? sc.table.sieges : 1;
       var bots = Math.max(0, sieges - 1);
@@ -713,6 +724,13 @@
       '#aventure .av-parchemin .pa-fiche .pa-col-d{flex:0 0 280px;padding-bottom:64px}' +
       '#aventure .av-parchemin .pa-fiche .pa-col-d .av-rangee{justify-content:flex-start;gap:6px;margin:4px 0 2px}' +
       '#aventure .av-parchemin .pa-fiche .pa-col-d .av-perso img{width:44px;height:44px}' +
+      /* S1796 · note 603 ② — PLAY hors de la fiche à vingt personnages : le `filter` de `.av-fiche` en faisait le bloc
+         conteneur de `.av-pied` (absolu), et la rangée repliée sur quatre lignes l'étirait à 379 px — PLAY à y = 1111 sous
+         une fiche qui finit à 1060. Sans filtre, PLAY s'ancre au bas de `.pa-fiche` ; la rangée tient sur UNE ligne qui défile. */
+      '#aventure .av-parchemin .pa-fiche .av-fiche{filter:none}' +
+      '#aventure .av-parchemin .pa-fiche .pa-col-d .av-rangee{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding-bottom:4px;scrollbar-width:thin;scrollbar-color:#6a5642 transparent}' +
+      '#aventure .av-parchemin .pa-fiche .pa-col-d .av-perso{flex:none}' +
+      '#aventure .av-parchemin .pa-fiche .pa-col-d{min-width:0;max-width:280px}' +
       '#aventure .av-parchemin .pa-fiche .av-obj{line-height:1.2}' +
       '#aventure .av-parchemin .pa-fiche .av-regle{margin:0 0 4px}' +
       '#aventure .av-parchemin .pa-suite{position:absolute;left:1650px;top:445px;width:52px;height:52px;display:grid;place-items:center;font:800 34px/1 ' + BS + ';color:#efe9df}' +
