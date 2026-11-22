@@ -1218,6 +1218,12 @@
       .main-basse.hd-rangee .hand:not(:hover) > .handslot {
         transform: translateX(var(--pousse, 0px)) translateY(var(--hd-reste, 0px));
       }
+      /* S1799 · note 606 ② — tenue par une question (ou par H), la main ne se rouvre pas au survol ; devant une
+         question dont la réponse est une carte, seules les cartes jouables restent levées. */
+      .main-basse.hd-rangee.hd-tenue .hand > .handslot,
+      .main-basse.hd-partielle .hand > .handslot:not(:has(.card.jouable)) {
+        transform: translateX(var(--pousse, 0px)) translateY(var(--hd-reste, 0px));
+      }
       .main-basse > .hd-onglet {
         position: absolute; z-index: 60; pointer-events: auto;
         left: var(--hd-onglet-x, 40%); bottom: var(--hd-onglet-y, 160px);
@@ -16656,7 +16662,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DTYmc48l.js"></script>
+    <script type="module" crossorigin src="./assets/index-7JHMUI2R.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
