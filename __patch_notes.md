@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 22 Nov 2026
+- **15:50** — Hot Stuff (the Cook): discard a consumable to add your STR to the damage and hit every Mob on your tile. New art: The Trigger Hall, The Red Library (its card now reads 2d8, like the game) and The Arena show their new cards; 28 spell icons are redrawn.
 - **12:15** — CAMPAIGN: with many characters, PLAY is back inside the level sheet and clickable (it was pushed below the screen). Your characters now sit on one row that scrolls (mouse wheel), and the one you play is shown first.
 - **11:50** — VAULT: the "Foil" option is gone from the dice sets (no more Foil button, note or FOIL DICE section under GRADE). Card foils are unchanged.
 - **09:55** — Online 2V2, end of run 1: the trade with your partner now has a turn timer (60 s). If a player is away, their trade passes when it runs out and the table goes on to READY FOR RUN 2.
