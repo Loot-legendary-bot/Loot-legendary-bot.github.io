@@ -473,7 +473,7 @@
     return fait;
   }
   /* l'achat d'un ticket DPT se débloque au palier 16 du Donjon */
-  function dptOuvert(profil) { return !!(profil && profil.mur && profil.mur.dpt === true); }
+  function dptOuvert(profil) { if (window.LL_DPT_GRATUIT === true) { return true; } /* S1799 - note 606 (1), temporaire */ return !!(profil && profil.mur && profil.mur.dpt === true); }
 
   /* ── S1370 · note 206 ① — LA PORTE D'UN ESPRIT ───────────────────────────
      Un esprit DORT (visage éteint, pas de barre, pas de serment, pas

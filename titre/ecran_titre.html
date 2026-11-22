@@ -3286,6 +3286,10 @@ fetch('/__version.json',{cache:'no-store'}).then(function(r){return r.ok?r.json(
    interrupteur : LL_DPT_ENDORMI = false le rouvre. */
 /* S1676 - note 495 (1) + 496 (Croze, 07/11 : « faut ouvrir le Dungeon Pro Tour now ») : le cadenas tombe. */
 window.LL_DPT_ENDORMI = false;
+/* S1799 - note 606 (1) (Croze, 22/11 : « Deverouille doijon pro tour pour all stp et rends les ticket gratuit
+   temporariement ») : TEMPORAIRE. true = la porte ouverte a tous (`bounty_wall.js::dptOuvert`), le ticket offert a
+   FIND MATCH (`protour.js::cherche`), « FREE » au Vault. Le retour a la regle (palier 16, 500 dents) = false. */
+window.LL_DPT_GRATUIT = true;
 window.LL_DPT_DORT = 'The Pro Tour opens soon.';
 /* S1625 - note 466 (1) (Croze, 02/11 : « on va le lock comme le mode Dungeon Pro Tour, ferme le temps
    qu'on rework les defis ») : TODAY'S DUNGEON se GRISE comme le Pro Tour - la porte, l'enveloppe du
@@ -3638,7 +3642,7 @@ function paintMatch(ctx){
        ? ' Seats are drawn at random \u2014 3 to 5.'
        : '');
   /* S1676 - 495 (1) : la table du Pro Tour se fait dans la file (serveur, `protour.ts`). */
-  if(ctx==='ranked'){ matchMode='ffa'; document.getElementById('mline').textContent='Free-for-all, 2 to 6 players from the queue — never a bot. A full table starts at once, otherwise after 2 minutes. Your ticket ('+(window.LLTickets?window.LLTickets.PRIX.dpl:500)+' teeth) is used only when the game starts.'; }
+  if(ctx==='ranked'){ matchMode='ffa'; document.getElementById('mline').textContent='Free-for-all, 2 to 6 players from the queue — never a bot. A full table starts at once, otherwise after 2 minutes. '+(window.LL_DPT_GRATUIT===true?'Free entry for now.':'Your ticket ('+(window.LLTickets?window.LLTickets.PRIX.dpl:500)+' teeth) is used only when the game starts.'); }
   if(ctx==='daily' && window.LLTickets){
     const T=window.LLTickets, sc=T.duJour(), p=window.LLProfil.lis();
     const poche=T.enPoche(p).daily;
@@ -4090,7 +4094,7 @@ function fillGrid(key){
       c.className='cell ticket-env'+(ferme?' locked':''); c.tabIndex=0;
       c.innerHTML='<div class="plate"><img alt="" src="'+src+'" style="width:100%;height:100%;object-fit:cover;display:block"></div>'+
         '<span class="ic-coin" title="'+cap+' - invitation"><svg class="besace-sil" viewBox="0 0 48 48">'+ICONES[k==='tdpl'?'dpl':'daily']+'</svg></span>'+
-        (ferme?'<div class="hatch"></div>'+exploitmark(EX):'')+'<div class="own vprix">'+fmt(prix)+'</div>'+(ferme?'<div class="exhint">'+EX+'</div>':'')+(n>0?'<div class="tagx">'+n+' in pocket</div>':'')+
+        (ferme?'<div class="hatch"></div>'+exploitmark(EX):'')+'<div class="own vprix">'+(k==='tdpl'&&(window.LL_DPT_GRATUIT===true)?'FREE':fmt(prix))+'</div>'+(ferme?'<div class="exhint">'+EX+'</div>':'')+(n>0?'<div class="tagx">'+n+' in pocket</div>':'')+
         '<div class="cap">'+cap+'</div>';
       c.addEventListener('click',()=>openSheet(k,-1));
       c.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();c.click();}});
@@ -4313,7 +4317,7 @@ function openSheet(kind,i){
     /* note 266 (3) - les peintures de Croze sont carrees : la fiche les montre entieres. */
     shot='<div class="dshot besace"><div class="plate"><img alt="" src="/art/tickets/'+(dpl?'dpl':'daily')+
       '.webp" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>';
-    kick=(dpl?'Dungeon Pro Tour \u00b7 ticket \u00b7 '+fmt(T.PRIX.dpl)+' \ud83e\uddb7':'Today\u2019s Dungeon \u00b7 invitation')+(n>0?' \u00b7 '+n+' in pocket':'');
+    kick=(dpl?'Dungeon Pro Tour \u00b7 ticket \u00b7 '+((window.LL_DPT_GRATUIT===true)?'FREE':fmt(T.PRIX.dpl)+' \ud83e\uddb7'):'Today\u2019s Dungeon \u00b7 invitation')+(n>0?' \u00b7 '+n+' in pocket':'');
     /* S1608 - note 449 (5) : « ca doit couter 500, et la description c'est juste de pouvoir entrer dans ce mode » -
        la fiche montre d'abord le TICKET et le mode ; le defi de la semaine passe en petit sous « this week ». */
     name=dpl?'Dungeon Pro Tour ticket':'Today\u2019s Dungeon Invitation';
@@ -4323,7 +4327,7 @@ function openSheet(kind,i){
       +row('Today\u2019s challenge','Read at the entrance: Dive \u2192 Today\u2019s Dungeon')
       +row('Pays','\u00d72 the teeth \u00b7 +64 if the day\u2019s objective is met')+'</div>';
     else body='<div class="rows">'+row('The mode','Ranked \u2014 the same dungeon for everyone this week, and grade points')
-      +row('The ticket',fmt(T.PRIX.dpl)+' \ud83e\uddb7 \u2014 one entry, burned at the door')
+      +row('The ticket',(window.LL_DPT_GRATUIT===true)?'Free entry for now.':fmt(T.PRIX.dpl)+' \ud83e\uddb7 \u2014 one entry, burned at the door')
       +row('Pays','\u00d73 the teeth of a normal game \u00b7 rank points')+'</div>'
       +'<div class="dpt-semaine"><b>This week \u00b7 '+sc.nom+'</b> \u2014 seed '+sc.seed+' \u00b7 '+sc.objectif
       +(sc.conditions?' \u00b7 '+sc.conditions:'')+' \u00b7 '+(sc.perso?sc.perso:'any character')+'</div>'
@@ -4446,7 +4450,7 @@ function openSheet(kind,i){
                : kind==='curs' ? PRIX_CURSEURS.choisi
                : kind==='backs' ? BACKS[i][3]
                : kind==='trays' ? TRAYS[i][3]
-               : kind==='tdpl' ? window.LLTickets.PRIX.dpl
+               : kind==='tdpl' ? ((window.LL_DPT_GRATUIT===true) ? 0 : window.LLTickets.PRIX.dpl)
                : kind==='tdaily' ? window.LLTickets.PRIX.daily : UNLOCK_PRICE;
     const can=PROFILE.gold>=prix;
     cta='<button class="cta" id="dbtn"'+(can?'':' disabled')+'>'+
@@ -4627,7 +4631,7 @@ function act(kind,i){
   }
   /* S1357 \u00b7 note 201 (5) - acheter un ticket : en dents (les serments sont retires, note 208). */
   if(kind==='tdpl'||kind==='tdaily'){
-    const prix=window.LLTickets.PRIX[kind==='tdpl'?'dpl':'daily'];
+    const prix=kind==='tdpl'&&(window.LL_DPT_GRATUIT===true)?0:window.LLTickets.PRIX[kind==='tdpl'?'dpl':'daily'];
     if(kind==='tdpl' && !window.LLBountyWall.dptOuvert(window.LLProfil.lis())) return;
     if(PROFILE.gold<prix) return;
     PROFILE.gold-=prix; window.LLTickets.achete(kind==='tdpl'?'dpl':'daily'); paintHUD(true);

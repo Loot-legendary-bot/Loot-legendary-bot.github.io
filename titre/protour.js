@@ -22,7 +22,8 @@
 
   var INTERVALLE_MS = 3000;
   var PHRASES = {
-    NO_TICKET: 'No Dungeon Pro Tour ticket in your pocket — the Vault sells them (500 teeth).',
+    NO_TICKET: window.LL_DPT_GRATUIT === true ? 'No ticket reached the server — search again. Free entry for now.'
+      : 'No Dungeon Pro Tour ticket in your pocket — the Vault sells them (500 teeth).',
     NO_PROFILE: 'Your profile is not on the server yet — play one game online, then try again.',
     UNAUTHORIZED: 'Your session ended. Log in again.',
     TOO_MANY_REQUESTS: 'The server asks us to slow down — searching again in a moment.',
@@ -127,7 +128,7 @@
     } else if (!erreur) {
       b.appendChild(el('div', 'pt-sous', 'Entering the queue…'));
     }
-    b.appendChild(el('p', 'pt-dit' + (erreur ? ' err' : ''), message || 'Your ticket is used only when the game starts — never for a cancelled search.'));
+    b.appendChild(el('p', 'pt-dit' + (erreur ? ' err' : ''), message || (window.LL_DPT_GRATUIT === true ? 'Free entry for now.' : 'Your ticket is used only when the game starts — never for a cancelled search.')));
     var row = el('div', 'pt-row'); b.appendChild(row);
     var cancel = el('button', erreur ? '' : 'oui', erreur ? 'Back' : 'Cancel');
     cancel.type = 'button';
@@ -199,6 +200,19 @@
     if (actif) { return; }
     actif = true; fenetreS = 120;
     peint(null, '', false);
+    /* S1799 - note 606 (1), TEMPORAIRE : sans ticket, un ticket est offert, et le profil est pose sur le serveur
+       AVANT d'entrer dans la file (le serveur le debite au lancement, comme aujourd'hui). */
+    var P = window.LLProfil ? window.LLProfil.lis() : null;
+    if (window.LL_DPT_GRATUIT === true && P && window.LLTickets && window.LLTickets.enPoche(P).dpl < 1) {
+      window.LLProfil.modifie(function (p) {
+        if (typeof p.tickets !== 'object' || p.tickets === null) { p.tickets = { dpl: 0, daily: 0 }; }
+        p.tickets.dpl = 1;
+      });
+      window.LLCompte.appel('PUT', '/profile', { profile: window.LLProfil.lis() }).then(function () {
+        if (actif) { appel('POST').then(lit); }
+      });
+      return;
+    }
     appel('POST').then(lit);
   }
 
