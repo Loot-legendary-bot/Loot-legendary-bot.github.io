@@ -2,7 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 22 Nov 2026
-- **00:20** — THE PIT (off by default), fighting a mob: the dice tray's banner now reads ZOMBIE ATTACKS — SHIV STRIKE (the mob's name first), and it stays there while you choose your answer.
+- **02:15** — Specter Wayfinder now deals the damage printed on its card: 1d12 (Uncommon), 1d6 (Rare). A mob killed in answer to its attack: the LOG now says <MOB>'s blow is cancelled — it died first (no more LAST BLOW line).
+- **00:17** — THE PIT (off by default), fighting a mob: the dice tray's banner now reads ZOMBIE ATTACKS — SHIV STRIKE (the mob's name first), and it stays there while you choose your answer.
 
 ## 21 Nov 2026
 - **23:56** — A mob killed in answer to its attack no longer lands its hit: kill it with a flask before the blow falls and you lose no HP. Online: when a player closes their tab or loses connection during their turn, the turn line says NAME is away — turn ends in N s, and when the turn timer runs out the table goes on without them; if the host quits, the new host takes over. Exploring Secret Garden (5-6) or The Sunken Core now says LOOT 1d6 UNCOMMON / LOOT 1d4 RARE — the count die is on the card.
