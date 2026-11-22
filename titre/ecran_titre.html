@@ -4181,13 +4181,7 @@ function fillGrid(key){
         '<div class="cap">'+x[0]+'</div>';
       grid.appendChild(c);
     });
-    const h2=document.createElement('div'); h2.className='rayon-sect'; h2.textContent='FOIL DICE'; grid.appendChild(h2);
-    const f=document.createElement('div');
-    f.className='cell locked'; f.tabIndex=0;
-    f.title=gNow>=10?'Foil dice: coming soon':'Reach grade 10';
-    f.innerHTML='<div class="plate"><img class="peau" alt="" src="/dice/bones/apercu.webp" onerror="this.style.display=\'none\'"></div><div class="hatch"></div>'+
-      '<div class="own vseason">'+(gNow>=10?'COMING SOON':'REACH GRADE 10')+'</div><div class="cap">Foil dice</div>';
-    grid.appendChild(f);
+    /* S1795 - note 600 (8) : la section FOIL DICE et sa tuile sont SUPPRIMEES (Croze : << ca on vire ca >>). */
   } else if(key==='blood'){
     /* S1418 - note 239 (3) : le rayon BLOOD, vitrine sans achat. */
     BLOOD.forEach(([nom,ico,prix],k)=>{
@@ -4517,13 +4511,7 @@ function openSheet(kind,i){
   } else if(kind!=='chars'){
     const eq=(kind==='dice'?equipped.dice:kind==='backs'?equipped.backs:kind==='trays'?equipped.trays:equipped.curs)===i;
     cta='<button class="cta" id="dbtn"'+(eq?' disabled':'')+'>'+(eq?'Equipped':'Equip')+'</button>';
-    /* S1550 - note 385 (2b), MONNAIE 32 (b) : le FOIL d'un set possede - ON / OFF au grade 10, verrouille avant. */
-    if(kind==='dice' && window.LLDesFoil){
-      const F=window.LLDesFoil, peau=DICE[i][1];
-      if(F.debloque()) cta+='<button class="cta" id="dfoil" type="button">Foil \u00b7 '+(F.actif(peau)?'ON':'OFF')+'</button>';
-      else { cta+='<button class="cta" id="dfoil" type="button" disabled>Foil \u00b7 reach grade '+F.GRADE+'</button>';
-             note='Foil dice: the same faces, with shine and glowing edges. Unlocked at grade '+F.GRADE+'.'; warn=false; }
-    }
+    /* S1795 - note 600 (8) : le bouton Foil d'un set de des et sa note sont SUPPRIMES ; des_foil.js reste sans porte. */
   }
   /* S1487 · note 367 ① — le charm POSSÉDÉ (ouvert depuis MY VAULT) : USE, ou RUNNING ; jamais BUY. */
   if(kind==='luckmine'){
@@ -4552,7 +4540,6 @@ function openSheet(kind,i){
   document.getElementById('dx').addEventListener('click',closeDrawer);
   const b=document.getElementById('dbtn');
   if(b&&!b.disabled) b.addEventListener('click',()=>act(kind,i));
-  { const fb=document.getElementById('dfoil'); if(fb&&!fb.disabled) fb.addEventListener('click',()=>{ window.LLDesFoil.bascule(DICE[i][1]); openSheet(kind,i); }); }
   { const gb=document.getElementById('dgetblood'); if(gb) gb.addEventListener('click',()=>{ if(window.LLBloodShop) window.LLBloodShop.ouvre(); }); }
   /* S1373 · note 208 (§13.4) - OFFRIR SUR CE TICKET */
   drawer.querySelectorAll('[data-tkoffr]').forEach(bo=>bo.addEventListener('click',()=>{

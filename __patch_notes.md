@@ -2,7 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 22 Nov 2026
-- **HH:MM** — Online 2V2, end of run 1: the trade with your partner now has a turn timer (60 s). If a player is away, their trade passes when it runs out and the table goes on to READY FOR RUN 2.
+- **11:50** — VAULT: the "Foil" option is gone from the dice sets (no more Foil button, note or FOIL DICE section under GRADE). Card foils are unchanged.
+- **09:55** — Online 2V2, end of run 1: the trade with your partner now has a turn timer (60 s). If a player is away, their trade passes when it runs out and the table goes on to READY FOR RUN 2.
 - **08:12** — In a fight, when you are asked something (YOU ARE ASKED), the card you point at in your hand now grows only into the free space under the question: the question and PLAY NOTHING are never hidden behind it.
 - **05:58** — A card that says "take 1dX dmg" (Specter Wayfinder, Magic Leeches, Razor Loop, Blood Pact…) now rolls its die in the dice tray before you lose what it shows. A dice card stays greyed in your hand when the die in play is held by no one — you never lose it for nothing.
 - **04:05** — Specter Wayfinder now makes you dodge the blow you flee. LICK THE FLOOR draws an Uncommon card, and its line says so. On The Arena, your turn timer waits while the player you threw in fights.
