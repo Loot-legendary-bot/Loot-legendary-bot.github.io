@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 22 Nov 2026
+- **04:05** — Specter Wayfinder now makes you dodge the blow you flee. LICK THE FLOOR draws an Uncommon card, and its line says so. On The Arena, your turn timer waits while the player you threw in fights.
 - **02:15** — Specter Wayfinder now deals the damage printed on its card: 1d12 (Uncommon), 1d6 (Rare). A mob killed in answer to its attack: the LOG now says <MOB>'s blow is cancelled — it died first (no more LAST BLOW line).
 - **00:17** — THE PIT (off by default), fighting a mob: the dice tray's banner now reads ZOMBIE ATTACKS — SHIV STRIKE (the mob's name first), and it stays there while you choose your answer.
 
