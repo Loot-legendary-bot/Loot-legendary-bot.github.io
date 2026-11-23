@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 23 Nov 2026
+- **16:15** — Unstable Rampage (The ManBearPig): after you discard your 3 cards, you now see every other player roll their d6, side by side, with their faces — before, your screen skipped the roll and showed nothing.
 - **13:57** — KEEP WHAT YOU WANT: if the game refuses your pick, the box stays open and says why inside it ("REFUSED — keep 1, you picked 2: choose again"). When a game is over, nothing is asked of anyone any more: the end-of-game screen is alone.
 - **12:15** — THE PIT: when another player casts at you, the dice tray names the spell while the die rolls ("THE WIZARD → YOU · ICE BOLT"); their die replaces yours in the tray instead of landing on it; and spell effects land on the enemy's portrait in the right-hand column, not in the middle of the screen.
 - **11:58** — Online: a card you had ticked to discard at the end of your turn, and that left your hand meanwhile (staked at the Goblin Casino, for instance), is no longer sent with the discard — the game could freeze for the whole table. The Coffin Lounge: the tile card stays on screen, its d20 rolls next to its text, then the d12 of damage, then you are moved — one die at a time.
