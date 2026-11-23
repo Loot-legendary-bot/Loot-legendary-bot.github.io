@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 23 Nov 2026
+- **11:58** — Online: a card you had ticked to discard at the end of your turn, and that left your hand meanwhile (staked at the Goblin Casino, for instance), is no longer sent with the discard — the game could freeze for the whole table. The Coffin Lounge: the tile card stays on screen, its d20 rolls next to its text, then the d12 of damage, then you are moved — one die at a time.
+- **09:58** — 2v2: during the trade before run 2, the bots now claim their partner card in turn — the "BOT REFUSED" notice no longer appears and the bots no longer wait out the 60 seconds.
 - **08:44** — 2v2: the TRADE WITH YOUR PARTNER box now opens before run 2, with its 60-second countdown — click a partner card to claim it, or PASS; at zero you pass and the game goes on (the table could freeze there, online and against bots).
 - **04:28** — Online: when the game ends, your hand no longer covers the end-of-game screen (it could when a question was still pending for you).
 - **02:00** — When the game refuses your answer to a question, the question stays on screen with the reason written inside it, under its buttons — you can answer something else.
