@@ -1573,7 +1573,7 @@
     '⎋ Esc puts back all raised cards': '⎋ Échap repose toutes les cartes levées', 'no drawn Tile is known on this decision': 'aucune tuile tirée connue sur cette décision',
     '⚠ you are destroying a piece equipped by': '⚠ tu détruis une pièce équipée par', 'asks you for this card': 'te demande cette carte',
     'TURN:': 'TOUR :', 'WAITING ON:': 'ON ATTEND :', '— no winner': '— pas de vainqueur', 'Dead — run lost': 'Mort — run perdu',
-    'THE DUNGEON EMPTIES': 'LE DONJON SE VIDE', 'your partner:': 'ton partenaire :', 'No deaths: no one has a choice to make.': 'Aucun mort : personne n’a de choix à faire.',
+    'THE DUNGEON EMPTIES': 'LE DONJON SE VIDE', 'your partner:': 'ton partenaire :', /* S1809 · 611 ⑦ (c) — le motif `TRADE WITH (.+)` laissait « YOUR PARTNER » */ 'TRADE WITH YOUR PARTNER': 'TROC AVEC TON PARTENAIRE','No deaths: no one has a choice to make.': 'Aucun mort : personne n’a de choix à faire.',
     'YOUR QUESTS FOR RUN 2': 'TES QUÊTES POUR LE RUN 2', 'you keep your character — you may redraw your unfinished quests': 'tu gardes ton personnage — tu peux retirer tes quêtes inachevées',
     'Choose your school': 'Choisis ton école', 'WHERE THE POINTS CAME FROM': 'D’OÙ VIENNENT LES POINTS', 'HAND': 'MAIN',
     'no event this game': 'aucun événement cette partie', 'NO WINNER': 'PAS DE VAINQUEUR', 'nothing earned this game': 'rien gagné cette partie',
