@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 23 Nov 2026
+- **04:28** — Online: when the game ends, your hand no longer covers the end-of-game screen (it could when a question was still pending for you).
 - **02:00** — When the game refuses your answer to a question, the question stays on screen with the reason written inside it, under its buttons — you can answer something else.
 - **01:01** — KEEP WHAT YOU WANT: the button now reads KEEP n / k and stays greyed until you have picked exactly the number of cards to keep — you can no longer send one card when the game asks for two.
 
