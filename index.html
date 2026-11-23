@@ -2057,6 +2057,12 @@
       .dicelayer.jet-au-milieu { inset: 0; border: 0; border-radius: 0;
         background: radial-gradient(ellipse 34% 30% at 50% 50%, rgba(10, 8, 6, .78) 0%,
           rgba(10, 8, 6, .55) 55%, rgba(10, 8, 6, 0) 100%) !important; }
+      /* S1813 · note 614 ⑩ — « quand je regarde un autre joueur, rien ne se chevauche » : dans la vue d'un joueur
+         suivi, la colonne WHAT HAPPENS IN THIS COMBAT est AU MILIEU, et l'ombre radiale laissait ses lignes passer
+         sous le dé, son total et son titre (mesuré : 10 445 px² à 2476×1283). La scène y porte sa plaque opaque. */
+      body:has(.ndr-435-suivi) .dicelayer.jet-au-milieu > div:not(.hide-btn) {
+        background: rgba(12, 10, 8, .97); border: 1px solid rgba(233, 228, 216, .22); border-radius: 8px;
+        padding: 14px 26px; box-shadow: 0 10px 40px rgba(0, 0, 0, .7); }
       /* S1437 · note 286 ⑪ — la fin en deux écrans : GAME (le podium) · REWARDS. */
       .fp1 .cache { display: none !important; }
       .fp1-onglets { display: flex; justify-content: center; gap: 14px; margin: 2px 0 10px; }
@@ -16692,7 +16698,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-B2bvgR36.js"></script>
+    <script type="module" crossorigin src="./assets/index-Bphvp-8e.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
