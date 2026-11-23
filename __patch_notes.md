@@ -1,6 +1,9 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 23 Nov 2026
+- **01:01** — KEEP WHAT YOU WANT: the button now reads KEEP n / k and stays greyed until you have picked exactly the number of cards to keep — you can no longer send one card when the game asks for two.
+
 ## 22 Nov 2026
 - **23:55** — Online: if you play your Signature or a card and then CANCEL its question, it is not played and the game goes on for the whole table (it could freeze). Arena Invitation on a player of your tile: tick the player(s) to send, and they choose their own fight in The Arena. Dice-Eating Goose no longer offers HONK a rival when no rival is in the fight. Cheater's Gloves is only offered when you draw — never in the window of a roll where it would do nothing.
 - **19:43** — In a fight, when you are asked something, your hand now slides down by itself so the question and its buttons are never behind your cards (cards you can play with stay up). Press H — or click the HAND tab — to tuck or raise your hand at any time.
