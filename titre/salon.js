@@ -338,6 +338,9 @@
       /* note 306 F / 297 ② : les cosmetiques EQUIPES de chaque siege (le relais les publie dans
          `seats[].equipped`, moteur 895) - la partie rend ceux du PROPRIETAIRE, jamais les miens. */
       equipped: etat && Array.isArray(etat.seats) ? etat.seats.map(function (x) { return x && x.equipped ? x.equipped : null; }) : [],
+      /* S1811 - 612 (2) (c) : les GP et la serie de chaque siege (`seats[].gp`, `seats[].serie`, note 469 (1)) -
+         la partie donne au moteur la MEME table de grades chez tous les ecrans du salon. */
+      points: etat && Array.isArray(etat.seats) ? etat.seats.map(function (x) { return x ? { gp: x.gp, serie: x.serie } : null; }) : [],
       seat: moi ? moi.seat : null,
       hote: !!(moi && moi.host),
       /* le jeton de CET onglet : deux comptes peuvent jouer depuis un même navigateur */

@@ -558,35 +558,102 @@
     tete.title = 'Every offering you can make, and your pact';
     tete.addEventListener('click', function () { déplié = !déplié; corps.style.display = déplié ? 'block' : 'none'; peinsLaTête(); });
     peinsLaTête();
-    var idPacte = BW.pacte(profil);
-    var lignePacte = document.createElement('div');
-    lignePacte.style.cssText = 'margin:4px 0 8px;color:' + OR;
-    lignePacte.textContent = idPacte === null ? 'PACT: no pact' : 'PACT: ' + BW.nomDe(idPacte) + ' (' + BW.affiche(BW.PACTE) + ')';
-    corps.appendChild(lignePacte);
-    var sac = BW.sac(profil);
-    BW.TRONCS.forEach(function (t) {
-      var sortes = BW.essencesDe(t.id);
-      if (sortes.length === 0) { return; }
-      var titre = document.createElement('div');
-      titre.textContent = t.t;
-      titre.style.cssText = 'margin-top:6px;font-weight:800;color:' + (t.teinte || ENCRE);
-      corps.appendChild(titre);
-      var feu = BW.brulent(profil, t.id);
-      sortes.forEach(function (s) {
-        var o = BW.OFFRANDES[s];
-        var n = sac[s] || 0;
-        var brûle = feu.filter(function (f) { return f.sorte === s; });
-        var l = document.createElement('div');
-        l.style.cssText = 'display:flex;justify-content:space-between;gap:8px;color:' + (n > 0 ? ENCRE : TEXTE_DOUX);
-        var nom = document.createElement('span');
-        nom.textContent = o.nom + ' ' + BW.affiche(o.x) + ' · ' + String(o.duree) + ' games';
-        var qte = document.createElement('span');
-        qte.textContent = (n > 0 ? '×' + String(n) + ' owned' : 'missing') +
-          (brûle.length > 0 ? ' · burning ' + String(brûle[0].restant) + ' left' : '');
-        l.appendChild(nom); l.appendChild(qte);
-        corps.appendChild(l);
+    /* S1810 · note 599 ② (c) — « sans quitter l'étoile : j'offre une essence à un esprit, je jure ou je romps mon
+       pacte, je lance un charm ». Les MÊMES portes que la page (`passeLePacte`, `romps`, `offre`, `utiliseLeCharme`) :
+       rien n'est recalculé ici. Un geste qui coûte des dents demande deux clics (le premier écrit le prix). La lecture
+       de « ce qui multiplie » n'est PAS réécrite ici (LE MINIMUM) : elle vit près du pseudo (`#whobuff`) et sur le
+       badge du médaillon au HOME. */
+    function geste(txt, prix, faire, titre, éteint) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'mur-geste';
+      b.textContent = txt;
+      b.title = titre || '';
+      b.style.cssText = 'cursor:pointer;margin-left:8px;padding:1px 8px;white-space:nowrap;' +
+        'font:800 12px/1.4 "Big Shoulders Display","Arial Black",sans-serif;letter-spacing:.06em;color:' + ENCRE + ';' +
+        'background:rgba(22,17,12,.85);border:1px solid ' + ENCRE_PALE + ';border-radius:3px';
+      var dents = profil && typeof profil.dents === 'number' ? profil.dents : 0;
+      if (éteint || prix > dents) {
+        b.disabled = true; b.style.opacity = '.45'; b.style.cursor = 'default';
+        if (!éteint) { b.title = 'Not enough teeth: ' + String(prix - dents) + ' short.'; }
+        return b;
+      }
+      var armé = prix === 0;
+      b.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        if (!armé) { armé = true; b.textContent = 'confirm · ' + String(prix) + ' teeth'; return; }
+        if (faire()) {
+          if (typeof window.paintHUD === 'function') { try { window.paintHUD(true); } catch (e) { /* le HUD n'est pas là */ } }
+          peinsLeCorps();
+        }
       });
-    });
+      return b;
+    }
+    function rangée(gauche, droite) {
+      var l = document.createElement('div');
+      l.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:8px;margin:2px 0';
+      l.appendChild(gauche);
+      if (droite) { l.appendChild(droite); }
+      return l;
+    }
+    function peinsLeCorps() {
+      profil = window.LLProfil ? window.LLProfil.lis() : {};
+      corps.textContent = '';
+      var idPacte = BW.pacte(profil);
+      var lignePacte = document.createElement('span');
+      lignePacte.style.cssText = 'color:' + OR;
+      lignePacte.textContent = idPacte === null ? 'PACT: no pact' : 'PACT: ' + BW.nomDe(idPacte) + ' (' + BW.affiche(BW.PACTE) + ')';
+      corps.appendChild(rangée(lignePacte, idPacte === null ? null
+        : geste('break', BW.ROMPRE, function () { return BW.romps(); }, 'Break your pact: its path goes back to ×1.')));
+      /* les charms : celui qui court, puis le stock (un seul court à la fois) */
+      var court = BW.chance(profil);
+      var stock = BW.stockDesCharmes(profil);
+      var ligneCharm = document.createElement('span');
+      ligneCharm.style.cssText = 'color:' + OR;
+      ligneCharm.textContent = court === null ? 'CHARM: none running'
+        : 'CHARM: ' + court.nom + ' · ' + String(court.restant) + (court.restant > 1 ? ' games left' : ' game left');
+      corps.appendChild(rangée(ligneCharm, null));
+      BW.SORTES_CHANCE.forEach(function (id) {
+        if (!(stock[id] > 0)) { return; }
+        var nom = document.createElement('span');
+        nom.textContent = BW.CHANCES[id].nom + ' ×' + String(stock[id]) + ' in stock';
+        corps.appendChild(rangée(nom, geste('use', 0, function () { return BW.utiliseLeCharme(id); },
+          court === null ? 'Start this charm now.' : 'One charm at a time: it starts when the running one ends.', court !== null)));
+      });
+      var sac = BW.sac(profil);
+      BW.TRONCS.forEach(function (t) {
+        var sortes = BW.essencesDe(t.id);
+        if (sortes.length === 0) { return; }
+        var titre = document.createElement('span');
+        titre.textContent = t.t;
+        titre.style.cssText = 'font-weight:800;color:' + (t.teinte || ENCRE);
+        var jurer = null;
+        if (!BW.dort(profil, t.id) && idPacte !== t.id) {
+          var prix = BW.prixDuPacte(profil, t.id);
+          jurer = geste(prix === 0 ? 'swear · free' : 'swear', prix, function () { return BW.passeLePacte(t.id); },
+            'Swear to ' + t.t + ': this path counts ' + BW.affiche(BW.PACTE) + '.');
+        }
+        var tête = rangée(titre, jurer);
+        tête.style.marginTop = '8px';
+        corps.appendChild(tête);
+        var feu = BW.brulent(profil, t.id);
+        sortes.forEach(function (s) {
+          var o = BW.OFFRANDES[s];
+          var n = sac[s] || 0;
+          var brûle = feu.filter(function (f) { return f.sorte === s; });
+          var nom = document.createElement('span');
+          nom.style.cssText = 'color:' + (n > 0 ? ENCRE : TEXTE_DOUX);
+          nom.textContent = o.nom + ' ' + BW.affiche(o.x) + ' · ' + String(o.duree) + ' games · ' +
+            (n > 0 ? '×' + String(n) + ' owned' : 'missing') +
+            (brûle.length > 0 ? ' · burning ' + String(brûle[0].restant) + ' left' : '');
+          var pourquoi = BW.refus(profil, t.id, s);
+          corps.appendChild(rangée(nom, geste('offer', 0, function () { return BW.offre(t.id, s); },
+            pourquoi !== null ? pourquoi : n > 0 ? 'Burn one: this path earns ' + BW.affiche(o.x) + ' for ' + String(o.duree) + ' games.'
+              : 'You have none — essences drop in games.', n === 0 || pourquoi !== null)));
+        });
+      });
+    }
+    peinsLeCorps();
     boite.appendChild(tete);
     boite.appendChild(corps);
     couche.appendChild(boite);

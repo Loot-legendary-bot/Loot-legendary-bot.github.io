@@ -1234,6 +1234,11 @@
       }
       .main-basse > .hd-onglet:hover { border-color: var(--stock-dim); }
       .main-basse.hd-rangee > .hd-onglet { bottom: var(--hd-onglet-y-rangee, 28px); }
+      /* S1812 · note 614 ⑥ — sous mon équipement, à place fixe (`main.ts::caleLaMain`) */
+      .main-basse.hd-onglet-sous-inv > .hd-onglet, .main-basse.hd-onglet-sous-inv.hd-rangee > .hd-onglet {
+        left: var(--hd-onglet-sx); top: var(--hd-onglet-sy); bottom: auto; }
+      .fin-aucun-skill { font-family: var(--serif, inherit); font-style: italic; font-size: 14px; color: var(--stock-dim, #b9b1a5);
+        margin-top: 6px; max-width: 360px; }
       /*
        * Un mouvement doit pouvoir être refusé. `transform/opacity only` reste
        * vrai ici : on ne remplace pas l'animation, on la coupe.
@@ -6826,6 +6831,10 @@
         border: 40px solid transparent; border-image: url(/art/ui/dicebox/tapis_cadre_noir.webp) 44 fill / 40px stretch;
         box-shadow: 0 12px 30px rgb(0 0 0 / .55);
       }
+      /* S1812 · note 614 ⑤ — la question monte au-dessus de ce que la main occupe (`main.ts::écarteLaQuestion`) :
+         rien ne la recouvre, ni une carte levée, ni la Signature, ni l'onglet HAND. */
+      .les-choix.est-question.q-levee, .pit-reponse.q-levee { position: relative; translate: 0 calc(-1 * var(--q-leve, 0px)); z-index: 70; }
+      .les-choix.est-question.q-pleine { max-height: var(--q-max, none) !important; }
       .les-choix.est-question > .choix-titre, .les-choix.a-toi.est-question > .choix-titre {
         position: absolute; left: -4px; top: 2px; z-index: 2; isolation: isolate;
         padding: 8px 26px 6px; color: #f4ecda; font-size: 24px; letter-spacing: .18em;
@@ -13100,6 +13109,22 @@
       .nouvelle-table .nt-chrono.sans-horloge circle { animation: nt-chrono-respire 1.4s ease-in-out infinite alternate; }
       @keyframes nt-chrono-respire { from { opacity: .35; } to { opacity: 1; } }
       .nouvelle-table .nt-rond:has(.nt-chrono)::after { display: none; }
+      /* S1811 · note 612 ② (a) — PRO TOUR : les secondes du tour en chiffres, contre l'anneau
+         (main.ts::peindreLeChrono) ; vides = aucune horloge tenue. */
+      .nouvelle-table .nt-chrono-sec {
+        position: absolute; left: -14px; top: -8px; z-index: 3; min-width: 26px; padding: 0 4px;
+        font: 700 calc(14px * var(--lisible, 1))/20px var(--mono, monospace); text-align: center;
+        border-radius: 10px; background: var(--ink); color: var(--siege, var(--stock));
+        border: 1px solid var(--siege, var(--stock)); pointer-events: none;
+      }
+      .nouvelle-table .nt-chrono-sec:empty { display: none; }
+      /* S1811 · note 612 ① (a) « draft 90 » — le chrono du choix du personnage, en tête du roster. */
+      .roster-chrono {
+        flex: 0 0 100%; display: flex; gap: 12px; justify-content: center; align-items: baseline;
+        margin-bottom: 8px; padding: 8px 0; font: 700 15px/22px var(--mono, monospace); color: var(--stock, #e8d9b0);
+      }
+      .roster-chrono-sec { font-size: 20px; min-width: 52px; text-align: right; }
+      .nouvelle-table .nt-chrono-sec.presse { color: var(--rouge-vif); border-color: var(--rouge-vif); }
       .nouvelle-table .nt-presence.nt-parti { opacity: .45; }
       /* S1434 · note 280 ① — la vignette d'un MORT passe en noir et blanc : c'est elle qui
          dit la mort (aucun indicateur d'activité ne s'y pose, main.ts::présence). */
@@ -16667,7 +16692,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BxAU-Wrw.js"></script>
+    <script type="module" crossorigin src="./assets/index-B2bvgR36.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
