@@ -12635,6 +12635,15 @@
       .qobj-planche .qobj-tour { margin-left: auto; font: 700 13px/1 var(--display); letter-spacing: .16em; color: #8d857a; }
       .qobj-planche .qobj-tour b { font: 800 19px/1 var(--display); letter-spacing: .04em; color: #efe9df; margin: 0 5px 0 6px; }
       .qobj-planche .qobj-tour.qobj-tard b { color: #e0483d; }
+      /* S1820 · note 616 ① — en combat : UNE ligne au ras du haut, au-dessus de la colonne (jamais sur ses PV ni ses stats) ; un clic déplie. */
+      .qobj.qobj-planche.qobj-replie { width: auto; display: flex; align-items: center; gap: 12px; padding: 5px 16px 5px 20px;
+        cursor: pointer; text-align: left; }
+      .qobj-planche.qobj-replie::before, .qobj-planche.qobj-replie::after { top: 50%; margin-top: -3.5px; }
+      .qobj-planche.qobj-replie .qobj-mot { font-size: 14px; }
+      .qobj-planche .qobj-resume { font: 800 15px/1 var(--display); letter-spacing: .08em; color: #efe9df; white-space: nowrap; }
+      .qobj-planche .qobj-resume.qobj-rate { color: #e0483d; } .qobj-planche .qobj-resume.qobj-fait { color: #8fd18b; }
+      .qobj-planche .qobj-fleche { font: 700 13px/1 var(--display); color: #8d857a; background: none; border: 0; padding: 0 0 0 2px; cursor: pointer; }
+      .qobj-planche .qobj-replier { margin-left: 8px; }
       .qobj-planche .qobj-etapes { display: flex; align-items: center; gap: 9px; margin: 13px 4px 0; }
       .qobj-planche .qobj-pip { width: 19px; height: 19px; flex: none; background: center / contain no-repeat; }
       .qobj-planche .qobj-pip.on { background-image: url(/art/hud/controls/pip_filled.png); }
@@ -16706,7 +16715,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-D9OeIsow.js"></script>
+    <script type="module" crossorigin src="./assets/index-49_YxZO9.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
