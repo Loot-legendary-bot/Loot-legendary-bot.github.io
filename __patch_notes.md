@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 24 Nov 2026
+- **14:20** — A question raised high on the screen (to clear your hand) no longer slides under the COMBAT · THE TABLE tabs or the players' portraits: it stops just below them, and its content scrolls if it is long.
 - **14:00** — In a fight, the OBJECTIVE panel no longer sits on your HP and stats: it folds into one line above your column (click it to unfold). Final Duel: at the end of run 2, if nobody is 2 points ahead, everyone within 2 points of the leader plays the Final Duel, and the winner scores +3 — the end screen lists it as "Final Duel".
 - **10:40** — Copy Cats on a Magpie, for real this time: the note of 23 Nov at 23:59 announced it, but the two copies still offered players and fizzled. Each copy now offers the Mobs the Magpie can target (the original's Mob is picked by default), and both copies loot.
 - **06:00** — When you follow another player in a fight, the pile of their last played cards no longer sits on their portrait's stats: the card they play is shown once, in the middle, under the die (outside a fight, their last five cards stay under their portrait).
