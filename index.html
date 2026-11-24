@@ -13799,6 +13799,11 @@
         display: flex; flex-direction: row; justify-content: center; align-items: flex-end;
         pointer-events: none; overflow: hidden; height: 300px;
       }
+      /* S1823 · 615 ① (c), vue S — FOLLOW allumé, une offre de réaction posée en bande sous la vue suivie
+         (`.nt-offre-suivi`, z 40) : la main en dos du joueur suivi (même z 40, peinte après) posait sa Signature au
+         milieu de YOU ARE ASKED (`sourdine-coup-pris`, 1920×1080 : `.carte-sig.adverse` sur « I PASS FOR YOU IN »).
+         Comme ma main descend devant une question, la sienne passe dessous. */
+      .nouvelle-table:has(> .nt-offre-suivi .les-choix.est-question) .main-basse.main-en-dos { z-index: 39; }
       .nouvelle-table .main-en-dos .med-rangee { display: flex; align-items: flex-end; padding-bottom: 0; }
       .nouvelle-table .main-en-dos .med-dos {
         width: 170px; height: auto; margin-left: -96px; border-radius: 8px;
@@ -15481,6 +15486,11 @@
         font-size: calc(15px * var(--lisible, 1)); margin: 0 0 6px; }
       .offre-tuile { display: block; width: 180px; max-width: 60%; margin: 4px 0 10px; border-radius: 6px;
         box-shadow: 0 4px 12px rgba(0,0,0,.55); }
+      /* S1823 · Croze, 24/11 (capture Primal Path) : « la tuile s'affiche pas en entier, c'est tronqué ». MESURÉ
+         (`jet-oppose`, J4, 1920×1080) : `.decision > * { flex: 1 0 100% }` étirait la tuile à 413×619 dans une boîte
+         de 568 px — coupée, à défiler. La tuile garde sa proportion, bornée en HAUTEUR : elle tient entière. */
+      .les-choix.est-question .decision > .offre-tuile { flex: 0 0 auto; width: auto; height: min(300px, 32vh);
+        max-width: 60%; object-fit: contain; }
       .offre-texte { font-size: max(14px, calc(13px * var(--lisible, 1))); color: #cfc6b4; margin: 0 0 10px; font-style: italic; }
       .decision.rps-gros button.rps-choix svg, .decision.rps-gros button.rps-choix img { width: 64px; height: 64px; }
       /* S1646 · note 473 ③ — l'icône de 64 px vivait dans une boîte de 30 px (`.rps-choix .rps-glyphe`) : elle débordait sur
@@ -16715,7 +16725,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-C_FbBRbx.js"></script>
+    <script type="module" crossorigin src="./assets/index-BWY5XOFk.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

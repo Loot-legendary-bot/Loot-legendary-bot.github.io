@@ -2,6 +2,8 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 24 Nov 2026
+- **20:45** — Fixed: right after an update, starting a CLASSIC game could show only the brick wall (your browser still had the previous page, whose game file had been removed). Updates now keep the previous game file, so a game always starts. Primal Path: the tile you may redraw is now shown whole in the question.
+- **20:30** — FOLLOW: when the table can react while you follow another player, the question at the bottom is no longer covered by that player's Signature card — their hand now sits behind it.
 - **18:25** — When the table waits for another player, the hourglass now says what they are choosing for every kind of question ("BOT 2 is choosing… cards", "…whether to pay the extra cost", "…a die"), instead of "an answer".
 - **17:55** — Questions wait for what caused them: whatever the game asks you (a target, a discard, a reaction, a roll), the card, roll or opening that caused it now always plays first, even when many things happen at once — it used to be skipped when the scene queue was full, and the question could show up before its cause.
 - **17:24** — The Goblin Casino: when it asks you to roll again or stop, your hand now tucks away on its own (like any other question), so your Signature and weapon cards no longer sit on the bottom of the question. HAND ▴ brings it back.
