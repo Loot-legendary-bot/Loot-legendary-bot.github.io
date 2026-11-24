@@ -1,6 +1,11 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 24 Nov 2026
+- **10:40** — Copy Cats on a Magpie, for real this time: the note of 23 Nov at 23:59 announced it, but the two copies still offered players and fizzled. Each copy now offers the Mobs the Magpie can target (the original's Mob is picked by default), and both copies loot.
+- **06:00** — When you follow another player in a fight, the pile of their last played cards no longer sits on their portrait's stats: the card they play is shown once, in the middle, under the die (outside a fight, their last five cards stay under their portrait).
+- **02:30** — New Dungeon Timer (23 Nov): the first Collapse falls on turn 3 (1d4, a 4 opens a portal), then 1d6 on turn 5, 1d10 on turn 7, 1d12 with a Legendary draw on turn 9, and the Ruins from turn 10. The turn banner tells you the die, the portal chance and the draw; the old Dungeon Timer picture is hidden until its new card is ready. When you follow another player's fight, the Mob card no longer runs under the DUNGEON · FOLLOWING · LOG · OPTIONS buttons.
+
 ## 23 Nov 2026
 - **23:59** — The Cell: a locked player who leaves The Cell by any other way (a tile drawn, a teleport, a swap, a pull…) is now freed, and the log says "free — they left The Cell". Copy Cats on a Magpie: each copy now offers the Mobs the Magpie can target. Onion asks you again in a trade (it could stay muted without you having set it).
 - **23:11** — When you follow another player's fight, their dice roll now shows on its own solid panel in the middle of the screen — the combat log no longer runs through the die, its total and its title.

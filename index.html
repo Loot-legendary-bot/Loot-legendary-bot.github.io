@@ -10708,7 +10708,7 @@
                     aspect-ratio: 1.52 / 1; max-height: calc(var(--uvh) * 62);
                     margin: 0 auto; width: 100%;
                     border: 1px solid var(--rule); background: var(--ink-2);
-                    background-image: url(/art/ui/dungeon_spirale.webp);
+                    /* S1815 · 613 ① (train 1341) : l'image de Croze porte l'ANCIENNE table ; elle ne s'affiche plus tant qu'il ne l'a pas refaite. Les pastilles lisent `timerTier` du moteur. */
                     background-size: 100% 100%; background-repeat: no-repeat; }
       /* ⚠ `7.4%` est `CÔTÉ_DU_TOUR` de `main.ts`, et il vaut pour la LARGEUR :
          la boîte n'est plus carrée. Il bouge des DEUX côtés. */
@@ -14983,6 +14983,14 @@
         flex: 1 1 0; min-height: 0; width: 100%;
         object-fit: contain; object-position: top center;
       }
+      /* S1815 · 614 ⑩ (mesuré au S1814 : 1 391 px² à 1366 × 768, 3 828 à 2476 × 1283) — dans la vue d'un
+         joueur suivi, la colonne du mob s'arrête au-dessus des boutons DUNGEON · FOLLOWING · LOG · OPTIONS
+         (`.tv2-vues`) ; la carte se réduit (`contain`). Mesuré après : 0 px² aux deux tailles. */
+      .nouvelle-table.nt-chez-un-autre .ntt-cb2-mobs { padding-bottom: max(104px, 9vh); box-sizing: border-box; }
+      /* S1816 · 614 ⑩ (mesuré au S1814 : la pile PLAYED du joueur suivi sur la ligne de stats de son rond, et
+         127 px² sur « ROUND 1 » à 2476 × 1283) — EN COMBAT, la carte qu'il joue est déjà au centre, sous le dé
+         (LE MINIMUM : un seul endroit) : sa pile des cinq se replie. Hors combat elle reste (204 ④). */
+      .nouvelle-table.nt-chez-un-autre:has(.ntt-cb2-mobs) .nt-regarde > .cj-pile:not(.cj-seule) { display: none; }
       .nouvelle-table .ntt-cb2-texte { flex: 1 1 0; min-height: 0; overflow: hidden; font-size: max(14px, calc(13px * var(--lisible, 1))); }
       /* ⛑ S1325 · CO-2 — contre un joueur : la cible à droite, plus large que le mob ;
          le bloc joueur (BJ-1) agrandi, un seul cœur (celui de la tête). */
@@ -16698,7 +16706,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-DNdz_qeq.js"></script>
+    <script type="module" crossorigin src="./assets/index-D9OeIsow.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
