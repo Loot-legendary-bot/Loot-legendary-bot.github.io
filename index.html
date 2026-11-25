@@ -13351,8 +13351,10 @@
       .nouvelle-table .tv4-bloc.epuisee { background: rgba(242,234,214,.025); }
       /* une tuile sans interaction n'a pas de ligne INTERACT (la ligne « This tile has no interaction » ne porte aucun détail) */
       .nouvelle-table .tv4-bloc[data-cle="INTERACT"]:not(:has(> .tv4-detail)) { display: none; }
+      /* S1834 · note 602 ③ — le libellé de Lick the Floor (≈ 117 u, nowrap) débordait sa colonne de 92 u et touchait sa phrase
+         bord à bord (mesuré à 1920 × 1080) ; une police de repli la faisait chevaucher. 124 u : le plus long libellé tient. */
       .nouvelle-table .tv2-liste.tv4 .tv4-ligne { display: grid;
-        grid-template-columns: calc(28 * var(--u)) calc(92 * var(--u)) minmax(0, 1fr); column-gap: calc(12 * var(--u));
+        grid-template-columns: calc(28 * var(--u)) calc(124 * var(--u)) minmax(0, 1fr); column-gap: calc(12 * var(--u));
         align-items: center; min-height: calc(40 * var(--u)); padding: calc(5 * var(--u)) calc(14 * var(--u));
         width: 100%; color: #F2EAD6; cursor: pointer; }
       /* 7 lignes et plus (`data-hauteur` 44 / 38, posé par `listeDesActionsV4`) : le même dessin, un cran plus serré */
@@ -16730,7 +16732,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BX_v1vrU.js"></script>
+    <script type="module" crossorigin src="./assets/index-CDwPMx7R.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>

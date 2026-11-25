@@ -2,6 +2,7 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 25 Nov 2026
+- **18:25** — Your turn: the action names in the centre list (EXPLORE, INTERACT, LICK THE FLOOR, MOVE) have a wider column — LICK THE FLOOR no longer runs into "Draw 1 … card".
 - **15:58** — Engine update, nothing new on screen yet: Gorma Juice is getting ready to boost a die you have just rolled on your own turn (never the Collapse). It works once the next card update rewrites its line; until then it still boosts your next roll.
 - **14:06** — Run 2, curse of the dead: when you die in run 2, the game asks you which curse the living will suffer — each curse is written in full next to its CHOOSE button. When a curse is announced at the start of a turn, the log says who cast it and what it does. (Its full presentation is still to come.)
 - **14:06** — Watching another player: the background is now the room of the tile they are on, dimmed like yours — no more brick wall with a grey halo in their colour and their banner behind it. Click your own portrait to come back to your room.
