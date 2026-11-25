@@ -602,7 +602,10 @@
       var idPacte = BW.pacte(profil);
       var lignePacte = document.createElement('span');
       lignePacte.style.cssText = 'color:' + OR;
-      lignePacte.textContent = idPacte === null ? 'PACT: no pact' : 'PACT: ' + BW.nomDe(idPacte) + ' (' + BW.affiche(BW.PACTE) + ')';
+      /* S1830 · 612 ① (e) — « ce qui multiplie » se lit sur PACT et CHARM, chacune avec son effet chiffré et ce qu'il
+         lui reste ; pas une troisième ligne. Le pacte court tant qu'on ne le rompt pas. */
+      lignePacte.textContent = idPacte === null ? 'PACT: no pact'
+        : 'PACT: ' + BW.nomDe(idPacte) + ' · its path counts ' + BW.affiche(BW.PACTE) + ' · until you break it';
       corps.appendChild(rangée(lignePacte, idPacte === null ? null
         : geste('break', BW.ROMPRE, function () { return BW.romps(); }, 'Break your pact: its path goes back to ×1.')));
       /* les charms : celui qui court, puis le stock (un seul court à la fois) */
@@ -611,8 +614,39 @@
       var ligneCharm = document.createElement('span');
       ligneCharm.style.cssText = 'color:' + OR;
       ligneCharm.textContent = court === null ? 'CHARM: none running'
-        : 'CHARM: ' + court.nom + ' · ' + String(court.restant) + (court.restant > 1 ? ' games left' : ' game left');
+        : 'CHARM: ' + court.nom + ' · teeth ' + BW.affiche(court.dents) + ' · essence drops ' + BW.affiche(court.essences) +
+          ' · ' + String(court.restant) + (court.restant > 1 ? ' games left' : ' game left');
       corps.appendChild(rangée(ligneCharm, null));
+      /* S1830 · 599 ② (c) — « je réclame ce qui est prêt ». Les nœuds `pret` du module qui se PRENNENT sans or (des
+         dents, l'accès DPT, un dos, un palier d'Exploration) passent par la MÊME porte que la page
+         (`window.LLMurAchete`) ; ceux qui s'achètent (un personnage, un dé, un curseur) restent sur la page, et la
+         ligne les compte. */
+      var prêts = [];
+      var àAcheter = 0;
+      BW.etat(profil, (profil && profil.mur && Array.isArray(profil.mur.offertes)) ? profil.mur.offertes : [])
+        .forEach(function (t) {
+          t.rangs.forEach(function (g) {
+            g.noeuds.forEach(function (x) {
+              if (x.s !== 'pret') { return; }
+              if (!x.p && !x.d && !x.u && (x.t || x.x || x.k)) { prêts.push(x); } else if (!x.e) { àAcheter += 1; }
+            });
+          });
+        });
+      if (prêts.length > 0 || àAcheter > 0) {
+        var lignePrêts = document.createElement('span');
+        lignePrêts.style.cssText = 'color:' + OR;
+        lignePrêts.textContent = 'READY: ' + (prêts.length > 0
+          ? String(prêts.length) + (prêts.length > 1 ? ' rewards' : ' reward') + ' to claim' + (àAcheter > 0 ? ' · ' : '') : '') +
+          (àAcheter > 0 ? String(àAcheter) + ' to buy on the page' : '');
+        corps.appendChild(rangée(lignePrêts, prêts.length === 0 ? null
+          : geste('claim', 0, function () {
+            if (typeof window.LLMurAchete !== 'function') { return false; }
+            var pris = 0;
+            prêts.forEach(function (x) { if (window.LLMurAchete(x)) { pris += 1; } });
+            if (pris > 0) { esprits = plan(); demande(); }
+            return pris > 0;
+          }, 'Claim every reward that is ready and costs nothing.')));
+      }
       BW.SORTES_CHANCE.forEach(function (id) {
         if (!(stock[id] > 0)) { return; }
         var nom = document.createElement('span');
