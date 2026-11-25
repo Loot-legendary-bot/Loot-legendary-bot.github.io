@@ -71,15 +71,9 @@ html.da-fond-pose #ll-salle .ll-salle-couche::after { background: radial-gradien
 
 /* ─── LE JEU (index.html) ─────────────────────────────────────────────────────── */
 
-/* Regarder un autre joueur (note 244 ⓒ, 243 ⑤) : la pierre, teintée à la couleur de sa
-   bannière (le liseré), la bannière en filigrane par-dessus — le noir plein est retiré. */
-html body .nouvelle-table.nt-chez-un-autre {
-  background:
-    linear-gradient(color-mix(in srgb, var(--lisere, rgba(233,228,216,.35)) 22%, transparent),
-                    color-mix(in srgb, var(--lisere, rgba(233,228,216,.35)) 22%, transparent)),
-    #0b0b0b var(--da-pierre) 0 0 / 768px repeat;
-}
-html body .nouvelle-table.nt-chez-un-autre::before { opacity: .55; }
+/* Regarder un autre joueur : S1831 · 612 ④ (Croze, « vraiment moche », « une sorte de halo terne ») — la pierre
+   teintée à sa couleur et sa bannière en filigrane (notes 244 ⓒ, 243 ⑤) sont retirées. Le fond est la salle de
+   SA tuile, comme chez moi (`poseLaSalle`). */
 
 /* Le HUD : la colonne du joueur (bandeau, stats, gestes, INVENTAIRE). */
 html body .nouvelle-table .ntt-toi {
