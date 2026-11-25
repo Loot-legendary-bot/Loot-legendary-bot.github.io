@@ -1,7 +1,16 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 25 Nov 2026
+- **04:30** — New cards (v223). The Cell (Ruins): explore for random gear or a Legendary. The Arena (Ruins): Pro — fight a random Boss. The Doom Compass (Ruins): Buy Time destroys X-Roads. Khan Spectral Blade: 1d8 + STR + AGI, or twice your Frost. All-in also triples Close Quarters. Their new cards are in the game.
+- **04:30** — Collapse: every window the Collapse opens now lasts three times longer — 450 s to answer the damage (the countdown starts full, once its die has been shown), 135 s on its die (180 s if it can kill you).
+- **04:30** — A stolen hand (TAKE WHAT YOU'RE TAKING): the LOOT · CHEST panel no longer opens on top of the question with a second copy of it — the question is alone, in one place; the chest's dice stay in your tray.
+- **04:30** — Final Duel: your opponent's die now rolls once, in the dice tray, and the banner says whose it is ("THE ROBERT → YOU · WEAPON ATTACK") — no more dice landing under the tray.
+- **04:30** — The Coffin Lounge: an invitation received from another tile always has its ACCEPT and REFUSE buttons clickable. When you watch another player's fight and the game asks you something, the question shows in that fight view — the old "out of combat" page no longer pops up.
+
 ## 24 Nov 2026
+- **23:40** — Death window: once a card has saved you (a "survive at" card), the button no longer says ACCEPT DEATH — it reads "You are saved — nothing more?". After any other card it reads "You played X — nothing more?".
+- **23:10** — Campaign: only First Steps (the tutorial) stays open for now, for everyone. The other levels are greyed out and say "Closed for now — only First Steps is open".
 - **20:45** — Fixed: right after an update, starting a CLASSIC game could show only the brick wall (your browser still had the previous page, whose game file had been removed). Updates now keep the previous game file, so a game always starts. Primal Path: the tile you may redraw is now shown whole in the question.
 - **20:30** — FOLLOW: when the table can react while you follow another player, the question at the bottom is no longer covered by that player's Signature card — their hand now sits behind it.
 - **18:25** — When the table waits for another player, the hourglass now says what they are choosing for every kind of question ("BOT 2 is choosing… cards", "…whether to pay the extra cost", "…a die"), instead of "an answer".

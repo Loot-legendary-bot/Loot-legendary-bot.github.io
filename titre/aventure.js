@@ -40,6 +40,11 @@
     return t ? { cle: 'tuto', val: t } : null;
   }
   function estLeTuto(ch) { return ch.scenario === 'tuto' || ch.scenario === 'tuto_1'; }
+  /* S1824 · note 617 ① (Croze, 24/11) — LA CAMPAGNE EST GRISÉE, SAUF FIRST STEPS : le tuto reste ouvert à TOUS les
+     profils ; tout le reste est fermé, quelle que soit la progression déjà écrite. Seule la case DEV ALL LEVELS OPEN
+     l'ouvre encore (outil de test). */
+  var SEUL_LE_TUTO = true;
+  function fermeParLaPause(ch) { return SEUL_LE_TUTO && !estLeTuto(ch) && !campagneOuverteEnDev(); }
   /* la progression (526 ②) : `ll_campagne[<id>].reussi`, écrit par la partie sur `SCENARIO_ENDED { reussi }` */
   function reussiDe(ch) {
     if (estLeTuto(ch)) return tutoFini();
@@ -79,7 +84,8 @@
     d.cercles.forEach(function (c) {
       c.chapitres.forEach(function (ch) {
         var e;
-        if (lanceurDe(ch) === null) e = 'A_VENIR';
+        if (fermeParLaPause(ch)) e = 'VERROUILLE';
+        else if (lanceurDe(ch) === null) e = 'A_VENIR';
         else if (bloque) e = 'VERROUILLE';
         else if (reussiDe(ch)) e = 'REUSSI';
         else if (!courantPris) { e = 'COURANT'; courantPris = true; bloque = true; }
@@ -343,7 +349,9 @@
         e = reussi ? 'REUSSI' : passant ? 'A_VENIR' : dev ? 'COURANT' : courant ? 'NON_ATTEINT' : 'COURANT';
         if (!reussi && !passant) courant = true;
       }
-      out.push({ cercle: c, chapitre: ch, etat: e, jouable: lanceurDe(ch) !== null, manque: manque });
+      var pause = fermeParLaPause(ch);
+      if (pause) { e = 'NON_ATTEINT'; manque = []; }
+      out.push({ cercle: c, chapitre: ch, etat: e, jouable: !pause && lanceurDe(ch) !== null, manque: manque, pause: pause });
     });
     return out;
   }
@@ -611,7 +619,9 @@
           var avant = points.filter(function (y) { return y.etat === 'COURANT'; })[0];
           var n = rangs.length > 0 ? rangs.join(' & ') : avant ? points.indexOf(avant) + 1 : null;
           var vieux = scene.querySelector('.av-pourquoi'); if (vieux) vieux.remove();
-          var pq = el('div', 'av-pourquoi', n !== null
+          var pq = el('div', 'av-pourquoi', x.pause
+            ? mot('Closed for now — only First Steps is open', 'Fermé pour l’instant — seul First Steps est ouvert')
+            : n !== null
             ? (rangs.length > 1
               ? mot('Locked — finish levels ' + n + ' first', 'Fermé — finis d’abord les niveaux ' + n)
               : mot('Locked — finish level ' + n + ' first', 'Fermé — finis d’abord le niveau ' + n))

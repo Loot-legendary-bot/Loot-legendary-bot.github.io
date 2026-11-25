@@ -16289,6 +16289,11 @@
         font: 900 20px/1.2 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .05em; color: #f3dc9a; }
       .cv-resultat { position: fixed; left: 50%; top: 18%; transform: translateX(-50%); z-index: 9000; min-width: 420px;
         padding: 16px 22px; background: rgba(14,12,10,.97); border: 2px solid #66cc44; box-shadow: 0 10px 40px rgba(0,0,0,.7); cursor: pointer; }
+      /* S1825 · 619 ② — « on te demande… et je pouvais cliquer nulle part » : mesuré (capture
+         `docs/refs/scenes/2026-11-25_619-2-invitation-hors-tuile.png`), cet encart se pose 4 s SUR la boîte
+         YOU ARE ASKED et prend le clic d'ACCEPT. Le clic passe au travers ; une question ouverte, il s'efface. */
+      .cv-resultat { pointer-events: none; }
+      body:has(.les-choix) .cv-resultat { opacity: 0; transition: opacity .2s; }
       .cv-res-titre { font: 800 14px var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .18em; color: #aef08a; }
       .cv-res-l1 { font: 900 26px/1.15 var(--display, "Big Shoulders Display"), sans-serif; letter-spacing: .03em; margin-top: 6px; }
       .cv-res-l2 { font: 700 20px/1.2 var(--display, "Big Shoulders Display"), sans-serif; color: #ff9a8a; }
@@ -16725,7 +16730,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-BWY5XOFk.js"></script>
+    <script type="module" crossorigin src="./assets/index-D_xDj8DO.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
