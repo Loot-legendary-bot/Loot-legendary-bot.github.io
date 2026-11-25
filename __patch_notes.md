@@ -2,11 +2,12 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 25 Nov 2026
-- **04:30** — New cards (v223). The Cell (Ruins): explore for random gear or a Legendary. The Arena (Ruins): Pro — fight a random Boss. The Doom Compass (Ruins): Buy Time destroys X-Roads. Khan Spectral Blade: 1d8 + STR + AGI, or twice your Frost. All-in also triples Close Quarters. Their new cards are in the game.
-- **04:30** — Collapse: every window the Collapse opens now lasts three times longer — 450 s to answer the damage (the countdown starts full, once its die has been shown), 135 s on its die (180 s if it can kill you).
-- **04:30** — A stolen hand (TAKE WHAT YOU'RE TAKING): the LOOT · CHEST panel no longer opens on top of the question with a second copy of it — the question is alone, in one place; the chest's dice stay in your tray.
-- **04:30** — Final Duel: your opponent's die now rolls once, in the dice tray, and the banner says whose it is ("THE ROBERT → YOU · WEAPON ATTACK") — no more dice landing under the tray.
-- **04:30** — The Coffin Lounge: an invitation received from another tile always has its ACCEPT and REFUSE buttons clickable. When you watch another player's fight and the game asks you something, the question shows in that fight view — the old "out of combat" page no longer pops up.
+- **HH:MM** — Questions that cut off their bottom line: Primal Path's "pay 3 HP to redraw" now shows its countdown and PAUSE inside the box (the tile shrinks to make room); a trap that makes you discard (Black Hole) tucks your hand away so CONFIRM DISCARD sits right under the cards, no scrolling.
+- **04:12** — New cards (v223). The Cell (Ruins): explore for random gear or a Legendary. The Arena (Ruins): Pro — fight a random Boss. The Doom Compass (Ruins): Buy Time destroys X-Roads. Khan Spectral Blade: 1d8 + STR + AGI, or twice your Frost. All-in also triples Close Quarters. Their new cards are in the game.
+- **04:12** — Collapse: every window the Collapse opens now lasts three times longer — 450 s to answer the damage (the countdown starts full, once its die has been shown), 135 s on its die (180 s if it can kill you).
+- **04:12** — A stolen hand (TAKE WHAT YOU'RE TAKING): the LOOT · CHEST panel no longer opens on top of the question with a second copy of it — the question is alone, in one place; the chest's dice stay in your tray.
+- **04:12** — Final Duel: your opponent's die now rolls once, in the dice tray, and the banner says whose it is ("THE ROBERT → YOU · WEAPON ATTACK") — no more dice landing under the tray.
+- **04:12** — The Coffin Lounge: an invitation received from another tile always has its ACCEPT and REFUSE buttons clickable. When you watch another player's fight and the game asks you something, the question shows in that fight view — the old "out of combat" page no longer pops up.
 
 ## 24 Nov 2026
 - **23:40** — Death window: once a card has saved you (a "survive at" card), the button no longer says ACCEPT DEATH — it reads "You are saved — nothing more?". After any other card it reads "You played X — nothing more?".
