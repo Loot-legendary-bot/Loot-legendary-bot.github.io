@@ -2,6 +2,11 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 26 Nov 2026
+- **21:45** — Card update (v226): The Tamarin now wears a weapon and THREE rings, is immune to Collapse and trap damage until Turn 9 (Tiny), and gets his new Banana Flee; Grab & Scam is removed. His character sheet (front and back) and The Poisoner's are the new ones, as are the Shock Eel, Mana Orb and Gold Snake Bauble cards.
+- **21:45** — Immunity: when a hit lands on a target that cannot take it (a fairy, the Tamarin under Tiny), everyone sees IMMUNE on the target.
+- **21:45** — Dice: a rerolled die now shows its NEW value in the dice tray (it used to come back to the old one). Dice roll at the size they land at — the d20 no longer rolls small then pops big.
+- **21:45** — Long games: when no ordinary mob is left to draw, the mob deck is reshuffled with the slain ones and the log says so.
+- **18:45** — Team games: when your partner calls you into their fight, the question is written once — the title, who is calling, and the two buttons (ACCEPT — I JOIN THE FIGHT · DECLINE — I STAY WHERE I AM). The same sentence no longer repeats in small print under the title.
 - **15:50** — DIVE menu: the four doors are in colour at rest. CAMPAIGN shows the knight in the torch-lit corridor, TODAY'S DUNGEON the blue vortex; hovering a door brightens it.
 - **15:50** — Gear grid: each player's grid now follows their own character's slots. A character who can wear three rings (the Tamarin, with the next card update) shows a RING 3 frame under RING 2.
 - **13:46** — Traps and immunity: when a card makes you immune to trap damage (the Tamarin before Dungeon Turn 10, with the next card update), the log says you take no damage, from which trap, and until which Dungeon Turn.
