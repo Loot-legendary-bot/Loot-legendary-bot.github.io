@@ -377,12 +377,25 @@
     x.style.cssText = 'position:absolute;right:8px;top:6px;cursor:pointer;border:0;background:none;font:900 18px/1 sans-serif;color:' + ENCRE;
     x.addEventListener('click', fermeLaFiche);
     panneau.appendChild(x);
-    if (s.etat === 'prete' && options.page) {
+    /* S1841 - note 623 (1) : « le claim it on the wall ... renvoie vers une autre fenêtre obsolète » — le bouton
+       appelait `options.page`, qui FERME l'étoile et ouvre l'ancienne page de branche. On prend la récompense SUR
+       le mur : les nœuds prêts de cette bounty passent par la même porte que la page (`window.LLMurAchete`). */
+    var prêtsIci = s.etat === 'prete' ? s.g.noeuds.filter(function (x) { return x.s === 'pret'; }) : [];
+    if (prêtsIci.length > 0 && typeof window.LLMurAchete === 'function') {
+      var prix = 0;
+      prêtsIci.forEach(function (x) { if (typeof window.LLMurPrix === 'function' && (x.p || x.d || x.u)) { prix += Number(window.LLMurPrix(x)) || 0; } });
       var va = document.createElement('button');
-      va.type = 'button'; va.textContent = 'CLAIM IT ON THE WALL ▸';
+      va.type = 'button';
+      va.textContent = prix > 0 ? 'CLAIM · ' + prix.toLocaleString('en-US') + ' GOLD ▸' : 'CLAIM ▸';
       va.style.cssText = 'margin-top:10px;cursor:pointer;padding:6px 12px;font:900 16px/1 "Big Shoulders Display",sans-serif;' +
         'letter-spacing:.08em;color:#1a120a;background:' + OR + ';border:2px solid ' + OR + ';border-radius:4px';
-      va.addEventListener('click', function () { options.page(e.t.id); });
+      va.addEventListener('click', function () {
+        var pris = 0;
+        prêtsIci.forEach(function (x) { if (window.LLMurAchete(x)) { pris += 1; } });
+        if (pris > 0) { esprits = plan(); fermeLaFiche(); demande(); return; }
+        va.disabled = true;
+        va.textContent = prix > 0 ? 'NOT ENOUGH GOLD' : 'CANNOT CLAIM';
+      });
       panneau.appendChild(va);
     }
     demande(); dessine();

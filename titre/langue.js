@@ -1939,8 +1939,10 @@
     /* S1715 - note 543 (4) : un etat depose (`?etat=`, les raccourcis VOIR-*.bat) s'ouvre sur un port a lui, donc
        SANS profil : il prenait la langue du navigateur, et Croze lisait « ON TE DEMANDE », « JET DU PREMIER JOUEUR ».
        Regle du 08/11 : tout ce que Croze ouvre, etats deposes compris, est en anglais. Le profil, s'il dit FR, gagne. */
-    try { if (/[?&]etat=/.test(String(location.search || ''))) return 'EN'; } catch (e) { /* */ }
-    try { return /^fr\b/i.test(String(navigator.language || '')) ? 'FR' : 'EN'; } catch (e) { return 'EN'; }
+    /* S1841 - note 622 (3), Q-LANGUEDEFAUT1830 (« 13. oui ») : sans choix dans OPTIONS, L'ANGLAIS, quel que soit
+       le navigateur ; le francais ne vient que d'un clic dans OPTIONS (le profil, s'il dit FR, gagne dans `cible`).
+       Avant : `navigator.language` en `fr` ouvrait le HOME et le jeu traduits par le lexique, avec ses trous. */
+    return 'EN';
   }
   function cible() { return lis() || duNavigateur(); }
 

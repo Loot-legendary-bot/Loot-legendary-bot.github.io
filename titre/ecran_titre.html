@@ -318,8 +318,9 @@
        soit le brightness. Sur un art dont le haut est a 11 % de luminance, le
        contraste ne fonce pas l'image : IL L'EFFACE. C'etait la ligne
        dominante, et elle n'etait accusee par personne. */
-    filter:grayscale(.9) brightness(.55) contrast(1);transition:filter .25s}
-  .door:hover img{filter:grayscale(.15) brightness(.66) contrast(1.35)}
+    filter:grayscale(.15) brightness(.86) contrast(1);transition:filter .25s}
+  /* S1844 - note 622 (4) : les quatre portes EN COULEUR au repos (maquette menu_dive_v1) ; le survol garde son eclat */
+  .door:hover img{filter:grayscale(0) brightness(1) contrast(1.12)}
   /* S1636 - note 471 (1) : la porte FERMEE - le cadenas du choix des persos, la condition sous le titre */
   .door.door-ferme:hover{transform:skewX(-5deg)}
   .door.door-ferme h3{color:#7d776c}
@@ -3332,7 +3333,10 @@ DOORS.forEach(([k,title,line,bg,fn,ident,chip])=>{
      (`play_bots` 10 la mêlée · `play_daily` 13 le couloir rouge ·
      `play_ranked` 05 l'arène). Le numéro de la colonne 4 reste le
      REPLI : index absent, l'écran s'ouvre comme avant. */
-  const fond = ident==='d-campaign' ? '/art/campagne/porte_campagne.jpg'
+  /* S1844 - note 622 (4) : CAMPAIGN = le chevalier dans le couloir aux torches, TODAY'S DUNGEON = le vortex bleu
+     (maquette menu_dive_v1 ; rien de genere : deux fonds du titre) */
+  const fond = ident==='d-campaign' ? '/art/titre/fonds/fond_04.jpg'
+    : ident==='d-daily' ? '/art/titre/fonds/fond_16.jpg'
     : typeof PANNEAU[ident.replace('d-','play_')] === 'string'
     ? PANNEAU[ident.replace('d-','play_')] : BGS[bg];
   d.innerHTML='<img src="'+fond+'" alt="">'+
@@ -6484,6 +6488,7 @@ paintHUD(); fillGrid(ongletDOuverture); refreshTabs();
     return true;
   }
   window.LLMurAchete = achete;   /* S1393 - TOUT DEVERROUILLER passe par ce bouton */
+  window.LLMurPrix = function (x) { return prixDe(x); };   /* S1841 - note 623 (1) : le prix dit sur le bouton CLAIM de l'etoile */
   /* note 206 (2) : un personnage 3 200, une peau cinq fois son prix de Vault */
   /* S1427 - note 263 : une peau HORS VENTE (le sceau, Dungeon 18) est DONNEE par son palier. */
   /* note 269 ② : au mur aussi, la grille gravee (perso 3 500, de par palier, curseur 1 000). */

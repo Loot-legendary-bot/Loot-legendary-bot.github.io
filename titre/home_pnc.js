@@ -208,8 +208,10 @@
       var b = document.createElement('button'); b.type = 'button'; b.className = 'pnc-z pnc-esprit';
       b.dataset.esprit = k; b.style.cssText = 'left:' + (m.cx - m.rx) + '%;top:' + (m.cy - m.ry) + '%;width:' + (2 * m.rx) + '%;height:' + (2 * m.ry) + '%';
       b.style.setProperty('--esprit', COULEURS[k]);
-      var nom = document.createElement('span'); nom.className = 'pnc-nom'; nom.textContent = NOMS[k];
-      b.appendChild(nom); b.setAttribute('aria-label', NOMS[k]); b.tabIndex = -1;
+      /* S1841 - note 623 (4) : « où que soit ton curseur sur le wall ça met bounty wall » — le survol d'un esprit
+         dit BOUNTY WALL (plus ARCANE, FROST…) ; le clic garde sa destination (le zoom de cet esprit). */
+      var nom = document.createElement('span'); nom.className = 'pnc-nom'; nom.textContent = 'BOUNTY WALL';
+      b.appendChild(nom); b.setAttribute('aria-label', 'BOUNTY WALL — ' + NOMS[k]); b.tabIndex = -1;
       b.addEventListener('click', function () { if (!b.classList.contains('inactif')) ouvreLEsprit(k); });
       racine.appendChild(b); zonesEl['esprit:' + k] = b;
     });

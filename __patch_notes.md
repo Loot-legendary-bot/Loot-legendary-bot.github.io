@@ -1,8 +1,19 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 26 Nov 2026
+- **15:50** — DIVE menu: the four doors are in colour at rest. CAMPAIGN shows the knight in the torch-lit corridor, TODAY'S DUNGEON the blue vortex; hovering a door brightens it.
+- **15:50** — Gear grid: each player's grid now follows their own character's slots. A character who can wear three rings (the Tamarin, with the next card update) shows a RING 3 frame under RING 2.
+- **13:46** — Traps and immunity: when a card makes you immune to trap damage (the Tamarin before Dungeon Turn 10, with the next card update), the log says you take no damage, from which trap, and until which Dungeon Turn.
+- **12:35** — The Robert: when his Cake passive sends a trap to the player with the most life, everyone now sees a message — "THE ROBERT REDIRECTS THE TRAP → …", which trap, and what the victim takes (the trap card's text).
+- **10:30** — Bounty Wall: a reward that is ready is claimed right on the wall — the CLAIM button on its card takes it (and says the gold price when there is one), without opening another window.
+- **10:30** — Home screen: wherever your cursor is on the wall, the label reads BOUNTY WALL; clicking a spirit still opens the wall zoomed on that spirit.
+- **10:00** — Language: the game now opens in English on every computer, whatever your browser's language. French is one click away in OPTIONS, and stays chosen once you pick it.
+- **09:30** — New cards (v225). The Cleric: Voices now costs 3 cards and heals your Arcane; Sky Help gives +1 Arcane each turn, permanently. The Tamarin: 20 HP; Aspartame Breath always stuns. Sala Septa: one attack, Fire × 3. Ring of Sala: +15 Fire. Slabblade: STR Chaos. New cards: Protection Potion (Epic), Cabbage. The Cleric's sheet and the new Slabblade, Ring of Sala, Ring of Adrenaline, Sala Septa, Gorma Juice, Protection Potion and Cabbage cards are in the game.
+- **09:30** — Card update (v224). Gorma Juice can now boost the die you just rolled (your turn, not Collapse). Ring of Jealousy now works: teleport to a player who opens a chest. Skeleton Warrior no longer appears when exploring.
+
 ## 25 Nov 2026
-- **20:10** — The Arena: when you send another player into the Arena with Thumbs Down, the line under the portraits no longer says "YOUR TURN" while they fight — it reads "BOT · 1 is fighting in The Arena — your turn resumes after". Nothing counts down your turn or asks you to end it meanwhile.
+- **20:06** — The Arena: when you send another player into the Arena with Thumbs Down, the line under the portraits no longer says "YOUR TURN" while they fight — it reads "BOT · 1 is fighting in The Arena — your turn resumes after". Nothing counts down your turn or asks you to end it meanwhile.
 - **18:25** — Your turn: the action names in the centre list (EXPLORE, INTERACT, LICK THE FLOOR, MOVE) have a wider column — LICK THE FLOOR no longer runs into "Draw 1 … card".
 - **15:58** — Engine update, nothing new on screen yet: Gorma Juice is getting ready to boost a die you have just rolled on your own turn (never the Collapse). It works once the next card update rewrites its line; until then it still boosts your next roll.
 - **14:06** — Run 2, curse of the dead: when you die in run 2, the game asks you which curse the living will suffer — each curse is written in full next to its CHOOSE button. When a curse is announced at the start of a turn, the log says who cast it and what it does. (Its full presentation is still to come.)

@@ -100,7 +100,7 @@
   }
 
   var PHRASES = {
-    SEATS_RANGE: 'A room has 2 to 5 seats.',
+    SEATS_RANGE: 'A room has 2 to 6 seats.',
     ROOM_NOT_FOUND: 'No room with this code.',
     UNAUTHORIZED: 'Your session ended. Log in again.',
     NOT_READY: 'Everyone seated must be ready.',
@@ -109,6 +109,30 @@
     NOT_IN_LOBBY: 'You are not seated in this room.',
     RESEAU: 'The server does not answer. Try again later.'
   };
+  /* S1837 - note 595 (4) : LA MEME VERSION POUR TOUTE LA TABLE. Le online est un lockstep (chaque client fait tourner
+     SON moteur) : le `hello` porte la version du moteur (`window.LLDefi.version`, gravee au build, null hors build) et
+     le relais refuse une autre version que celle du salon (`BUILD_MISMATCH`, note moteur 464 (2)). */
+  function maVersion() {
+    var d = window.LLDefi, v = d && d.version;
+    return typeof v === 'string' && v !== '' ? v : null;
+  }
+  /* RELOAD rafraichit d'abord le cache des fichiers non haches (la page, titre/defi.js, les scripts de titre/ :
+     Pages les sert dix minutes en cache), puis recharge. */
+  function rechargeLaVersion() {
+    var urls = [location.pathname, '/titre/defi.js'];
+    Array.prototype.forEach.call(document.querySelectorAll('script[src^="/titre/"]'), function (x) { urls.push(x.getAttribute('src')); });
+    Promise.all(urls.map(function (u) { return fetch(u, { cache: 'reload' }).catch(function () { return null; }); }))
+      .then(function () { location.reload(); });
+  }
+  function peintVersionNeuve(salonVersion) {
+    if (ws) { fermeVoulue = true; try { ws.close(); } catch (e) { /* deja fermee */ } ws = null; }
+    var b = cadre();
+    b.appendChild(el('h2', '', 'NEW VERSION ' + '—' + ' RELOAD'));
+    b.appendChild(el('p', '', 'This room plays version ' + String(salonVersion || '?') + '; this tab runs ' + String(maVersion() || 'another one') + '. Everyone at the table must play the same version: reload, then join with the code again.'));
+    var r = el('div', 'row'); b.appendChild(r);
+    var go = bouton(r, 'Reload', 'oui', function () { go.disabled = true; rechargeLaVersion(); });
+    bouton(r, 'Back', '', ferme);
+  }
   function phrase(code) {
     /* S1427 - note 254 (1) : le message nomme le serveur qui n'a pas répondu */
     if (code === 'RESEAU' && window.LLCompte && window.LLCompte.sansReponse) { return window.LLCompte.sansReponse(base()); }
@@ -144,15 +168,22 @@
     var peint = function () {
       rs.innerHTML = ''; rm.innerHTML = ''; ri.innerHTML = '';
       rs.appendChild(el('p', '', 'Seats'));
-      [2, 3, 4, 5].forEach(function (n) {
+      /* S1837 - 601 (3) : SIX sieges (le relais en accepte 2 a 6, `app.ts:893`). Un nombre qui ne
+         porte pas les equipes du mode choisi le ramene au chacun-pour-soi. */
+      [2, 3, 4, 5, 6].forEach(function (n) {
         bouton(rs, String(n), n === sieges ? 'sel' : '', function () {
-          sieges = n; if (n !== 4) { mode = 'FFA'; } peint();
+          sieges = n;
+          if ((mode === '2V2' && n !== 4) || (mode === '2V2V2' && n !== 6)) { mode = 'FFA'; }
+          peint();
         });
       });
       rm.appendChild(el('p', '', 'Mode'));
       bouton(rm, 'Free-for-all', mode === 'FFA' ? 'sel' : '', function () { mode = 'FFA'; peint(); });
       var d = bouton(rm, '2 vs 2', mode === '2V2' ? 'sel' : '', function () { mode = '2V2'; sieges = 4; peint(); });
       d.title = 'Four seats: seats 1 + 2 against seats 3 + 4.';
+      /* S1837 - 601 (3) : trois equipes de deux (moteur 921 : six sieges, trois camps). */
+      var t3 = bouton(rm, '2 vs 2 vs 2', mode === '2V2V2' ? 'sel' : '', function () { mode = '2V2V2'; sieges = 6; peint(); });
+      t3.title = 'Six seats: seats 1 + 2, seats 3 + 4, seats 5 + 6.';
       ri.appendChild(el('p', '', 'Idle timer'));
       bouton(ri, 'On', idle ? 'sel' : '', function () { idle = true; peint(); });
       bouton(ri, 'Off', idle ? '' : 'sel', function () { idle = false; peint(); });
@@ -212,12 +243,13 @@
     var w;
     try { w = new WebSocket(url); } catch (e) { peintLeSalon(code, mode, phrase('RESEAU')); return; }
     ws = w;
-    w.onopen = function () { w.send(JSON.stringify({ t: 'hello', token: s.token })); };
+    w.onopen = function () { var h = { t: 'hello', token: s.token }; if (maVersion() !== null) { h.build = maVersion(); } w.send(JSON.stringify(h)); };
     w.onmessage = function (ev) {
       var m; try { m = JSON.parse(ev.data); } catch (e) { return; }
       if (m.t === 'welcome') { moi = m; peintLeSalon(code, mode, ''); return; }
       if (m.t === 'room') { etat = m; peintLeSalon(code, mode, ''); if (auto) { avanceSeul(w); } return; }
       if (m.t === 'start') { lance(code, m.setup); return; }
+      if (m.t === 'error' && m.code === 'BUILD_MISMATCH') { peintVersionNeuve(m.build); return; }
       if (m.t === 'error') { peintLeSalon(code, mode, phrase(m.code)); }
     };
     w.onclose = function () {
@@ -258,7 +290,7 @@
     rc.appendChild(el('p', '', 'Give it to your friends: Play with friends → Join.'));
     var hote = moi && moi.host === true;
     if (hote && mode) { b.appendChild(el('p', '', idleVoulu ? 'Idle timer: on — 60 s per action, 3 timeouts in a row = disconnected.' : 'Idle timer: off.')); }
-    if (hote && mode) { b.appendChild(el('p', '', mode === '2V2' ? 'Mode: 2 vs 2 — seats 1 + 2 against seats 3 + 4.' : 'Mode: free-for-all.')); }
+    if (hote && mode) { b.appendChild(el('p', '', mode === '2V2' ? 'Mode: 2 vs 2 — seats 1 + 2 against seats 3 + 4.' : mode === '2V2V2' ? 'Mode: 2 vs 2 vs 2 — seats 1 + 2, seats 3 + 4, seats 5 + 6.' : 'Mode: free-for-all.')); }
     var ol = el('ol'); b.appendChild(ol);
     var tousPrets = false, assis = 0;
     if (etat) {
@@ -312,7 +344,7 @@
       var go = bouton(row, 'Start', 'oui', function () {
         if (!ws) { return; }
         go.disabled = true;
-        ws.send(JSON.stringify({ t: 'start', setup: { mode: mode === '2V2' ? '2V2' : 'FFA', idleTimer: idleVoulu } }));
+        ws.send(JSON.stringify({ t: 'start', setup: { mode: mode === '2V2' || mode === '2V2V2' ? mode : 'FFA', idleTimer: idleVoulu } }));
       });
       go.disabled = !tousPrets || assis < 2;
       if (assis < 2) { go.title = 'Wait for a friend to join.'; }
@@ -328,7 +360,7 @@
       base: base(),
       seed: setup.seed,
       seats: Array.isArray(setup.players) ? setup.players.length : 4,
-      mode: setup.mode === '2V2' ? '2V2' : 'FFA',
+      mode: setup.mode === '2V2' || setup.mode === '2V2V2' ? setup.mode : 'FFA',
       /* note 275 (3) : l'option choisie par l'hote, relayee a tous par le setup */
       idleTimer: setup.idleTimer !== false,
       /* S1676 - 495 (1) : la partie sait qu'elle est une table du Pro Tour (bandeau, chrono : passes suivantes) */
