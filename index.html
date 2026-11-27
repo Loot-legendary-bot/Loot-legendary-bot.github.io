@@ -7008,6 +7008,10 @@
       .fen-mort .opt-cartes.fen-mort-cartes { justify-content: center; gap: 18px; margin: 12px 0; }
       .fen-mort .opt-cartes.fen-mort-cartes > * { transform: scale(1.35); transform-origin: top center; margin: 0 22px 70px; }
       .fen-mort .fen-mort-accepter { background: #5a0006 !important; color: #fff !important; border-color: #b3121b !important; }
+      /* S1847 · note 626 ② — mes réponses d'abord, en or ; ACCEPT DEATH en second, sobre. */
+      .fen-mort .fen-mort-reponses { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 10px 0 8px; }
+      .fen-mort .fen-mort-reponse { font-size: 17px; font-weight: 700; padding: 8px 18px; background: #6b4a00; color: #fff; border: 2px solid #ffcf6b; }
+      .fen-mort .fen-mort-accepter.fen-mort-accepter-second { background: transparent !important; color: #ff8a8a !important; border-color: #5a0006 !important; font-size: 12px; opacity: .85; }
       /* S1690 · note 512 ④ — « 5 / 6 SELECTED » en gros, vert quand le compte y est. */
       .compte-selection { font-size: 22px; font-weight: 700; letter-spacing: .04em; color: #ffcf6b; margin: 8px 0 6px; }
       .compte-selection.juste { color: #6be38a; }
@@ -13712,6 +13716,10 @@
         animation-delay: var(--bd-cycle-delai, 4s); }
       .boite-des.bd-roule .bd-bandeau .bd-fixe { animation: none; opacity: 1; }
       .boite-des.bd-roule .bd-bandeau .bd-defile { animation: none; visibility: hidden; }
+      /* S1847 · note 626 ③ (Croze, 26/11 : les bacs titrés « RUN 1 · TURN 10 », « EVERYWHERE ») — le défilé de borne
+         recopiait le bandeau du tour (règle du MINIMUM : une information à UN endroit). Le bac ne dit plus que SON jet. */
+      .boite-des .bd-bandeau .bd-fixe { animation: none !important; opacity: 1 !important; }
+      .boite-des .bd-bandeau .bd-defile { display: none !important; }
       .boite-des.bd-jet-de-portail .bd-bandeau { color: #8fd8ff; text-shadow: 0 0 4px rgba(90, 190, 255, .85), 0 0 10px rgba(60, 150, 255, .45); }
       @keyframes bd-borne-fixe { 0%, 30% { opacity: 1; } 32%, 98% { opacity: 0; } 100% { opacity: 1; } }
       @keyframes bd-borne-defile { 0%, 31% { left: 100%; transform: translateX(0); } 99%, 100% { left: 0; transform: translateX(-100%); } }
@@ -16736,7 +16744,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-C7jmgPEI.js"></script>
+    <script type="module" crossorigin src="./assets/index-60ayrMhp.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
