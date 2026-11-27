@@ -1,0 +1,52 @@
+{
+ "famille": "bois",
+ "couleurs": {
+  "corps": [
+   "#b07a48",
+   "#6b4226"
+  ],
+  "veines": "#3d2414",
+  "inclusions": null,
+  "pointes": null,
+  "chiffres": "#a8f060",
+  "chiffres_bas": "#3f8f2c"
+ },
+ "fini": {
+  "rugosite": 0.5,
+  "metallique": 0.0,
+  "transmission": 0.0,
+  "ior": 1.45,
+  "emission": 0.0
+ },
+ "motif": {
+  "echelle": 1.0,
+  "contraste": 0.6,
+  "densite": 0.6,
+  "densite_paillettes": 0.12,
+  "rugosite_inclusions": 0.65
+ },
+ "chiffres": {
+  "style": "grave_peint",
+  "police": "packages/debug-ui/tools/forge_des/polices/Archivo-Bold.ttf",
+  "profondeur": 0.045,
+  "taille": 0.42,
+  "metallique": 0.0,
+  "rugosite": 0.4,
+  "lueur": 0.3,
+  "fondu": 0.6,
+  "paroi": "distance"
+ },
+ "forme": {
+  "biseau": 0.3,
+  "arrondi": 0.0
+ },
+ "graine": 6,
+ "notes": "Set signature du Green, Epic. Famille bois (cernes, fibres, pores), mousse aux aretes et aux coins. Chiffres pousses, vert tendre au haut, vert profond au pied. Croze 27/11.",
+ "mousse": {
+  "couleur": "#2f5a1c",
+  "pointes": "#8fb84a",
+  "couverture": 0.25,
+  "bords": 0.8,
+  "relief": 0.6
+ }
+}

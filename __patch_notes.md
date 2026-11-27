@@ -1,6 +1,16 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 27 Nov 2026
+- **17:26** — Card update (v227): Ring of Fisdeputry now works: sacrifice it when a mob attacks another player. Ooh, Shiny! can draw a ring. The Pink Buffer: you cannot be stunned. Chaos Stick, Voidthread Gloves and Lucky Thief's Gloves now do what their cards say.
+- **17:26** — Death window: when you are about to die and can still answer, each answer the game offers (a card in hand, a worn item, your Signature, your Reaction) gets its own PLAY button, above ACCEPT DEATH.
+- **17:26** — Final Duel: if your opponent abandons, the duel stops and you win by forfeit — the log and the end screen say so. A game where no human is left ends "ranked on points".
+- **17:26** — Final Duel: while your opponent's die rolls in THE PIT, the banner says it is for you ("THE GREEN → YOU · WEAPON ATTACK") instead of "→ …".
+- **17:26** — Dice tray: once the die has landed, the tray title only names its own roll ("COLLAPSE · d20") — no more scrolling run, turn and portal text.
+- **17:26** — Watching a fight you are not in: the mob's "TO YOU" table no longer shows; it only appears when the mob's lines are aimed at you.
+- **17:26** — Combat start: while the table can react before the first blow, your skills are greyed out without repeating "a decision is pending" under each of them — the question is in its box.
+- **17:26** — Mission done in combat: "MISSION ACCOMPLISHED" is written once, in the question box; the folded objective line shows a ✓.
+
 ## 26 Nov 2026
 - **21:45** — Card update (v226): The Tamarin now wears a weapon and THREE rings, is immune to Collapse and trap damage until Turn 9 (Tiny), and gets his new Banana Flee; Grab & Scam is removed. His character sheet (front and back) and The Poisoner's are the new ones, as are the Shock Eel, Mana Orb and Gold Snake Bauble cards.
 - **21:45** — Immunity: when a hit lands on a target that cannot take it (a fairy, the Tamarin under Tiny), everyone sees IMMUNE on the target.
