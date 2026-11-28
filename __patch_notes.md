@@ -1,6 +1,13 @@
 # LICK FLOOR — Patch notes
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
+## 28 Nov 2026
+- **12:25** — Drunken Bet (The Whiff): the number box button now reads CONFIRM (it was left in French).
+- **11:42** — Death window: when a trap or a hit is about to kill you, the question waits for you — it no longer hangs behind a frozen die before showing your answers.
+- **11:42** — Combat: a mob killed before the first blow (by a throw at the start of the fight) no longer plays an empty turn.
+- **11:42** — Mob attacks: the mob's table shows the players its lines are actually aimed at.
+- **11:42** — Lucky Thief's Gloves (and Gambler's Gloves, Prismatic Ring, Ring of Hi-Five, Backlash): an item that only works on a given face is only offered when your die shows that face. Stealing a card never lets you pick yourself.
+
 ## 27 Nov 2026
 - **17:26** — Card update (v227): Ring of Fisdeputry now works: sacrifice it when a mob attacks another player. Ooh, Shiny! can draw a ring. The Pink Buffer: you cannot be stunned. Chaos Stick, Voidthread Gloves and Lucky Thief's Gloves now do what their cards say.
 - **17:26** — Death window: when you are about to die and can still answer, each answer the game offers (a card in hand, a worn item, your Signature, your Reaction) gets its own PLAY button, above ACCEPT DEATH.
