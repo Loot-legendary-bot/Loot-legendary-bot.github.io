@@ -2,6 +2,9 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 28 Nov 2026
+- **16:45** — Death window: when a hit is about to kill you, ONE window opens with everything that can save you — your Reaction, your cards and your Signature — playable in the order you want; ACCEPT DEATH is written once.
+- **16:45** — Reactions: a Reaction already played on a hit is not offered again on that same hit — it stays in your hand, greyed, with "already played on this occurrence".
+- **16:45** — Razor Loop: on every 17+, the game asks again whether you roll — and the damage total stays on screen and climbs at each pass, until it stops.
 - **15:15** — Combat and reactions: the button to let a hit pass (PLAY NOTHING · NO REACTION · ACCEPT DEATH · ROLL THE DIE) is now big and always in the same place, bottom right above DUNGEON · LOG — never on top of the fight.
 - **15:15** — Card update (v229): Copy Cat: reworded.
 - **12:20** — Drunken Bet (The Whiff): the number box button now reads CONFIRM (it was left in French).
