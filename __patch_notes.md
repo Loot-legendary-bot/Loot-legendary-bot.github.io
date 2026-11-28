@@ -2,7 +2,9 @@
 *Player-facing, condensed, newest first. **From 29 Oct 2026 20:30 UTC, written by the SCREEN at every publication** (it knows what goes online and when) — the CLASSEUR only checks it. Times are UTC (GMT+0), the moment the change was pushed. The screen shows this file when you click the version number at the bottom right of the HOME menu.*
 
 ## 28 Nov 2026
-- **12:25** — Drunken Bet (The Whiff): the number box button now reads CONFIRM (it was left in French).
+- **15:15** — Combat and reactions: the button to let a hit pass (PLAY NOTHING · NO REACTION · ACCEPT DEATH · ROLL THE DIE) is now big and always in the same place, bottom right above DUNGEON · LOG — never on top of the fight.
+- **15:15** — Card update (v229): Copy Cat: reworded.
+- **12:20** — Drunken Bet (The Whiff): the number box button now reads CONFIRM (it was left in French).
 - **11:42** — Death window: when a trap or a hit is about to kill you, the question waits for you — it no longer hangs behind a frozen die before showing your answers.
 - **11:42** — Combat: a mob killed before the first blow (by a throw at the start of the fight) no longer plays an empty turn.
 - **11:42** — Mob attacks: the mob's table shows the players its lines are actually aimed at.

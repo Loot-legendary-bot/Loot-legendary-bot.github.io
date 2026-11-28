@@ -7012,6 +7012,15 @@
       .fen-mort .fen-mort-reponses { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 10px 0 8px; }
       .fen-mort .fen-mort-reponse { font-size: 17px; font-weight: 700; padding: 8px 18px; background: #6b4a00; color: #fff; border: 2px solid #ffcf6b; }
       .fen-mort .fen-mort-accepter.fen-mort-accepter-second { background: transparent !important; color: #ff8a8a !important; border-color: #5a0006 !important; font-size: 12px; opacity: .85; }
+      /* S1865 · note 630 ② — le bouton pour laisser passer (NO REACTION · PLAY NOTHING · ACCEPT DEATH · ROLL THE DIE) :
+         gros, UNE place fixe pour toutes les fenêtres de réponse, colonne de droite au-dessus de DUNGEON · LOG, hors
+         des infos du combat. */
+      #passer-place-fixe-hote .passer-place-fixe { position: fixed !important; right: 48px; bottom: 168px; z-index: 9500;
+        min-width: 380px; min-height: 64px; padding: 12px 28px !important; font-size: 22px !important; font-weight: 700;
+        letter-spacing: .06em; opacity: 1 !important; background: #2a1c08 !important; color: #ffe7b0 !important;
+        border: 3px solid #ffcf6b !important; box-shadow: 0 0 22px rgba(0,0,0,.85), 0 0 12px rgba(255,207,107,.35); }
+      #passer-place-fixe-hote .passer-place-fixe.fen-mort-accepter { background: #5a0006 !important; color: #fff !important;
+        border-color: #ff3b3b !important; }
       /* S1690 · note 512 ④ — « 5 / 6 SELECTED » en gros, vert quand le compte y est. */
       .compte-selection { font-size: 22px; font-weight: 700; letter-spacing: .04em; color: #ffcf6b; margin: 8px 0 6px; }
       .compte-selection.juste { color: #6be38a; }
@@ -16744,7 +16753,7 @@
     <script src="/titre/deux_fiches.js"></script>
     <!-- S1420 - DA-2 (notes 244, 245) : la pierre, le bois, le parchemin. -->
     <link rel="stylesheet" href="/titre/da_fonds.css" />
-    <script type="module" crossorigin src="./assets/index-CV1dW-QE.js"></script>
+    <script type="module" crossorigin src="./assets/index-h-KMPp8W.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vfx-BmmzxjIU.js">
     <link rel="modulepreload" crossorigin href="./titre/defi.js">
   </head>
